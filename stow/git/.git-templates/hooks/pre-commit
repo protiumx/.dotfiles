@@ -1,0 +1,8 @@
+#!/bin/sh
+
+branch="$(git rev-parse --abbrev-ref HEAD)"
+main_branches=("main" "master")
+if printf '%s\n' "${main_branches[@]}" | grep -Fxq $branch; then
+  echo "Nein! Committing to < $branch > forbidden -.-"
+  exit 1
+fi

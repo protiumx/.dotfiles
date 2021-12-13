@@ -1,0 +1,29 @@
+[user]
+	name = Brian Mayo
+	email = ioprotium@gmail.com
+[help]
+	autocorrect = 1
+[alias]
+	amend = commit --amend
+	append = commit --amend --no-edit
+	ck = checkout
+	ckb = checkout -b
+	last = log -1 HEAD --stat
+	logf = !git log --pretty=format:\"%C(magenta)%h%Creset -%C(red)%d%Creset %s %C(dim green)(%cr) [%an]\" --abbrev-commit -30
+	main = checkout main
+	st = status -sb
+  # pull rebase remote main
+	sync = !git pull origin main --rebase
+	undo = reset HEAD^
+	discard = checkout -- .
+	unstage = reset HEAD --
+  # push and set upt origin for branch
+	up = !git push -u origin `git branch --show-current`
+  # count the number of files changed in the current branch compared to main
+	count = !git diff --name-only main... | wc -l
+[init]
+	templatedir = ~/.git-templates
+	defaultBranch = main
+[core]
+  # avoid problems when changing a case of a filename
+	ignorecase = false

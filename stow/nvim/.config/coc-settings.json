@@ -1,0 +1,16 @@
+{
+  "coc.preferences.snippets.enable": true,
+  "coc.preferences.formatOnSaveFiletypes": [
+    "typescript",
+    "typescriptreact",
+    "json",
+    "typescript.tsx",
+    "rust",
+    "python",
+    "go",
+    "html",
+    "cpp"
+  ],
+  "diagnostic.checkCurrentLine": true,
+  "diagnostic.virtualTextCurrentLineOnly": false
+}

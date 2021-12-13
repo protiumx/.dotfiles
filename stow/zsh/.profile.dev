@@ -1,0 +1,52 @@
+# Aliases
+alias yw="yarn workspace"
+alias python=/usr/bin/python3
+
+# Conventional Commits utils
+function git_commit() {
+    if [ -z "$3" ]
+    then
+        git commit -m "$1: $2"
+    else
+        git commit -m "$1($2): $3"
+    fi
+}
+
+alias g-r="git_commit refactor"
+alias g-t="git_commit test"
+alias g-fi="git_commit fix"
+alias g-fe="git_commit feat"
+alias g-ch="git_commit chore"
+alias g-st="git_commit style"
+alias g-ci="git_commit ci"
+alias g-d="git_commit docs"
+alias g-m="git_commit misc"
+
+# iTerm bindings
+# changes hex 0x15 to delete everything to the left of the cursor, rather than the whole line
+bindkey "^U" backward-kill-line
+# binds hex 0x18 0x7f with deleting everything to the left of the cursor
+bindkey "^X\\x7f" backward-kill-line
+# adds redo
+bindkey "^X^_" redo
+
+# Set locales
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export EDITOR="nvim"
+export HISTSIZE=2000
+setopt HIST_FIND_NO_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+
+CLI="$HOME/.cli"
+CHT="$CLI/cht"
+
+# add "code" to the terminal
+VSCODE="/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+
+export PATH=$FLUTTER/bin:$VSCODE:/usr/local/bin:/opt/local/bin:$CHT:$PATH
+export GOPATH=$(go env GOPATH)
+export PATH=$PATH:$GOPATH/bin
+
+. "$HOME/.cargo/env"
+
