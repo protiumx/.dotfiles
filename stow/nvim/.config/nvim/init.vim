@@ -144,7 +144,8 @@ nnoremap <leader>k :m .-2<CR>==
 
 " new buffer vertical split
 nnoremap <leader>vs :vnew<cr>
-
+" select everithing
+nnoremap <C-A> ggVG
 " open new file adjacent to current file
 nnoremap <leader>o :e <C-R>=expand("%:p:h") . "/" <CR>
 " toggle between buffers current and prev buffer
