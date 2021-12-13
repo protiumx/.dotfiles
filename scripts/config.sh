@@ -62,7 +62,7 @@ function configure_iterm() {
 
 function stow_dotfiles() {
   print_blue "Removing default config"
-  rm ~/.profile ~/.zprofile ~/.gitconfig ~/.aliases ~/.zshrc
+  rm ~/.profile ~/.zprofile ~/.gitconfig ~/.aliases ~/.zshrc ~/.config/nvim/coc-settings.json ~/.config/nvim/init.vim
   print_blue "Stowing zsh, git, and nvim"
   cd stow && stow -vSt ~ zsh git nvim && cd ..
 }

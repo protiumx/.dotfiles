@@ -23,7 +23,6 @@ packages=(
   httpie
   jq
   kubernetes-cli
-  neovim
   node
   nmap
   openjdk
