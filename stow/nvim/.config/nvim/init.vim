@@ -1,6 +1,7 @@
 " =============================================================================
 " plugins
 " =============================================================================
+
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'drewtempelmeyer/palenight.vim'
@@ -12,7 +13,7 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'ryanoasis/vim-devicons'
 " }
 
-" spelling
+" Spelling
 Plug 'kamykn/spelunker.vim'
 
 Plug 'kamykn/popup-menu.nvim'
@@ -59,15 +60,15 @@ colorscheme PaperColor
 
 let mapleader = "\<space>"
 
-filetype plugin indent on
-
 set expandtab
 set number
 set autoindent
 set tabstop=2
 set shiftwidth=2
-set scl=yes " always show signs column
-set mouse=a " mouse enabled in all modes
+" always show signs column
+set scl=yes
+" mouse enabled in all modes
+set mouse=a
 set encoding=UTF-8
 set background=dark
 set splitbelow
@@ -81,15 +82,18 @@ set ignorecase
 " Line size {
 set colorcolumn=100
 highlight ColorColumn ctermbg=0 guibg=lightgrey
-autocmd BufRead,BufNewFile * setlocal signcolumn=yes " set signcolumn for new buffers
+" set signcolumn for new buffers
+autocmd BufRead,BufNewFile * setlocal signcolumn=yes
 " }
 
 set nospell
 set spelllang=en_us
 set noshowmode
-set shortmess+=F  " do not show the file name
+" do not show the file name
+set shortmess+=F
 
-set nostartofline " don’t reset cursor to start of line when moving around.
+" don’t reset cursor to start of line when moving around.
+set nostartofline
 
 " wildignore {
 set wildignore=*.o,*.obj,*~,*.exe,*.a,*.pdb,*.lib
@@ -104,20 +108,29 @@ set wildignore+=*/.git/*,*.DS_Store
 set wildignore+=*/node_modules/*,*/build/*,*/logs/*,*/dist/*,*/tmp/*
 " } wildignore
 
-nnoremap <leader>d "_d " delete to blackhole register
+" delete to blackhole register
+nnoremap <leader>d "_d
 vnoremap <leader>d "_d
 
-inoremap <C-c> <esc> " remap C-c to esc in insert mode
-nnoremap ; : " remap ; to :
+" remap C-c to esc in insert mode
+inoremap <C-c> <esc>
+nnoremap ; :
 
-nmap <leader>w :w<CR> " quick-save
+" quick-save
+nmap <leader>w :w<CR>
 
-nnoremap <Leader>c* *``cgn " replaces the word under the cursor downwards. press . to repeat
-nnoremap <Leader>c# *``cgn " upwards
-nnoremap <Leader>d* *``cgn " delete word
-nnoremap :: :bp\|bd #<CR> " close buffer without changing window layout
-nnoremap Y y$ " copy from cursor to end of line
-nnoremap n nzzzv " jump next/prev but centered
+" replaces the word under the cursor downwards. press . to repeat
+nnoremap <Leader>c* *``cgn
+" upwards
+nnoremap <Leader>c# *``cgn
+" delete word
+nnoremap <Leader>d* *``cgn
+" close buffer without changing window layout
+nnoremap :: :bp\|bd #<CR>
+" copy from cursor to end of line
+nnoremap Y y$
+"jump next/prev but centered
+nnoremap n nzzzv
 nnoremap N Nzzzv
 
 " Moving lines up or down preserving format {
@@ -129,10 +142,13 @@ nnoremap <leader>j :m .+1<CR>==
 nnoremap <leader>k :m .-2<CR>==
 " }
 
-nnoremap <leader>vs :vnew<cr> " new buffer vertical split
+" new buffer vertical split
+nnoremap <leader>vs :vnew<cr>
 
-nnoremap <leader>o :e <C-R>=expand("%:p:h") . "/" <CR> " open new file adjacent to current file
-nnoremap <leader><leader> <c-^> " toggle between buffers current and prev buffer
+" open new file adjacent to current file
+nnoremap <leader>o :e <C-R>=expand("%:p:h") . "/" <CR>
+" toggle between buffers current and prev buffer
+nnoremap <leader><leader> <c-^>
 
 " Function to set tab width to n spaces
 function! SetTab(n)
@@ -177,13 +193,6 @@ if (has("nvim"))
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 endif
 
-"For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
-"Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
-" < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
-if (has("termguicolors"))
-  set termguicolors
-endif
-
 nnoremap <F9> :UndotreeToggle<CR>
 
 augroup compileandrun
@@ -194,9 +203,11 @@ augroup compileandrun
 		autocmd FileType go nmap <f5> <Plug>(go-run)
 augroup END
 
-nmap <F8> :TagbarToggle<CR> " [preservim/tagbar] map F8 to CTagbar
+" [preservim/tagbar] map F8 to CTagbar
+nmap <F8> :TagbarToggle<CR>
 
-let b:lion_squeeze_spaces = 1 " [tommcdo/vim-lion]
+" [tommcdo/vim-lion]
+let b:lion_squeeze_spaces = 1
 
 " NERDCommenter {
 nmap <C-_> <Plug>NERDCommenterToggle
@@ -205,10 +216,12 @@ vmap <C-_> <Plug>NERDCommenterToggle<CR>gv
 
 " Spelling {
 let g:spelunker_max_suggest_words = 5
-highlight SpelunkerSpellBad cterm=underline ctermfg=135 guisp=169 gui=None guifg=#af5fff " override highlight setting.
+" override highlight setting.
+highlight SpelunkerSpellBad cterm=underline ctermfg=135 guisp=169 gui=None guifg=#af5fff
 highlight SpelunkerComplexOrCompoundWord cterm=underline ctermfg=135 guisp=169 gui=None guifg=#af5fff
 let g:spelunker_white_list_for_user = ['grpc', 'uuid']
-let g:spelunker_disable_uri_checking = 1 " Disable URI checking. (default: 0)
+" Disable URI checking. (default: 0)
+let g:spelunker_disable_uri_checking = 1
 " }
 
 " Go syntax highlighting {
@@ -220,12 +233,15 @@ let g:go_highlight_operators = 1
 " }
 
 " CoC {
-
-set hidden " textEdit might fail if hidden is not set.
-set nobackup " some servers have issues with backup files, see #649.
+filetype plugin indent on
+" textEdit might fail if hidden is not set.
+set hidden
+" some servers have issues with backup files, see #649.
+set nobackup
 set nowritebackup
 set updatetime=300
-set shortmess+=c " don't pass messages to |ins-completion-menu|.
+" don't pass messages to |ins-completion-menu|
+set shortmess+=c
 
 " Remap <C-f> and <C-b> for scroll float windows/popups.
 if has('nvim-0.4.0') || has('patch-8.2.0750')
@@ -287,17 +303,25 @@ function! s:show_documentation()
   endif
 endfunction
 
-autocmd CursorHold * silent call CocActionAsync('highlight') " Highlight the symbol and its references when holding the cursor.
-nmap <leader>rn <Plug>(coc-rename) " Symbol renaming.
-nmap <F2> <Plug>(coc-rename) " Remap for rename current word
-xmap <leader>f <Plug>(coc-format-selected) " Formatting selected code.
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+" Remap for rename current word
+nmap <F2> <Plug>(coc-rename)
+" Formatting selected code.
+xmap <leader>f <Plug>(coc-format-selected)
 nmap <leader>f <Plug>(coc-format-selected)
 
-nmap <leader>qf  <Plug>(coc-fix-current) " Fix autofix problem of current line
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
 
-command! -nargs=0 Format :call CocAction('format') " Add `:Format` command to format current buffer.
-command! -nargs=? Fold :call CocAction('fold', <f-args>) " Add `:Fold` command to fold current buffer.
-command! -nargs=0 ORG :call CocAction('runCommand', 'editor.action.organizeImport') " use `:OR` for organize import of current buffer
+" Add `:Format` command to format current buffer.
+command! -nargs=0 Format :call CocAction('format')
+" Add `:Fold` command to fold current buffer.
+command! -nargs=? Fold :call CocAction('fold', <f-args>)
+" use `:OR` for organize import of current buffer
+command! -nargs=0 ORG :call CocAction('runCommand', 'editor.action.organizeImport')
 
 " Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -306,15 +330,16 @@ nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
 
 " Telescope {
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fc :lua require('telescope.builtin').file_browser({cwd = vim.fn.expand('%:p:h')}) " open in current file pwd
+" open in current file pwd
+nnoremap <leader>fc :lua require('telescope.builtin').file_browser({cwd = vim.fn.expand('%:p:h')})
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fr :lua require('telescope.builtin').registers()<CR>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr> " display help tags for all extensions
+" display help tags for all extensions
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>fk :lua require('telescope.builtin').keymaps()<CR>
 nnoremap <leader>fz :lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>
 " }
-
 
 " NerdTree {
 let NERDTreeShowHidden=1
@@ -323,7 +348,7 @@ nnoremap <leader>nf :NERDTreeFocus<CR>
 nnoremap <leader>nt :NERDTreeToggle %<CR>
 
 " Check if NERDTree is open or active
-function! IsNERDTreeOpen()        
+function! IsNERDTreeOpen()
   return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
 endfunction
 
@@ -352,12 +377,11 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 " }
 
-
 " Fugitive {
 function! ToggleGStatus()
     if buflisted(bufname('.git/index'))
         bd .git/index
-    else  
+    else
 			vertical Git | vertical resize 40
     endif
 endfunction
