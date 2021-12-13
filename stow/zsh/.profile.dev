@@ -1,6 +1,6 @@
 # Aliases
 alias yw="yarn workspace"
-alias python=/usr/bin/python3
+alias python=python3
 
 # Conventional Commits utils
 function git_commit() {
@@ -44,9 +44,10 @@ CHT="$CLI/cht"
 # add "code" to the terminal
 VSCODE="/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
-export PATH=$FLUTTER/bin:$VSCODE:/usr/local/bin:/opt/local/bin:$CHT:$PATH
+export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$PATH"
+export PATH="$VSCODE:/opt/local/bin:$PATH"
 export GOPATH=$(go env GOPATH)
-export PATH=$PATH:$GOPATH/bin
+export PATH="$CHT:$GOPATH/bin:$PATH"
 
 . "$HOME/.cargo/env"
 
