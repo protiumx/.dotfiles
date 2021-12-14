@@ -17,7 +17,7 @@ function configure_macos_defaults() {
   defaults write com.apple.AppleMultitouchMouse MouseButtonMode -string "TwoButton"
 }
 
-function set_vscode_as_default_editor() {
+function code_as_default_text_editor() {
   print_blue "setting up VS Code as default editor for common extensions"
   local extensions=(
     ".c"
@@ -52,9 +52,9 @@ function set_vscode_as_default_editor() {
 }
 
 function configure_iterm() {
-  if [[ ! -f ~/Library/Application\ Support/iTerm2/DynamicProfiles/iTermProfiles.json ]]; then
+  if [[ ! -f ~/.config/iterm2/AppSupport/DynamicProfiles/iTermProfiles.json ]]; then
     print_blue "Copying iTerm2 profiles..."
-    cp iTermProfiles.json ~/Library/Application\ Support/iTerm2/DynamicProfiles/
+    cp iterm-profiles.json ~/Library/Application\ Support/iTerm2/DynamicProfiles/iTermProfiles.json
   else
     print_yellow "iTerm2 custom profile is already installed"
   fi
@@ -62,7 +62,7 @@ function configure_iterm() {
 
 function stow_dotfiles() {
   print_blue "Removing default config"
-  rm ~/.profile ~/.zprofile ~/.gitconfig ~/.aliases ~/.zshrc ~/.config/nvim/coc-settings.json ~/.config/nvim/init.vim
+  rm ~/.profile ~/.zprofile ~/.gitconfig ~/.aliases ~/.zshrc ~/.config/nvim/coc-settings.json ~/.config/nvim/init.vim || true
   print_blue "Stowing zsh, git, and nvim"
   cd stow && stow -vSt ~ zsh git nvim && cd ..
 }
