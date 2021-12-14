@@ -32,6 +32,7 @@ packages=(
   # fuzzy grep
   ripgrep
   rlwrap
+  rustup
   sqlite
   stow
   telnet
