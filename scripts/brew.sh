@@ -1,3 +1,14 @@
+function install_homebrew() {
+  export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+  if hash brew &>/dev/null; then
+    print_yellow "Homebrew already installed. Getting updates and package upgrades..."
+  else
+    print_blue "Installing homebrew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    brew update
+  fi  
+}
+
 function apply_brew_taps() {
   local tap_packages=$*
   for tap in $tap_packages; do
