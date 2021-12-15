@@ -1,13 +1,16 @@
 " =============================================================================
-" plugins
+" Plugins
 " =============================================================================
 
 call plug#begin('~/.config/nvim/plugged')
 
+" Color schemes
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'https://github.com/rafi/awesome-vim-colorschemes'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+" }
+
 " Icons {
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'ryanoasis/vim-devicons'
@@ -144,7 +147,7 @@ nnoremap <leader>k :m .-2<CR>==
 
 " new buffer vertical split
 nnoremap <leader>vs :vnew<cr>
-" select everithing
+" select everything
 nnoremap <C-A> ggVG
 " open new file adjacent to current file
 nnoremap <leader>o :e <C-R>=expand("%:p:h") . "/" <CR>
@@ -328,6 +331,7 @@ command! -nargs=0 ORG :call CocAction('runCommand', 'editor.action.organizeImpor
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" }
 
 " Telescope {
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
@@ -340,6 +344,7 @@ nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>fk :lua require('telescope.builtin').keymaps()<CR>
 nnoremap <leader>fz :lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>
+nnoremap <leader>ft :lua require('telescope.builtin').colorscheme()<CR>
 " }
 
 " NerdTree {
