@@ -106,6 +106,8 @@ nnoremap <leader>o :e <C-R>=expand("%:p:h") . "/" <CR>
 " toggle between buffers current and prev buffer
 nnoremap <leader><leader> <c-^>
 
+nnoremap p p=`]
+nnoremap <C-p> p
 " Function to set tab width to n spaces
 function! SetTab(n)
   let &l:tabstop=a:n
