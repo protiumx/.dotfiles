@@ -34,6 +34,7 @@ packages=(
   rlwrap
   rustup
   sqlite
+  stern
   stow
   telnet
   # telnet-like for websockets
