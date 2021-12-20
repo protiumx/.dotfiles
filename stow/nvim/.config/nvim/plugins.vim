@@ -67,8 +67,8 @@ nmap <F8> :TagbarToggle<CR>
 let b:lion_squeeze_spaces = 1
 
 " NERDCommenter {
-nmap <C-_> <Plug>NERDCommenterToggle
-vmap <C-_> <Plug>NERDCommenterToggle<CR>gv
+nnoremap <C-_> <Plug>NERDCommenterToggle
+vnoremap <C-_> <Plug>NERDCommenterToggle<CR>gv
 " }
 
 " Spelling {

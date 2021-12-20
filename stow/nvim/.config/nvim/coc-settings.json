@@ -16,5 +16,7 @@
   "rust-analyzer.diagnostics.enable": true,
   "rust-analyzer.inlayHints.chainingHints": true,
   "rust-analyzer.inlayHints.typeHints": true,
-  "rust-analyzer.inlayHints.parameterHints": true
+  "rust-analyzer.inlayHints.parameterHints": true,
+  "rust-analyzer.hoverActions.linksInHover": true,
+  "rust-analyzer.cargo.allFeatures": true
 }
