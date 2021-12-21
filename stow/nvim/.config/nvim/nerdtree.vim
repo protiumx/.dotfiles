@@ -1,7 +1,7 @@
 let NERDTreeShowHidden=1
 let NERDTreeQuitOnOpen=1
-nnoremap <leader>nf :NERDTreeFocus<CR>
-nnoremap <leader>nt :NERDTreeToggle %<CR>
+nnoremap <Leader>nf :NERDTreeFocus<CR>
+nnoremap <Leader>nt :NERDTreeToggle %<CR>
 
 " Check if NERDTree is open or active
 function! IsNERDTreeOpen()

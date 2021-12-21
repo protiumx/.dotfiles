@@ -29,16 +29,18 @@ set splitright
 
 " Searching {
 set smartcase
-set ignorecase
+" set ignorecase
 " }
 
 " Line size {
 set colorcolumn=100
-highlight ColorColumn ctermbg=0 guibg=lightgrey
+highlight ColorColumn ctermbg=0
+highlight CursorColumn ctermbg=magenta ctermfg=black
 " set signcolumn for new buffers
 autocmd BufRead,BufNewFile * setlocal signcolumn=yes
 " }
 
+" Disable spell since the plugin Spelunker will also highlight
 set nospell
 set spelllang=en_us
 set noshowmode
@@ -62,15 +64,16 @@ set wildignore+=*/node_modules/*,*/build/*,*/logs/*,*/dist/*,*/tmp/*
 " } wildignore
 
 " delete to blackhole register
-nnoremap <leader>d "_d
-vnoremap <leader>d "_d
-
+nnoremap <Leader>d "_d
+vnoremap <Leader>d "_d
+" Prepare replace of current word
+nnoremap <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
 " remap C-c to esc in insert mode
 inoremap <C-c> <esc>
 nnoremap ; :
 
 " quick-save
-nmap <leader>w :w<CR>
+nmap <Leader>w :w<CR>
 
 " replaces the word under the cursor downwards. press . to repeat
 nnoremap <Leader>c* *``cgn
@@ -93,18 +96,18 @@ vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 inoremap <C-j> <esc>:m .+1<CR>==gi
 inoremap <C-k> <esc>:m .-2<CR>==gi
-nnoremap <leader>j :m .+1<CR>==
-nnoremap <leader>k :m .-2<CR>==
+nnoremap <Leader>j :m .+1<CR>==
+nnoremap <Leader>k :m .-2<CR>==
 " }
 
 " new buffer vertical split
-nnoremap <leader>vs :vnew<cr>
+nnoremap <Leader>vs :vnew<cr>
 " select everything
 nnoremap <C-A> ggVG
 " open new file adjacent to current file
-nnoremap <leader>o :e <C-R>=expand("%:p:h") . "/" <CR>
+nnoremap <Leader>o :e <C-R>=expand("%:p:h") . "/" <CR>
 " toggle between buffers current and prev buffer
-nnoremap <leader><leader> <c-^>
+nnoremap <Leader><Leader> <C-^>
 
 nnoremap p p=`]
 nnoremap <C-p> p
@@ -146,9 +149,9 @@ endfunction
 set foldtext=CFoldText()
 set foldmethod=expr
 
-if (has("nvim"))
-  "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-endif
+"if (has("nvim"))
+  ""For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+  "let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+"endif
 
 

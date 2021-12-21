@@ -8,5 +8,5 @@ endfunction
 
 command ToggleGStatus :call ToggleGStatus()
 nmap <F3> :ToggleGStatus<CR>
-nmap <leader>gj :diffget //3<CR>
-nmap <leader>gf :diffget //2<CR>
+nmap <Leader>gj :diffget //3<CR>
+nmap <Leader>gf :diffget //2<CR>

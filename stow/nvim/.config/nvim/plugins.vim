@@ -67,18 +67,24 @@ nmap <F8> :TagbarToggle<CR>
 let b:lion_squeeze_spaces = 1
 
 " NERDCommenter {
-nnoremap <C-_> <Plug>NERDCommenterToggle
-vnoremap <C-_> <Plug>NERDCommenterToggle<CR>gv
+nmap <C-_> <Plug>NERDCommenterToggle
+vmap <C-_> <Plug>NERDCommenterToggle<CR>gv
+nmap <C-/> <Plug>NERDCommenterToggle
+vmap <C-/> <Plug>NERDCommenterToggle<CR>gv
 " }
 
 " Spelling {
+let g:enable_spelunker_vim = 1
+let g:enable_spelunker_vim_on_readonly = 1
 let g:spelunker_max_suggest_words = 5
 " override highlight setting.
-highlight SpelunkerSpellBad cterm=underline ctermfg=135 guisp=169 gui=None guifg=#af5fff
-highlight SpelunkerComplexOrCompoundWord cterm=underline ctermfg=135 guisp=169 gui=None guifg=#af5fff
+highlight SpelunkerSpellBad cterm=undercurl ctermfg=165 gui=undercurl guifg=#af5fff
+highlight SpelunkerComplexOrCompoundWord cterm=undercurl ctermfg=None gui=undercurl guifg=#af5fff
 let g:spelunker_white_list_for_user = ['grpc', 'uuid']
 " Disable URI checking. (default: 0)
 let g:spelunker_disable_uri_checking = 1
+
+command! -nargs=0 CheckSpell call spelunker#check()
 " }
 
 " Go syntax highlighting {
