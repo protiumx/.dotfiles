@@ -1,7 +1,6 @@
 call plug#begin('~/.config/nvim/plugged')
 
 " Color schemes
-Plug 'drewtempelmeyer/palenight.vim'
 Plug 'https://github.com/rafi/awesome-vim-colorschemes'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -26,7 +25,6 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
-Plug 'lukas-reineke/indent-blankline.nvim'
 " }
 
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -58,7 +56,6 @@ call plug#end()
 lua << EOF
 local opts = {
   auto_session_enabled = true,
-  auto_save_enabled = true,
 }
 
 require('auto-session').setup(opts)
