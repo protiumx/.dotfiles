@@ -12,6 +12,8 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'ryanoasis/vim-devicons'
 " }
 
+Plug 'rmagatti/auto-session'
+
 " Spelling
 Plug 'kamykn/spelunker.vim'
 
@@ -24,6 +26,7 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+Plug 'lukas-reineke/indent-blankline.nvim'
 " }
 
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -48,8 +51,20 @@ Plug 'preservim/tagbar'
 Plug 'universal-ctags/ctags'
 " }
 
+Plug 'voldikss/vim-floaterm'
+
 call plug#end()
 
+lua << EOF
+local opts = {
+  auto_session_enabled = true,
+  auto_save_enabled = true,
+}
+
+require('auto-session').setup(opts)
+EOF
+
+let g:floaterm_keymap_toggle = '<F12>'
 
 nnoremap <F9> :UndotreeToggle<CR>
 augroup compileandrun

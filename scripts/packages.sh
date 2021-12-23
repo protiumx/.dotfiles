@@ -11,6 +11,7 @@ packages=(
   # styled cat
   bat
   # tree listing for files
+  bottom
   broot
   cmake
   ctags
@@ -23,6 +24,7 @@ packages=(
   httpie
   jq
   kubernetes-cli
+  lazydocker
   node
   nmap
   openjdk

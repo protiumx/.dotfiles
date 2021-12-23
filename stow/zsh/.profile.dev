@@ -1,8 +1,10 @@
-# Aliases
+# ALIASES
+
 alias yw="yarn workspace"
 alias python=python3
+alias cat='bat --paging=never'
 
-# Conventional Commits utils
+# CONVENTIONAL COMMITS
 function git_commit() {
     if [ -z "$3" ]
     then
@@ -22,7 +24,8 @@ alias g-ci="git_commit ci"
 alias g-d="git_commit docs"
 alias g-m="git_commit misc"
 
-# iTerm bindings
+
+# ITERM bindings
 # changes hex 0x15 to delete everything to the left of the cursor, rather than the whole line
 bindkey "^U" backward-kill-line
 # binds hex 0x18 0x7f with deleting everything to the left of the cursor
@@ -39,15 +42,22 @@ setopt HIST_FIND_NO_DUPS
 setopt HIST_IGNORE_ALL_DUPS
 
 CLI="$HOME/.cli"
+
+# CHT
 CHT="$CLI/cht"
 
-# add "code" to the terminal
+# VSCODE
 VSCODE="/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
 export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$PATH"
 export PATH="$VSCODE:/opt/local/bin:$PATH"
+
+# GO
 export GOPATH=$(go env GOPATH)
 export PATH="$CHT:$GOPATH/bin:$PATH"
 
-. "$HOME/.cargo/env"
+export ZSH="$HOME/.oh-my-zsh"
+
+# CARGO
+source "$HOME/.cargo/env"
 

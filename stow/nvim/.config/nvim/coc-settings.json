@@ -13,6 +13,8 @@
   ],
   "diagnostic.checkCurrentLine": true,
   "diagnostic.virtualTextCurrentLineOnly": false,
+  "diagnostic.locationlistUpdate": true,
+  "diagnostic.refreshOnInsertMode": true,
   "rust-analyzer.diagnostics.enable": true,
   "rust-analyzer.inlayHints.chainingHints": true,
   "rust-analyzer.inlayHints.typeHints": true,

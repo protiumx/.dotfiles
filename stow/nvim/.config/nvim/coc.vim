@@ -48,6 +48,7 @@ inoremap <silent><expr> <CR> pumvisible() ? coc#_select_confirm()
 hi CocUnderline gui=undercurl term=undercurl
 hi CocErrorHighlight ctermfg=red  guifg=#c4384b gui=undercurl term=undercurl
 hi CocWarningHighlight ctermfg=yellow guifg=#c4ab39 gui=undercurl term=undercurl
+hi CocHintSign cterm=bold ctermfg=darkgray ctermbg=234
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)

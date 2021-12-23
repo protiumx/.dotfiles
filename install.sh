@@ -11,6 +11,7 @@ set -o pipefail
 . scripts/config.sh
 . scripts/fonts.sh
 . scripts/packages.sh
+. scripts/oh-my-zsh.sh
 
 function cleanup() {
     echo "Finishing"
@@ -45,10 +46,13 @@ function main() {
   install_fonts
   print_green "Finished installing fonts"
 
-  print_blue "=== Oh My ZSH ==="
+  print_blue "=== Oh-my-zsh ==="
   wait_input
   install_oh_my_zsh
   print_green "Finished installing Oh-my-zsh"
+  
+  install_zsh_plugins
+  print_green "Finished installing Oh-my-zsh plugins"
 
   print_blue "=== MacOS Apps ==="
   wait_input

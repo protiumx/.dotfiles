@@ -10,6 +10,7 @@ set hidden
 set nobackup
 set nowritebackup
 set updatetime=300
+set sessionoptions+=winpos,terminal
 " don't pass messages to |ins-completion-menu|
 set shortmess+=c
 
@@ -35,7 +36,7 @@ set smartcase
 " Line size {
 set colorcolumn=100
 highlight ColorColumn ctermbg=0
-highlight CursorColumn ctermbg=magenta ctermfg=black
+highlight CursorColumn ctermbg=none ctermfg=magenta
 " set signcolumn for new buffers
 autocmd BufRead,BufNewFile * setlocal signcolumn=yes
 " }
@@ -74,6 +75,7 @@ nnoremap ; :
 
 " quick-save
 nmap <Leader>w :w<CR>
+nnoremap <silent> Q <nop>
 
 " replaces the word under the cursor downwards. press . to repeat
 nnoremap <Leader>c* *``cgn
@@ -136,6 +138,8 @@ function! Trim()
 endfun
 
 command! -nargs=0 Trim call Trim()
+
+autocmd BufWritePre * :%s/\s\+$//e
 
 " custom function to fold blocks
 function! CFoldText()
