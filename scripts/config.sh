@@ -8,7 +8,7 @@ function configure_macos_defaults() {
   defaults write com.apple.finder ShowPathbar -bool true
   # Have the Dock show only active apps
   defaults write com.apple.dock static-only -bool true
-  # Set Dock autohide 
+  # Set Dock autohide
   defaults write com.apple.dock autohide -bool true
   defaults write com.apple.dock largesize -float 128
   defaults write com.apple.dock "minimize-to-application" -bool true
@@ -65,5 +65,5 @@ function stow_dotfiles() {
   rm ~/.profile ~/.zprofile ~/.gitconfig ~/.aliases ~/.zshrc ~/.config/nvim/coc-settings.json ~/.config/nvim/init.vim || true
   mkdir ~/.config/nvim || true
   print_blue "Stowing zsh, git and nvim"
-  cd stow && stow --verbose 1 --target $HOME zsh git nvim && cd ..
+  cd stow && stow --verbose 1 --target $HOME zsh git nvim kitty && cd ..
 }
