@@ -6,6 +6,7 @@ apps=(
   docker
   firefox
   google-chrome
+  kitty
   iterm2
   rectangle
   slack
