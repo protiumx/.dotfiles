@@ -51,6 +51,14 @@ function code_as_default_text_editor() {
   done
 }
 
+function setup_github_ssh() {
+  read -p 'github email: ' email
+  ssh-keygen -t ed25519 -C $email
+  print_blue "Adding ssh key to keychain"
+  ssh-add -K ~/.ssh/id_ed25519
+  print_blue "Remember add ssh key to github account 'pbcopy < ~/.ssh/id_ed25519.pub'"
+}
+
 function stow_dotfiles() {
   local files=(
     ".profile*"

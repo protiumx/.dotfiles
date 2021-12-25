@@ -73,6 +73,10 @@ function main() {
   stow_dotfiles
   print_green "Finished stowing dotfiles"
 
+  print_blue "=== SSH Key ==="
+  setup_github_ssh
+  print_green "Finished setting up SSH Key"
+
   print_blue "=== NeoVim Plugins ==="
   wait_input
   nvim -c ':PlugInstall' -c ':UpdateRemotePlugins' -c ':qall'
