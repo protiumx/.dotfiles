@@ -32,7 +32,7 @@ function main() {
   print_green "Finished installing xCode"
 
   print_blue "=== Homebrew ==="
-  wait_input    
+  wait_input
   install_homebrew
   print_green "Finished installing Homebrew"
 
@@ -50,7 +50,7 @@ function main() {
   wait_input
   install_oh_my_zsh
   print_green "Finished installing Oh-my-zsh"
-  
+
   install_zsh_plugins
   print_green "Finished installing Oh-my-zsh plugins"
 
@@ -70,8 +70,6 @@ function main() {
   print_green "Finished configuring MacOS defaults. NOTE: A restart is needed"
   code_as_default_text_editor
   print_green "Finished setting up VSCode as default text editor"
-  configure_iterm
-  print_green "Finished importing iTerm profiles"
   stow_dotfiles
   print_green "Finished stowing dotfiles"
 
