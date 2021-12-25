@@ -51,19 +51,31 @@ function code_as_default_text_editor() {
   done
 }
 
-function configure_iterm() {
-  if [[ ! -f ~/.config/iterm2/AppSupport/DynamicProfiles/iTermProfiles.json ]]; then
-    print_blue "Copying iTerm2 profiles..."
-    cp iterm-profiles.json ~/Library/Application\ Support/iTerm2/DynamicProfiles/iTermProfiles.json
-  else
-    print_yellow "iTerm2 custom profile is already installed"
-  fi
-}
-
 function stow_dotfiles() {
-  print_blue "Removing default config"
-  rm ~/.profile ~/.zprofile ~/.gitconfig ~/.aliases ~/.zshrc ~/.config/nvim/coc-settings.json ~/.config/nvim/init.vim || true
-  mkdir ~/.config/nvim || true
-  print_blue "Stowing zsh, git and nvim"
-  cd stow && stow --verbose 1 --target $HOME zsh git nvim kitty && cd ..
+  local files=(
+    ".profile*"
+    ".zprofile"
+    ".gitconfig"
+    ".aliases"
+    ".zshrc"
+    ".p10k.sh"
+  )
+  local folders=(
+    ".config/nvim"
+    ".config/kitty"
+    ".ssh"
+  )
+  print_blue "Removing config files"
+  for f in $files; do
+    rm -f "$HOME/$f" || true
+  done
+
+  # Create the folders to avoid stowing the whole folders
+  for d in $folders; do
+    rm -rf "$HOME/$d" || true
+    mkdir "$HOME/$d"
+  done
+
+  print_blue "Stowing zsh, git, kitty and nvim"
+  cd stow && stow --verbose 1 --target $HOME zsh ssh git nvim kitty && cd ..
 }
