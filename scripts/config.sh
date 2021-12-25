@@ -27,7 +27,7 @@ function code_as_default_text_editor() {
     ".ts"
     ".tsx"
     ".json"
-    ".mod"
+    ".md"
     ".sql"
     ".html"
     ".css"
