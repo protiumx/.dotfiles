@@ -20,11 +20,12 @@ packages=(
   duti
   gettext
   go
-  http-server  
+  http-server
   httpie
   jq
   kubernetes-cli
   lazydocker
+  minikube
   node
   nmap
   openjdk
