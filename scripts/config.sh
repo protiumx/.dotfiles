@@ -18,7 +18,7 @@ function configure_macos_defaults() {
 }
 
 function code_as_default_text_editor() {
-  print_blue "setting up VS Code as default editor for common extensions"
+  print_blue "Setting up VSCode as default editor for common extensions"
   local extensions=(
     ".c"
     ".cpp"
@@ -63,9 +63,10 @@ function stow_dotfiles() {
   local folders=(
     ".config/nvim"
     ".config/kitty"
+    ".git-templates/hooks"
     ".ssh"
   )
-  print_blue "Removing config files"
+  print_blue "Removing existing config files"
   for f in $files; do
     rm -f "$HOME/$f" || true
   done
@@ -76,6 +77,6 @@ function stow_dotfiles() {
     mkdir "$HOME/$d"
   done
 
-  print_blue "Stowing zsh, git, kitty and nvim"
+  print_blue "Stowing ssh, zsh, git, kitty and nvim"
   cd stow && stow --verbose 1 --target $HOME zsh ssh git nvim kitty && cd ..
 }

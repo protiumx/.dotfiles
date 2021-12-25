@@ -53,7 +53,7 @@ packages=(
 function install_packages() {
   print_blue "Configuring taps"
   apply_brew_taps "${taps[@]}"
-  print_blue "Installing macOS and Linux packages..."
+  print_blue "Installing packages..."
   install_brew_formulas "${packages[@]}"
   print_blue "Cleaning up brew packages..."
   brew cleanup
