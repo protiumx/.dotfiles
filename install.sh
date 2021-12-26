@@ -9,6 +9,7 @@ set -o pipefail
 . scripts/apps.sh
 . scripts/cli.sh
 . scripts/config.sh
+. scripts/osx.sh
 . scripts/fonts.sh
 . scripts/packages.sh
 . scripts/oh-my-zsh.sh
@@ -66,7 +67,7 @@ function main() {
 
   print_blue "=== Configuration ==="
   wait_input
-  configure_macos_defaults
+  setup_osx
   print_green "Finished configuring MacOS defaults. NOTE: A restart is needed"
   code_as_default_text_editor
   print_green "Finished setting up VSCode as default text editor"
