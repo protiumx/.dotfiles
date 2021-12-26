@@ -13,9 +13,6 @@ Plug 'ryanoasis/vim-devicons'
 
 Plug 'rmagatti/auto-session'
 
-" Spelling
-Plug 'kamykn/spelunker.vim'
-
 Plug 'kamykn/popup-menu.nvim'
 " Enhancements
 Plug 'justinmk/vim-sneak'
@@ -85,18 +82,18 @@ nmap <C-/> <Plug>NERDCommenterToggle
 vmap <C-/> <Plug>NERDCommenterToggle<CR>gv
 " }
 
-" Spelling {
-let g:enable_spelunker_vim = 1
-let g:enable_spelunker_vim_on_readonly = 1
-let g:spelunker_max_suggest_words = 5
-" override highlight setting.
-highlight SpelunkerSpellBad cterm=undercurl ctermfg=165 gui=undercurl guifg=#af5fff
-highlight SpelunkerComplexOrCompoundWord cterm=undercurl ctermfg=None gui=undercurl guifg=#af5fff
-let g:spelunker_white_list_for_user = ['grpc', 'uuid']
-" Disable URI checking. (default: 0)
-let g:spelunker_disable_uri_checking = 1
+"Spelling {
+"let g:enable_spelunker_vim = 1
+"let g:enable_spelunker_vim_on_readonly = 1
+"let g:spelunker_max_suggest_words = 5
+ "override highlight setting.
+"highlight SpelunkerSpellBad cterm=undercurl ctermfg=165 gui=undercurl guifg=#af5fff
+"highlight SpelunkerComplexOrCompoundWord cterm=undercurl ctermfg=None gui=undercurl guifg=#af5fff
+"let g:spelunker_white_list_for_user = ['grpc', 'uuid']
+ "Disable URI checking. (default: 0)
+"let g:spelunker_disable_uri_checking = 1
 
-command! -nargs=0 CheckSpell call spelunker#check()
+"command! -nargs=0 CheckSpell call spelunker#check()
 " }
 
 " Go syntax highlighting {

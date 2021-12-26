@@ -42,7 +42,8 @@ autocmd BufRead,BufNewFile * setlocal signcolumn=yes
 " }
 
 " Disable spell since the plugin Spelunker will also highlight
-set nospell
+"set nospell
+set spell
 set spelllang=en_us
 set noshowmode
 " do not show the file name
@@ -67,11 +68,17 @@ set wildignore+=*/node_modules/*,*/build/*,*/logs/*,*/dist/*,*/tmp/*
 " delete to blackhole register
 nnoremap <Leader>d "_d
 vnoremap <Leader>d "_d
+nnoremap <Leader>c "_c
+vnoremap <Leader>c "_c
+
 " Prepare replace of current word
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
 " remap C-c to esc in insert mode
 inoremap <C-c> <esc>
 nnoremap ; :
+
+" Clears hlsearch after doing a search, otherwise just does normal <CR> stuff
+nnoremap <expr> <CR> {-> v:hlsearch ? ":nohl\<CR>" : "\<CR>"}()
 
 " quick-save
 nmap <Leader>w :w<CR>
@@ -93,13 +100,17 @@ nnoremap Y y$
 nnoremap n nzzzv
 nnoremap N Nzzzv
 
+" Opens line below or above the current line
+inoremap <S-CR> <C-O>o
+inoremap <C-CR> <C-O>O
+
 " Moving lines up or down preserving format {
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 inoremap <C-j> <esc>:m .+1<CR>==gi
 inoremap <C-k> <esc>:m .-2<CR>==gi
-nnoremap <Leader>j :m .+1<CR>==
-nnoremap <Leader>k :m .-2<CR>==
+nnoremap <C-j> :m .+1<CR>==
+nnoremap <C-k> :m .-2<CR>==
 " }
 
 " new buffer vertical split
@@ -152,10 +163,4 @@ endfunction
 
 set foldtext=CFoldText()
 set foldmethod=expr
-
-"if (has("nvim"))
-  ""For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
-  "let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-"endif
-
 
