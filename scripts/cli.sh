@@ -4,6 +4,7 @@ function install_xcode_clt() {
   else
     print_blue "Installing XCode Command Line Tools..."
     xcode-select --install
+    sudo xcodebuild -license accept
   fi
 }
 
@@ -11,5 +12,5 @@ function install_neovim {
   print_blue "Installing NeoVim"
   install_brew_formulas neovim
   print_blue "Installing Vim Plugged"
-  sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'  
+  sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 }
