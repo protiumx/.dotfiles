@@ -1,6 +1,7 @@
 runtime plugins.vim
 runtime keymaps.vim
 runtime settings.vim
+runtime autogroups.vim
 
 runtime airline.vim
 runtime coc.vim

@@ -5,7 +5,7 @@ nnoremap <Leader>c "_c
 vnoremap <Leader>c "_c
 
 " Prepare replace of current word
-nnoremap <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
+nnoremap <Leader>r :%s/\<<C-r><C-w>\>//g<Left><Left>
 
 " Remap C-c to esc in insert mode
 inoremap <C-c> <esc>
