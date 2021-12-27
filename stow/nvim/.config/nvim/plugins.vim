@@ -21,6 +21,7 @@ Plug 'https://github.com/preservim/nerdtree'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-media-files.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 " }
 
@@ -46,6 +47,8 @@ Plug 'preservim/tagbar'
 Plug 'universal-ctags/ctags'
 " }
 
+Plug 'ahmedkhalf/project.nvim'
+
 Plug 'voldikss/vim-floaterm'
 
 call plug#end()
@@ -56,6 +59,12 @@ local opts = {
 }
 
 require('auto-session').setup(opts)
+require('telescope').load_extension('media_files')
+require("project_nvim").setup {
+    patterns = { ".git", "package.json" },
+    show_hidden = true,
+  }
+require('telescope').load_extension('projects')
 EOF
 
 let g:floaterm_keymap_toggle = '<F12>'
