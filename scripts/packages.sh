@@ -22,6 +22,7 @@ packages=(
   go
   http-server
   httpie
+  imagemagick
   jq
   kubernetes-cli
   lazydocker
