@@ -24,7 +24,7 @@ alias g-ci="git_commit ci"
 alias g-d="git_commit docs"
 alias g-m="git_commit misc"
 
-alias icat="kitty +kitten icat"
+alias icat="kitty +kitten icat --align left"
 # ITERM bindings
 # changes hex 0x15 to delete everything to the left of the cursor, rather than the whole line
 bindkey "^U" backward-kill-line
