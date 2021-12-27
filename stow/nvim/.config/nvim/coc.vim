@@ -1,4 +1,4 @@
-" CoC {
+" CoC
 let g:coc_global_extensions = [
       \'coc-html',
       \'coc-tsserver',
@@ -82,6 +82,7 @@ nmap <Leader>f <Plug>(coc-format-selected)
 
 " Fix autofix problem of current line
 nmap <Leader>qf  <Plug>(coc-fix-current)
+nmap <leader>ac   <Plug>(coc-codeaction-selected)w
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
@@ -94,4 +95,3 @@ command! -nargs=0 ORG :call CocAction('runCommand', 'editor.action.organizeImpor
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 nnoremap <silent> <space>a  :<C-u>CocList diagnostics<CR>
-" }

@@ -1,7 +1,6 @@
 let mapleader = "\<space>"
 
 colorscheme PaperColor
-set background=dark
 
 filetype plugin indent on
 " CoC TextEdit might fail if hidden is not set.
@@ -172,3 +171,4 @@ let g:PaperColor_Theme_Options = {
       \     }
       \   }
       \ }
+set background=dark
