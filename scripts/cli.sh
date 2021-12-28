@@ -8,6 +8,13 @@ function install_xcode_clt() {
   fi
 }
 
+function install_python_packages() {
+  print_blue "Installing pip"
+  curl https://bootstrap.pypa.io/get-pip.py | python
+
+  pip install xkcdpass
+}
+
 function install_neovim {
   print_blue "Installing NeoVim"
   install_brew_formulas neovim

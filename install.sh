@@ -65,6 +65,11 @@ function main() {
   install_neovim
   print_green "Finished installing neovim"
 
+  print_blue "======= PiP ======="
+  wait_input
+  install_python_packages
+  print_green "Finished installing python packages"
+
   print_blue "======= Configuration ======="
   wait_input
   setup_osx
