@@ -16,7 +16,7 @@ git_commit() {
 
 alias yw="yarn workspace"
 alias python=python3
-alias cat='bat --paging=never'
+alias cat='bat -p --paging=never'
 
 # CONVENTIONAL COMMITS
 alias g-r="git_commit refactor"
