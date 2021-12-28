@@ -1,7 +1,7 @@
 call plug#begin('~/.config/nvim/plugged')
 
 " Color schemes
-Plug 'https://github.com/rafi/awesome-vim-colorschemes'
+Plug 'NLKNguyen/papercolor-theme'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 

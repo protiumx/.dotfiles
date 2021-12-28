@@ -1,4 +1,5 @@
 runtime plugins.vim
+runtime plugins.settings.vim
 runtime settings.vim
 runtime keymaps.vim
 runtime autogroups.vim
