@@ -1,3 +1,17 @@
+# HELPERS
+
+cheat() { curl -s "cheat.sh/$1"; }
+
+git_commit() {
+  if [ -z "$3" ]
+  then
+    git commit -m "$1: $2"
+  else
+    git commit -m "$1($2): $3"
+  fi
+}
+
+
 # ALIASES
 
 alias yw="yarn workspace"
@@ -5,15 +19,6 @@ alias python=python3
 alias cat='bat --paging=never'
 
 # CONVENTIONAL COMMITS
-function git_commit() {
-    if [ -z "$3" ]
-    then
-        git commit -m "$1: $2"
-    else
-        git commit -m "$1($2): $3"
-    fi
-}
-
 alias g-r="git_commit refactor"
 alias g-t="git_commit test"
 alias g-fi="git_commit fix"
@@ -24,40 +29,18 @@ alias g-ci="git_commit ci"
 alias g-d="git_commit docs"
 alias g-m="git_commit misc"
 
-alias icat="kitty +kitten icat --align left"
-# ITERM bindings
-# changes hex 0x15 to delete everything to the left of the cursor, rather than the whole line
-bindkey "^U" backward-kill-line
-# binds hex 0x18 0x7f with deleting everything to the left of the cursor
-bindkey "^X\\x7f" backward-kill-line
-# adds redo
-bindkey "^X^_" redo
+alias vs='code .'
 
-# Set locales
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
-export EDITOR="nvim"
-export HISTSIZE=2000
-setopt HIST_FIND_NO_DUPS
-setopt HIST_IGNORE_ALL_DUPS
+alias icat="kitty +kitten icat --align left"
+alias mkpwd="xkcdpass --count=5 --acrostic=\"chaos\" -C \"first\" -R --min=5 --max=6 -D \"#@^&~_-;\""
 
 CLI="$HOME/.cli"
-
-# CHT
-CHT="$CLI/cht"
-
-# VSCODE
 VSCODE="/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
 export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$PATH"
 export PATH="$VSCODE:/opt/local/bin:$PATH"
 
-# GO
 export GOPATH=$(go env GOPATH)
 export PATH="$CHT:$GOPATH/bin:$PATH"
-
 export ZSH="$HOME/.oh-my-zsh"
-
-# CARGO
-source "$HOME/.cargo/env"
 
