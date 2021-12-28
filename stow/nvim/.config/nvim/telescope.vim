@@ -14,7 +14,7 @@ require('telescope').setup{
     },
   }
 }
-require('telescope').load_extension('media_files')
+-- require('telescope').load_extension('media_files')
 EOF
 
 nnoremap <Leader>ff <cmd>:lua require('telescope.builtin').find_files({ find_command = { 'rg', '--files', '--iglob', '!.git', '--hidden' }, })<cr>
