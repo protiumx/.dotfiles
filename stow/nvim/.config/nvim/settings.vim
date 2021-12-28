@@ -1,7 +1,11 @@
 let mapleader = " "
 
 set background=dark
-colorscheme PaperColor
+try
+  colorscheme PaperColor
+catch /^Vim\%((\a\+)\)\=:E185/
+  colorscheme default
+endtry
 
 filetype plugin indent on
 " CoC TextEdit might fail if hidden is not set.
