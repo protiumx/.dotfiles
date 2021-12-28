@@ -42,4 +42,7 @@ function setup_osx() {
 
   # Secondary click in external mouse
   defaults write com.apple.AppleMultitouchMouse MouseButtonMode -string "TwoButton"
+
+  # Disable startup sound
+  sudo nvram SystemAudioVolume=%01
 }
