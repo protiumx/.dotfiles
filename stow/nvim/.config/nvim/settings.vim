@@ -1,4 +1,4 @@
-let mapleader = "\<space>"
+let mapleader = " "
 
 colorscheme PaperColor
 
@@ -114,11 +114,10 @@ local opts = {
   }
 
 require('auto-session').setup(opts)
-require('telescope').load_extension('media_files')
 require("project_nvim").setup {
   patterns = { ".git", "package.json" },
   show_hidden = true,
-  }
+}
 EOF
 
 let g:floaterm_keymap_toggle = '<F12>'
