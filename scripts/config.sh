@@ -63,9 +63,9 @@ function stow_dotfiles() {
   # Create the folders to avoid stowing the whole folders
   for d in $folders; do
     rm -rf "$HOME/$d" || true
-    mkdir "$HOME/$d"
+    mkdir -p "$HOME/$d"
   done
 
   print_blue "Stowing ssh, zsh, git, kitty and nvim"
-  cd stow && stow --verbose 1 --target $HOME zsh ssh git nvim kitty && cd ..
+  stow -d stow --verbose 1 --target $HOME zsh ssh git nvim kitty
 }
