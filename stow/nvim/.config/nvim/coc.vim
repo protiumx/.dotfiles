@@ -6,7 +6,8 @@ let g:coc_global_extensions = [
       \'coc-pyright',
       \'coc-json',
       \'coc-go',
-      \'coc-clangd'
+      \'coc-clangd',
+      \'coc-yaml'
       \]
 
 " Remap <C-f> and <C-b> for scroll float windows/popups.

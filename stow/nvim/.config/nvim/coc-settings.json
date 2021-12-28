@@ -20,5 +20,6 @@
   "rust-analyzer.inlayHints.typeHints": true,
   "rust-analyzer.inlayHints.parameterHints": true,
   "rust-analyzer.hoverActions.linksInHover": true,
-  "rust-analyzer.cargo.allFeatures": true
+  "rust-analyzer.cargo.allFeatures": true,
+  "yaml.format.enable": true
 }
