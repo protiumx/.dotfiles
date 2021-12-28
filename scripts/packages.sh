@@ -8,16 +8,13 @@ taps=(
 )
 
 packages=(
-  # styled cat
-  bat
-  # tree listing for files
-  bottom
+  bat             # styled cat
+  bottom          # tree listing for files
   broot
   cmake
   ctags
   curl
-  # to set default handlers for file types in MacOS
-  duti
+  duti            # to set default handlers for file types in MacOS
   gettext
   go
   http-server
@@ -33,16 +30,14 @@ packages=(
   openssl
   python3
   protobuf
-  # fuzzy grep
-  ripgrep
+  ripgrep          # fuzzy grep
   rlwrap
   rustup
   sqlite
   stern
   stow
   telnet
-  # telnet-like for websockets
-  websocat
+  websocat         # telnet-like for websockets
   yarn
   ytt
   wget
@@ -51,11 +46,13 @@ packages=(
   zsh-syntax-highlighting
 )
 
-function install_packages() {
-  print_blue "Configuring taps"
+install_packages() {
+  info "Configuring taps"
   apply_brew_taps "${taps[@]}"
-  print_blue "Installing packages..."
+  
+  info "Installing packages..."
   install_brew_formulas "${packages[@]}"
-  print_blue "Cleaning up brew packages..."
+  
+  info "Cleaning up brew packages..."
   brew cleanup
 }

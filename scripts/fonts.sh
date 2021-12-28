@@ -9,8 +9,8 @@ fonts=(
   font-meslo-lg
 )
 
-function install_fonts() {
-  print_blue "Installing fonts..."
+install_fonts() {
+  info "Installing fonts..."
   brew tap homebrew/cask-fonts
   install_brew_casks "${fonts[@]}"
 }

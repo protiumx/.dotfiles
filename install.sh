@@ -14,86 +14,87 @@ set -o pipefail
 . scripts/packages.sh
 . scripts/oh-my-zsh.sh
 
-function cleanup() {
-    echo "Finishing"
+cleanup() {
+  echo "Finishing"
 }
 
-function wait_input() {
+wait_input() {
   read -p "Press enter to continue: "
 }
 
 trap cleanup EXIT
 
-function main() {
-  print_green "Starting ..."
+main() {
+  info "Starting ..."
 
-  print_blue "======= xCode ======="
+  info "======= xCode ======="
   wait_input
-  install_xcode_clt
-  print_green "Finished installing xCode"
+  install_xcode
+  success "Finished installing xCode"
 
-  print_blue "======= Homebrew ======="
+  info "======= Homebrew ======="
   wait_input
   install_homebrew
-  print_green "Finished installing Homebrew"
+  success "Finished installing Homebrew"
 
-  print_blue "======= Homebrew packages ======="
+  info "======= Homebrew packages ======="
   wait_input
   install_packages
-  print_green "Finished installing Homebrew packages"
+  success "Finished installing Homebrew packages"
 
-  print_blue "======= Homebrew Fonts ======="
+  info "======= Homebrew Fonts ======="
   wait_input
   install_fonts
-  print_green "Finished installing fonts"
+  success "Finished installing fonts"
 
-  print_blue "======= Oh-my-zsh ======="
+  info "======= Oh-my-zsh ======="
   wait_input
   install_oh_my_zsh
-  print_green "Finished installing Oh-my-zsh"
+  success "Finished installing Oh-my-zsh"
 
   install_zsh_plugins
-  print_green "Finished installing Oh-my-zsh plugins"
+  success "Finished installing Oh-my-zsh plugins"
 
-  print_blue "======= MacOS Apps ======="
+  info "======= MacOS Apps ======="
   wait_input
   install_macos_apps
-  print_green "Finished installing macOS apps"
+  success "Finished installing macOS apps"
 
-  print_blue "======= NeoVim ======="
+  info "======= NeoVim ======="
   wait_input
   install_neovim
-  print_green "Finished installing neovim"
+  success "Finished installing neovim"
 
-  print_blue "======= PiP ======="
+  info "======= PiP ======="
   wait_input
   install_python_packages
-  print_green "Finished installing python packages"
+  success "Finished installing python packages"
 
-  print_blue "======= Configuration ======="
+  info "======= Configuration ======="
   wait_input
   setup_osx
-  print_green "Finished configuring MacOS defaults. NOTE: A restart is needed"
+  success "Finished configuring MacOS defaults. NOTE: A restart is needed"
   code_as_default_text_editor
-  print_green "Finished setting up VSCode as default text editor"
+  success "Finished setting up VSCode as default text editor"
   stow_dotfiles
-  print_green "Finished stowing dotfiles"
+  success "Finished stowing dotfiles"
 
-  print_blue "======= SSH Key ======="
+  info "======= SSH Key ======="
   setup_github_ssh
-  print_green "Finished setting up SSH Key"
+  success "Finished setting up SSH Key"
 
-  print_blue "======= NeoVim Plugins ======="
+  info "======= NeoVim Plugins ======="
   wait_input
-  # Only load the plugins files
-  nvim -u ~/.config/nvim/plugins.vim -c ':PlugInstall' -c ':UpdateRemotePlugins' -c ':qall'
-  print_green "Finished installing nvim plugins"
+  nvim +PlugInstall +qall
+  success "Finished installing nvim plugins"
 
-  print_blue "======= Rust Setup ======="
+  info "======= Rust Setup ======="
   wait_input
   rustup-init
 
-  print_blue "Restarting"
+  success "Done"
+
+  info "System needs to restart..."
   wait_input
   sudo shutdown -r now
 }

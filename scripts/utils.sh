@@ -2,18 +2,18 @@
 
 reset_color=$(tput sgr 0)
 
-function print_blue() {
+info() {
   printf "%s[*] %s%s\n" "$(tput setaf 4)" "$1" "$reset_color"
 }
 
-function print_green() {
+success() {
   printf "%s[*] %s%s\n" "$(tput setaf 2)" "$1" "$reset_color"
 }
 
-function print_red() {
+err() {
   printf "%s[*] %s%s\n" "$(tput setaf 1)" "$1" "$reset_color"
 }
 
-function print_yellow() {
+warn() {
   printf "%s[*] %s%s\n" "$(tput setaf 3)" "$1" "$reset_color"
 }

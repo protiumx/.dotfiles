@@ -1,5 +1,6 @@
-function setup_osx() {
-  print_blue "Configuring MacOS default settings"
+setup_osx() {
+  info "Configuring MacOS default settings"
+
   # Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)
   defaults write com.apple.screencapture type -string "png"
 

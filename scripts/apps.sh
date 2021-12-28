@@ -15,8 +15,8 @@ apps=(
   vlc
 )
 
-function install_macos_apps() {
-  print_blue "Installing macOS apps..."
+install_macos_apps() {
+  info "Installing macOS apps..."
   brew tap homebrew/cask
   install_brew_casks "${apps[@]}"
 }
