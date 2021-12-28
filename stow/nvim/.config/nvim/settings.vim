@@ -119,7 +119,6 @@ require("project_nvim").setup {
   patterns = { ".git", "package.json" },
   show_hidden = true,
   }
-require('telescope').load_extension('projects')
 EOF
 
 let g:floaterm_keymap_toggle = '<F12>'
