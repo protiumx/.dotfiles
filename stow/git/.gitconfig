@@ -19,6 +19,7 @@
 	unstage = reset HEAD --
   # push and set upt origin for branch
 	up = !git push -u origin `git branch --show-current`
+  upt = !git push origin --tags
   # count the number of files changed in the current branch compared to main
 	count = !git diff --name-only main... | wc -l
 [init]
