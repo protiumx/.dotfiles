@@ -68,6 +68,8 @@ nnoremap <C-A> ggVG
 
 " Open new file adjacent to current file
 nnoremap <Leader>o :e <C-R>=expand("%:p:h") . "/" <CR>
+" Open new adjacent file in vertical split
+nnoremap <Leader>vo :vsp \| :e <C-R>=expand("%:p:h") . "/" <CR>
 
 " Paste formatted
 nnoremap p p=`]

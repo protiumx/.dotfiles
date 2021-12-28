@@ -4,6 +4,7 @@ let g:PaperColor_Theme_Options = {
       \      'default.dark': {
       \         'override' : {
       \            'color00' : ['#080808', '232'],
+      \            'color07': ['#eeeeee', '255'],
       \            'linenumber_bg' : ['#080808', '232']
       \          }
       \        }
