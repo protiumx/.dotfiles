@@ -7,7 +7,6 @@ apps=(
   firefox
   google-chrome
   kitty
-  iterm2
   rectangle
   slack
   spotify
