@@ -29,10 +29,11 @@ alias g-ci="git_commit ci"
 alias g-d="git_commit docs"
 alias g-m="git_commit misc"
 
-alias vs='code .'
+alias vs="code ."
 
 alias icat="kitty +kitten icat --align left"
 alias mkpwd="xkcdpass --count=5 --acrostic=\"chaos\" -C \"first\" -R --min=5 --max=6 -D \"#@^&~_-;\""
+alias isodate='date --iso-8601=seconds'
 
 CLI="$HOME/.cli"
 VSCODE="/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
