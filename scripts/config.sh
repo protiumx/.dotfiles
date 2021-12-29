@@ -1,4 +1,4 @@
-funcode_as_default_text_editor() {
+code_as_default_text_editor() {
   info "Setting up VSCode as default editor for common extensions"
   local extensions=(
     ".c"
@@ -64,7 +64,7 @@ stow_dotfiles() {
     rm -f "$HOME/$f" || true
   done
 
-  # Create the folders to avoid stowing the whole folders
+  # Create the folders to avoid symlinking folders
   for d in $folders; do
     rm -rf "$HOME/$d" || true
     mkdir -p "$HOME/$d"

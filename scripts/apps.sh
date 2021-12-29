@@ -1,6 +1,5 @@
 apps=(
   arduino
-  caffeine
   clipy
   deepl
   discord
@@ -25,7 +24,6 @@ masApps=(
 
 install_macos_apps() {
   info "Installing macOS apps..."
-  brew tap homebrew/cask
   install_brew_casks "${apps[@]}"
 }
 
