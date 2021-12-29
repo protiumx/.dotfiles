@@ -36,10 +36,10 @@ funcode_as_default_text_editor() {
 setup_github_ssh() {
   info "Using $SSH_PASSPHRASE"
   ssh-keygen -t ed25519 -C $SSH_PASSPHRASE
-  
+
   info "Adding ssh key to keychain"
   ssh-add -K ~/.ssh/id_ed25519
-  
+
   info "Remember add ssh key to github account 'pbcopy < ~/.ssh/id_ed25519.pub'"
 }
 
@@ -51,6 +51,7 @@ stow_dotfiles() {
     ".aliases"
     ".zshrc"
     ".p10k.sh"
+    ".vimrc"
   )
   local folders=(
     ".config/nvim"
@@ -69,6 +70,7 @@ stow_dotfiles() {
     mkdir -p "$HOME/$d"
   done
 
-  info "Stowing ssh, zsh, git, kitty and nvim"
-  stow -d stow --verbose 1 --target $HOME zsh ssh git nvim kitty
+  local dotfiles="git kitty nvim ssh vim zsh"
+  info "Stowing: $dotfiles"
+  stow -d stow --verbose 1 --target $HOME $dotfiles
 }
