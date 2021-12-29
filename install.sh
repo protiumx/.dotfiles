@@ -84,14 +84,15 @@ main() {
   nvim +PlugInstall +qall
   success "Finished installing nvim plugins"
 
-  info "======= Rust Setup ======="
-  wait_input
-  rustup-init
+  if ! hash rustc &>/dev/null; then
+    info "======= Rust Setup ======="
+    wait_input
+    rustup-init
+  fi
 
   success "Done"
 
-  info "System needs to restart..."
-  info "Restart?"
+  info "System needs to restart. Restart?"
 
   select yn in "y" "n"; do
     case $yn in
@@ -99,7 +100,6 @@ main() {
         n ) exit;;
     esac
   done
-
 }
 
 main
