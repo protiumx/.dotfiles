@@ -1,13 +1,3 @@
-install_homebrew() {
-  export HOMEBREW_CASK_OPTS="--appdir=/Applications"
-  if hash brew &>/dev/null; then
-    warn "Homebrew already installed"    
-  else
-    info "Installing homebrew..."
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  fi
-}
-
 apply_brew_taps() {
   local tap_packages=$*
   for tap in $tap_packages; do

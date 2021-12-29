@@ -15,7 +15,7 @@ set -o pipefail
 . scripts/oh-my-zsh.sh
 
 cleanup() {
-  echo "Finishing"
+  echo "Finishing..."
 }
 
 wait_input() {
@@ -25,17 +25,7 @@ wait_input() {
 trap cleanup EXIT
 
 main() {
-  info "Starting ..."
-
-  info "======= xCode ======="
-  wait_input
-  install_xcode
-  success "Finished installing xCode"
-
-  info "======= Homebrew ======="
-  wait_input
-  install_homebrew
-  success "Finished installing Homebrew"
+  info "Installing ..."
 
   info "======= Homebrew packages ======="
   wait_input
@@ -65,7 +55,7 @@ main() {
   install_neovim
   success "Finished installing neovim"
 
-  info "======= PiP ======="
+  info "======= PiP modules ======="
   wait_input
   install_python_packages
   success "Finished installing python packages"
@@ -95,8 +85,15 @@ main() {
   success "Done"
 
   info "System needs to restart..."
-  wait_input
-  sudo shutdown -r now
+  info "Restart?"
+
+  select yn in "y" "n"; do
+    case $yn in
+        y ) sudo shutdown -r now; break;;
+        n ) exit;;
+    esac
+  done
+
 }
 
 main
