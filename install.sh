@@ -48,6 +48,8 @@ main() {
   info "======= MacOS Apps ======="
   wait_input
   install_macos_apps
+
+  install_masApps
   success "Finished installing macOS apps"
 
   info "======= NeoVim ======="
