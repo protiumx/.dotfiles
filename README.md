@@ -19,3 +19,12 @@ In order to reuse these scripts, here a summary of files you can change/adapt to
 - `scripts/apps.sh`: `homebrew` casks to install
 - `scripts/osx.sh`: **macOS** settings
 - `scripts/config.sh`: general settings and dotfiles
+
+## Testing Stow
+
+To double checks that the dot files will be correctly linked, you can use stow to simulate the result. E.g.
+
+```sh
+stow -nSv vim
+
+```
