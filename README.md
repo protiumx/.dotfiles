@@ -1,18 +1,21 @@
 # dotfiles
 
-my dotfiles and configurations for setting up a new **macOS** env.
-I use [stow](https://www.gnu.org/software/stow/) for managing my dotfiles.
+Set up dev environment in a **macOS** machine.
+This script installs all the packages and apps I use, [stow](https://www.gnu.org/software/stow/) my dotfiles and sets all my preffered macOS configurations.
 
-## Download
+## Installing
 
-Ideally you want to clone this repo at your home folder
+Run the `dotenv` script:
 ```sh
-git clone https://github.com/protiumx/dotfiles.git ~/.dotfiles
+curl -sO https://raw.githubusercontent.com/protiumx/.dotfiles/main/dotfiles
 ```
 
-## Installation
-You can run `install.sh` and expect to execute everything
+## Reusing
 
-```sh
-chmox +x install.sh && ./install.sh
-```
+In order to reuse these scripts, here a summary of files you can change/adapt to your needs:
+
+- `scripts/packages.sh`: all the `homebrew` taps and packages to install
+- `scripts/fonts.sh`: `homebrew` fonts to install
+- `scripts/apps.sh`: `homebrew` casks to install
+- `scripts/osx.sh`: **macOS** settings
+- `scripts/config.sh`: general settings and dotfiles
