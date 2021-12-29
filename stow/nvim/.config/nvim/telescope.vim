@@ -11,6 +11,8 @@ require('telescope').setup{
       '--smart-case',
       '-u',
       '--hidden',
+      '--iglob',
+      '!.git !node_modules'
     },
   }
 }

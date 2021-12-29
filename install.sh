@@ -69,6 +69,10 @@ main() {
   code_as_default_text_editor
   success "Finished setting up VSCode as default text editor"
   stow_dotfiles
+
+  info "Crating development folders"
+  mkdir -p ~/Development/protiumx
+
   success "Finished stowing dotfiles"
 
   info "======= SSH Key ======="
