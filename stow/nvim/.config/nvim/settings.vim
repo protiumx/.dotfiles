@@ -52,6 +52,7 @@ autocmd BufRead,BufNewFile * setlocal signcolumn=yes
 "set nospell
 set spell
 set spelllang=en_us
+hi SpellBad gui=undercurl cterm=undercurl ctermbg=none ctermfg=none
 
 set noshowmode
 " Do not show the file name. Airline already does it
