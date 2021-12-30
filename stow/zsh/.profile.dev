@@ -1,4 +1,4 @@
-# HELPERS
+# Functions
 
 cheat() { curl -s "cheat.sh/$1"; }
 
@@ -11,23 +11,26 @@ git_commit() {
   fi
 }
 
+gshow() {
+  open $(git remote -v | grep fetch | awk '{print $2}' | sed 's/git@/http:\/\//' | sed 's/com:/com\//' | head -n1);
+}
 
-# ALIASES
+# Aliases
 
 alias yw="yarn workspace"
 alias python=python3
-alias cat='bat -p --paging=never'
+alias cat="bat -p --paging=never"
 
-# CONVENTIONAL COMMITS
-alias g-r="git_commit refactor"
-alias g-t="git_commit test"
-alias g-fi="git_commit fix"
-alias g-fe="git_commit feat"
-alias g-ch="git_commit chore"
-alias g-st="git_commit style"
-alias g-ci="git_commit ci"
-alias g-d="git_commit docs"
-alias g-m="git_commit misc"
+# Conventional Commits
+alias cc-r="git_commit refactor"
+alias cc-t="git_commit test"
+alias cc-fi="git_commit fix"
+alias cc-fe="git_commit feat"
+alias cc-ch="git_commit chore"
+alias cc-st="git_commit style"
+alias cc-ci="git_commit ci"
+alias cc-d="git_commit docs"
+alias cc-m="git_commit misc"
 
 alias vs="code ."
 
