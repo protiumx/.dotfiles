@@ -8,7 +8,7 @@ bindkey "^X^_" redo
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
-export EDITOR="nvim"
+export EDITOR="vim"
 export HISTSIZE=4000
 export SAVEHIST=5000
 
