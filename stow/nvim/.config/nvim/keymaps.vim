@@ -53,6 +53,9 @@ nnoremap <C-Down> :resize +2<CR>
 nnoremap <C-Left> :vertical resize -2<CR>
 nnoremap <C-Right> :vertical resize +2<CR>
 
+" Copy to macOS clipboard
+vnoremap <C-y> "*y
+
 " Navigate buffers
 nnoremap <S-l> :bnext<CR>
 nnoremap <S-h> :bprevious<CR>

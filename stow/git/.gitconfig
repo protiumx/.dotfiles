@@ -8,22 +8,28 @@
 [alias]
 	amend = commit --amend
   append = commit --amend --no-edit
+
   # clean up merged branches using "main" as default
   bclean = "!f() { git branch --merged ${1-main} | grep -v " ${1-main}$" | xargs -r git branch -d; }; f"
-	ck = checkout
+  ck = checkout
   ckb = checkout -b
+
   # count the number of files changed in the current branch compared to main
   count = !git diff --name-only main... | wc -l
   dd = !git --no-pager diff
+  discard = checkout -- .
+
 	last = log -1 HEAD --stat
 	logf = !git log --pretty=format:\"%C(magenta)%h%Creset -%C(red)%d%Creset %s %C(dim green)(%cr) [%an]\" --abbrev-commit -30
   main = checkout main
-	st = status -sb
+  cnv = commit -n -m
+  st = status -sb
+
   # pull rebase remote main
 	sync = !git pull origin main --rebase
 	undo = reset HEAD^
-	discard = checkout -- .
 	unstage = reset HEAD --
+
   # push and set upt origin for branch
 	up = !git push -u origin `git branch --show-current`
   upt = !git push origin --tags
