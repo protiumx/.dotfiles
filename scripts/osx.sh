@@ -19,9 +19,6 @@ setup_osx() {
   # Hide icons on desktop
   defaults write com.apple.finder CreateDesktop -bool false
 
-  # When performing a search, search the current folder by default
-  defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
-
   # Avoid creating .DS_Store files on network volumes
   defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
@@ -45,8 +42,8 @@ setup_osx() {
 
   # Set Desktop as the default location for new Finder windows
   # For other paths, use `PfLo` and `file:///full/path/here/`
-  defaults write com.apple.finder NewWindowTarget -string "PfDe"
-  defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/"
+  defaults write com.apple.finder NewWindowTarget -string "PfHm"
+  defaults write com.apple.finder NewWindowTargetPath -string "file:///${HOME}/"
 
   # Enable the Develop menu and the Web Inspector in Safari
   defaults write com.apple.Safari IncludeDevelopMenu -bool true
