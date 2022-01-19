@@ -11,7 +11,7 @@
 
   # clean up merged branches using "main" as default
   bclean = "!f() { git branch --merged ${1-main} | grep -v " ${1-main}$" | xargs -r git branch -d; }; f"
-  ck = checkout
+  ck = "!f() { git checkout $1 2>/dev/null || git checkout -b $1; }; f"
   ckb = checkout -b
 
   # count the number of files changed in the current branch compared to main
