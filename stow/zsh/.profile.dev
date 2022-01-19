@@ -32,6 +32,7 @@ alias cc-ci="git_commit ci"
 alias cc-d="git_commit docs"
 alias cc-m="git_commit misc"
 
+alias dc="docker-compose"
 alias vs="code ."
 
 alias icat="kitty +kitten icat --align left"
@@ -43,6 +44,7 @@ VSCODE="/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
 export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$PATH"
 export PATH="$VSCODE:/opt/local/bin:$PATH"
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
 export GOPATH=$(go env GOPATH)
 export PATH="$CHT:$GOPATH/bin:$PATH"
