@@ -12,14 +12,18 @@ require('telescope').setup{
       '-u',
       '--hidden',
       '--iglob',
-      '!.git !node_modules'
+      '!.git',
+      '--iglob',
+      '!**/node_modules',
+      '--iglob',
+      '!.yarn'
     },
   }
 }
 -- require('telescope').load_extension('media_files')
 EOF
 
-nnoremap <Leader>ff <cmd>:lua require('telescope.builtin').find_files({ find_command = { 'rg', '--files', '--iglob', '!.git', '--hidden' }, })<cr>
+nnoremap <Leader>ff <cmd>:lua require('telescope.builtin').find_files({ find_command = { 'rg', '--files', '--iglob', '!.git', '--iglob', '!.yarn', '--hidden' }, })<cr>
 " open in current file pwd
 nnoremap <Leader>fc :lua require('telescope.builtin').file_browser({cwd = vim.fn.expand('%:p:h')})
 nnoremap <Leader>fg <cmd>Telescope live_grep<cr>

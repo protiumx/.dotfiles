@@ -7,7 +7,7 @@ augroup compileandrun
 augroup END
 
 " Remove white spaces before saving
-autocmd BufWritePre * :%s/\s\+$//e
+"autocmd BufWritePre * :%s/\s\+$//e
 
 augroup highlight_yank
   autocmd!

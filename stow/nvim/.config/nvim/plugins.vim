@@ -4,6 +4,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'catppuccin/nvim', {'as': 'catppuccin'}
 
 " Icons
 Plug 'kyazdani42/nvim-web-devicons'
@@ -47,5 +48,7 @@ Plug 'universal-ctags/ctags'
 
 Plug 'ahmedkhalf/project.nvim'
 Plug 'voldikss/vim-floaterm'
+
+Plug 'https://github.com/lbrayner/vim-rzip'
 
 call plug#end()

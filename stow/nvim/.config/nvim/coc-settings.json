@@ -1,14 +1,10 @@
 {
   "coc.preferences.snippets.enable": true,
   "coc.preferences.formatOnSaveFiletypes": [
-    "typescript",
-    "typescriptreact",
     "json",
-    "typescript.tsx",
     "rust",
     "python",
     "go",
-    "html",
     "cpp"
   ],
   "diagnostic.checkCurrentLine": true,
@@ -21,5 +17,8 @@
   "rust-analyzer.inlayHints.parameterHints": true,
   "rust-analyzer.hoverActions.linksInHover": true,
   "rust-analyzer.cargo.allFeatures": true,
-  "yaml.format.enable": true
+  "yaml.format.enable": true,
+  "tsserver.tsdk": ".yarn/sdks/typescript/lib",
+  "eslint.packageManager": "yarn",
+  "eslint.nodePath": ".yarn/sdks"
 }
