@@ -17,12 +17,15 @@ packages=(
   duti            # to set default handlers for file types in MacOS
   gettext
   go
+  hashicorp/tap/terraform
   http-server
   httpie
   imagemagick
   jq
   kubernetes-cli
   lazydocker
+  libpq
+  macpass
   minikube
   node
   nmap
@@ -49,10 +52,10 @@ packages=(
 install_packages() {
   info "Configuring taps"
   apply_brew_taps "${taps[@]}"
-  
+
   info "Installing packages..."
   install_brew_formulas "${packages[@]}"
-  
+
   info "Cleaning up brew packages..."
   brew cleanup
 }
