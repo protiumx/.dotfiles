@@ -28,6 +28,9 @@ setup_osx() {
   # Show hidden files inside the finder
   defaults write com.apple.finder "AppleShowAllFiles" -bool true
 
+  # Show Status Bar
+  defaults write com.apple.finder "ShowStatusBar" -bool true
+
   # Do not show warning when changing the file extension
   defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 
