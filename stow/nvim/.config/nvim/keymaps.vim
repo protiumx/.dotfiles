@@ -79,4 +79,4 @@ nnoremap p p=`]
 nnoremap <C-p> p
 
 " Close all but current buffer
-nnoremap <Leader> ca :%bd|e#<CR>
+nnoremap <Leader>xa :%bd\|e#\|bd#<cr>\|'"
