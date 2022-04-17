@@ -77,3 +77,6 @@ nnoremap <Leader>vo :vsp \| :e <C-R>=expand("%:p:h") . "/" <CR>
 " Paste formatted
 nnoremap p p=`]
 nnoremap <C-p> p
+
+" Close all but current buffer
+nnoremap <Leader> ca :%bd|e#<CR>

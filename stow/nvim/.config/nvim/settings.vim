@@ -2,8 +2,8 @@ let mapleader = " "
 
 set background=dark
 try
-  "colorscheme PaperColor
-  colorscheme catppuccin
+  colorscheme PaperColor
+  "colorscheme catppuccin
 catch /^Vim\%((\a\+)\)\=:E185/
   colorscheme default
 endtry
