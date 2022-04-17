@@ -31,6 +31,7 @@ packages=(
   nmap
   openjdk
   openssl
+  postgresql
   python3
   protobuf
   ripgrep          # fuzzy grep
