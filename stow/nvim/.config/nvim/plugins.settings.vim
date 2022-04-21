@@ -24,8 +24,6 @@ require("project_nvim").setup {
 }
 EOF
 
-let g:floaterm_keymap_toggle = '<F12>'
-
 nnoremap <F9> :UndotreeToggle<CR>
 
 " [preservim/tagbar] map F8 to CTagbar

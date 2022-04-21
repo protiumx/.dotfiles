@@ -47,7 +47,6 @@ Plug 'preservim/tagbar'
 Plug 'universal-ctags/ctags'
 
 Plug 'ahmedkhalf/project.nvim'
-Plug 'voldikss/vim-floaterm'
 
 Plug 'https://github.com/lbrayner/vim-rzip'
 

@@ -60,7 +60,7 @@ vnoremap <C-y> "*y
 nnoremap <S-l> :bnext<CR>
 nnoremap <S-h> :bprevious<CR>
 " Toggle between buffers current and prev buffer
-nnoremap <Leader><Leader> <C-^>
+nnoremap `` <C-^>
 " New buffer vertical split
 nnoremap <Leader>vs :vnew<cr>
 " Close buffer without changing window layout
@@ -80,3 +80,6 @@ nnoremap <C-p> p
 
 " Close all but current buffer
 nnoremap <Leader>xa :%bd\|e#\|bd#<cr>\|'"
+
+inoremap <F12> :vsplit term://zsh
+nnoremap <F12> :vsplit term://zsh

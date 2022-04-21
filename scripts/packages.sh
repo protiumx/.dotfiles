@@ -14,7 +14,8 @@ packages=(
   cmake
   ctags
   curl
-  duti            # to set default handlers for file types in MacOS
+  duti # to set default handlers for file types in MacOS
+  fzf
   gettext
   go
   hashicorp/tap/terraform
@@ -28,6 +29,7 @@ packages=(
   macpass
   minikube
   node
+  nvm
   nmap
   openjdk
   openssl
