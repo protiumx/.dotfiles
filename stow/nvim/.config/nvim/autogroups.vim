@@ -11,7 +11,7 @@ augroup END
 
 augroup highlight_yank
   autocmd!
-  au TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=500}
+  autocmd TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=500}
 augroup END
 
 augroup neovim_terminal
@@ -19,5 +19,6 @@ augroup neovim_terminal
   " Enter Terminal-mode (insert) automatically
   autocmd TermOpen * startinsert
   " Disables number lines on terminal buffers
-  autocmd TermOpen * :set nonumber norelativenumber nospell
+  autocmd TermOpen * setlocal nonumber norelativenumber nospell
+  autocmd TermOpen * setlocal signcolumn=no
 augroup END
