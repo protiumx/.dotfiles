@@ -1,6 +1,7 @@
 taps=(
   hashicorp/tap
   helm/tap
+  helix-editor/helix
   homebrew/cask
   homebrew/cask-fonts
   homebrew/core
@@ -19,6 +20,8 @@ packages=(
   gettext
   go
   hashicorp/tap/terraform
+  helm
+  helix
   http-server
   httpie
   imagemagick
