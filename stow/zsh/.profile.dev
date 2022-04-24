@@ -22,18 +22,18 @@ alias python=python3
 alias cat="bat -p --paging=never"
 
 # Conventional Commits
-alias cc-r="git_commit refactor"
-alias cc-t="git_commit test"
-alias cc-fi="git_commit fix"
-alias cc-fe="git_commit feat"
-alias cc-ch="git_commit chore"
-alias cc-st="git_commit style"
-alias cc-ci="git_commit ci"
-alias cc-d="git_commit docs"
-alias cc-m="git_commit misc"
+alias gr="git_commit refactor"
+alias gt="git_commit test"
+alias gfi="git_commit fix"
+alias gfe="git_commit feat"
+alias gch="git_commit chore"
+alias gst="git_commit style"
+alias gci="git_commit ci"
+alias gd="git_commit docs"
+alias gm="git_commit misc"
 
 alias dc="docker-compose"
-alias vs="code ."
+alias kc="kubectl"
 
 alias icat="kitty +kitten icat --align left"
 alias mkpwd="xkcdpass --count=5 --acrostic=\"chaos\" -C \"first\" -R --min=5 --max=6 -D \"#@^&~_-;\""
@@ -49,4 +49,4 @@ export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 export GOPATH=$(go env GOPATH)
 export PATH="$CHT:$GOPATH/bin:$PATH"
 export ZSH="$HOME/.oh-my-zsh"
-
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
