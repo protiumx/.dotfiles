@@ -29,9 +29,6 @@ nnoremap Y y$
 nnoremap n nzzzv
 nnoremap N Nzzzv
 
-" Opens line below or above the current line
-inoremap <S-CR> <C-O>o
-inoremap <C-CR> <C-O>O
 
 " Moving lines up or down preserving format
 vnoremap J :m '>+1<CR>gv=gv
@@ -65,6 +62,10 @@ nnoremap `` <C-^>
 nnoremap <Leader>vs :vnew<cr>
 " Close buffer without changing window layout
 nnoremap :: :bp\|bd #<CR>
+nnoremap << :bp<cr>
+nnoremap >> :bn<cr>
+" Close all but current buffer
+nnoremap <Leader>xa :%bd\|e#\|bd#<cr>\|'"
 
 " Select everything
 nnoremap <C-A> ggVG
@@ -78,8 +79,5 @@ nnoremap <Leader>vo :vsp \| :e <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap p p=`]
 nnoremap <C-p> p
 
-" Close all but current buffer
-nnoremap <Leader>xa :%bd\|e#\|bd#<cr>\|'"
-
-inoremap <F12> :vsplit term://zsh
-nnoremap <F12> :vsplit term://zsh
+inoremap <F12> <esc>:e term://zsh<CR>
+nnoremap <F12> :e term://zsh<CR>

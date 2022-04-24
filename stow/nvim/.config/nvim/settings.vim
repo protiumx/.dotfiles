@@ -21,15 +21,18 @@ set sessionoptions+=winpos,terminal
 
 " Don't pass messages to |ins-completion-menu|
 set shortmess+=c
-
+set nowrap
 set expandtab
 set number
 set autoindent
 set tabstop=2
 set shiftwidth=2
 
-" Always show signs column
-set scl=yes
+" Enable signcolumn for git projects
+
+set signcolumn=yes
+" Set signcolumn for new buffers
+autocmd BufRead,BufNewFile * setlocal signcolumn=yes
 
 " Mouse enabled in all modes
 set mouse=a
@@ -45,9 +48,6 @@ set smartcase
 set colorcolumn=100
 highlight ColorColumn ctermbg=0
 highlight CursorColumn ctermbg=none ctermfg=magenta
-
-" Set signcolumn for new buffers
-autocmd BufRead,BufNewFile * setlocal signcolumn=yes
 
 " Disable spell since the plugin Spelunker will also highlight
 "set nospell

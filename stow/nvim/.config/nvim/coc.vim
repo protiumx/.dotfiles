@@ -1,14 +1,13 @@
 " CoC
 let g:coc_global_extensions = [
-      \'coc-html',
-      \'coc-tsserver',
-      \'coc-rust-analyzer',
-      \'coc-pyright',
-      \'coc-json',
-      \'coc-go',
-      \'coc-clangd',
-      \'coc-yaml'
-      \]
+  \'coc-html',
+  \'coc-tsserver',
+  \'coc-rust-analyzer',
+  \'coc-pyright',
+  \'coc-json',
+  \'coc-go',
+  \'coc-clangd',
+  \'coc-yaml']
 
 " Remap <C-f> and <C-b> for scroll float windows/popups.
 if has('nvim-0.4.0') || has('patch-8.2.0750')
