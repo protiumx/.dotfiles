@@ -1,5 +1,7 @@
 # dotfiles
 
+[![shell](https://github.com/protiumx/.dotfiles/actions/workflows/shell.yml/badge.svg)](https://github.com/protiumx/.dotfiles/actions/workflows/shell.yml)
+
 Set up dev environment in a **macOS** machine.
 This script installs all the packages and apps I use, [stow](https://www.gnu.org/software/stow/) my dotfiles and sets all my preffered macOS configurations.
 
@@ -7,7 +9,7 @@ Check my [Medium article](https://medium.com/@protiumx/bash-gnu-stow-take-a-walk
 
 ## Installing
 
-Run the `dotenv` script:
+Run the `dotfiles` script:
 ```sh
 curl -sO https://raw.githubusercontent.com/protiumx/.dotfiles/main/dotfiles
 ```
