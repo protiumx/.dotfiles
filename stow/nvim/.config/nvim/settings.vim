@@ -8,6 +8,15 @@ catch /^Vim\%((\a\+)\)\=:E185/
   colorscheme default
 endtry
 
+highlight LineNr ctermbg=none
+highlight Normal ctermbg=none
+highlight NonText ctermbg=none
+highlight SignColumn ctermbg=none
+highlight VertSplit ctermbg=none ctermfg=98 cterm=none
+
+" Hide tab bar
+set showtabline=0
+
 filetype plugin indent on
 " CoC TextEdit might fail if hidden is not set.
 set hidden
@@ -29,7 +38,6 @@ set tabstop=2
 set shiftwidth=2
 
 " Enable signcolumn for git projects
-
 set signcolumn=yes
 " Set signcolumn for new buffers
 autocmd BufRead,BufNewFile * setlocal signcolumn=yes
@@ -46,11 +54,10 @@ set smartcase
 
 " Line size
 set colorcolumn=100
-highlight ColorColumn ctermbg=0
+highlight ColorColumn ctermbg=93
 highlight CursorColumn ctermbg=none ctermfg=magenta
 
 " Disable spell since the plugin Spelunker will also highlight
-"set nospell
 set spell
 set spelllang=en_us
 hi SpellBad gui=undercurl cterm=undercurl ctermbg=none ctermfg=none
@@ -82,14 +89,16 @@ function! SetTab(n)
   set expandtab
 endfunction
 
-fun! EmptyRegisters()
+command! -nargs=1 SetTab call SetTab(<f-args>)
+
+function! EmptyRegisters()
   let regs=split('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/-"', '\zs')
   for r in regs
     call setreg(r, [])
   endfor
 endfun
 
-command! -nargs=1 SetTab call SetTab(<f-args>)
+command! -nargs=1 EmptyReg call EmptyRegisters(<f-args>)
 
 " Function to trim extra whitespace in whole file
 function! Trim()
