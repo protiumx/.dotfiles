@@ -2,14 +2,13 @@ call plug#begin('~/.config/nvim/plugged')
 
 " Color schemes
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'https://github.com/joshdick/onedark.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " Icons
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'ryanoasis/vim-devicons'
-
-Plug 'rmagatti/auto-session'
 
 Plug 'kamykn/popup-menu.nvim'
 
@@ -26,7 +25,9 @@ Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
 " Completion/Syntax
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'elixir-editors/vim-elixir'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'mattn/emmet-vim'
 
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
@@ -41,11 +42,7 @@ Plug 'https://github.com/tpope/vim-fugitive.git'
 " Show sign columns for changes in files
 Plug 'mhinz/vim-signify'
 
-" Better ctags
-Plug 'preservim/tagbar'
-Plug 'universal-ctags/ctags'
-
-Plug 'ahmedkhalf/project.nvim'
+Plug 'https://github.com/vim-scripts/dbext.vim'
 
 Plug 'https://github.com/lbrayner/vim-rzip'
 
