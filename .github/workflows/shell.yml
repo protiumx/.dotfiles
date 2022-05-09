@@ -1,10 +1,12 @@
 name: shell
 on:
+  workflow_dispatch:
+    
   push:
     paths:
       - "**/*.sh"
     branches:
-      - main
+      - "main"
 jobs:
   lint:
     name: lint
