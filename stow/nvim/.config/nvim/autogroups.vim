@@ -6,8 +6,7 @@ augroup compileandrun
   autocmd FileType go nmap <f5> <Plug>(go-run)
 augroup END
 
-" Remove white spaces before saving
-"autocmd BufWritePre * :%s/\s\+$//e
+autocmd BufNewFile,BufRead *.heex set ft=html syntax=html
 
 augroup highlight_yank
   autocmd!
@@ -21,4 +20,14 @@ augroup neovim_terminal
   " Disables number lines on terminal buffers
   autocmd TermOpen * setlocal nonumber norelativenumber nospell
   autocmd TermOpen * setlocal signcolumn=no
+augroup END
+
+" Clear last command after 2 seconds
+augroup clearcmdline
+  autocmd!
+  function! Echo_Nothing(timer)
+      echo ''
+  endfunction
+
+  autocmd CmdlineLeave * call timer_start(2000, 'Echo_Nothing')
 augroup END

@@ -20,5 +20,18 @@
   "yaml.format.enable": true,
   "tsserver.tsdk": ".yarn/sdks/typescript/lib",
   "eslint.packageManager": "yarn",
-  "eslint.nodePath": ".yarn/sdks"
+  "eslint.nodePath": ".yarn/sdks",
+  "cSpell.enabled": true,
+  "cSpell.enabledLanguageIds": [
+    "go",
+    "javascript",
+    "javascriptreact",
+    "markdown",
+    "plaintext",
+    "typescript",
+    "typescriptreact",
+    "yml",
+    "yaml",
+    "elixir"
+  ]
 }
