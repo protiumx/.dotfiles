@@ -29,7 +29,6 @@ nnoremap Y y$
 nnoremap n nzzzv
 nnoremap N Nzzzv
 
-
 " Moving lines up or down preserving format
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
@@ -52,16 +51,13 @@ nnoremap <C-Right> :vertical resize +2<CR>
 
 " Copy to macOS clipboard
 vnoremap <C-y> "*y
-
-" Navigate buffers
-nnoremap <S-l> :bnext<CR>
-nnoremap <S-h> :bprevious<CR>
 " Toggle between buffers current and prev buffer
 nnoremap `` <C-^>
 " New buffer vertical split
 nnoremap <Leader>vs :vnew<cr>
 " Close buffer without changing window layout
 nnoremap :: :bp\|bd #<CR>
+" Go next/prev buffer
 nnoremap << :bp<cr>
 nnoremap >> :bn<cr>
 " Close all but current buffer
@@ -81,3 +77,7 @@ nnoremap <C-p> p
 
 inoremap <F12> <esc>:e term://zsh<CR>
 nnoremap <F12> :e term://zsh<CR>
+
+" Reload configuration
+nnoremap <Leader>so :source $MYVIMRC<CR>
+
