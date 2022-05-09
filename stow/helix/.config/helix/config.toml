@@ -3,6 +3,9 @@ theme = "onedark"
 [editor]
 mouse = false
 
+[editor.file-picker]
+hidden = false
+
 [editor.cursor-shape]
 insert = "bar"
 
@@ -15,5 +18,5 @@ C-c = "normal_mode"
 [keys.normal]
 ";" = "command_mode"
 "`" = { "`" = "goto_previous_buffer" }
-#"|" = { "|" = "buffer_close" }
+":" = { ":" = ":buffer-close" }
 
