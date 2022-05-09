@@ -81,8 +81,9 @@ xmap <Leader>f <Plug>(coc-format-selected)
 nmap <Leader>f <Plug>(coc-format-selected)
 
 " Fix autofix problem of current line
-nmap <Leader>qf  <Plug>(coc-fix-current)
-nmap <leader>ac   <Plug>(coc-codeaction-selected)w
+nmap <Leader>qf <Plug>(coc-fix-current)
+" List code actions under current word
+nmap <leader>ac <Plug>(coc-codeaction-selected)w
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
