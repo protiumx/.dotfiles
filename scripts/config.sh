@@ -28,7 +28,7 @@ code_as_default_text_editor() {
     "public.data"
   )
 
-  for ext in $extensions; do
+  for ext in "${extensions[@]}"; do
     duti -s com.microsoft.VSCode $ext all
   done
 }
@@ -60,13 +60,13 @@ stow_dotfiles() {
     ".ssh"
   )
   info "Removing existing config files"
-  for f in $files; do
+  for f in "${files[@]}"; do
     rm -f "$HOME/$f" || true
   done
 
   # Create the folders to avoid symlinking folders
-  for d in $folders; do
-    rm -rf "$HOME/$d" || true
+  for d in "${folders[@]}"; do
+    rm -rf "${HOME:?}/$d" || true
     mkdir -p "$HOME/$d"
   done
 

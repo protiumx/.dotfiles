@@ -29,7 +29,7 @@ install_macos_apps() {
 
 install_masApps() {
   info "Installing App Store apps..."
-  for app in $masApps; do
+  for app in "${masApps[@]}"; do
     mas install $app
   done
 }

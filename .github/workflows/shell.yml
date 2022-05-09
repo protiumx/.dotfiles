@@ -1,0 +1,14 @@
+name: shell
+on:
+  pull_request:
+    paths:
+      - "**/*.sh"
+jobs:
+  lint:
+    name: lint
+    runs-on: ubuntu-latest
+    container: koalaman/shellcheck-alpine:v0.8.0
+    steps:
+      - uses: actions/checkout@v3
+      - name: Check shell scripts
+        run: shellcheck -a -x install.sh
