@@ -15,17 +15,20 @@ packages=(
   cmake
   ctags
   curl
-  duti # to set default handlers for file types in MacOS
+  duti            # to set default handlers for file types in MacOS
   fzf
   gettext
+  gh
   go
   hashicorp/tap/terraform
   helm
   helix
   http-server
   httpie
+  htop
   imagemagick
   jq
+  k9s
   kubernetes-cli
   lazydocker
   libpq
@@ -42,10 +45,12 @@ packages=(
   ripgrep          # fuzzy grep
   rlwrap
   rustup
+  shellcheck
   sqlite
   stern
   stow
   telnet
+  tree
   websocat         # telnet-like for websockets
   yarn
   ytt
