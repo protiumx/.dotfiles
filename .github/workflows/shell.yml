@@ -1,6 +1,6 @@
 name: shell
 on:
-  pull_request:
+  push:
     paths:
       - "**/*.sh"
 jobs:
