@@ -15,4 +15,4 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Check shell scripts
-        run: shellcheck -a -x install.sh
+        run: shellcheck -S warning -a -x install.sh
