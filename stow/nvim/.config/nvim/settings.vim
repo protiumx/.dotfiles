@@ -1,4 +1,6 @@
 let mapleader = " "
+syntax sync fromstart
+syntax sync minlines=10000
 
 set background=dark
 try
@@ -98,7 +100,7 @@ function! EmptyRegisters()
   endfor
 endfun
 
-command! -nargs=1 EmptyReg call EmptyRegisters(<f-args>)
+command! -nargs=0 EmptyReg call EmptyRegisters()
 
 " Function to trim extra whitespace in whole file
 function! Trim()

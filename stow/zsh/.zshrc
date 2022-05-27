@@ -1,3 +1,17 @@
+CLI="$HOME/.cli"
+VSCODE="/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+
+export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$PATH"
+export PATH="$VSCODE:/opt/local/bin:$PATH"
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+export GOPATH="$(go env GOPATH)"
+export PATH="$CHT:$GOPATH/bin:$PATH"
+export ZSH="$HOME/.oh-my-zsh"
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
+export EDITOR=hx
+
+eval "$(zoxide init zsh)"
+
 # ITERM bindings
 # changes hex 0x15 to delete everything to the left of the cursor, rather than the whole line
 bindkey "^U" backward-kill-line
@@ -17,19 +31,12 @@ setopt HIST_IGNORE_ALL_DUPS
 setopt appendhistory           # Immediately append history instead of overwriting
 setopt nobeep                  # No beep
 
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
+#Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+#Initialization code that may require console input (password prompts, [y/n]
+#confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-
-plugins=(zsh-z)
-
-# Source all profile files
-for file in $HOME/.profile*; do
-  source "$file";
-done
 
 brew_prefix="$(brew --prefix)"
 
@@ -49,3 +56,8 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Source all profile files
+for file in $HOME/.profile*; do
+  source "$file"
+done

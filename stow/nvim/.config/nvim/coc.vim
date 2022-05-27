@@ -48,7 +48,8 @@ inoremap <silent><expr> <CR> pumvisible() ? coc#_select_confirm()
 hi CocUnderline gui=undercurl term=undercurl
 hi CocErrorHighlight ctermfg=red  guifg=#c4384b gui=undercurl term=undercurl
 hi CocWarningHighlight ctermfg=yellow guifg=#c4ab39 gui=undercurl term=undercurl
-hi CocHintSign cterm=bold ctermfg=darkgray ctermbg=234
+hi CocHintSign cterm=bold ctermfg=darkgray ctermbg=none
+hi CocHintVirtualText ctermbg=none
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
@@ -77,13 +78,13 @@ nmap <Leader>rn <Plug>(coc-rename)
 " Remap for rename current word
 nmap <F2> <Plug>(coc-rename)
 " Formatting selected code.
-xmap <Leader>f <Plug>(coc-format-selected)
-nmap <Leader>f <Plug>(coc-format-selected)
+xmap <Leader>cf <Plug>(coc-format-selected)
+nmap <Leader>cfs <Plug>(coc-format-selected)
 
 " Fix autofix problem of current line
-nmap <Leader>qf <Plug>(coc-fix-current)
+nmap <Leader>cqf <Plug>(coc-fix-current)
 " List code actions under current word
-nmap <leader>ac <Plug>(coc-codeaction-selected)w
+nmap <leader>ca <Plug>(coc-codeaction-selected)w
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')

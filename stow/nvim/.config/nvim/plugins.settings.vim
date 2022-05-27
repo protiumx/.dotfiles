@@ -14,6 +14,7 @@ let g:PaperColor_Theme_Options = {
 nnoremap <F9> :UndotreeToggle<CR>
 
 " NERDCommenter
+let g:NERDCreateDefaultMappings = 0
 nmap <C-_> <Plug>NERDCommenterToggle
 vmap <C-_> <Plug>NERDCommenterToggle<CR>gv
 nmap <C-/> <Plug>NERDCommenterToggle

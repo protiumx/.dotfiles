@@ -5,6 +5,19 @@ setopt +o nomatch
 
 cheat() { curl -s "cheat.sh/$1"; }
 
+# retrieve process real memory
+psrm() {
+  ps -o rss= -p $1 | awk '{ hr=$1/1024; printf "%13.2f Mb\n",hr }' | tr -d ' ';
+}
+
+psrml() {
+  while true;
+  do
+    psrm $1;
+    sleep 1;
+  done
+}
+
 git_commit() {
   if [ -z "$3" ]
   then
@@ -19,6 +32,15 @@ gshow() {
 }
 
 # Aliases
+
+if [ "$(command -v exa)" ]; then
+  unalias -m 'll'
+  unalias -m 'l'
+  unalias -m 'la'
+  unalias -m 'ls'
+  alias ls="exa -G  --color auto --icons -a -s type"
+  alias ll='exa -l --color always --icons -a -s type'
+fi
 
 alias yw="yarn workspace"
 alias python=python3
@@ -42,16 +64,3 @@ alias k9="k9s"
 alias icat="kitty +kitten icat --align left"
 alias mkpwd="xkcdpass --count=5 --acrostic=\"chaos\" -C \"first\" -R --min=5 --max=6 -D \"#@^&~_-;\""
 alias isodate='date --iso-8601=seconds'
-
-CLI="$HOME/.cli"
-VSCODE="/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
-
-export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$PATH"
-export PATH="$VSCODE:/opt/local/bin:$PATH"
-export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
-
-export GOPATH="$(go env GOPATH)"
-export PATH="$CHT:$GOPATH/bin:$PATH"
-export ZSH="$HOME/.oh-my-zsh"
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
-export EDITOR=hx

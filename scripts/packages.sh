@@ -10,13 +10,15 @@ taps=(
 
 packages=(
   bat             # styled cat
-  bottom          # tree listing for files
+  bottom          
   broot
   cmake
   ctags
   curl
   duti            # to set default handlers for file types in MacOS
+  exa
   fzf
+  fd
   gettext
   gh
   go
@@ -58,6 +60,7 @@ packages=(
   zsh
   zsh-autosuggestions
   zsh-syntax-highlighting
+  zoxide
 )
 
 install_packages() {

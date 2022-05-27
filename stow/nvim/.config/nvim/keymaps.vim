@@ -4,6 +4,9 @@ vnoremap <Leader>d "_d
 nnoremap <Leader>c "_c
 vnoremap <Leader>c "_c
 
+" Build date
+nnoremap <Leader>db "=strftime('%Y%m%d%H%M')<CR>p
+
 " Prepare replace of current word
 nnoremap <Leader>r :%s/\<<C-r><C-w>\>//g<Left><Left>
 
@@ -14,13 +17,10 @@ nnoremap ; :
 " Clears hlsearch after doing a search, otherwise just does normal <CR> stuff
 nnoremap <expr> <CR> {-> v:hlsearch ? ":nohl\<CR>" : "\<CR>"}()
 
-" Quick-save
-nmap <Leader>w :w<CR>
-
 nnoremap <silent> Q <nop>
 
 " Close current split
-nnoremap <Leader>q <C-w>q
+nnoremap <Leader>wq <C-w>q
 
 " Copy from cursor to end of line
 nnoremap Y y$
@@ -51,7 +51,7 @@ nnoremap <C-Right> :vertical resize +2<CR>
 
 " Copy to macOS clipboard
 vnoremap <C-y> "*y
-" Toggle between buffers current and prev buffer
+" Toggle between current and prev buffers
 nnoremap `` <C-^>
 " New buffer vertical split
 nnoremap <Leader>vs :vnew<cr>
@@ -67,17 +67,17 @@ nnoremap <Leader>xa :%bd\|e#\|bd#<cr>\|'"
 nnoremap <C-A> ggVG
 
 " Open new file adjacent to current file
-nnoremap <Leader>o :e <C-R>=expand("%:p:h") . "/" <CR>
+nnoremap <Leader>o :e <C-R>=expand("%:h") . "/" <CR>
 " Open new adjacent file in vertical split
-nnoremap <Leader>vo :vsp \| :e <C-R>=expand("%:p:h") . "/" <CR>
+nnoremap <Leader>vo :vsp \| :e <C-R>=expand("%:h") . "/" <CR>
 
 " Paste formatted
 nnoremap p p=`]
+nnoremap P P=`]
 nnoremap <C-p> p
 
-inoremap <F12> <esc>:e term://zsh<CR>
-nnoremap <F12> :e term://zsh<CR>
+inoremap <F12> <esc>:term<CR>
+nnoremap <F12> :term<CR>
 
-" Reload configuration
-nnoremap <Leader>so :source $MYVIMRC<CR>
+nnoremap <Leader>fp :let @+=expand('%:h')<CR>
 

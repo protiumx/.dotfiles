@@ -6,7 +6,7 @@ require('telescope').setup{
         ["<C-q>"] = "delete_buffer"
       },
     },
-    file_ignore_patterns = { "node_modules/", ".git/", ".yarn/" },
+    file_ignore_patterns = { "node_modules/", "^.git/", "^.yarn/" },
   }
 }
 -- require('telescope').load_extension('media_files')
@@ -25,3 +25,4 @@ nnoremap <Leader>fz :lua require('telescope.builtin').current_buffer_fuzzy_find(
 nnoremap <Leader>ft :lua require('telescope.builtin').colorscheme()<CR>
 " Show diff
 nnoremap <Leader>fs :lua require('telescope.builtin').git_status()<CR>
+highlight TelescopePromptBorder guifg=#8631B4

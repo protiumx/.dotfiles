@@ -28,13 +28,14 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'elixir-editors/vim-elixir'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'mattn/emmet-vim'
+Plug 'arthurxavierx/vim-caser'
 
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
 Plug 'preservim/nerdcommenter'
 Plug 'mbbill/undotree'
 
-" Get Multiple cursor like in vscode
+" Multiple cursors
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
 " Git client

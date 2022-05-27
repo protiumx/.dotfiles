@@ -1,5 +1,4 @@
 {
-  "coc.preferences.snippets.enable": true,
   "coc.preferences.formatOnSaveFiletypes": [
     "json",
     "rust",
@@ -14,24 +13,8 @@
   "rust-analyzer.diagnostics.enable": true,
   "rust-analyzer.inlayHints.chainingHints": true,
   "rust-analyzer.inlayHints.typeHints": true,
-  "rust-analyzer.inlayHints.parameterHints": true,
-  "rust-analyzer.hoverActions.linksInHover": true,
   "rust-analyzer.cargo.allFeatures": true,
   "yaml.format.enable": true,
-  "tsserver.tsdk": ".yarn/sdks/typescript/lib",
   "eslint.packageManager": "yarn",
-  "eslint.nodePath": ".yarn/sdks",
-  "cSpell.enabled": true,
-  "cSpell.enabledLanguageIds": [
-    "go",
-    "javascript",
-    "javascriptreact",
-    "markdown",
-    "plaintext",
-    "typescript",
-    "typescriptreact",
-    "yml",
-    "yaml",
-    "elixir"
-  ]
+  "eslint.nodePath": ".yarn/sdks"
 }
