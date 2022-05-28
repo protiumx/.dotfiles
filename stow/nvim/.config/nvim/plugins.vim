@@ -10,18 +10,18 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'ryanoasis/vim-devicons'
 
-Plug 'kamykn/popup-menu.nvim'
-
 " Enhancements
+Plug 'kamykn/popup-menu.nvim'
+Plug 'airblade/vim-rooter'
 Plug 'justinmk/vim-sneak'
 
 Plug 'https://github.com/preservim/nerdtree'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-" Telescope media not supported in Mac
-" Plug 'nvim-telescope/telescope-media-files.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+Plug 'nvim-telescope/telescope.nvim'
+" Telescope media not supported on Mac
+" Plug 'nvim-telescope/telescope-media-files.nvim'
 
 " Completion/Syntax
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
