@@ -81,3 +81,5 @@ nnoremap <F12> :term<CR>
 
 nnoremap <Leader>fp :let @+=expand('%:h')<CR>
 
+inoremap <S-M-Left> <Esc>vb
+inoremap <S-M-Right> <Esc>vw
