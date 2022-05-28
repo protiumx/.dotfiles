@@ -5,14 +5,13 @@ export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr
 export PATH="$VSCODE:/opt/local/bin:$PATH"
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 export GOPATH="$(go env GOPATH)"
-export PATH="$CHT:$GOPATH/bin:$PATH"
+export PATH="$GOPATH/bin:$PATH"
 export ZSH="$HOME/.oh-my-zsh"
+
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
-export EDITOR=hx
 
 eval "$(zoxide init zsh)"
 
-# ITERM bindings
 # changes hex 0x15 to delete everything to the left of the cursor, rather than the whole line
 bindkey "^U" backward-kill-line
 # binds hex 0x18 0x7f with deleting everything to the left of the cursor
@@ -38,6 +37,9 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# Fix preview-tui getting raw output from less
+export PAGER='less -R'
+
 brew_prefix="$(brew --prefix)"
 
 source $brew_prefix/opt/powerlevel10k/powerlevel10k.zsh-theme
@@ -51,13 +53,14 @@ source $HOME/.p10k.zsh
 source $HOME/.config/broot/launcher/bash/br
 source $HOME/.cargo/env
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 # Source all profile files
 for file in $HOME/.profile*; do
   source "$file"
 done
+
+export NVM_DIR="$HOME/.nvm"
+
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # load nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # load nvm bash_completion
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

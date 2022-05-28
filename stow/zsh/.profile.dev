@@ -5,11 +5,30 @@ setopt +o nomatch
 
 cheat() { curl -s "cheat.sh/$1"; }
 
+# Open vim in a new kitty tab
+tab_nvim() {
+  kitty @ launch --type tab --cwd $1 --no-response --keep-focus nvim . 2>/dev/null 1>/dev/null &;
+}
+
+zv() {
+  z $1 && nvim .;
+}
+
+groot() {
+  root="$(git rev-parse --show-toplevel 2>/dev/null)"
+  if [ -n "$root" ]; then
+      cd $root;
+  else
+      echo "Not in a git repository"
+  fi
+}
+
 # retrieve process real memory
 psrm() {
   ps -o rss= -p $1 | awk '{ hr=$1/1024; printf "%13.2f Mb\n",hr }' | tr -d ' ';
 }
 
+# watch process real memory
 psrml() {
   while true;
   do
@@ -31,6 +50,9 @@ gshow() {
   open $(git remote -v | grep fetch | awk '{print $2}' | sed 's/git@/http:\/\//' | sed 's/com:/com\//' | head -n1);
 }
 
+export NNN_PLUG='p:preview-tui;i:imgview;v:-!cd $nnn && nvim .;o:nvim'
+export NNN_FIFO=/tmp/nnn.fifo
+
 # Aliases
 
 if [ "$(command -v exa)" ]; then
@@ -42,25 +64,31 @@ if [ "$(command -v exa)" ]; then
   alias ll='exa -l --color always --icons -a -s type'
 fi
 
+alias nnn="nnn -a"
+
 alias yw="yarn workspace"
 alias python=python3
 alias cat="bat -p --paging=never"
 
 # Conventional Commits
-alias ccr="git_commit refactor"
-alias cct="git_commit test"
-alias ccfi="git_commit fix"
-alias ccfe="git_commit feat"
-alias cch="git_commit chore"
-alias ccst="git_commit style"
-alias cci="git_commit ci"
-alias ccd="git_commit docs"
-alias ccm="git_commit misc"
+alias gr="git_commit refactor"
+alias gt="git_commit test"
+alias gfi="git_commit fix"
+alias gfe="git_commit feat"
+alias gh="git_commit chore"
+alias gst="git_commit style"
+alias gci="git_commit ci"
+alias gd="git_commit docs"
+alias gm="git_commit misc"
+alias gnv="git commit --no-verify -m"
+
 
 alias dc="docker compose"
 alias kc="kubectl"
 alias k9="k9s"
 
 alias icat="kitty +kitten icat --align left"
+
+# create random password
 alias mkpwd="xkcdpass --count=5 --acrostic=\"chaos\" -C \"first\" -R --min=5 --max=6 -D \"#@^&~_-;\""
 alias isodate='date --iso-8601=seconds'
