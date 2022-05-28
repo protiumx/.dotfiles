@@ -10,8 +10,8 @@ taps=(
 
 packages=(
   bat             # styled cat
+  bandwhich
   bottom          
-  broot
   cmake
   ctags
   curl
@@ -25,9 +25,7 @@ packages=(
   hashicorp/tap/terraform
   helm
   helix
-  http-server
   httpie
-  htop
   imagemagick
   jq
   k9s
@@ -42,17 +40,17 @@ packages=(
   openjdk
   openssl
   postgresql
+  procs
   python3
   protobuf
   ripgrep          # fuzzy grep
-  rlwrap
   rustup
   shellcheck
   sqlite
   stern
   stow
+  tealdeer
   telnet
-  tree
   websocat         # telnet-like for websockets
   yarn
   ytt
