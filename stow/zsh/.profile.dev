@@ -92,3 +92,4 @@ alias icat="kitty +kitten icat --align left"
 # create random password
 alias mkpwd="xkcdpass --count=5 --acrostic=\"chaos\" -C \"first\" -R --min=5 --max=6 -D \"#@^&~_-;\""
 alias isodate='date --iso-8601=seconds'
+alias serv="python3 -m http.server"
