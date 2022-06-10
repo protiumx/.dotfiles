@@ -2,7 +2,7 @@ function! ToggleGStatus()
   if buflisted(bufname('.git/index'))
     bd .git/index
   else
-    vertical Git | vertical resize 40 | setlocal noequalalways
+    vertical Git | vertical resize 40 | setlocal noequalalways | setlocal wrap
   endif
 endfunction
 
