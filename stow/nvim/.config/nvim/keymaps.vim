@@ -13,6 +13,7 @@ nnoremap <Leader>r :%s/\<<C-r><C-w>\>//g<Left><Left>
 " Remap C-c to esc in insert mode
 inoremap <C-c> <esc>
 nnoremap ; :
+vnoremap ; :
 
 " Clears hlsearch after doing a search, otherwise just does normal <CR> stuff
 nnoremap <expr> <CR> {-> v:hlsearch ? ":nohl\<CR>" : "\<CR>"}()
@@ -26,8 +27,11 @@ nnoremap <Leader>wq <C-w>q
 nnoremap Y y$
 
 " Jump next/prev but centered
-nnoremap n nzzzv
-nnoremap N Nzzzv
+nnoremap <silent> n nzzzv
+nnoremap <silent> N Nzzzv
+nnoremap <silent> * *zz
+nnoremap <silent> # #zz
+nnoremap <silent> g* g*zz
 
 " Moving lines up or down preserving format
 vnoremap J :m '>+1<CR>gv=gv
@@ -50,16 +54,16 @@ nnoremap <C-Left> :vertical resize -2<CR>
 nnoremap <C-Right> :vertical resize +2<CR>
 
 " Copy to macOS clipboard
-vnoremap <C-y> "*y
+vnoremap <silent> <C-y> "*y
 " Toggle between current and prev buffers
-nnoremap `` <C-^>
+nnoremap <silent> `` <C-^>
 " New buffer vertical split
 nnoremap <Leader>vs :vnew<cr>
 " Close buffer without changing window layout
-nnoremap :: :bp\|bd #<CR>
+nnoremap <silent> :: :bp\|bd #<CR>
 " Go next/prev buffer
-nnoremap << :bp<cr>
-nnoremap >> :bn<cr>
+nnoremap <silent> << :bp<cr>
+nnoremap <silent> >> :bn<cr>
 " Close all but current buffer
 nnoremap <Leader>xa :%bd\|e#\|bd#<cr>\|'"
 
@@ -79,7 +83,9 @@ nnoremap <C-p> p
 inoremap <F12> <esc>:term<CR>
 nnoremap <F12> :term<CR>
 
+" current file path
 nnoremap <Leader>fp :let @+=expand('%:h')<CR>
 
+" visual select words
 inoremap <S-M-Left> <Esc>vb
 inoremap <S-M-Right> <Esc>vw
