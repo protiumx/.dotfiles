@@ -1,4 +1,6 @@
-let g:airline_theme='selenized_bw'
+" For transparent bg
+"let g:airline_theme='selenized_bw'
+let g:airline_theme='raven'
 
 " Show git branch
 let g:airline#extensions#branch#enabled=1

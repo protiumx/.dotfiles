@@ -3,6 +3,9 @@ call plug#begin('~/.config/nvim/plugged')
 " Color schemes
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'https://github.com/joshdick/onedark.vim'
+Plug 'https://github.com/morhetz/gruvbox'
+Plug 'marko-cerovac/material.nvim'
+
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
@@ -16,6 +19,7 @@ Plug 'airblade/vim-rooter'
 Plug 'justinmk/vim-sneak'
 
 Plug 'https://github.com/preservim/nerdtree'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
@@ -24,7 +28,8 @@ Plug 'nvim-telescope/telescope.nvim'
 " Plug 'nvim-telescope/telescope-media-files.nvim'
 
 " Completion/Syntax
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'https://github.com/vim-scripts/dbext.vim'
+"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'elixir-editors/vim-elixir'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'mattn/emmet-vim'
@@ -42,8 +47,6 @@ Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'https://github.com/tpope/vim-fugitive.git'
 " Show sign columns for changes in files
 Plug 'mhinz/vim-signify'
-
-Plug 'https://github.com/vim-scripts/dbext.vim'
 
 Plug 'https://github.com/lbrayner/vim-rzip'
 

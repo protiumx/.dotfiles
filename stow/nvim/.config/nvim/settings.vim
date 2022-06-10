@@ -5,16 +5,19 @@ syntax sync minlines=10000
 set background=dark
 try
   colorscheme PaperColor
+  "colorscheme gruvbox
+  "colorscheme material
+  "let g:material_style = "darker"
   "colorscheme catppuccin
 catch /^Vim\%((\a\+)\)\=:E185/
   colorscheme default
 endtry
 
-highlight LineNr ctermbg=none
-highlight Normal ctermbg=none
-highlight NonText ctermbg=none
-highlight SignColumn ctermbg=none
-highlight VertSplit ctermbg=none ctermfg=98 cterm=none
+"highlight LineNr ctermbg=none guibg=none
+"highlight Normal ctermbg=none guibg=none
+"highlight NonText ctermbg=none guibg=none
+"highlight SignColumn ctermbg=none guibg=none
+"highlight VertSplit ctermbg=none ctermfg=98 cterm=none guibg=none
 
 " Hide tab bar
 set showtabline=0
@@ -23,7 +26,7 @@ filetype plugin indent on
 " CoC TextEdit might fail if hidden is not set.
 set hidden
 
-" Some CoC servers have issues with backup files, see #649.
+" Some CoC servers have issues with backup files
 set nobackup
 set nowritebackup
 
