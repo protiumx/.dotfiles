@@ -16,5 +16,7 @@
   "rust-analyzer.cargo.allFeatures": true,
   "yaml.format.enable": true,
   "eslint.packageManager": "yarn",
-  "eslint.nodePath": ".yarn/sdks"
+  "eslint.nodePath": ".yarn/sdks",
+  "sql.database": "postgresql",
+  "go.goplsOptions": { "gofumpt": true }
 }

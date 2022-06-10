@@ -7,7 +7,10 @@ let g:coc_global_extensions = [
   \'coc-json',
   \'coc-go',
   \'coc-clangd',
-  \'coc-yaml']
+  \'coc-yaml',
+  \'coc-eslint',
+  \'coc-elixir',
+  \'coc-docker']
 
 " Remap <C-f> and <C-b> for scroll float windows/popups.
 if has('nvim-0.4.0') || has('patch-8.2.0750')
