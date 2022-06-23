@@ -1,13 +1,15 @@
 let mapleader = " "
 syntax sync fromstart
-syntax sync minlines=10000
+syntax sync minlines=3000
 
+"highlight clear
+set guifont=CaskaydiaCove\ Nerd\ Font\ Mono:h18
 set background=dark
 try
-  colorscheme PaperColor
+  "colorscheme PaperColor
   "colorscheme gruvbox
-  "colorscheme material
-  "let g:material_style = "darker"
+  let g:material_style = "oceanic"
+  colorscheme material
   "colorscheme catppuccin
 catch /^Vim\%((\a\+)\)\=:E185/
   colorscheme default
@@ -18,6 +20,8 @@ endtry
 "highlight NonText ctermbg=none guibg=none
 "highlight SignColumn ctermbg=none guibg=none
 "highlight VertSplit ctermbg=none ctermfg=98 cterm=none guibg=none
+
+set shell=/bin/zsh
 
 " Hide tab bar
 set showtabline=0
@@ -59,13 +63,15 @@ set smartcase
 
 " Line size
 set colorcolumn=100
-highlight ColorColumn ctermbg=93
-highlight CursorColumn ctermbg=none ctermfg=magenta
-
+hi ColorColumn ctermbg=82 guibg=#5f5fd7
+hi CursorColumn ctermbg=none ctermfg=211 guibg=none guifg=#fd79a8
+hi Cursor ctermbg=211 guibg=#fd79a8
+"highlight LineNr ctermbg=none guibg=none
+"highlight CursorLineNR cterm=bold gui=bold
 " Disable spell since the plugin Spelunker will also highlight
 set spell
 set spelllang=en_us
-hi SpellBad gui=undercurl cterm=undercurl ctermbg=none ctermfg=none
+hi SpellBad gui=undercurl cterm=undercurl ctermbg=none ctermfg=none guibg=none guifg=none
 
 set noshowmode
 " Do not show the file name. Airline already does it
