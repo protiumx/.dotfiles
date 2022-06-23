@@ -42,11 +42,11 @@ imap <C-_> <ESC><CMD>lua require("Comment.api").toggle_current_linewise()<CR>
 let g:user_emmet_leader_key='<C-X>'
 
 " Vim Sneak
-nmap a <Plug>Sneak_s
-nmap A <Plug>Sneak_S
+nmap z <Plug>Sneak_s
+nmap Z <Plug>Sneak_S
 " visual-mode
-xmap a <Plug>Sneak_s
-xmap A <Plug>Sneak_S
+xmap z <Plug>Sneak_s
+xmap Z <Plug>Sneak_S
 " operator-pending-mode
-omap a <Plug>Sneak_s
-omap A <Plug>Sneak_S
+omap z <Plug>Sneak_s
+omap Z <Plug>Sneak_S
