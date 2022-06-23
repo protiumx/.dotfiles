@@ -23,9 +23,9 @@ bindkey "^X^_" redo
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
-export EDITOR="vim"
-export HISTSIZE=4000
-export SAVEHIST=5000
+export EDITOR="nvim"
+export HISTSIZE=10000
+export SAVEHIST=10000
 
 setopt HIST_FIND_NO_DUPS
 setopt HIST_IGNORE_ALL_DUPS
