@@ -7,6 +7,12 @@ The `dotfiles` script installs all the packages and apps I use, [stow](https://w
 
 Check my [Medium article](https://medium.com/@protiumx/bash-gnu-stow-take-a-walk-while-your-new-macbook-is-being-set-up-351a6f2f9225).
 
+## Previews
+
+![preview 1](./preview-1.png)
+
+![preview 2](./preview-2.png)
+
 ## Installing
 
 Run the `dotfiles` script:
