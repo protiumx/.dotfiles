@@ -31,3 +31,25 @@ augroup clearcmdline
 
   autocmd CmdlineLeave * call timer_start(2000, 'Echo_Nothing')
 augroup END
+
+augroup kitty_title
+  function! SetTitle(leaving)
+    let tabs = system("kitty @ ls | jq '.[] | select(.is_focused == true) | .tabs | length'")
+    if tabs > 1
+      let cmd = 'kitty @ set-tab-title '
+    else
+      let cmd = 'kitty @ set-window-title '
+    endif
+
+    if a:leaving
+      let title = '""'
+    else
+      let title = '"nvim ~ $(basename $(pwd))"'
+    endif
+
+    call system(cmd . title)
+  endfunction
+  autocmd VimEnter * ++once call SetTitle(0)
+  autocmd VimLeave * ++once call SetTitle(1)
+augroup END
+

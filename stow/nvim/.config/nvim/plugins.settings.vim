@@ -1,27 +1,35 @@
-let g:PaperColor_Theme_Options = {
-      \   'theme': {
-      \      'default.dark': {
-      \         'override' : {
-      \            'color07': ['#eeeeee', ''],
-      \            'linenumber_bg' : ['#212121', '']
-      \          }
-      \        }
-      \      }
-      \    }
+nmap s <Nop>
+xmap s <Nop>
+
+lua << EOF
+require("colorizer").setup()
+require('gitsigns').setup()
+require('Comment').setup()
+EOF
+
+"let g:PaperColor_Theme_Options = {
+      "\   'theme': {
+      "\      'default.dark': {
+      "\         'override' : {
+      "\            'color07': ['#eeeeee', ''],
+      "\            'linenumber_bg' : ['#212121', '']
+      "\          }
+      "\        }
+      "\      }
+      "\    }
 
 nnoremap <F9> :UndotreeToggle<CR>
 
-" NERDCommenter
-let g:NERDCreateDefaultMappings = 0
-nmap <C-_> <Plug>NERDCommenterToggle
-vmap <C-_> <Plug>NERDCommenterToggle<CR>gv
-nmap <C-/> <Plug>NERDCommenterToggle
-vmap <C-/> <Plug>NERDCommenterToggle<CR>gv
-imap <C-/> <Plug>NERDCommenterInsert
-imap <C-_> <Plug>NERDCommenterInsert
+" Comment
+nmap <C-_> <CMD>lua require("Comment.api").toggle_current_linewise()<CR>
+nmap <C-/> <CMD>lua require("Comment.api").toggle_current_linewise()<CR>
+vmap <C-_> <ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>
+vmap <C-/> <ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>
+imap <C-/> <ESC><CMD>lua require("Comment.api").toggle_current_linewise()<CR> 
+imap <C-_> <ESC><CMD>lua require("Comment.api").toggle_current_linewise()<CR> 
 
-let g:gruvbox_contrast = 'hard'
-let g:gruvbox_sign_column = 'bg0'
+"let g:gruvbox_contrast = 'hard'
+"let g:gruvbox_sign_column = 'bg0'
 
 " Go syntax highlighting
 "let g:go_highlight_fields = 1
@@ -33,3 +41,12 @@ let g:gruvbox_sign_column = 'bg0'
 " Emmet
 let g:user_emmet_leader_key='<C-X>'
 
+" Vim Sneak
+nmap a <Plug>Sneak_s
+nmap A <Plug>Sneak_S
+" visual-mode
+xmap a <Plug>Sneak_s
+xmap A <Plug>Sneak_S
+" operator-pending-mode
+omap a <Plug>Sneak_s
+omap A <Plug>Sneak_S
