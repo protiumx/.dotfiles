@@ -62,13 +62,17 @@ nnoremap <Leader>vs :vnew<cr>
 " Close buffer without changing window layout
 nnoremap <silent> :: :bp\|bd #<CR>
 " Go next/prev buffer
-nnoremap <silent> << :bp<cr>
-nnoremap <silent> >> :bn<cr>
+nnoremap <silent> <Tab> :bn<CR>
+nnoremap <silent> <S-Tab> :bp<CR>
+nnoremap <leader>q <Cmd>bd<CR>
+
 " Close all but current buffer
 nnoremap <Leader>xa :%bd\|e#\|bd#<cr>\|'"
 
-" Select everything
+" Select all
 nnoremap <C-A> ggVG
+inoremap <C-A> <ESC>ggVG
+vnoremap <C-A> <ESC>ggVG
 
 " Open new file adjacent to current file
 nnoremap <Leader>o :e <C-R>=expand("%:h") . "/" <CR>
@@ -89,3 +93,9 @@ nnoremap <Leader>fp :let @+=expand('%:h')<CR>
 " visual select words
 inoremap <S-M-Left> <Esc>vb
 inoremap <S-M-Right> <Esc>vw
+" close terminal
+tnoremap <C-q> <C-\><C-n>:bd!<CR>
+tnoremap <C-n> <C-\><C-n>
+
+" Begin new line above from insert mode
+inoremap <M-Return> <Esc>O
