@@ -46,8 +46,22 @@ git_commit() {
   fi
 }
 
+glog() {
+  git log --graph --abbrev-commit --decorate --all \
+    --format=format:"%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(dim white) \
+    - %an%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n %C(white)%s%C(reset)"
+}
+
 gshow() {
   open $(git remote -v | grep fetch | awk '{print $2}' | sed 's/git@/http:\/\//' | sed 's/com:/com\//' | head -n1);
+}
+
+kitty_title() {
+  kitty @ set-tab-title "$1"
+}
+
+mkcd(){
+    mkdir -p "$1" && cd "$1"
 }
 
 export NNN_PLUG='p:preview-tui;i:imgview;v:-!cd $nnn && nvim .;o:nvim'
@@ -60,8 +74,10 @@ if [ "$(command -v exa)" ]; then
   unalias -m 'l'
   unalias -m 'la'
   unalias -m 'ls'
-  alias ls="exa -G  --color auto --icons -a -s type"
-  alias ll='exa -l --color always --icons -a -s type'
+
+  alias ls="exa --group-directories-first -G  --color auto --icons -a -s type"
+  alias ll='exa --group-directories-first -l --color always --icons -a -s type'
+  alias tree="exa --tree --icons --group-directories-first --color auto"
 fi
 
 alias nnn="nnn -a"
@@ -93,3 +109,7 @@ alias icat="kitty +kitten icat --align left"
 alias mkpwd="xkcdpass --count=5 --acrostic=\"chaos\" -C \"first\" -R --min=5 --max=6 -D \"#@^&~_-;\""
 alias isodate='date --iso-8601=seconds'
 alias serv="python3 -m http.server"
+alias neov="neovide --frame none"
+
+alias pkgls="cat package.json | jq .scripts"
+alias diff='diff -tW $(tput cols) --color=always'
