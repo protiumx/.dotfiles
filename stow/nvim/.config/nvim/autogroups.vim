@@ -25,29 +25,39 @@ augroup END
 " Clear last command after 2 seconds
 augroup clearcmdline
   autocmd!
-  function! Echo_Nothing(timer)
-      echo ''
+
+  function! Clean(timer)
+    echo ''
   endfunction
 
-  autocmd CmdlineLeave * call timer_start(2000, 'Echo_Nothing')
+  function! Leave()  
+      let g:timer = timer_start(2000, 'Clean')
+  endfunction
+
+  function! Enter()
+    if exists("g:timer")
+      call timer_stop(g:timer)
+    endif
+  endfunction
+
+  autocmd CmdlineLeave * call Leave()
+  autocmd CmdlineEnter * call Enter()
 augroup END
 
 augroup kitty_title
   function! SetTitle(leaving)
-    let tabs = system("kitty @ ls | jq '.[] | select(.is_focused == true) | .tabs | length'")
-    if tabs > 1
-      let cmd = 'kitty @ set-tab-title '
-    else
-      let cmd = 'kitty @ set-window-title '
+    let title = '""'
+    let arg = argv()[0]
+    if !a:leaving
+      if isdirectory(arg)
+        let title = '"nvim ~ ' . expand('%:p:h:t')
+      else
+        let title = 'nvim ~ ' . arg
+      endi
     endif
 
-    if a:leaving
-      let title = '""'
-    else
-      let title = '"nvim ~ $(basename $(pwd))"'
-    endif
-
-    call system(cmd . title)
+    call system('kitty @ set-window-title "' . title . '"')
+    call system('kitty @ set-tab-title "' . title . '"')
   endfunction
   autocmd VimEnter * ++once call SetTitle(0)
   autocmd VimLeave * ++once call SetTitle(1)
