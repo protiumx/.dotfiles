@@ -1,4 +1,3 @@
-# dotfiles
 ```
     ____        __  _____ __         
    / __ \____  / /_/ __(_) /__  _____
@@ -57,3 +56,6 @@ To double checks that the dot files will be correctly linked, you can use stow t
 ```sh
 stow -nSv vim
 ```
+
+## License
+Licensed under MIT, © Brian Mayo 2022: https://protiumx.dev
