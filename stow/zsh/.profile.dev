@@ -1,7 +1,7 @@
-# Functions
-
 # Disable error when using glob patterns that don't have matches
 setopt +o nomatch
+
+# Functions
 
 cheat() { curl -s "cheat.sh/$1"; }
 
@@ -61,14 +61,37 @@ kitty_title() {
 }
 
 mkcd(){
-    mkdir -p "$1" && cd "$1"
+  mkdir -p "$1" && cd "$1"
+}
+
+ansi_colors() {
+  python -c "print(''.join(f'\u001b[48;5;{s}m{s.rjust(4)}' + ('\n' if not (int(s)+1) % 8 else '') for s in (str(i) for i in range(256))) + '\u001b[0m')"
+}
+
+# checkout or create new branch
+gck() { 
+  git checkout $1 2>/dev/null || git checkout -b $1; 
+}
+
+# Excluded dirs are set in ../fd/ignore
+export FZF_DEFAULT_COMMAND="fd -d 1 --hidden --follow --color=never --strip-cwd-prefix"
+export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --prompt ' ' --bind 'ctrl-p:preview(bat {})' --preview-window hidden --no-info --color 'gutter:-1,hl+:#82aaff,hl:#82aaff,bg+:-1,pointer:#82aaff'"
+export FZF_COMPLETION_OPTS=$FZF_DEFAULT_OPTS
+
+_fzf_compgen_path() {
+  fd -d 1 --hidden --follow . "$1"
+}
+
+# Use fd to generate the list for directory completion
+_fzf_compgen_dir() {
+  fd -d 1 --type d --hidden --follow . "$1"
 }
 
 export NNN_PLUG='p:preview-tui;i:imgview;v:-!cd $nnn && nvim .;o:nvim'
-export NNN_FIFO=/tmp/nnn.fifo
+export NNN_FIFO="/tmp/nnn.fifo"
+export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/rg"
 
 # Aliases
-
 if [ "$(command -v exa)" ]; then
   unalias -m 'll'
   unalias -m 'l'
@@ -81,11 +104,9 @@ if [ "$(command -v exa)" ]; then
 fi
 
 alias nnn="nnn -a"
-
 alias yw="yarn workspace"
 alias python=python3
 alias cat="bat -p --paging=never"
-
 # Conventional Commits
 alias gr="git_commit refactor"
 alias gt="git_commit test"
@@ -98,18 +119,14 @@ alias gd="git_commit docs"
 alias gm="git_commit misc"
 alias gnv="git commit --no-verify -m"
 
-
 alias dc="docker compose"
 alias kc="kubectl"
 alias k9="k9s"
-
 alias icat="kitty +kitten icat --align left"
-
 # create random password
 alias mkpwd="xkcdpass --count=5 --acrostic=\"chaos\" -C \"first\" -R --min=5 --max=6 -D \"#@^&~_-;\""
 alias isodate='date --iso-8601=seconds'
 alias serv="python3 -m http.server"
 alias neov="neovide --frame none"
-
 alias pkgls="cat package.json | jq .scripts"
 alias diff='diff -tW $(tput cols) --color=always'
