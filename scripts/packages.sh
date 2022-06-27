@@ -6,59 +6,57 @@ taps=(
   homebrew/cask-fonts
   homebrew/core
   vmware-tanzu/carvel
+  brew tap espanso/espanso
 )
 
 packages=(
-  bat             # styled cat
-  bandwhich
-  bottom          
-  cmake
-  ctags
-  curl
-  duti            # to set default handlers for file types in MacOS
-  exa
-  fzf
-  fd
-  gettext
-  gh
-  go
-  hashicorp/tap/terraform
-  helm
-  helix
-  httpie
-  imagemagick
-  jq
-  k9s
-  kubernetes-cli
-  lazydocker
-  libpq
-  macpass
-  minikube
-  node
-  nvm
-  nmap
-  openjdk
-  openssl
-  postgresql
-  procs
-  python3
-  protobuf
-  ripgrep          # fuzzy grep
-  rustup
-  shellcheck
-  sqlite
-  stern
-  stow
-  tealdeer
-  telnet
-  websocat         # telnet-like for websockets
-  yarn
-  ytt
-  wget
-  zsh
-  zsh-autosuggestions
-  zsh-syntax-highlighting
-  zoxide
+	bat                      #  https://github.com/sharkdp/bat
+	bandwhich                #  https://github.com/imsnif/bandwhich
+	bottom                   #  https://github.com/ClementTsang/bottom
+	cmake
+	ctags
+	curl
+	duti                     #  https://github.com/moretension/duti
+  espanso                  #  https://github.com/federico-terzi/espanso
+	exa                      #  https://github.com/ogham/exa
+	fzf                      #  https://github.com/junegunn/fzf
+	fd                       #  https://github.com/sharkdp/fd
+	gettext
+	gh
+	go
+	hashicorp/tap/terraform
+	helm
+	httpie                   #  https://github.com/httpie/httpie
+	imagemagick
+	jq
+	k9s                      #  https://github.com/derailed/k9s
+	kubernetes-cli
+	lazydocker               #  https://github.com/jesseduffield/lazydocker
+	libpq
+	macpass                  #  https://macpassapp.org/
+	minikube
+	node
+	nvm
+	nmap
+	openjdk
+	openssl
+	postgresql
+	procs                    #  https://github.com/dalance/procs/
+	python3
+	protobuf
+	ripgrep                  #  https://github.com/BurntSushi/ripgrep
+	rustup
+	shellcheck
+	stow
+	tealdeer                 #  https://github.com/dbrgn/tealdeer
+	telnet
+	websocat                 #  https://github.com/vi/websocat
+	yarn
+	wget
+	zsh
+	zsh-autosuggestions
+	zsh-syntax-highlighting
+	zoxide                   #  https://github.com/ajeetdsouza/zoxide
 )
 
 install_packages() {
