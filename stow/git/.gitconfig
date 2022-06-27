@@ -1,59 +1,59 @@
 [user]
 	name = Brian Mayo
 	email = ioprotium@gmail.com
-
+	
 [core]
-  pager = delta
-  # avoid problems when changing a case of a filename
-  ignorecase = false
-
+	pager = delta
+	# avoid problems when changing a case of a filename
+	ignorecase = false
+	
 [interactive]
-  diffFilter = delta --color-only
-
+	diffFilter = delta --color-only
+	
 [merge]
-  conflictstyle = diff3
-
+	conflictstyle = diff3
+	
 [diff]
-  colorMoved = default
+	colorMoved = default
 
 [help]
-  autocorrect = 1
-
+	autocorrect = 1
+	
 [delta]
-  navigate = true  # use n and N to move between diff sections
-  light = false
-  side-by-side = true
-
+	navigate = true  # use n and N to move between diff sections
+	light = false
+	side-by-side = true
+	
 [alias]
 	amend = commit --amend
-  append = commit --amend --no-edit
-  # checkout or create new branch
-  ck = "!f() { git checkout $1 2>/dev/null || git checkout -b $1; }; f"
-  cnv = commit -n -m
-  # count the number of files changed in the current branch compared to main
-  count = !git diff --name-only main... | wc -l
-  dd = !git --no-pager diff
-  discard = checkout -- .
+	append = commit --amend --no-edit
+	# checkout or create new branch
+	ck = "!f() { git checkout $1 2>/dev/null || git checkout -b $1; }; f"
+	cnv = commit -n -m
+	# count the number of files changed in the current branch compared to main
+	count = !git diff --name-only main... | wc -l
+	dd = !git --no-pager diff
+	discard = checkout -- .
 	last = log -1 HEAD --stat
 	logf = !git log --pretty=format:\"%C(magenta)%h%Creset -%C(red)%d%Creset %s %C(dim green)(%cr) [%an]\" --abbrev-commit -30
-  main = checkout main
-  # clean up merged branches using "main" as default
-  purge = "!f() { git branch --merged ${1-main} | grep -v " ${1-main}$" | xargs -r git branch -d; }; f"
-  st = status -sb
-  # pull rebase remote main
+	main = checkout main
+	# clean up merged branches using "main" as default
+	purge = "!f() { git branch --merged ${1-main} | grep -v " ${1-main}$" | xargs -r git branch -d; }; f"
+	st = status -sb
+	# pull rebase remote main
 	sync = !git pull origin main --rebase
 	undo = reset HEAD^
 	unstage = reset HEAD --
-  # push and set upt origin for branch
+	# push and set upt origin for branch
 	up = !git push -u origin `git branch --show-current`
-  upt = !git push origin --tags
-
+	upt = !git push origin --tags
+	
 [init]
 	templatedir = ~/.git-templates
-  defaultBranch = main
-
+	defaultBranch = main
+	
 [commit]
-  gpgsign = false
-
+	gpgsign = false
+	
 [gpg]
 	program = gpg
