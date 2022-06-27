@@ -1,8 +1,9 @@
 lua << EOF
 require('telescope').setup{
   defaults = {
+    prompt_prefix = "❯ ",
+		selection_caret = "+ ",
     layout_config = { height = 0.95, width = 0.9 },
-    file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
     mappings = {
       i = {
         ["<C-q>"] = "delete_buffer"
@@ -32,12 +33,14 @@ require('telescope').load_extension('fzf')
 require("telescope").load_extension('file_browser')
 EOF
 
-nnoremap <silent><Leader>ff <cmd>Telescope find_files<CR>
-nnoremap <silent><Leader>Ff <cmd>:lua require('telescope').extensions.file_browser.file_browser(require('telescope.themes').get_dropdown{previewer = false, path='%:p:h', prompt_title=vim.fn.expand('%:h')})<CR>
-nnoremap <silent><Leader>FF <cmd>:lua require('telescope').extensions.file_browser.file_browser(require('telescope.themes').get_dropdown{previewer = false})<CR>
+nnoremap <silent><Leader>ff <cmd>Telescope find_files previewer=false theme=dropdown<CR>
+nnoremap <silent><Leader>fF <cmd>Telescope find_files<CR>
+nnoremap <silent><Leader>Ff :exe ':Telescope file_browser path=%:p:h hidden=true previewer=false theme=dropdown prompt_title='.expand('%:h')<CR>
+nnoremap <silent><Leader>FF :exe ':Telescope file_browser hidden=true previewer=false theme=dropdown prompt_title='.expand('%:h')<CR>
 " open in current file pwd
 nnoremap <silent><Leader>fg <cmd>Telescope live_grep<CR>
-nnoremap <silent><Leader>fG <cmd>Telescope grep_string<CR>
+" find word under cursor
+nnoremap <silent><Leader>fw <cmd>Telescope grep_string<CR>
 nnoremap <silent><Leader>fr :lua require('telescope.builtin').registers()<CR>
 nnoremap <silent><Leader>fb <cmd>Telescope buffers previewer=false theme=dropdown<CR>
 nnoremap <silent><Leader>fh <cmd>Telescope help_tags<CR>
