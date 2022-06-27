@@ -1,9 +1,8 @@
 let mapleader = " "
-syntax sync fromstart
 syntax sync minlines=3000
 
 "highlight clear
-set guifont=CaskaydiaCove\ Nerd\ Font\ Mono:h18
+set guifont=FiraCode\ Nerd\ Font\ Mono:h18
 set background=dark
 try
   "colorscheme PaperColor
@@ -20,8 +19,6 @@ endtry
 "highlight NonText ctermbg=none guibg=none
 "highlight SignColumn ctermbg=none guibg=none
 "highlight VertSplit ctermbg=none ctermfg=98 cterm=none guibg=none
-
-set shell=/bin/zsh
 
 " Hide tab bar
 set showtabline=0
@@ -61,13 +58,14 @@ set splitright
 
 set smartcase
 
-" Line size
+" Line size limit
 set colorcolumn=100
-hi ColorColumn ctermbg=82 guibg=#5f5fd7
+set cursorline
+hi ColorColumn ctermbg=62 guibg=#5f5fd7
 hi CursorColumn ctermbg=none ctermfg=211 guibg=none guifg=#fd79a8
 hi Cursor ctermbg=211 guibg=#fd79a8
-"highlight LineNr ctermbg=none guibg=none
-"highlight CursorLineNR cterm=bold gui=bold
+hi IncSearch cterm=none gui=none ctermbg=237 ctermfg=white guibg=#3C474E guifg=#ffffff
+hi CursorLine cterm=none gui=none ctermbg=none guibg=none
 " Disable spell since the plugin Spelunker will also highlight
 set spell
 set spelllang=en_us
@@ -109,9 +107,9 @@ function! EmptyRegisters()
   endfor
 endfun
 
-command! -nargs=0 EmptyReg call EmptyRegisters()
+command! -nargs=0 EmptyRegisters call EmptyRegisters()
 
-" Function to trim extra whitespace in whole file
+" Trim extra whitespace in whole file
 function! Trim()
   let l:save = winsaveview()
   keeppatterns %s/\s\+$//e
@@ -119,15 +117,3 @@ function! Trim()
 endfun
 
 command! -nargs=0 Trim call Trim()
-
-" Custom function to fold blocks
-function! CFoldText()
-    let line = getline(v:foldstart)
-    let folded_line_num = v:foldend - v:foldstart
-    let line_text = substitute(line, '^"{\+', '', 'g')
-    let fillcharcount = &textwidth - len(line_text) - len(folded_line_num)
-    return '+'. repeat('-', 4) . line_text . repeat('.', fillcharcount) . ' (' . folded_line_num . ' L)'
-endfunction
-
-set foldtext=CFoldText()
-set foldmethod=expr

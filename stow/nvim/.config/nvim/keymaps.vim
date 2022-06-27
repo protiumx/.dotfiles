@@ -8,7 +8,7 @@ vnoremap <Leader>c "_c
 nnoremap <Leader>db "=strftime('%Y%m%d%H%M')<CR>p
 
 " Prepare replace of current word
-nnoremap <Leader>r :%s/\<<C-r><C-w>\>//g<Left><Left>
+nnoremap <Leader>rw :%s/\<<C-r><C-w>\>//g<Left><Left>
 
 " Remap C-c to esc in insert mode
 inoremap <C-c> <esc>
@@ -60,11 +60,11 @@ nnoremap <silent> `` <C-^>
 " New buffer vertical split
 nnoremap <Leader>vs :vnew<cr>
 " Close buffer without changing window layout
-nnoremap <silent> :: :bp\|bd #<CR>
+nnoremap <silent>:: :bp\|bd #<CR>
 " Go next/prev buffer
 nnoremap <silent> <Tab> :bn<CR>
 nnoremap <silent> <S-Tab> :bp<CR>
-nnoremap <leader>q <Cmd>bd<CR>
+nnoremap <leader>bd <Cmd>bd<CR>
 
 " Close all but current buffer
 nnoremap <Leader>xa :%bd\|e#\|bd#<cr>\|'"
@@ -86,16 +86,18 @@ nnoremap <C-p> p
 
 inoremap <F12> <esc>:term<CR>
 nnoremap <F12> :term<CR>
+inoremap <F10> <esc>:vs term://zsh<CR>
+nnoremap <F10> :vs term://zsh<CR>
 
-" current file path
+" insert current file path
 nnoremap <Leader>fp :let @+=expand('%:h')<CR>
 
 " visual select words
 inoremap <S-M-Left> <Esc>vb
-inoremap <S-M-Right> <Esc>vw
+inoremap <S-M-Right> <Esc>ve
 " close terminal
 tnoremap <C-q> <C-\><C-n>:bd!<CR>
-tnoremap <C-n> <C-\><C-n>
+tnoremap <Esc> <C-\><C-n>
 
 " Begin new line above from insert mode
-inoremap <M-Return> <Esc>O
+inoremap <M-Return> <C-o>O
