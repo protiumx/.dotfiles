@@ -15,7 +15,7 @@ matches:
         params:
           cmd: "ifconfig en0| grep \"inet[ ]\" | awk '{print $2}'"
 
-  - trigger: ":md-link"
+  - trigger: ":mdlink"
     replace: "[$|$]({{clipboard}})"
     vars:
       - name: "clipboard"
@@ -32,4 +32,3 @@ matches:
         type: shell
         params:
           cmd: 'curl "https://cht.sh/{{command}}?QT&style=bw"'
-          debug: true
