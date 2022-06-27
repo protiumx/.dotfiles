@@ -1,0 +1,32 @@
+# config
+--column
+--smart-case
+--line-number
+--hidden
+--follow
+--no-heading
+--max-columns=150
+--max-columns-preview
+--colors=line:none
+--colors=path:fg:62
+--colors=match:fg:205
+
+# add custom types
+--type-add
+web:*.{html,css,js,jsx,ts,tsx,scss,sass,html.heex}*
+
+# ignores, etc
+--glob=!.git
+--glob=!.elixir_ls
+--glob=!node_modules
+--glob=!yarn.lock
+--glob=!package-lock.json
+--glob=!.yarn
+--glob=!_build
+--glob=!tags
+--glob=!tmp
+--glob=!coverage
+--glob=!public
+--glob=!*.cache
+--glob=!.Trash
+--glob=!.licenses

@@ -45,17 +45,20 @@ setup_github_ssh() {
 
 stow_dotfiles() {
   local files=(
-    ".profile*"
-    ".zprofile"
-    ".gitconfig"
     ".aliases"
-    ".zshrc"
-    ".p10k.sh"
+    ".config/starship.toml"
+    ".gitconfig"
+    ".profile*"
     ".vimrc"
+    ".zshrc"
+    ".zprofile"
   )
   local folders=(
-    ".config/nvim"
+    ".config/espanso"
+    ".config/fd"
     ".config/kitty"
+    ".config/nvim"
+    ".config/ripgrep"
     ".git-templates/hooks"
     ".ssh"
   )
@@ -70,7 +73,7 @@ stow_dotfiles() {
     mkdir -p "$HOME/$d"
   done
 
-  local dotfiles="git kitty nvim ssh vim zsh"
+  local dotfiles="espanso fd git kitty nvim ripgrep ssh starship vim zsh"
   info "Stowing: $dotfiles"
   stow -d stow --verbose 1 --target $HOME $dotfiles
 }
