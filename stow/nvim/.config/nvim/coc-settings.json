@@ -15,6 +15,9 @@
   "rust-analyzer.inlayHints.typeHints": true,
   "rust-analyzer.cargo.allFeatures": true,
   "yaml.format.enable": true,
+  "yaml.schemas": {
+    "https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json": "docker-*.yml"
+  },
   "eslint.packageManager": "yarn",
   "eslint.nodePath": ".yarn/sdks",
   "sql.database": "postgresql",
