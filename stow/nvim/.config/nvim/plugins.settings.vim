@@ -25,8 +25,8 @@ nmap <C-_> <CMD>lua require("Comment.api").toggle_current_linewise()<CR>
 nmap <C-/> <CMD>lua require("Comment.api").toggle_current_linewise()<CR>
 vmap <C-_> <ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>
 vmap <C-/> <ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>
-imap <C-/> <ESC><CMD>lua require("Comment.api").toggle_current_linewise()<CR> 
-imap <C-_> <ESC><CMD>lua require("Comment.api").toggle_current_linewise()<CR> 
+imap <C-/> <C-o><CMD>lua require("Comment.api").toggle_current_linewise()<CR>
+imap <C-_> <C-o><CMD>lua require("Comment.api").toggle_current_linewise()<CR>
 
 "let g:gruvbox_contrast = 'hard'
 "let g:gruvbox_sign_column = 'bg0'
@@ -50,3 +50,20 @@ xmap Z <Plug>Sneak_S
 " operator-pending-mode
 omap z <Plug>Sneak_s
 omap Z <Plug>Sneak_S
+
+" vim align
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+" vim sandwhich
+xmap iss <Plug>(textobj-sandwich-auto-i)
+xmap ass <Plug>(textobj-sandwich-auto-a)
+omap iss <Plug>(textobj-sandwich-auto-i)
+omap ass <Plug>(textobj-sandwich-auto-a)
+" For specific chars, e.g. im_
+xmap im <Plug>(textobj-sandwich-literal-query-i)
+xmap am <Plug>(textobj-sandwich-literal-query-a)
+omap im <Plug>(textobj-sandwich-literal-query-i)
+omap am <Plug>(textobj-sandwich-literal-query-a)
