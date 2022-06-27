@@ -4,7 +4,7 @@ if not pcall(require, "feline") then
 end
 
 local colors = {
-  bg = '#1e1e1e',  
+  bg = '#3C474E',  
   fg = '#abb2bf',
   yellow = '#e0af68',
   cyan = '#56b6c2',
@@ -66,7 +66,7 @@ local comps = {
     vi_mode = {
         left = {
             provider = function()
-              return '  ' .. modes[vim.fn.mode()]
+              return '▌ ' .. modes[vim.fn.mode()]
             end,
             hl = function()
                 local val = {
@@ -85,7 +85,7 @@ local comps = {
               opts = {
                 type = 'relative',
                 file_readonly_icon = '  ',
-                file_modified_icon = '',
+                file_modified_icon = ' * ',
                 icons = true
               }
             },
@@ -97,14 +97,6 @@ local comps = {
         },
         encoding = {
             provider = 'file_encoding',
-            left_sep = ' ',
-            hl = {
-                fg = colors.violet,
-                style = 'bold'
-            }
-        },
-        os = {
-            provider = ' MAC',
             left_sep = ' ',
             hl = {
                 fg = colors.violet,
@@ -195,7 +187,6 @@ table.insert(components.active[1], comps.file.info)
 table.insert(components.inactive[1], comps.vi_mode.left)
 table.insert(components.inactive[1], comps.file.info)
 table.insert(components.active[3], comps.file.encoding)
-table.insert(components.active[3], comps.file.os)
 table.insert(components.active[3], comps.file.position)
 table.insert(components.active[3], comps.line_percentage)
 table.insert(components.active[3], comps.scroll_bar)
