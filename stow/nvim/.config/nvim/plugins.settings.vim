@@ -3,7 +3,6 @@ xmap s <Nop>
 
 lua << EOF
 require("colorizer").setup()
-require('gitsigns').setup()
 require('Comment').setup()
 EOF
 

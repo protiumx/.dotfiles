@@ -1,9 +1,9 @@
 augroup compileandrun
   autocmd!
-  autocmd filetype rust nmap <f5> :w <bar> :!cargo run <cr>
-  autocmd filetype rust nmap <f6> :w <bar> :!cargo build <cr>
-  autocmd filetype python nmap <f5> :w <bar> :!python % <cr>
-  autocmd FileType go nmap <f5> <Plug>(go-run)
+  autocmd filetype rust nmap <F5> :w <bar> :!cargo run <CR>
+  autocmd filetype rust nmap <F6> :w <bar> :!cargo build <CR>
+  autocmd filetype python nmap <F5> :w <bar> :!python % <CR>
+  autocmd FileType go nmap <F5> :w <bar> :!go run % <CR>
 augroup END
 
 autocmd BufNewFile,BufRead *.heex set ft=html syntax=html
@@ -46,11 +46,11 @@ augroup END
 
 augroup kitty_title
   function! SetTitle(leaving)
-    let title = '""'
+    let title = ''
     let arg = argv()[0]
     if !a:leaving
       if isdirectory(arg)
-        let title = '"nvim ~ ' . expand('%:p:h:t')
+        let title = 'nvim ~ ' . expand('%:p:h:t')
       else
         let title = 'nvim ~ ' . arg
       endi

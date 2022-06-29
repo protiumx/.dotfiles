@@ -12,3 +12,4 @@ runtime coc.vim
 runtime fugitive.vim
 runtime nerdtree.vim
 runtime telescope.vim
+runtime gitsigns.vim
