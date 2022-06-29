@@ -20,7 +20,6 @@ $nodejs\
 $python\
 $rust\
 $zig\
-$package\
 $line_break\
 $character"""
 
@@ -28,6 +27,18 @@ right_format = """
 $cmd_duration\
 $jobs\
 $status"""
+
+[git_status]
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+conflicted = "=${count} "
+behind = "⇣${count} "
+ahead = "⇡${count} "
+modified = "!${count} "
+untracked = "?${count} "
+stashed = "$${count} "
+staged = "+${count} "
+deleted = "x${count} "
+renamed = "»${count} "
 
 [status]
 disabled = false
