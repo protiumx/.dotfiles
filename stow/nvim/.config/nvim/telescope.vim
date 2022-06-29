@@ -2,7 +2,7 @@ lua << EOF
 require('telescope').setup{
   defaults = {
     prompt_prefix = "❯ ",
-		selection_caret = "+ ",
+    selection_caret = "❯ ",
     layout_config = { height = 0.95, width = 0.9 },
     mappings = {
       i = {
@@ -19,7 +19,7 @@ require('telescope').setup{
       "-u"
     },
 
-    file_ignore_patterns = { "node_modules/*", "^.git/*", "^.yarn/*" },
+    file_ignore_patterns = { "target/*" "node_modules/*", "^.git/*", "^.yarn/*" },
   },
 
   pickers = {
@@ -35,8 +35,8 @@ EOF
 
 nnoremap <silent><Leader>ff <cmd>Telescope find_files previewer=false theme=dropdown<CR>
 nnoremap <silent><Leader>fF <cmd>Telescope find_files<CR>
-nnoremap <silent><Leader>Ff :exe ':Telescope file_browser path=%:p:h hidden=true previewer=false theme=dropdown prompt_title='.expand('%:h')<CR>
-nnoremap <silent><Leader>FF :exe ':Telescope file_browser hidden=true previewer=false theme=dropdown prompt_title='.expand('%:h')<CR>
+nnoremap <silent><Leader>Ff :exe ':Telescope file_browser grouped=true path=%:p:h hidden=true previewer=false theme=dropdown prompt_title='.expand('%:h')<CR>
+nnoremap <silent><Leader>FF :exe ':Telescope file_browser grouped=true hidden=true previewer=false theme=dropdown prompt_title='.expand('%:h')<CR>
 " open in current file pwd
 nnoremap <silent><Leader>fg <cmd>Telescope live_grep<CR>
 " find word under cursor
