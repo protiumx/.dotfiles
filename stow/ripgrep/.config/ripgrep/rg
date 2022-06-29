@@ -30,3 +30,4 @@ web:*.{html,css,js,jsx,ts,tsx,scss,sass,html.heex}*
 --glob=!*.cache
 --glob=!.Trash
 --glob=!.licenses
+--glob=!target
