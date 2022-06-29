@@ -1,19 +1,15 @@
 # REF: https://github.com/kovidgoyal/kitty/discussions/4447
-import datetime
 
 from kitty.fast_data_types import Screen
 from kitty.rgb import Color
 from kitty.tab_bar import (
     DrawData,
     ExtraData,
-    Formatter,
     TabBarData,
     as_rgb,
-    draw_attributed_string,
     draw_title,
 )
 from kitty.utils import color_as_int
-import socket
 
 def calc_draw_spaces(*args) -> int:
     length = 0
