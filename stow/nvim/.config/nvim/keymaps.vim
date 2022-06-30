@@ -101,4 +101,4 @@ tnoremap <Esc> <C-\><C-n>
 
 " Begin new line above from insert mode
 inoremap <M-Return> <C-o>O
-inoremap <S-M-Return> <C-o>o
+inoremap <C-Return> <C-o>o

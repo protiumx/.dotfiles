@@ -19,7 +19,7 @@ require('telescope').setup{
       "-u"
     },
 
-    file_ignore_patterns = { "target/*" "node_modules/*", "^.git/*", "^.yarn/*" },
+    file_ignore_patterns = { "target/*", "node_modules/*", "^.git/*", "^.yarn/*" },
   },
 
   pickers = {
@@ -35,8 +35,8 @@ EOF
 
 nnoremap <silent><Leader>ff <cmd>Telescope find_files previewer=false theme=dropdown<CR>
 nnoremap <silent><Leader>fF <cmd>Telescope find_files<CR>
-nnoremap <silent><Leader>Ff :exe ':Telescope file_browser grouped=true path=%:p:h hidden=true previewer=false theme=dropdown prompt_title='.expand('%:h')<CR>
-nnoremap <silent><Leader>FF :exe ':Telescope file_browser grouped=true hidden=true previewer=false theme=dropdown prompt_title='.expand('%:h')<CR>
+nnoremap <silent><Leader>Ff :exe ':Telescope file_browser grouped=true hidden=true previewer=false theme=dropdown follow=true path=%:p:h cwd='.finddir('.git/..', expand('%:p:h').';')<CR>
+nnoremap <silent><Leader>FF :exe ":Telescope file_browser grouped=true hidden=true previewer=false theme=dropdown follow=true cwd=".finddir('.git/..', expand('%:p:h').';')<CR>
 " open in current file pwd
 nnoremap <silent><Leader>fg <cmd>Telescope live_grep<CR>
 " find word under cursor
@@ -51,3 +51,5 @@ nnoremap <silent><Leader>fq :lua require('telescope.builtin').quickfix()<CR>
 nnoremap <silent><Leader>fS :lua require('telescope.builtin').spell_suggest(require('telescope.themes').get_cursor())<CR>
 " Show diff
 nnoremap <silent><Leader>fs :lua require('telescope.builtin').git_status()<CR>
+
+autocmd User TelescopePreviewerLoaded setlocal wrap
