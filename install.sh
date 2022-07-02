@@ -42,9 +42,6 @@ main() {
   install_oh_my_zsh
   success "Finished installing Oh-my-zsh"
 
-  install_zsh_plugins
-  success "Finished installing Oh-my-zsh plugins"
-
   info "======= MacOS Apps ======="
   wait_input
   install_macos_apps
