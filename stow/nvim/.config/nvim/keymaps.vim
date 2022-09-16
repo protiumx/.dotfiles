@@ -56,7 +56,7 @@ nnoremap <C-Right> :vertical resize +2<CR>
 " Copy to macOS clipboard
 vnoremap <silent> <C-y> "*y
 " Toggle between current and prev buffers
-nnoremap <silent> `` <C-^>
+nnoremap <silent> `` <c-^>
 " New buffer vertical split
 nnoremap <Leader>vs :vnew<cr>
 " Close buffer without changing window layout
@@ -64,15 +64,14 @@ nnoremap <silent>:: :bp\|bd #<CR>
 " Go next/prev buffer
 nnoremap <silent> <Tab> :bn<CR>
 nnoremap <silent> <S-Tab> :bp<CR>
-nnoremap <leader>bd <Cmd>bd<CR>
 
 " Close all but current buffer
 nnoremap <Leader>xa :%bd\|e#\|bd#<cr>\|'"
 
 " Select all
-nnoremap <C-A> ggVG
-inoremap <C-A> <ESC>ggVG
-vnoremap <C-A> <ESC>ggVG
+nnoremap <C-S> ggVG
+inoremap <C-S> <ESC>ggVG
+vnoremap <C-S> <ESC>ggVG
 
 " Open new file adjacent to current file
 nnoremap <Leader>o :e <C-R>=expand("%:h") . "/" <CR>
@@ -102,3 +101,6 @@ tnoremap <Esc> <C-\><C-n>
 " Begin new line above from insert mode
 inoremap <M-Return> <C-o>O
 inoremap <C-Return> <C-o>o
+
+" Exec current line as bash code
+nmap <Leader><Enter> !!zsh<CR>

@@ -1,4 +1,5 @@
 let mapleader = " "
+let g:netrw_banner = 0
 syntax sync minlines=3000
 
 "highlight clear
