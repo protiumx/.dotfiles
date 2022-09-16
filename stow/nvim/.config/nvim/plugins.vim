@@ -27,8 +27,6 @@ Plug 'numToStr/Comment.nvim'
 Plug 'https://github.com/lbrayner/vim-rzip'
 " Multiple cursors
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-Plug 'https://github.com/preservim/nerdtree'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'kamykn/popup-menu.nvim'
 Plug 'nvim-lua/popup.nvim'
