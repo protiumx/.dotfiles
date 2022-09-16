@@ -1,7 +1,11 @@
 CLI="$HOME/.cli"
 VSCODE="/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
+# Pasting big chunks of text takes ages
+unset zle_bracketed_paste
+
 export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$PATH"
+export PATH="/opt/homebrew/sbin:$PATH"
 export PATH="$VSCODE:/opt/local/bin:$PATH"
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 export GOPATH="$(go env GOPATH)"
