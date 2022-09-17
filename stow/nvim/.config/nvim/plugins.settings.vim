@@ -6,16 +6,15 @@ require("colorizer").setup()
 require('Comment').setup()
 EOF
 
-"let g:PaperColor_Theme_Options = {
-      "\   'theme': {
-      "\      'default.dark': {
-      "\         'override' : {
-      "\            'color07': ['#eeeeee', ''],
-      "\            'linenumber_bg' : ['#212121', '']
-      "\          }
-      "\        }
-      "\      }
-      "\    }
+let g:PaperColor_Theme_Options = {
+      \   'theme': {
+      \      'default.dark': {
+      \         'override' : {
+      \            'color07': ['#e3e3e3', ''],
+      \          }
+      \        }
+      \      }
+      \    }
 
 nnoremap <F9> :UndotreeToggle<CR>
 
@@ -57,6 +56,8 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " vim sandwhich
+" Additional text objects e.g. viss to select inner text with auto detection
+" of surroundings
 xmap iss <Plug>(textobj-sandwich-auto-i)
 xmap ass <Plug>(textobj-sandwich-auto-a)
 omap iss <Plug>(textobj-sandwich-auto-i)

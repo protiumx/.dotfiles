@@ -6,15 +6,16 @@ syntax sync minlines=3000
 set guifont=FiraCode\ Nerd\ Font\ Mono:h18
 set background=dark
 try
-  "colorscheme PaperColor
+  colorscheme PaperColor
   "colorscheme gruvbox
-  let g:material_style = "oceanic"
-  colorscheme material
+  " let g:material_style = "oceanic"
+  " colorscheme material
   "colorscheme catppuccin
 catch /^Vim\%((\a\+)\)\=:E185/
   colorscheme default
 endtry
 
+" Transparent background
 "highlight LineNr ctermbg=none guibg=none
 "highlight Normal ctermbg=none guibg=none
 "highlight NonText ctermbg=none guibg=none
