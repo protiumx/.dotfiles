@@ -54,7 +54,6 @@ stow_dotfiles() {
     ".zprofile"
   )
   local folders=(
-    ".config/espanso"
     ".config/fd"
     ".config/kitty"
     ".config/nvim"
@@ -73,7 +72,7 @@ stow_dotfiles() {
     mkdir -p "$HOME/$d"
   done
 
-  local dotfiles="espanso fd git kitty nvim ripgrep ssh starship vim zsh"
+  local dotfiles="fd git kitty nvim ripgrep ssh starship vim zsh"
   info "Stowing: $dotfiles"
   stow -d stow --verbose 1 --target $HOME $dotfiles
 }

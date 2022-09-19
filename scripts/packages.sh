@@ -6,7 +6,6 @@ taps=(
   homebrew/cask-fonts
   homebrew/core
   vmware-tanzu/carvel
-  brew tap espanso/espanso
 )
 
 packages=(
@@ -17,7 +16,6 @@ packages=(
 	ctags
 	curl
 	duti                     #  https://github.com/moretension/duti
-  espanso                  #  https://github.com/federico-terzi/espanso
 	exa                      #  https://github.com/ogham/exa
 	fzf                      #  https://github.com/junegunn/fzf
 	fd                       #  https://github.com/sharkdp/fd
