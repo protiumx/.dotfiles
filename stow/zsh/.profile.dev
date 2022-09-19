@@ -10,6 +10,8 @@ tab_nvim() {
   kitty @ launch --type tab --cwd $1 --no-response --keep-focus nvim . 2>/dev/null 1>/dev/null &;
 }
 
+# Jump to folder and open nvim.
+# nvim plug will set the root folder properly if a .git folder exists
 zv() {
   z $1 && nvim .;
 }
