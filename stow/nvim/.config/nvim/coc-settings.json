@@ -1,5 +1,16 @@
 {
-  "coc.preferences.formatOnSaveFiletypes": ["json", "rust", "python", "go"],
+  "coc.preferences.formatOnSaveFiletypes": [
+    "json",
+    "rust",
+    "python",
+    "go",
+    "javascript",
+    "javascript.jsx",
+    "json",
+    "typescript",
+    "typescript.tsx",
+    "typscriptreact"
+  ],
   "diagnostic.checkCurrentLine": true,
   "diagnostic.virtualTextCurrentLineOnly": false,
   "diagnostic.locationlistUpdate": true,
