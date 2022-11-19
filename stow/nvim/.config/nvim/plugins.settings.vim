@@ -1,10 +1,11 @@
-nmap s <Nop>
+" Needed for vim-sandwhich
+map s <Nop>
 xmap s <Nop>
 
-lua << EOF
-require("colorizer").setup()
-require('Comment').setup()
-EOF
+let g:dbext_default_usermaps = 0
+
+lua require("colorizer").setup()
+lua require('Comment').setup()
 
 let g:PaperColor_Theme_Options = {
       \   'theme': {
@@ -19,12 +20,12 @@ let g:PaperColor_Theme_Options = {
 nnoremap <F9> :UndotreeToggle<CR>
 
 " Comment
-nmap <C-_> <CMD>lua require("Comment.api").toggle_current_linewise()<CR>
-nmap <C-/> <CMD>lua require("Comment.api").toggle_current_linewise()<CR>
-vmap <C-_> <ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>
-vmap <C-/> <ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>
-imap <C-/> <C-o><CMD>lua require("Comment.api").toggle_current_linewise()<CR>
-imap <C-_> <C-o><CMD>lua require("Comment.api").toggle_current_linewise()<CR>
+nmap <C-_> <Plug>(comment_toggle_linewise)
+nmap <C-/> <Plug>(comment_toggle_linewise)
+vmap <C-_> <Plug>(comment_toggle_linewise_visual)
+vmap <C-/> <Plug>(comment_toggle_linewise_visual)
+imap <C-/> <C-o><Plug>(comment_toggle_linewise_current)
+imap <C-_> <C-o><Plug>(comment_toggle_linewise_current)
 
 "let g:gruvbox_contrast = 'hard'
 "let g:gruvbox_sign_column = 'bg0'
@@ -40,14 +41,16 @@ imap <C-_> <C-o><CMD>lua require("Comment.api").toggle_current_linewise()<CR>
 let g:user_emmet_leader_key='<C-X>'
 
 " Vim Sneak
-nmap z <Plug>Sneak_s
-nmap Z <Plug>Sneak_S
+nmap m <Plug>Sneak_s
+nmap M <Plug>Sneak_S
 " visual-mode
-xmap z <Plug>Sneak_s
-xmap Z <Plug>Sneak_S
+xmap m <Plug>Sneak_s
+xmap M <Plug>Sneak_S
 " operator-pending-mode
-omap z <Plug>Sneak_s
-omap Z <Plug>Sneak_S
+omap m <Plug>Sneak_s
+omap M <Plug>Sneak_S
+" nmap < <Plug>Sneak_,
+" nmap > <Plug>Sneak_;
 
 " vim align
 " Start interactive EasyAlign in visual mode (e.g. vipga)
@@ -67,3 +70,7 @@ xmap im <Plug>(textobj-sandwich-literal-query-i)
 xmap am <Plug>(textobj-sandwich-literal-query-a)
 omap im <Plug>(textobj-sandwich-literal-query-i)
 omap am <Plug>(textobj-sandwich-literal-query-a)
+
+nnoremap <Leader>hn <cmd>Gitsigns next_hunk<CR>
+
+let g:rooter_patterns = ['.git']
