@@ -7,21 +7,16 @@ vnoremap <Leader>c "_c
 " Build date
 nnoremap <Leader>db "=strftime('%Y%m%d%H%M')<CR>p
 
-" Prepare replace of current word
+" Prepare replace all occurrences of current word
 nnoremap <Leader>rw :%s/\<<C-r><C-w>\>//g<Left><Left>
 
 " Remap C-c to esc in insert mode
 inoremap <C-c> <esc>
-nnoremap ; :
-vnoremap ; :
 
 " Clears hlsearch after doing a search, otherwise just does normal <CR> stuff
 nnoremap <expr> <CR> {-> v:hlsearch ? ":nohl\<CR>" : "\<CR>"}()
 
 nnoremap <silent> Q <nop>
-
-" Close current split
-nnoremap <Leader>wq <C-w>q
 
 " Copy from cursor to end of line
 nnoremap Y y$
@@ -50,8 +45,8 @@ nnoremap <C-l> <C-w>l
 " Resize windows
 nnoremap <C-Up> :resize -2<CR>
 nnoremap <C-Down> :resize +2<CR>
-nnoremap <C-Left> :vertical resize -2<CR>
-nnoremap <C-Right> :vertical resize +2<CR>
+nnoremap <Leader><Left> :vertical resize -2<CR>
+nnoremap <Leader><Right> :vertical resize +2<CR>
 
 " Copy to macOS clipboard
 vnoremap <silent> <C-y> "*y
@@ -60,7 +55,7 @@ nnoremap <silent> `` <c-^>
 " New buffer vertical split
 nnoremap <Leader>vs :vnew<cr>
 " Close buffer without changing window layout
-nnoremap <silent>:: :bp\|bd #<CR>
+nnoremap <silent>;; :bp\|bd #<CR>
 " Go next/prev buffer
 nnoremap <silent> <Tab> :bn<CR>
 nnoremap <silent> <S-Tab> :bp<CR>
@@ -92,15 +87,12 @@ nnoremap <F10> :vs term://zsh<CR>
 nnoremap <Leader>fp :let @+=expand('%:h')<CR>
 
 " visual select words
-inoremap <S-M-Left> <Esc>vb
-inoremap <S-M-Right> <Esc>ve
+inoremap <S-Left> <Esc>vb
+inoremap <S-Right> <Esc>ve
 " close terminal
 tnoremap <C-q> <C-\><C-n>:bd!<CR>
+" Esc goes to normal mode
 tnoremap <Esc> <C-\><C-n>
-
-" Begin new line above from insert mode
-inoremap <M-Return> <C-o>O
-inoremap <C-Return> <C-o>o
 
 " Exec current line as bash code
 nmap <Leader><Enter> !!zsh<CR>
