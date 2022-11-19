@@ -107,7 +107,7 @@ local comps = {
             provider = {
               name = "position",
               opts = {
-                format = "↓{line} →{col}",
+                format = "{line}:{col}",
               },
             },
             left_sep = ' ',
