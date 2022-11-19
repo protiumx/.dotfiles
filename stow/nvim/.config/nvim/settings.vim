@@ -20,7 +20,8 @@ endtry
 "highlight Normal ctermbg=none guibg=none
 "highlight NonText ctermbg=none guibg=none
 "highlight SignColumn ctermbg=none guibg=none
-"highlight VertSplit ctermbg=none ctermfg=98 cterm=none guibg=none
+
+highlight VertSplit ctermbg=none ctermfg=98 cterm=none guibg=none guifg=#454545
 
 " Hide tab bar
 set showtabline=0

@@ -19,7 +19,7 @@ Plug 'norcalli/nvim-colorizer.lua'
 Plug 'junegunn/vim-easy-align'
 Plug 'mattn/emmet-vim'
 Plug 'arthurxavierx/vim-caser'
-" Chang surroundings
+" Change surroundings
 Plug 'https://github.com/machakann/vim-sandwich'
 Plug 'jiangmiao/auto-pairs'
 Plug 'mbbill/undotree'
