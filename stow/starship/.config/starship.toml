@@ -26,8 +26,7 @@ $lua\
 $nodejs\
 $python\
 $rust\
-$zig\
-$memory_usage"""
+$zig"""
 
 [memory_usage]
 disabled = false
@@ -58,17 +57,20 @@ format = "[ $duration]($style) "
 
 [directory]
 truncate_to_repo = false
-truncation_length = 3
+truncation_length = 1
 format = "[$path]($style)[$repo_root]($repo_root_style)[$read_only]($read_only_style) "
 read_only = " "
 
 [c]
+format = "[$symbol($version(-$name) )]($style)"
 symbol = " "
 
 [docker_context]
+format = "[$symbol$context]($style)"
 symbol = " "
 
 [elixir]
+format = '[$symbol($version \(OTP $otp_version\) )]($style)'
 symbol = " "
 
 [git_branch]
@@ -76,16 +78,20 @@ symbol = " "
 style = "bold fg:#f07178"
 
 [golang]
+format = "[$symbol($version)]($style)"
 symbol = " "
 
 [nodejs]
+format = "[$symbol($version )]($style)"
 symbol = " "
 
 [package]
 symbol = " "
 
 [python]
+format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
 symbol = " "
 
 [rust]
+format = "[$symbol($version )]($style)"
 symbol = " "
