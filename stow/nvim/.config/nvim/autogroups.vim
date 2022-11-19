@@ -47,13 +47,15 @@ augroup END
 augroup kitty_title
   function! SetTitle(leaving)
     let title = ''
-    let arg = argv()[0]
-    if !a:leaving
+    let arg = argv(0)
+    if arg is v:null
+      let title = 'nvim'
+    elseif !a:leaving
       if isdirectory(arg)
         let title = 'nvim ~ ' . expand('%:p:h:t')
       else
         let title = 'nvim ~ ' . arg
-      endi
+      endif
     endif
 
     call system('kitty @ set-window-title "' . title . '"')
