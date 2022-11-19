@@ -26,7 +26,7 @@ def draw_icon(screen: Screen, index: int, symbol: str = "") -> int:
 
     fg, bg = screen.cursor.fg, screen.cursor.bg
     screen.cursor.fg = as_rgb(color_as_int(Color(130, 170, 255)))
-    screen.cursor.bg = as_rgb(color_as_int(Color(60, 71, 77)))
+    screen.cursor.bg = as_rgb(color_as_int(Color(69, 69, 69)))
     screen.draw(symbol)
     screen.cursor.fg, screen.cursor.bg = fg, bg
     screen.cursor.x = len(symbol)
