@@ -22,6 +22,7 @@ packages=(
 	gettext
 	gh
 	go
+  grpcurl                  #  https://github.com/fullstorydev/grpcurl
 	hashicorp/tap/terraform
 	helm
 	httpie                   #  https://github.com/httpie/httpie
@@ -30,6 +31,7 @@ packages=(
 	k9s                      #  https://github.com/derailed/k9s
 	kubernetes-cli
 	lazydocker               #  https://github.com/jesseduffield/lazydocker
+  lf                       #  https://github.com/gokcehan/lf
 	libpq
 	macpass                  #  https://macpassapp.org/
 	minikube
