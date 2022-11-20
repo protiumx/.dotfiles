@@ -71,7 +71,7 @@ ansi_colors() {
 }
 
 # checkout or create new branch
-gck() { 
+gck() {
   git checkout $1 2>/dev/null || git checkout -b $1; 
 }
 
@@ -89,8 +89,6 @@ _fzf_compgen_dir() {
   fd -d 1 --type d --hidden --follow . "$1"
 }
 
-export NNN_PLUG='p:preview-tui;i:imgview;v:-!cd $nnn && nvim .;o:nvim'
-export NNN_FIFO="/tmp/nnn.fifo"
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/rg"
 
 # Aliases
@@ -105,20 +103,19 @@ if [ "$(command -v exa)" ]; then
   alias tree="exa --tree --icons --group-directories-first --color auto"
 fi
 
-alias nnn="nnn -a"
 alias yw="yarn workspace"
 alias python=python3
 alias cat="bat -p --paging=never"
 # Conventional Commits
-alias gr="git_commit refactor"
-alias gt="git_commit test"
+alias gre="git_commit refactor"
+alias gte="git_commit test"
 alias gfi="git_commit fix"
 alias gfe="git_commit feat"
 alias gch="git_commit chore"
 alias gst="git_commit style"
 alias gci="git_commit ci"
-alias gd="git_commit docs"
-alias gm="git_commit misc"
+alias gdo="git_commit docs"
+alias gmi="git_commit misc"
 alias gnv="git commit --no-verify -m"
 
 alias dc="docker compose"
@@ -129,6 +126,182 @@ alias icat="kitty +kitten icat --align left"
 alias mkpwd="xkcdpass --count=5 --acrostic=\"chaos\" -C \"first\" -R --min=5 --max=6 -D \"#@^&~_-;\""
 alias isodate='date --iso-8601=seconds'
 alias serv="python3 -m http.server"
-alias neov="neovide --frame none"
-alias pkgls="cat package.json | jq .scripts"
+alias pkgls="jq .scripts package.json"
 alias diff='diff -tW $(tput cols) --color=always'
+
+export LF_ICONS="\
+di=:\
+fi=:\
+ln=:\
+or=:\
+ex=:\
+*.vimrc=:\
+*.viminfo=:\
+*.gitignore=:\
+*.c=:\
+*.cc=:\
+*.clj=:\
+*.coffee=:\
+*.cpp=:\
+*.css=:\
+*.d=:\
+*.dart=:\
+*.erl=:\
+*.exs=:\
+*.fs=:\
+*.go=:\
+*.h=:\
+*.hh=:\
+*.hpp=:\
+*.hs=:\
+*.html=:\
+*.java=:\
+*.jl=:\
+*.js=:\
+*.json=:\
+*.lua=:\
+*.md=:\
+*.php=:\
+*.pl=:\
+*.pro=:\
+*.py=:\
+*.rb=:\
+*.rs=:\
+*.scala=:\
+*.ts=:\
+*.vim=:\
+*.cmd=:\
+*.ps1=:\
+*.sh=:\
+*.bash=:\
+*.zsh=:\
+*.fish=:\
+*.tar=:\
+*.tgz=:\
+*.arc=:\
+*.arj=:\
+*.taz=:\
+*.lha=:\
+*.lz4=:\
+*.lzh=:\
+*.lzma=:\
+*.tlz=:\
+*.txz=:\
+*.tzo=:\
+*.t7z=:\
+*.zip=:\
+*.z=:\
+*.dz=:\
+*.gz=:\
+*.lrz=:\
+*.lz=:\
+*.lzo=:\
+*.xz=:\
+*.zst=:\
+*.tzst=:\
+*.bz2=:\
+*.bz=:\
+*.tbz=:\
+*.tbz2=:\
+*.tz=:\
+*.deb=:\
+*.rpm=:\
+*.jar=:\
+*.war=:\
+*.ear=:\
+*.sar=:\
+*.rar=:\
+*.alz=:\
+*.ace=:\
+*.zoo=:\
+*.cpio=:\
+*.7z=:\
+*.rz=:\
+*.cab=:\
+*.wim=:\
+*.swm=:\
+*.dwm=:\
+*.esd=:\
+*.jpg=:\
+*.jpeg=:\
+*.mjpg=:\
+*.mjpeg=:\
+*.gif=:\
+*.bmp=:\
+*.pbm=:\
+*.pgm=:\
+*.ppm=:\
+*.tga=:\
+*.xbm=:\
+*.xpm=:\
+*.tif=:\
+*.tiff=:\
+*.png=:\
+*.svg=:\
+*.svgz=:\
+*.mng=:\
+*.pcx=:\
+*.mov=:\
+*.mpg=:\
+*.mpeg=:\
+*.m2v=:\
+*.mkv=:\
+*.webm=:\
+*.ogm=:\
+*.mp4=:\
+*.m4v=:\
+*.mp4v=:\
+*.vob=:\
+*.qt=:\
+*.nuv=:\
+*.wmv=:\
+*.asf=:\
+*.rm=:\
+*.rmvb=:\
+*.flc=:\
+*.avi=:\
+*.fli=:\
+*.flv=:\
+*.gl=:\
+*.dl=:\
+*.xcf=:\
+*.xwd=:\
+*.yuv=:\
+*.cgm=:\
+*.emf=:\
+*.ogv=:\
+*.ogx=:\
+*.aac=:\
+*.au=:\
+*.flac=:\
+*.m4a=:\
+*.mid=:\
+*.midi=:\
+*.mka=:\
+*.mp3=:\
+*.mpc=:\
+*.ogg=:\
+*.ra=:\
+*.wav=:\
+*.oga=:\
+*.opus=:\
+*.spx=:\
+*.xspf=:\
+*.pdf=:\
+*.nix=:\
+"
+
+export LF_COLORS="\
+~/Documents=01;31:\
+~/Downloads=01;31:\
+.git/=01;32:\
+.git*=32:\
+*.gitignore=32:\
+*Makefile=32:\
+README.*=33:\
+*.txt=34:\
+*.md=34:\
+ln=01;36:\
+di=01;34:\
+ex=01;32:\
+"
