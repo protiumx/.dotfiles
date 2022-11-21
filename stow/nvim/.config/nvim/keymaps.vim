@@ -55,7 +55,7 @@ nnoremap <silent> `` <c-^>
 " New buffer vertical split
 nnoremap <Leader>vs :vnew<cr>
 " Close buffer without changing window layout
-nnoremap <silent>;; :bp\|bd #<CR>
+nnoremap <silent>99 :bp\|bd #<CR>
 " Go next/prev buffer
 nnoremap <silent> <Tab> :bn<CR>
 nnoremap <silent> <S-Tab> :bp<CR>
