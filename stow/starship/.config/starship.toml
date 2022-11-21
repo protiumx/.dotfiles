@@ -6,15 +6,8 @@ format = """
 $directory\
 $git_branch\
 $git_state\
-$git_metrics\
 $git_status\
-$line_break\
-$character"""
-
-right_format = """
-$cmd_duration\
 $jobs\
-$status\
 $kubernetes\
 $docker_context\
 $c\
@@ -26,13 +19,25 @@ $lua\
 $nodejs\
 $python\
 $rust\
-$zig"""
+$zig\
+$cmd_duration\
+$status\
+$line_break\
+$character"""
+
+[character]
+success_symbol = "[](bold green)"
 
 [memory_usage]
 disabled = false
 symbol = ""
 threshold = 30
 format = "[$symbol ${ram}]($style)"
+
+[git_branch]
+symbol = " "
+format = "[$symbol$branch(:$remote_branch)]($style) "
+style = "bold fg:#82aaff" 
 
 [git_status]
 format = '([\[ $all_status$ahead_behind\]]($style) )'
@@ -46,9 +51,12 @@ stashed = "$${count} "
 staged = "+${count} "
 deleted = "x${count} "
 renamed = "»${count} "
+style = "bold fg:#82aaff" 
 
 [status]
 disabled = false
+format = "[$symbol $status]($style)"
+symbol = ""
 
 [cmd_duration]
 min_time = 500
@@ -73,12 +81,8 @@ symbol = " "
 format = '[$symbol($version \(OTP $otp_version\) )]($style)'
 symbol = " "
 
-[git_branch]
-symbol = " "
-style = "bold fg:#f07178"
-
 [golang]
-format = "[$symbol($version)]($style)"
+format = "[$symbol($version )]($style)"
 symbol = " "
 
 [nodejs]
