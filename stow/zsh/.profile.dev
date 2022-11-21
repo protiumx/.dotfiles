@@ -5,6 +5,13 @@ setopt +o nomatch
 
 cheat() { curl -s "cheat.sh/$1"; }
 
+pkgrun() {
+  name=$(cat package.json | jq .scripts | sed '1d;$d' | fzf --height 40% | awk -F ': ' '{gsub(/"/, "", $1); print $1}')
+  if [[ -n $scripts ]]; then
+    yarn run $name
+  fi
+}
+
 # Open vim in a new kitty tab
 tab_nvim() {
   kitty @ launch --type tab --cwd $1 --no-response --keep-focus nvim . 2>/dev/null 1>/dev/null &;
@@ -126,7 +133,6 @@ alias icat="kitty +kitten icat --align left"
 alias mkpwd="xkcdpass --count=5 --acrostic=\"chaos\" -C \"first\" -R --min=5 --max=6 -D \"#@^&~_-;\""
 alias isodate='date -u +"%Y-%m-%dT%H:%M:%SZ"'
 alias serv="python3 -m http.server"
-alias pkgls="jq .scripts package.json"
 alias diff='diff -tW $(tput cols) --color=always'
 
 export LF_ICONS="\
