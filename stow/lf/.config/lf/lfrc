@@ -6,6 +6,7 @@ set shellopts '-euy'
 set hidden
 set info size
 set icons true
+set ignorecase true
 
 # set internal field separator (IFS) to "\n" for shell commands
 # This is useful to automatically split file names in $fs and $fx properly
