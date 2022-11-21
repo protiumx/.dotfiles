@@ -25,9 +25,6 @@ $status\
 $line_break\
 $character"""
 
-[character]
-success_symbol = "[](bold green)"
-
 [memory_usage]
 disabled = false
 symbol = ""
