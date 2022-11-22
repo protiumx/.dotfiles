@@ -15,51 +15,62 @@ set -o pipefail
 . scripts/oh-my-zsh.sh
 
 cleanup() {
-  echo "Finishing..."
+  info "Finishing..."
 }
 
 wait_input() {
   read -p "Press enter to continue: "
 }
 
-trap cleanup EXIT
+trap cleanup SIGINT SIGTERM ERR EXIT
 
 main() {
   info "Installing ..."
 
-  info "======= Homebrew packages ======="
+  if [ -z "${SSH_PASSPHRASE}" ]; then
+    echo "SSH_PASSPHRASE not set"
+    exit 1
+  fi
+
+  info "Homebrew Packages"
+  info "################################################"
   wait_input
   install_packages
   success "Finished installing Homebrew packages"
 
-  info "======= Homebrew Fonts ======="
+  info "Homebrew Fonts"
+  info "################################################"
   wait_input
   install_fonts
   success "Finished installing fonts"
 
-  info "======= Oh-my-zsh ======="
-  wait_input
-  install_oh_my_zsh
-  success "Finished installing Oh-my-zsh"
+  # info "Oh-my-zsh"
+  # wait_input
+  # install_oh_my_zsh
+  # success "Finished installing Oh-my-zsh"
 
-  info "======= MacOS Apps ======="
+  info "MacOS Apps"
+  info "################################################"
   wait_input
   install_macos_apps
 
   install_masApps
   success "Finished installing macOS apps"
 
-  info "======= NeoVim ======="
+  info "NeoVim"
+  info "################################################################################"
   wait_input
   install_neovim
   success "Finished installing neovim"
 
-  info "======= PiP modules ======="
+  info "PiP modules"
+  info "################################################################################"
   wait_input
   install_python_packages
   success "Finished installing python packages"
 
-  info "======= Configuration ======="
+  info "Configuration"
+  info "################################################################################"
   wait_input
   setup_osx
   success "Finished configuring MacOS defaults. NOTE: A restart is needed"
@@ -68,21 +79,25 @@ main() {
   stow_dotfiles
 
   info "Crating development folders"
+  info "################################################################################"
   mkdir -p ~/Development/protiumx
 
   success "Finished stowing dotfiles"
 
-  info "======= SSH Key ======="
+  info "SSH Key"
+  info "################################################################################"
   setup_github_ssh
   success "Finished setting up SSH Key"
 
-  info "======= NeoVim Plugins ======="
+  info "NeoVim Plugins"
+  info "################################################################################"
   wait_input
   nvim +PlugInstall +qall
   success "Finished installing nvim plugins"
 
   if ! hash rustc &>/dev/null; then
-    info "======= Rust Setup ======="
+    info "Rust Setup"
+    info "################################################################################"
     wait_input
     rustup-init
   fi
