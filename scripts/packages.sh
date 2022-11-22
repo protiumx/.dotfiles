@@ -53,7 +53,6 @@ packages=(
 	telnet
 	websocat                 #  https://github.com/vi/websocat
 	yarn
-  wez/wezterm/wezterm      #  https://wezfurlong.org/wezterm
 	wget
 	zsh
 	zsh-autosuggestions
