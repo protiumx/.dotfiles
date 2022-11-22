@@ -6,6 +6,7 @@ taps=(
   homebrew/cask-fonts
   homebrew/core
   vmware-tanzu/carvel
+  wez/wezterm
 )
 
 packages=(
@@ -52,6 +53,7 @@ packages=(
 	telnet
 	websocat                 #  https://github.com/vi/websocat
 	yarn
+  wez/wezterm/wezterm      #  https://wezfurlong.org/wezterm
 	wget
 	zsh
 	zsh-autosuggestions
