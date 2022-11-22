@@ -14,6 +14,7 @@ apps=(
   typora
   visual-studio-code
   vlc
+  wez/wezterm/wezterm      #  https://wezfurlong.org/wezterm
 )
 
 masApps=(

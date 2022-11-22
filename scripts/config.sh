@@ -56,8 +56,11 @@ stow_dotfiles() {
   local folders=(
     ".config/fd"
     ".config/kitty"
+    ".config/helix"
+    ".config/lf"
     ".config/nvim"
     ".config/ripgrep"
+    ".config/vim"
     ".git-templates/hooks"
     ".ssh"
   )
@@ -72,7 +75,7 @@ stow_dotfiles() {
     mkdir -p "$HOME/$d"
   done
 
-  local dotfiles="fd git kitty nvim ripgrep ssh starship vim zsh"
-  info "Stowing: $dotfiles"
-  stow -d stow --verbose 1 --target $HOME $dotfiles
+  local to_stow="$(find stow -maxdepth 1 -type d -mindepth 1 | awk -F "/" '{print $NF}' ORS=' ')"
+  info "Stowing: $to_stow"
+  stow -d stow --verbose 1 --target $HOME $to_stow
 }
