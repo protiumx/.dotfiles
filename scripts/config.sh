@@ -61,6 +61,7 @@ stow_dotfiles() {
     ".config/nvim"
     ".config/ripgrep"
     ".config/vim"
+    ".config/wezterm"
     ".git-templates/hooks"
     ".ssh"
   )
