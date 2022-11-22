@@ -2,8 +2,6 @@ local wezterm = require 'wezterm'
 local act = wezterm.action
 local mux = wezterm.mux
 
-local SOLID_RIGHT_ARROW = utf8.char(0xe0b0)
-
 wezterm.on('gui-startup', function(cmd)
   local tab, pane, window = mux.spawn_window(cmd or {})
   window:gui_window():maximize()
@@ -21,7 +19,7 @@ wezterm.on(
 
 return {
   audible_bell = "Disabled",
-  color_scheme = "PaperColorDark",
+  -- color_scheme = "PaperColor Dark (base16)",
   font = wezterm.font("FiraCode Nerd Font", {weight="Medium", stretch="Normal", style="Normal"}),
   font_rules = {
     {
@@ -30,6 +28,9 @@ return {
     },
   },
   font_size = 19.0,
+  -- Disable font ligatures
+  harfbuzz_features = {'calt=0', 'clig=0', 'liga=0'},
+
   hide_tab_bar_if_only_one_tab = true,
   inactive_pane_hsb = {
     brightness = 0.8,
@@ -190,6 +191,7 @@ return {
   send_composed_key_when_left_alt_is_pressed = false,
   show_new_tab_button_in_tab_bar = false,
   switch_to_last_active_tab_when_closing_tab = true,
+  tab_max_width = 30,
 
   window_decorations = "RESIZE",
   window_frame = {
