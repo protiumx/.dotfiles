@@ -19,7 +19,9 @@ wezterm.on(
 
 return {
   audible_bell = "Disabled",
-  -- color_scheme = "PaperColor Dark (base16)",
+  color_scheme = "Argonaut",
+  use_fancy_tab_bar = false,
+  max_fps = 100,
   font = wezterm.font("FiraCode Nerd Font", {weight="Medium", stretch="Normal", style="Normal"}),
   font_rules = {
     {
@@ -37,7 +39,11 @@ return {
   },
 
   keys = {
-    { key = 'p', mods = 'CMD', action = wezterm.action.ShowLauncher },
+    { 
+      key = 'p', 
+      mods = 'CMD', 
+      action = wezterm.action.ShowLauncherArgs { flags = 'FUZZY|TABS|WORKSPACES' },
+    },
     { key = 'd', mods = 'ALT', action = wezterm.action.ShowDebugOverlay },
 
     -- Panes
@@ -186,12 +192,14 @@ return {
       mods = 'CMD',
       action = act.SendKey { key = 'e', mods = 'CTRL' },
     },
+
+    -- { key = '/', mods = 'CTRL', action = wezterm.action.Nop },
   },
   scrollback_lines = 6000,
   send_composed_key_when_left_alt_is_pressed = false,
   show_new_tab_button_in_tab_bar = false,
   switch_to_last_active_tab_when_closing_tab = true,
-  tab_max_width = 30,
+  tab_max_width = 60,
 
   window_decorations = "RESIZE",
   window_frame = {
@@ -223,6 +231,7 @@ return {
   colors = {
     background = "#1c1c1c",
     cursor_bg = '#ff5faf',
+    cursor_border = '#ff5faf',
     selection_fg = '#1c1c1c',
     selection_bg = '#ff5faf',
     tab_bar = {
