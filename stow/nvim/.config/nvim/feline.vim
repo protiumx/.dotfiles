@@ -66,7 +66,7 @@ local comps = {
     vi_mode = {
         left = {
             provider = function()
-              return '▌ ' .. modes[vim.fn.mode()]
+              return '| ' .. modes[vim.fn.mode()]
             end,
             hl = function()
                 local val = {
@@ -78,6 +78,7 @@ local comps = {
             right_sep = ' '
         },
     },
+
     file = {
         info = {
             provider = {
@@ -86,23 +87,23 @@ local comps = {
                 type = 'relative',
                 file_readonly_icon = '  ',
                 file_modified_icon = ' * ',
-                icons = true
               }
             },
+            icon = '',
             left_sep = ' ',
             hl = {
                 fg = colors.blue,
-                style = 'bold'
             }
         },
+
         encoding = {
             provider = 'file_encoding',
             left_sep = ' ',
             hl = {
                 fg = colors.violet,
-                style = 'bold'
             }
         },
+
         position = {
             provider = {
               name = "position",
@@ -113,7 +114,6 @@ local comps = {
             left_sep = ' ',
             hl = {
                 fg = colors.cyan,
-                -- style = 'bold'
             }
         },
     },
@@ -121,49 +121,8 @@ local comps = {
     line_percentage = {
         provider = 'line_percentage',
         left_sep = ' ',
-        hl = {
-            style = 'bold'
-        }
+        hl = {},
     },
-    scroll_bar = {
-        provider = 'scroll_bar',
-        left_sep = ' ',
-        hl = {
-            fg = colors.blue,
-            style = 'bold'
-        }
-    },
-
-    git = {
-        branch = {
-            provider = 'git_branch',
-            icon = ' ',
-            left_sep = ' ',
-            right_sep = ' ',
-            hl = {
-                fg = colors.violet,
-                style = 'bold'
-            },
-        },
-        add = {
-            provider = 'git_diff_added',
-            hl = {
-                fg = colors.green
-            }
-        },
-        change = {
-            provider = 'git_diff_changed',
-            hl = {
-                fg = colors.orange
-            }
-        },
-        remove = {
-            provider = 'git_diff_removed',
-            hl = {
-                fg = colors.red
-            }
-        }
-    }
 }
 
 local components = {
@@ -171,40 +130,41 @@ local components = {
   inactive = {},
 }
 
+-- Left and right columns
 table.insert(components.active, {})
 table.insert(components.active, {})
-table.insert(components.active, {})
-table.insert(components.inactive, {})
 table.insert(components.inactive, {})
 table.insert(components.inactive, {})
 
+-- Left
 table.insert(components.active[1], comps.vi_mode.left)
-table.insert(components.active[1], comps.git.branch)
-table.insert(components.active[1], comps.git.add)
-table.insert(components.active[1], comps.git.change)
-table.insert(components.active[1], comps.git.remove)
 table.insert(components.active[1], comps.file.info)
 table.insert(components.inactive[1], comps.vi_mode.left)
 table.insert(components.inactive[1], comps.file.info)
-table.insert(components.active[3], comps.file.encoding)
-table.insert(components.active[3], comps.file.position)
-table.insert(components.active[3], comps.line_percentage)
-table.insert(components.active[3], comps.scroll_bar)
 
-require'feline'.setup {
+-- Right
+table.insert(components.active[2], comps.file.encoding)
+table.insert(components.active[2], comps.file.position)
+table.insert(components.active[2], comps.line_percentage)
+
+local f = require 'feline'
+f.setup {
     colors = colors,
     components = components,
     vi_mode_colors = mode_colors,
     disable = {
         filetypes = {
-            'packer',
-            'NvimTree',
-            'fugitive',
-            'fugitiveblame'
+          '^NvimTree$',
+          '^packer$',
+          '^startify$',
+          '^fugitive$',
+          '^fugitiveblame$',
+          '^qf$',
+          '^help$'
         },
-        buftypes = {'terminal'},
+        buftypes = {'^terminal$'},
         bufnames = {}
     }
 }
-require('feline').use_theme(colors)
+f.use_theme(colors)
 EOF
