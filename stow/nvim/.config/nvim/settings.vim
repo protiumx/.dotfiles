@@ -67,10 +67,10 @@ set cursorline
 hi ColorColumn ctermbg=62 guibg=#5f5fd7
 hi CursorColumn ctermbg=none ctermfg=211 guibg=none guifg=#fd79a8
 hi Cursor ctermbg=211 guibg=#fd79a8
-hi IncSearch cterm=none gui=none ctermbg=237 ctermfg=white guibg=#3C474E guifg=#ffffff
 hi CursorLine cterm=none gui=none ctermbg=none guibg=none
+hi IncSearch cterm=none gui=none ctermbg=237 ctermfg=white guibg=#fd79a8 guifg=none
 hi NormalFloat guibg=#2e3e45 ctermbg=239
-" Disable spell since the plugin Spelunker will also highlight
+
 set spell
 set spelllang=en_us
 hi SpellBad gui=undercurl cterm=undercurl ctermbg=none ctermfg=none guibg=none guifg=none
