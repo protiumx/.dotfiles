@@ -17,5 +17,5 @@ case "$1" in
 	*.tar.txz|*.txz) xz --list "$1";;
 	*.tar) tar tf "$1";;
 	*.zip|*.jar|*.war|*.ear|*.oxt) unzip -l "$1";;
-  *) bat --color always --paging=never "$1";;
+  *) bat --color always --paging=never --style="changes" "$1";;
 esac
