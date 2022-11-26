@@ -38,10 +38,10 @@ style = "fg:#d13e11"
 
 [git_status]
 format = '([\[ $all_status$ahead_behind\]]($style) )'
-diverged = "<>^${ahead_count}~${behind_count}"
+diverged = "${ahead_count}${behind_count}"
 conflicted = "=${count} "
-behind = "~${count} "
-ahead = "^${count} "
+behind = "${count} "
+ahead = "${count} "
 modified = "!${count} "
 untracked = "?${count} "
 stashed = "$${count} "
@@ -54,11 +54,15 @@ style = "fg:#d13e11"
 disabled = false
 format = "[$symbol $status]($style)"
 symbol = ""
+signal_symbol = ""
+sigint_symbol = "𥉉"
+not_found_symbol = ""
+not_executable_symbol = ""
 
 [cmd_duration]
 min_time = 500
 show_milliseconds = true
-format = "[ $duration]($style) "
+format = "[ $duration](grey) "
 
 [directory]
 truncate_to_repo = false
