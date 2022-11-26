@@ -1,3 +1,6 @@
+# Disable error when using glob patterns that don't have matches
+setopt +o nomatch
+
 CLI="$HOME/.cli"
 VSCODE="/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
@@ -17,9 +20,6 @@ ZSH_THEME=""
 plugins=(fzf-tab)
 source $ZSH/oh-my-zsh.sh
 
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
-export EDITOR=vim
-
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 
@@ -31,6 +31,7 @@ bindkey "^X\\x7f" backward-kill-line
 # adds redo
 bindkey "^X^_" redo
 
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export EDITOR="nvim"

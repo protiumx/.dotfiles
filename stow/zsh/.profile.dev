@@ -1,10 +1,10 @@
-# Disable error when using glob patterns that don't have matches
-setopt +o nomatch
-
 # Functions
 
-cheat() { curl -s "cheat.sh/$1"; }
+cheat() { 
+  curl -s "cheat.sh/$1";
+}
 
+# Show package.json scripts with fzf
 pkgrun() {
   name=$(cat package.json | jq .scripts | sed '1d;$d' | fzf --height 40% | awk -F ': ' '{gsub(/"/, "", $1); print $1}')
   if [[ -n $scripts ]]; then
@@ -17,12 +17,13 @@ tab_nvim() {
   kitty @ launch --type tab --cwd $1 --no-response --keep-focus nvim . 2>/dev/null 1>/dev/null &;
 }
 
-# Jump to folder and open nvim.
-# nvim plug will set the root folder properly if a .git folder exists
+# Jump to folder (zoxide) and open nvim.
+# NOTE: nvim plug will set the root folder properly if a .git folder exists
 zv() {
   z $1 && nvim .;
 }
 
+# Go to repository root folder
 groot() {
   root="$(git rev-parse --show-toplevel 2>/dev/null)"
   if [ -n "$root" ]; then
@@ -32,12 +33,12 @@ groot() {
   fi
 }
 
-# retrieve process real memory
+# Retrieve process real memory
 psrm() {
   ps -o rss= -p $1 | awk '{ hr=$1/1024; printf "%13.2f Mb\n",hr }' | tr -d ' ';
 }
 
-# watch process real memory
+# Watch process real memory
 psrml() {
   while true;
   do
@@ -55,12 +56,14 @@ git_commit() {
   fi
 }
 
+# Pretty git log
 glog() {
   git log --graph --abbrev-commit --decorate --all \
     --format=format:"%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(dim white) \
     - %an%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n %C(white)%s%C(reset)"
 }
 
+# Open git remote
 gshow() {
   open $(git remote -v | grep fetch | awk '{print $2}' | sed 's/git@/http:\/\//' | sed 's/com:/com\//' | head -n1);
 }
@@ -69,10 +72,11 @@ kitty_title() {
   kitty @ set-tab-title "$1"
 }
 
-mkcd(){
+mkc(){
   mkdir -p "$1" && cd "$1"
 }
 
+# Print all 256 ANSI colors
 ansi_colors() {
   python3 -c "print(''.join(f'\u001b[48;5;{s}m{s.rjust(4)}' + ('\n' if not (int(s)+1) % 8 else '') for s in (str(i) for i in range(256))) + '\u001b[0m')"
 }
@@ -107,11 +111,10 @@ if [ "$(command -v exa)" ]; then
 
   alias ls="exa --group-directories-first -G  --color auto --icons -a -s type"
   alias ll='exa --group-directories-first -l --color always --icons -a -s type'
-  alias tree="exa --tree --icons --group-directories-first --color auto"
+  alias tree="exa --tree --level=5 --icons --group-directories-first --color auto"
 fi
 
 alias yw="yarn workspace"
-alias python=python3
 alias cat="bat -p --paging=never"
 # Conventional Commits
 alias gre="git_commit refactor"
@@ -129,185 +132,7 @@ alias dc="docker compose"
 alias kc="kubectl"
 alias k9="k9s"
 alias icat="kitty +kitten icat --align left"
-# create random password
+# create 5 random passwords
 alias mkpwd="xkcdpass --count=5 --acrostic=\"chaos\" -C \"first\" -R --min=5 --max=6 -D \"#@^&~_-;\""
 alias isodate='date -u +"%Y-%m-%dT%H:%M:%SZ"'
 alias serv="python3 -m http.server"
-alias diff='diff -tW $(tput cols) --color=always'
-
-export LF_ICONS="\
-di=:\
-fi=:\
-ln=:\
-or=:\
-ex=:\
-*.vimrc=:\
-*.viminfo=:\
-*.gitignore=:\
-*.c=:\
-*.cc=:\
-*.clj=:\
-*.coffee=:\
-*.cpp=:\
-*.css=:\
-*.d=:\
-*.dart=:\
-*.erl=:\
-*.exs=:\
-*.fs=:\
-*.go=:\
-*.h=:\
-*.hh=:\
-*.hpp=:\
-*.hs=:\
-*.html=:\
-*.java=:\
-*.jl=:\
-*.js=:\
-*.json=:\
-*.lua=:\
-*.md=:\
-*.php=:\
-*.pl=:\
-*.pro=:\
-*.py=:\
-*.rb=:\
-*.rs=:\
-*.scala=:\
-*.ts=:\
-*.vim=:\
-*.cmd=:\
-*.ps1=:\
-*.sh=:\
-*.bash=:\
-*.zsh=:\
-*.fish=:\
-*.tar=:\
-*.tgz=:\
-*.arc=:\
-*.arj=:\
-*.taz=:\
-*.lha=:\
-*.lz4=:\
-*.lzh=:\
-*.lzma=:\
-*.tlz=:\
-*.txz=:\
-*.tzo=:\
-*.t7z=:\
-*.zip=:\
-*.z=:\
-*.dz=:\
-*.gz=:\
-*.lrz=:\
-*.lz=:\
-*.lzo=:\
-*.xz=:\
-*.zst=:\
-*.tzst=:\
-*.bz2=:\
-*.bz=:\
-*.tbz=:\
-*.tbz2=:\
-*.tz=:\
-*.deb=:\
-*.rpm=:\
-*.jar=:\
-*.war=:\
-*.ear=:\
-*.sar=:\
-*.rar=:\
-*.alz=:\
-*.ace=:\
-*.zoo=:\
-*.cpio=:\
-*.7z=:\
-*.rz=:\
-*.cab=:\
-*.wim=:\
-*.swm=:\
-*.dwm=:\
-*.esd=:\
-*.jpg=:\
-*.jpeg=:\
-*.mjpg=:\
-*.mjpeg=:\
-*.gif=:\
-*.bmp=:\
-*.pbm=:\
-*.pgm=:\
-*.ppm=:\
-*.tga=:\
-*.xbm=:\
-*.xpm=:\
-*.tif=:\
-*.tiff=:\
-*.png=:\
-*.svg=:\
-*.svgz=:\
-*.mng=:\
-*.pcx=:\
-*.mov=:\
-*.mpg=:\
-*.mpeg=:\
-*.m2v=:\
-*.mkv=:\
-*.webm=:\
-*.ogm=:\
-*.mp4=:\
-*.m4v=:\
-*.mp4v=:\
-*.vob=:\
-*.qt=:\
-*.nuv=:\
-*.wmv=:\
-*.asf=:\
-*.rm=:\
-*.rmvb=:\
-*.flc=:\
-*.avi=:\
-*.fli=:\
-*.flv=:\
-*.gl=:\
-*.dl=:\
-*.xcf=:\
-*.xwd=:\
-*.yuv=:\
-*.cgm=:\
-*.emf=:\
-*.ogv=:\
-*.ogx=:\
-*.aac=:\
-*.au=:\
-*.flac=:\
-*.m4a=:\
-*.mid=:\
-*.midi=:\
-*.mka=:\
-*.mp3=:\
-*.mpc=:\
-*.ogg=:\
-*.ra=:\
-*.wav=:\
-*.oga=:\
-*.opus=:\
-*.spx=:\
-*.xspf=:\
-*.pdf=:\
-*.nix=:\
-"
-
-export LF_COLORS="\
-~/Documents=01;31:\
-~/Downloads=01;31:\
-.git/=01;32:\
-.git*=32:\
-*.gitignore=32:\
-*Makefile=32:\
-README.*=33:\
-*.txt=34:\
-*.md=34:\
-ln=01;36:\
-di=01;34:\
-ex=01;32:\
-"
