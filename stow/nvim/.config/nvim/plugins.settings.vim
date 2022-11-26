@@ -20,8 +20,8 @@ let g:PaperColor_Theme_Options = {
 nnoremap <F9> :UndotreeToggle<CR>
 
 " Comment
-nmap <C-_> <Plug>(comment_toggle_linewise)
-nmap <C-/> <Plug>(comment_toggle_linewise)
+nmap <C-_> <Plug>(comment_toggle_linewise_current)
+nmap <C-/> <Plug>(comment_toggle_linewise_current)
 vmap <C-_> <Plug>(comment_toggle_linewise_visual)
 vmap <C-/> <Plug>(comment_toggle_linewise_visual)
 imap <C-/> <C-o><Plug>(comment_toggle_linewise_current)
