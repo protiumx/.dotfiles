@@ -1,3 +1,6 @@
+" Reload config
+nnoremap <Leader>so :so ~/.config/nvim/init.vim<CR>
+
 " Delete/change to blackhole register
 nnoremap <Leader>d "_d
 vnoremap <Leader>d "_d
@@ -36,12 +39,6 @@ inoremap <C-k> <esc>:m .-2<CR>==gi
 nnoremap <Leader>j :m .+1<CR>==
 nnoremap <Leader>k :m .-2<CR>==
 
-" Navigate windows
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-
 " Resize windows
 nnoremap <C-Up> :resize -2<CR>
 nnoremap <C-Down> :resize +2<CR>
@@ -52,15 +49,13 @@ nnoremap <Leader><Right> :vertical resize +2<CR>
 vnoremap <silent> <C-y> "*y
 " Toggle between current and prev buffers
 nnoremap <silent> `` <c-^>
-" New buffer vertical split
-nnoremap <Leader>vs :vnew<cr>
 " Close buffer without changing window layout
-nnoremap <silent>99 :bp\|bd #<CR>
-" Go next/prev buffer
+nnoremap <silent>-- :bp\|bd #<CR>
+" Go next/prev buffer using Tab
 nnoremap <silent> <Tab> :bn<CR>
 nnoremap <silent> <S-Tab> :bp<CR>
 
-" Close all but current buffer
+" Close all buffers except current
 nnoremap <Leader>xa :%bd\|e#\|bd#<cr>\|'"
 
 " Select all
@@ -86,9 +81,6 @@ nnoremap <F10> :vs term://zsh<CR>
 " insert current file path
 nnoremap <Leader>fp :let @+=expand('%:h')<CR>
 
-" visual select words
-inoremap <S-Left> <Esc>vb
-inoremap <S-Right> <Esc>ve
 " close terminal
 tnoremap <C-q> <C-\><C-n>:bd!<CR>
 " Esc goes to normal mode
