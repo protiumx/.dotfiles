@@ -19,8 +19,7 @@ wezterm.on(
 
 return {
   audible_bell = "Disabled",
-  color_scheme = "Argonaut",
-  use_fancy_tab_bar = false,
+  color_scheme = "3024 (base16)",
   max_fps = 100,
   font = wezterm.font("FiraCode Nerd Font", {weight="Medium", stretch="Normal", style="Normal"}),
   font_rules = {
@@ -193,7 +192,7 @@ return {
       action = act.SendKey { key = 'e', mods = 'CTRL' },
     },
 
-    -- { key = '/', mods = 'CTRL', action = wezterm.action.Nop },
+    { key = '/', mods = 'CTRL', action = act.SendKey { key = '/', mods = 'CTRL' } },
   },
   scrollback_lines = 6000,
   send_composed_key_when_left_alt_is_pressed = false,
