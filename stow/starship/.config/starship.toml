@@ -38,13 +38,13 @@ style = "fg:#d13e11"
 
 [git_status]
 format = '([\[ $all_status$ahead_behind\]]($style) )'
-diverged = "${ahead_count}${behind_count}"
+diverged = " ﰛ${ahead_count} ﰗ${behind_count}"
 conflicted = "=${count} "
-behind = "${count} "
-ahead = "${count} "
+behind = "ﰗ${count} "
+ahead = "ﰛ${count} "
 modified = "!${count} "
 untracked = "?${count} "
-stashed = "$${count} "
+stashed = "~${count} "
 staged = "+${count} "
 deleted = "x${count} "
 renamed = "»${count} "
