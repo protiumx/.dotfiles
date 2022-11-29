@@ -4,7 +4,6 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'https://github.com/joshdick/onedark.vim'
 Plug 'https://github.com/morhetz/gruvbox'
-Plug 'marko-cerovac/material.nvim'
 Plug 'sainnhe/everforest'
 
 " ==== Icons ====
