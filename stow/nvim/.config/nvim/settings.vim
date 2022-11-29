@@ -65,10 +65,10 @@ set smartcase
 set colorcolumn=100
 set cursorline
 hi ColorColumn ctermbg=62 guibg=#5f5fd7
-hi CursorColumn ctermbg=none ctermfg=211 guibg=none guifg=#fd79a8
-hi Cursor ctermbg=211 guibg=#fd79a8
+hi CursorColumn ctermbg=none ctermfg=211 guibg=none guifg=#fe5186
+hi Cursor ctermbg=211 guibg=#fe5186
 hi CursorLine cterm=none gui=none ctermbg=none guibg=none
-hi IncSearch cterm=none gui=none ctermbg=237 ctermfg=white guibg=#fd79a8 guifg=none
+hi IncSearch cterm=none gui=none ctermbg=237 ctermfg=white guibg=#fe5186 guifg=none
 hi NormalFloat guibg=#2e3e45 ctermbg=239
 
 set spell
