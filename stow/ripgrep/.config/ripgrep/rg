@@ -16,7 +16,7 @@
 web:*.{html,css,js,jsx,ts,tsx,scss,sass,html.heex}*
 
 # ignores, etc
---glob=!.git/
+--glob=!.git/*
 --glob=!.elixir_ls
 --glob=!node_modules
 --glob=!yarn.lock
