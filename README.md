@@ -22,7 +22,7 @@ Check my [Medium article](https://medium.com/@protiumx/bash-gnu-stow-take-a-walk
 
 ## Apps
 Main apps installed:
-- Terminal: [Kitty](https://github.com/kovidgoyal/kitty)
+- Terminal: [Kitty](https://github.com/kovidgoyal/kitty) and [Wezterm](https://wezfurlong.org/wezterm/)
 - Editor: [neovim](https://neovim.io/)
 - Firefox
 - Spotify
