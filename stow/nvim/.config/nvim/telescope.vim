@@ -2,7 +2,6 @@ lua << EOF
 require('telescope').setup{
   defaults = {
     prompt_prefix = "❯ ",
-
     selection_caret = "❯ ",
 
     layout_config = { height = 0.95, width = 0.9 },
@@ -26,7 +25,7 @@ require('telescope').setup{
   },
   pickers = {
     find_files = {
-      find_command = { "rg", "--files", "--hidden", "--glob", "!.git/*" }
+      find_command = { "fd", "-t", "f", "--hidden", "-i" }
     },
   }
 }
