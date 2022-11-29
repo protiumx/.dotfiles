@@ -34,7 +34,7 @@ return {
 
   hide_tab_bar_if_only_one_tab = true,
   inactive_pane_hsb = {
-    brightness = 0.8,
+    brightness = 0.85,
   },
 
   keys = {
@@ -64,24 +64,34 @@ return {
 
     -- Activation
     {
-      key = 'LeftArrow',
+      key = 'h',
       mods = 'CMD',
       action = act.ActivatePaneDirection 'Left',
     },
     {
-      key = 'RightArrow',
+      key = 'l',
       mods = 'CMD',
       action = act.ActivatePaneDirection 'Right',
     },
     {
-      key = 'UpArrow',
+      key = 'k',
       mods = 'CMD',
       action = act.ActivatePaneDirection 'Up',
     },
     {
-      key = 'DownArrow',
+      key = 'j',
       mods = 'CMD',
       action = act.ActivatePaneDirection 'Down',
+    },
+    {
+      key = ']',
+      mods = 'CMD',
+      action = act.ActivatePaneDirection 'Next',
+    },
+    {
+      key = '[',
+      mods = 'CMD',
+      action = act.ActivatePaneDirection 'Prev',
     },
 
     -- Size
@@ -108,12 +118,12 @@ return {
     -- Rotate
     {
       key = 'r',
-      mods = 'CMD',
+      mods = 'ALT',
       action = act.RotatePanes 'CounterClockwise',
     },
     { 
       key = 'R',
-      mods = 'SHIFT|CMD', 
+      mods = 'SHIFT|ALT',
       action = act.RotatePanes 'Clockwise',
     },
 
@@ -133,7 +143,7 @@ return {
 
 
     -- Tabs
-    { key = ']', mods = 'CMD', action = wezterm.action.ShowTabNavigator },
+    { key = ']', mods = 'SHIFT|CMD', action = wezterm.action.ShowTabNavigator },
     { key = 'Tab', mods = 'SHIFT|CTRL', action = act.ActivateTabRelative(-1) },
     { key = 'Tab', mods = 'CTRL', action = act.ActivateTabRelative(1) },
 
@@ -162,6 +172,7 @@ return {
       },
     },
 
+    -- Jump word to the left
     {
       key = 'LeftArrow',
       mods = 'OPT',
@@ -171,12 +182,14 @@ return {
       },
     },
 
+    -- Jump word to the right
     {
       key = 'RightArrow',
       mods = 'OPT',
       action = act.SendKey { key = 'f', mods = 'ALT' },
     },
 
+    -- Go to beginning of line
     {
       key = 'LeftArrow',
       mods = 'CMD',
@@ -186,6 +199,7 @@ return {
       },
     },
 
+    -- Go to end of line
     {
       key = 'RightArrow',
       mods = 'CMD',
@@ -229,10 +243,10 @@ return {
 
   colors = {
     background = "#1c1c1c",
-    cursor_bg = '#ff5faf',
-    cursor_border = '#ff5faf',
+    cursor_bg = '#fe5186',
+    cursor_border = '#fe5186',
     selection_fg = '#1c1c1c',
-    selection_bg = '#ff5faf',
+    selection_bg = '#fe5186',
     tab_bar = {
       -- The color of the strip that goes along the top of the window
       -- (does not apply when fancy tab bar is in use)
