@@ -150,10 +150,7 @@ return {
     {
       key = 'k',
       mods = 'CTRL',
-      action = act.Multiple {
-        act.ClearScrollback 'ScrollbackAndViewport',
-        act.SendKey { key = 'L', mods = 'CTRL' },
-      },
+      action = act.SendKey { key = 'k', mods = 'CTRL' },
     },
 
     {
