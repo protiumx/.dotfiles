@@ -7,7 +7,7 @@ vnoremap <Leader>d "_d
 nnoremap <Leader>c "_c
 vnoremap <Leader>c "_c
 
-" Build date
+" Insert a build date
 nnoremap <Leader>db "=strftime('%Y%m%d%H%M')<CR>p
 
 " Prepare replace all occurrences of current word
@@ -30,6 +30,10 @@ nnoremap <silent> N Nzzzv
 nnoremap <silent> * *zz
 nnoremap <silent> # #zz
 nnoremap <silent> g* g*zz
+
+" Down/up centered
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
 
 " Moving lines up or down preserving format
 vnoremap J :m '>+1<CR>gv=gv
@@ -77,14 +81,10 @@ inoremap <F12> <esc>:term<CR>
 nnoremap <F12> :term<CR>
 inoremap <F10> <esc>:vs term://zsh<CR>
 nnoremap <F10> :vs term://zsh<CR>
-
-" insert current file path
-nnoremap <Leader>fp :let @+=expand('%:h')<CR>
-
-" close terminal
+" Close terminal
 tnoremap <C-q> <C-\><C-n>:bd!<CR>
 " Esc goes to normal mode
 tnoremap <Esc> <C-\><C-n>
 
 " Exec current line as bash code
-nmap <Leader><Enter> !!zsh<CR>
+nmap <Leader>sh !!zsh<CR>
