@@ -41,16 +41,12 @@ imap <C-_> <C-o><Plug>(comment_toggle_linewise_current)
 let g:user_emmet_leader_key='<C-X>'
 
 " Vim Sneak
-nmap m <Plug>Sneak_s
-nmap M <Plug>Sneak_S
-" visual-mode
-xmap m <Plug>Sneak_s
-xmap M <Plug>Sneak_S
-" operator-pending-mode
-omap m <Plug>Sneak_s
-omap M <Plug>Sneak_S
-" nmap < <Plug>Sneak_,
-" nmap > <Plug>Sneak_;
+map s <Plug>Sneak_s
+map S <Plug>Sneak_S
+map f <Plug>Sneak_f
+map F <Plug>Sneak_F
+map t <Plug>Sneak_t
+map T <Plug>Sneak_T
 
 " vim align
 " Start interactive EasyAlign in visual mode (e.g. vipga)
@@ -73,4 +69,4 @@ omap am <Plug>(textobj-sandwich-literal-query-a)
 
 nnoremap <Leader>hn <cmd>Gitsigns next_hunk<CR>
 
-let g:rooter_patterns = ['.git']
+let g:rooter_patterns = ['.git', 'go.mod']
