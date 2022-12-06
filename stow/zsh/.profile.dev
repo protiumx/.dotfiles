@@ -72,7 +72,7 @@ kitty_title() {
   kitty @ set-tab-title "$1"
 }
 
-mkc(){
+mkcd(){
   mkdir -p "$1" && cd "$1"
 }
 
@@ -86,18 +86,25 @@ gck() {
   git checkout $1 2>/dev/null || git checkout -b $1; 
 }
 
+cdi() {
+  p="$(fd -t d -H | fzf)"
+  if [ -n "$p" ]; then
+    cd "$p"
+  fi
+}
+
 # Excluded dirs are set in ../fd/ignore
 export FZF_DEFAULT_COMMAND="fd -d 1 --hidden --follow --color=never --strip-cwd-prefix"
 export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --prompt ' ' --bind 'ctrl-p:preview(bat {})' --preview-window hidden --no-info --color 'gutter:-1,hl+:#82aaff,hl:#82aaff,bg+:-1,pointer:#82aaff'"
 export FZF_COMPLETION_OPTS=$FZF_DEFAULT_OPTS
 
 _fzf_compgen_path() {
-  fd -d 1 --hidden --follow . "$1"
+  fd -d 1 --strip-cwd-prefix --hidden --follow --exclude ".git/" . "$1"
 }
 
 # Use fd to generate the list for directory completion
 _fzf_compgen_dir() {
-  fd -d 1 --type d --hidden --follow . "$1"
+  fd -d 1 --strip-cwd-prefix --type d --hidden --follow --exclude ".git/" . "$1"
 }
 
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/rg"
@@ -127,6 +134,7 @@ alias gci="git_commit ci"
 alias gdo="git_commit docs"
 alias gmi="git_commit misc"
 alias gnv="git commit --no-verify -m"
+alias gnva="git commit --no-verify --no-edit --amend"
 
 alias dc="docker compose"
 alias kc="kubectl"

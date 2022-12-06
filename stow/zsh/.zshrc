@@ -31,7 +31,6 @@ bindkey "^X\\x7f" backward-kill-line
 # adds redo
 bindkey "^X^_" redo
 
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export EDITOR="nvim"
@@ -45,13 +44,12 @@ setopt nobeep                  # No beep
 
 brew_prefix="$(brew --prefix)"
 
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
 source $brew_prefix/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # Fix issue autocomplete after paste
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(bracketed-paste)
 source $brew_prefix/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# Fix preview-tui
-export PAGER='less -R'
 export NVM_DIR="$HOME/.nvm"
 
 source $HOME/.cargo/env
