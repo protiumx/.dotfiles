@@ -33,24 +33,25 @@ main() {
   fi
 
   info "Homebrew Packages"
-  info "################################################"
+  info "################################################################################"
   wait_input
   install_packages
   success "Finished installing Homebrew packages"
 
   info "Homebrew Fonts"
-  info "################################################"
+  info "################################################################################"
   wait_input
   install_fonts
   success "Finished installing fonts"
 
-  # info "Oh-my-zsh"
-  # wait_input
-  # install_oh_my_zsh
-  # success "Finished installing Oh-my-zsh"
+  info "Oh-my-zsh"
+  info "################################################################################"
+  wait_input
+  install_oh_my_zsh
+  success "Finished installing Oh-my-zsh"
 
   info "MacOS Apps"
-  info "################################################"
+  info "################################################################################"
   wait_input
   install_macos_apps
 
