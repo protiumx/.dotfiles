@@ -10,7 +10,8 @@ let g:coc_global_extensions = [
   \'coc-yaml',
   \'coc-eslint',
   \'coc-elixir',
-  \'coc-docker']
+  \'coc-docker',
+  \'coc-snippets']
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: There's always complete item selected by default, you may want to enable
@@ -100,3 +101,8 @@ nnoremap <silent> <space>a :<C-u>CocList diagnostics<CR>
 " if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
 "   let g:coc_global_extensions += ['coc-eslint']
 " endif
+
+" Snippets
+imap <C-l> <Plug>(coc-snippets-expand)
+
+autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')

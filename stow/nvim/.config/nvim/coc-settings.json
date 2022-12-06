@@ -26,5 +26,10 @@
   "eslint.packageManager": "yarn",
   "eslint.nodePath": ".yarn/sdks",
   "sql.database": "postgresql",
-  "go.goplsOptions": { "gofumpt": true }
+  "go.goplsOptions": {
+    "gofumpt": true,
+    "experimentalWorkspaceModule": true
+  },
+  "snippets.ultisnips.pythonPrompt": false,
+  "snippets.userSnippetsDirectory": "~/.config/nvim/snippets"
 }
