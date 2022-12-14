@@ -16,6 +16,7 @@ packages=(
 	cmake
 	ctags
 	curl
+  dust                     #  https://github.com/bootandy/dust
 	duti                     #  https://github.com/moretension/duti
 	exa                      #  https://github.com/ogham/exa
 	fzf                      #  https://github.com/junegunn/fzf
