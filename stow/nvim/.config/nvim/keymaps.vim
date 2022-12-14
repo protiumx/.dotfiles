@@ -88,3 +88,5 @@ tnoremap <Esc> <C-\><C-n>
 
 " Exec current line as bash code
 nmap <Leader>sh !!zsh<CR>
+" Copy current file relative path to macos clipboard
+nmap <silent><Leader>P :let @*=expand('%:~:.')<CR>
