@@ -42,7 +42,7 @@ install_homebrew() {
   else
     info "Installing homebrew..."
     sudo --validate  # reset `sudo` timeout to use Homebrew install in noninteractive mode
-    CI=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+    NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
   fi
 }
 
@@ -63,6 +63,3 @@ info "Change path to $REPO_PATH"
 cd "$REPO_PATH" >/dev/null
 
 ./install.sh
-
-
-
