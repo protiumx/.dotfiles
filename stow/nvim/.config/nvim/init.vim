@@ -1,5 +1,5 @@
 set termguicolors
-set shell=/opt/homebrew/bin/zsh
+set shell=zsh
 
 runtime plugins.vim
 runtime plugins.settings.vim
