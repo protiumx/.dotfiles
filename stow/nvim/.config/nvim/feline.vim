@@ -4,7 +4,7 @@ if not pcall(require, "feline") then
 end
 
 local colors = {
-  bg = '#2c2c2c',  
+  bg = '#1c1c1c',
   fg = '#abb2bf',
   yellow = '#e0af68',
   cyan = '#56b6c2',
@@ -64,88 +64,88 @@ local mode_colors = {
 
 local comps = {
     vi_mode = {
-        left = {
-            provider = function()
-              return '| ' .. modes[vim.fn.mode()]
-            end,
-            hl = function()
-                local val = {
-                    fg = mode_colors[vim.fn.mode()],
-                    style = 'bold'
-                }
-                return val
-            end,
-            right_sep = ' '
-        },
+      provider = function()
+        return '| ' .. modes[vim.fn.mode()] .. '  '
+      end,
+      hl = function()
+          local val = {
+              fg = mode_colors[vim.fn.mode()],
+              bg = "#2c2c2c",
+              style = 'bold'
+          }
+          return val
+      end,
+      right_sep = '  '
     },
 
     file = {
-        info = {
-            provider = {
-              name = 'file_info',
-              opts = {
-                type = 'relative',
-                file_readonly_icon = '  ',
-                file_modified_icon = ' * ',
-              }
-            },
-            icon = '',
-            left_sep = ' ',
-            hl = {
-                fg = colors.blue,
+      info = {
+          provider = {
+            name = 'file_info',
+            opts = {
+              type = 'relative',
+              file_readonly_icon = '  ',
+              file_modified_icon = ' * ',
             }
-        },
+          },
+          icon = '',
+          right_sep = '',
+          hl = {
+              -- bg = '#2c2c2c',
+              fg = colors.blue,
+          }
+      },
 
-        encoding = {
-            provider = 'file_encoding',
-            left_sep = ' ',
-            hl = {
-                fg = colors.violet,
-            }
-        },
+      encoding = {
+          provider = 'file_encoding',
+          left_sep = ' ',
+          hl = {
+              fg = colors.violet,
+          }
+      },
 
-        position = {
-            provider = {
-              name = "position",
-              opts = {
-                format = "{line}:{col}",
-              },
+      position = {
+          provider = {
+            name = "position",
+            opts = {
+              format = "{line}:{col}",
             },
-            left_sep = ' ',
-            hl = {
-                fg = colors.cyan,
-            }
-        },
+          },
+          left_sep = ' ',
+          hl = {
+              fg = colors.cyan,
+          }
+      },
     },
 
     line_percentage = {
-        provider = 'line_percentage',
-        left_sep = ' ',
-        hl = {},
+      provider = 'line_percentage',
+      left_sep = ' ',
+      hl = {},
     },
 }
 
 local components = {
-  active = {},
-  inactive = {},
+  active = {
+    {},
+    {},
+  },
+  inactive = {
+    {},
+    {},
+  },
 }
 
--- Left and right columns
-table.insert(components.active, {})
-table.insert(components.active, {})
-table.insert(components.inactive, {})
-table.insert(components.inactive, {})
-
--- Left
-table.insert(components.active[1], comps.vi_mode.left)
+table.insert(components.active[1], comps.vi_mode)
 table.insert(components.active[1], comps.file.info)
-table.insert(components.inactive[1], comps.vi_mode.left)
-table.insert(components.inactive[1], comps.file.info)
+table.insert(components.active[1], {})
 
--- Right
 table.insert(components.active[2], comps.file.encoding)
 table.insert(components.active[2], comps.file.position)
 table.insert(components.active[2], comps.line_percentage)
+
+table.insert(components.inactive[1], comps.vi_mode)
+table.insert(components.inactive[1], comps.file.info)
 
 local f = require 'feline'
 f.setup {
