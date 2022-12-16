@@ -6,7 +6,7 @@
 /_____/\____/\__/_/ /_/_/\___/____/
 ```
 
-[![shell](https://github.com/protiumx/.dotfiles/actions/workflows/shell.yml/badge.svg)](https://github.com/protiumx/.dotfiles/actions/workflows/shell.yml)
+[![shellcheck](https://github.com/protiumx/.dotfiles/actions/workflows/shell.yml/badge.svg)](https://github.com/protiumx/.dotfiles/actions/workflows/shell.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 My dotfiles to set up a dev environment in a **MacOS** machine.
@@ -52,7 +52,7 @@ In order to reuse these scripts, here a summary of files you can change/adapt to
 
 ## Testing Stow
 
-To double checks that the dot files will be correctly linked, you can use stow to simulate the result. E.g.
+Simulate `stow` links
 
 ```sh
 stow -nSv vim
