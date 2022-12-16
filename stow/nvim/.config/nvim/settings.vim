@@ -1,8 +1,9 @@
 let mapleader = " "
+" disable current path banner
 let g:netrw_banner = 0
+
 syntax sync minlines=3000
 
-"highlight clear
 set guifont=FiraCode\ Nerd\ Font\ Mono:h18
 set background=dark
 try
@@ -27,7 +28,6 @@ highlight VertSplit ctermbg=none ctermfg=98 cterm=none guibg=none guifg=#454545
 set showtabline=0
 
 filetype plugin indent on
-" CoC TextEdit might fail if hidden is not set.
 set hidden
 
 " Some CoC servers have issues with backup files
@@ -41,6 +41,7 @@ set sessionoptions+=winpos,terminal
 set shortmess+=c
 set nowrap
 set expandtab
+" Show line numbers
 set number
 set autoindent
 set tabstop=2
@@ -64,6 +65,7 @@ set smartcase
 " Line size limit
 set colorcolumn=100
 set cursorline
+
 hi ColorColumn ctermbg=62 guibg=#5f5fd7
 hi CursorColumn ctermbg=none ctermfg=211 guibg=none guifg=#fe5186
 hi Cursor ctermbg=211 guibg=#fe5186
@@ -73,10 +75,12 @@ hi NormalFloat guibg=#2e3e45 ctermbg=239
 
 set spell
 set spelllang=en_us
+" Disable capital letter check
+set spellcapcheck=
 hi SpellBad gui=undercurl cterm=undercurl ctermbg=none ctermfg=none guibg=none guifg=none
 
 set noshowmode
-" Do not show the file name. Airline already does it
+" Do not show the file name
 set shortmess+=F
 
 " Don’t reset cursor to start of line when moving around.
@@ -113,11 +117,11 @@ endfun
 
 command! -nargs=0 EmptyRegisters call EmptyRegisters()
 
-" Trim extra whitespace in whole file
-function! Trim()
+" Remove trailing whitespaces
+function! TrimTrailingSpaces()
   let l:save = winsaveview()
-  keeppatterns %s/\s\+$//e
+  keeppatterns %s/\s*$//e
   call winrestview(l:save)
 endfun
 
-command! -nargs=0 Trim call Trim()
+command! -nargs=0 TrimTrailingSpaces call TrimTrailingSpaces()
