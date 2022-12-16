@@ -205,6 +205,24 @@ return {
 
     { key = '/', mods = 'CTRL', action = act.SendKey { key = '/', mods = 'CTRL' } },
   },
+
+  mouse_bindings = {
+    -- Change the default click behavior so that it only selects
+    -- text and doesn't open hyperlinks
+    {
+      event = { Up = { streak = 1, button = 'Left' } },
+      mods = 'NONE',
+      action = act.CompleteSelection 'PrimarySelection',
+    },
+
+    -- and make CTRL-Click open hyperlinks
+    {
+      event = { Up = { streak = 1, button = 'Left' } },
+      mods = 'CMD',
+      action = act.OpenLinkAtMouseCursor,
+    },
+  },
+
   scrollback_lines = 6000,
   send_composed_key_when_left_alt_is_pressed = false,
   show_new_tab_button_in_tab_bar = false,

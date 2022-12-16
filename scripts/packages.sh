@@ -13,6 +13,7 @@ packages=(
   cmake
   ctags
   curl
+  dust                     #  https://github.com/bootandy/dust
   exa                      #  https://github.com/ogham/exa
   fzf                      #  https://github.com/junegunn/fzf
   fd                       #  https://github.com/sharkdp/fd
