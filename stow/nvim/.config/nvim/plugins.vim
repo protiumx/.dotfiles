@@ -1,4 +1,4 @@
-call plug#begin('~/.config/nvim/plugged')
+call plug#begin(stdpath('data') . '/plugged')
 
 " ==== Color schemes ====
 Plug 'NLKNguyen/papercolor-theme'
