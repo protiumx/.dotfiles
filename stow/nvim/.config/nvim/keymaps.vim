@@ -36,23 +36,23 @@ nnoremap <C-d> <C-d>zz
 nnoremap <C-u> <C-u>zz
 
 " Moving lines up or down preserving format
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
-inoremap <C-j> <esc>:m .+1<CR>==gi
-inoremap <C-k> <esc>:m .-2<CR>==gi
-nnoremap <Leader>j :m .+1<CR>==
-nnoremap <Leader>k :m .-2<CR>==
+vnoremap <silent>J :m '>+1<CR>gv=gv
+vnoremap <silent>K :m '<-2<CR>gv=gv
+inoremap <silent><C-j> <Esc>:m .+1<CR>==gi
+inoremap <silent><C-k> <Esc>:m .-2<CR>==gi
+nnoremap <silent><Leader>j :m .+1<CR>==
+nnoremap <silent><Leader>k :m .-2<CR>==
 
 " Resize windows
-nnoremap <C-Up> :resize -2<CR>
-nnoremap <C-Down> :resize +2<CR>
-nnoremap <Leader><Left> :vertical resize -2<CR>
-nnoremap <Leader><Right> :vertical resize +2<CR>
+nnoremap <silent><C-Up> :resize -2<CR>
+nnoremap <silent><C-Down> :resize +2<CR>
+nnoremap <silent><Leader><Left> :vertical resize -2<CR>
+nnoremap <silent><Leader><Right> :vertical resize +2<CR>
 
 " Copy to macOS clipboard
 vnoremap <silent> <C-y> "*y
 " Toggle between current and prev buffers
-nnoremap <silent> `` <c-^>
+nnoremap <silent> `` <C-^>
 " Close buffer without changing window layout
 nnoremap <silent>-- :bp\|bd #<CR>
 " Go next/prev buffer using Tab
@@ -73,18 +73,18 @@ nnoremap <Leader>o :e <C-R>=expand("%:h") . "/" <CR>
 nnoremap <Leader>vo :vsp \| :e <C-R>=expand("%:h") . "/" <CR>
 
 " Paste formatted
-nnoremap p p=`]
-nnoremap P P=`]
-nnoremap <C-p> p
+nnoremap <silent>p p=`]
+nnoremap <silent>P P=`]
+nnoremap <silent><C-p> p
 
-inoremap <F12> <esc>:term<CR>
-nnoremap <F12> :term<CR>
-inoremap <F10> <esc>:vs term://zsh<CR>
-nnoremap <F10> :vs term://zsh<CR>
+inoremap <silent><F12> <esc>:term ++close<CR>
+nnoremap <silent><F12> :term ++close<CR>
+inoremap <silent><F10> <esc>:vs term://zsh<CR>
+nnoremap <silent><F10> :vs term://zsh<CR>
 " Close terminal
-tnoremap <C-q> <C-\><C-n>:bd!<CR>
+tnoremap <silent><C-q> <C-\><C-n>:bd!<CR>
 " Esc goes to normal mode
-tnoremap <Esc> <C-\><C-n>
+tnoremap <silent><Esc> <C-\><C-n>
 
 " Exec current line as bash code
 nmap <Leader>sh !!zsh<CR>
