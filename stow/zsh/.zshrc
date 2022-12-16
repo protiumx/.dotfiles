@@ -1,16 +1,14 @@
 # Disable error when using glob patterns that don't have matches
 setopt +o nomatch
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
 
 CLI="$HOME/.cli"
-VSCODE="/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
 # Pasting big chunks of text takes ages
 unset zle_bracketed_paste
 
-export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$PATH"
-export PATH="/opt/homebrew/sbin:$PATH"
-export PATH="$VSCODE:/opt/local/bin:$PATH"
-export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 export GOPATH="$(go env GOPATH)"
 export PATH="$GOPATH/bin:$PATH"
 export ZSH="$HOME/.oh-my-zsh"
@@ -50,12 +48,7 @@ source $brew_prefix/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(bracketed-paste)
 source $brew_prefix/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-export NVM_DIR="$HOME/.nvm"
-
 source $HOME/.cargo/env
-
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
