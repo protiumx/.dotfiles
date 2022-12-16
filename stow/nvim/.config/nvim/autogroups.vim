@@ -18,8 +18,7 @@ augroup neovim_terminal
   " Enter Terminal-mode (insert) automatically
   autocmd TermOpen * startinsert
   " Disables number lines on terminal buffers
-  autocmd TermOpen * setlocal nonumber norelativenumber nospell
-  autocmd TermOpen * setlocal signcolumn=no
+  autocmd TermOpen * setlocal nonumber norelativenumber nospell laststatus=0 signcolumn=no noruler
 augroup END
 
 " Clear last command after 2 seconds
