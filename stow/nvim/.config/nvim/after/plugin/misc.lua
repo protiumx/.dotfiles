@@ -27,3 +27,13 @@ vim.keymap.set('x', 'it', '<Plug>(textobj-sandwich-literal-query-i)', { remap = 
 vim.keymap.set('x', 'at', '<Plug>(textobj-sandwich-literal-query-a)', { remap = true })
 vim.keymap.set('o', 'it', '<Plug>(textobj-sandwich-literal-query-i)', { remap = true })
 vim.keymap.set('o', 'at', '<Plug>(textobj-sandwich-literal-query-a)', { remap = true })
+
+-- Git status
+vim.keymap.set('n', '<F3>', function()
+  if vim.fn.buflisted(vim.fn.bufname('.git/index')) then
+    vim.cmd [[bd .git/index]]
+  else
+    vim.cmd [[vertical Git | vertical resize 40 | setlocal noequalalways | setlocal wrap]]
+  end
+end)
+
