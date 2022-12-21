@@ -43,8 +43,8 @@ nnoremap <silent><C-H> <cmd>Telescope find_files<CR>
 inoremap <silent><C-B> <Esc><cmd>Telescope buffers previewer=false theme=dropdown<CR>
 nnoremap <silent><C-B> <cmd>Telescope buffers previewer=false theme=dropdown<CR>
 
-nnoremap <silent><Leader><C-]> :exe ':Telescope file_browser grouped=true hidden=true previewer=false theme=dropdown follow=true path=%:p:h cwd='.finddir('.git/..', expand('%:p:h').';')<CR>
-nnoremap <silent><Leader><C-H> :exe ":Telescope file_browser grouped=true hidden=true previewer=false theme=dropdown follow=true cwd=".finddir('.git/..', expand('%:p:h').';')<CR>
+nnoremap <silent><Leader><C-]> :exe ':Telescope file_browser grouped=true hidden=true previewer=false theme=dropdown path=%:p:h cwd='.finddir('.git/..', expand('%:p:h').';')<CR>
+nnoremap <silent><Leader><C-H> :exe ":Telescope file_browser grouped=true hidden=true previewer=false theme=dropdown cwd=".finddir('.git/..', expand('%:p:h').';')<CR>
 
 nnoremap <silent><Leader>fg <cmd>Telescope live_grep<CR>
 " find word under cursor

@@ -4,8 +4,10 @@ xmap s <Nop>
 
 let g:dbext_default_usermaps = 0
 
-lua require("colorizer").setup()
-lua require('Comment').setup()
+lua << EOF
+require("colorizer").setup()
+require('Comment').setup()
+EOF
 
 let g:PaperColor_Theme_Options = {
       \   'theme': {
