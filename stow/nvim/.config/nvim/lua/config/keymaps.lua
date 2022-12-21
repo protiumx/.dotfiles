@@ -11,7 +11,7 @@ vim.keymap.set('v', '<Leader>d', '"_c')
 -- Insert date time as YYYY-MM-DD-HH:mm
 vim.keymap.set('n','<Leader>pb','"=strftime("%Y%m%d%H%M")<CR>p')
 
--- Prepare replace all occurrences of current word
+-- Prepare replace all occurrences of word under cursor
 vim.keymap.set('n', '<Leader>rw', [[:%s/\<<C-r><C-w>\>//g<Left><Left>]])
 vim.keymap.set('i', '<C-c>', '<Esc>')
 
@@ -109,3 +109,5 @@ vim.keymap.set('n', '<Leader>P', function()
   end
   return ':let @' .. clip .. '=expand("%:~:.")<CR>'
 end, { silent = true })
+
+vim.keymap.set('n', '<leader>f', vim.lsp.buf.format)
