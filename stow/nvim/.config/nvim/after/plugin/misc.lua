@@ -27,6 +27,3 @@ vim.keymap.set('x', 'it', '<Plug>(textobj-sandwich-literal-query-i)', { remap = 
 vim.keymap.set('x', 'at', '<Plug>(textobj-sandwich-literal-query-a)', { remap = true })
 vim.keymap.set('o', 'it', '<Plug>(textobj-sandwich-literal-query-i)', { remap = true })
 vim.keymap.set('o', 'at', '<Plug>(textobj-sandwich-literal-query-a)', { remap = true })
-
--- Gitsigns
-vim.keymap.set('n', '<Leader>nh', '<cmd>Gitsigns next_hunk<CR>')
