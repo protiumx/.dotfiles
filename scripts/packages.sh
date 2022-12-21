@@ -64,3 +64,11 @@ install_packages() {
   info "Cleaning up brew packages..."
   brew cleanup
 }
+
+post_install_packages() {
+  info "Installing fzf bindings"
+  $(brew --prefix)/opt/fzf/install
+
+  info "Cloning Packer"
+  git clone --depth 1 https://github.com/wbthomason/packer.nvim /.local/share/nvim/site/pack/packer/start/packer.nvim
+}

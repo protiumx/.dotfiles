@@ -22,8 +22,6 @@ wait_input() {
   read -p "Press enter to continue: "
 }
 
-trap cleanup SIGINT SIGTERM ERR EXIT
-
 main() {
   info "Installing ..."
 
@@ -36,6 +34,8 @@ main() {
   info "################################################################################"
   wait_input
   install_packages
+
+  post_install_packages
   success "Finished installing Homebrew packages"
 
   info "Homebrew Fonts"
@@ -114,5 +114,7 @@ main() {
     esac
   done
 }
+
+trap cleanup SIGINT SIGTERM ERR EXIT
 
 main
