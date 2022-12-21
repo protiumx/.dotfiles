@@ -6,6 +6,9 @@ vim.cmd [[
   filetype plugin indent on
 ]]
 
+
+vim.opt.shell = 'zsh'
+
 vim.opt.background = 'dark'
 
 -- Highlights
