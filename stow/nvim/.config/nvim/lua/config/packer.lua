@@ -2,22 +2,51 @@ vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
   -- Packer can manage itself
-  use 'wbthomason/packer.nvim'
+  use('wbthomason/packer.nvim')
 
-  use {
-	  'nvim-telescope/telescope.nvim', tag = '0.1.0',
-	  requires = { {'nvim-lua/plenary.nvim'} }
-  }
-
+  -- Telescope
   use({
-	  'NLKNguyen/papercolor-theme',
+	  'nvim-telescope/telescope.nvim', branch = '0.1.x',
+	  requires = { {'nvim-lua/plenary.nvim'} }
   })
+  -- use('nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' })
+  use('nvim-telescope/telescope-file-browser.nvim')
 
+  -- Themes
+  use('NLKNguyen/papercolor-theme')
+
+  -- Icons
+  use('kyazdani42/nvim-web-devicons')
+
+  -- Treesitter
   use({'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'})
   use('nvim-treesitter/playground')
-  use('tpope/vim-fugitive')
+  
+  -- Enhancement
+  use('feline-nvim/feline.nvim')
+  use('airblade/vim-rooter')
+  -- Better jump
+  use('justinmk/vim-sneak')
+  use('norcalli/nvim-colorizer.lua')
+  use('junegunn/vim-easy-align')
+  use('mattn/emmet-vim')
+  use('arthurxavierx/vim-caser')
+  -- Change surroundings
+  use('machakann/vim-sandwich')
+  use('jiangmiao/auto-pairs')
+  use('mbbill/undotree')
+  use('numToStr/Comment.nvim')
+  use('lbrayner/vim-rzip')
+  -- Multiple cursors
+  use({'mg979/vim-visual-multi', branch = 'master'})
 
-  use {
+  -- Git
+  use('tpope/vim-fugitive')
+  -- Show sign columns for changes in files
+  use('lewis6991/gitsigns.nvim')
+
+  -- LSP
+  use({
 	  'VonHeikemen/lsp-zero.nvim',
 	  requires = {
 		  -- LSP Support
@@ -37,5 +66,5 @@ return require('packer').startup(function(use)
 		  {'L3MON4D3/LuaSnip'},
 		  {'rafamadriz/friendly-snippets'},
 	  }
-  }
+  })
 end)
