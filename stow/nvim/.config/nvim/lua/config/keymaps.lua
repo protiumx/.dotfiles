@@ -81,10 +81,10 @@ vim.keymap.set('n', '<C-s>', 'ggVG', { silent = true })
 vim.keymap.set('i', '<C-s>', '<Esc>ggVG', { silent = true })
 
 -- Open new file adjacent to current file
-vim.keymap.set('n', '<Leader>o', ':e <C-R>=expand("%:h") . "/"<CR>', { silent = true })
+vim.keymap.set('n', '<Leader>o', [[:e <C-R>=expand("%:h") . "/"<CR><Right>]], { silent = true })
 
 -- Open new adjacent file in vertical split
-vim.keymap.set('n', '<Leader>vo', ':vsp | e <C-R>=expand("%:h") . "/"<CR>', { silent = true })
+vim.keymap.set('n', '<Leader>vo', [[:vsp | e <C-R>=expand("%:h") . "/"<CR>]], { silent = true })
 
 -- Paste formatted
 vim.keymap.set('n', 'p', 'p=`]', { silent = true })
