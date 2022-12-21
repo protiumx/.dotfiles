@@ -81,20 +81,3 @@ vim.opt.wildignore:append('*.mp4,*.avi,*.flv,*.mov,*.mkv,*.swf,*.swc')
 vim.opt.wildignore:append('*.ppt,*.pptx,*.doc,*.docx,*.xlt,*.xls,*.xlsx,*.odt,*.wps')
 vim.opt.wildignore:append('*/.git/*,*.DS_Store')
 vim.opt.wildignore:append('*/node_modules/*,*/build/*,*/logs/*,*/dist/*,*/tmp/*')
-
-local augroup = vim.api.nvim_create_augroup
-local autocmd = vim.api.nvim_create_autocmd
-local config = augroup('config', {})
-
-autocmd({'BufRead', 'BufNewFile'}, {
-    group = config,
-    pattern = '*',
-    command = 'setlocal signcolumn=yes',
-})
-
--- Trim white spaces before writing
-autocmd({"BufWritePre"}, {
-    group = ThePrimeagenGroup,
-    pattern = "*",
-    command = [[%s/\s\+$//e]],
-})

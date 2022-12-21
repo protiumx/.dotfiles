@@ -27,7 +27,12 @@ return require('packer').startup(function(use)
   use('airblade/vim-rooter')
   -- Better jump
   use('justinmk/vim-sneak')
-  use('norcalli/nvim-colorizer.lua')
+  use({
+    'norcalli/nvim-colorizer.lua',
+    config = function()
+      require('colorizer').setup()
+    end
+  })
   use('junegunn/vim-easy-align')
   use('mattn/emmet-vim')
   use('arthurxavierx/vim-caser')
@@ -35,8 +40,14 @@ return require('packer').startup(function(use)
   use('machakann/vim-sandwich')
   use('jiangmiao/auto-pairs')
   use('mbbill/undotree')
-  use('numToStr/Comment.nvim')
   use('lbrayner/vim-rzip')
+  use({
+    'numToStr/Comment.nvim',
+    config = function()
+        require('Comment').setup({ ignore = '^$' })
+    end
+  })
+
   -- Multiple cursors
   use({'mg979/vim-visual-multi', branch = 'master'})
 
