@@ -1,4 +1,3 @@
-lua << EOF
 if not pcall(require, "feline") then
   return
 end
@@ -147,8 +146,8 @@ table.insert(components.active[2], comps.line_percentage)
 table.insert(components.inactive[1], comps.vi_mode)
 table.insert(components.inactive[1], comps.file.info)
 
-local f = require 'feline'
-f.setup {
+local feline = require('feline')
+feline.setup({
     colors = colors,
     components = components,
     vi_mode_colors = mode_colors,
@@ -165,6 +164,5 @@ f.setup {
         buftypes = {'^terminal$'},
         bufnames = {}
     }
-}
-f.use_theme(colors)
-EOF
+})
+feline.use_theme(colors)
