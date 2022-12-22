@@ -10,27 +10,6 @@ vim.cmd [[
 vim.opt.shell = 'zsh'
 
 vim.opt.background = 'dark'
-
--- Highlights
-
--- Transparent background
--- vim.api.nvim_set_hl(0, 'LineNr', {bg = 'none'})
--- vim.api.nvim_set_hl(0, 'Normal', {bg = 'none'})
--- vim.api.nvim_set_hl(0, 'NonText', {bg = 'none'})
--- vim.api.nvim_set_hl(0, 'SignColumn', {bg = 'none'})
-
-vim.api.nvim_set_hl(0, 'VertSplit', {bg = 'none', fg = '#454545'})
-vim.api.nvim_set_hl(0, 'ColorColumn', {bg = '#5f5fd7'})
-
-vim.api.nvim_set_hl(0, 'Cursor', {bg = '#fe5186'})
-vim.api.nvim_set_hl(0, 'CursorColumn', {bg = 'none', fg = '#fe5186'})
-vim.api.nvim_set_hl(0, 'Search', { bg = '#fe5186' })
-vim.api.nvim_set_hl(0, 'CursorLine', {bg = 'none', fg = 'none'})
-
-vim.api.nvim_set_hl(0, 'IncSearch', {bg = '#fe5186', fg = 'none'})
-vim.api.nvim_set_hl(0, 'NormalFloat', {bg = '#2e3e45'})
-vim.api.nvim_set_hl(0, 'SpellBad', {bg = 'none', fg = 'none', undercurl = true})
-
 vim.opt.showtabline = 0
 vim.opt.hidden = true
 vim.opt.backup = false

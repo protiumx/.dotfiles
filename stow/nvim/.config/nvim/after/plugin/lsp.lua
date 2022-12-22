@@ -24,6 +24,7 @@ lsp.configure('sumneko_lua', {
 })
 
 local cmp = require('cmp')
+local luasnip = require('luasnip')
 local cmp_mappings = lsp.defaults.cmp_mappings({
   ['<CR>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
@@ -91,19 +92,20 @@ lsp.on_attach(function(client, bufnr)
   end, { desc = 'Format current buffer with LSP' })
 
   if client.server_capabilities.documentHighlightProvider then
-    vim.api.nvim_create_augroup('lsp_document_highlight', { clear = true })
-    vim.api.nvim_clear_autocmds { buffer = bufnr, group = 'lsp_document_highlight' }
-    vim.api.nvim_create_autocmd('CursorHold', {
-        callback = vim.lsp.buf.document_highlight,
-        buffer = bufnr,
-        group = 'lsp_document_highlight',
-        desc = 'Document Highlight',
+    vim.api.nvim_set_hl(0, 'LspReferenceRead', { fg = '#fe5186' })
+    vim.api.nvim_set_hl(0, 'LspReferenceText', { fg = '#fe5186' })
+    vim.api.nvim_set_hl(0, 'LspReferenceWrite', { fg = '#fe5186' })
+
+    vim.api.nvim_create_augroup('lsp_document_highlight', {})
+    vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+      group = 'lsp_document_highlight',
+      buffer = 0,
+      callback = vim.lsp.buf.document_highlight,
     })
     vim.api.nvim_create_autocmd('CursorMoved', {
-        callback = vim.lsp.buf.clear_references,
-        buffer = bufnr,
-        group = 'lsp_document_highlight',
-        desc = 'Clear All the References',
+      group = 'lsp_document_highlight',
+      buffer = 0,
+      callback = vim.lsp.buf.clear_references,
     })
   end
 end)
