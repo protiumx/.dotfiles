@@ -34,7 +34,7 @@ vim.opt.showtabline = 0
 vim.opt.hidden = true
 vim.opt.backup = false
 vim.opt.writebackup = false
-vim.opt.updatetime = 100
+vim.opt.updatetime = 200
 vim.opt.number = true
 vim.opt.relativenumber = false
 vim.opt.sessionoptions:append {'winpos','terminal'}
@@ -46,6 +46,7 @@ vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.smartindent = true
+vim.o.completeopt = 'menuone,noselect'
 
 vim.opt.undodir = os.getenv('HOME') .. '/.vim/undodir'
 vim.opt.undofile = true

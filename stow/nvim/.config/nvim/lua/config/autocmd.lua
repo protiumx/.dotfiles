@@ -47,7 +47,6 @@ autocmd('TermOpen', {
   command = [[setlocal nonumber norelativenumber nospell laststatus=0 signcolumn=no noruler]],
 })
 
-
 local clear_cmd_group = augroup('clear_cmd', {})
 local cmd_timer = vim.loop.new_timer()
 
@@ -68,7 +67,6 @@ autocmd('CmdlineEnter', {
     cmd_timer:stop()
   end,
 })
-
 
 local kitty_group = augroup('kitty', {})
 local kitty_title = function(leaving)

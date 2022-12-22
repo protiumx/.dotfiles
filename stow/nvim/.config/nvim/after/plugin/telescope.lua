@@ -66,7 +66,7 @@ vim.keymap.set('n', '<Leader>sr', builtin.registers, { silent = true })
 
 vim.keymap.set('n', '<Leader>sh', builtin.help_tags, { silent = true })
 vim.keymap.set('n', '<Leader>sk', builtin.keymaps, { silent = true })
-vim.keymap.set('n', '<Leader>sF', function()
+vim.keymap.set('n', '<Leader>/', function()
   builtin.current_buffer_fuzzy_find(minimal)
 end, { silent = true })
 
@@ -81,5 +81,8 @@ end, { silent = true })
 
 -- Show git diff
 vim.keymap.set('n', '<Leader>sG', builtin.git_status, { silent = true })
+
+vim.keymap.set('n', '<Leader>sd', builtin.diagnostics, { silent = true, desc = '[S]earch [D]iagnostics' })
+vim.keymap.set('n', '<Leader>sS', builtin.lsp_document_symbols, { silent = true, desc = '[S]earch [S]ymbols' })
 
 vim.cmd [[autocmd User TelescopePreviewerLoaded setlocal wrap]]
