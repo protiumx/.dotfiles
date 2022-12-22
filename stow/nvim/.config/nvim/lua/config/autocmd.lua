@@ -51,7 +51,7 @@ local clear_cmd_group = augroup('clear_cmd', {})
 local cmd_timer = vim.loop.new_timer()
 
 autocmd('CmdlineLeave', {
-  group = clear_cmd,
+  group = clear_cmd_group,
   pattern = '*',
   callback = function()
     cmd_timer:start(2000, 0,  vim.schedule_wrap(function()
@@ -61,7 +61,7 @@ autocmd('CmdlineLeave', {
 })
 
 autocmd('CmdlineEnter', {
-  group = clear_cmd,
+  group = clear_cmd_group,
   pattern = '*',
   callback = function()
     cmd_timer:stop()
