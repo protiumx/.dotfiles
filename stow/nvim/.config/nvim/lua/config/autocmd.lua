@@ -1,24 +1,24 @@
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 
-local sign_group = augroup('sign', {})
+augroup('sign_column_all', {})
 autocmd({'BufRead', 'BufNewFile'}, {
-  group = sign_group,
+  group = 'sign_column_all',
   pattern = '*',
   command = 'setlocal signcolumn=yes',
 })
 
 -- Trim white spaces before writing
-local trim_group = augroup('trim', {})
+augroup('trim_spaces', {})
 autocmd({"BufWritePre"}, {
-  group = trim_group,
+  group = 'trim_spaces',
   pattern = "*",
   command = [[%s/\s\+$//e]],
 })
 
-local yank_group = augroup('HighlightYank', {})
+augroup('highlight_yank', {})
 autocmd('TextYankPost', {
-  group = yank_group,
+  group = 'highlight_yank',
   pattern = '*',
   callback = function()
     vim.highlight.on_yank({
@@ -28,30 +28,27 @@ autocmd('TextYankPost', {
   end,
 })
 
-local elexir_tpl_group = augroup('elixir', {})
+augroup('elixir_tpl', {})
 autocmd({'BufNewFile', 'BufRead'}, {
-  group = elexir_tpl_group,
+  group = 'elixir_tpl',
   pattern = '*.heex',
   command = [[setlocal ft=html syntax=html]],
 })
 
-local term_group = augroup('term', {})
+augroup('term_open_insert', {})
 autocmd('TermOpen', {
-  group = term_group,
+  group = 'term_open_insert',
   pattern = '*',
-  command = [[startinsert]],
-})
-autocmd('TermOpen', {
-  group = term_group,
-  pattern = '*',
-  command = [[setlocal nonumber norelativenumber nospell laststatus=0 signcolumn=no noruler]],
+  command = [[
+    startinsert
+    setlocal nonumber norelativenumber nospell laststatus=0 signcolumn=no noruler
+  ]],
 })
 
-local clear_cmd_group = augroup('clear_cmd', {})
 local cmd_timer = nil
-
+augroup('clear_cmdline', {})
 autocmd('CmdlineLeave', {
-  group = clear_cmd_group,
+  group = 'clear_cmdline',
   pattern = '*',
   callback = function()
     cmd_timer = vim.defer_fn(function ()
@@ -62,7 +59,7 @@ autocmd('CmdlineLeave', {
 })
 
 autocmd('CmdlineEnter', {
-  group = clear_cmd_group,
+  group = 'clear_cmdline',
   pattern = '*',
   callback = function()
     if cmd_timer then
@@ -71,7 +68,6 @@ autocmd('CmdlineEnter', {
   end,
 })
 
-local kitty_group = augroup('kitty', {})
 local kitty_title = function(leaving)
   local title = ''
   local arg = vim.api.nvim_eval('argv(0)')
@@ -89,8 +85,9 @@ local kitty_title = function(leaving)
   vim.fn.system('kitty @ set-tab-title "' .. title .. '"')
 end
 
+augroup('kitty_title', {})
 autocmd('VimEnter', {
-  group = kitty_group,
+  group = 'kitty_title',
   pattern = '* ++once',
   callback = function()
     kitty_title(false)
@@ -98,7 +95,7 @@ autocmd('VimEnter', {
 })
 
 autocmd('VimLeave', {
-  group = kitty_group,
+  group = 'kitty_title',
   pattern = '* ++once',
   callback = function()
     kitty_title(true)
