@@ -16,7 +16,7 @@ vim.keymap.set('n', '<Leader>rw', [[:%s/\<<C-r><C-w>\>//g<Left><Left>]])
 vim.keymap.set('i', '<C-c>', '<Esc>')
 
 -- Clears hlsearch after doing a search, otherwise just does normal <CR> stuff
-vim.keymap.set('n', '<CR>', function() 
+vim.keymap.set('n', '<CR>', function()
   if vim.api.nvim_get_vvar('hlsearch') then
     return ':nohl<CR>'
   end
@@ -55,7 +55,7 @@ vim.keymap.set('n', '<Leader><Left>', ':vertical resize -2<CR>', { silent = true
 vim.keymap.set('n', '<Leader><Right>', ':vertical resize +2<CR>', { silent = true })
 
 -- Copy to system clipboard
-vim.keymap.set('v', '<C-y>', function() 
+vim.keymap.set('v', '<C-y>', function()
   if macos then
     return '"*y'
   end

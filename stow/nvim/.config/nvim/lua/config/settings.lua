@@ -24,6 +24,7 @@ vim.api.nvim_set_hl(0, 'ColorColumn', {bg = '#5f5fd7'})
 
 vim.api.nvim_set_hl(0, 'Cursor', {bg = '#fe5186'})
 vim.api.nvim_set_hl(0, 'CursorColumn', {bg = 'none', fg = '#fe5186'})
+vim.api.nvim_set_hl(0, 'Search', { bg = '#fe5186' })
 vim.api.nvim_set_hl(0, 'CursorLine', {bg = 'none', fg = 'none'})
 
 vim.api.nvim_set_hl(0, 'IncSearch', {bg = '#fe5186', fg = 'none'})
