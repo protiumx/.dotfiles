@@ -47,6 +47,7 @@ return require('packer').startup(function(use)
         require('Comment').setup({ ignore = '^$' })
     end
   })
+  use('lukas-reineke/indent-blankline.nvim')
 
   -- Multiple cursors
   use({'mg979/vim-visual-multi', branch = 'master'})
