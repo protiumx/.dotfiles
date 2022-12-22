@@ -7,7 +7,6 @@ require('gitsigns').setup({
       opts.buffer = bufnr
       vim.keymap.set(mode, l, r, opts)
     end
-
     -- Navigation
     map('n', ']c', function()
       if vim.wo.diff then return ']c' end
@@ -37,5 +36,8 @@ require('gitsigns').setup({
 
     -- Text object
     map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
-  end
+  end,
+  signs = {
+    untracked = { hl = 'GitSignsAdd', text = '┃', numhl='GitSignsAddNr', linehl='GitSignsAddLn' },
+  },
 })
