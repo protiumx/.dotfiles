@@ -1,5 +1,8 @@
 vim.g['user_emmet_leader_key'] = '<C-X>'
 vim.g['rooter_patterns'] = {'.git', 'go.mod'}
+vim.g['rooter_manual_only'] = true
+
+vim.keymap.set('n', '<Leader>ro', ':RooterToggle')
 
 -- vim sneak
 vim.keymap.set('', 's', '<Plug>Sneak_s', { remap = true })
