@@ -48,15 +48,16 @@ autocmd('TermOpen', {
 })
 
 local clear_cmd_group = augroup('clear_cmd', {})
-local cmd_timer = vim.loop.new_timer()
+local cmd_timer = nil
 
 autocmd('CmdlineLeave', {
   group = clear_cmd_group,
   pattern = '*',
   callback = function()
-    cmd_timer:start(2000, 0,  vim.schedule_wrap(function()
+    cmd_timer = vim.defer_fn(function ()
       vim.api.nvim_command('echo ""')
-    end))
+      cmd_timer = nil
+    end, 2000)
   end,
 })
 
@@ -64,7 +65,9 @@ autocmd('CmdlineEnter', {
   group = clear_cmd_group,
   pattern = '*',
   callback = function()
-    cmd_timer:stop()
+    if cmd_timer then
+      cmd_timer:stop()
+    end
   end,
 })
 
