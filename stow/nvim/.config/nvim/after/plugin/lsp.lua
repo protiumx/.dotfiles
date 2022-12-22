@@ -91,29 +91,39 @@ lsp.on_attach(function(client, bufnr)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
 
+  vim.api.nvim_create_augroup('lsp_format', {})
+  vim.api.nvim_create_autocmd('BufWritePre', {
+    group = 'lsp_format',
+    pattern = "*",
+    callback = vim.lsp.buf.formatting_sync,
+  })
+
   if client.server_capabilities.documentHighlightProvider then
     vim.api.nvim_set_hl(0, 'LspReferenceRead', { fg = '#fe5186' })
     vim.api.nvim_set_hl(0, 'LspReferenceText', { fg = '#fe5186' })
     vim.api.nvim_set_hl(0, 'LspReferenceWrite', { fg = '#fe5186' })
 
     vim.api.nvim_create_augroup('lsp_document_highlight', {})
+    -- Highlight references only in normal mode
     vim.api.nvim_create_autocmd('CursorHold', {
       group = 'lsp_document_highlight',
-      buffer = 0,
+      buffer = bufnr,
       callback = vim.lsp.buf.document_highlight,
     })
     vim.api.nvim_create_autocmd({'CursorMoved', 'CursorMovedI'}, {
       group = 'lsp_document_highlight',
-      buffer = 0,
+      buffer = bufnr,
       callback = vim.lsp.buf.clear_references,
     })
   end
+
+  vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
 end)
 
 lsp.setup()
 
 vim.diagnostic.config({
-  virtual_text = true,
+  virtual_text = false,
 })
 
 vim.api.nvim_set_hl(0, 'DiagnosticError' , { fg = '#c4384b' })
@@ -123,9 +133,7 @@ vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextHint' , { bg = 'none' })
 vim.api.nvim_set_hl(0, 'DiagnosticUnderlineError' , { undercurl = true })
 vim.api.nvim_set_hl(0, 'DiagnosticFloatingHint' , { bg = 'none' })
 vim.api.nvim_set_hl(0, 'DiagnosticFloatingInfo' , { bg = 'none' })
-vim.api.nvim_set_hl(0, 'DiagnosticFloatingWarn' , { bg = 'none' })
-vim.api.nvim_set_hl(0, 'DiagnosticFloatingError' , { bg = 'none' })
+vim.api.nvim_set_hl(0, 'DiagnosticFloatingWarn' , { bg = 'none', fg = '#c4ab39' })
+vim.api.nvim_set_hl(0, 'DiagnosticFloatingError' , { bg = 'none', fg = '#c4384b' })
 vim.api.nvim_set_hl(0, 'NormalFloat' , { bg = 'none' })
 vim.api.nvim_set_hl(0, 'FloatBorder' , { bg = 'none' })
-
--- vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
