@@ -97,12 +97,12 @@ lsp.on_attach(function(client, bufnr)
     vim.api.nvim_set_hl(0, 'LspReferenceWrite', { fg = '#fe5186' })
 
     vim.api.nvim_create_augroup('lsp_document_highlight', {})
-    vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+    vim.api.nvim_create_autocmd('CursorHold', {
       group = 'lsp_document_highlight',
       buffer = 0,
       callback = vim.lsp.buf.document_highlight,
     })
-    vim.api.nvim_create_autocmd('CursorMoved', {
+    vim.api.nvim_create_autocmd({'CursorMoved', 'CursorMovedI'}, {
       group = 'lsp_document_highlight',
       buffer = 0,
       callback = vim.lsp.buf.clear_references,
