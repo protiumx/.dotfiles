@@ -1,8 +1,3 @@
-require('indent_blankline').setup {
-  char = '┊',
-  show_trailing_blankline_indent = false,
-}
-
 vim.g['user_emmet_leader_key'] = '<C-X>'
 vim.g['rooter_patterns'] = {'.git', 'go.mod'}
 vim.g['rooter_manual_only'] = true

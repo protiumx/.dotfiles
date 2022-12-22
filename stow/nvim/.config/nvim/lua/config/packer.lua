@@ -21,7 +21,7 @@ return require('packer').startup(function(use)
   -- Treesitter
   use({'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'})
   use('nvim-treesitter/playground')
-  
+
   -- Enhancement
   use('feline-nvim/feline.nvim')
   use('airblade/vim-rooter')
@@ -47,7 +47,6 @@ return require('packer').startup(function(use)
         require('Comment').setup({ ignore = '^$' })
     end
   })
-  use('lukas-reineke/indent-blankline.nvim')
 
   -- Multiple cursors
   use({'mg979/vim-visual-multi', branch = 'master'})
