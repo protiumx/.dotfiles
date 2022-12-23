@@ -12,49 +12,48 @@ lsp.ensure_installed({
   'pyright',
 })
 
--- Fix Undefined global 'vim'
 lsp.configure('sumneko_lua', {
-    settings = {
-        Lua = {
-            diagnostics = {
-                globals = { 'vim' }
-            }
-        }
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { 'vim' }
+      }
     }
+  }
 })
 
 local cmp = require('cmp')
 local luasnip = require('luasnip')
 local cmp_mappings = lsp.defaults.cmp_mappings({
   ['<CR>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
-    },
+    behavior = cmp.ConfirmBehavior.Replace,
+    select = true,
+  },
   ['<C-Space>'] = cmp.mapping.complete(),
   ['<C-d>'] = cmp.mapping.scroll_docs(-4),
   ['<C-f>'] = cmp.mapping.scroll_docs(4),
   ['<Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-    ['<S-Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
+    if cmp.visible() then
+      cmp.select_next_item()
+    elseif luasnip.expand_or_jumpable() then
+      luasnip.expand_or_jump()
+    else
+      fallback()
+    end
+  end, { 'i', 's' }),
+  ['<S-Tab>'] = cmp.mapping(function(fallback)
+    if cmp.visible() then
+      cmp.select_prev_item()
+    elseif luasnip.jumpable(-1) then
+      luasnip.jump(-1)
+    else
+      fallback()
+    end
+  end, { 'i', 's' }),
 })
 
 lsp.set_preferences({
-  sign_icons = { }
+  sign_icons = {}
 })
 
 lsp.setup_nvim_cmp({
@@ -69,8 +68,8 @@ lsp.on_attach(function(client, bufnr)
   local opts = { buffer = bufnr }
 
   if client.name == 'eslint' then
-      vim.cmd.LspStop('eslint')
-      return
+    vim.cmd.LspStop('eslint')
+    return
   end
 
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
@@ -83,8 +82,8 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set('n', '<Leader>vd', vim.diagnostic.open_float, opts)
   vim.keymap.set('n', '[d', vim.diagnostic.goto_next, opts)
   vim.keymap.set('n', ']d', vim.diagnostic.goto_prev, opts)
-  vim.keymap.set('n', '<Leader>vca', vim.lsp.buf.code_action, opts)
-  vim.keymap.set('n', '<Leader>rn', vim.lsp.buf.rename, opts)
+  -- vim.keymap.set('n', '<Leader>vca', vim.lsp.buf.code_action, opts)
+  -- vim.keymap.set('n', '<Leader>rn', vim.lsp.buf.rename, opts)
   vim.keymap.set('i', '<C-h>', vim.lsp.buf.signature_help, opts)
 
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
@@ -110,7 +109,7 @@ lsp.on_attach(function(client, bufnr)
       buffer = bufnr,
       callback = vim.lsp.buf.document_highlight,
     })
-    vim.api.nvim_create_autocmd({'CursorMoved', 'CursorMovedI'}, {
+    vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
       group = 'lsp_document_highlight',
       buffer = bufnr,
       callback = vim.lsp.buf.clear_references,
@@ -126,14 +125,14 @@ vim.diagnostic.config({
   virtual_text = false,
 })
 
-vim.api.nvim_set_hl(0, 'DiagnosticError' , { fg = '#c4384b' })
-vim.api.nvim_set_hl(0, 'DiagnosticWarn' , { fg = '#c4ab39' })
-vim.api.nvim_set_hl(0, 'DiagnosticSignHint' , { fg = 'darkgray', bold = true })
-vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextHint' , { bg = 'none' })
-vim.api.nvim_set_hl(0, 'DiagnosticUnderlineError' , { undercurl = true })
-vim.api.nvim_set_hl(0, 'DiagnosticFloatingHint' , { bg = 'none' })
-vim.api.nvim_set_hl(0, 'DiagnosticFloatingInfo' , { bg = 'none' })
-vim.api.nvim_set_hl(0, 'DiagnosticFloatingWarn' , { bg = 'none', fg = '#c4ab39' })
-vim.api.nvim_set_hl(0, 'DiagnosticFloatingError' , { bg = 'none', fg = '#c4384b' })
-vim.api.nvim_set_hl(0, 'NormalFloat' , { bg = 'none' })
-vim.api.nvim_set_hl(0, 'FloatBorder' , { bg = 'none' })
+vim.api.nvim_set_hl(0, 'DiagnosticError', { fg = '#c4384b' })
+vim.api.nvim_set_hl(0, 'DiagnosticWarn', { fg = '#c4ab39' })
+vim.api.nvim_set_hl(0, 'DiagnosticSignHint', { fg = 'darkgray', bold = true })
+vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextHint', { bg = 'none' })
+vim.api.nvim_set_hl(0, 'DiagnosticUnderlineError', { undercurl = true })
+vim.api.nvim_set_hl(0, 'DiagnosticFloatingHint', { bg = 'none' })
+vim.api.nvim_set_hl(0, 'DiagnosticFloatingInfo', { bg = 'none' })
+vim.api.nvim_set_hl(0, 'DiagnosticFloatingWarn', { bg = 'none', fg = '#c4ab39' })
+vim.api.nvim_set_hl(0, 'DiagnosticFloatingError', { bg = 'none', fg = '#c4384b' })
+vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
+vim.api.nvim_set_hl(0, 'FloatBorder', { bg = 'none' })
