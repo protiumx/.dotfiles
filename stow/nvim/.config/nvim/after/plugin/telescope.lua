@@ -36,26 +36,26 @@ telescope.load_extension('file_browser')
 local builtin = require('telescope.builtin')
 local minimal = { previewer = false, theme = 'dropdown' }
 
-vim.keymap.set({'i', 'n'}, '<C-]>', function()
+vim.keymap.set({ 'i', 'n' }, '<C-]>', function()
   builtin.find_files(minimal)
 end, { silent = true })
 
-vim.keymap.set({'i', 'n'}, '<C-h>', builtin.find_files, { silent = true })
+vim.keymap.set({ 'n' }, '<C-h>', builtin.find_files, { silent = true })
 
-vim.keymap.set({'i', 'n'}, '<C-b>', function()
+vim.keymap.set({ 'i', 'n' }, '<C-b>', function()
   builtin.buffers(minimal)
 end, { silent = true })
 
 -- Open in current file folder
 vim.keymap.set('n', '<Leader><C-]>', function()
   local cwd = vim.fn.finddir('.git/..', vim.fn.expand('%:p:h'))
-  local opts = { grouped=true, hidden=true, previewer=false, theme='dropdown', path='%:p:h', cwd=cwd}
+  local opts = { grouped = true, hidden = true, previewer = false, theme = 'dropdown', path = '%:p:h', cwd = cwd }
   telescope.extensions.file_browser.file_browser(opts)
 end, { silent = true })
 
 vim.keymap.set('n', '<Leader><C-h>', function()
   local cwd = vim.fn.finddir('.git/..', vim.fn.expand('%:p:h'))
-  local opts = { grouped=true, hidden=true, previewer=false, theme='dropdown', cwd=cwd}
+  local opts = { grouped = true, hidden = true, previewer = false, theme = 'dropdown', cwd = cwd }
   telescope.extensions.file_browser.file_browser(opts)
 end, { silent = true })
 

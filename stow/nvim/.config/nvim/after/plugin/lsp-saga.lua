@@ -6,6 +6,7 @@ saga.init_lsp_saga({
 })
 
 keymap('n', 'gh', '<cmd>Lspsaga lsp_finder<CR>', { silent = true })
+keymap('i', '<C-h>', '<Esc><cmd>Lspsaga lsp_finder<CR>', { silent = true })
 keymap({ 'n', 'v' }, '<Leader>vca', '<cmd>Lspsaga code_action<CR>', { silent = true })
 keymap('n', '<Leader>rn', '<cmd>Lspsaga rename<CR>', { silent = true })
 keymap('n', 'gpd', '<cmd>Lspsaga peek_definition<CR>', { silent = true })

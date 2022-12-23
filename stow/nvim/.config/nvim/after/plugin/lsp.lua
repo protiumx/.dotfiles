@@ -11,6 +11,7 @@ lsp.ensure_installed({
   'gopls',
   'clangd',
   'pyright',
+  'bashls',
 })
 
 lsp.configure('sumneko_lua', {
@@ -69,6 +70,7 @@ lsp.setup_nvim_cmp({
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
+    { name = 'buffer' },
   },
 })
 
@@ -90,9 +92,6 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set('n', '<Leader>vd', vim.diagnostic.open_float, opts)
   vim.keymap.set('n', '[d', vim.diagnostic.goto_next, opts)
   vim.keymap.set('n', ']d', vim.diagnostic.goto_prev, opts)
-  -- vim.keymap.set('n', '<Leader>vca', vim.lsp.buf.code_action, opts)
-  -- vim.keymap.set('n', '<Leader>rn', vim.lsp.buf.rename, opts)
-  vim.keymap.set('i', '<C-h>', vim.lsp.buf.signature_help, opts)
 
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
     vim.lsp.buf.format()
