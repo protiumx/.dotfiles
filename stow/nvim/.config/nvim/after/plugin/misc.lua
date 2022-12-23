@@ -1,5 +1,7 @@
 vim.g['user_emmet_leader_key'] = '<C-X>'
-vim.g['rooter_patterns'] = {'.git', 'go.mod'}
+
+-- vim rooter
+vim.g['rooter_patterns'] = { '.git', 'go.mod' }
 vim.g['rooter_manual_only'] = true
 
 vim.keymap.set('n', '<Leader>ro', ':RooterToggle')
@@ -18,7 +20,7 @@ vim.keymap.set('x', 'ga', '<Plug>(EasyAlign)', { remap = true })
 -- Start interactive EasyAlign for a motion/text object (e.g. gaip)
 vim.keymap.set('n', 'ga', '<Plug>(EasyAlign)', { remap = true })
 
--- vim sandwhich
+-- vim sandwich
 -- Additional text objects e.g. viss to select inner text with auto detection
 -- of surroundings
 vim.keymap.set('x', 'is', '<Plug>(textobj-sandwich-auto-i)', { remap = true })
@@ -39,4 +41,3 @@ vim.keymap.set('n', '<F3>', function()
     vim.cmd [[vertical Git | vertical resize 40 | setlocal noequalalways | setlocal wrap]]
   end
 end)
-
