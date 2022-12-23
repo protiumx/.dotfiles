@@ -38,7 +38,12 @@ return require('packer').startup(function(use)
   use('arthurxavierx/vim-caser')
   -- Change surroundings
   use('machakann/vim-sandwich') -- surroundings
-  use('jiangmiao/auto-pairs')
+  use {
+    "windwp/nvim-autopairs",
+    config = function()
+      require("nvim-autopairs").setup({})
+    end
+  }
   use('mbbill/undotree')
   use('lbrayner/vim-rzip')
   use({
