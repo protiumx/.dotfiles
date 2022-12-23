@@ -1,4 +1,5 @@
 local lsp = require('lsp-zero')
+local colors = require('config.colors')
 
 lsp.preset('recommended')
 
@@ -98,9 +99,9 @@ lsp.on_attach(function(client, bufnr)
   })
 
   if client.server_capabilities.documentHighlightProvider then
-    vim.api.nvim_set_hl(0, 'LspReferenceRead', { fg = '#fe5186' })
-    vim.api.nvim_set_hl(0, 'LspReferenceText', { fg = '#fe5186' })
-    vim.api.nvim_set_hl(0, 'LspReferenceWrite', { fg = '#fe5186' })
+    vim.api.nvim_set_hl(0, 'LspReferenceRead', { fg = colors.accent })
+    vim.api.nvim_set_hl(0, 'LspReferenceText', { fg = colors.accent })
+    vim.api.nvim_set_hl(0, 'LspReferenceWrite', { fg = colors.accent })
 
     vim.api.nvim_create_augroup('lsp_document_highlight', {})
     -- Highlight references only in normal mode
@@ -124,13 +125,3 @@ lsp.setup()
 vim.diagnostic.config({
   virtual_text = false,
 })
-
-vim.api.nvim_set_hl(0, 'DiagnosticError', { fg = '#c4384b' })
-vim.api.nvim_set_hl(0, 'DiagnosticWarn', { fg = '#c4ab39' })
-vim.api.nvim_set_hl(0, 'DiagnosticSignHint', { fg = 'darkgray', bold = true })
-vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextHint', { bg = 'none' })
-vim.api.nvim_set_hl(0, 'DiagnosticUnderlineError', { undercurl = true })
-vim.api.nvim_set_hl(0, 'DiagnosticFloatingHint', { bg = 'none' })
-vim.api.nvim_set_hl(0, 'DiagnosticFloatingInfo', { bg = 'none' })
-vim.api.nvim_set_hl(0, 'DiagnosticFloatingWarn', { bg = 'none', fg = '#c4ab39' })
-vim.api.nvim_set_hl(0, 'DiagnosticFloatingError', { bg = 'none', fg = '#c4384b' })
