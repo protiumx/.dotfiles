@@ -61,10 +61,6 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
   end, { 'i', 's' }),
 })
 
-lsp.set_preferences({
-  sign_icons = {}
-})
-
 lsp.setup_nvim_cmp({
   mapping = cmp_mappings,
   sources = {
@@ -129,5 +125,13 @@ end)
 lsp.setup()
 
 vim.diagnostic.config({
-  virtual_text = false,
+  virtual_text = {
+    format = function(diagnostic)
+      -- just show the sign
+      return ''
+    end
+  },
+  underline = false,
+  severity_sort = true,
+  signs = false,
 })
