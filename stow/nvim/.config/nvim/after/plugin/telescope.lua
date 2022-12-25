@@ -30,7 +30,7 @@ telescope.setup({
   }
 })
 
--- telescope.load_extension('fzf')
+telescope.load_extension('fzf')
 telescope.load_extension('file_browser')
 
 local builtin = require('telescope.builtin')
@@ -46,16 +46,14 @@ vim.keymap.set({ 'i', 'n' }, '<C-b>', function()
   builtin.buffers(minimal)
 end, { silent = true })
 
--- Open in current file folder
+-- Open in current file's folder
 vim.keymap.set('n', '<Leader><C-]>', function()
-  local cwd = vim.fn.finddir('.git/..', vim.fn.expand('%:p:h'))
-  local opts = { grouped = true, hidden = true, previewer = false, theme = 'dropdown', path = '%:p:h', cwd = cwd }
+  local opts = { grouped = true, hidden = true, previewer = false, theme = 'dropdown', path = '%:p:h' }
   telescope.extensions.file_browser.file_browser(opts)
 end, { silent = true })
 
 vim.keymap.set('n', '<Leader><C-h>', function()
-  local cwd = vim.fn.finddir('.git/..', vim.fn.expand('%:p:h'))
-  local opts = { grouped = true, hidden = true, previewer = false, theme = 'dropdown', cwd = cwd }
+  local opts = { grouped = true, hidden = true, previewer = false, theme = 'dropdown' }
   telescope.extensions.file_browser.file_browser(opts)
 end, { silent = true })
 
