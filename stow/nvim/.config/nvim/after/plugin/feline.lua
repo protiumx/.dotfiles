@@ -120,6 +120,7 @@ local comps = {
   line_percentage = {
     provider = 'line_percentage',
     left_sep = ' ',
+    right_sep = ' ',
     hl = {},
   },
 }
