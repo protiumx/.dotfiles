@@ -2,7 +2,6 @@ vim.g['user_emmet_leader_key'] = '<C-X>'
 
 -- vim rooter
 vim.g['rooter_patterns'] = { '.git', 'go.mod' }
-vim.g['rooter_manual_only'] = true
 
 vim.keymap.set('n', '<Leader>ro', ':RooterToggle')
 
@@ -35,9 +34,9 @@ vim.keymap.set('o', 'at', '<Plug>(textobj-sandwich-literal-query-a)', { remap = 
 
 -- Git status
 vim.keymap.set('n', '<F3>', function()
-  if vim.fn.buflisted(vim.fn.bufname('.git/index')) then
-    vim.cmd [[bd .git/index]]
+  if vim.fn.bufwinnr('fugitive') > 0 then
+    vim.cmd [[bd fugitive]]
   else
-    vim.cmd [[vertical Git | vertical resize 40 | setlocal noequalalways | setlocal wrap]]
+    vim.cmd [[vertical Git | vertical resize 40 | setlocal noequalalways wrap]]
   end
 end)
