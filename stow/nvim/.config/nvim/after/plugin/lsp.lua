@@ -93,9 +93,8 @@ lsp.on_attach(function(client, bufnr)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
 
-  vim.api.nvim_create_augroup('lsp_format', {})
   vim.api.nvim_create_autocmd('BufWritePre', {
-    group = 'lsp_format',
+    group = 'write_pre',
     pattern = "*",
     callback = vim.lsp.buf.formatting_sync,
   })
