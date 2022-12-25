@@ -2,16 +2,16 @@ local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 
 augroup('sign_column_all', {})
-autocmd({'BufRead', 'BufNewFile'}, {
+autocmd({ 'BufRead', 'BufNewFile' }, {
   group = 'sign_column_all',
   pattern = '*',
   command = 'setlocal signcolumn=yes',
 })
 
 -- Trim white spaces before writing
-augroup('trim_spaces', {})
-autocmd({"BufWritePre"}, {
-  group = 'trim_spaces',
+augroup('write_pre', {})
+autocmd({ 'BufWritePre' }, {
+  group = 'write_pre',
   pattern = "*",
   command = [[%s/\s\+$//e]],
 })
@@ -22,14 +22,14 @@ autocmd('TextYankPost', {
   pattern = '*',
   callback = function()
     vim.highlight.on_yank({
-        higroup = 'IncSearch',
-        timeout = 500,
+      higroup = 'IncSearch',
+      timeout = 300,
     })
   end,
 })
 
 augroup('elixir_tpl', {})
-autocmd({'BufNewFile', 'BufRead'}, {
+autocmd({ 'BufNewFile', 'BufRead' }, {
   group = 'elixir_tpl',
   pattern = '*.heex',
   command = [[setlocal ft=html syntax=html]],
@@ -51,7 +51,7 @@ autocmd('CmdlineLeave', {
   group = 'clear_cmdline',
   pattern = '*',
   callback = function()
-    cmd_timer = vim.defer_fn(function ()
+    cmd_timer = vim.defer_fn(function()
       vim.api.nvim_command('echo ""')
       cmd_timer = nil
     end, 2000)
