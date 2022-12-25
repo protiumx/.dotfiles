@@ -34,9 +34,10 @@ vim.keymap.set('o', 'at', '<Plug>(textobj-sandwich-literal-query-a)', { remap = 
 
 -- Git status
 vim.keymap.set('n', '<F3>', function()
-  if vim.fn.bufwinnr('fugitive') > 0 then
-    vim.cmd [[bd fugitive]]
+  local name = vim.fn.bufname('fugitive:///*/.git//')
+  if name ~= '' and vim.fn.buflisted(name) ~= 0 then
+    vim.cmd [[ execute ":bd" bufname('fugitive:///*/.git//') ]]
   else
-    vim.cmd [[vertical Git | vertical resize 40 | setlocal noequalalways wrap]]
+    vim.cmd [[vertical Git | vertical resize 40 | setlocal noequalalways wrap readonly nomodifiable noswapfile]]
   end
 end)
