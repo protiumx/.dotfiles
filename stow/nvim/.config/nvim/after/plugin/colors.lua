@@ -26,8 +26,11 @@ vim.api.nvim_set_hl(0, 'CursorLine', { bg = 'none', fg = 'none' })
 
 vim.api.nvim_set_hl(0, 'IncSearch', { bg = colors.accent, fg = 'none' })
 vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
-vim.api.nvim_set_hl(0, 'SpellBad', { bg = 'none', fg = 'none', undercurl = true, ctermbg = 'none', ctermfg = 'none' })
 vim.api.nvim_set_hl(0, 'FloatBorder', { bg = 'none' })
+
+vim.api.nvim_set_hl(0, 'SpellBad', { bg = 'none', fg = 'none', undercurl = true, ctermbg = 'none', ctermfg = 'none' })
+vim.api.nvim_set_hl(0, 'SpellRare', { bg = 'none', fg = 'none', undercurl = true, ctermbg = 'none', ctermfg = 'none' })
+vim.api.nvim_set_hl(0, 'SpellLocal', { bg = 'none', fg = 'none', undercurl = true, ctermbg = 'none', ctermfg = 'none' })
 
 -- Diagnostic
 vim.api.nvim_set_hl(0, 'DiagnosticError', { fg = colors.red })
