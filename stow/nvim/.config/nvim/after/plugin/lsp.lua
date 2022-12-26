@@ -44,8 +44,8 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
   ['<Tab>'] = cmp.mapping(function(fallback)
     if cmp.visible() then
       cmp.select_next_item()
-    elseif luasnip.expand_or_jumpable() then
-      luasnip.expand_or_jump()
+    elseif luasnip.expandable() then
+      luasnip.expand()
     else
       fallback()
     end
@@ -53,12 +53,26 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
   ['<S-Tab>'] = cmp.mapping(function(fallback)
     if cmp.visible() then
       cmp.select_prev_item()
-    elseif luasnip.jumpable(-1) then
-      luasnip.jump(-1)
     else
       fallback()
     end
   end, { 'i', 's' }),
+
+  -- Jump to luasnip placeholders
+  ['<C-j>'] = cmp.mapping(function(fallback)
+    if luasnip.jumpable(1) then
+      luasnip.jump(1)
+    else
+      fallback()
+    end
+  end, { 'i', 's' }),
+  ['<C-k>'] = cmp.mapping(function(fallback)
+    if luasnip.jumpable(-1) then
+      luasnip.jump(-1)
+    else
+      fallback()
+    end
+  end, { 'i', 's' })
 })
 
 lsp.setup_nvim_cmp({
