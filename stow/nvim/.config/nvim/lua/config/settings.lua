@@ -1,14 +1,13 @@
 vim.g.netrw_banner = 0
 vim.g.netrw_browse_split = 0
+vim.g.netrw_liststyle = 3 -- Tree-style view
 
 vim.cmd [[
   syntax sync minlines=3000
   filetype plugin indent on
 ]]
 
-
 vim.opt.shell = 'zsh'
-
 vim.opt.background = 'dark'
 vim.opt.showtabline = 0
 vim.opt.hidden = true
