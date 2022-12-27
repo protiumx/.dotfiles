@@ -6,10 +6,10 @@ vim.g.mapleader = ' '
 vim.keymap.set('n', '<Leader>d', '"_d')
 vim.keymap.set('n', '<Leader>c', '"_c')
 vim.keymap.set('v', '<Leader>d', '"_d')
-vim.keymap.set('v', '<Leader>d', '"_c')
+vim.keymap.set('v', '<Leader>c', '"_c')
 
 -- Insert date time as YYYY-MM-DD-HH:mm
-vim.keymap.set('n','<Leader>pb','"=strftime("%Y%m%d%H%M")<CR>p')
+vim.keymap.set('n', '<Leader>pb', '"=strftime("%Y%m%d%H%M")<CR>p')
 
 -- Prepare replace all occurrences of word under cursor
 vim.keymap.set('n', '<Leader>rw', [[:%s/\<<C-r><C-w>\>//g<Left><Left>]])
@@ -77,19 +77,21 @@ vim.keymap.set('n', '<S-Tab>', ':bp<CR>', { silent = true })
 vim.keymap.set('n', '<Leader>xa', ':%bd | e# | bd#<CR> | \'"', { silent = true })
 
 -- Select all text in current buffer
-vim.keymap.set('n', '<C-s>', 'ggVG', { silent = true })
-vim.keymap.set('i', '<C-s>', '<Esc>ggVG', { silent = true })
+vim.keymap.set('n', '<M-a>', 'ggVG', { silent = true })
+vim.keymap.set('i', '<M-a>', '<Esc>ggVG', { silent = true })
 
 -- Open new file adjacent to current file
 vim.keymap.set('n', '<Leader>o', [[:e <C-R>=expand("%:h") . "/"<CR><Right>]], { silent = true })
-
--- Open new adjacent file in vertical split
 vim.keymap.set('n', '<Leader>vo', [[:vsp | e <C-R>=expand("%:h") . "/"<CR>]], { silent = true })
 
 -- Paste formatted
 vim.keymap.set('n', 'p', 'p=`]', { silent = true })
 vim.keymap.set('n', 'P', 'P=`]', { silent = true })
 vim.keymap.set('n', '<C-p>', 'p', { silent = true })
+
+-- Quick new line
+vim.keymap.set('i', '<M-o>', '<C-o>o', { silent = true })
+vim.keymap.set('i', '<M-O>', '<C-o>O', { silent = true })
 
 -- Terminal keymaps
 vim.keymap.set('i', '<F12>', '<Esc>:term ++close<CR>', { silent = true })
@@ -109,5 +111,3 @@ vim.keymap.set('n', '<Leader>P', function()
   end
   return ':let @' .. clip .. '=expand("%:~:.")<CR>'
 end, { silent = true })
-
-vim.keymap.set('n', '<leader>f', vim.lsp.buf.format)
