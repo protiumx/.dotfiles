@@ -49,6 +49,13 @@ return require('packer').startup(function(use)
 
   use('ahmedkhalf/project.nvim')
 
+  use {
+    'AckslD/nvim-neoclip.lua',
+    requires = {
+      { 'nvim-telescope/telescope.nvim' },
+    },
+  }
+
   -- Better jump
   use('justinmk/vim-sneak') -- sneaky jumps
   use({
@@ -63,9 +70,9 @@ return require('packer').startup(function(use)
   -- Change surroundings
   use('machakann/vim-sandwich') -- surroundings
   use {
-    "windwp/nvim-autopairs",
+    'windwp/nvim-autopairs',
     config = function()
-      require("nvim-autopairs").setup({})
+      require('nvim-autopairs').setup({})
     end
   }
   use('mbbill/undotree')
@@ -109,8 +116,8 @@ return require('packer').startup(function(use)
   })
 
   use({
-    "glepnir/lspsaga.nvim",
-    branch = "main",
+    'glepnir/lspsaga.nvim',
+    branch = 'main',
   })
 
   -- Sync plugins after installing packer
