@@ -54,7 +54,7 @@ autocmd('CmdlineLeave', {
     cmd_timer = vim.defer_fn(function()
       vim.api.nvim_command('echo ""')
       cmd_timer = nil
-    end, 2000)
+    end, 3000)
   end,
 })
 
