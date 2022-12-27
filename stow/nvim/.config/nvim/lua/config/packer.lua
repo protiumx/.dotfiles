@@ -46,7 +46,9 @@ return require('packer').startup(function(use)
 
   -- Enhancement
   use('feline-nvim/feline.nvim') -- status line
-  use('airblade/vim-rooter') -- set cwd if .git folder is found
+
+  use('ahmedkhalf/project.nvim')
+
   -- Better jump
   use('justinmk/vim-sneak') -- sneaky jumps
   use({

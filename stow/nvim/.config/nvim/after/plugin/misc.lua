@@ -1,9 +1,11 @@
+-- Project
+require('project_nvim').setup({
+  detection_methods = { 'pattern' },
+  show_hidden = true,
+  patterns = { 'go.mod', '.git', 'Makefile', 'package.json', '!.git/worktrees' },
+})
+
 vim.g['user_emmet_leader_key'] = '<C-X>'
-
--- vim rooter
-vim.g['rooter_patterns'] = { '.git', 'go.mod' }
-
-vim.keymap.set('n', '<Leader>ro', ':RooterToggle')
 
 -- vim sneak
 vim.keymap.set('', 's', '<Plug>Sneak_s', { remap = true })

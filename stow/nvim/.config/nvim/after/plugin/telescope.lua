@@ -32,6 +32,7 @@ telescope.setup({
 
 telescope.load_extension('fzf')
 telescope.load_extension('file_browser')
+telescope.load_extension('projects')
 
 local builtin = require('telescope.builtin')
 local minimal = { previewer = false, theme = 'dropdown' }
@@ -83,5 +84,10 @@ vim.keymap.set('n', '<Leader>sG', builtin.git_status, { silent = true })
 vim.keymap.set('n', '<Leader>sd', builtin.diagnostics, { silent = true, desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<Leader>sS', builtin.lsp_document_symbols, { silent = true, desc = '[S]earch [S]ymbols' })
 vim.keymap.set('n', '<Leader>sl', builtin.resume, { silent = true, desc = '[S]earch [L]ast' })
+
+-- Projects
+vim.keymap.set('n', '<Leader>sP', function()
+  require('telescope').extensions.projects.projects({})
+end, { silent = true, desc = '[S]earch [P]rojects' })
 
 vim.cmd [[autocmd User TelescopePreviewerLoaded setlocal wrap]]
