@@ -67,8 +67,6 @@ install_packages() {
 
 post_install_packages() {
   info "Installing fzf bindings"
+  # shellcheck disable=SC2155
   $(brew --prefix)/opt/fzf/install
-
-  info "Cloning Packer"
-  git clone --depth 1 https://github.com/wbthomason/packer.nvim /.local/share/nvim/site/pack/packer/start/packer.nvim
 }

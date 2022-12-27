@@ -34,7 +34,7 @@ format = "[$symbol ${ram}]($style)"
 [git_branch]
 symbol = " "
 format = "[$symbol$branch(:$remote_branch)]($style) "
-style = "fg:#d13e11" 
+style = "fg:#d13e11"
 
 [git_status]
 format = '([\[ $all_status$ahead_behind\]]($style) )'
@@ -48,7 +48,7 @@ stashed = "~${count} "
 staged = "+${count} "
 deleted = "x${count} "
 renamed = "»${count} "
-style = "fg:#d13e11" 
+style = "fg:#d13e11"
 
 [status]
 disabled = false
@@ -100,3 +100,7 @@ symbol = " "
 [rust]
 format = "[$symbol($version )]($style)"
 symbol = " "
+
+[lua]
+format = "[$symbol($version )]($style)"
+symbol = " "

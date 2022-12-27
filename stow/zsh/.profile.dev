@@ -1,6 +1,6 @@
 # Functions
 
-cheat() { 
+cheat() {
   curl -s "cheat.sh/$1";
 }
 
@@ -65,7 +65,7 @@ glog() {
 
 # Open git remote
 gshow() {
-  open $(git remote -v | grep fetch | awk '{print $2}' | sed 's/git@/http:\/\//' | sed 's/com:/com\//' | head -n1);
+  git remote -v | grep fetch | awk '{print $2}' | sed 's/git@/https:\/\//' | sed 's/com:/com\//' | sed 's/\.git$//' | head -n1
 }
 
 kitty_title() {
@@ -83,7 +83,7 @@ ansi_colors() {
 
 # checkout or create new branch
 gck() {
-  git checkout $1 2>/dev/null || git checkout -b $1; 
+  git checkout $1 2>/dev/null || git checkout -b $1;
 }
 
 cdi() {
