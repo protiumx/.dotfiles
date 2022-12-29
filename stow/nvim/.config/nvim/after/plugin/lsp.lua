@@ -19,7 +19,15 @@ lsp.configure('sumneko_lua', {
     Lua = {
       diagnostics = {
         globals = { 'vim' }
-      }
+      },
+      workspace = {
+        library = {
+          [vim.fn.expand '$VIMRUNTIME/lua'] = true,
+          [vim.fn.expand '$VIMRUNTIME/lua/vim/lsp'] = true,
+        },
+        maxPreload = 100000,
+        preloadFileSize = 10000,
+      },
     }
   }
 })
@@ -107,9 +115,10 @@ lsp.on_attach(function(client, bufnr)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
 
+  vim.api.nvim_create_augroup('lsp_format', {})
   vim.api.nvim_create_autocmd('BufWritePre', {
-    group = 'write_pre',
-    pattern = "*",
+    group = 'lsp_format',
+    pattern = '*',
     callback = vim.lsp.buf.formatting_sync,
   })
 
@@ -139,6 +148,7 @@ lsp.setup()
 
 vim.diagnostic.config({
   virtual_text = {
+    spacing = 1,
     format = function(diagnostic)
       -- just show the sign
       return ''
