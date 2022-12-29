@@ -61,7 +61,17 @@ return require('packer').startup(function(use)
   use({
     'norcalli/nvim-colorizer.lua', -- colorize hexa color strings
     config = function()
-      require('colorizer').setup()
+      require('colorizer').setup({
+        user_default_options = {
+          RGB = true,
+          RRGGBB = true,
+          names = false,
+          RRGGBBAA = false,
+          css = false,
+          css_fn = true,
+          mode = 'foreground',
+        },
+      })
     end
   })
   use('junegunn/vim-easy-align')
