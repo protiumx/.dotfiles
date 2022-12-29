@@ -101,3 +101,11 @@ autocmd('VimLeave', {
     kitty_title(true)
   end,
 })
+
+-- dont list quickfix buffers
+autocmd('FileType', {
+  pattern = 'qf',
+  callback = function()
+    vim.opt_local.buflisted = false
+  end,
+})
