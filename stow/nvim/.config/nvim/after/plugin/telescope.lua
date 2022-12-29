@@ -49,12 +49,12 @@ vim.keymap.set({ 'i', 'n' }, '<C-b>', function()
 end, { silent = true })
 
 -- Open in current file's folder
-vim.keymap.set('n', '<Leader><C-]>', function()
+vim.keymap.set('n', '<M-r>', function()
   local opts = { grouped = true, hidden = true, previewer = false, theme = 'dropdown', path = '%:p:h' }
   telescope.extensions.file_browser.file_browser(opts)
 end, { silent = true })
 
-vim.keymap.set('n', '<Leader><C-h>', function()
+vim.keymap.set('n', '<M-f>', function()
   local opts = { grouped = true, hidden = true, previewer = false, theme = 'dropdown' }
   telescope.extensions.file_browser.file_browser(opts)
 end, { silent = true })
@@ -96,6 +96,10 @@ vim.cmd [[autocmd User TelescopePreviewerLoaded setlocal wrap]]
 
 -- Neoclip
 vim.keymap.set('n', '<Leader>sy', function()
+  require('telescope').extensions.neoclip.default()
+end, { silent = true, desc = '[S]earch [Y]anks' })
+
+vim.keymap.set('i', '<C-y>', function()
   require('telescope').extensions.neoclip.default()
 end, { silent = true, desc = '[S]earch [Y]anks' })
 
