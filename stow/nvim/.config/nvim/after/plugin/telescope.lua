@@ -23,6 +23,7 @@ telescope.setup({
 
     file_ignore_patterns = { 'target/*', 'node_modules/*', '^.git/*', '^.yarn/*' },
   },
+
   pickers = {
     find_files = {
       find_command = { 'fd', '-t', 'f', '--hidden', '--strip-cwd-prefix', '-i' }
@@ -49,7 +50,7 @@ vim.keymap.set({ 'i', 'n' }, '<C-b>', function()
 end, { silent = true })
 
 -- Open in current file's folder
-vim.keymap.set('n', '<M-r>', function()
+vim.keymap.set('n', '<M-g>', function()
   local opts = { grouped = true, hidden = true, previewer = false, theme = 'dropdown', path = '%:p:h' }
   telescope.extensions.file_browser.file_browser(opts)
 end, { silent = true })
