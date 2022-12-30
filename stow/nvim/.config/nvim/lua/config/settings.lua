@@ -54,13 +54,17 @@ vim.opt.spellcapcheck = ''
 vim.opt.showmode = false
 vim.opt.startofline = false
 
-vim.opt.wildignore = '*.o,*.obj,*~,*.exe,*.a,*.pdb,*.lib'
-vim.opt.wildignore:append('*.so,*.pyc,*.pyo,*.bin,*.dex')
-vim.opt.wildignore:append('*.log,*.pyc,*.sqlite,*.sqlite3,*.min.js,*.min.css,*.tags')
-vim.opt.wildignore:append('*.zip,*.7z,*.rar,*.gz,*.tar,*.gzip,*.bz2,*.tgz,*.xz')
-vim.opt.wildignore:append('*.png,*.jpg,*.gif,*.bmp,*.tga,*.pcx,*.ppm,*.img,*.iso')
-vim.opt.wildignore:append('*.pdf,*.dmg,*.app,*.ipa,*.apk,*.mobi,*.epub')
-vim.opt.wildignore:append('*.mp4,*.avi,*.flv,*.mov,*.mkv,*.swf,*.swc')
-vim.opt.wildignore:append('*.ppt,*.pptx,*.doc,*.docx,*.xlt,*.xls,*.xlsx,*.odt,*.wps')
-vim.opt.wildignore:append('*/.git/*,*.DS_Store')
-vim.opt.wildignore:append('*/node_modules/*,*/build/*,*/logs/*,*/dist/*,*/tmp/*')
+vim.opt.wildmode = 'full' -- Shows a menu bar as opposed to an enormous list
+vim.opt.wildignorecase = true -- Ignore case when completing file names and directories
+vim.opt.wildignore = {
+  '*.o', '*.obj', '*~', '*.exe', '*.a', '*.pdb', '*.lib',
+  '*.so', '*.pyc', '*.pyo', '*.bin', '*.dex',
+  '*.log', '*.pyc', '*.sqlite', '*.sqlite3', '*.min.js', '*.min.css', '*.tags',
+  '*.zip', '*.7z', '*.rar', '*.gz', '*.tar', '*.gzip', '*.bz2', '*.tgz', '*.xz',
+  '*.png', '*.jpg', '*.gif', '*.bmp', '*.tga', '*.pcx', '*.ppm', '*.img', '*.iso',
+  '*.pdf', '*.dmg', '*.app', '*.ipa', '*.apk', '*.mobi', '*.epub',
+  '*.mp4', '*.avi', '*.flv', '*.mov', '*.mkv', '*.swf', '*.swc',
+  '*.ppt', '*.pptx', '*.doc', '*.docx', '*.xlt', '*.xls', '*.xlsx', '*.odt', '*.wps',
+  '*/.git/*', '*.DS_Store',
+  '*/node_modules/*', '*/build/*', '*/logs/*', '*/dist/*', '*/tmp/*',
+}
