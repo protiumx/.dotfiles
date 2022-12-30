@@ -132,6 +132,27 @@ return require('packer').startup(function(use)
     branch = 'main',
   })
 
+  -- Debugging
+  use {
+    'mfussenegger/nvim-dap',
+    opt = true,
+    event = 'BufReadPre',
+    module = { 'dap' },
+    wants = {
+      'nvim-dap-virtual-text',
+      'nvim-dap-ui',
+    },
+    requires = {
+      'theHamsta/nvim-dap-virtual-text',
+      'rcarriga/nvim-dap-ui',
+      'nvim-telescope/telescope-dap.nvim',
+      { 'leoluz/nvim-dap-go', module = 'dap-go' },
+    },
+    config = function()
+      require('config.dap').setup()
+    end,
+  }
+
   -- Sync plugins after installing packer
   if packer_bootstrap then
     require('packer').sync()
