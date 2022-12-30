@@ -28,7 +28,10 @@ lsp.configure('sumneko_lua', {
         maxPreload = 100000,
         preloadFileSize = 10000,
       },
-    }
+    },
+    gopls = {
+      gofumpt = true,
+    },
   }
 })
 
@@ -92,6 +95,22 @@ lsp.setup_nvim_cmp({
   },
 })
 
+-- https://github.com/neovim/nvim-lspconfig/issues/115#issuecomment-902680058
+function organize_imports(timeoutms)
+  local params = vim.lsp.util.make_range_params()
+  params.context = { only = { 'source.organizeImports' } }
+  local result = vim.lsp.buf_request_sync(0, 'textDocument/codeAction', params, timeoutms)
+  for _, res in pairs(result or {}) do
+    for _, r in pairs(res.result or {}) do
+      if r.edit then
+        vim.lsp.util.apply_workspace_edit(r.edit, 'UTF-8')
+      else
+        vim.lsp.buf.execute_command(r.command)
+      end
+    end
+  end
+end
+
 lsp.on_attach(function(client, bufnr)
   local opts = { buffer = bufnr }
 
@@ -119,7 +138,10 @@ lsp.on_attach(function(client, bufnr)
   vim.api.nvim_create_autocmd('BufWritePre', {
     group = 'lsp_format',
     pattern = '*',
-    callback = vim.lsp.buf.formatting_sync,
+    callback = function()
+      vim.lsp.buf.formatting_sync()
+      organize_imports(500)
+    end
   })
 
   if client.server_capabilities.documentHighlightProvider then
