@@ -26,6 +26,8 @@ return require('packer').startup(function(use)
   -- Packer can manage itself
   use('wbthomason/packer.nvim')
 
+  use('lewis6991/impatient.nvim')
+
   -- Telescope
   use({
     'nvim-telescope/telescope.nvim', branch = '0.1.x',
