@@ -24,7 +24,7 @@ vim.api.nvim_set_hl(0, 'CursorColumn', { bg = 'none', fg = colors.accent })
 vim.api.nvim_set_hl(0, 'Search', { bg = colors.accent })
 vim.api.nvim_set_hl(0, 'CursorLine', { bg = 'none', fg = 'none' })
 
-vim.api.nvim_set_hl(0, 'IncSearch', { bg = colors.accent, fg = 'none' })
+vim.api.nvim_set_hl(0, 'IncSearch', { bg = colors.purple, fg = 'none' })
 vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
 vim.api.nvim_set_hl(0, 'FloatBorder', { bg = 'none' })
 
