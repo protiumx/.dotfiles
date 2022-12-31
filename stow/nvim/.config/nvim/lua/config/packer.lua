@@ -48,7 +48,13 @@ return require('packer').startup(function(use)
   use('kyazdani42/nvim-web-devicons')
 
   -- Treesitter
-  use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' })
+  use({
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate',
+    config = function()
+      require('config.treesitter').setup()
+    end
+  })
 
   use('nvim-treesitter/playground')
 
