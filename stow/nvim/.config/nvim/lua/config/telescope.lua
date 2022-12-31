@@ -74,7 +74,9 @@ function M.setup()
     defaults = {
       prompt_prefix = '❯ ',
       selection_caret = '❯ ',
+      multi_icon = '+ ',
 
+      layout_strategy = 'flex',
       layout_config = { height = 0.95, width = 0.9 },
 
       mappings = {
