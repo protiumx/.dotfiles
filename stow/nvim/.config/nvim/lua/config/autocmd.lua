@@ -1,24 +1,18 @@
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 
-augroup('sign_column_all', {})
 autocmd({ 'BufRead', 'BufNewFile' }, {
-  group = 'sign_column_all',
   pattern = '*',
   command = 'setlocal signcolumn=yes',
 })
 
 -- Trim white spaces before writing
-augroup('write_pre', {})
 autocmd({ 'BufWritePre' }, {
-  group = 'write_pre',
   pattern = "*",
   command = [[%s/\s\+$//e]],
 })
 
-augroup('highlight_yank', {})
 autocmd('TextYankPost', {
-  group = 'highlight_yank',
   pattern = '*',
   callback = function()
     vim.highlight.on_yank({
@@ -28,9 +22,7 @@ autocmd('TextYankPost', {
   end,
 })
 
-augroup('elixir_tpl', {})
 autocmd({ 'BufNewFile', 'BufRead' }, {
-  group = 'elixir_tpl',
   pattern = '*.heex',
   command = [[setlocal ft=html syntax=html]],
 })
@@ -62,7 +54,7 @@ autocmd('CmdlineEnter', {
   group = 'clear_cmdline',
   pattern = '*',
   callback = function()
-    if cmd_timer then
+    if cmd_timer ~= nil then
       cmd_timer:stop()
     end
   end,
