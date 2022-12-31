@@ -138,8 +138,13 @@ lsp.on_attach(function(client, bufnr)
   vim.api.nvim_create_autocmd('BufWritePre', {
     group = 'lsp_format',
     pattern = '*',
+    callback = vim.lsp.buf.formatting_sync,
+  })
+
+  vim.api.nvim_create_autocmd('BufWritePre', {
+    group = 'lsp_format',
+    pattern = '*.go',
     callback = function()
-      vim.lsp.buf.formatting_sync()
       organize_imports(500)
     end
   })
