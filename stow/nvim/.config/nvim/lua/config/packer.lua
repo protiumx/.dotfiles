@@ -107,6 +107,9 @@ return require('packer').startup(function(use)
     setup = function()
       vim.g['sandwich_no_default_key_mappings'] = 1
     end,
+    config = function()
+      require('config.vim-sandwich').setup()
+    end,
   })
 
   use {
