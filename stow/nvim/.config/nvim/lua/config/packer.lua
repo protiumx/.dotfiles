@@ -33,7 +33,9 @@ return require('packer').startup(function(use)
     'nvim-telescope/telescope.nvim', branch = '0.1.x',
     requires = { { 'nvim-lua/plenary.nvim' } }
   })
+
   use({ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' })
+
   use('nvim-telescope/telescope-file-browser.nvim')
 
   -- Themes
@@ -44,6 +46,7 @@ return require('packer').startup(function(use)
 
   -- Treesitter
   use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' })
+
   use('nvim-treesitter/playground')
 
   -- Enhancement
@@ -59,7 +62,8 @@ return require('packer').startup(function(use)
   }
 
   -- Better jump
-  use('justinmk/vim-sneak') -- sneaky jumps
+  use('justinmk/vim-sneak') -- sneaky jump
+
   use({
     'norcalli/nvim-colorizer.lua', -- colorize hexa color strings
     config = function()
@@ -77,18 +81,30 @@ return require('packer').startup(function(use)
     end
   })
   use('junegunn/vim-easy-align')
+
   use('mattn/emmet-vim')
+
   use('arthurxavierx/vim-caser')
+  --
   -- Change surroundings
-  use('machakann/vim-sandwich') -- surroundings
+  use({
+    'machakann/vim-sandwich',
+    setup = function()
+      vim.g['sandwich_no_default_key_mappings'] = 1
+    end,
+  })
+
   use {
     'windwp/nvim-autopairs',
     config = function()
       require('nvim-autopairs').setup({})
     end
   }
+
   use('mbbill/undotree')
+
   use('lbrayner/vim-rzip')
+
   use({
     'numToStr/Comment.nvim',
     config = function()
@@ -101,6 +117,7 @@ return require('packer').startup(function(use)
 
   -- Git
   use('tpope/vim-fugitive')
+
   -- Show sign columns for changes in files
   use('lewis6991/gitsigns.nvim')
 
@@ -145,7 +162,6 @@ return require('packer').startup(function(use)
     requires = {
       'theHamsta/nvim-dap-virtual-text',
       'rcarriga/nvim-dap-ui',
-      'nvim-telescope/telescope-dap.nvim',
       { 'leoluz/nvim-dap-go', module = 'dap-go' },
     },
     config = function()
