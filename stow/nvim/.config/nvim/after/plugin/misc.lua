@@ -30,3 +30,5 @@ vim.keymap.set('n', '<F3>', function()
     vim.cmd [[vertical Git | vertical resize 40 | setlocal noequalalways wrap readonly nomodifiable noswapfile]]
   end
 end)
+
+vim.keymap.set('n', '<Leader>G', ':G | only<CR>', { silent = true })

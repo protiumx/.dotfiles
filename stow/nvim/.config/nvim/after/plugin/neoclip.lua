@@ -19,7 +19,7 @@ require('neoclip').setup({
       i = {
         select = '<CR>',
         paste = '<C-p>',
-        paste_behind = '<c-k>',
+        paste_behind = '<C-k>',
         replay = '<C-q>', -- replay a macro
         delete = '<C-d>', -- delete an entry
       },
