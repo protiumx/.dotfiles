@@ -37,16 +37,16 @@ telescope.load_extension('projects')
 telescope.load_extension('neoclip')
 
 local builtin = require('telescope.builtin')
-local minimal = { previewer = false, theme = 'dropdown' }
+local dropdown = { previewer = false, theme = 'dropdown' }
 
 vim.keymap.set({ 'i', 'n' }, '<C-]>', function()
-  builtin.find_files(minimal)
+  builtin.find_files(dropdown)
 end, { silent = true })
 
 vim.keymap.set({ 'n' }, '<C-h>', builtin.find_files, { silent = true })
 
 vim.keymap.set({ 'i', 'n' }, '<C-b>', function()
-  builtin.buffers(minimal)
+  builtin.buffers(dropdown)
 end, { silent = true })
 
 -- Open in current file's folder
@@ -68,13 +68,10 @@ vim.keymap.set('n', '<Leader>sr', builtin.registers, { silent = true })
 vim.keymap.set('n', '<Leader>sh', builtin.help_tags, { silent = true })
 vim.keymap.set('n', '<Leader>sk', builtin.keymaps, { silent = true })
 vim.keymap.set('n', '<Leader>/', function()
-  builtin.current_buffer_fuzzy_find(minimal)
+  builtin.current_buffer_fuzzy_find(dropdown)
 end, { silent = true })
 
 vim.keymap.set('n', '<Leader>st', builtin.colorscheme, { silent = true })
-
--- LSP quick fix
-vim.keymap.set('n', '<Leader>sqf', builtin.quickfix, { silent = true })
 
 -- Spell suggestions for word under cursor
 vim.keymap.set('n', '<Leader>ss', function()
@@ -96,14 +93,10 @@ end, { silent = true, desc = '[S]earch [P]rojects' })
 vim.cmd [[autocmd User TelescopePreviewerLoaded setlocal wrap]]
 
 -- Neoclip
-vim.keymap.set('n', '<Leader>sy', function()
-  require('telescope').extensions.neoclip.default()
-end, { silent = true, desc = '[S]earch [Y]anks' })
-
-vim.keymap.set('i', '<C-y>', function()
-  require('telescope').extensions.neoclip.default()
-end, { silent = true, desc = '[S]earch [Y]anks' })
+vim.keymap.set({ 'n', 'i' }, '<M-y>', function()
+  telescope.extensions.neoclip.default()
+end, { silent = true, desc = 'Search Yanks' })
 
 vim.keymap.set('n', '<Leader>sm', function()
-  require('telescope').extensions.macroscope.default()
-end, { silent = true, desc = '[S]earch [Y]anks' })
+  telescope.extensions.macroscope.default()
+end, { silent = true, desc = '[S]earch [M]acros' })
