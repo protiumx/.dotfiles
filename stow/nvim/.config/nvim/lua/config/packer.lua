@@ -128,7 +128,12 @@ return require('packer').startup(function(use)
   use('tpope/vim-fugitive')
 
   -- Show sign columns for changes in files
-  use('lewis6991/gitsigns.nvim')
+  use({
+    'lewis6991/gitsigns.nvim',
+    config = function()
+      require('config.gitsigns').setup()
+    end
+  })
 
   -- LSP
   use({
