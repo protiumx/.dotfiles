@@ -81,8 +81,8 @@ vim.keymap.set('n', '<M-a>', 'ggVG', { silent = true })
 vim.keymap.set('i', '<M-a>', '<Esc>ggVG', { silent = true })
 
 -- Open new file adjacent to current file
-vim.keymap.set('n', '<Leader>o', [[:e <C-R>=expand("%:h") . "/"<CR><Right>]], { silent = true })
-vim.keymap.set('n', '<Leader>vo', [[:vsp | e <C-R>=expand("%:h") . "/"<CR>]], { silent = true })
+vim.keymap.set('n', '<Leader>o', ':e <C-R>=expand("%:h") . "/"<CR>', { silent = true })
+vim.keymap.set('n', '<Leader>vo', ':vsp | e <C-R>=expand("%:h") . "/"<CR>', { silent = true })
 
 -- Paste formatted
 vim.keymap.set('n', 'p', 'p=`]', { silent = true })
@@ -94,9 +94,9 @@ vim.keymap.set('i', '<M-o>', '<C-o>o', { silent = true })
 vim.keymap.set('i', '<M-O>', '<C-o>O', { silent = true })
 
 -- Terminal keymaps
-vim.keymap.set('i', '<F12>', '<Esc>:term ++close<CR>', { silent = true })
+vim.keymap.set('i', '<F12>', '<Esc>:term<CR>', { silent = true })
 vim.keymap.set('i', '<F10>', '<Esc>:vs term://zsh<CR>', { silent = true })
-vim.keymap.set('n', '<F12>', ':term ++close<CR>', { silent = true })
+vim.keymap.set('n', '<F12>', ':term<CR>', { silent = true })
 vim.keymap.set('n', '<F10>', ':vs term://zsh<CR>', { silent = true })
 -- Close terminal
 vim.keymap.set('t', '<C-q>', '<C-\\><C-n>:bd!<CR>', { silent = true })
