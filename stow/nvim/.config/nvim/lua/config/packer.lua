@@ -53,7 +53,12 @@ return require('packer').startup(function(use)
   use('nvim-treesitter/playground')
 
   -- Enhancement
-  use('feline-nvim/feline.nvim') -- status line
+  use({
+    'feline-nvim/feline.nvim', -- Status line
+    config = function()
+      require('config.feline').setup()
+    end
+  })
 
   use('ahmedkhalf/project.nvim')
 

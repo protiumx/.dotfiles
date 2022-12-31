@@ -1,6 +1,4 @@
-if not pcall(require, "feline") then
-  return
-end
+local M = {}
 
 local colors = {
   bg = '#1c1c1c',
@@ -147,22 +145,30 @@ table.insert(components.active[2], comps.line_percentage)
 table.insert(components.inactive[1], comps.vi_mode)
 table.insert(components.inactive[1], comps.file.info)
 
-local feline = require('feline')
-feline.setup({
-  colors = colors,
-  components = components,
-  vi_mode_colors = mode_colors,
-  disable = {
-    filetypes = {
-      '^packer$',
-      '^fugitive$',
-      '^fugitiveblame$',
-      '^qf$',
-      '^help$'
-    },
-    buftypes = { '^terminal$' },
-    bufnames = {}
-  }
-})
+function M.setup()
+  if not pcall(require, "feline") then
+    return
+  end
 
-feline.use_theme(colors)
+  local feline = require('feline')
+  feline.setup({
+    colors = colors,
+    components = components,
+    vi_mode_colors = mode_colors,
+    disable = {
+      filetypes = {
+        '^packer$',
+        '^fugitive$',
+        '^fugitiveblame$',
+        '^qf$',
+        '^help$'
+      },
+      buftypes = { '^terminal$' },
+      bufnames = {}
+    }
+  })
+
+  feline.use_theme(colors)
+end
+
+return M
