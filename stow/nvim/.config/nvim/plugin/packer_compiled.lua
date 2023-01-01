@@ -113,8 +113,11 @@ _G.packer_plugins = {
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
   ["emmet-vim"] = {
-    loaded = true,
-    path = "/home/brian/.local/share/nvim/site/pack/packer/start/emmet-vim",
+    config = { "\27LJ\2\n=\0\0\2\0\4\0\0056\0\0\0009\0\1\0'\1\3\0=\1\2\0K\0\1\0\n<C-X>\26user_emmet_leader_key\6g\bvim\0" },
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/home/brian/.local/share/nvim/site/pack/packer/opt/emmet-vim",
     url = "https://github.com/mattn/emmet-vim"
   },
   ["feline.nvim"] = {
@@ -252,8 +255,11 @@ _G.packer_plugins = {
     url = "https://github.com/NLKNguyen/papercolor-theme"
   },
   playground = {
-    loaded = true,
-    path = "/home/brian/.local/share/nvim/site/pack/packer/start/playground",
+    commands = { "TSPlay" },
+    loaded = false,
+    needs_bufread = true,
+    only_cond = false,
+    path = "/home/brian/.local/share/nvim/site/pack/packer/opt/playground",
     url = "https://github.com/nvim-treesitter/playground"
   },
   ["plenary.nvim"] = {
@@ -419,6 +425,13 @@ time([[Config for feline.nvim]], false)
 
 -- Command lazy-loads
 time([[Defining lazy-load commands]], true)
+pcall(vim.api.nvim_create_user_command, 'TSPlay', function(cmdargs)
+          require('packer.load')({'playground'}, { cmd = 'TSPlay', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
+        end,
+        {nargs = '*', range = true, bang = true, complete = function()
+          require('packer.load')({'playground'}, { cmd = 'TSPlay' }, _G.packer_plugins)
+          return vim.fn.getcompletion('TSPlay ', 'cmdline')
+      end})
 pcall(vim.api.nvim_create_user_command, 'EasyAlign', function(cmdargs)
           require('packer.load')({'vim-easy-align'}, { cmd = 'EasyAlign', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
         end,
@@ -430,10 +443,31 @@ time([[Defining lazy-load commands]], false)
 
 vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
+  -- Filetype lazy-loads
+time([[Defining lazy-load filetype autocommands]], true)
+vim.cmd [[au FileType pug ++once lua require("packer.load")({'emmet-vim'}, { ft = "pug" }, _G.packer_plugins)]]
+vim.cmd [[au FileType php ++once lua require("packer.load")({'emmet-vim'}, { ft = "php" }, _G.packer_plugins)]]
+vim.cmd [[au FileType handlebars ++once lua require("packer.load")({'emmet-vim'}, { ft = "handlebars" }, _G.packer_plugins)]]
+vim.cmd [[au FileType glimmer ++once lua require("packer.load")({'emmet-vim'}, { ft = "glimmer" }, _G.packer_plugins)]]
+vim.cmd [[au FileType typescriptreact ++once lua require("packer.load")({'emmet-vim'}, { ft = "typescriptreact" }, _G.packer_plugins)]]
+vim.cmd [[au FileType xml ++once lua require("packer.load")({'emmet-vim'}, { ft = "xml" }, _G.packer_plugins)]]
+vim.cmd [[au FileType tsx ++once lua require("packer.load")({'emmet-vim'}, { ft = "tsx" }, _G.packer_plugins)]]
+vim.cmd [[au FileType svelte ++once lua require("packer.load")({'emmet-vim'}, { ft = "svelte" }, _G.packer_plugins)]]
+vim.cmd [[au FileType hbs ++once lua require("packer.load")({'emmet-vim'}, { ft = "hbs" }, _G.packer_plugins)]]
+vim.cmd [[au FileType ejs ++once lua require("packer.load")({'emmet-vim'}, { ft = "ejs" }, _G.packer_plugins)]]
+vim.cmd [[au FileType markdown ++once lua require("packer.load")({'emmet-vim'}, { ft = "markdown" }, _G.packer_plugins)]]
+vim.cmd [[au FileType django-html ++once lua require("packer.load")({'emmet-vim'}, { ft = "django-html" }, _G.packer_plugins)]]
+vim.cmd [[au FileType javascriptreact ++once lua require("packer.load")({'emmet-vim'}, { ft = "javascriptreact" }, _G.packer_plugins)]]
+vim.cmd [[au FileType htmldjango ++once lua require("packer.load")({'emmet-vim'}, { ft = "htmldjango" }, _G.packer_plugins)]]
+vim.cmd [[au FileType html ++once lua require("packer.load")({'emmet-vim'}, { ft = "html" }, _G.packer_plugins)]]
+vim.cmd [[au FileType jsx ++once lua require("packer.load")({'emmet-vim'}, { ft = "jsx" }, _G.packer_plugins)]]
+vim.cmd [[au FileType rescript ++once lua require("packer.load")({'emmet-vim'}, { ft = "rescript" }, _G.packer_plugins)]]
+vim.cmd [[au FileType vue ++once lua require("packer.load")({'emmet-vim'}, { ft = "vue" }, _G.packer_plugins)]]
+time([[Defining lazy-load filetype autocommands]], false)
   -- Event lazy-loads
 time([[Defining lazy-load event autocommands]], true)
-vim.cmd [[au BufRead * ++once lua require("packer.load")({'gitsigns.nvim', 'Comment.nvim'}, { event = "BufRead *" }, _G.packer_plugins)]]
 vim.cmd [[au BufReadPre * ++once lua require("packer.load")({'nvim-dap'}, { event = "BufReadPre *" }, _G.packer_plugins)]]
+vim.cmd [[au BufRead * ++once lua require("packer.load")({'gitsigns.nvim', 'Comment.nvim'}, { event = "BufRead *" }, _G.packer_plugins)]]
 time([[Defining lazy-load event autocommands]], false)
 vim.cmd("augroup END")
 

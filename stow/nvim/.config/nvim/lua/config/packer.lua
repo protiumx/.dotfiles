@@ -58,7 +58,10 @@ return require('packer').startup(function(use)
     end
   })
 
-  use('nvim-treesitter/playground')
+  use({
+    'nvim-treesitter/playground',
+    cmd = 'TSPlay',
+  })
 
   -- Enhancement
   use({
@@ -129,10 +132,35 @@ return require('packer').startup(function(use)
     end
   })
 
-  use('mattn/emmet-vim')
+  use({
+    'mattn/emmet-vim',
+    config = function()
+      vim.g['user_emmet_leader_key'] = '<C-X>'
+    end,
+    ft = {
+      'django-html',
+      'ejs',
+      'glimmer',
+      'handlebars',
+      'hbs',
+      'html',
+      'htmldjango',
+      'javascriptreact',
+      'jsx',
+      'markdown',
+      'php',
+      'pug',
+      'rescript',
+      'svelte',
+      'tsx',
+      'typescriptreact',
+      'vue',
+      'xml',
+    },
+  })
 
   use('arthurxavierx/vim-caser')
-  --
+
   -- Change surroundings
   use({
     'machakann/vim-sandwich',
@@ -164,7 +192,10 @@ return require('packer').startup(function(use)
   })
 
   -- Multiple cursors
-  use({ 'mg979/vim-visual-multi', branch = 'master' })
+  use({
+    'mg979/vim-visual-multi',
+    branch = 'master',
+  })
 
   -- Git
   use({
