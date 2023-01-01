@@ -176,13 +176,13 @@ _G.packer_plugins = {
     url = "https://github.com/hrsh7th/nvim-cmp"
   },
   ["nvim-colorizer.lua"] = {
-    config = { "\27LJ\2\nô\1\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\25user_default_options\1\0\0\1\0\a\tmode\15foreground\vcss_fn\2\bcss\1\rRRGGBBAA\1\nnames\1\vRRGGBB\2\bRGB\2\nsetup\14colorizer\frequire\0" },
+    config = { "\27LJ\2\nô\1\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\25user_default_options\1\0\0\1\0\a\nnames\1\rRRGGBBAA\1\tmode\15foreground\bcss\1\vcss_fn\2\bRGB\2\vRRGGBB\2\nsetup\14colorizer\frequire\0" },
     loaded = true,
     path = "/home/brian/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua",
     url = "https://github.com/norcalli/nvim-colorizer.lua"
   },
   ["nvim-dap"] = {
-    after = { "nvim-dap-ui", "nvim-dap-virtual-text", "nvim-dap-go" },
+    after = { "nvim-dap-virtual-text", "nvim-dap-go", "nvim-dap-ui" },
     config = { "\27LJ\2\n8\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\15config.dap\frequire\0" },
     loaded = false,
     needs_bufread = false,
@@ -262,7 +262,10 @@ _G.packer_plugins = {
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
   ["project.nvim"] = {
+    after = { "gitsigns.nvim" },
+    config = { "\27LJ\2\nª\1\0\0\4\0\b\0\v6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\0025\3\6\0=\3\a\2B\0\2\1K\0\1\0\rpatterns\1\6\0\0\vgo.mod\rMakefile\17package.json\t.git\20!.git/worktrees\22detection_methods\1\0\1\16show_hidden\2\1\2\0\0\fpattern\nsetup\17project_nvim\frequire\0" },
     loaded = true,
+    only_config = true,
     path = "/home/brian/.local/share/nvim/site/pack/packer/start/project.nvim",
     url = "https://github.com/ahmedkhalf/project.nvim"
   },
@@ -369,50 +372,50 @@ time([[Setup for vim-sandwich]], false)
 time([[packadd for vim-sandwich]], true)
 vim.cmd [[packadd vim-sandwich]]
 time([[packadd for vim-sandwich]], false)
--- Config for: nvim-treesitter
-time([[Config for nvim-treesitter]], true)
-try_loadstring("\27LJ\2\n?\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\22config.treesitter\frequire\0", "config", "nvim-treesitter")
-time([[Config for nvim-treesitter]], false)
--- Config for: nvim-neoclip.lua
-time([[Config for nvim-neoclip.lua]], true)
-try_loadstring("\27LJ\2\n<\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\19config.neoclip\frequire\0", "config", "nvim-neoclip.lua")
-time([[Config for nvim-neoclip.lua]], false)
--- Config for: vim-sandwich
-time([[Config for vim-sandwich]], true)
-try_loadstring("\27LJ\2\nA\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\24config.vim-sandwich\frequire\0", "config", "vim-sandwich")
-time([[Config for vim-sandwich]], false)
--- Config for: feline.nvim
-time([[Config for feline.nvim]], true)
-try_loadstring("\27LJ\2\n;\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\18config.feline\frequire\0", "config", "feline.nvim")
-time([[Config for feline.nvim]], false)
--- Config for: nvim-colorizer.lua
-time([[Config for nvim-colorizer.lua]], true)
-try_loadstring("\27LJ\2\nô\1\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\25user_default_options\1\0\0\1\0\a\tmode\15foreground\vcss_fn\2\bcss\1\rRRGGBBAA\1\nnames\1\vRRGGBB\2\bRGB\2\nsetup\14colorizer\frequire\0", "config", "nvim-colorizer.lua")
-time([[Config for nvim-colorizer.lua]], false)
--- Config for: telescope.nvim
-time([[Config for telescope.nvim]], true)
-try_loadstring("\27LJ\2\n>\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\21config.telescope\frequire\0", "config", "telescope.nvim")
-time([[Config for telescope.nvim]], false)
--- Config for: lspsaga.nvim
-time([[Config for lspsaga.nvim]], true)
-try_loadstring("\27LJ\2\n=\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\20config.lsp-saga\frequire\0", "config", "lspsaga.nvim")
-time([[Config for lspsaga.nvim]], false)
--- Config for: vim-fugitive
-time([[Config for vim-fugitive]], true)
-try_loadstring("\27LJ\2\n¨\2\0\0\4\0\t\1\0246\0\0\0009\0\1\0009\0\2\0'\2\3\0B\0\2\2\6\0\4\0X\1\fÄ6\1\0\0009\1\1\0019\1\5\1\18\3\0\0B\1\2\2\b\1\0\0X\1\5Ä6\1\0\0009\1\6\1'\3\a\0B\1\2\1X\1\4Ä6\1\0\0009\1\6\1'\3\b\0B\1\2\1K\0\1\0evertical Git | vertical resize 40 | setlocal noequalalways wrap readonly nomodifiable noswapfile4 execute \":bd\" bufname('fugitive:///*/.git//') \bcmd\14buflisted\5\25fugitive:///*/.git//\fbufname\afn\bvim\0Å\1\1\0\6\0\t\0\0166\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\4\0003\4\5\0B\0\4\0016\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\6\0'\4\a\0005\5\b\0B\0\5\1K\0\1\0\1\0\1\vsilent\2\18:G | only<CR>\14<Leader>G\0\t<F3>\6n\bset\vkeymap\bvim\0", "config", "vim-fugitive")
-time([[Config for vim-fugitive]], false)
--- Config for: vim-sneak
-time([[Config for vim-sneak]], true)
-try_loadstring("\27LJ\2\n>\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\21config.vim-sneak\frequire\0", "config", "vim-sneak")
-time([[Config for vim-sneak]], false)
 -- Config for: nvim-autopairs
 time([[Config for nvim-autopairs]], true)
 try_loadstring("\27LJ\2\n@\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\19nvim-autopairs\frequire\0", "config", "nvim-autopairs")
 time([[Config for nvim-autopairs]], false)
--- Load plugins in order defined by `after`
-time([[Sequenced loading]], true)
-vim.cmd [[ packadd project.nvim ]]
-time([[Sequenced loading]], false)
+-- Config for: vim-sandwich
+time([[Config for vim-sandwich]], true)
+try_loadstring("\27LJ\2\nA\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\24config.vim-sandwich\frequire\0", "config", "vim-sandwich")
+time([[Config for vim-sandwich]], false)
+-- Config for: nvim-treesitter
+time([[Config for nvim-treesitter]], true)
+try_loadstring("\27LJ\2\n?\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\22config.treesitter\frequire\0", "config", "nvim-treesitter")
+time([[Config for nvim-treesitter]], false)
+-- Config for: telescope.nvim
+time([[Config for telescope.nvim]], true)
+try_loadstring("\27LJ\2\n>\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\21config.telescope\frequire\0", "config", "telescope.nvim")
+time([[Config for telescope.nvim]], false)
+-- Config for: vim-fugitive
+time([[Config for vim-fugitive]], true)
+try_loadstring("\27LJ\2\n¨\2\0\0\4\0\t\1\0246\0\0\0009\0\1\0009\0\2\0'\2\3\0B\0\2\2\6\0\4\0X\1\fÄ6\1\0\0009\1\1\0019\1\5\1\18\3\0\0B\1\2\2\b\1\0\0X\1\5Ä6\1\0\0009\1\6\1'\3\a\0B\1\2\1X\1\4Ä6\1\0\0009\1\6\1'\3\b\0B\1\2\1K\0\1\0evertical Git | vertical resize 40 | setlocal noequalalways wrap readonly nomodifiable noswapfile4 execute \":bd\" bufname('fugitive:///*/.git//') \bcmd\14buflisted\5\25fugitive:///*/.git//\fbufname\afn\bvim\0Å\1\1\0\6\0\t\0\0166\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\4\0003\4\5\0B\0\4\0016\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\6\0'\4\a\0005\5\b\0B\0\5\1K\0\1\0\1\0\1\vsilent\2\18:G | only<CR>\14<Leader>G\0\t<F3>\6n\bset\vkeymap\bvim\0", "config", "vim-fugitive")
+time([[Config for vim-fugitive]], false)
+-- Config for: lspsaga.nvim
+time([[Config for lspsaga.nvim]], true)
+try_loadstring("\27LJ\2\n=\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\20config.lsp-saga\frequire\0", "config", "lspsaga.nvim")
+time([[Config for lspsaga.nvim]], false)
+-- Config for: project.nvim
+time([[Config for project.nvim]], true)
+try_loadstring("\27LJ\2\nª\1\0\0\4\0\b\0\v6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\0025\3\6\0=\3\a\2B\0\2\1K\0\1\0\rpatterns\1\6\0\0\vgo.mod\rMakefile\17package.json\t.git\20!.git/worktrees\22detection_methods\1\0\1\16show_hidden\2\1\2\0\0\fpattern\nsetup\17project_nvim\frequire\0", "config", "project.nvim")
+time([[Config for project.nvim]], false)
+-- Config for: nvim-colorizer.lua
+time([[Config for nvim-colorizer.lua]], true)
+try_loadstring("\27LJ\2\nô\1\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\25user_default_options\1\0\0\1\0\a\nnames\1\rRRGGBBAA\1\tmode\15foreground\bcss\1\vcss_fn\2\bRGB\2\vRRGGBB\2\nsetup\14colorizer\frequire\0", "config", "nvim-colorizer.lua")
+time([[Config for nvim-colorizer.lua]], false)
+-- Config for: nvim-neoclip.lua
+time([[Config for nvim-neoclip.lua]], true)
+try_loadstring("\27LJ\2\n<\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\19config.neoclip\frequire\0", "config", "nvim-neoclip.lua")
+time([[Config for nvim-neoclip.lua]], false)
+-- Config for: vim-sneak
+time([[Config for vim-sneak]], true)
+try_loadstring("\27LJ\2\n>\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\21config.vim-sneak\frequire\0", "config", "vim-sneak")
+time([[Config for vim-sneak]], false)
+-- Config for: feline.nvim
+time([[Config for feline.nvim]], true)
+try_loadstring("\27LJ\2\n;\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\18config.feline\frequire\0", "config", "feline.nvim")
+time([[Config for feline.nvim]], false)
 
 -- Command lazy-loads
 time([[Defining lazy-load commands]], true)

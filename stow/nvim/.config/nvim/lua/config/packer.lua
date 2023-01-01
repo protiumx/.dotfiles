@@ -68,7 +68,22 @@ return require('packer').startup(function(use)
     end
   })
 
-  use('ahmedkhalf/project.nvim')
+  use({
+    'ahmedkhalf/project.nvim',
+    config = function()
+      require('project_nvim').setup({
+        detection_methods = { 'pattern' },
+        show_hidden = true,
+        patterns = {
+          'go.mod',
+          'Makefile',
+          'package.json',
+          '.git',
+          '!.git/worktrees',
+        },
+      })
+    end
+  })
 
   use {
     'AckslD/nvim-neoclip.lua',
