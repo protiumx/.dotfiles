@@ -104,6 +104,7 @@ return require('packer').startup(function(use)
 
   use({
     'norcalli/nvim-colorizer.lua', -- colorize hexa and rgb strings
+    cmd = 'Colorizer',
     config = function()
       require('colorizer').setup({
         user_default_options = {
@@ -179,7 +180,10 @@ return require('packer').startup(function(use)
 
   use('mbbill/undotree')
 
-  use('lbrayner/vim-rzip')
+  use({
+    'lbrayner/vim-rzip',
+    cmd = 'VimZip',
+  })
 
   use({
     'numToStr/Comment.nvim',
@@ -193,6 +197,7 @@ return require('packer').startup(function(use)
   use({
     'mg979/vim-visual-multi',
     branch = 'master',
+    event = "BufRead",
   })
 
   -- Git
