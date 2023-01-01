@@ -97,6 +97,7 @@ return require('packer').startup(function(use)
   -- Better jump
   use({
     'justinmk/vim-sneak',
+    event = "BufRead",
     config = function()
       require('config.vim-sneak').setup()
     end
@@ -163,6 +164,7 @@ return require('packer').startup(function(use)
   -- Change surroundings
   use({
     'machakann/vim-sandwich',
+    event = "BufRead",
     setup = function()
       vim.g['sandwich_no_default_key_mappings'] = 1
     end,
@@ -173,12 +175,11 @@ return require('packer').startup(function(use)
 
   use {
     'windwp/nvim-autopairs',
+    event = "BufRead",
     config = function()
       require('nvim-autopairs').setup({})
     end
   }
-
-  use('mbbill/undotree')
 
   use({
     'lbrayner/vim-rzip',
@@ -273,9 +274,7 @@ return require('packer').startup(function(use)
     'mfussenegger/nvim-dap',
     opt = true,
     event = 'BufReadPre',
-    ft = {
-      'go',
-    },
+    cmd = 'Dap',
     module = { 'dap' },
     wants = {
       'nvim-dap-virtual-text',
