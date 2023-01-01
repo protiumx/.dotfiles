@@ -1,6 +1,7 @@
 -- Automatically install packer
 local fn = vim.fn
 local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+local packer_bootstrap = false
 
 if fn.empty(fn.glob(install_path)) > 0 then
   packer_bootstrap = fn.system({
@@ -15,7 +16,7 @@ if fn.empty(fn.glob(install_path)) > 0 then
 end
 
 -- Use a protected call so we don't error out on first use
-local status_ok, packer = pcall(require, 'packer')
+local status_ok, _ = pcall(require, 'packer')
 if not status_ok then
   return
 end
@@ -30,8 +31,9 @@ return require('packer').startup(function(use)
 
   -- Telescope
   use({
-    'nvim-telescope/telescope.nvim', branch = '0.1.x',
-    requires = { { 'nvim-lua/plenary.nvim' } },
+    'nvim-telescope/telescope.nvim',
+    branch = '0.1.x',
+    requires = { 'nvim-lua/plenary.nvim' },
     config = function()
       require('config.telescope').setup()
     end
@@ -77,7 +79,12 @@ return require('packer').startup(function(use)
   }
 
   -- Better jump
-  use('justinmk/vim-sneak') -- sneaky jump
+  use({
+    'justinmk/vim-sneak',
+    config = function()
+      require('config.vim-sneak').setup()
+    end
+  })
 
   use({
     'norcalli/nvim-colorizer.lua', -- colorize hexa color strings
