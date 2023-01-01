@@ -171,6 +171,11 @@ return require('packer').startup(function(use)
   -- Show sign columns for changes in files
   use({
     'lewis6991/gitsigns.nvim',
+    after = 'project.nvim',
+    cond = function()
+      -- project.nvim should have setup the path when this is executed
+      return vim.fn.isdirectory(vim.fn.getcwd() .. '/.git/')
+    end,
     event = "BufRead",
     config = function()
       require('config.gitsigns').setup()
