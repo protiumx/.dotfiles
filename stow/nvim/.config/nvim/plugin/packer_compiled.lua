@@ -287,8 +287,12 @@ _G.packer_plugins = {
     url = "https://github.com/arthurxavierx/vim-caser"
   },
   ["vim-easy-align"] = {
-    loaded = true,
-    path = "/home/brian/.local/share/nvim/site/pack/packer/start/vim-easy-align",
+    commands = { "EasyAlign" },
+    config = { "\27LJ\2\n‡\1\0\0\6\0\t\0\0176\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\4\0'\4\5\0005\5\6\0B\0\5\0016\0\0\0009\0\1\0009\0\2\0'\2\a\0'\3\4\0'\4\5\0005\5\b\0B\0\5\1K\0\1\0\1\0\1\nremap\2\6n\1\0\1\nremap\2\22<Plug>(EasyAlign)\aga\6x\bset\vkeymap\bvim\0" },
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/home/brian/.local/share/nvim/site/pack/packer/opt/vim-easy-align",
     url = "https://github.com/junegunn/vim-easy-align"
   },
   ["vim-fugitive"] = {
@@ -402,6 +406,18 @@ time([[Config for Comment.nvim]], false)
 time([[Config for vim-sneak]], true)
 try_loadstring("\27LJ\2\n>\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\21config.vim-sneak\frequire\0", "config", "vim-sneak")
 time([[Config for vim-sneak]], false)
+
+-- Command lazy-loads
+time([[Defining lazy-load commands]], true)
+pcall(vim.api.nvim_create_user_command, 'EasyAlign', function(cmdargs)
+          require('packer.load')({'vim-easy-align'}, { cmd = 'EasyAlign', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
+        end,
+        {nargs = '*', range = true, bang = true, complete = function()
+          require('packer.load')({'vim-easy-align'}, { cmd = 'EasyAlign' }, _G.packer_plugins)
+          return vim.fn.getcompletion('EasyAlign ', 'cmdline')
+      end})
+time([[Defining lazy-load commands]], false)
+
 vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Event lazy-loads

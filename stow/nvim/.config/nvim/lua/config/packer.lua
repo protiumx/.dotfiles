@@ -87,7 +87,7 @@ return require('packer').startup(function(use)
   })
 
   use({
-    'norcalli/nvim-colorizer.lua', -- colorize hexa color strings
+    'norcalli/nvim-colorizer.lua', -- colorize hexa and rgb strings
     config = function()
       require('colorizer').setup({
         user_default_options = {
@@ -102,7 +102,17 @@ return require('packer').startup(function(use)
       })
     end
   })
-  use('junegunn/vim-easy-align')
+
+  use({
+    'junegunn/vim-easy-align',
+    cmd = 'EasyAlign',
+    config = function()
+      -- Start interactive EasyAlign in visual mode (e.g. vipga)
+      vim.keymap.set('x', 'ga', '<Plug>(EasyAlign)', { remap = true })
+      -- Start interactive EasyAlign for a motion/text object (e.g. gaip)
+      vim.keymap.set('n', 'ga', '<Plug>(EasyAlign)', { remap = true })
+    end
+  })
 
   use('mattn/emmet-vim')
 
