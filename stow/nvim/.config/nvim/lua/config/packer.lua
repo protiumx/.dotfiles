@@ -175,7 +175,6 @@ return require('packer').startup(function(use)
 
   use {
     'windwp/nvim-autopairs',
-    event = "BufRead",
     config = function()
       require('nvim-autopairs').setup({})
     end
