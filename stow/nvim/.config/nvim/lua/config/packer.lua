@@ -27,8 +27,6 @@ return require('packer').startup(function(use)
   -- Packer can manage itself
   use('wbthomason/packer.nvim')
 
-  use('lewis6991/impatient.nvim')
-
   -- Telescope
   use({
     'nvim-telescope/telescope.nvim',
@@ -272,8 +270,6 @@ return require('packer').startup(function(use)
     event = 'BufReadPre',
     ft = {
       'go',
-      'lua',
-      'rust',
     },
     module = { 'dap' },
     wants = {

@@ -1,2 +1,1 @@
-require('impatient')
 require('config')
