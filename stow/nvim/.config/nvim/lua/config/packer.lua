@@ -247,6 +247,9 @@ return require('packer').startup(function(use)
       -- Snippets
       'L3MON4D3/LuaSnip',
       'rafamadriz/friendly-snippets',
+
+      -- Show lsp progress
+      'j-hui/fidget.nvim',
     },
     config = function()
       require('config.lsp').setup()

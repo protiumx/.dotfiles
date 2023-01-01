@@ -3,6 +3,11 @@ local M = {}
 function M.setup()
   require('config.lsp.mason').setup()
   require('config.lsp.cmp').setup()
+  require('fidget').setup({
+    text = {
+      done = "",
+    }
+  })
 
   vim.diagnostic.config({
     virtual_text = {
