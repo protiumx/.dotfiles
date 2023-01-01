@@ -3,7 +3,22 @@ local M = {}
 local function keymaps()
   local telescope = require('telescope')
   local builtin = require('telescope.builtin')
-  local dropdown = { previewer = false, theme = 'dropdown' }
+  local themes = require('telescope.themes')
+
+  local dropdown = themes.get_dropdown({
+    previewer = false,
+    layout_config = { prompt_position = 'top' },
+  })
+
+
+  local opts_file_browser = vim.tbl_extend('force', dropdown, {
+    grouped = true,
+    hidden = true,
+  })
+
+  local opts_file_browser_path = vim.tbl_extend('force', opts_file_browser, {
+    path = '%:p:h',
+  })
 
   vim.keymap.set({ 'i', 'n' }, '<C-]>', function()
     builtin.find_files(dropdown)
@@ -17,13 +32,11 @@ local function keymaps()
 
   -- Open in current file's folder
   vim.keymap.set('n', '<M-g>', function()
-    local opts = { grouped = true, hidden = true, previewer = false, theme = 'dropdown', path = '%:p:h' }
-    telescope.extensions.file_browser.file_browser(opts)
+    telescope.extensions.file_browser.file_browser(opts_file_browser_path)
   end, { silent = true })
 
   vim.keymap.set('n', '<M-f>', function()
-    local opts = { grouped = true, hidden = true, previewer = false, theme = 'dropdown' }
-    telescope.extensions.file_browser.file_browser(opts)
+    telescope.extensions.file_browser.file_browser(opts_file_browser)
   end, { silent = true })
 
   vim.keymap.set('n', '<Leader>sg', builtin.live_grep, { silent = true })
