@@ -142,6 +142,7 @@ return require('packer').startup(function(use)
 
   use({
     'numToStr/Comment.nvim',
+    event = "BufRead",
     config = function()
       require('config.comment').setup()
     end
@@ -151,11 +152,26 @@ return require('packer').startup(function(use)
   use({ 'mg979/vim-visual-multi', branch = 'master' })
 
   -- Git
-  use('tpope/vim-fugitive')
+  use({
+    'tpope/vim-fugitive',
+    config = function()
+      vim.keymap.set('n', '<F3>', function()
+        local name = vim.fn.bufname('fugitive:///*/.git//')
+        if name ~= '' and vim.fn.buflisted(name) ~= 0 then
+          vim.cmd [[ execute ":bd" bufname('fugitive:///*/.git//') ]]
+        else
+          vim.cmd [[vertical Git | vertical resize 40 | setlocal noequalalways wrap readonly nomodifiable noswapfile]]
+        end
+      end)
+
+      vim.keymap.set('n', '<Leader>G', ':G | only<CR>', { silent = true })
+    end
+  })
 
   -- Show sign columns for changes in files
   use({
     'lewis6991/gitsigns.nvim',
+    event = "BufRead",
     config = function()
       require('config.gitsigns').setup()
     end
