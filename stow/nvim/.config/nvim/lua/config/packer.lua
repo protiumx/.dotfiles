@@ -231,6 +231,11 @@ return require('packer').startup(function(use)
   -- LSP
   use({
     'neovim/nvim-lspconfig',
+    ft = {
+      'go',
+      'lua',
+      'rust',
+    },
     requires = {
       -- LSP Support
       'williamboman/mason.nvim',
@@ -250,17 +255,13 @@ return require('packer').startup(function(use)
 
       -- Show lsp progress
       'j-hui/fidget.nvim',
+      {
+        'glepnir/lspsaga.nvim', -- better ui
+        branch = 'main',
+      }
     },
     config = function()
       require('config.lsp').setup()
-    end
-  })
-
-  use({
-    'glepnir/lspsaga.nvim',
-    branch = 'main',
-    config = function()
-      require('config.lsp-saga').setup()
     end
   })
 
@@ -269,6 +270,11 @@ return require('packer').startup(function(use)
     'mfussenegger/nvim-dap',
     opt = true,
     event = 'BufReadPre',
+    ft = {
+      'go',
+      'lua',
+      'rust',
+    },
     module = { 'dap' },
     wants = {
       'nvim-dap-virtual-text',

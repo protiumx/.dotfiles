@@ -152,7 +152,6 @@ _G.packer_plugins = {
     url = "https://github.com/lewis6991/impatient.nvim"
   },
   ["lspsaga.nvim"] = {
-    config = { "\27LJ\2\n=\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\20config.lsp-saga\frequire\0" },
     loaded = true,
     path = "/home/brian/.local/share/nvim/site/pack/packer/start/lspsaga.nvim",
     url = "https://github.com/glepnir/lspsaga.nvim"
@@ -224,8 +223,10 @@ _G.packer_plugins = {
   },
   ["nvim-lspconfig"] = {
     config = { "\27LJ\2\n8\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\15config.lsp\frequire\0" },
-    loaded = true,
-    path = "/home/brian/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/home/brian/.local/share/nvim/site/pack/packer/opt/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
   },
   ["nvim-neoclip.lua"] = {
@@ -395,18 +396,10 @@ time([[Config for nvim-autopairs]], false)
 time([[Config for vim-fugitive]], true)
 try_loadstring("\27LJ\2\n¨\2\0\0\4\0\t\1\0246\0\0\0009\0\1\0009\0\2\0'\2\3\0B\0\2\2\6\0\4\0X\1\fÄ6\1\0\0009\1\1\0019\1\5\1\18\3\0\0B\1\2\2\b\1\0\0X\1\5Ä6\1\0\0009\1\6\1'\3\a\0B\1\2\1X\1\4Ä6\1\0\0009\1\6\1'\3\b\0B\1\2\1K\0\1\0evertical Git | vertical resize 40 | setlocal noequalalways wrap readonly nomodifiable noswapfile4 execute \":bd\" bufname('fugitive:///*/.git//') \bcmd\14buflisted\5\25fugitive:///*/.git//\fbufname\afn\bvim\0Å\1\1\0\6\0\t\0\0166\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\4\0003\4\5\0B\0\4\0016\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\6\0'\4\a\0005\5\b\0B\0\5\1K\0\1\0\1\0\1\vsilent\2\18:G | only<CR>\14<Leader>G\0\t<F3>\6n\bset\vkeymap\bvim\0", "config", "vim-fugitive")
 time([[Config for vim-fugitive]], false)
--- Config for: nvim-treesitter
-time([[Config for nvim-treesitter]], true)
-try_loadstring("\27LJ\2\n?\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\22config.treesitter\frequire\0", "config", "nvim-treesitter")
-time([[Config for nvim-treesitter]], false)
--- Config for: lspsaga.nvim
-time([[Config for lspsaga.nvim]], true)
-try_loadstring("\27LJ\2\n=\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\20config.lsp-saga\frequire\0", "config", "lspsaga.nvim")
-time([[Config for lspsaga.nvim]], false)
--- Config for: nvim-lspconfig
-time([[Config for nvim-lspconfig]], true)
-try_loadstring("\27LJ\2\n8\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\15config.lsp\frequire\0", "config", "nvim-lspconfig")
-time([[Config for nvim-lspconfig]], false)
+-- Config for: feline.nvim
+time([[Config for feline.nvim]], true)
+try_loadstring("\27LJ\2\n;\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\18config.feline\frequire\0", "config", "feline.nvim")
+time([[Config for feline.nvim]], false)
 -- Config for: nvim-colorizer.lua
 time([[Config for nvim-colorizer.lua]], true)
 try_loadstring("\27LJ\2\nô\1\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\25user_default_options\1\0\0\1\0\a\rRRGGBBAA\1\bcss\1\vcss_fn\2\tmode\15foreground\bRGB\2\vRRGGBB\2\nnames\1\nsetup\14colorizer\frequire\0", "config", "nvim-colorizer.lua")
@@ -419,10 +412,10 @@ time([[Config for vim-sneak]], false)
 time([[Config for nvim-neoclip.lua]], true)
 try_loadstring("\27LJ\2\n<\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\19config.neoclip\frequire\0", "config", "nvim-neoclip.lua")
 time([[Config for nvim-neoclip.lua]], false)
--- Config for: feline.nvim
-time([[Config for feline.nvim]], true)
-try_loadstring("\27LJ\2\n;\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\18config.feline\frequire\0", "config", "feline.nvim")
-time([[Config for feline.nvim]], false)
+-- Config for: nvim-treesitter
+time([[Config for nvim-treesitter]], true)
+try_loadstring("\27LJ\2\n?\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\22config.treesitter\frequire\0", "config", "nvim-treesitter")
+time([[Config for nvim-treesitter]], false)
 -- Config for: vim-sandwich
 time([[Config for vim-sandwich]], true)
 try_loadstring("\27LJ\2\nA\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\24config.vim-sandwich\frequire\0", "config", "vim-sandwich")
@@ -454,12 +447,12 @@ vim.cmd [[au FileType vue ++once lua require("packer.load")({'emmet-vim'}, { ft 
 vim.cmd [[au FileType django-html ++once lua require("packer.load")({'emmet-vim'}, { ft = "django-html" }, _G.packer_plugins)]]
 vim.cmd [[au FileType ejs ++once lua require("packer.load")({'emmet-vim'}, { ft = "ejs" }, _G.packer_plugins)]]
 vim.cmd [[au FileType glimmer ++once lua require("packer.load")({'emmet-vim'}, { ft = "glimmer" }, _G.packer_plugins)]]
-vim.cmd [[au FileType lua ++once lua require("packer.load")({'nvim-dap'}, { ft = "lua" }, _G.packer_plugins)]]
+vim.cmd [[au FileType lua ++once lua require("packer.load")({'nvim-dap', 'nvim-lspconfig'}, { ft = "lua" }, _G.packer_plugins)]]
 vim.cmd [[au FileType hbs ++once lua require("packer.load")({'emmet-vim'}, { ft = "hbs" }, _G.packer_plugins)]]
 vim.cmd [[au FileType html ++once lua require("packer.load")({'emmet-vim'}, { ft = "html" }, _G.packer_plugins)]]
 vim.cmd [[au FileType htmldjango ++once lua require("packer.load")({'emmet-vim'}, { ft = "htmldjango" }, _G.packer_plugins)]]
 vim.cmd [[au FileType javascriptreact ++once lua require("packer.load")({'emmet-vim'}, { ft = "javascriptreact" }, _G.packer_plugins)]]
-vim.cmd [[au FileType go ++once lua require("packer.load")({'nvim-dap'}, { ft = "go" }, _G.packer_plugins)]]
+vim.cmd [[au FileType go ++once lua require("packer.load")({'nvim-dap', 'nvim-lspconfig'}, { ft = "go" }, _G.packer_plugins)]]
 vim.cmd [[au FileType markdown ++once lua require("packer.load")({'emmet-vim'}, { ft = "markdown" }, _G.packer_plugins)]]
 vim.cmd [[au FileType php ++once lua require("packer.load")({'emmet-vim'}, { ft = "php" }, _G.packer_plugins)]]
 vim.cmd [[au FileType pug ++once lua require("packer.load")({'emmet-vim'}, { ft = "pug" }, _G.packer_plugins)]]
@@ -467,15 +460,15 @@ vim.cmd [[au FileType rescript ++once lua require("packer.load")({'emmet-vim'}, 
 vim.cmd [[au FileType svelte ++once lua require("packer.load")({'emmet-vim'}, { ft = "svelte" }, _G.packer_plugins)]]
 vim.cmd [[au FileType tsx ++once lua require("packer.load")({'emmet-vim'}, { ft = "tsx" }, _G.packer_plugins)]]
 vim.cmd [[au FileType typescriptreact ++once lua require("packer.load")({'emmet-vim'}, { ft = "typescriptreact" }, _G.packer_plugins)]]
-vim.cmd [[au FileType rust ++once lua require("packer.load")({'nvim-dap'}, { ft = "rust" }, _G.packer_plugins)]]
+vim.cmd [[au FileType rust ++once lua require("packer.load")({'nvim-dap', 'nvim-lspconfig'}, { ft = "rust" }, _G.packer_plugins)]]
 vim.cmd [[au FileType xml ++once lua require("packer.load")({'emmet-vim'}, { ft = "xml" }, _G.packer_plugins)]]
 vim.cmd [[au FileType handlebars ++once lua require("packer.load")({'emmet-vim'}, { ft = "handlebars" }, _G.packer_plugins)]]
 vim.cmd [[au FileType jsx ++once lua require("packer.load")({'emmet-vim'}, { ft = "jsx" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
   -- Event lazy-loads
 time([[Defining lazy-load event autocommands]], true)
-vim.cmd [[au BufRead * ++once lua require("packer.load")({'gitsigns.nvim', 'Comment.nvim'}, { event = "BufRead *" }, _G.packer_plugins)]]
 vim.cmd [[au BufReadPre * ++once lua require("packer.load")({'nvim-dap'}, { event = "BufReadPre *" }, _G.packer_plugins)]]
+vim.cmd [[au BufRead * ++once lua require("packer.load")({'gitsigns.nvim', 'Comment.nvim'}, { event = "BufRead *" }, _G.packer_plugins)]]
 time([[Defining lazy-load event autocommands]], false)
 vim.cmd("augroup END")
 
