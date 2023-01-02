@@ -11,17 +11,17 @@ function M.setup()
   vim.keymap.set('n', 'zrb', '<Plug>(sandwich-replace-auto)', { remap = true })
   vim.keymap.set({ 'x', 'o', 'v' }, 'sr', '<Plug>(sandwich-replace)', { remap = true })
 
-  -- Additional text objects e.g. viss to select inner text with auto detection
+  -- Additional text objects e.g. via to select inner text with auto detection
   -- of surroundings
-  vim.keymap.set('x', 'is', '<Plug>(textobj-sandwich-auto-i)', { remap = true })
-  vim.keymap.set('x', 'as', '<Plug>(textobj-sandwich-auto-a)', { remap = true })
-  vim.keymap.set('o', 'is', '<Plug>(textobj-sandwich-auto-i)', { remap = true })
-  vim.keymap.set('o', 'as', '<Plug>(textobj-sandwich-auto-a)', { remap = true })
-  -- For specific chars, e.g. im_
-  vim.keymap.set('x', 'it', '<Plug>(textobj-sandwich-literal-query-i)', { remap = true })
-  vim.keymap.set('x', 'at', '<Plug>(textobj-sandwich-literal-query-a)', { remap = true })
-  vim.keymap.set('o', 'it', '<Plug>(textobj-sandwich-literal-query-i)', { remap = true })
-  vim.keymap.set('o', 'at', '<Plug>(textobj-sandwich-literal-query-a)', { remap = true })
+  vim.keymap.set('x', 'ia', '<Plug>(textobj-sandwich-auto-i)', { remap = true })
+  vim.keymap.set('x', 'aa', '<Plug>(textobj-sandwich-auto-a)', { remap = true })
+  vim.keymap.set('o', 'ia', '<Plug>(textobj-sandwich-auto-i)', { remap = true })
+  vim.keymap.set('o', 'aa', '<Plug>(textobj-sandwich-auto-a)', { remap = true })
+  -- For specific chars, e.g. ic_ selects w from _w_
+  vim.keymap.set('x', 'ic', '<Plug>(textobj-sandwich-literal-query-i)', { remap = true })
+  vim.keymap.set('x', 'ac', '<Plug>(textobj-sandwich-literal-query-a)', { remap = true })
+  vim.keymap.set('o', 'ic', '<Plug>(textobj-sandwich-literal-query-i)', { remap = true })
+  vim.keymap.set('o', 'ac', '<Plug>(textobj-sandwich-literal-query-a)', { remap = true })
 end
 
 return M
