@@ -1,4 +1,4 @@
-local macos = vim.loop.os_uname().sysname == 'Darwin'
+local macos = jit.os == 'OSX'
 
 vim.g.mapleader = ' '
 
