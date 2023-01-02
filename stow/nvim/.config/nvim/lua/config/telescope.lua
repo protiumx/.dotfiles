@@ -55,7 +55,12 @@ local function keymaps()
 
   map('n', '<Leader>sh', builtin.help_tags, '[S]earch [H]elp')
   map('n', '<Leader>sk', builtin.keymaps, '[S]earch [K]eymaps')
-  map('n', '<Leader>/', function() builtin.current_buffer_fuzzy_find(dropdown) end, 'Fuzzy search in buffer')
+  map('n', '<Leader>/', function()
+    builtin.current_buffer_fuzzy_find({
+      theme = 'dropdown',
+      layout_config = { prompt_position = 'top' },
+    })
+  end, 'Fuzzy search in buffer')
 
   map('n', '<Leader>st', builtin.colorscheme, '[S]earch [C]olor schemes')
 
@@ -63,13 +68,17 @@ local function keymaps()
   map('n', '<Leader>ss', function() builtin.spell_suggest(themes.get_cursor()) end, '[S]earch [S]pell suggestions')
 
   -- Show git diff
-  map('n', '<Leader>Gs', function() builtin.git_status({ previeer = delta, layout_strategy = 'vertical' }) end,
-    '[G]it [S]tatus')
+  map('n', '<Leader>Gs', function()
+    builtin.git_status({
+      previewer = delta, layout_strategy = 'vertical', layout_config = { prompt_position = 'top' },
+    })
+  end, '[G]it [S]tatus')
   map('n', '<Leader>Gb', builtin.git_branches, '[G]it [B]ranches')
   map('n', '<Leader>Gh', builtin.git_bcommits, '[G]it [H]istory of buffer')
   map('n', '<Leader>Gc', builtin.git_commits, '[G]it [C]ommits')
 
   map('n', '<Leader>sd', builtin.diagnostics, '[S]earch [D]iagnostics')
+  map('n', '<Leader>sS', builtin.lsp_document_symbols, '[S]earch [S]ymbols (LSP)')
   map('n', '<Leader>sR', builtin.resume, '[S]earch [R]esume')
   map('n', '<Leader>sT', function() builtin.treesitter(dropdown) end, '[S]earch [T]reesitter')
   map('n', '<Leader>sc', function() builtin.commands_history(dropdown) end, '[S]earch [C]ommands history')
@@ -91,7 +100,7 @@ function M.setup()
       multi_icon = '+ ',
 
       layout_strategy = 'flex',
-      layout_config = { height = 0.95, width = 0.9 },
+      layout_config = { height = 0.9, width = 0.95 },
 
       mappings = {
         i = {
