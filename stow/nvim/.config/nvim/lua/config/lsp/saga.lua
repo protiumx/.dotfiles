@@ -6,6 +6,7 @@ local function keymaps()
   keymap('i', '<C-h>', '<Esc><cmd>Lspsaga lsp_finder<CR>', { silent = true })
   keymap({ 'n', 'v' }, '<Leader>qf', '<cmd>Lspsaga code_action<CR>', { silent = true })
   keymap('n', '<Leader>rn', '<cmd>Lspsaga rename<CR>', { silent = true })
+  keymap('n', '<F2>', '<cmd>Lspsaga rename<CR>', { silent = true })
   keymap('n', 'gpd', '<cmd>Lspsaga peek_definition<CR>', { silent = true })
 
   -- Only jump to errors
