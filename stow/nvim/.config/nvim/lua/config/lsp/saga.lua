@@ -18,7 +18,7 @@ local function keymaps()
   end, { silent = true })
 
   -- Outline
-  keymap('n', '<Leader>so', '<cmd>Lspsaga outline<CR>', { silent = true })
+  keymap('n', '<Leader>So', '<cmd>Lspsaga outline<CR>', { silent = true })
 end
 
 function M.setup()

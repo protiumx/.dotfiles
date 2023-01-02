@@ -51,8 +51,8 @@ vim.keymap.set("n", "J", "mzJ`z")
 -- Resize windows
 vim.keymap.set('n', '<C-Up>', ':resize -2<CR>', { silent = true })
 vim.keymap.set('n', '<C-Down>', ':resize +2<CR>', { silent = true })
-vim.keymap.set('n', '<Leader><Left>', ':vertical resize -2<CR>', { silent = true })
-vim.keymap.set('n', '<Leader><Right>', ':vertical resize +2<CR>', { silent = true })
+vim.keymap.set('n', '<Leader><Left>', ':vertical resize +2<CR>', { silent = true })
+vim.keymap.set('n', '<Leader><Right>', ':vertical resize -2<CR>', { silent = true })
 
 -- Copy to system clipboard
 vim.keymap.set('v', '<C-y>', function()

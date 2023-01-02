@@ -209,7 +209,7 @@ return require('packer').startup(function(use)
         if name ~= '' and vim.fn.buflisted(name) ~= 0 then
           vim.cmd [[ execute ":bd" bufname('fugitive:///*/.git//') ]]
         else
-          vim.cmd [[vertical Git | vertical resize 40 | setlocal noequalalways wrap nonu readonly nomodifiable noswapfile]]
+          vim.cmd [[vertical Git | vertical resize 40 | setlocal noequalalways wrap readonly nomodifiable noswapfile]]
         end
       end)
 

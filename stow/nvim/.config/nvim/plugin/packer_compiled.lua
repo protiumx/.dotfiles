@@ -174,7 +174,7 @@ _G.packer_plugins = {
   },
   ["nvim-colorizer.lua"] = {
     commands = { "Colorizer" },
-    config = { "\27LJ\2\nô\1\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\25user_default_options\1\0\0\1\0\a\bRGB\2\tmode\15foreground\vcss_fn\2\bcss\1\rRRGGBBAA\1\nnames\1\vRRGGBB\2\nsetup\14colorizer\frequire\0" },
+    config = { "\27LJ\2\nô\1\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\25user_default_options\1\0\0\1\0\a\bcss\1\rRRGGBBAA\1\nnames\1\vRRGGBB\2\bRGB\2\tmode\15foreground\vcss_fn\2\nsetup\14colorizer\frequire\0" },
     loaded = false,
     needs_bufread = false,
     only_cond = false,
@@ -307,7 +307,7 @@ _G.packer_plugins = {
     url = "https://github.com/junegunn/vim-easy-align"
   },
   ["vim-fugitive"] = {
-    config = { "\27LJ\2\n±\2\0\0\4\0\t\1\0246\0\0\0009\0\1\0009\0\2\0'\2\3\0B\0\2\2\6\0\4\0X\1\fÄ6\1\0\0009\1\1\0019\1\5\1\18\3\0\0B\1\2\2\b\1\0\0X\1\5Ä6\1\0\0009\1\6\1'\3\a\0B\1\2\1X\1\4Ä6\1\0\0009\1\6\1'\3\b\0B\1\2\1K\0\1\0jvertical Git | vertical resize 40 | setlocal noequalalways wrap nonu readonly nomodifiable noswapfile4 execute \":bd\" bufname('fugitive:///*/.git//') \bcmd\14buflisted\5\25fugitive:///*/.git//\fbufname\afn\bvim\0Å\1\1\0\6\0\t\0\0166\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\4\0003\4\5\0B\0\4\0016\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\6\0'\4\a\0005\5\b\0B\0\5\1K\0\1\0\1\0\1\vsilent\2\18:G | only<CR>\14<Leader>G\0\t<F3>\6n\bset\vkeymap\bvim\0" },
+    config = { "\27LJ\2\n¨\2\0\0\4\0\t\1\0246\0\0\0009\0\1\0009\0\2\0'\2\3\0B\0\2\2\6\0\4\0X\1\fÄ6\1\0\0009\1\1\0019\1\5\1\18\3\0\0B\1\2\2\b\1\0\0X\1\5Ä6\1\0\0009\1\6\1'\3\a\0B\1\2\1X\1\4Ä6\1\0\0009\1\6\1'\3\b\0B\1\2\1K\0\1\0evertical Git | vertical resize 40 | setlocal noequalalways wrap readonly nomodifiable noswapfile4 execute \":bd\" bufname('fugitive:///*/.git//') \bcmd\14buflisted\5\25fugitive:///*/.git//\fbufname\afn\bvim\0Å\1\1\0\6\0\t\0\0166\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\4\0003\4\5\0B\0\4\0016\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\6\0'\4\a\0005\5\b\0B\0\5\1K\0\1\0\1\0\1\vsilent\2\18:G | only<CR>\14<Leader>G\0\t<F3>\6n\bset\vkeymap\bvim\0" },
     loaded = true,
     path = "/home/brian/.local/share/nvim/site/pack/packer/start/vim-fugitive",
     url = "https://github.com/tpope/vim-fugitive"
@@ -380,14 +380,6 @@ end
 time([[Setup for vim-sandwich]], true)
 try_loadstring("\27LJ\2\nB\0\0\2\0\3\0\0056\0\0\0009\0\1\0)\1\1\0=\1\2\0K\0\1\0%sandwich_no_default_key_mappings\6g\bvim\0", "setup", "vim-sandwich")
 time([[Setup for vim-sandwich]], false)
--- Config for: vim-fugitive
-time([[Config for vim-fugitive]], true)
-try_loadstring("\27LJ\2\n±\2\0\0\4\0\t\1\0246\0\0\0009\0\1\0009\0\2\0'\2\3\0B\0\2\2\6\0\4\0X\1\fÄ6\1\0\0009\1\1\0019\1\5\1\18\3\0\0B\1\2\2\b\1\0\0X\1\5Ä6\1\0\0009\1\6\1'\3\a\0B\1\2\1X\1\4Ä6\1\0\0009\1\6\1'\3\b\0B\1\2\1K\0\1\0jvertical Git | vertical resize 40 | setlocal noequalalways wrap nonu readonly nomodifiable noswapfile4 execute \":bd\" bufname('fugitive:///*/.git//') \bcmd\14buflisted\5\25fugitive:///*/.git//\fbufname\afn\bvim\0Å\1\1\0\6\0\t\0\0166\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\4\0003\4\5\0B\0\4\0016\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\6\0'\4\a\0005\5\b\0B\0\5\1K\0\1\0\1\0\1\vsilent\2\18:G | only<CR>\14<Leader>G\0\t<F3>\6n\bset\vkeymap\bvim\0", "config", "vim-fugitive")
-time([[Config for vim-fugitive]], false)
--- Config for: nvim-autopairs
-time([[Config for nvim-autopairs]], true)
-try_loadstring("\27LJ\2\n@\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\19nvim-autopairs\frequire\0", "config", "nvim-autopairs")
-time([[Config for nvim-autopairs]], false)
 -- Config for: nvim-treesitter
 time([[Config for nvim-treesitter]], true)
 try_loadstring("\27LJ\2\n?\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\22config.treesitter\frequire\0", "config", "nvim-treesitter")
@@ -400,24 +392,25 @@ time([[Config for feline.nvim]], false)
 time([[Config for telescope.nvim]], true)
 try_loadstring("\27LJ\2\n>\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\21config.telescope\frequire\0", "config", "telescope.nvim")
 time([[Config for telescope.nvim]], false)
--- Config for: project.nvim
-time([[Config for project.nvim]], true)
-try_loadstring("\27LJ\2\nª\1\0\0\4\0\b\0\v6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\0025\3\6\0=\3\a\2B\0\2\1K\0\1\0\rpatterns\1\6\0\0\vgo.mod\rMakefile\17package.json\t.git\20!.git/worktrees\22detection_methods\1\0\1\16show_hidden\2\1\2\0\0\fpattern\nsetup\17project_nvim\frequire\0", "config", "project.nvim")
-time([[Config for project.nvim]], false)
+-- Config for: nvim-autopairs
+time([[Config for nvim-autopairs]], true)
+try_loadstring("\27LJ\2\n@\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\19nvim-autopairs\frequire\0", "config", "nvim-autopairs")
+time([[Config for nvim-autopairs]], false)
 -- Config for: nvim-neoclip.lua
 time([[Config for nvim-neoclip.lua]], true)
 try_loadstring("\27LJ\2\n<\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\19config.neoclip\frequire\0", "config", "nvim-neoclip.lua")
 time([[Config for nvim-neoclip.lua]], false)
+-- Config for: vim-fugitive
+time([[Config for vim-fugitive]], true)
+try_loadstring("\27LJ\2\n¨\2\0\0\4\0\t\1\0246\0\0\0009\0\1\0009\0\2\0'\2\3\0B\0\2\2\6\0\4\0X\1\fÄ6\1\0\0009\1\1\0019\1\5\1\18\3\0\0B\1\2\2\b\1\0\0X\1\5Ä6\1\0\0009\1\6\1'\3\a\0B\1\2\1X\1\4Ä6\1\0\0009\1\6\1'\3\b\0B\1\2\1K\0\1\0evertical Git | vertical resize 40 | setlocal noequalalways wrap readonly nomodifiable noswapfile4 execute \":bd\" bufname('fugitive:///*/.git//') \bcmd\14buflisted\5\25fugitive:///*/.git//\fbufname\afn\bvim\0Å\1\1\0\6\0\t\0\0166\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\4\0003\4\5\0B\0\4\0016\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\6\0'\4\a\0005\5\b\0B\0\5\1K\0\1\0\1\0\1\vsilent\2\18:G | only<CR>\14<Leader>G\0\t<F3>\6n\bset\vkeymap\bvim\0", "config", "vim-fugitive")
+time([[Config for vim-fugitive]], false)
+-- Config for: project.nvim
+time([[Config for project.nvim]], true)
+try_loadstring("\27LJ\2\nª\1\0\0\4\0\b\0\v6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\0025\3\6\0=\3\a\2B\0\2\1K\0\1\0\rpatterns\1\6\0\0\vgo.mod\rMakefile\17package.json\t.git\20!.git/worktrees\22detection_methods\1\0\1\16show_hidden\2\1\2\0\0\fpattern\nsetup\17project_nvim\frequire\0", "config", "project.nvim")
+time([[Config for project.nvim]], false)
 
 -- Command lazy-loads
 time([[Defining lazy-load commands]], true)
-pcall(vim.api.nvim_create_user_command, 'TSPlay', function(cmdargs)
-          require('packer.load')({'playground'}, { cmd = 'TSPlay', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
-        end,
-        {nargs = '*', range = true, bang = true, complete = function()
-          require('packer.load')({'playground'}, { cmd = 'TSPlay' }, _G.packer_plugins)
-          return vim.fn.getcompletion('TSPlay ', 'cmdline')
-      end})
 pcall(vim.api.nvim_create_user_command, 'Colorizer', function(cmdargs)
           require('packer.load')({'nvim-colorizer.lua'}, { cmd = 'Colorizer', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
         end,
@@ -432,13 +425,6 @@ pcall(vim.api.nvim_create_user_command, 'Dap', function(cmdargs)
           require('packer.load')({'nvim-dap'}, { cmd = 'Dap' }, _G.packer_plugins)
           return vim.fn.getcompletion('Dap ', 'cmdline')
       end})
-pcall(vim.api.nvim_create_user_command, 'EasyAlign', function(cmdargs)
-          require('packer.load')({'vim-easy-align'}, { cmd = 'EasyAlign', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
-        end,
-        {nargs = '*', range = true, bang = true, complete = function()
-          require('packer.load')({'vim-easy-align'}, { cmd = 'EasyAlign' }, _G.packer_plugins)
-          return vim.fn.getcompletion('EasyAlign ', 'cmdline')
-      end})
 pcall(vim.api.nvim_create_user_command, 'VimZip', function(cmdargs)
           require('packer.load')({'vim-rzip'}, { cmd = 'VimZip', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
         end,
@@ -446,12 +432,35 @@ pcall(vim.api.nvim_create_user_command, 'VimZip', function(cmdargs)
           require('packer.load')({'vim-rzip'}, { cmd = 'VimZip' }, _G.packer_plugins)
           return vim.fn.getcompletion('VimZip ', 'cmdline')
       end})
+pcall(vim.api.nvim_create_user_command, 'TSPlay', function(cmdargs)
+          require('packer.load')({'playground'}, { cmd = 'TSPlay', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
+        end,
+        {nargs = '*', range = true, bang = true, complete = function()
+          require('packer.load')({'playground'}, { cmd = 'TSPlay' }, _G.packer_plugins)
+          return vim.fn.getcompletion('TSPlay ', 'cmdline')
+      end})
+pcall(vim.api.nvim_create_user_command, 'EasyAlign', function(cmdargs)
+          require('packer.load')({'vim-easy-align'}, { cmd = 'EasyAlign', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
+        end,
+        {nargs = '*', range = true, bang = true, complete = function()
+          require('packer.load')({'vim-easy-align'}, { cmd = 'EasyAlign' }, _G.packer_plugins)
+          return vim.fn.getcompletion('EasyAlign ', 'cmdline')
+      end})
 time([[Defining lazy-load commands]], false)
 
 vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
 time([[Defining lazy-load filetype autocommands]], true)
+vim.cmd [[au FileType tsx ++once lua require("packer.load")({'emmet-vim'}, { ft = "tsx" }, _G.packer_plugins)]]
+vim.cmd [[au FileType typescriptreact ++once lua require("packer.load")({'emmet-vim'}, { ft = "typescriptreact" }, _G.packer_plugins)]]
+vim.cmd [[au FileType vue ++once lua require("packer.load")({'emmet-vim'}, { ft = "vue" }, _G.packer_plugins)]]
+vim.cmd [[au FileType xml ++once lua require("packer.load")({'emmet-vim'}, { ft = "xml" }, _G.packer_plugins)]]
+vim.cmd [[au FileType go ++once lua require("packer.load")({'nvim-lspconfig'}, { ft = "go" }, _G.packer_plugins)]]
+vim.cmd [[au FileType rust ++once lua require("packer.load")({'nvim-lspconfig'}, { ft = "rust" }, _G.packer_plugins)]]
+vim.cmd [[au FileType lua ++once lua require("packer.load")({'nvim-lspconfig'}, { ft = "lua" }, _G.packer_plugins)]]
+vim.cmd [[au FileType django-html ++once lua require("packer.load")({'emmet-vim'}, { ft = "django-html" }, _G.packer_plugins)]]
+vim.cmd [[au FileType ejs ++once lua require("packer.load")({'emmet-vim'}, { ft = "ejs" }, _G.packer_plugins)]]
 vim.cmd [[au FileType glimmer ++once lua require("packer.load")({'emmet-vim'}, { ft = "glimmer" }, _G.packer_plugins)]]
 vim.cmd [[au FileType handlebars ++once lua require("packer.load")({'emmet-vim'}, { ft = "handlebars" }, _G.packer_plugins)]]
 vim.cmd [[au FileType hbs ++once lua require("packer.load")({'emmet-vim'}, { ft = "hbs" }, _G.packer_plugins)]]
@@ -464,20 +473,11 @@ vim.cmd [[au FileType php ++once lua require("packer.load")({'emmet-vim'}, { ft 
 vim.cmd [[au FileType pug ++once lua require("packer.load")({'emmet-vim'}, { ft = "pug" }, _G.packer_plugins)]]
 vim.cmd [[au FileType rescript ++once lua require("packer.load")({'emmet-vim'}, { ft = "rescript" }, _G.packer_plugins)]]
 vim.cmd [[au FileType svelte ++once lua require("packer.load")({'emmet-vim'}, { ft = "svelte" }, _G.packer_plugins)]]
-vim.cmd [[au FileType rust ++once lua require("packer.load")({'nvim-lspconfig'}, { ft = "rust" }, _G.packer_plugins)]]
-vim.cmd [[au FileType typescriptreact ++once lua require("packer.load")({'emmet-vim'}, { ft = "typescriptreact" }, _G.packer_plugins)]]
-vim.cmd [[au FileType lua ++once lua require("packer.load")({'nvim-lspconfig'}, { ft = "lua" }, _G.packer_plugins)]]
-vim.cmd [[au FileType xml ++once lua require("packer.load")({'emmet-vim'}, { ft = "xml" }, _G.packer_plugins)]]
-vim.cmd [[au FileType go ++once lua require("packer.load")({'nvim-lspconfig'}, { ft = "go" }, _G.packer_plugins)]]
-vim.cmd [[au FileType vue ++once lua require("packer.load")({'emmet-vim'}, { ft = "vue" }, _G.packer_plugins)]]
-vim.cmd [[au FileType tsx ++once lua require("packer.load")({'emmet-vim'}, { ft = "tsx" }, _G.packer_plugins)]]
-vim.cmd [[au FileType django-html ++once lua require("packer.load")({'emmet-vim'}, { ft = "django-html" }, _G.packer_plugins)]]
-vim.cmd [[au FileType ejs ++once lua require("packer.load")({'emmet-vim'}, { ft = "ejs" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
   -- Event lazy-loads
 time([[Defining lazy-load event autocommands]], true)
+vim.cmd [[au BufRead * ++once lua require("packer.load")({'vim-sneak', 'vim-sandwich', 'vim-visual-multi', 'gitsigns.nvim', 'Comment.nvim'}, { event = "BufRead *" }, _G.packer_plugins)]]
 vim.cmd [[au BufReadPre * ++once lua require("packer.load")({'nvim-dap'}, { event = "BufReadPre *" }, _G.packer_plugins)]]
-vim.cmd [[au BufRead * ++once lua require("packer.load")({'Comment.nvim', 'vim-sandwich', 'vim-sneak', 'gitsigns.nvim', 'vim-visual-multi'}, { event = "BufRead *" }, _G.packer_plugins)]]
 time([[Defining lazy-load event autocommands]], false)
 vim.cmd("augroup END")
 
