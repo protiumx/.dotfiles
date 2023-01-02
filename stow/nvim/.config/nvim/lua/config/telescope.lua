@@ -6,21 +6,15 @@ local function keymaps()
   local previewers = require('telescope.previewers')
   local themes = require('telescope.themes')
 
-  local delta = previewers.new_termopen_previewer {
+  local delta = previewers.new_termopen_previewer({
     get_command = function(entry)
-      -- this is for status
-      -- You can get the AM things in entry.status. So we are displaying file if entry.status == '??' or 'A '
-      -- just do an if and return a different command
       if entry.status == '??' or 'A ' then
         return { 'git', 'diff', entry.value }
       end
 
-      -- note we can't use pipes
-      -- this command is for git_commits and git_bcommits
       return { 'git', 'diff', entry.value .. '^!' }
-
     end
-  }
+  })
 
   local map = function(mode, l, r, desc)
     local opts = { silent = true, desc = desc }
@@ -43,74 +37,49 @@ local function keymaps()
     path = '%:p:h',
   })
 
-  map({ 'i', 'n' }, '<C-]>', function()
-    builtin.find_files(dropdown)
-  end, 'Find files')
-
+  map({ 'i', 'n' }, '<C-]>', function() builtin.find_files(dropdown) end, 'Find files')
   map({ 'n' }, '<C-h>', builtin.find_files, 'Find files with preview')
 
-  map({ 'i', 'n' }, '<C-b>', function()
-    builtin.buffers(dropdown)
-  end, 'Find buffers')
+  map({ 'i', 'n' }, '<C-b>', function() builtin.buffers(dropdown) end, 'Find buffers')
 
   -- Open in current file's folder
-  map('n', '<M-g>', function()
-    telescope.extensions.file_browser.file_browser(opts_file_browser_path)
-  end, 'Browse files relative')
-
-  map('n', '<M-f>', function()
-    telescope.extensions.file_browser.file_browser(opts_file_browser)
-  end, 'Browse files')
+  map('n', '<M-g>', function() telescope.extensions.file_browser.file_browser(opts_file_browser_path) end,
+    'Browse files relative')
+  map('n', '<M-f>', function() telescope.extensions.file_browser.file_browser(opts_file_browser) end, 'Browse files')
 
   map('n', '<Leader>sg', builtin.live_grep, '[S]earch [G]rep')
 
   -- find word under cursor
-  vim.keymap.set('n', '<Leader>sw', builtin.grep_string, { silent = true })
-  vim.keymap.set('n', '<Leader>sr', builtin.registers, { silent = true })
+  map('n', '<Leader>sw', builtin.grep_string, '[S]earch [W]ord')
+  map('n', '<Leader>sr', builtin.registers, '[S]earch [R]egisters')
 
-  vim.keymap.set('n', '<Leader>sh', builtin.help_tags, { silent = true })
-  vim.keymap.set('n', '<Leader>sk', builtin.keymaps, { silent = true })
-  vim.keymap.set('n', '<Leader>/', function()
-    builtin.current_buffer_fuzzy_find(dropdown)
-  end, { silent = true })
+  map('n', '<Leader>sh', builtin.help_tags, '[S]earch [H]elp')
+  map('n', '<Leader>sk', builtin.keymaps, '[S]earch [K]eymaps')
+  map('n', '<Leader>/', function() builtin.current_buffer_fuzzy_find(dropdown) end, 'Fuzzy search in buffer')
 
-  vim.keymap.set('n', '<Leader>st', builtin.colorscheme, { silent = true })
+  map('n', '<Leader>st', builtin.colorscheme, '[S]earch [C]olor schemes')
 
   -- Spell suggestions for word under cursor
-  vim.keymap.set('n', '<Leader>ss', function()
-    builtin.spell_suggest(themes.get_cursor())
-  end, { silent = true })
+  map('n', '<Leader>ss', function() builtin.spell_suggest(themes.get_cursor()) end, '[S]earch [S]pell suggestions')
 
   -- Show git diff
-  vim.keymap.set('n', '<Leader>sGs', function()
-    builtin.git_status({ previewer = delta, layout_strategy = 'vertical' })
-  end, { silent = true })
-  vim.keymap.set('n', '<Leader>sGb', builtin.git_branches, { silent = true })
-  vim.keymap.set('n', '<Leader>sGh', builtin.git_bcommits, { silent = true })
-  vim.keymap.set('n', '<Leader>sGc', builtin.git_commits, { silent = true })
+  map('n', '<Leader>Gs', function() builtin.git_status({ previeer = delta, layout_strategy = 'vertical' }) end,
+    '[G]it [S]tatus')
+  map('n', '<Leader>Gb', builtin.git_branches, '[G]it [B]ranches')
+  map('n', '<Leader>Gh', builtin.git_bcommits, '[G]it [H]istory of buffer')
+  map('n', '<Leader>Gc', builtin.git_commits, '[G]it [C]ommits')
 
-  vim.keymap.set('n', '<Leader>sd', builtin.diagnostics, { silent = true, desc = '[S]earch [D]iagnostics' })
-  vim.keymap.set('n', '<Leader>sR', builtin.resume, { silent = true, desc = '[S]earch [R]esume' })
-  vim.keymap.set('n', '<Leader>sT', function()
-    builtin.treesitter(dropdown)
-  end, { silent = true, desc = '[S]earch [T]reesitter' })
-  vim.keymap.set('n', '<Leader>sc', function()
-    builtin.commands_history(dropdown)
-  end, { silent = true, desc = '[S]earch [R]esume' })
+  map('n', '<Leader>sd', builtin.diagnostics, '[S]earch [D]iagnostics')
+  map('n', '<Leader>sR', builtin.resume, '[S]earch [R]esume')
+  map('n', '<Leader>sT', function() builtin.treesitter(dropdown) end, '[S]earch [T]reesitter')
+  map('n', '<Leader>sc', function() builtin.commands_history(dropdown) end, '[S]earch [C]ommands history')
 
   -- Projects
-  vim.keymap.set('n', '<Leader>sp', function()
-    require('telescope').extensions.projects.projects({})
-  end, { silent = true, desc = '[S]earch [P]rojects' })
+  map('n', '<Leader>sp', telescope.extensions.projects.projects, '[S]earch [P]rojects')
 
   -- Neoclip
-  vim.keymap.set({ 'n', 'i' }, '<M-y>', function()
-    telescope.extensions.neoclip.default()
-  end, { silent = true, desc = 'Search Yanks' })
-
-  vim.keymap.set('n', '<Leader>sm', function()
-    telescope.extensions.macroscope.default()
-  end, { silent = true, desc = '[S]earch [M]acros' })
+  map({ 'n', 'i' }, '<M-y>', telescope.extensions.neoclip.default, 'Search Yanks')
+  map('n', '<Leader>sm', telescope.extensions.macroscope.default, '[S]earch [M]acros')
 end
 
 function M.setup()
