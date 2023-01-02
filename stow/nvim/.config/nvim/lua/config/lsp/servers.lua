@@ -27,7 +27,7 @@ local servers = {
   sumneko_lua = {
     Lua = {
       diagnostics = {
-        globals = { 'vim' }
+        globals = { 'vim', 'jit' }
       },
       workspace = {
         checkThirdParty = false,
