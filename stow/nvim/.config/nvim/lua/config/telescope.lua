@@ -3,7 +3,30 @@ local M = {}
 local function keymaps()
   local telescope = require('telescope')
   local builtin = require('telescope.builtin')
+  local previewers = require('telescope.previewers')
   local themes = require('telescope.themes')
+
+  local delta = previewers.new_termopen_previewer {
+    get_command = function(entry)
+      -- this is for status
+      -- You can get the AM things in entry.status. So we are displaying file if entry.status == '??' or 'A '
+      -- just do an if and return a different command
+      if entry.status == '??' or 'A ' then
+        return { 'git', 'diff', entry.value }
+      end
+
+      -- note we can't use pipes
+      -- this command is for git_commits and git_bcommits
+      return { 'git', 'diff', entry.value .. '^!' }
+
+    end
+  }
+
+  local map = function(mode, l, r, desc)
+    local opts = { silent = true, desc = desc }
+
+    vim.keymap.set(mode, l, r, opts)
+  end
 
   local dropdown = themes.get_dropdown({
     previewer = false,
@@ -20,26 +43,27 @@ local function keymaps()
     path = '%:p:h',
   })
 
-  vim.keymap.set({ 'i', 'n' }, '<C-]>', function()
+  map({ 'i', 'n' }, '<C-]>', function()
     builtin.find_files(dropdown)
-  end, { silent = true })
+  end, 'Find files')
 
-  vim.keymap.set({ 'n' }, '<C-h>', builtin.find_files, { silent = true })
+  map({ 'n' }, '<C-h>', builtin.find_files, 'Find files with preview')
 
-  vim.keymap.set({ 'i', 'n' }, '<C-b>', function()
+  map({ 'i', 'n' }, '<C-b>', function()
     builtin.buffers(dropdown)
-  end, { silent = true })
+  end, 'Find buffers')
 
   -- Open in current file's folder
-  vim.keymap.set('n', '<M-g>', function()
+  map('n', '<M-g>', function()
     telescope.extensions.file_browser.file_browser(opts_file_browser_path)
-  end, { silent = true })
+  end, 'Browse files relative')
 
-  vim.keymap.set('n', '<M-f>', function()
+  map('n', '<M-f>', function()
     telescope.extensions.file_browser.file_browser(opts_file_browser)
-  end, { silent = true })
+  end, 'Browse files')
 
-  vim.keymap.set('n', '<Leader>sg', builtin.live_grep, { silent = true })
+  map('n', '<Leader>sg', builtin.live_grep, '[S]earch [G]rep')
+
   -- find word under cursor
   vim.keymap.set('n', '<Leader>sw', builtin.grep_string, { silent = true })
   vim.keymap.set('n', '<Leader>sr', builtin.registers, { silent = true })
@@ -54,22 +78,30 @@ local function keymaps()
 
   -- Spell suggestions for word under cursor
   vim.keymap.set('n', '<Leader>ss', function()
-    builtin.spell_suggest(require('telescope.themes').get_cursor())
+    builtin.spell_suggest(themes.get_cursor())
   end, { silent = true })
 
   -- Show git diff
-  vim.keymap.set('n', '<Leader>sG', builtin.git_status, { silent = true })
+  vim.keymap.set('n', '<Leader>sGs', function()
+    builtin.git_status({ previewer = delta, layout_strategy = 'vertical' })
+  end, { silent = true })
+  vim.keymap.set('n', '<Leader>sGb', builtin.git_branches, { silent = true })
+  vim.keymap.set('n', '<Leader>sGh', builtin.git_bcommits, { silent = true })
+  vim.keymap.set('n', '<Leader>sGc', builtin.git_commits, { silent = true })
 
   vim.keymap.set('n', '<Leader>sd', builtin.diagnostics, { silent = true, desc = '[S]earch [D]iagnostics' })
-  vim.keymap.set('n', '<Leader>sS', builtin.lsp_document_symbols, { silent = true, desc = '[S]earch [S]ymbols' })
   vim.keymap.set('n', '<Leader>sR', builtin.resume, { silent = true, desc = '[S]earch [R]esume' })
+  vim.keymap.set('n', '<Leader>sT', function()
+    builtin.treesitter(dropdown)
+  end, { silent = true, desc = '[S]earch [T]reesitter' })
+  vim.keymap.set('n', '<Leader>sc', function()
+    builtin.commands_history(dropdown)
+  end, { silent = true, desc = '[S]earch [R]esume' })
 
   -- Projects
   vim.keymap.set('n', '<Leader>sp', function()
     require('telescope').extensions.projects.projects({})
   end, { silent = true, desc = '[S]earch [P]rojects' })
-
-  vim.cmd [[autocmd User TelescopePreviewerLoaded setlocal wrap]]
 
   -- Neoclip
   vim.keymap.set({ 'n', 'i' }, '<M-y>', function()
@@ -124,6 +156,8 @@ function M.setup()
   telescope.load_extension('neoclip')
 
   keymaps()
+
+  vim.cmd [[autocmd User TelescopePreviewerLoaded setlocal wrap]]
 end
 
 return M
