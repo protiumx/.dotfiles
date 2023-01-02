@@ -101,3 +101,10 @@ autocmd('FileType', {
     vim.opt_local.buflisted = false
   end,
 })
+
+autocmd('FileType', {
+  pattern = { 'gitcommit', 'fugitive' },
+  command = [[
+    setlocal nonumber signcolumn=no
+  ]]
+})
