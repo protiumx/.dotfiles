@@ -307,7 +307,7 @@ _G.packer_plugins = {
     url = "https://github.com/junegunn/vim-easy-align"
   },
   ["vim-fugitive"] = {
-    config = { "\27LJ\2\n¨\2\0\0\4\0\t\1\0246\0\0\0009\0\1\0009\0\2\0'\2\3\0B\0\2\2\6\0\4\0X\1\fÄ6\1\0\0009\1\1\0019\1\5\1\18\3\0\0B\1\2\2\b\1\0\0X\1\5Ä6\1\0\0009\1\6\1'\3\a\0B\1\2\1X\1\4Ä6\1\0\0009\1\6\1'\3\b\0B\1\2\1K\0\1\0evertical Git | vertical resize 40 | setlocal noequalalways wrap readonly nomodifiable noswapfile4 execute \":bd\" bufname('fugitive:///*/.git//') \bcmd\14buflisted\5\25fugitive:///*/.git//\fbufname\afn\bvim\0Å\1\1\0\6\0\t\0\0166\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\4\0003\4\5\0B\0\4\0016\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\6\0'\4\a\0005\5\b\0B\0\5\1K\0\1\0\1\0\1\vsilent\2\18:G | only<CR>\14<Leader>G\0\t<F3>\6n\bset\vkeymap\bvim\0" },
+    config = { "\27LJ\2\n±\2\0\0\4\0\t\1\0246\0\0\0009\0\1\0009\0\2\0'\2\3\0B\0\2\2\6\0\4\0X\1\fÄ6\1\0\0009\1\1\0019\1\5\1\18\3\0\0B\1\2\2\b\1\0\0X\1\5Ä6\1\0\0009\1\6\1'\3\a\0B\1\2\1X\1\4Ä6\1\0\0009\1\6\1'\3\b\0B\1\2\1K\0\1\0jvertical Git | vertical resize 40 | setlocal noequalalways wrap nonu readonly nomodifiable noswapfile4 execute \":bd\" bufname('fugitive:///*/.git//') \bcmd\14buflisted\5\25fugitive:///*/.git//\fbufname\afn\bvim\0Å\1\1\0\6\0\t\0\0166\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\4\0003\4\5\0B\0\4\0016\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\6\0'\4\a\0005\5\b\0B\0\5\1K\0\1\0\1\0\1\vsilent\2\18:G | only<CR>\14<Leader>G\0\t<F3>\6n\bset\vkeymap\bvim\0" },
     loaded = true,
     path = "/home/brian/.local/share/nvim/site/pack/packer/start/vim-fugitive",
     url = "https://github.com/tpope/vim-fugitive"
@@ -382,7 +382,7 @@ try_loadstring("\27LJ\2\nB\0\0\2\0\3\0\0056\0\0\0009\0\1\0)\1\1\0=\1\2\0K\0\1\0%
 time([[Setup for vim-sandwich]], false)
 -- Config for: vim-fugitive
 time([[Config for vim-fugitive]], true)
-try_loadstring("\27LJ\2\n¨\2\0\0\4\0\t\1\0246\0\0\0009\0\1\0009\0\2\0'\2\3\0B\0\2\2\6\0\4\0X\1\fÄ6\1\0\0009\1\1\0019\1\5\1\18\3\0\0B\1\2\2\b\1\0\0X\1\5Ä6\1\0\0009\1\6\1'\3\a\0B\1\2\1X\1\4Ä6\1\0\0009\1\6\1'\3\b\0B\1\2\1K\0\1\0evertical Git | vertical resize 40 | setlocal noequalalways wrap readonly nomodifiable noswapfile4 execute \":bd\" bufname('fugitive:///*/.git//') \bcmd\14buflisted\5\25fugitive:///*/.git//\fbufname\afn\bvim\0Å\1\1\0\6\0\t\0\0166\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\4\0003\4\5\0B\0\4\0016\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\6\0'\4\a\0005\5\b\0B\0\5\1K\0\1\0\1\0\1\vsilent\2\18:G | only<CR>\14<Leader>G\0\t<F3>\6n\bset\vkeymap\bvim\0", "config", "vim-fugitive")
+try_loadstring("\27LJ\2\n±\2\0\0\4\0\t\1\0246\0\0\0009\0\1\0009\0\2\0'\2\3\0B\0\2\2\6\0\4\0X\1\fÄ6\1\0\0009\1\1\0019\1\5\1\18\3\0\0B\1\2\2\b\1\0\0X\1\5Ä6\1\0\0009\1\6\1'\3\a\0B\1\2\1X\1\4Ä6\1\0\0009\1\6\1'\3\b\0B\1\2\1K\0\1\0jvertical Git | vertical resize 40 | setlocal noequalalways wrap nonu readonly nomodifiable noswapfile4 execute \":bd\" bufname('fugitive:///*/.git//') \bcmd\14buflisted\5\25fugitive:///*/.git//\fbufname\afn\bvim\0Å\1\1\0\6\0\t\0\0166\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\4\0003\4\5\0B\0\4\0016\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\6\0'\4\a\0005\5\b\0B\0\5\1K\0\1\0\1\0\1\vsilent\2\18:G | only<CR>\14<Leader>G\0\t<F3>\6n\bset\vkeymap\bvim\0", "config", "vim-fugitive")
 time([[Config for vim-fugitive]], false)
 -- Config for: nvim-autopairs
 time([[Config for nvim-autopairs]], true)
@@ -476,8 +476,8 @@ vim.cmd [[au FileType ejs ++once lua require("packer.load")({'emmet-vim'}, { ft 
 time([[Defining lazy-load filetype autocommands]], false)
   -- Event lazy-loads
 time([[Defining lazy-load event autocommands]], true)
-vim.cmd [[au BufRead * ++once lua require("packer.load")({'Comment.nvim', 'vim-sandwich', 'vim-sneak', 'gitsigns.nvim', 'vim-visual-multi'}, { event = "BufRead *" }, _G.packer_plugins)]]
 vim.cmd [[au BufReadPre * ++once lua require("packer.load")({'nvim-dap'}, { event = "BufReadPre *" }, _G.packer_plugins)]]
+vim.cmd [[au BufRead * ++once lua require("packer.load")({'Comment.nvim', 'vim-sandwich', 'vim-sneak', 'gitsigns.nvim', 'vim-visual-multi'}, { event = "BufRead *" }, _G.packer_plugins)]]
 time([[Defining lazy-load event autocommands]], false)
 vim.cmd("augroup END")
 
