@@ -32,6 +32,7 @@ vim.keymap.set('n', 'N', 'Nzzzv', { silent = true })
 vim.keymap.set('n', '*', '*zz', { silent = true })
 vim.keymap.set('n', '#', '#zz', { silent = true })
 vim.keymap.set('n', 'g*', 'g*zz', { silent = true })
+vim.keymap.set('n', 'G', 'Gzz', { silent = true })
 
 -- Move down/up centered
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
