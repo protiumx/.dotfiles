@@ -1,20 +1,18 @@
 apps=(
   arduino
-  clipy
+  clipy               # Clipboard manager https://github.com/Clipy/Clipy
   deepl
   discord
   docker
   firefox
   google-chrome
   kitty
-  mas
-  rectangle
+  rectangle           # Window manager
   slack
   spotify
-  typora
   visual-studio-code
   vlc
-  wez/wezterm/wezterm      #  https://wezfurlong.org/wezterm
+  wez/wezterm/wezterm # Terminal https://wezfurlong.org/wezterm
 )
 
 masApps=(
@@ -31,6 +29,6 @@ install_macos_apps() {
 install_masApps() {
   info "Installing App Store apps..."
   for app in "${masApps[@]}"; do
-    mas install $app
+    mas install "$app"
   done
 }
