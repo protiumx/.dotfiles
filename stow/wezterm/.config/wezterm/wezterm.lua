@@ -21,16 +21,16 @@ return {
   audible_bell = "Disabled",
   color_scheme = "3024 (base16)",
   max_fps = 100,
-  font = wezterm.font("FiraCode Nerd Font", {weight="Medium", stretch="Normal", style="Normal"}),
+  font = wezterm.font("CaskaydiaCove Nerd Font", { weight = "Medium", stretch = "Normal", style = "Normal" }),
   font_rules = {
     {
       intensity = 'Bold',
-      font = wezterm.font("FiraCode Nerd Font", {weight="Bold", stretch="Normal", style="Normal"}),
+      font = wezterm.font("CaskaydiaCove Nerd Font", { weight = "Bold", stretch = "Normal", style = "Normal" }),
     },
   },
   font_size = 19.0,
   -- Disable font ligatures
-  harfbuzz_features = {'calt=0', 'clig=0', 'liga=0'},
+  harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
 
   hide_tab_bar_if_only_one_tab = true,
   inactive_pane_hsb = {
@@ -38,9 +38,9 @@ return {
   },
 
   keys = {
-    { 
-      key = 'p', 
-      mods = 'CMD', 
+    {
+      key = 'p',
+      mods = 'CMD',
       action = wezterm.action.ShowLauncherArgs { flags = 'FUZZY|TABS|WORKSPACES' },
     },
     { key = 'd', mods = 'ALT', action = wezterm.action.ShowDebugOverlay },
@@ -105,10 +105,11 @@ return {
       mods = 'SHIFT|CMD',
       action = act.AdjustPaneSize { 'Down', 1 },
     },
-    { 
+    {
       key = 'K',
       mods = 'SHIFT|CMD',
-      action = act.AdjustPaneSize { 'Up', 1 } },
+      action = act.AdjustPaneSize { 'Up', 1 }
+    },
     {
       key = 'L',
       mods = 'SHIFT|CMD',
@@ -121,15 +122,15 @@ return {
       mods = 'ALT',
       action = act.RotatePanes 'CounterClockwise',
     },
-    { 
+    {
       key = 'R',
       mods = 'SHIFT|ALT',
       action = act.RotatePanes 'Clockwise',
     },
 
-    { 
-      key = 'S', 
-      mods = 'SHIFT|CTRL', 
+    {
+      key = 'S',
+      mods = 'SHIFT|CTRL',
       action = act.PaneSelect,
     },
 
