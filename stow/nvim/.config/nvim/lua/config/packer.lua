@@ -123,7 +123,7 @@ return require('packer').startup(function(use)
 
   use({
     'junegunn/vim-easy-align',
-    cmd = 'EasyAlign',
+    cmd = 'EasyAlignEnable',
     config = function()
       -- Start interactive EasyAlign in visual mode (e.g. vipga)
       vim.keymap.set('x', 'ga', '<Plug>(EasyAlign)', { remap = true })
