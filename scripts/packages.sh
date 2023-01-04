@@ -32,6 +32,7 @@ packages=(
   libpq
   mas                      #  https://github.com/mas-cli/mas
   minikube
+  neovim
   node
   nmap
   openjdk
