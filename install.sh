@@ -15,21 +15,18 @@ set -o pipefail
 . scripts/oh-my-zsh.sh
 
 cleanup() {
+  err "Last command failed"
   info "Finishing..."
 }
 
 wait_input() {
-  read -p "Press enter to continue: "
+  read -p -r "Press enter to continue: "
 }
 
 main() {
   info "Installing ..."
 
-  if [ -z "${SSH_PASSPHRASE}" ]; then
-    echo "SSH_PASSPHRASE not set"
-    exit 1
-  fi
-
+  info "################################################################################"
   info "Homebrew Packages"
   info "################################################################################"
   wait_input
@@ -38,18 +35,21 @@ main() {
   post_install_packages
   success "Finished installing Homebrew packages"
 
+  info "################################################################################"
   info "Homebrew Fonts"
   info "################################################################################"
   wait_input
   install_fonts
   success "Finished installing fonts"
 
+  info "################################################################################"
   info "Oh-my-zsh"
   info "################################################################################"
   wait_input
   install_oh_my_zsh
   success "Finished installing Oh-my-zsh"
 
+  info "################################################################################"
   info "MacOS Apps"
   info "################################################################################"
   wait_input
@@ -58,45 +58,40 @@ main() {
   install_masApps
   success "Finished installing macOS apps"
 
-  info "NeoVim"
   info "################################################################################"
-  wait_input
-  install_neovim
-  success "Finished installing neovim"
-
   info "PiP modules"
   info "################################################################################"
   wait_input
   install_python_packages
   success "Finished installing python packages"
 
+  info "################################################################################"
   info "Configuration"
   info "################################################################################"
   wait_input
+
   setup_osx
   success "Finished configuring MacOS defaults. NOTE: A restart is needed"
+
   code_as_default_text_editor
   success "Finished setting up VSCode as default text editor"
-  stow_dotfiles
 
+  stow_dotfiles
+  success "Finished stowing dotfiles"
+
+  info "################################################################################"
   info "Crating development folders"
   info "################################################################################"
   mkdir -p ~/Development/protiumx
 
-  success "Finished stowing dotfiles"
-
+  info "################################################################################"
   info "SSH Key"
   info "################################################################################"
   setup_github_ssh
   success "Finished setting up SSH Key"
 
-  info "NeoVim Plugins"
-  info "################################################################################"
-  wait_input
-  nvim +PlugInstall +qall
-  success "Finished installing nvim plugins"
-
   if ! hash rustc &>/dev/null; then
+    info "################################################################################"
     info "Rust Setup"
     info "################################################################################"
     wait_input
