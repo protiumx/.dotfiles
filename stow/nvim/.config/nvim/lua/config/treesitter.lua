@@ -12,6 +12,7 @@ function M.setup()
       'cpp',
       'lua',
       'rust',
+      'vim',
     },
 
     sync_install = false,
