@@ -2,6 +2,8 @@
 setopt +o nomatch
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+else
+  eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
 CLI="$HOME/.cli"
@@ -48,7 +50,7 @@ source $brew_prefix/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(bracketed-paste)
 source $brew_prefix/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-source $HOME/.cargo/env
+[ -f $HOME/.cargo/env ] && source $HOME/.cargo/env
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
