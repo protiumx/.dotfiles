@@ -18,7 +18,6 @@ packages=(
   fzf                      #  https://github.com/junegunn/fzf
   fd                       #  https://github.com/sharkdp/fd
   gettext
-  gh
   git-delta                #  https://github.com/dandavison/delta
   go
   grpcurl                  #  https://github.com/fullstorydev/grpcurl
@@ -31,6 +30,7 @@ packages=(
   lazydocker               #  https://github.com/jesseduffield/lazydocker
   lf                       #  https://github.com/gokcehan/lf
   libpq
+  mas                      #  https://github.com/mas-cli/mas
   minikube
   node
   nmap
