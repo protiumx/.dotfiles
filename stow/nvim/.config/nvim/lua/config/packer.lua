@@ -159,7 +159,10 @@ return require('packer').startup(function(use)
     },
   })
 
-  use('arthurxavierx/vim-caser')
+  use({
+    'arthurxavierx/vim-caser',
+    cmd = 'VimCaserEnable'
+  })
 
   -- Change surroundings
   use({
