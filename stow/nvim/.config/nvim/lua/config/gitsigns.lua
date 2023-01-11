@@ -23,16 +23,12 @@ local function on_attach(bufnr)
   end, { expr = true })
 
   -- Actions
-  map({ 'n', 'v' }, '<leader>gs', ':Gitsigns stage_hunk<CR>')
-  map({ 'n', 'v' }, '<leader>gr', ':Gitsigns reset_hunk<CR>')
-  map('n', '<Leader>gS', gs.stage_buffer)
-  map('n', '<Leader>gu', gs.undo_stage_hunk)
-  map('n', '<Leader>gR', gs.reset_buffer)
   map('n', '<Leader>gp', gs.preview_hunk)
   map('n', '<Leader>gb', gs.blame_line)
-  map('n', '<Leader>gB', function() gs.blame_line { full = true } end)
+  map('n', '<Leader>gB', function() gs.blame_line({ full = true }) end)
   map('n', '<Leader>glb', gs.toggle_current_line_blame)
   map('n', '<Leader>gd', gs.diffthis)
+  -- TODO: make it usable
   map('n', '<Leader>gD', function() gs.diffthis('~') end)
   map('n', '<Leader>gtd', gs.toggle_deleted)
 
