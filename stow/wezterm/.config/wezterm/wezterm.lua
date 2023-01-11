@@ -238,7 +238,7 @@ return {
     -- Whatever font is selected here, it will have the
     -- main font setting appended to it to pick up any
     -- fallback fonts you may have used there.
-    font = wezterm.font { family = 'Fira Code', weight = 'Bold' },
+    font = wezterm.font { family = 'CaskaydiaCove Nerd Font', weight = 'Bold' },
 
     -- The size of the font in the tab bar.
     -- Default to 10. on Windows but 12.0 on other systems
@@ -256,6 +256,7 @@ return {
   cursor_blink_rate = 400,
   default_cursor_style = "BlinkingBar",
   cursor_thickness = 1.5,
+  underline_position = -3,
 
   colors = {
     background = "#1c1c1c",
