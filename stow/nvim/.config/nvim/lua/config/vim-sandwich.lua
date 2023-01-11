@@ -17,11 +17,11 @@ function M.setup()
   vim.keymap.set('x', 'aa', '<Plug>(textobj-sandwich-auto-a)', { remap = true })
   vim.keymap.set('o', 'ia', '<Plug>(textobj-sandwich-auto-i)', { remap = true })
   vim.keymap.set('o', 'aa', '<Plug>(textobj-sandwich-auto-a)', { remap = true })
-  -- For specific chars, e.g. ic_ selects w from _w_
-  vim.keymap.set('x', 'ic', '<Plug>(textobj-sandwich-literal-query-i)', { remap = true })
-  vim.keymap.set('x', 'ac', '<Plug>(textobj-sandwich-literal-query-a)', { remap = true })
-  vim.keymap.set('o', 'ic', '<Plug>(textobj-sandwich-literal-query-i)', { remap = true })
-  vim.keymap.set('o', 'ac', '<Plug>(textobj-sandwich-literal-query-a)', { remap = true })
+  -- For specific chars, e.g. im_ selects w from _w_
+  vim.keymap.set('x', 'im', '<Plug>(textobj-sandwich-literal-query-i)', { remap = true })
+  vim.keymap.set('x', 'am', '<Plug>(textobj-sandwich-literal-query-a)', { remap = true })
+  vim.keymap.set('o', 'im', '<Plug>(textobj-sandwich-literal-query-i)', { remap = true })
+  vim.keymap.set('o', 'am', '<Plug>(textobj-sandwich-literal-query-a)', { remap = true })
 end
 
 return M
