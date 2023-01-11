@@ -87,8 +87,12 @@ local function keymaps()
   map('n', '<Leader>sp', telescope.extensions.projects.projects, '[S]earch [P]rojects')
 
   -- Neoclip
-  map({ 'n', 'i' }, '<M-y>', telescope.extensions.neoclip.default, 'Search Yanks')
-  map('n', '<Leader>sm', telescope.extensions.macroscope.default, '[S]earch [M]acros')
+  map({ 'n', 'i' }, '<M-y>', function()
+    telescope.extensions.neoclip.default(themes.get_dropdown())
+  end, 'Search Yanks')
+  map('n', '<Leader>sm', function()
+    telescope.extensions.macroscope.default(themes.get_dropdown())
+  end, '[S]earch [M]acros')
 end
 
 function M.setup()
