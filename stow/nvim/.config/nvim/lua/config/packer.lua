@@ -110,7 +110,7 @@ return require('packer').startup(function(use)
 
   use({
     'norcalli/nvim-colorizer.lua', -- colorize hexa and rgb strings
-    cmd = 'Colorizer',
+    cmd = 'ColorizerEnable',
     config = function()
       require('colorizer').setup({
         user_default_options = {
@@ -247,9 +247,10 @@ return require('packer').startup(function(use)
       'hrsh7th/nvim-cmp',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
-      'saadparwaiz1/cmp_luasnip',
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-nvim-lua',
+      'hrsh7th/cmp-nvim-lsp-signature-help',
+      'saadparwaiz1/cmp_luasnip',
 
       -- Snippets
       'L3MON4D3/LuaSnip',
