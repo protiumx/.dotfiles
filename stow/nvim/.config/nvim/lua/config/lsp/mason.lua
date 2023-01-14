@@ -21,7 +21,7 @@ local function setup_autocmd(bufnr)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
 
-  vim.api.nvim_create_augroup('lsp_format', {})
+  vim.api.nvim_create_augroup('lsp_format', { clear = true })
   vim.api.nvim_create_autocmd('BufWritePre', {
     group = 'lsp_format',
     pattern = '*',
@@ -53,13 +53,14 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_set_hl(0, 'LspReferenceText', { fg = colors.accent })
     vim.api.nvim_set_hl(0, 'LspReferenceWrite', { fg = colors.accent })
 
-    vim.api.nvim_create_augroup('lsp_document_highlight', {})
+    vim.api.nvim_create_augroup('lsp_document_highlight', { clear = true })
     -- Highlight references only in normal mode
     vim.api.nvim_create_autocmd('CursorHold', {
       group = 'lsp_document_highlight',
       buffer = bufnr,
       callback = vim.lsp.buf.document_highlight,
     })
+
     vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
       group = 'lsp_document_highlight',
       buffer = bufnr,
@@ -67,7 +68,7 @@ local on_attach = function(client, bufnr)
     })
   end
 
-  vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
+  vim.cmd [[autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focus = false })]]
 end
 
 

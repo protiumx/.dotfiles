@@ -8,6 +8,7 @@ local servers = {
 
   gopls = {
     gofumpt = true,
+    experimentalPostfixCompletions = true,
     analyses = {
       unusedparams = true,
     },
