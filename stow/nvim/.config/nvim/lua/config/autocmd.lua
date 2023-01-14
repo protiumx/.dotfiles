@@ -1,18 +1,25 @@
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 
+augroup('show_signcolumn', { clear = true })
 autocmd({ 'BufRead', 'BufNewFile' }, {
+  group = 'show_signcolumn',
   pattern = '*',
   command = 'setlocal signcolumn=yes',
 })
 
 -- Trim white spaces before writing
+augroup('remove_white_spaces', { clear = true })
 autocmd({ 'BufWritePre' }, {
+  group = 'remove_white_spaces',
   pattern = "*",
   command = [[%s/\s\+$//e]],
 })
 
+
+augroup('yank_post', { clear = true })
 autocmd('TextYankPost', {
+  group = 'yank_post',
   pattern = '*',
   callback = function()
     vim.highlight.on_yank({
@@ -27,7 +34,7 @@ autocmd({ 'BufNewFile', 'BufRead' }, {
   command = [[setlocal ft=html syntax=html]],
 })
 
-augroup('term_open_insert', {})
+augroup('term_open_insert', { clear = true })
 autocmd('TermOpen', {
   group = 'term_open_insert',
   pattern = '*',
@@ -38,7 +45,7 @@ autocmd('TermOpen', {
 })
 
 local cmd_timer = nil
-augroup('clear_cmdline', {})
+augroup('clear_cmdline', { clear = true })
 autocmd('CmdlineLeave', {
   group = 'clear_cmdline',
   pattern = '*',
@@ -77,7 +84,7 @@ local kitty_title = function(leaving)
   vim.fn.system('kitty @ set-tab-title "' .. title .. '"')
 end
 
-augroup('kitty_title', {})
+augroup('kitty_title', { clear = true })
 autocmd('VimEnter', {
   group = 'kitty_title',
   pattern = '* ++once',
