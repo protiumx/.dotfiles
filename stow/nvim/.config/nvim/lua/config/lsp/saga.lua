@@ -4,7 +4,7 @@ local function keymaps()
   local keymap = vim.keymap.set
   keymap('n', 'gh', '<cmd>Lspsaga lsp_finder<CR>', { silent = true })
   keymap('i', '<C-h>', '<Esc><cmd>Lspsaga lsp_finder<CR>', { silent = true })
-  keymap({ 'n', 'v' }, '<Leader>qf', '<cmd>Lspsaga code_action<CR>', { silent = true })
+  keymap({ 'n', 'v' }, '<Leader>Ca', '<cmd>Lspsaga code_action<CR>', { silent = true })
   keymap('n', '<Leader>rn', '<cmd>Lspsaga rename<CR>', { silent = true })
   keymap('n', '<F2>', '<cmd>Lspsaga rename<CR>', { silent = true })
   keymap('n', 'gpd', '<cmd>Lspsaga peek_definition<CR>', { silent = true })
@@ -22,9 +22,37 @@ local function keymaps()
 end
 
 function M.setup()
-  require('lspsaga').init_lsp_saga({
-    code_action_icon = '',
+  local colors = require('config.colors')
+  require('lspsaga').setup({
+    lightbulb = {
+      enable = false,
+    },
+
+    symbol_in_winbar = {
+      enable = false, -- showing symbols in feline
+      hide_keyword = true,
+      show_file = false,
+    },
+
+    ui = {
+      border = 'single',
+      colors = {
+        normal_bg = colors.background,
+        title_bg = colors.background,
+        red = '#e95678',
+        magenta = '#b33076',
+        orange = '#FF8700',
+        yellow = '#f7bb3b',
+        green = '#afd700',
+        cyan = '#36d0e0',
+        blue = '#61afef',
+        purple = '#CBA6F7',
+        white = '#d1d4cf',
+        black = '#1c1c19',
+      },
+    },
   })
+
   keymaps()
 end
 
