@@ -67,6 +67,9 @@ local comps = {
     end,
     left_sep = ' ',
     right_sep = ' ',
+    hl = {
+      fg = colors.blue,
+    }
   },
 
   vi_mode = {

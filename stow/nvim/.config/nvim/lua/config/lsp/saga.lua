@@ -30,6 +30,7 @@ function M.setup()
 
     symbol_in_winbar = {
       enable = false, -- showing symbols in feline
+      separator = '  ',
       hide_keyword = true,
       show_file = false,
     },
