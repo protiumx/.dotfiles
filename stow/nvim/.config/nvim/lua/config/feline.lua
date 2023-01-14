@@ -60,6 +60,15 @@ local mode_colors = {
 }
 
 local comps = {
+  symbols = {
+    enabled = require('feline.providers.lsp').is_lsp_attached,
+    provider = function()
+      return require('lspsaga.symbolwinbar'):get_winbar() or ''
+    end,
+    left_sep = ' ',
+    right_sep = ' ',
+  },
+
   vi_mode = {
     provider = function()
       return '| ' .. modes[vim.fn.mode()] .. '  '
@@ -136,7 +145,7 @@ local components = {
 
 table.insert(components.active[1], comps.vi_mode)
 table.insert(components.active[1], comps.file.info)
-table.insert(components.active[1], {})
+table.insert(components.active[1], comps.symbols)
 
 table.insert(components.active[2], comps.file.encoding)
 table.insert(components.active[2], comps.file.position)
@@ -161,7 +170,8 @@ function M.setup()
         '^fugitive$',
         '^fugitiveblame$',
         '^qf$',
-        '^help$'
+        '^help$',
+        '^lspsagaoutline$'
       },
       buftypes = { '^terminal$' },
       bufnames = {}
