@@ -61,13 +61,14 @@ local on_attach = function(client, bufnr)
       callback = vim.lsp.buf.document_highlight,
     })
 
-    vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+    vim.api.nvim_create_autocmd({ 'CursorMoved' }, {
       group = 'lsp_document_highlight',
       buffer = bufnr,
       callback = vim.lsp.buf.clear_references,
     })
   end
 
+  -- open diagnostic on cursor hold
   vim.cmd [[autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focus = false })]]
 end
 
@@ -79,7 +80,6 @@ function M.setup()
 
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-
 
   -- Ensure the servers above are installed
   local mason_lspconfig = require('mason-lspconfig')
