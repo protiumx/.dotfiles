@@ -2,20 +2,24 @@ local M = {}
 
 function M.setup()
   local cmp = require('cmp')
-  local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+  -- local cmp_autopairs = require('nvim-autopairs.completion.cmp')
   local luasnip = require('luasnip')
 
-
-  cmp.event:on(
-    'confirm_done',
-    cmp_autopairs.on_confirm_done()
-  )
+  -- cmp.event:on(
+  --   'confirm_done',
+  --   cmp_autopairs.on_confirm_done()
+  -- )
 
   cmp.setup({
     snippet = {
       expand = function(args)
         luasnip.lsp_expand(args.body)
       end,
+    },
+
+    window = {
+      -- completion = cmp.config.window.bordered(),
+      documentation = cmp.config.window.bordered(),
     },
 
     sources = {
@@ -37,7 +41,7 @@ function M.setup()
 
       ['<C-d>'] = cmp.mapping.scroll_docs(-4),
 
-      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      ['<C-u>'] = cmp.mapping.scroll_docs(4),
 
       ['<Tab>'] = cmp.mapping(function(fallback)
         if cmp.visible() then
