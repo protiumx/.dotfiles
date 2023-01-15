@@ -15,14 +15,6 @@ vim.keymap.set('n', '<Leader>pb', '"=strftime("%Y%m%d%H%M")<CR>p')
 vim.keymap.set('n', '<Leader>rw', [[:%s/\<<C-r><C-w>\>//g<Left><Left>]])
 vim.keymap.set('i', '<C-c>', '<Esc>')
 
--- Clears hlsearch after doing a search, otherwise just does normal <CR> stuff
-vim.keymap.set('n', '<CR>', function()
-  if vim.api.nvim_get_vvar('hlsearch') then
-    return ':nohl<CR>'
-  end
-  return '<CR>'
-end, { expr = true })
-
 vim.keymap.set("n", "Q", "<nop>", { silent = true })
 vim.keymap.set('n', 'Y', 'y$')
 
