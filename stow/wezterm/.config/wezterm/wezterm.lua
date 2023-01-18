@@ -3,12 +3,14 @@ local act = wezterm.action
 local mux = wezterm.mux
 
 wezterm.on('gui-startup', function(cmd)
+  ---@diagnostic disable-next-line: unused-local
   local tab, pane, window = mux.spawn_window(cmd or {})
   window:gui_window():maximize()
 end)
 
 wezterm.on(
   'format-tab-title',
+  ---@diagnostic disable-next-line: unused-local
   function(tab, tabs, panes, config, hover, max_width)
     wezterm.log_info(tab.active_pane)
     return {
@@ -205,6 +207,10 @@ return {
     },
 
     { key = '/', mods = 'CTRL', action = act.SendKey { key = '/', mods = 'CTRL' } },
+
+    { key = 'f', mods = 'SHIFT|CMD', action = act.TogglePaneZoomState },
+
+    { key = 'c', mods = 'SHIFT|CMD', action = act.ActivateCopyMode },
   },
 
   mouse_bindings = {
