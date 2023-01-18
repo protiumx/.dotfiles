@@ -48,13 +48,11 @@ vim.keymap.set('n', '<Leader><Left>', ':vertical resize +2<CR>', { silent = true
 vim.keymap.set('n', '<Leader><Right>', ':vertical resize -2<CR>', { silent = true })
 
 -- Copy to system clipboard
-vim.keymap.set('v', '<C-y>', function()
-  if macos then
-    return '"*y'
-  end
-  -- Linux
-  return '"+y'
-end, { silent = true })
+if macos then
+  vim.keymap.set('v', '<C-y>', '"*y', { silent = true })
+else
+  vim.keymap.set('v', '<C-y>', '"+y', { silent = true })
+end
 
 -- Toggle between current and prev buffers
 vim.keymap.set('n', '``', '<C-^>', { silent = true })
@@ -98,9 +96,9 @@ vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { silent = true })
 
 -- Copy current file relative path to clipboard
 vim.keymap.set('n', '<Leader>P', function()
-  local clip = '+'
   if macos then
-    clip = '*'
+    vim.cmd [[ let @*=expand("%:~:.") ]]
+  else
+    vim.cmd [[ let @+=expand("%:~:.") ]]
   end
-  return ':let @' .. clip .. '=expand("%:~:.")<CR>'
 end, { silent = true })
