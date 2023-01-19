@@ -230,7 +230,7 @@ return require('packer').startup(function(use)
       -- project.nvim should have setup the path when this is executed
       return vim.fn.isdirectory(vim.fn.getcwd() .. '/.git/')
     end,
-    event = "BufRead",
+    event = 'BufRead',
     config = function()
       require('config.gitsigns').setup()
     end
@@ -239,7 +239,7 @@ return require('packer').startup(function(use)
   use({
     'sindrets/diffview.nvim',
     requires = 'nvim-lua/plenary.nvim',
-    cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles" },
+    cmd = { 'DiffviewOpen', 'DiffviewClose', 'DiffviewToggleFiles', 'DiffviewFocusFiles' },
   })
 
   -- LSP
