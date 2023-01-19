@@ -138,6 +138,12 @@ return require('packer').startup(function(use)
   })
 
   use({
+    'iamcco/markdown-preview.nvim',
+    run = function() vim.fn['mkdp#util#install']() end,
+    ft = { "markdown" },
+  })
+
+  use({
     'mattn/emmet-vim',
     config = function()
       vim.g['user_emmet_leader_key'] = '<C-X>'
@@ -228,6 +234,12 @@ return require('packer').startup(function(use)
     config = function()
       require('config.gitsigns').setup()
     end
+  })
+
+  use({
+    'sindrets/diffview.nvim',
+    requires = 'nvim-lua/plenary.nvim',
+    cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles" },
   })
 
   -- LSP
