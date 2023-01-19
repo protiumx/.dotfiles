@@ -1,10 +1,24 @@
 local servers = {
+  dockerls = {},
+
+  graphql = {},
+
   tsserver = {},
+
   eslint = {},
+
   rust_analyzer = {},
+
   clangd = {},
+
   pyright = {},
-  bashls = {},
+
+  bashls = {
+    cmd_env = {
+      GLOB_PATTERN = "*@(.sh|.inc|.bash|.command|.zsh)",
+    },
+    filetypes = { "sh", "zsh" },
+  },
 
   gopls = {
     gofumpt = true,
