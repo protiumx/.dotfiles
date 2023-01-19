@@ -2,6 +2,126 @@ local wezterm = require 'wezterm'
 local act = wezterm.action
 local mux = wezterm.mux
 
+local colors = {
+  rosewater = '#F5E0DC',
+  flamingo = '#F2CDCD',
+  pink = '#F5C2E7',
+  mauve = '#CBA6F7',
+  red = '#F38BA8',
+  maroon = '#EBA0AC',
+  peach = '#FAB387',
+  yellow = '#F9E2AF',
+  green = '#A6E3A1',
+  teal = '#94E2D5',
+  sky = '#89DCEB',
+  sapphire = '#74C7EC',
+  blue = '#89B4FA',
+  lavender = '#B4BEFE',
+
+  text = '#CDD6F4',
+  subtext1 = '#BAC2DE',
+  subtext0 = '#A6ADC8',
+  overlay2 = '#9399B2',
+  overlay1 = '#7F849C',
+  overlay0 = '#6C7086',
+  surface2 = '#585B70',
+  surface1 = '#45475A',
+  surface0 = '#313244',
+
+  base = '#1E1E2E',
+  mantle = '#181825',
+  crust = '#11111B',
+}
+
+local process_icons = {
+  ['docker'] = {
+    { Foreground = { Color = colors.blue } },
+    { Text = wezterm.nerdfonts.linux_docker },
+  },
+  ['docker-compose'] = {
+    { Foreground = { Color = colors.blue } },
+    { Text = wezterm.nerdfonts.linux_docker },
+  },
+  ['nvim'] = {
+    { Foreground = { Color = colors.green } },
+    { Text = wezterm.nerdfonts.custom_vim },
+  },
+  ['vim'] = {
+    { Foreground = { Color = colors.green } },
+    { Text = wezterm.nerdfonts.dev_vim },
+  },
+  ['node'] = {
+    { Foreground = { Color = colors.green } },
+    { Text = wezterm.nerdfonts.mdi_hexagon },
+  },
+  ['zsh'] = {
+    { Foreground = { Color = colors.peach } },
+    { Text = wezterm.nerdfonts.dev_terminal },
+  },
+  ['bash'] = {
+    { Foreground = { Color = colors.subtext0 } },
+    { Text = wezterm.nerdfonts.cod_terminal_bash },
+  },
+  ['btm'] = {
+    { Foreground = { Color = colors.yellow } },
+    { Text = wezterm.nerdfonts.mdi_chart_donut_variant },
+  },
+  ['htop'] = {
+    { Foreground = { Color = colors.yellow } },
+    { Text = wezterm.nerdfonts.mdi_chart_donut_variant },
+  },
+  ['cargo'] = {
+    { Foreground = { Color = colors.peach } },
+    { Text = wezterm.nerdfonts.dev_rust },
+  },
+  ['go'] = {
+    { Foreground = { Color = colors.sapphire } },
+    { Text = wezterm.nerdfonts.mdi_language_go },
+  },
+  ['lazydocker'] = {
+    { Foreground = { Color = colors.blue } },
+    { Text = wezterm.nerdfonts.linux_docker },
+  },
+  ['git'] = {
+    { Foreground = { Color = colors.peach } },
+    { Text = wezterm.nerdfonts.dev_git },
+  },
+  ['lua'] = {
+    { Foreground = { Color = colors.blue } },
+    { Text = wezterm.nerdfonts.seti_lua },
+  },
+  ['wget'] = {
+    { Foreground = { Color = colors.yellow } },
+    { Text = wezterm.nerdfonts.mdi_arrow_down_box },
+  },
+  ['curl'] = {
+    { Foreground = { Color = colors.yellow } },
+    { Text = wezterm.nerdfonts.mdi_flattr },
+  },
+  ['gh'] = {
+    { Foreground = { Color = colors.mauve } },
+    { Text = wezterm.nerdfonts.dev_github_badge },
+  },
+}
+
+
+local function get_current_working_dir(tab)
+  local current_dir = tab.active_pane.current_working_dir
+  local HOME_DIR = string.format("file://%s", os.getenv("HOME"))
+
+  return current_dir == HOME_DIR and "  ~"
+      or string.format("  %s", string.gsub(current_dir, "(.*[/\\])(.*)", "%2"))
+end
+
+local function get_process(tab)
+  local process_name = string.gsub(tab.active_pane.foreground_process_name, "(.*[/\\])(.*)", "%2")
+
+  return wezterm.format(
+    process_icons[process_name]
+    or { { Foreground = { Color = colors.sky } }, { Text = string.format("[%s]", process_name) } }
+  )
+end
+
 wezterm.on('gui-startup', function(cmd)
   ---@diagnostic disable-next-line: unused-local
   local tab, pane, window = mux.spawn_window(cmd or {})
@@ -10,14 +130,26 @@ end)
 
 wezterm.on(
   'format-tab-title',
-  ---@diagnostic disable-next-line: unused-local
   function(tab, tabs, panes, config, hover, max_width)
-    wezterm.log_info(tab.active_pane)
-    return {
-      { Text = wezterm.nerdfonts.fa_chevron_right .. ' ' .. tab.active_pane.title .. ' ' },
-    }
+    return wezterm.format({
+      { Attribute = { Intensity = "Half" } },
+      { Text = string.format(" %s  ", wezterm.nerdfonts.fa_chevron_right) },
+      "ResetAttributes",
+      { Text = get_process(tab) },
+      { Text = " ~ " },
+      { Text = get_current_working_dir(tab) },
+      { Foreground = { Color = colors.base } },
+      { Text = "  ▕" },
+    })
   end
 )
+
+wezterm.on("update-right-status", function(window)
+  window:set_right_status(wezterm.format({
+    { Attribute = { Intensity = "Bold" } },
+    { Text = wezterm.strftime(" %A, %d %B %Y %I:%M %p ") },
+  }))
+end)
 
 return {
   audible_bell = "Disabled",
@@ -36,6 +168,7 @@ return {
 
   hide_tab_bar_if_only_one_tab = true,
   inactive_pane_hsb = {
+    saturation = 1.0,
     brightness = 0.85,
   },
 
@@ -132,7 +265,7 @@ return {
 
     {
       key = 'S',
-      mods = 'SHIFT|CTRL',
+      mods = 'SHIFT|ALT',
       action = act.PaneSelect,
     },
 
@@ -263,6 +396,8 @@ return {
   default_cursor_style = "BlinkingBar",
   cursor_thickness = 1.5,
   underline_position = -3,
+  use_fancy_tab_bar = true,
+
 
   colors = {
     background = "#1c1c1c",
