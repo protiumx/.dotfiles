@@ -68,3 +68,31 @@ vim.opt.wildignore = {
   '*/.git/*', '*.DS_Store',
   '*/node_modules/*', '*/build/*', '*/logs/*', '*/dist/*', '*/tmp/*',
 }
+
+vim.filetype.add({
+  pattern = {
+    ['[jt]sconfig.*.json'] = 'jsonc',
+  },
+})
+
+local builtins = {
+  'gzip',
+  'zip',
+  'zipPlugin',
+  'fzf',
+  'tar',
+  'tarPlugin',
+  'getscript',
+  'getscriptPlugin',
+  'vimball',
+  'vimballPlugin',
+  '2html_plugin',
+  'matchit',
+  'matchparen',
+  'logiPat',
+  'rrhelper',
+}
+
+for _, plugin in ipairs(builtins) do
+  vim.g['loaded_' .. plugin] = 1
+end
