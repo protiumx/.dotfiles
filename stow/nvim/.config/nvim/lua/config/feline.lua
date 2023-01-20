@@ -174,7 +174,8 @@ function M.setup()
         '^fugitiveblame$',
         '^qf$',
         '^help$',
-        '^lspsagaoutline$'
+        '^lspsagaoutline$',
+        '^DiffviewFiles$',
       },
       buftypes = { '^terminal$' },
       bufnames = {}
