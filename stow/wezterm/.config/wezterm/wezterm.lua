@@ -35,71 +35,54 @@ local colors = {
 
 local process_icons = {
   ['docker'] = {
-    { Foreground = { Color = colors.blue } },
     { Text = wezterm.nerdfonts.linux_docker },
   },
   ['docker-compose'] = {
-    { Foreground = { Color = colors.blue } },
     { Text = wezterm.nerdfonts.linux_docker },
   },
   ['nvim'] = {
-    { Foreground = { Color = colors.green } },
     { Text = wezterm.nerdfonts.custom_vim },
   },
   ['vim'] = {
-    { Foreground = { Color = colors.green } },
     { Text = wezterm.nerdfonts.dev_vim },
   },
   ['node'] = {
-    { Foreground = { Color = colors.green } },
     { Text = wezterm.nerdfonts.mdi_hexagon },
   },
   ['zsh'] = {
-    { Foreground = { Color = colors.peach } },
     { Text = wezterm.nerdfonts.dev_terminal },
   },
   ['bash'] = {
-    { Foreground = { Color = colors.subtext0 } },
     { Text = wezterm.nerdfonts.cod_terminal_bash },
   },
   ['btm'] = {
-    { Foreground = { Color = colors.yellow } },
     { Text = wezterm.nerdfonts.mdi_chart_donut_variant },
   },
   ['htop'] = {
-    { Foreground = { Color = colors.yellow } },
     { Text = wezterm.nerdfonts.mdi_chart_donut_variant },
   },
   ['cargo'] = {
-    { Foreground = { Color = colors.peach } },
     { Text = wezterm.nerdfonts.dev_rust },
   },
   ['go'] = {
-    { Foreground = { Color = colors.sapphire } },
     { Text = wezterm.nerdfonts.mdi_language_go },
   },
   ['lazydocker'] = {
-    { Foreground = { Color = colors.blue } },
     { Text = wezterm.nerdfonts.linux_docker },
   },
   ['git'] = {
-    { Foreground = { Color = colors.peach } },
     { Text = wezterm.nerdfonts.dev_git },
   },
   ['lua'] = {
-    { Foreground = { Color = colors.blue } },
     { Text = wezterm.nerdfonts.seti_lua },
   },
   ['wget'] = {
-    { Foreground = { Color = colors.yellow } },
     { Text = wezterm.nerdfonts.mdi_arrow_down_box },
   },
   ['curl'] = {
-    { Foreground = { Color = colors.yellow } },
     { Text = wezterm.nerdfonts.mdi_flattr },
   },
   ['gh'] = {
-    { Foreground = { Color = colors.mauve } },
     { Text = wezterm.nerdfonts.dev_github_badge },
   },
 }
@@ -107,18 +90,18 @@ local process_icons = {
 
 local function get_current_working_dir(tab)
   local current_dir = tab.active_pane.current_working_dir
-  local HOME_DIR = string.format("file://%s", os.getenv("HOME"))
+  local HOME_DIR = string.format('file://%s', os.getenv('HOME'))
 
-  return current_dir == HOME_DIR and "  ~"
-      or string.format("  %s", string.gsub(current_dir, "(.*[/\\])(.*)", "%2"))
+  return current_dir == HOME_DIR and '.'
+      or string.gsub(current_dir, '(.*[/\\])(.*)', '%2')
 end
 
 local function get_process(tab)
-  local process_name = string.gsub(tab.active_pane.foreground_process_name, "(.*[/\\])(.*)", "%2")
+  local process_name = string.gsub(tab.active_pane.foreground_process_name, '(.*[/\\])(.*)', '%2')
 
   return wezterm.format(
     process_icons[process_name]
-    or { { Foreground = { Color = colors.sky } }, { Text = string.format("[%s]", process_name) } }
+    or { { Foreground = { Color = colors.sky } }, { Text = string.format('[%s]', process_name) } }
   )
 end
 
@@ -132,37 +115,36 @@ wezterm.on(
   'format-tab-title',
   function(tab, tabs, panes, config, hover, max_width)
     return wezterm.format({
-      { Attribute = { Intensity = "Half" } },
-      { Text = string.format(" %s  ", wezterm.nerdfonts.fa_chevron_right) },
-      "ResetAttributes",
+      { Attribute = { Intensity = 'Half' } },
+      { Text = string.format(' %s  ', wezterm.nerdfonts.fa_chevron_right) },
+      'ResetAttributes',
       { Text = get_process(tab) },
-      { Text = " ~ " },
+      { Text = ' ~ ' },
       { Text = get_current_working_dir(tab) },
-      { Foreground = { Color = colors.base } },
-      { Text = "  ▕" },
+      { Text = '  ' },
     })
   end
 )
 
-wezterm.on("update-right-status", function(window)
+wezterm.on('update-right-status', function(window)
   window:set_right_status(wezterm.format({
-    { Attribute = { Intensity = "Bold" } },
-    { Text = wezterm.strftime(" %A, %d %B %Y %I:%M %p ") },
+    { Attribute = { Intensity = 'Bold' } },
+    { Text = wezterm.strftime(' %A, %d %B %Y %I:%M %p ') },
   }))
 end)
 
 return {
-  audible_bell = "Disabled",
-  color_scheme = "3024 (base16)",
+  audible_bell = 'Disabled',
+  color_scheme = '3024 (base16)',
   max_fps = 100,
-  font = wezterm.font("CaskaydiaCove Nerd Font", { weight = "Medium", stretch = "Normal", style = "Normal" }),
+  font = wezterm.font('CaskaydiaCove Nerd Font', { weight = 'Medium', stretch = 'Normal', style = 'Normal' }),
   font_rules = {
     {
       intensity = 'Bold',
-      font = wezterm.font("CaskaydiaCove Nerd Font", { weight = "Bold", stretch = "Normal", style = "Normal" }),
+      font = wezterm.font('CaskaydiaCove Nerd Font', { weight = 'Bold', stretch = 'Normal', style = 'Normal' }),
     },
   },
-  font_size = 19.0,
+  font_size = 18.0,
   -- Disable font ligatures
   harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
 
@@ -279,7 +261,7 @@ return {
 
 
     -- Tabs
-    { key = ']', mods = 'SHIFT|CMD', action = wezterm.action.ShowTabNavigator },
+    { key = 'N', mods = 'SHIFT|CMD', action = wezterm.action.ShowTabNavigator },
     { key = 'Tab', mods = 'SHIFT|CTRL', action = act.ActivateTabRelative(-1) },
     { key = 'Tab', mods = 'CTRL', action = act.ActivateTabRelative(1) },
 
@@ -291,7 +273,7 @@ return {
 
     {
       key = '0',
-      mods = 'CTRL',
+      mods = 'CMD',
       action = wezterm.action.ResetFontAndWindowSize,
     },
 
@@ -341,9 +323,9 @@ return {
 
     { key = '/', mods = 'CTRL', action = act.SendKey { key = '/', mods = 'CTRL' } },
 
-    { key = 'f', mods = 'SHIFT|CMD', action = act.TogglePaneZoomState },
+    { key = 'z', mods = 'SHIFT|ALT', action = act.TogglePaneZoomState },
 
-    { key = 'c', mods = 'SHIFT|CMD', action = act.ActivateCopyMode },
+    { key = 'c', mods = 'SHIFT|ALT', action = act.ActivateCopyMode },
   },
 
   mouse_bindings = {
@@ -369,7 +351,7 @@ return {
   switch_to_last_active_tab_when_closing_tab = true,
   tab_max_width = 60,
 
-  window_decorations = "RESIZE",
+  window_decorations = 'RESIZE',
   window_frame = {
     -- The font used in the tab bar.
     -- Roboto Bold is the default; this font is bundled
@@ -381,7 +363,7 @@ return {
 
     -- The size of the font in the tab bar.
     -- Default to 10. on Windows but 12.0 on other systems
-    font_size = 14.0,
+    font_size = 16.0,
 
     -- The overall background color of the tab bar when
     -- the window is focused
@@ -393,14 +375,14 @@ return {
   },
 
   cursor_blink_rate = 400,
-  default_cursor_style = "BlinkingBar",
+  default_cursor_style = 'BlinkingBar',
   cursor_thickness = 1.5,
   underline_position = -3,
   use_fancy_tab_bar = true,
 
 
   colors = {
-    background = "#1c1c1c",
+    background = '#1c1c1c',
     cursor_bg = '#fe5186',
     cursor_border = '#fe5186',
     selection_fg = '#1c1c1c',
