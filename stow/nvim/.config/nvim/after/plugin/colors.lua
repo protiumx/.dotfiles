@@ -42,3 +42,9 @@ vim.api.nvim_set_hl(0, 'DiagnosticFloatingHint', { bg = 'none' })
 vim.api.nvim_set_hl(0, 'DiagnosticFloatingInfo', { bg = 'none' })
 vim.api.nvim_set_hl(0, 'DiagnosticFloatingWarn', { bg = 'none', fg = colors.yellow })
 vim.api.nvim_set_hl(0, 'DiagnosticFloatingError', { bg = 'none', fg = colors.red })
+
+
+-- Diff
+vim.api.nvim_set_hl(0, 'DiffAdd', { bg = '#3d7321', fg = 'none' })
+vim.api.nvim_set_hl(0, 'DiffDelete', { bg = '#6e1b1b', fg = '#6e1b1b' })
+vim.api.nvim_set_hl(0, 'DiffText', { fg = 'none' })
