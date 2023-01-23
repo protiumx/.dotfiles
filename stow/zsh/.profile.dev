@@ -6,28 +6,29 @@ cheat() {
 
 # Show package.json scripts with fzf
 pkgrun() {
-  name=$(cat package.json | jq .scripts | sed '1d;$d' | fzf --height 40% | awk -F ': ' '{gsub(/"/, "", $1); print $1}')
+  name=$(jq .scripts package.json | sed '1d;$d' | fzf --height 40% | awk -F ': ' '{gsub(/"/, "", $1); print $1}')
   if [[ -n $scripts ]]; then
-    yarn run $name
+    yarn run "$name"
   fi
 }
 
 # Open vim in a new kitty tab
 tab_nvim() {
-  kitty @ launch --type tab --cwd $1 --no-response --keep-focus nvim . 2>/dev/null 1>/dev/null &;
+  kitty @ launch --type tab --cwd "$1" --no-response --keep-focus nvim . 2>/dev/null 1>/dev/null &
 }
 
 # Jump to folder (zoxide) and open nvim.
 # NOTE: nvim plug will set the root folder properly if a .git folder exists
 zv() {
-  z $1 && nvim .;
+ z "$1"
+ nvim .
 }
 
 # Go to repository root folder
 groot() {
   root="$(git rev-parse --show-toplevel 2>/dev/null)"
   if [ -n "$root" ]; then
-      cd $root;
+      cd "$root";
   else
       echo "Not in a git repository"
   fi
@@ -35,14 +36,14 @@ groot() {
 
 # Retrieve process real memory
 psrm() {
-  ps -o rss= -p $1 | awk '{ hr=$1/1024; printf "%13.2f Mb\n",hr }' | tr -d ' ';
+  ps -o rss= -p "$1" | awk '{ hr=$1/1024; printf "%13.2f Mb\n",hr }' | tr -d ' ';
 }
 
 # Watch process real memory
 psrml() {
   while true;
   do
-    psrm $1;
+    psrm "$1";
     sleep 1;
   done
 }
@@ -73,7 +74,7 @@ kitty_title() {
 }
 
 mkcd(){
-  mkdir -p "$1" && cd "$1"
+  mkdir -p "$1" && cd "$1" || exit
 }
 
 # Print all 256 ANSI colors
@@ -83,7 +84,7 @@ ansi_colors() {
 
 # checkout or create new branch
 gck() {
-  git checkout $1 2>/dev/null || git checkout -b $1;
+  git checkout "$1" 2>/dev/null || git checkout -b "$1";
 }
 
 cdi() {
