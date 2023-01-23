@@ -123,7 +123,7 @@ if [ "$(command -v exa)" ]; then
 fi
 
 alias yw="yarn workspace"
-alias cat="bat -p --paging=never"
+alias cat="bat -p --paging=never --theme='TwoDark'"
 # Conventional Commits
 alias gre="git_commit refactor"
 alias gte="git_commit test"
