@@ -69,6 +69,7 @@ function M.setup()
       'c',
       'cpp',
       'lua',
+      'python',
       'rust',
       'vim',
     },
