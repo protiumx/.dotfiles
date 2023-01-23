@@ -11,7 +11,6 @@ CLI="$HOME/.cli"
 # Pasting big chunks of text takes ages
 unset zle_bracketed_paste
 
-export GOPATH="$(go env GOPATH)"
 export PATH="$GOPATH/bin:$PATH"
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -58,3 +57,5 @@ source $brew_prefix/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 for file in $HOME/.profile*; do
   source "$file"
 done
+
+export GOPATH="$(go env GOPATH)"
