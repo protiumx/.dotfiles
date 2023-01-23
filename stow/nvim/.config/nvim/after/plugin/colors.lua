@@ -31,6 +31,7 @@ vim.api.nvim_set_hl(0, 'FloatBorder', { bg = 'none' })
 vim.api.nvim_set_hl(0, 'SpellBad', { bg = 'none', fg = 'none', undercurl = true, ctermbg = 'none', ctermfg = 'none' })
 vim.api.nvim_set_hl(0, 'SpellRare', { bg = 'none', fg = 'none', undercurl = true, ctermbg = 'none', ctermfg = 'none' })
 vim.api.nvim_set_hl(0, 'SpellLocal', { bg = 'none', fg = 'none', undercurl = true, ctermbg = 'none', ctermfg = 'none' })
+vim.api.nvim_set_hl(0, 'StatusLine', { fg = colors.white, bg = colors.background })
 
 -- Diagnostic
 vim.api.nvim_set_hl(0, 'DiagnosticError', { fg = colors.red })
@@ -42,7 +43,6 @@ vim.api.nvim_set_hl(0, 'DiagnosticFloatingHint', { bg = 'none' })
 vim.api.nvim_set_hl(0, 'DiagnosticFloatingInfo', { bg = 'none' })
 vim.api.nvim_set_hl(0, 'DiagnosticFloatingWarn', { bg = 'none', fg = colors.yellow })
 vim.api.nvim_set_hl(0, 'DiagnosticFloatingError', { bg = 'none', fg = colors.red })
-
 
 -- Diff
 vim.api.nvim_set_hl(0, 'DiffAdd', { bg = '#3d7321', fg = 'none' })
