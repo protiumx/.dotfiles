@@ -248,7 +248,9 @@ return require('packer').startup(function(use)
     ft = {
       'go',
       'lua',
+      'python',
       'rust',
+      'bash',
     },
     requires = {
       -- LSP Support
