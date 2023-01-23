@@ -104,7 +104,7 @@ function M.setup()
       multi_icon = '+ ',
 
       layout_strategy = 'flex',
-      layout_config = { height = 0.9, width = 0.95 },
+      layout_config = { height = 0.9, width = 0.9 },
 
       mappings = {
         i = {
