@@ -47,10 +47,9 @@ local function keymaps()
     'Browse files relative')
   map('n', '<M-f>', function() telescope.extensions.file_browser.file_browser(opts_file_browser) end, 'Browse files')
 
-  map('n', '<Leader>sg', builtin.live_grep, '[S]earch [G]rep')
-
+  map('n', '<Leader>sg', builtin.live_grep, '[S]earch Live [G]rep')
   -- find word under cursor
-  map('n', '<Leader>sw', builtin.grep_string, '[S]earch [W]ord')
+  map('n', '<Leader>sw', builtin.grep_string, '[S]earch [W]ord in cwd')
   map('n', '<Leader>sr', builtin.registers, '[S]earch [R]egisters')
 
   map('n', '<Leader>sh', builtin.help_tags, '[S]earch [H]elp')
@@ -58,7 +57,6 @@ local function keymaps()
   map('n', '<Leader>/', function()
     builtin.current_buffer_fuzzy_find({
       theme = 'dropdown',
-      layout_config = { prompt_position = 'top' },
     })
   end, 'Fuzzy search in buffer')
 
