@@ -73,6 +73,7 @@ function M.setup()
       'python',
       'rust',
       'vim',
+      'yaml',
     },
 
     sync_install = false,
