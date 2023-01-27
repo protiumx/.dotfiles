@@ -48,3 +48,5 @@ vim.api.nvim_set_hl(0, 'DiagnosticFloatingError', { bg = 'none', fg = colors.red
 vim.api.nvim_set_hl(0, 'DiffAdd', { bg = '#3d7321', fg = 'none' })
 vim.api.nvim_set_hl(0, 'DiffDelete', { bg = '#6e1b1b', fg = '#6e1b1b' })
 vim.api.nvim_set_hl(0, 'DiffText', { fg = 'none' })
+
+vim.api.nvim_set_hl(0, 'MatchParen', { fg = colors.accent, bg = 'none' })
