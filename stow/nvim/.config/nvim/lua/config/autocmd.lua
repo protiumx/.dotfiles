@@ -29,9 +29,17 @@ autocmd('TextYankPost', {
   end,
 })
 
+augroup('set_filetypes', { clear = true })
 autocmd({ 'BufNewFile', 'BufRead' }, {
+  group = 'set_filetypes',
   pattern = '*.heex',
   command = [[setlocal ft=html syntax=html]],
+})
+
+autocmd({ 'BufNewFile', 'BufRead' }, {
+  group = 'set_filetypes',
+  pattern = 'Dockerfile*',
+  command = [[set ft=dockerfile]],
 })
 
 augroup('term_open_insert', { clear = true })
@@ -67,42 +75,9 @@ autocmd('CmdlineEnter', {
   end,
 })
 
-local kitty_title = function(leaving)
-  local title = ''
-  local arg = vim.api.nvim_eval('argv(0)')
-  if not arg then
-    title = 'nvim'
-  elseif not leaving then
-    if vim.fn.isdirectory(arg) then
-      title = 'nvim ~ ' .. vim.fn.expand('%:p:h:t')
-    else
-      title = 'nvim ~ ' .. arg
-    end
-  end
-
-  vim.fn.system('kitty @ set-window-title "' .. title .. '"')
-  vim.fn.system('kitty @ set-tab-title "' .. title .. '"')
-end
-
-augroup('kitty_title', { clear = true })
-autocmd('VimEnter', {
-  group = 'kitty_title',
-  pattern = '* ++once',
-  callback = function()
-    kitty_title(false)
-  end,
-})
-
-autocmd('VimLeave', {
-  group = 'kitty_title',
-  pattern = '* ++once',
-  callback = function()
-    kitty_title(true)
-  end,
-})
-
 -- dont list quickfix buffers
 autocmd('FileType', {
+  group = 'set_filetypes',
   pattern = 'qf',
   callback = function()
     vim.opt_local.buflisted = false
@@ -110,6 +85,7 @@ autocmd('FileType', {
 })
 
 autocmd('FileType', {
+  group = 'set_filetypes',
   pattern = { 'gitcommit', 'fugitive' },
   command = [[
     setlocal nonumber signcolumn=no
