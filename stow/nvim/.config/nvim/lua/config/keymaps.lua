@@ -4,15 +4,13 @@ vim.g.mapleader = ' '
 
 -- Delete to blackhole register
 vim.keymap.set('n', '<Leader>d', '"_d')
-vim.keymap.set('n', '<Leader>c', '"_c')
 vim.keymap.set('v', '<Leader>d', '"_d')
-vim.keymap.set('v', '<Leader>c', '"_c')
 
 -- Insert date time as YYYY-MM-DD-HH:mm
 vim.keymap.set('n', '<Leader>pb', '"=strftime("%Y%m%d%H%M")<CR>p')
 
 -- Prepare replace all occurrences of word under cursor
-vim.keymap.set('n', '<Leader>rw', [[:%s/\<<C-r><C-w>\>//g<Left><Left>]])
+vim.keymap.set('n', '<Leader>wr', [[:%s/\<<C-r><C-w>\>//g<Left><Left>]])
 vim.keymap.set('i', '<C-c>', '<Esc>')
 
 vim.keymap.set("n", "Q", "<nop>", { silent = true })
@@ -42,8 +40,8 @@ vim.keymap.set('v', 'K', ':m \'<-2<CR>gv=gv', { silent = true })
 vim.keymap.set("n", "J", "mzJ`z")
 
 -- Resize windows
-vim.keymap.set('n', '<C-Up>', ':resize -2<CR>', { silent = true })
-vim.keymap.set('n', '<C-Down>', ':resize +2<CR>', { silent = true })
+vim.keymap.set('n', '<Leader><Up>', ':resize -2<CR>', { silent = true })
+vim.keymap.set('n', '<Leader><Down>', ':resize +2<CR>', { silent = true })
 vim.keymap.set('n', '<Leader><Left>', ':vertical resize +2<CR>', { silent = true })
 vim.keymap.set('n', '<Leader><Right>', ':vertical resize -2<CR>', { silent = true })
 
@@ -58,14 +56,11 @@ end
 vim.keymap.set('n', '``', '<C-^>', { silent = true })
 
 -- Close buffer without changing window layout
-vim.keymap.set('n', '--', ':bp|bd #<CR>', { silent = true })
+vim.keymap.set('n', '--', ':bd<CR>', { silent = true })
 
 -- Go next/prev buffer using Tab
 vim.keymap.set('n', '<Tab>', ':bn<CR>', { silent = true })
 vim.keymap.set('n', '<S-Tab>', ':bp<CR>', { silent = true })
-
--- Close all buffers except current
-vim.keymap.set('n', '<Leader>xa', ':%bd | e# | bd#<CR> | \'"', { silent = true })
 
 -- Select all text in current buffer
 vim.keymap.set('n', '<M-a>', 'ggVG', { silent = true })
@@ -80,7 +75,7 @@ vim.keymap.set('n', 'p', 'p=`]', { silent = true })
 vim.keymap.set('n', 'P', 'P=`]', { silent = true })
 vim.keymap.set('n', '<C-p>', 'p', { silent = true })
 
--- Quick new line
+-- Quick new lines
 vim.keymap.set('i', '<M-o>', '<C-o>o', { silent = true })
 vim.keymap.set('i', '<M-O>', '<C-o>O', { silent = true })
 
@@ -95,10 +90,8 @@ vim.keymap.set('t', '<C-q>', '<C-\\><C-n>:bd!<CR>', { silent = true })
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { silent = true })
 
 -- Copy current file relative path to clipboard
-vim.keymap.set('n', '<Leader>P', function()
-  if macos then
-    vim.cmd [[ let @*=expand("%:~:.") ]]
-  else
-    vim.cmd [[ let @+=expand("%:~:.") ]]
-  end
-end, { silent = true })
+if macos then
+  vim.keymap.set('n', '<Leader>P', ':let @*=expand("%:~:.")', { silent = true })
+else
+  vim.keymap.set('n', '<Leader>P', ':let @+=expand("%:~:.")', { silent = true })
+end
