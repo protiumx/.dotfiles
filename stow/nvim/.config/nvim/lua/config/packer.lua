@@ -21,7 +21,7 @@ if not status_ok then
   return
 end
 
-vim.cmd [[packadd packer.nvim]]
+vim.cmd [[ packadd packer.nvim ]]
 
 return require('packer').startup(function(use)
   -- Packer can manage itself
@@ -128,19 +128,13 @@ return require('packer').startup(function(use)
 
   use({
     'junegunn/vim-easy-align',
-    cmd = 'EasyAlignEnable',
+    cmd = 'EasyAlign',
     config = function()
       -- Start interactive EasyAlign in visual mode (e.g. vipga)
       vim.keymap.set('x', 'ga', '<Plug>(EasyAlign)', { remap = true })
       -- Start interactive EasyAlign for a motion/text object (e.g. gaip)
       vim.keymap.set('n', 'ga', '<Plug>(EasyAlign)', { remap = true })
     end
-  })
-
-  use({
-    'iamcco/markdown-preview.nvim',
-    run = function() vim.fn['mkdp#util#install']() end,
-    ft = { "markdown" },
   })
 
   use({
@@ -172,7 +166,7 @@ return require('packer').startup(function(use)
 
   use({
     'arthurxavierx/vim-caser',
-    cmd = 'VimCaserEnable'
+    cmd = 'VimCaser'
   })
 
   -- Change surroundings
@@ -251,6 +245,8 @@ return require('packer').startup(function(use)
       'python',
       'rust',
       'bash',
+      'dockerfile',
+      'yaml',
     },
     requires = {
       -- LSP Support
@@ -272,8 +268,10 @@ return require('packer').startup(function(use)
 
       -- Show lsp progress
       'j-hui/fidget.nvim',
+      --
+      -- Better UI for LSP commands
       {
-        'glepnir/lspsaga.nvim', -- better ui
+        'glepnir/lspsaga.nvim',
         branch = 'main',
       }
     },
