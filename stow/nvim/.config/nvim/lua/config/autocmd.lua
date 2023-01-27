@@ -87,6 +87,11 @@ autocmd('FileType', {
 })
 
 autocmd('FileType', {
-  pattern = { 'help', 'startuptime', 'qf', 'lspinfo' }, command = [[nnoremap <buffer><silent> q :close<CR>]]
+  pattern = { 'help', 'startuptime', 'qf', 'lspinfo' },
+  command = [[nnoremap <buffer><silent> q :close<CR>]],
 })
-autocmd('FileType', { pattern = 'man', command = [[nnoremap <buffer><silent> q :quit<CR>]] })
+
+autocmd('FileType', {
+  pattern = 'man',
+  command = [[nnoremap <buffer><silent> q :quit<CR>]]
+})
