@@ -38,22 +38,23 @@ local function keymaps()
   })
 
   map({ 'i', 'n' }, '<C-]>', function() builtin.find_files(dropdown) end, 'Find files')
-  map({ 'n' }, '<C-h>', builtin.find_files, 'Find files with preview')
-
+  map({ 'i', 'n' }, '<C-h>', builtin.find_files, 'Find files with preview')
   map({ 'i', 'n' }, '<C-b>', function() builtin.buffers(dropdown) end, 'Find buffers')
 
   -- Open in current file's folder
-  map('n', '<M-g>', function() telescope.extensions.file_browser.file_browser(opts_file_browser_path) end,
-    'Browse files relative')
-  map('n', '<M-f>', function() telescope.extensions.file_browser.file_browser(opts_file_browser) end, 'Browse files')
+  map('n', '<M-g>', function()
+    telescope.extensions.file_browser.file_browser(opts_file_browser_path)
+  end, 'Browse files relative')
+
+  map('n', '<M-f>', function()
+    telescope.extensions.file_browser.file_browser(opts_file_browser)
+  end, 'Browse files')
 
   map('n', '<Leader>sg', builtin.live_grep, '[S]earch Live [G]rep')
-  -- find word under cursor
-  map('n', '<Leader>sw', builtin.grep_string, '[S]earch [W]ord in cwd')
-  map('n', '<Leader>sr', builtin.registers, '[S]earch [R]egisters')
-
+  map('n', '<Leader>sw', builtin.grep_string, '[S]earch [W]ord under cursor in cwd')
   map('n', '<Leader>sh', builtin.help_tags, '[S]earch [H]elp')
   map('n', '<Leader>sk', builtin.keymaps, '[S]earch [K]eymaps')
+
   map('n', '<Leader>/', function()
     builtin.current_buffer_fuzzy_find({
       theme = 'dropdown',
@@ -62,18 +63,20 @@ local function keymaps()
 
   map('n', '<Leader>st', builtin.colorscheme, '[S]earch [C]olor schemes')
 
-  -- Spell suggestions for word under cursor
-  map('n', '<Leader>ss', function() builtin.spell_suggest(themes.get_cursor()) end, '[S]earch [S]pell suggestions')
+  map('n', '<Leader>ss', function()
+    builtin.spell_suggest(themes.get_cursor())
+  end, '[S]earch [S]pell suggestions')
 
-  -- Show git diff
-  map('n', '<Leader>Gs', function()
+  -- see ./fugitive.lua for more git mappings
+  map('n', '<Leader>gs', function()
     builtin.git_status({
       previewer = delta, layout_strategy = 'vertical', layout_config = { prompt_position = 'top' },
     })
   end, '[G]it [S]tatus')
-  map('n', '<Leader>Gb', builtin.git_branches, '[G]it [B]ranches')
-  map('n', '<Leader>Gh', builtin.git_bcommits, '[G]it [H]istory of buffer')
-  map('n', '<Leader>Gc', builtin.git_commits, '[G]it [C]ommits')
+
+  map('n', '<Leader>gb', builtin.git_branches, '[G]it [B]ranches')
+  map('n', '<Leader>gh', builtin.git_bcommits, '[G]it [H]istory of buffer')
+  map('n', '<Leader>gC', builtin.git_commits, '[G]it [C]ommits')
 
   map('n', '<Leader>sd', builtin.diagnostics, '[S]earch [D]iagnostics')
   map('n', '<Leader>sS', builtin.lsp_document_symbols, '[S]earch [S]ymbols (LSP)')
@@ -88,6 +91,7 @@ local function keymaps()
   map({ 'n', 'i' }, '<M-y>', function()
     telescope.extensions.neoclip.default(themes.get_dropdown())
   end, 'Search Yanks')
+
   map('n', '<Leader>sm', function()
     telescope.extensions.macroscope.default(themes.get_dropdown())
   end, '[S]earch [M]acros')
@@ -106,7 +110,7 @@ function M.setup()
 
       mappings = {
         i = {
-          ['<C-r>'] = 'delete_buffer'
+          ['<M-d>'] = 'delete_buffer'
         },
       },
 
@@ -137,6 +141,7 @@ function M.setup()
 
   keymaps()
 
+  -- wrap text in preview
   vim.cmd [[autocmd User TelescopePreviewerLoaded setlocal wrap]]
 end
 
