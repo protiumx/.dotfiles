@@ -24,6 +24,7 @@ vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.opt.autoindent = true
+vim.opt.ignorecase = true
 vim.opt.smartindent = true
 vim.o.completeopt = 'menuone,noselect'
 
@@ -87,8 +88,6 @@ local builtins = {
   'vimball',
   'vimballPlugin',
   '2html_plugin',
-  'matchit',
-  'matchparen',
   'logiPat',
   'rrhelper',
 }

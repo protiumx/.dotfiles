@@ -21,7 +21,7 @@ if not status_ok then
   return
 end
 
-vim.cmd [[ packadd packer.nvim ]]
+vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
   -- Packer can manage itself
@@ -268,7 +268,7 @@ return require('packer').startup(function(use)
 
       -- Show lsp progress
       'j-hui/fidget.nvim',
-      --
+
       -- Better UI for LSP commands
       {
         'glepnir/lspsaga.nvim',
