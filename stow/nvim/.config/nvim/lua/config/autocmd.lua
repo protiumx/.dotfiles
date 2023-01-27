@@ -16,7 +16,6 @@ autocmd({ 'BufWritePre' }, {
   command = [[%s/\s\+$//e]],
 })
 
-
 augroup('yank_post', { clear = true })
 autocmd('TextYankPost', {
   group = 'yank_post',
@@ -29,15 +28,12 @@ autocmd('TextYankPost', {
   end,
 })
 
-augroup('set_filetypes', { clear = true })
 autocmd({ 'BufNewFile', 'BufRead' }, {
-  group = 'set_filetypes',
   pattern = '*.heex',
   command = [[setlocal ft=html syntax=html]],
 })
 
 autocmd({ 'BufNewFile', 'BufRead' }, {
-  group = 'set_filetypes',
   pattern = 'Dockerfile*',
   command = [[set ft=dockerfile]],
 })
@@ -77,7 +73,6 @@ autocmd('CmdlineEnter', {
 
 -- dont list quickfix buffers
 autocmd('FileType', {
-  group = 'set_filetypes',
   pattern = 'qf',
   callback = function()
     vim.opt_local.buflisted = false
@@ -85,9 +80,13 @@ autocmd('FileType', {
 })
 
 autocmd('FileType', {
-  group = 'set_filetypes',
   pattern = { 'gitcommit', 'fugitive' },
   command = [[
     setlocal nonumber signcolumn=no
   ]]
 })
+
+autocmd('FileType', {
+  pattern = { 'help', 'startuptime', 'qf', 'lspinfo' }, command = [[nnoremap <buffer><silent> q :close<CR>]]
+})
+autocmd('FileType', { pattern = 'man', command = [[nnoremap <buffer><silent> q :quit<CR>]] })
