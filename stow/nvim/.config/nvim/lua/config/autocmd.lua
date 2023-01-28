@@ -48,29 +48,6 @@ autocmd('TermOpen', {
   ]],
 })
 
-local cmd_timer = nil
-augroup('clear_cmdline', { clear = true })
-autocmd('CmdlineLeave', {
-  group = 'clear_cmdline',
-  pattern = '*',
-  callback = function()
-    cmd_timer = vim.defer_fn(function()
-      vim.api.nvim_command('echo ""')
-      cmd_timer = nil
-    end, 3000)
-  end,
-})
-
-autocmd('CmdlineEnter', {
-  group = 'clear_cmdline',
-  pattern = '*',
-  callback = function()
-    if cmd_timer ~= nil then
-      cmd_timer:stop()
-    end
-  end,
-})
-
 -- dont list quickfix buffers
 autocmd('FileType', {
   pattern = 'qf',
