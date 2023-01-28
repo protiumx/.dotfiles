@@ -214,19 +214,6 @@ return require('packer').startup(function(use)
     event = 'BufRead',
   })
 
-  -- Git
-  use({
-    'tpope/vim-fugitive',
-    after = 'project.nvim',
-    cond = function()
-      -- project.nvim should have setup the path when this is executed
-      return vim.fn.isdirectory(vim.fn.getcwd() .. '/.git/')
-    end,
-    config = function()
-      require('config.fugitive').setup()
-    end
-  })
-
   -- Show sign columns for changes in files
   use({
     'lewis6991/gitsigns.nvim',
