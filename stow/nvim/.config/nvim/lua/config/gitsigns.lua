@@ -4,7 +4,7 @@ local function on_attach(bufnr)
   local gs = package.loaded.gitsigns
 
   local function map(mode, l, r, desc)
-    local opts = { silent = true, desc = desc, bufnr = bufnr }
+    local opts = { silent = true, desc = desc, buffer = bufnr }
     vim.keymap.set(mode, l, r, opts)
   end
 
