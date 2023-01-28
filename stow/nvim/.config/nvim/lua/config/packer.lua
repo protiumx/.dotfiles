@@ -51,6 +51,7 @@ return require('packer').startup(function(use)
   use({
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
+    event = "BufRead",
     config = function()
       require('config.treesitter').setup()
     end
@@ -128,7 +129,7 @@ return require('packer').startup(function(use)
 
   use({
     'junegunn/vim-easy-align',
-    cmd = 'EasyAlign',
+    cmd = 'EasyAlignLoad',
     config = function()
       -- Start interactive EasyAlign in visual mode (e.g. vipga)
       vim.keymap.set('x', 'ga', '<Plug>(EasyAlign)', { remap = true })
@@ -166,7 +167,7 @@ return require('packer').startup(function(use)
 
   use({
     'arthurxavierx/vim-caser',
-    cmd = 'VimCaser'
+    cmd = 'VimCaserEnable'
   })
 
   -- Change surroundings
@@ -183,6 +184,7 @@ return require('packer').startup(function(use)
 
   use {
     'windwp/nvim-autopairs',
+    event = 'BufRead',
     config = function()
       require('nvim-autopairs').setup({})
     end
@@ -195,7 +197,7 @@ return require('packer').startup(function(use)
 
   use({
     'numToStr/Comment.nvim',
-    event = "BufRead",
+    event = 'BufRead',
     config = function()
       require('config.comment').setup()
     end
@@ -205,12 +207,17 @@ return require('packer').startup(function(use)
   use({
     'mg979/vim-visual-multi',
     branch = 'master',
-    event = "BufRead",
+    event = 'BufRead',
   })
 
   -- Git
   use({
     'tpope/vim-fugitive',
+    after = 'project.nvim',
+    cond = function()
+      -- project.nvim should have setup the path when this is executed
+      return vim.fn.isdirectory(vim.fn.getcwd() .. '/.git/')
+    end,
     config = function()
       require('config.fugitive').setup()
     end
@@ -232,8 +239,12 @@ return require('packer').startup(function(use)
 
   use({
     'sindrets/diffview.nvim',
+    after = 'project.nvim',
+    cond = function()
+      -- project.nvim should have setup the path when this is executed
+      return vim.fn.isdirectory(vim.fn.getcwd() .. '/.git/')
+    end,
     requires = 'nvim-lua/plenary.nvim',
-    cmd = { 'DiffviewOpen', 'DiffviewClose', 'DiffviewToggleFiles', 'DiffviewFocusFiles' },
   })
 
   -- LSP
@@ -284,8 +295,9 @@ return require('packer').startup(function(use)
   use {
     'mfussenegger/nvim-dap',
     opt = true,
-    event = 'BufReadPre',
-    cmd = 'Dap',
+    ft = {
+      'go',
+    },
     module = { 'dap' },
     wants = {
       'nvim-dap-virtual-text',
