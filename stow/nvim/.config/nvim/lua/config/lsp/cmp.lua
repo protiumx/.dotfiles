@@ -2,13 +2,13 @@ local M = {}
 
 function M.setup()
   local cmp = require('cmp')
-  -- local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+  local cmp_autopairs = require('nvim-autopairs.completion.cmp')
   local luasnip = require('luasnip')
 
-  -- cmp.event:on(
-  --   'confirm_done',
-  --   cmp_autopairs.on_confirm_done()
-  -- )
+  cmp.event:on(
+    'confirm_done',
+    cmp_autopairs.on_confirm_done()
+  )
 
   cmp.setup({
     snippet = {
