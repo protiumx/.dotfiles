@@ -15,9 +15,9 @@ local servers = {
 
   bashls = {
     cmd_env = {
-      GLOB_PATTERN = "*@(.sh|.inc|.bash|.command|.zsh)",
+      GLOB_PATTERN = '*@(.sh|.inc|.bash|.command|.zsh)',
     },
-    filetypes = { "sh", "zsh" },
+    filetypes = { 'sh', 'zsh' },
   },
 
   gopls = {
@@ -44,6 +44,12 @@ local servers = {
       diagnostics = {
         globals = { 'vim', 'jit' }
       },
+
+      runtime = {
+        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+        version = 'LuaJIT',
+      },
+
       workspace = {
         checkThirdParty = false,
         library = {
