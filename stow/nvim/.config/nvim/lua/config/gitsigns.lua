@@ -29,12 +29,6 @@ local function on_attach(bufnr)
   end, '[Git] Blame line full')
 
   map('n', '<Leader>glb', gs.toggle_current_line_blame, '[Git] Toggle line blame')
-  map('n', '<Leader>gd', gs.diffthis, '[Git] Show diff of current file')
-  -- TODO: make it usable
-  map('n', '<Leader>gD', function()
-    gs.diffthis('~')
-  end)
-
   map('n', '<Leader>gtd', gs.toggle_deleted, '[Git] Toggle deleted preview')
 
   -- Text object
