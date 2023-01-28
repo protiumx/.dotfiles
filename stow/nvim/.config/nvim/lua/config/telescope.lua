@@ -105,6 +105,8 @@ function M.setup()
       selection_caret = '❯ ',
       multi_icon = '+ ',
 
+      file_previewer = require('telescope.previewers').cat.new,
+
       layout_strategy = 'flex',
       layout_config = { height = 0.9, width = 0.9 },
 
