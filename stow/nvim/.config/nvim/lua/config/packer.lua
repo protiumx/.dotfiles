@@ -51,7 +51,7 @@ return require('packer').startup(function(use)
   use({
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
-    event = "BufRead",
+    event = 'BufRead',
     config = function()
       require('config.treesitter').setup()
     end
@@ -103,7 +103,7 @@ return require('packer').startup(function(use)
   -- Better jump
   use({
     'justinmk/vim-sneak',
-    event = "BufRead",
+    event = 'BufRead',
     config = function()
       require('config.vim-sneak').setup()
     end
@@ -243,6 +243,9 @@ return require('packer').startup(function(use)
     cond = function()
       -- project.nvim should have setup the path when this is executed
       return vim.fn.isdirectory(vim.fn.getcwd() .. '/.git/')
+    end,
+    config = function()
+      require('config.diffview').setup()
     end,
     requires = 'nvim-lua/plenary.nvim',
   })
