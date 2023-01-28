@@ -6,8 +6,9 @@ function M.setup()
     vim.keymap.set(mode, l, r, opts)
   end
 
-  map('n', '<Leader>gD', '<cmd>DiffviewOpen<CR>', 'Open Diff view')
-  map('n', '<Leader>gH', '<cmd>DiffviewHistory %<CR>', 'Open Git history of current file')
+  map('n', '<Leader>gd', '<cmd>DiffviewOpen -- %<CR>', 'Open Diffview current file')
+  map('n', '<Leader>gD', '<cmd>DiffviewOpen<CR>', 'Open Diffview HEAD')
+  map('n', '<Leader>gH', '<cmd>DiffviewHistory %<CR>', 'Open Diffview history current file')
 
   local actions = require('diffview.actions')
   require('diffview').setup({
