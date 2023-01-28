@@ -92,6 +92,15 @@ return require('packer').startup(function(use)
     end
   })
 
+  use({
+    'sindrets/winshift.nvim',
+    cmd = 'WinShift',
+    config = function()
+      vim.keymap.set('n', '<C-w>m', '<Cmd>WinShift<CR>')
+      vim.keymap.set('n', '<C-w>x', '<Cmd>WinShift swap<CR>')
+    end
+  })
+
   use {
     'AckslD/nvim-neoclip.lua',
     requires = { 'nvim-telescope/telescope.nvim' },
@@ -111,7 +120,7 @@ return require('packer').startup(function(use)
 
   use({
     'norcalli/nvim-colorizer.lua', -- colorize hexa and rgb strings
-    cmd = 'ColorizerEnable',
+    cmd = { 'ColorizerToggle', 'ColorizerAttachToBuffer' },
     config = function()
       require('colorizer').setup({
         user_default_options = {
@@ -129,7 +138,7 @@ return require('packer').startup(function(use)
 
   use({
     'junegunn/vim-easy-align',
-    cmd = 'EasyAlignLoad',
+    cmd = 'EasyAlign',
     config = function()
       -- Start interactive EasyAlign in visual mode (e.g. vipga)
       vim.keymap.set('x', 'ga', '<Plug>(EasyAlign)', { remap = true })
@@ -167,7 +176,7 @@ return require('packer').startup(function(use)
 
   use({
     'arthurxavierx/vim-caser',
-    cmd = 'VimCaserEnable'
+    cmd = { 'CaserCamelCase', 'CaserSnakeCase', 'CaserUpperCase', 'CaserKebabCase' },
   })
 
   -- Change surroundings
@@ -189,11 +198,6 @@ return require('packer').startup(function(use)
       require('nvim-autopairs').setup({})
     end
   }
-
-  use({
-    'lbrayner/vim-rzip',
-    cmd = 'VimZip',
-  })
 
   use({
     'numToStr/Comment.nvim',
