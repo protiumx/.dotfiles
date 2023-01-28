@@ -193,7 +193,6 @@ return require('packer').startup(function(use)
 
   use {
     'windwp/nvim-autopairs',
-    event = 'BufRead',
     config = function()
       require('nvim-autopairs').setup({})
     end
@@ -219,7 +218,6 @@ return require('packer').startup(function(use)
     'lewis6991/gitsigns.nvim',
     after = 'project.nvim',
     cond = function()
-      -- project.nvim should have setup the path when this is executed
       return vim.fn.isdirectory(vim.fn.getcwd() .. '/.git/')
     end,
     event = 'BufRead',
@@ -232,7 +230,6 @@ return require('packer').startup(function(use)
     'sindrets/diffview.nvim',
     after = 'project.nvim',
     cond = function()
-      -- project.nvim should have setup the path when this is executed
       return vim.fn.isdirectory(vim.fn.getcwd() .. '/.git/')
     end,
     config = function()
