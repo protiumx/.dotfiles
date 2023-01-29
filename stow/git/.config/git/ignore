@@ -1,0 +1,40 @@
+# Compiled source
+*.o
+*.pyc
+*.pyo
+*.so
+
+# Logs
+*.log
+
+# Temporary files
+*#
+*.bak
+*.swo
+*.swp
+*~
+
+# Tools specific
+*.retry
+.vagrant/
+.venv
+npm-debug.log
+
+# OSX generated files
+.AppleDB
+.AppleDesktop
+.AppleDouble
+.DS_Store
+.DocumentRevisions-V100
+.LSOverride
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+._*
+.apdisk
+.com.apple.timemachine.donotpresent
+.fseventsd
+Icon
+Network Trash Folder
+Temporary Items
