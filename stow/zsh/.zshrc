@@ -62,7 +62,7 @@ done
 export GOPATH="$(go env GOPATH)"
 
 if [[ "$OSTYPE" =~ ^linux ]]; then
-  eval $(ssh-agent)
+  eval $(ssh-agent) >/dev/null
 fi
 
 gpgconf --launch gpg-agent
