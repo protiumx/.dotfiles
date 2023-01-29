@@ -3,18 +3,18 @@ local macos = jit.os == 'OSX'
 vim.g.mapleader = ' '
 
 -- Delete to blackhole register
-vim.keymap.set('n', '<Leader>d', '"_d')
-vim.keymap.set('v', '<Leader>d', '"_d')
+vim.keymap.set('n', '<Leader>d', '"_d', { silent = true })
+vim.keymap.set('v', '<Leader>d', '"_d', { silent = true })
 
 -- Insert date time as YYYY-MM-DD-HH:mm
 vim.keymap.set('n', '<Leader>pb', '"=strftime("%Y%m%d%H%M")<CR>p')
 
 -- Prepare replace all occurrences of word under cursor
 vim.keymap.set('n', '<Leader>wr', [[:%s/\<<C-r><C-w>\>//g<Left><Left>]])
-vim.keymap.set('i', '<C-c>', '<Esc>')
+vim.keymap.set('i', '<C-c>', '<Esc>', { silent = true })
 
 vim.keymap.set("n", "Q", "<nop>", { silent = true })
-vim.keymap.set('n', 'Y', 'y$')
+vim.keymap.set('n', 'Y', 'y$', { silent = true })
 
 -- Jump next/prev but centered
 vim.keymap.set('n', 'n', 'nzzzv', { silent = true })
@@ -25,8 +25,8 @@ vim.keymap.set('n', 'g*', 'g*zz', { silent = true })
 vim.keymap.set('n', 'G', 'Gzz', { silent = true })
 
 -- Move down/up centered
-vim.keymap.set('n', '<C-d>', '<C-d>zz')
-vim.keymap.set('n', '<C-u>', '<C-u>zz')
+vim.keymap.set('n', '<C-d>', '<C-d>zz', { silent = true })
+vim.keymap.set('n', '<C-u>', '<C-u>zz', { silent = true })
 
 -- Moving lines up or down preserving format
 vim.keymap.set('n', '<Leader>j', ':m .+1<CR>==', { silent = true })
@@ -37,7 +37,7 @@ vim.keymap.set('v', 'J', ':m \'>+1<CR>gv=gv', { silent = true })
 vim.keymap.set('v', 'K', ':m \'<-2<CR>gv=gv', { silent = true })
 
 -- Join line with cursor at beginning of line
-vim.keymap.set("n", "J", "mzJ`z")
+vim.keymap.set("n", "J", "mzJ`z", { silent = true })
 
 -- Resize windows
 vim.keymap.set('n', '<Leader><Up>', ':resize -2<CR>', { silent = true })
@@ -95,3 +95,6 @@ if macos then
 else
   vim.keymap.set('n', '<Leader>P', ':let @+=expand("%:~:.")', { silent = true })
 end
+
+-- Git
+vim.keymap.set('n', '<Leader>gs', ':!git stage %<CR>')
