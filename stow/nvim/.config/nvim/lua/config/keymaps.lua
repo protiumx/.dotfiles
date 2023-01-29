@@ -74,6 +74,8 @@ vim.keymap.set('n', '<Leader>vo', ':vsp | e <C-R>=expand("%:h") . "/"<CR>')
 vim.keymap.set('n', 'p', 'p=`]', { silent = true })
 vim.keymap.set('n', 'P', 'P=`]', { silent = true })
 vim.keymap.set('n', '<C-p>', 'p', { silent = true })
+-- Fix indent in file
+vim.keymap.set('n', '<Leader>T', 'gg=G', { silent = true })
 
 -- Quick new lines
 vim.keymap.set('i', '<M-o>', '<C-o>o', { silent = true })
