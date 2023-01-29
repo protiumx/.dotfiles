@@ -1,55 +1,62 @@
 [user]
-	name = Brian Mayo
-	email = ioprotium@gmail.com
+  name = Brian Mayo
+  email = ioprotium@gmail.com
+  signingKey = 1B2B3771
+
+[commit]
+  gpgsign = true
+
+[tag]
+  gpgSign = true
 
 [include]
-	path = ~/work/.gitconfig
+  path = ~/work/.gitconfig
 
 [core]
-	pager = delta
-	# avoid problems when changing a case of a filename
-	ignorecase = false
+  pager = delta
+  # avoid problems when changing a case of a filename
+  ignorecase = false
   excludesfile = ~/.config/git/ignore
 
 [status]
-	# Show untracked files, directories and files in untracked directorie
-	showUntrackedFiles = all
+    # Show untracked files, directories and files in untracked directorie
+  showUntrackedFiles = all
 
 [interactive]
-	diffFilter = delta --color-only
+  diffFilter = delta --color-only
 
 [pull]
-	# Keep local commits on top of the tree
-	rebase = true
+  # Keep local commits on top of the tree
+  rebase = true
 
 [merge]
   conflictstyle = diff3
 
 [rebase]
-	# Stash and pop uncommitted changes on rebase
-	autoStash = true
+  # Stash and pop uncommitted changes on rebase
+  autoStash = true
 
 # Maintain a 1-1 mapping to upstream refs and tags
 [fetch]
-	prune = true
-	pruneTags = true
+  prune = true
+  pruneTags = true
 
 [diff]
-	colorMoved = default
+  colorMoved = default
 
 [help]
-	autocorrect = 1
+  autocorrect = 1
 
 [delta]
-	navigate = true  # use n and N to move between diff sections
-	light = false
-	side-by-side = true
+  navigate = true  # use n and N to move between diff sections
+  light = false
+  side-by-side = true
 
 [alias]
   # List all the git aliases
   aliases = !sh -c 'git config --get-regexp '^alias\\.' | sed -e s/^alias\\.// -e s/\\ /\\ =\\ / | sort'
 
-	amend = commit --amend
+  amend = commit --amend
 
   # Add files to last commit
   append = commit --amend --no-edit
@@ -57,71 +64,68 @@
   # List remote-tracking and local branches
   branches = branch --all -vv
 
-	# checkout or create new branch
+  # checkout or create new branch
   ck = "!f() { git checkout $1 2>/dev/null || git checkout -b $1; }; f"
 
   # Remove untracked and ignored files interactively
   cleanup = clean -xfdi
 
   # Commit no verify (disable hooks)
-	cnv = commit -n -m
-	# Count the number of files changed in the current branch compared to main
-	count = !git diff --name-only main... | wc -l
-	dd = !git --no-pager diff
+  cnv = commit -n -m
+  # Count the number of files changed in the current branch compared to main
+  count = !git diff --name-only main... | wc -l
+  dd = !git --no-pager diff
 
   # Clean up all current changes
-	discard = checkout -- .
+  discard = checkout -- .
 
   # Filter the commit logs messages with the provided string
   filter = "!f() { git logs --grep=$1; }; f"
 
-	last = log -1 HEAD --stat
-	logf = !git log --pretty=format:\"%C(magenta)%h%Creset -%C(red)%d%Creset %s %C(dim green)(%cr) [%an]\" --abbrev-commit -30
-	main = checkout main
+  last = log -1 HEAD --stat
+  logf = !git log --pretty=format:\"%C(magenta)%h%Creset -%C(red)%d%Creset %s %C(dim green)(%cr) [%an]\" --abbrev-commit -30
+  main = checkout main
 
-	# Clean up merged branches to a given branch ("main" is default)
-	purge = "!f() { git branch --merged ${1-main} | grep -v " ${1-main}$" | xargs -r git branch -d; }; f"
+  # Clean up merged branches to a given branch ("main" is default)
+  purge = "!f() { git branch --merged ${1-main} | grep -v " ${1-main}$" | xargs -r git branch -d; }; f"
 
   # Remove a remote branch
-	rmrb = push origin -d
+  rmrb = push origin -d
 
   # Grep the given pattern in tracked files with line numbers and context
-	search = grep -n -C 1
+  search = grep -n -C 1
 
   # Short status
   ss = status -sb
 
   # Stash the working directory, the index and the untracked files
-	stash-all = stash save --include-untracked
+  stash-all = stash save --include-untracked
 
-	# Pull rebase remote main
-	sync = !git pull origin main --rebase
+  # Pull rebase remote main
+  sync = !git pull origin main --rebase
 
   # List tags and sort them by version number
   tags = tag -l --sort=-version:refname
 
   # Show a graph of the commit logs
-	tree = log --graph --full-history --pretty=format:'%C(red)%h%C(reset) -%C(yellow)%d%C(reset) %s %C(green)(%cr) %C(bold blue)[%an]%C(reset)'
+  tree = log --graph --full-history --pretty=format:'%C(red)%h%C(reset) -%C(yellow)%d%C(reset) %s %C(green)(%cr) %C(bold blue)[%an]%C(reset)'
 
   # Revert the last commit and put its changes in the index
-	undo = reset --soft HEAD^
-	unstage = reset HEAD --
+  undo = reset --soft HEAD^
+  unstage = reset HEAD --
 
-	# Push and set upstream origin for branch
-	up = !git push -u origin `git branch --show-current`
-	upt = !git push origin --tags
+  # Push and set upstream origin for branch
+  up = !git push -u origin `git branch --show-current`
+  upt = !git push origin --tags
 
 [init]
-	templatedir = ~/.config/git/templates
-	defaultBranch = main
-
-[commit]
-	gpgsign = false
+  templatedir = ~/.config/git/templates
+  defaultBranch = main
 
 [gpg]
   program = gpg
 
 [color "branch"]
-	current = yellow reverse
-	local = yellow
-	remote = green
+  current = yellow reverse
+  local = yellow
+  remote = green
