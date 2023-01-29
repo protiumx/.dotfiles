@@ -30,6 +30,7 @@ bindkey "^X\\x7f" backward-kill-line
 # adds redo
 bindkey "^X^_" redo
 
+export GPG_TTY=$(tty)
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export EDITOR="nvim"

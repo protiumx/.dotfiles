@@ -67,7 +67,7 @@ stow_dotfiles() {
     ".config/ripgrep"
     ".config/vim"
     ".config/wezterm"
-    ".git-templates/hooks"
+    ".gnupg"
     ".ssh"
   )
   info "Removing existing config files"

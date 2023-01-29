@@ -19,6 +19,7 @@ packages=(
   fd                       #  https://github.com/sharkdp/fd
   gettext
   git-delta                #  https://github.com/dandavison/delta
+  gpg
   go
   grpcurl                  #  https://github.com/fullstorydev/grpcurl
   httpie                   #  https://github.com/httpie/httpie
@@ -37,6 +38,7 @@ packages=(
   nmap
   openjdk
   openssl
+  pinentry-mac
   postgresql
   procs                    #  https://github.com/dalance/procs/
   python3
