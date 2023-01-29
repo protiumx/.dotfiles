@@ -60,3 +60,5 @@ for file in $HOME/.profile*; do
 done
 
 export GOPATH="$(go env GOPATH)"
+
+gpgconf --launch gpg-agent
