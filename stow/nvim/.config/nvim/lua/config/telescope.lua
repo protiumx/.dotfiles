@@ -17,7 +17,7 @@ local function keymaps()
   })
 
   local map = function(mode, l, r, desc)
-    local opts = { silent = true, desc = desc }
+    local opts = { silent = true, desc = '[Telescope] ' .. desc }
 
     vim.keymap.set(mode, l, r, opts)
   end
@@ -68,7 +68,7 @@ local function keymaps()
   end, '[S]earch [S]pell suggestions')
 
   -- see ./fugitive.lua for more git mappings
-  map('n', '<Leader>gs', function()
+  map('n', '<Leader>gS', function()
     builtin.git_status({
       previewer = delta, layout_strategy = 'vertical', layout_config = { prompt_position = 'top' },
     })
