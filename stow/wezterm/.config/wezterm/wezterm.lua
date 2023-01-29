@@ -136,7 +136,7 @@ end)
 return {
   audible_bell = 'Disabled',
   color_scheme = '3024 (base16)',
-  max_fps = 100,
+  max_fps = 120,
   font = wezterm.font('CaskaydiaCove Nerd Font', { weight = 'Medium', stretch = 'Normal', style = 'Normal' }),
   font_rules = {
     {
@@ -160,7 +160,7 @@ return {
       mods = 'CMD',
       action = wezterm.action.ShowLauncherArgs { flags = 'FUZZY|TABS|WORKSPACES' },
     },
-    { key = 'd', mods = 'ALT', action = wezterm.action.ShowDebugOverlay },
+    { key = ':', mods = 'SHIFT|CMD', action = wezterm.action.ShowDebugOverlay },
 
     -- Panes
     {
@@ -236,27 +236,19 @@ return {
     -- Rotate
     {
       key = 'r',
-      mods = 'ALT',
+      mods = 'CMD',
       action = act.RotatePanes 'CounterClockwise',
     },
     {
       key = 'R',
-      mods = 'SHIFT|ALT',
+      mods = 'SHIFT|CMD',
       action = act.RotatePanes 'Clockwise',
     },
 
     {
       key = 'S',
-      mods = 'SHIFT|ALT',
-      action = act.PaneSelect,
-    },
-
-    {
-      key = 'S',
       mods = 'SHIFT|CMD',
-      action = act.PaneSelect {
-        mode = 'SwapWithActive',
-      },
+      action = act.PaneSelect,
     },
 
 
