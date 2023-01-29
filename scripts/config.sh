@@ -59,6 +59,7 @@ stow_dotfiles() {
   )
   local folders=(
     ".config/fd"
+    ".config/git"
     ".config/kitty"
     ".config/helix"
     ".config/lf"

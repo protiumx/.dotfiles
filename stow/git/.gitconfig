@@ -112,7 +112,7 @@
 	upt = !git push origin --tags
 
 [init]
-	templatedir = ~/.git-templates
+	templatedir = ~/.config/git/templates
 	defaultBranch = main
 
 [commit]
