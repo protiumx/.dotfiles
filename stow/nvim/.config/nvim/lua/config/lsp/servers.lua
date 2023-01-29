@@ -11,7 +11,13 @@ local servers = {
 
   clangd = {},
 
-  pyright = {},
+  pyright = {
+    analysis = {
+      autoSearchPaths = true,
+      diagnosticMode = 'workspace',
+      useLibraryCodeForTypes = true
+    },
+  },
 
   yamlls = {},
 
