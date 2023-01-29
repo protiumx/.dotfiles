@@ -4,7 +4,7 @@ cheat() {
   curl -s "cheat.sh/$1";
 }
 
-# Show package.json scripts with fzf
+# Show package.json scripts with fzf and run selected
 pkgrun() {
   name=$(jq .scripts package.json | sed '1d;$d' | fzf --height 40% | awk -F ': ' '{gsub(/"/, "", $1); print $1}')
   if [[ -n $scripts ]]; then
@@ -12,26 +12,11 @@ pkgrun() {
   fi
 }
 
-# Open vim in a new kitty tab
-tab_nvim() {
-  kitty @ launch --type tab --cwd "$1" --no-response --keep-focus nvim . 2>/dev/null 1>/dev/null &
-}
-
 # Jump to folder (zoxide) and open nvim.
 # NOTE: nvim plug will set the root folder properly if a .git folder exists
 zv() {
  z "$1"
  nvim .
-}
-
-# Go to repository root folder
-groot() {
-  root="$(git rev-parse --show-toplevel 2>/dev/null)"
-  if [ -n "$root" ]; then
-      cd "$root";
-  else
-      echo "Not in a git repository"
-  fi
 }
 
 # Retrieve process real memory
@@ -48,7 +33,17 @@ psrml() {
   done
 }
 
-git_commit() {
+# Go to repository root folder
+groot() {
+  root="$(git rev-parse --show-toplevel 2>/dev/null)"
+  if [ -n "$root" ]; then
+    cd "$root";
+  else
+    echo "Not in a git repository"
+  fi
+}
+
+gcommit() {
   if [ -z "$3" ]
   then
     git commit -m "$1: $2"
@@ -64,13 +59,9 @@ glog() {
     - %an%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n %C(white)%s%C(reset)"
 }
 
-# Open git remote
-gshow() {
+# Print git remote
+gremote() {
   git remote -v | grep fetch | awk '{print $2}' | sed 's/git@/https:\/\//' | sed 's/com:/com\//' | sed 's/\.git$//' | head -n1
-}
-
-kitty_title() {
-  kitty @ set-tab-title "$1"
 }
 
 mkcd(){
@@ -82,11 +73,7 @@ ansi_colors() {
   python3 -c "print(''.join(f'\u001b[48;5;{s}m{s.rjust(4)}' + ('\n' if not (int(s)+1) % 8 else '') for s in (str(i) for i in range(256))) + '\u001b[0m')"
 }
 
-# checkout or create new branch
-gck() {
-  git checkout "$1" 2>/dev/null || git checkout -b "$1";
-}
-
+# Fzf all folders and cd on selection
 cdi() {
   p="$(fd -t d -H | fzf)"
   if [ -n "$p" ]; then
@@ -111,37 +98,32 @@ _fzf_compgen_dir() {
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/rg"
 
 # Aliases
-if [ "$(command -v exa)" ]; then
-  unalias -m 'll'
-  unalias -m 'l'
-  unalias -m 'la'
-  unalias -m 'ls'
-
-  alias ls="exa --group-directories-first -G  --color auto --icons -a -s type"
-  alias ll='exa --group-directories-first -l --color always --icons -a -s type'
-  alias tree="exa --tree --level=5 --icons --group-directories-first --color auto"
-fi
+alias ls="exa --group-directories-first -G  --color auto --icons -a -s type"
+alias ll='exa --group-directories-first -l --color always --icons -a -s type'
+alias tree="exa --tree --level=5 --icons --group-directories-first --color auto"
 
 alias yw="yarn workspace"
 alias cat="bat -p --paging=never --theme='TwoDark'"
+
 # Conventional Commits
-alias gre="git_commit refactor"
-alias gte="git_commit test"
-alias gfi="git_commit fix"
-alias gfe="git_commit feat"
-alias gch="git_commit chore"
-alias gst="git_commit style"
-alias gci="git_commit ci"
-alias gdo="git_commit docs"
-alias gmi="git_commit misc"
+alias gcm="gcommit"
+alias gre="gcommit refactor"
+alias gte="gcommit test"
+alias gfi="gcommit fix"
+alias gfe="gcommit feat"
+alias gch="gcommit chore"
+alias gst="gcommit style"
+alias gci="gcommit ci"
+alias gdo="gcommit docs"
+alias gmi="gcommit misc"
 alias gnv="git commit --no-verify -m"
-alias gnva="git commit --no-verify --no-edit --amend"
 
 alias dc="docker compose"
 alias kc="kubectl"
 alias k9="k9s"
 alias icat="kitty +kitten icat --align left"
-# create 5 random passwords
+# Create 5 random passwords
 alias mkpwd="xkcdpass --count=5 --acrostic=\"chaos\" -C \"first\" -R --min=5 --max=6 -D \"#@^&~_-;\""
 alias isodate='date -u +"%Y-%m-%dT%H:%M:%SZ"'
+# Serve files in current dir with python http server
 alias serv="python3 -m http.server"
