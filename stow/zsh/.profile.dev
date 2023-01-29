@@ -106,7 +106,8 @@ alias yw="yarn workspace"
 alias cat="bat -p --paging=never --theme='TwoDark'"
 
 # Conventional Commits
-alias gcm="gcommit"
+alias gcm="git commit -m"
+alias gnv="git commit --no-verify -m"
 alias gre="gcommit refactor"
 alias gte="gcommit test"
 alias gfi="gcommit fix"
@@ -116,7 +117,6 @@ alias gst="gcommit style"
 alias gci="gcommit ci"
 alias gdo="gcommit docs"
 alias gmi="gcommit misc"
-alias gnv="git commit --no-verify -m"
 
 alias dc="docker compose"
 alias kc="kubectl"
