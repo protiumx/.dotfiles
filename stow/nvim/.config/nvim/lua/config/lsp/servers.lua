@@ -13,6 +13,8 @@ local servers = {
 
   pyright = {},
 
+  yamlls = {},
+
   bashls = {
     cmd_env = {
       GLOB_PATTERN = '*@(.sh|.inc|.bash|.command|.zsh)',
