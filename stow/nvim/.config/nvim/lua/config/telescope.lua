@@ -14,6 +14,9 @@ local function keymaps()
 
   local dropdown = themes.get_dropdown({
     previewer = false,
+    prompt_title = '',
+    preview_title = '',
+    results_title = '',
     layout_config = { prompt_position = 'top' },
   })
 
@@ -23,6 +26,9 @@ local function keymaps()
   })
 
   local opts_file_browser_preview = themes.get_dropdown({
+    prompt_title = '',
+    results_title = '',
+    preview_title = '',
     layout_config = { prompt_position = 'top' },
     grouped = true,
     hidden = true,
@@ -101,6 +107,9 @@ function M.setup()
   telescope.setup({
     defaults = {
       prompt_prefix = '❯ ',
+      prompt_title = '',
+      results_title = '',
+      preview_title = '',
       selection_caret = '❯ ',
       multi_icon = '+ ',
 
