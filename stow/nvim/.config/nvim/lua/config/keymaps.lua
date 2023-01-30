@@ -99,4 +99,4 @@ else
 end
 
 -- Git
-vim.keymap.set('n', '<Leader>gs', ':!git stage %<CR>')
+vim.keymap.set('n', '<C-g>s', ':!git stage %<CR>')

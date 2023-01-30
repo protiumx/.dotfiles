@@ -22,14 +22,13 @@ local function on_attach(bufnr)
   end, { expr = true })
 
   -- Actions
-  map('n', '<Leader>gp', gs.preview_hunk, '[Git] Preview hunk')
-  map('n', '<Leader>gb', gs.blame_line, '[Git] Blame line short')
-  map('n', '<Leader>gB', function()
+  map('n', '<C-g>b', gs.blame_line, '[Git] Blame line short')
+  map('n', '<C-g>B', function()
     gs.blame_line({ full = true })
   end, '[Git] Blame line full')
 
-  map('n', '<Leader>glb', gs.toggle_current_line_blame, '[Git] Toggle line blame')
-  map('n', '<Leader>gtd', gs.toggle_deleted, '[Git] Toggle deleted preview')
+  map('n', '<C-g>lb', gs.toggle_current_line_blame, '[Git] Toggle line blame')
+  map('n', '<C-g>td', gs.toggle_deleted, '[Git] Toggle deleted preview')
 
   -- Text object
   map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', '[Git] Hunk Text Object')
