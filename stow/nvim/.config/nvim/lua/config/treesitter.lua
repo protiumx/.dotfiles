@@ -63,6 +63,7 @@ function M.setup()
     -- A list of parser names, or "all"
     ensure_installed = {
       'bash',
+      'comment',
       'help',
       'javascript',
       'go',
@@ -86,6 +87,8 @@ function M.setup()
       disable = { 'go' },
     },
   })
+  vim.api.nvim_set_hl(0, '@text.todo', { link = 'Todo' })
+
   setup_text_objects()
 end
 
