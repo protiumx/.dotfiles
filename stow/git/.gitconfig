@@ -99,7 +99,7 @@
   ss = status -sb
 
   # Stash the working directory, the index and the untracked files
-  stash-all = stash save --include-untracked
+  stall = stash save --include-untracked
 
   # Pull rebase remote main
   sync = !git pull origin main --rebase
