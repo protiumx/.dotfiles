@@ -9,14 +9,14 @@ local function on_attach(bufnr)
   end
 
   -- Hunk Navigation
-  vim.keymap.set('n', ']c', function()
-    if vim.wo.diff then return ']c' end
+  vim.keymap.set('n', ']h', function()
+    if vim.wo.diff then return ']h' end
     vim.schedule(function() gs.next_hunk() end)
     return '<Ignore>'
   end, { expr = true })
 
-  vim.keymap.set('n', '[c', function()
-    if vim.wo.diff then return '[c' end
+  vim.keymap.set('n', '[h', function()
+    if vim.wo.diff then return '[h' end
     vim.schedule(function() gs.prev_hunk() end)
     return '<Ignore>'
   end, { expr = true })
@@ -29,6 +29,7 @@ local function on_attach(bufnr)
 
   map('n', '<C-g>lb', gs.toggle_current_line_blame, '[Git] Toggle line blame')
   map('n', '<C-g>td', gs.toggle_deleted, '[Git] Toggle deleted preview')
+  map('n', '<C-g>rh', gs.reset_hunk, '[Git] Reset hunk')
 
   -- Text object
   map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', '[Git] Hunk Text Object')
