@@ -156,7 +156,7 @@ return require('packer').startup(function(use)
 
   use({
     'mattn/emmet-vim',
-    config = function()
+    setup = function()
       vim.g['user_emmet_leader_key'] = '<C-X>'
     end,
     ft = {
@@ -169,7 +169,6 @@ return require('packer').startup(function(use)
       'htmldjango',
       'javascriptreact',
       'jsx',
-      'markdown',
       'php',
       'pug',
       'rescript',
