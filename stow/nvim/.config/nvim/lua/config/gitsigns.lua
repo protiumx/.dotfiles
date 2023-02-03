@@ -27,7 +27,7 @@ local function on_attach(bufnr)
     gs.blame_line({ full = true })
   end, '[Git] Blame line full')
 
-  map('n', '<C-g>lb', gs.toggle_current_line_blame, '[Git] Toggle line blame')
+  map('n', '<C-g>tb', gs.toggle_current_line_blame, '[Git] Toggle line blame')
   map('n', '<C-g>td', gs.toggle_deleted, '[Git] Toggle deleted preview')
   map('n', '<C-g>rh', gs.reset_hunk, '[Git] Reset hunk')
 
