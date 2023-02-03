@@ -15,7 +15,7 @@ function M.setup()
   end
 
   require('neoclip').setup({
-    history = 20,
+    history = 100,
     enable_persistent_history = false,
     length_limit = 1000,
     preview = true,
@@ -29,11 +29,11 @@ function M.setup()
     end,
     on_paste = {
       set_reg = true,
-      move_to_front = false,
+      move_to_front = true,
     },
     on_replay = {
-      set_reg = false,
-      move_to_front = false,
+      set_reg = true,
+      move_to_front = true,
     },
     keys = {
       telescope = {
