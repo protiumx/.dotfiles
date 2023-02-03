@@ -9,7 +9,7 @@ local function keymaps()
   keymap('n', 'gr', '<cmd>Lspsaga rename<CR>', { silent = true })
   keymap('n', '<F2>', '<cmd>Lspsaga rename<CR>', { silent = true })
 
-  keymap('n', '<M-d>', '<cmd>Lspsaga peek_definition<CR>', { silent = true })
+  keymap('n', 'gD', '<cmd>Lspsaga peek_definition<CR>', { silent = true })
   -- Go to definition
   keymap('n', 'gd', '<cmd>Lspsaga goto_definition<CR>')
 
@@ -19,15 +19,14 @@ local function keymaps()
   keymap('n', 'K', '<cmd>Lspsaga hover_doc<CR>', { silent = true })
 
   -- Diagnostic jump
-  -- You can use <C-o> to jump back to your previous location
-  keymap('n', '[e', '<cmd>Lspsaga diagnostic_jump_prev<CR>')
-  keymap('n', ']e', '<cmd>Lspsaga diagnostic_jump_next<CR>')
+  keymap('n', '[d', '<cmd>Lspsaga diagnostic_jump_prev<CR>')
+  keymap('n', ']d', '<cmd>Lspsaga diagnostic_jump_next<CR>')
 
   -- Only jump to errors
-  keymap('n', '[E', function()
+  keymap('n', '[e', function()
     require('lspsaga.diagnostic').goto_prev({ severity = vim.diagnostic.severity.ERROR })
   end, { silent = true })
-  keymap('n', ']E', function()
+  keymap('n', ']e', function()
     require('lspsaga.diagnostic').goto_next({ severity = vim.diagnostic.severity.ERROR })
   end, { silent = true })
 
