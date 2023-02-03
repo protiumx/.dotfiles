@@ -20,48 +20,45 @@ local function keymaps()
     layout_config = { prompt_position = 'top' },
   })
 
+  -- File browser always relative to buffer
   local opts_file_browser = vim.tbl_extend('force', dropdown, {
     grouped = true,
     hidden = true,
-  })
-
-  local opts_file_browser_preview = themes.get_dropdown({
-    prompt_title = '',
-    results_title = '',
-    preview_title = '',
-    layout_config = { prompt_position = 'top' },
-    grouped = true,
-    hidden = true,
-  })
-
-  local opts_file_browser_path = vim.tbl_extend('force', opts_file_browser, {
     path = '%:p:h',
   })
 
-  local opts_file_browser_path_preview = vim.tbl_extend('force', opts_file_browser_preview, {
-    path = '%:p:h',
-  })
+  -- Set current folder as prompt title
+  local with_title = function(opts, extra)
+    return vim.tbl_extend('force', opts, {
+      prompt_title = opts.cwd and vim.fn.expand('%:p:h:t') or vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
+    }, extra or {})
+  end
 
-  map({ 'i', 'n' }, '<C-]>', function() builtin.find_files(dropdown) end, 'Find files')
-  map({ 'i', 'n' }, '<C-h>', builtin.find_files, 'Find files with preview')
+  map({ 'i', 'n' }, '<M-]>', function()
+    builtin.find_files(with_title(dropdown))
+  end, 'Find files')
+
+  map({ 'i', 'n' }, '<M-}>', function()
+    builtin.find_files(with_title(dropdown, { cwd = vim.fn.expand('%:p:h') }))
+  end, 'Find files relative to buffer')
+
+  map({ 'i', 'n' }, '<M-->', function()
+    builtin.find_files(with_title({}))
+  end, 'Find files with preview')
+
+  map({ 'i', 'n' }, '<M-_>', function()
+    builtin.find_files(with_title({ cwd = vim.fn.expand('%:p:h') }))
+  end, 'Find files with preview relative to buffer')
+
   map({ 'i', 'n' }, '<C-b>', function() builtin.buffers(dropdown) end, 'Find buffers')
 
-  -- Open in current file's folder
-  map('n', '<M-]>', function()
-    telescope.extensions.file_browser.file_browser(opts_file_browser_path)
+  map('n', '<M-f>', function()
+    telescope.extensions.file_browser.file_browser(with_title(opts_file_browser))
   end, 'Browse files relative to buffer')
 
-  map('n', '<M-)>', function()
-    telescope.extensions.file_browser.file_browser(opts_file_browser)
-  end, 'Browse files in CWD')
-
-  map('n', '<M-h>', function()
-    telescope.extensions.file_browser.file_browser(opts_file_browser_path_preview)
+  map('n', '<M-F>', function()
+    telescope.extensions.file_browser.file_browser({ path = '%:p:h' })
   end, 'Browse files relative to buffer with preview')
-
-  map('n', '<M-S-H>', function()
-    telescope.extensions.file_browser.file_browser(opts_file_browser_preview)
-  end, 'Browse files in CWD with preview')
 
   map('n', '<Leader>sg', builtin.live_grep, '[S]earch Live [G]rep')
   map('n', '<Leader>sw', builtin.grep_string, '[S]earch [W]ord under cursor in cwd')
