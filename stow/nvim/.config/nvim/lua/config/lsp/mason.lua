@@ -55,16 +55,28 @@ local on_attach = function(client, bufnr)
 
     vim.api.nvim_create_augroup('lsp_document_highlight', { clear = true })
     -- Highlight references only in normal mode
+    local timer = nil
     vim.api.nvim_create_autocmd('CursorHold', {
       group = 'lsp_document_highlight',
       buffer = bufnr,
-      callback = vim.lsp.buf.document_highlight,
+      callback = function()
+        timer = vim.defer_fn(function()
+          vim.lsp.buf.document_highlight()
+          timer = nil
+        end, 1000)
+      end
     })
 
     vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
       group = 'lsp_document_highlight',
       buffer = bufnr,
-      callback = vim.lsp.buf.clear_references,
+      callback = function()
+        if timer ~= nil then
+          timer:stop()
+        else
+          vim.lsp.buf.clear_references()
+        end
+      end
     })
   end
 
