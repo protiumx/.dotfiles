@@ -60,18 +60,32 @@ local function keymaps()
     telescope.extensions.file_browser.file_browser({ path = '%:p:h' })
   end, 'Browse files relative to buffer with preview')
 
-  map('n', '<Leader>sg', builtin.live_grep, '[S]earch Live [G]rep')
-  map('n', '<Leader>sw', builtin.grep_string, '[S]earch [W]ord under cursor in cwd')
-  map('n', '<Leader>sh', builtin.help_tags, '[S]earch [H]elp')
-  map('n', '<Leader>sk', builtin.keymaps, '[S]earch [K]eymaps')
+  map('n', '<M-s>g', function()
+    builtin.live_grep(with_title({}))
+  end, '[S]earch Live [G]rep')
 
-  map('n', '<Leader>/', function()
+  map('n', '<M-S>g', function()
+    builtin.live_grep(with_title({ cwd = vim.fn.expand('%:p:h') }))
+  end, '[S]earch Live [G]rep relative buffer')
+
+  map('n', '<M-s>w', function()
+    builtin.grep_string(with_title({}))
+  end, '[S]earch [W]ord under cursor in cwd')
+
+  map('n', '<M-S>w', function()
+    builtin.grep_string(with_title({ cwd = vim.fn.expand('%:p:h') }))
+  end, '[S]earch [W]ord under cursor in cwd relative to buffer')
+
+  map('n', '<M-s>h', builtin.help_tags, '[S]earch [H]elp')
+  map('n', '<M-s>k', builtin.keymaps, '[S]earch [K]eymaps')
+
+  map('n', '<M-s>/', function()
     builtin.current_buffer_fuzzy_find({
       theme = 'dropdown',
     })
   end, 'Fuzzy search in buffer')
 
-  map('n', '<Leader>ss', function()
+  map('n', '<M-s>s', function()
     builtin.spell_suggest(themes.get_cursor())
   end, '[S]pell [S]uggestions')
 
@@ -79,28 +93,26 @@ local function keymaps()
   map('n', '<C-g>h', builtin.git_bcommits, '[G]it [H]istory of buffer')
   map('n', '<C-g>C', builtin.git_commits, '[G]it [C]ommits')
 
-  map('n', '<Leader>sd', builtin.diagnostics, '[S]earch [D]iagnostics')
-  map('n', '<Leader>sS', builtin.lsp_document_symbols, '[S]earch [S]ymbols (LSP)')
-  map('n', '<Leader>sR', builtin.resume, 'Resume last search')
-  map('n', '<Leader>sT', function() builtin.treesitter(dropdown) end, '[S]earch [T]reesitter')
-  map('n', '<Leader>sc', function() builtin.commands_history(dropdown) end, '[S]earch [C]ommands history')
+  map('n', '<M-s>d', builtin.diagnostics, '[S]earch [D]iagnostics')
+  map('n', '<M-s>S', builtin.lsp_document_symbols, '[S]earch [S]ymbols (LSP)')
+  map('n', '<M-s>R', builtin.resume, 'Resume last search')
+  map('n', '<M-s>T', function() builtin.treesitter(dropdown) end, '[S]earch [T]reesitter')
 
   -- Projects
-  map('n', '<Leader>sp', telescope.extensions.projects.projects, '[S]earch [P]rojects')
+  map('n', '<M-s>p', telescope.extensions.projects.projects, '[S]earch [P]rojects')
 
   -- Neoclip
   map({ 'n', 'i' }, '<M-y>', function()
     telescope.extensions.neoclip.default(themes.get_dropdown())
   end, 'Search Yanks')
 
-  map('n', '<Leader>sm', function()
+  map('n', '<M-s>m', function()
     telescope.extensions.macroscope.default(themes.get_dropdown())
   end, '[S]earch [M]acros')
 end
 
 function M.setup()
   local telescope = require('telescope')
-  local previewers = require('telescope.previewers')
   telescope.setup({
     defaults = {
       prompt_prefix = '❯ ',
