@@ -81,7 +81,7 @@ local on_attach = function(client, bufnr)
   end
 
   -- open diagnostic on cursor hold
-  vim.cmd [[autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focus = false })]]
+  -- vim.cmd [[autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focus = false })]]
 end
 
 
