@@ -4,7 +4,7 @@ local function keymaps()
   local telescope = require('telescope')
   local builtin = require('telescope.builtin')
   local themes = require('telescope.themes')
-  local previewers = require('telescope.previewers')
+  local Path = require('plenary.path')
 
   local map = function(mode, l, r, desc)
     local opts = { silent = true, desc = '[Telescope] ' .. desc }
@@ -29,8 +29,19 @@ local function keymaps()
 
   -- Set current folder as prompt title
   local with_title = function(opts, extra)
+    extra = extra or {}
+    local path = opts.cwd or opts.path or extra.cwd or extra.path or nil
+    local title = ''
+    local buf_path = vim.fn.expand('%:p:h')
+    local cwd = vim.fn.getcwd()
+    if path ~= nil and buf_path ~= cwd then
+      title = Path:new(buf_path):make_relative(cwd)
+    else
+      title = vim.fn.fnamemodify(cwd, ':t')
+    end
+
     return vim.tbl_extend('force', opts, {
-      prompt_title = opts.cwd and vim.fn.expand('%:p:h:t') or vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
+      prompt_title = title
     }, extra or {})
   end
 
@@ -57,14 +68,18 @@ local function keymaps()
   end, 'Browse files relative to buffer')
 
   map('n', '<M-F>', function()
-    telescope.extensions.file_browser.file_browser({ path = '%:p:h' })
+    telescope.extensions.file_browser.file_browser({
+      path = '%:p:h',
+      grouped = true,
+      hidden = true,
+    })
   end, 'Browse files relative to buffer with preview')
 
   map('n', '<M-s>g', function()
     builtin.live_grep(with_title({}))
   end, '[S]earch Live [G]rep')
 
-  map('n', '<M-S>g', function()
+  map('n', '<M-s>G', function()
     builtin.live_grep(with_title({ cwd = vim.fn.expand('%:p:h') }))
   end, '[S]earch Live [G]rep relative buffer')
 
@@ -72,7 +87,7 @@ local function keymaps()
     builtin.grep_string(with_title({}))
   end, '[S]earch [W]ord under cursor in cwd')
 
-  map('n', '<M-S>w', function()
+  map('n', '<M-s>W', function()
     builtin.grep_string(with_title({ cwd = vim.fn.expand('%:p:h') }))
   end, '[S]earch [W]ord under cursor in cwd relative to buffer')
 
@@ -95,11 +110,13 @@ local function keymaps()
 
   map('n', '<M-s>d', builtin.diagnostics, '[S]earch [D]iagnostics')
   map('n', '<M-s>S', builtin.lsp_document_symbols, '[S]earch [S]ymbols (LSP)')
-  map('n', '<M-s>R', builtin.resume, 'Resume last search')
-  map('n', '<M-s>T', function() builtin.treesitter(dropdown) end, '[S]earch [T]reesitter')
+  map('n', '<M-s>r', builtin.resume, 'Resume last search')
+  map('n', '<M-s>t', function() builtin.treesitter(dropdown) end, '[S]earch [T]reesitter')
 
   -- Projects
-  map('n', '<M-s>p', telescope.extensions.projects.projects, '[S]earch [P]rojects')
+  map('n', '<M-s>p', function()
+    telescope.extensions.projects.projects(dropdown)
+  end, '[S]earch [P]rojects')
 
   -- Neoclip
   map({ 'n', 'i' }, '<M-y>', function()
