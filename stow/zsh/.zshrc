@@ -8,7 +8,7 @@ fi
 
 CLI="$HOME/.cli"
 
-# Pasting big chunks of text takes ages
+# Fast pasting big chunks
 unset zle_bracketed_paste
 
 export PATH="$GOPATH/bin:$PATH"
@@ -45,10 +45,17 @@ setopt nobeep                  # No beep
 brew_prefix="$(brew --prefix)"
 
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
-source $brew_prefix/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE='100'
 # Fix issue autocomplete after paste
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(bracketed-paste)
+
+source $brew_prefix/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $brew_prefix/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# zsh syntax highlighting clears and restores aliases after .zshenv is loaded
+# this keeps ls and ll aliased correctly
+alias ls="exa --group-directories-first -G  --color auto --icons -a -s type"
+alias ll="exa --group-directories-first -l --color always --icons -a -s type"
 
 [ -f $HOME/.cargo/env ] && source $HOME/.cargo/env
 

@@ -98,8 +98,6 @@ _fzf_compgen_dir() {
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/rg"
 
 # Aliases
-alias ls="exa --group-directories-first -G  --color auto --icons -a -s type"
-alias ll="exa --group-directories-first -l --color always --icons -a -s type"
 alias tree="exa --tree --level=5 --icons --group-directories-first --color auto"
 
 alias lt="dust -b -H -r -X '.git'"
