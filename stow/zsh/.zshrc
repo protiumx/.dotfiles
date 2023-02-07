@@ -46,10 +46,11 @@ brew_prefix="$(brew --prefix)"
 
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
 export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE='100'
+
+source $brew_prefix/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # Fix issue autocomplete after paste
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(bracketed-paste)
 
-source $brew_prefix/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $brew_prefix/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # zsh syntax highlighting clears and restores aliases after .zshenv is loaded
@@ -61,12 +62,15 @@ alias ll="exa --group-directories-first -l --color always --icons -a -s type"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+[[ $commands[kubectl] ]] && source <(kubectl completion zsh)
+
 # Source all profile files
 for file in $HOME/.profile*; do
   source "$file"
 done
 
 export GOPATH="$(go env GOPATH)"
+export PATH="$GOPATH/bin:$PATH"
 
 if [[ "$OSTYPE" =~ ^linux ]]; then
   eval $(ssh-agent) >/dev/null
