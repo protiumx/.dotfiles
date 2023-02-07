@@ -31,15 +31,16 @@ return require('packer').startup(function(use)
   use({
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x',
-    requires = { 'nvim-lua/plenary.nvim' },
     config = function()
       require('config.telescope').setup()
-    end
+    end,
+    requires = {
+      'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope-live-grep-args.nvim',
+      'nvim-telescope/telescope-file-browser.nvim',
+      { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
+    }
   })
-
-  use({ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' })
-
-  use('nvim-telescope/telescope-file-browser.nvim')
 
   -- Themes
   use('NLKNguyen/papercolor-theme')
