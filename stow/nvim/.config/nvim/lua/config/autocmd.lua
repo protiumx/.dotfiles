@@ -86,7 +86,7 @@ autocmd('CmdlineLeave', {
   end,
 })
 
-autocmd('CmdlineEnter', {
+autocmd({ 'CmdlineEnter', 'CmdlineChanged' }, {
   group = 'clear_cmdline',
   pattern = '*',
   callback = function()
