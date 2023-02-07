@@ -13,7 +13,6 @@ pkgrun() {
 }
 
 # Jump to folder (zoxide) and open nvim.
-# NOTE: nvim plug will set the root folder properly if a .git folder exists
 zv() {
  z "$1"
  nvim .
@@ -119,7 +118,8 @@ alias gdo="gcommit docs"
 alias gmi="gcommit misc"
 
 alias dc="docker compose"
-alias kc="kubectl"
+alias k="kubectl"
+alias kf="kubectl get pods --no-headers | fzf --height 40% | awk '{print $1}'"
 alias k9="k9s"
 alias icat="kitty +kitten icat --align left"
 # Create 5 random passwords
@@ -127,3 +127,5 @@ alias mkpwd="xkcdpass --count=5 --acrostic=\"chaos\" -C \"first\" -R --min=5 --m
 alias isodate='date -u +"%Y-%m-%dT%H:%M:%SZ"'
 # Serve files in current dir with python http server
 alias serv="python3 -m http.server"
+# Reload shell
+alias reload="exec $SHELL -l"
