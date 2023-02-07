@@ -1,12 +1,17 @@
 local wezterm = require 'wezterm'
 local act = wezterm.action
-local mux = wezterm.mux
 
 local process_icons = {
   ['docker'] = {
     { Text = wezterm.nerdfonts.linux_docker },
   },
   ['docker-compose'] = {
+    { Text = wezterm.nerdfonts.linux_docker },
+  },
+  ['kuberlr'] = {
+    { Text = wezterm.nerdfonts.linux_docker },
+  },
+  ['kubectl'] = {
     { Text = wezterm.nerdfonts.linux_docker },
   },
   ['nvim'] = {
@@ -67,17 +72,15 @@ end
 
 local function get_process(tab)
   local process_name = string.gsub(tab.active_pane.foreground_process_name, '(.*[/\\])(.*)', '%2')
+  if string.find(process_name, 'kubectl') then
+    process_name = 'kubectl'
+  end
 
   return wezterm.format(
     process_icons[process_name]
     or { { Text = string.format('[%s]', process_name) } }
   )
 end
-
-wezterm.on('gui-startup', function(cmd)
-  local tab, pane, window = mux.spawn_window(cmd or {})
-  window:gui_window():maximize()
-end)
 
 wezterm.on(
   'format-tab-title',
@@ -93,13 +96,6 @@ wezterm.on(
     })
   end
 )
-
-wezterm.on('update-right-status', function(window)
-  window:set_right_status(wezterm.format({
-    { Attribute = { Intensity = 'Bold' } },
-    { Text = wezterm.strftime(' %A, %d %B %Y %I:%M %p ') },
-  }))
-end)
 
 return {
   audible_bell = 'Disabled',
@@ -239,7 +235,7 @@ return {
 
     -- Utils
     {
-      key = 'V',
+      key = 'P',
       mods = 'SHIFT|CMD',
       action = wezterm.action.SplitPane {
         direction = 'Right',
@@ -283,7 +279,7 @@ return {
 
     { key = '/', mods = 'CTRL', action = act.SendKey { key = '/', mods = 'CTRL' } },
 
-    { key = 'z', mods = 'SHIFT|ALT', action = act.TogglePaneZoomState },
+    { key = 'z', mods = 'SHIFT|CMD', action = act.TogglePaneZoomState },
 
     { key = 'c', mods = 'SHIFT|ALT', action = act.ActivateCopyMode },
   },
@@ -297,7 +293,6 @@ return {
       action = act.CompleteSelection 'PrimarySelection',
     },
 
-    -- and make CTRL-Click open hyperlinks
     {
       event = { Up = { streak = 1, button = 'Left' } },
       mods = 'CMD',
