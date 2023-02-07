@@ -73,6 +73,7 @@ local on_attach = function(client, bufnr)
       callback = function()
         if timer ~= nil then
           timer:stop()
+          timer = nil
         else
           vim.lsp.buf.clear_references()
         end
