@@ -41,6 +41,8 @@ function M.setup()
       enable = false,
     },
 
+    request_timeout = 5000,
+
     symbol_in_winbar = {
       enable = false, -- showing symbols in feline
       separator = '  ',
@@ -48,8 +50,21 @@ function M.setup()
       show_file = false,
     },
 
+    outline = {
+      win_width = 35,
+      keys = {
+        jump = '<CR>',
+      }
+    },
+
+    diagnostic = {
+      custom_fix = 'Code Actions',
+    },
+
     ui = {
       border = 'single',
+      code_action = '',
+      diagnostic = '',
       colors = {
         normal_bg = colors.background,
         title_bg = colors.background,
@@ -68,6 +83,7 @@ function M.setup()
   })
 
   keymaps()
+  -- vim.cmd [[autocmd CursorHold * lua require('lspsaga.diagnostic'):show_diagnostics(nil, 'line') ]]
 end
 
 return M
