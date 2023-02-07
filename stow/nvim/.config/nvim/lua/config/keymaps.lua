@@ -56,7 +56,7 @@ end
 vim.keymap.set('n', '``', '<C-^>', { silent = true })
 
 -- Close buffer without changing window layout
-vim.keymap.set('n', '--', ':bd<CR>', { silent = true })
+vim.keymap.set('n', '--', ':bp|bd #<CR>', { silent = true })
 
 -- Go next/prev buffer using Tab
 vim.keymap.set('n', '<Tab>', ':bn<CR>', { silent = true })
@@ -90,13 +90,14 @@ vim.keymap.set('n', '<F10>', ':vs term://zsh<CR>', { silent = true })
 vim.keymap.set('t', '<C-q>', '<C-\\><C-n>:bd!<CR>', { silent = true })
 -- Esc goes to normal mode
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { silent = true })
+vim.keymap.set('n', '<Leader>S', ':mks! .session.vim')
 
 -- Copy current file relative path to clipboard
 if macos then
-  vim.keymap.set('n', '<Leader>P', ':let @*=expand("%:~:.")', { silent = true })
+  vim.keymap.set('n', '<Leader>P', ':let @*=expand("%:~:.")<CR>')
 else
-  vim.keymap.set('n', '<Leader>P', ':let @+=expand("%:~:.")', { silent = true })
+  vim.keymap.set('n', '<Leader>P', ':let @+=expand("%:~:.")<CR>')
 end
 
 -- Git
-vim.keymap.set('n', '<C-g>s', ':silent exec "!git stage %"<CR>', { silent = true })
+vim.keymap.set('n', '<C-g>s', ':silent exec "!git stage %"<CR>')
