@@ -111,10 +111,11 @@ local function keymaps()
   map('n', '<M-s>d', builtin.diagnostics, '[S]earch [D]iagnostics')
   map('n', '<M-s>S', builtin.lsp_document_symbols, '[S]earch [S]ymbols (LSP)')
   map('n', '<M-s>r', builtin.resume, 'Resume last search')
+  map('n', '<M-s>p', builtin.pickers, '[S]earch [P]revious pickers')
   map('n', '<M-s>t', function() builtin.treesitter(dropdown) end, '[S]earch [T]reesitter')
 
   -- Projects
-  map('n', '<M-s>p', function()
+  map('n', '<M-s>P', function()
     telescope.extensions.projects.projects(dropdown)
   end, '[S]earch [P]rojects')
 
@@ -126,6 +127,10 @@ local function keymaps()
   map('n', '<M-s>m', function()
     telescope.extensions.macroscope.default(themes.get_dropdown())
   end, '[S]earch [M]acros')
+
+  -- Rg with args
+
+  map('n', '<M-s>f', telescope.extensions.live_grep_args.live_grep_args, '[S]earch [L]ive Rg')
 end
 
 function M.setup()
@@ -172,6 +177,7 @@ function M.setup()
   telescope.load_extension('file_browser')
   telescope.load_extension('projects')
   telescope.load_extension('neoclip')
+  telescope.load_extension('live_grep_args')
 
   keymaps()
 
