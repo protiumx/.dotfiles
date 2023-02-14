@@ -83,7 +83,7 @@ function M.setup()
   })
 
   keymaps()
-  -- vim.cmd [[autocmd CursorHold * lua require('lspsaga.diagnostic'):show_diagnostics(nil, 'line') ]]
+  vim.cmd [[autocmd CursorHold * lua require('lspsaga.diagnostic'):show_diagnostics(nil, 'line') ]]
 end
 
 return M
