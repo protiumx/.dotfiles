@@ -1,16 +1,10 @@
 local servers = {
   dockerls = {},
-
   graphql = {},
-
   tsserver = {},
-
   eslint = {},
-
   rust_analyzer = {},
-
   clangd = {},
-
   pyright = {
     python = {
       analysis = {
@@ -20,16 +14,14 @@ local servers = {
       },
     }
   },
-
   yamlls = {},
-
+  terraformls = {},
   bashls = {
     cmd_env = {
       GLOB_PATTERN = '*@(.sh|.inc|.bash|.command|.zsh)',
     },
     filetypes = { 'sh', 'zsh' },
   },
-
   gopls = {
     gofumpt = true,
     experimentalPostfixCompletions = true,
@@ -48,11 +40,20 @@ local servers = {
     },
     usePlaceholders = true,
   },
-
-  sumneko_lua = {
+  lua_ls = {
     Lua = {
       diagnostics = {
-        globals = { 'vim', 'jit' }
+        globals = { 'vim', 'jit' },
+        neededFileStatus = true,
+        ["codestyle-check"] = "Any",
+      },
+
+      format = {
+        enable = true,
+        defaultConfig = {
+          indent_style = "space",
+          indent_size = "2",
+        }
       },
 
       runtime = {
