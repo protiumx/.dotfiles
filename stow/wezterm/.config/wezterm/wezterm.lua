@@ -111,20 +111,24 @@ return {
   font_size = 18.0,
   -- Disable font ligatures
   harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
-
   hide_tab_bar_if_only_one_tab = true,
   inactive_pane_hsb = {
     saturation = 1.0,
     brightness = 0.85,
   },
-
+  window_background_opacity = 0.9,
   keys = {
     {
       key = 'p',
       mods = 'CMD',
       action = wezterm.action.ShowLauncherArgs { flags = 'FUZZY|TABS|WORKSPACES' },
     },
-    { key = ':', mods = 'SHIFT|CMD', action = wezterm.action.ShowDebugOverlay },
+    {
+      key = 'Enter',
+      mods = 'SHIFT|CMD',
+      action = wezterm.action.ToggleFullScreen,
+    },
+    { key = ':',   mods = 'SHIFT|CMD',  action = wezterm.action.ShowDebugOverlay },
 
     -- Panes
     {
@@ -217,9 +221,9 @@ return {
 
 
     -- Tabs
-    { key = 'N', mods = 'SHIFT|CMD', action = wezterm.action.ShowTabNavigator },
-    { key = 'Tab', mods = 'SHIFT|CTRL', action = act.ActivateTabRelative(-1) },
-    { key = 'Tab', mods = 'CTRL', action = act.ActivateTabRelative(1) },
+    { key = 'N',   mods = 'SHIFT|CMD',  action = wezterm.action.ShowTabNavigator },
+    { key = 'Tab', mods = 'SHIFT|CTRL', action = act.ActivateTabRelative( -1) },
+    { key = 'Tab', mods = 'CTRL',       action = act.ActivateTabRelative(1) },
 
     {
       key = 'k',
@@ -277,13 +281,12 @@ return {
       action = act.SendKey { key = 'e', mods = 'CTRL' },
     },
 
-    { key = '/', mods = 'CTRL', action = act.SendKey { key = '/', mods = 'CTRL' } },
+    { key = '/', mods = 'CTRL',      action = act.SendKey { key = '/', mods = 'CTRL' } },
 
     { key = 'z', mods = 'SHIFT|CMD', action = act.TogglePaneZoomState },
 
     { key = 'c', mods = 'SHIFT|ALT', action = act.ActivateCopyMode },
   },
-
   mouse_bindings = {
     -- Change the default click behavior so that it only selects
     -- text and doesn't open hyperlinks
@@ -299,13 +302,11 @@ return {
       action = act.OpenLinkAtMouseCursor,
     },
   },
-
   scrollback_lines = 6000,
   send_composed_key_when_left_alt_is_pressed = false,
   show_new_tab_button_in_tab_bar = false,
   switch_to_last_active_tab_when_closing_tab = true,
   tab_max_width = 60,
-
   window_decorations = 'RESIZE',
   window_frame = {
     -- The font used in the tab bar.
@@ -328,14 +329,11 @@ return {
     -- the window is not focused
     inactive_titlebar_bg = '#1c1c1c',
   },
-
   cursor_blink_rate = 400,
   default_cursor_style = 'BlinkingBar',
   cursor_thickness = 1.5,
   underline_position = -3,
   use_fancy_tab_bar = true,
-
-
   colors = {
     background = '#1c1c1c',
     cursor_bg = '#fe5186',
@@ -345,17 +343,18 @@ return {
     tab_bar = {
       -- The color of the strip that goes along the top of the window
       -- (does not apply when fancy tab bar is in use)
-      background = '#1c1c1c',
-      inactive_tab_edge = '#1c1c1c',
+      -- background = '#1c1c1c',
+      background = 'rgba(28, 28, 28, 0.9)',
+      inactive_tab_edge = 'rgba(28, 28, 28, 0.9)',
 
       active_tab = {
-        bg_color = '#1c1c1c',
+        bg_color = 'rgba(28, 28, 28, 0.9)',
         fg_color = '#c0c0c0',
       },
 
       -- Inactive tabs are the tabs that do not have focus
       inactive_tab = {
-        bg_color = '#1c1c1c',
+        bg_color = 'rgba(28, 28, 28, 0.9)',
         fg_color = '#808080',
 
         -- The same options that were listed under the `active_tab` section above
@@ -365,7 +364,7 @@ return {
       -- You can configure some alternate styling when the mouse pointer
       -- moves over inactive tabs
       inactive_tab_hover = {
-        bg_color = '#1c1c1c',
+        bg_color = 'rgba(28, 28, 28, 0.9)',
         fg_color = '#808080',
 
         -- The same options that were listed under the `active_tab` section above
