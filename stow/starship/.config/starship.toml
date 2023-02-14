@@ -60,6 +60,7 @@ not_found_symbol = ""
 not_executable_symbol = ""
 
 [cmd_duration]
+disabled = true
 min_time = 500
 show_milliseconds = true
 format = "[ $duration](grey) "
@@ -75,7 +76,7 @@ format = "[$symbol($version(-$name) )]($style)"
 symbol = " "
 
 [docker_context]
-format = "[$symbol$context]($style)"
+format = "[$symbol$context ]($style)"
 symbol = " "
 
 [elixir]
