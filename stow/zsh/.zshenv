@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 # Functions
 
 cheat() {
@@ -42,6 +44,7 @@ groot() {
   fi
 }
 
+# Conventional commits helper
 gcommit() {
   if [ -z "$3" ]
   then
@@ -80,29 +83,108 @@ cdi() {
   fi
 }
 
-# Excluded dirs are set in ../fd/ignore
-export FZF_DEFAULT_COMMAND="fd -d 1 --hidden --follow --color=never --strip-cwd-prefix"
-export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --prompt ' ' --bind 'ctrl-p:preview(bat {})' --preview-window hidden --no-info --color 'gutter:-1,hl+:#82aaff,hl:#82aaff,bg+:-1,pointer:#82aaff'"
-export FZF_COMPLETION_OPTS=$FZF_DEFAULT_OPTS
-
-_fzf_compgen_path() {
-  fd -d 1 --strip-cwd-prefix --hidden --follow --exclude ".git/" . "$1"
+# Fuzzy find kubernetes resource
+kf() {
+  kubectl get $1 --no-headers | fzf --height 40% | awk '{print $1}'
 }
 
-# Use fd to generate the list for directory completion
-_fzf_compgen_dir() {
-  fd -d 1 --strip-cwd-prefix --type d --hidden --follow --exclude ".git/" . "$1"
+kube_view_config() {
+  if [ -z "$1" ]; then
+    echo "No service supplied. \nUsage: $funcstack[1] <service>"
+  else
+    kubectl get configmap "$1" \
+      -o go-template='{{range $k, $v := .data }}export {{$k}}={{$v}}{{"\n"}}{{end}}'
+  fi
 }
 
-export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/rg"
+# View the envionment variables of a provided pod
+kube_view_env() {
+  if [ -z "$1" ]; then
+    echo "No pod supplied. \nUsage: $funcstack[1] <pod_name>"
+  else
+    kubectl exec "$1" -it -- env
+  fi
+}
+
+# Pack a folder into a .tar.bz2
+pack() {
+  if [ -z "$1" ]; then
+    echo "No directory supplied. \nUsage: $funcstack[1] directory-path"
+  elif ! [[ -d $1 ]]; then
+    echo "Error: $1 is not a directory."
+  else
+    tar -cvjSf "$(date "+%F")-$1.tar.bz2" "$1"
+  fi
+}
+
+# Unpack a .tar.bz2 folder
+unpack() {
+  if [ -z "$1" ]; then
+    echo "No directory supplied. \nUsage: $funcstack[1] directory-path.tar.bz2"
+  else
+    tar xjf "$1"
+  fi
+}
+
+brew_updater() {
+  brew update &&
+    brew upgrade &&
+    brew autoremove &&
+    brew cleanup -s &&
+    brew doctor
+}
+
+# Run test of a given path with colored output
+gotest() {
+  go test -v -race -failfast $1 | sed ''/PASS/s//$(printf "\033[32mPASS\033[0m")/'' | sed ''/FAIL/s//$(printf "\033[31mFAIL\033[0m")/''
+}
 
 # Aliases
 alias tree="exa --tree --level=5 --icons --group-directories-first --color auto"
-
 alias lt="dust -b -H -r -X '.git'"
-
 alias yw="yarn workspace"
 alias cat="bat -p --paging=never --theme='TwoDark'"
+alias dc="docker compose"
+
+# Kubernetes
+alias kx="kubectx"
+alias k="kubectl"
+alias k9="k9s -c pod --readonly"
+alias kfp="kf pods"
+alias kfs="kf services"
+alias ksh="kubectl get pods --no-headers | fzf | awk '{print $1}' | xargs -o -I % kubectl exec -it % bash"
+alias kex="kubectl exec -ti"
+alias kdc="kubectl describe configmap"
+alias kdd="kubectl describe deployment"
+alias kdp="kubectl describe pods"
+alias kds="kubectl describe svc"
+alias kgctx="kubectl config get-contexts"
+alias kgcj="kubectl get cronjob"
+alias kgconf="kubectl get configmap"
+alias kgd="kubectl get deployements"
+alias kge="kubectl get events"
+alias kgi="kubectl get ingress"
+alias kgp="kubectl get pods"
+alias kgpv="kgp -o jsonpath='{.items[*].spec.containers[*].image}' | tr -s '[[:space:]]' '\n' | sort | cut -d'/' -f3 | column -t -s':' | uniq -c"
+alias kgs="kubectl get svc"
+alias klft="kubectl logs --since 1s -f"
+alias kpf="kubectl port-forward"
+alias krrd="kubectl rollout restart deployment"
+alias ksd="kubectl scale deployment"
+
+alias icat="kitty +kitten icat --align left"
+# Create 5 random passwords
+alias mkpwd="xkcdpass --count=5 --acrostic=\"chaos\" -C \"first\" -R --min=5 --max=6 -D \"#@^&~_-;\""
+alias isodate='date -u +"%Y-%m-%dT%H:%M:%SZ"'
+# Serve files in current dir with python http server
+alias serv="python3 -m http.server"
+# Reload shell
+alias reload="exec $SHELL -l"
+# Print each PATH entry on a separate line
+alias path='echo -e ${PATH//:/\\n}'
+alias localip="ifconfig | grep 'inet ' | grep -v 127.0.0.1 | cut -d\  -f2"
+# Lock the screen
+alias afk="open /System/Library/CoreServices/ScreenSaverEngine.app"
 
 # Conventional Commits
 alias gcm="git commit -m"
@@ -116,16 +198,3 @@ alias gst="gcommit style"
 alias gci="gcommit ci"
 alias gdo="gcommit docs"
 alias gmi="gcommit misc"
-
-alias dc="docker compose"
-alias k="kubectl"
-alias kf="kubectl get pods --no-headers | fzf --height 40% | awk '{print $1}'"
-alias k9="k9s"
-alias icat="kitty +kitten icat --align left"
-# Create 5 random passwords
-alias mkpwd="xkcdpass --count=5 --acrostic=\"chaos\" -C \"first\" -R --min=5 --max=6 -D \"#@^&~_-;\""
-alias isodate='date -u +"%Y-%m-%dT%H:%M:%SZ"'
-# Serve files in current dir with python http server
-alias serv="python3 -m http.server"
-# Reload shell
-alias reload="exec $SHELL -l"
