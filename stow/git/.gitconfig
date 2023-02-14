@@ -111,7 +111,7 @@
   tree = log --graph --full-history --pretty=format:'%C(red)%h%C(reset) -%C(yellow)%d%C(reset) %s %C(green)(%cr) %C(bold blue)[%an]%C(reset)'
 
   # Revert the last commit and put its changes in the index
-  undo = reset --soft HEAD^
+  undolast = reset --soft HEAD^
   unstage = reset HEAD --
 
   # Push and set upstream origin for branch
