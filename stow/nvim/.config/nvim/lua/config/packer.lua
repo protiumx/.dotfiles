@@ -44,7 +44,8 @@ return require('packer').startup(function(use)
 
   -- Themes
   use('NLKNguyen/papercolor-theme')
-
+  use 'Yazeed1s/minimal.nvim'
+  use "rebelot/kanagawa.nvim"
   -- Icons
   use('kyazdani42/nvim-web-devicons')
 
@@ -223,7 +224,6 @@ return require('packer').startup(function(use)
   -- Show sign columns for changes in files
   use({
     'lewis6991/gitsigns.nvim',
-    after = 'project.nvim',
     cond = function()
       return vim.fn.isdirectory(vim.fn.getcwd() .. '/.git/')
     end,
@@ -235,7 +235,6 @@ return require('packer').startup(function(use)
 
   use({
     'sindrets/diffview.nvim',
-    after = 'project.nvim',
     cond = function()
       return vim.fn.isdirectory(vim.fn.getcwd() .. '/.git/')
     end,
@@ -255,6 +254,7 @@ return require('packer').startup(function(use)
       'rust',
       'bash',
       'dockerfile',
+      'terraform',
       'yaml',
     },
     requires = {
