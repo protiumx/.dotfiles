@@ -1,7 +1,29 @@
 local colors = require('config.colors')
 
-vim.cmd.colorscheme('PaperColor')
+-- vim.g.minimal_italic_functions = false
+-- vim.g.minimal_italic_comments = false
+-- vim.g.minimal_transparent_background = true
+-- vim.cmd("colorscheme minimal")
+-- vim.cmd.colorscheme('PaperColor')
 
+require('kanagawa').setup({
+  undercurl = true, -- enable undercurls
+  commentStyle = { italic = false },
+  functionStyle = {},
+  keywordStyle = { italic = false },
+  statementStyle = { bold = true },
+  typeStyle = {},
+  variablebuiltinStyle = { italic = false },
+  specialReturn = true, -- special highlight for the return keyword
+  specialException = true, -- special highlight for exception handling keywords
+  transparent = true, -- do not set background color
+  dimInactive = true, -- dim inactive window `:h hl-NormalNC`
+  globalStatus = false, -- adjust window separators highlight for laststatus=3
+  terminalColors = true, -- define vim.g.terminal_color_{0,17}
+})
+
+-- setup must be called before loading
+vim.cmd("colorscheme kanagawa")
 vim.g['PaperColor_Theme_Options'] = {
   theme = {
     default = { dark = { override = { color07 = { colors.white, '' } } } }
@@ -11,11 +33,17 @@ vim.g['PaperColor_Theme_Options'] = {
 -- Highlights
 
 -- Transparent background
--- vim.api.nvim_set_hl(0, 'LineNr', {bg = 'none'})
--- vim.api.nvim_set_hl(0, 'Normal', {bg = 'none'})
--- vim.api.nvim_set_hl(0, 'NonText', {bg = 'none'})
--- vim.api.nvim_set_hl(0, 'SignColumn', {bg = 'none'})
+-- vim.api.nvim_set_hl(0, 'LineNr', { bg = 'none' })
+-- vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
+-- vim.api.nvim_set_hl(0, 'SignColumn', { bg = 'none' })
+-- vim.api.nvim_set_hl(0, 'NonText', { bg = 'none', ctermbg = 'none' })
+-- vim.api.nvim_set_hl(0, 'Normal', { bg = 'none', ctermbg = 'none' })
+vim.api.nvim_set_hl(0, 'TelescopeBorder', { bg = 'none', ctermbg = 'none' })
+vim.api.nvim_set_hl(0, 'Conceal', { bg = 'none', ctermbg = 'none' })
+vim.api.nvim_set_hl(0, 'MsgArea', { bg = 'none', ctermbg = 'none' })
+vim.api.nvim_set_hl(0, 'NormalNC', { bg = 'none', ctermbg = 'none' })
 
+------
 vim.api.nvim_set_hl(0, 'VertSplit', { bg = 'none', fg = colors.grey })
 vim.api.nvim_set_hl(0, 'ColorColumn', { bg = colors.purple })
 
@@ -45,8 +73,10 @@ vim.api.nvim_set_hl(0, 'DiagnosticFloatingWarn', { bg = 'none', fg = colors.yell
 vim.api.nvim_set_hl(0, 'DiagnosticFloatingError', { bg = 'none', fg = colors.red })
 
 -- Diff
-vim.api.nvim_set_hl(0, 'DiffAdd', { bg = '#3d7321', fg = 'none' })
-vim.api.nvim_set_hl(0, 'DiffDelete', { bg = '#6e1b1b', fg = '#6e1b1b' })
-vim.api.nvim_set_hl(0, 'DiffText', { fg = 'none' })
+-- vim.api.nvim_set_hl(0, 'DiffAdd', { bg = '#3d7321', fg = 'none' })
+-- vim.api.nvim_set_hl(0, 'DiffDelete', { bg = '#6e1b1b', fg = '#6e1b1b' })
+-- vim.api.nvim_set_hl(0, 'DiffText', { fg = 'none' })
 
 vim.api.nvim_set_hl(0, 'MatchParen', { fg = colors.accent, bg = 'none' })
+vim.api.nvim_set_hl(0, 'ErrorMsg', { bg = 'none', fg = '#bf1131' })
+vim.api.nvim_set_hl(0, 'Todo', { bg = 'none', ctermbg = 'none' })
