@@ -23,6 +23,8 @@ vim.keymap.set('n', '*', '*zz', { silent = true })
 vim.keymap.set('n', '#', '#zz', { silent = true })
 vim.keymap.set('n', 'g*', 'g*zz', { silent = true })
 vim.keymap.set('n', 'G', 'Gzz', { silent = true })
+vim.keymap.set('n', '<C-o>', '<C-o>zz', { silent = true })
+vim.keymap.set('n', '<C-i>', '<C-i>zz', { silent = true })
 
 -- Move down/up centered
 vim.keymap.set('n', '<C-d>', '<C-d>zz', { silent = true })
@@ -53,10 +55,12 @@ else
 end
 
 -- Toggle between current and prev buffers
-vim.keymap.set('n', '``', '<C-^>', { silent = true })
+vim.keymap.set('n', '``', '<C-^>zz', { silent = true })
 
 -- Close buffer without changing window layout
 vim.keymap.set('n', '--', ':bp|bd #<CR>', { silent = true })
+-- Close all but current buffer
+vim.keymap.set('n', '<M-q>', ':%bp|e #<CR>', { silent = true })
 
 -- Go next/prev buffer using Tab
 vim.keymap.set('n', '<Tab>', ':bn<CR>', { silent = true })
@@ -90,7 +94,7 @@ vim.keymap.set('n', '<F10>', ':vs term://zsh<CR>', { silent = true })
 vim.keymap.set('t', '<C-q>', '<C-\\><C-n>:bd!<CR>', { silent = true })
 -- Esc goes to normal mode
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { silent = true })
-vim.keymap.set('n', '<Leader>S', ':mks! .session.vim')
+vim.keymap.set('n', '<Leader>S', ':mks! .session.vim<CR>')
 
 -- Copy current file relative path to clipboard
 if macos then
