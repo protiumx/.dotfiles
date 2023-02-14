@@ -71,21 +71,20 @@ function M.setup()
       'javascript',
       'lua',
       'markdown',
+      'markdown_inline',
       'python',
       'rust',
+      'terraform',
+      'toml',
       'typescript',
       'vim',
       'yaml',
     },
-
     sync_install = false,
     auto_install = false,
-
     highlight = {
       enable = true,
       additional_vim_regex_highlighting = false,
-      -- PaperColor looks better
-      disable = { 'go' },
     },
   })
   vim.api.nvim_set_hl(0, '@text.todo', { link = 'Todo' })
