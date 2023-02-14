@@ -149,7 +149,7 @@ function M.setup()
 
       mappings = {
         i = {
-          ['<M-d>'] = 'delete_buffer'
+          ['<M-D>'] = 'delete_buffer'
         },
       },
 
