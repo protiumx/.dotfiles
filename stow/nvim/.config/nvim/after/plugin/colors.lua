@@ -42,6 +42,7 @@ vim.api.nvim_set_hl(0, 'TelescopeBorder', { bg = 'none', ctermbg = 'none' })
 vim.api.nvim_set_hl(0, 'Conceal', { bg = 'none', ctermbg = 'none' })
 vim.api.nvim_set_hl(0, 'MsgArea', { bg = 'none', ctermbg = 'none' })
 vim.api.nvim_set_hl(0, 'NormalNC', { bg = 'none', ctermbg = 'none' })
+vim.api.nvim_set_hl(0, 'WinSeparator', { bg = 'none', ctermbg = 'none' })
 
 ------
 vim.api.nvim_set_hl(0, 'VertSplit', { bg = 'none', fg = colors.grey })
