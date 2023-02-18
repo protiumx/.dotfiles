@@ -5,6 +5,7 @@ vim.g.netrw_liststyle = 3 -- Tree-style view
 vim.cmd [[
   syntax sync minlines=3000
   filetype plugin indent on
+  set fillchars=diff:\ ,
 ]]
 
 vim.opt.shell = 'zsh'
