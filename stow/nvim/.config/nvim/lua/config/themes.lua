@@ -1,34 +1,10 @@
-local colors = {
-  background = '#1c1c1c',
-  foreground = '#cacaca',
+local colors = require('config.colors')
 
-  accent = '#fe5186',
-  blue = '#61afef',
-  cyan = '#56b6c2',
-  dark_green = '#5faf5f',
-  dark_orange = '#ff5d62',
-  dark_red = '#bf1131',
-  green = '#98c379',
-  grey = '#454545',
-  dark_grey = '#363545',
-  dark_yellow = '#ffaf00',
-  light_grey = '#727169',
-  magenta = '#c678dd',
-  light_orange = '#ffa066',
-  orange = '#ff8700',
-  light_pink = '#e46876',
-  purple = '#af87d7',
-  red = '#c4384b',
-  violet = '#a9a1e1',
-  white = '#e3e3e3',
-  yellow = '#d7af5f',
-}
+local theme = {
+  -- VIM
+  Special = { fg = colors.dark_yellow },
 
-colors.vim = {
-  Special = { fg = '#ffaf00' },
-}
-
-colors.treesitter = {
+  -- Treesitter
   ['@text.literal'] = { fg = colors.yellow, bg = '' },
   -- ['@text.reference'] = { fg = '', bg = '' },
   ['@text.title'] = { fg = colors.blue, bg = '' },
@@ -36,14 +12,16 @@ colors.treesitter = {
   -- ['@text.underline'] = { fg = '', bg = '' },
   ['@text.todo'] = { fg = colors.orange, bg = '' },
   ['@text.strong'] = { bold = true },
-  ["@text.warning"] = { fg = colors.orange },
-  ["@text.danger"] = { fg = colors.dark_orange },
+  ['@text.warning'] = { fg = colors.orange },
+  ['@text.danger'] = { fg = colors.dark_orange },
 
   ['@comment'] = { fg = colors.light_grey, bg = '' },
-  -- ['@punctuation'] = { fg = '', bg = '' },
+  ['@punctuation.Special'] = { fg = colors.purple, bg = '' },
+  ['@punctuation.bracket'] = { fg = colors.purple, bg = '' },
+  ['@punctuation.delimiter'] = { fg = colors.purple, bg = '' },
 
   ['@constant'] = { fg = colors.foreground, bg = '' },
-  ['@constant.builtin'] = { fg = colors.dark_orange, bg = '' },
+  ['@constant.builtin'] = { fg = colors.dark_yellow, bg = '' },
   ['@constant.macro'] = { fg = colors.dark_orange, bg = '' },
   -- ['@define'] = { fg = '', bg = '' },
   ['@macro'] = { fg = colors.dark_orange, bg = '' },
@@ -63,10 +41,10 @@ colors.treesitter = {
   ['@method'] = { fg = colors.foreground, bg = '' },
   ['@field'] = { fg = colors.foreground, bg = '' },
   ['@property'] = { fg = colors.foreground, bg = '' },
-  ['@constructor'] = { fg = colors.foreground, bg = '' },
+  ['@constructor'] = { fg = colors.blue, bg = '' },
 
-  ['@conditional'] = { fg = '', bg = '' },
-  -- ['@repeat'] = { fg = '', bg = '' },
+  ['@conditional'] = { fg = colors.blue, bg = '' },
+  ['@repeat'] = { fg = colors.blue, bg = '' },
   ['@label'] = { fg = colors.blue, bg = '' },
   ['@operator'] = { fg = colors.purple, bg = '' },
   ['@keyword'] = { fg = colors.blue, bg = '' },
@@ -75,16 +53,26 @@ colors.treesitter = {
   ['@variable'] = { fg = colors.foreground, bg = '' },
   ['@variable.builtin'] = { fg = colors.light_orange, bg = '' },
   ['@type'] = { fg = colors.light_orange, bg = '' },
-  ['@type.definition'] = { fg = colors.light_orange, bg = '' },
+  ['@type.definition'] = { fg = colors.foreground, bg = '' },
   -- ['@storageclass'] = { fg = '', bg = '' },
   -- ['@structure'] = { fg = '', bg = '' },
-  -- ['@namespace'] = { fg = '', bg = '' },
-  -- ['@include'] = { fg = '', bg = '' },
+  ['@namespace'] = { fg = colors.foreground, bg = '' },
+  ['@include'] = { fg = colors.dark_orange, bg = '' },
   -- ['@preproc'] = { fg = '', bg = '' },
   -- ['@debug'] = { fg = '', bg = '' },
   ['@tag'] = { fg = colors.orange, bg = '' },
-  ["@tag.delimiter"] = { fg = colors.purple },
-  ["@tag.attribute"] = { fg = colors.foreground },
+  ['@tag.delimiter'] = { fg = colors.purple },
+  ['@tag.attribute'] = { fg = colors.foreground },
 }
 
-return colors
+local M = {}
+
+function M.load()
+  for group, colors in pairs(theme) do
+    if not vim.tbl_isempty(colors) then
+      vim.api.nvim_set_hl(0, group, colors)
+    end
+  end
+end
+
+return M
