@@ -5,6 +5,34 @@ function M.setup()
   local cmp_autopairs = require('nvim-autopairs.completion.cmp')
   local luasnip = require('luasnip')
 
+  local kind_icons = {
+    Text = "",
+    Method = "",
+    Function = "",
+    Constructor = "",
+    Field = "",
+    Variable = "",
+    Class = "ﴯ",
+    Interface = "",
+    Module = "",
+    Property = "ﰠ",
+    Unit = "",
+    Value = "",
+    Enum = "",
+    Keyword = "",
+    Snippet = "",
+    Color = "",
+    File = "",
+    Reference = "",
+    Folder = "",
+    EnumMember = "",
+    Constant = "",
+    Struct = "",
+    Event = "",
+    Operator = "",
+    TypeParameter = ""
+  }
+
   cmp.event:on(
     'confirm_done',
     cmp_autopairs.on_confirm_done()
@@ -18,7 +46,7 @@ function M.setup()
     },
 
     window = {
-      -- completion = cmp.config.window.bordered(),
+      completion = cmp.config.window.bordered(),
       documentation = cmp.config.window.bordered(),
     },
 
@@ -28,6 +56,21 @@ function M.setup()
       { name = 'buffer' },
       { name = 'path' },
       { name = 'luasnip' },
+    },
+
+    formatting = {
+      format = function(entry, vim_item)
+        vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
+        vim_item.menu = ({
+          buffer = "[Buffer]",
+          nvim_lsp = "[LSP]",
+          luasnip = "[LuaSnip]",
+          nvim_lua = "[Lua]",
+          latex_symbols = "[LaTeX]",
+        })[entry.source.name]
+        vim_item.abbr = string.sub(vim_item.abbr, 1, 50)
+        return vim_item
+      end
     },
 
     mapping = cmp.mapping.preset.insert({
