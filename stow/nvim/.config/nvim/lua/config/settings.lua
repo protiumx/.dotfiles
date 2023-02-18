@@ -52,6 +52,7 @@ vim.opt.smartcase = true
 vim.opt.spell = true
 vim.opt.spelllang = 'en_us'
 vim.opt.spellcapcheck = ''
+vim.opt.spelloptions = 'camel'
 
 vim.opt.showmode = false
 vim.opt.startofline = false
