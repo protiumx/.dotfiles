@@ -97,6 +97,19 @@ wezterm.on(
   end
 )
 
+wezterm.on('update-right-status', function(window)
+  if not window:get_dimensions().is_full_screen then
+    window:set_right_status("")
+    return
+  end
+
+  window:set_right_status(wezterm.format({
+    { Attribute = { Intensity = 'Bold' } },
+    { Foreground = { Color = '#808080' } },
+    { Text = wezterm.strftime(' %R ') },
+  }))
+end)
+
 return {
   audible_bell = 'Disabled',
   color_scheme = '3024 (base16)',
@@ -116,7 +129,7 @@ return {
     saturation = 1.0,
     brightness = 0.85,
   },
-  window_background_opacity = 0.9,
+  window_background_opacity = 0.85,
   keys = {
     {
       key = 'p',
@@ -282,6 +295,7 @@ return {
     },
 
     { key = '/', mods = 'CTRL',      action = act.SendKey { key = '/', mods = 'CTRL' } },
+    { key = 'q', mods = 'CTRL',      action = act.SendKey { key = 'q', mods = 'CTRL' } },
 
     { key = 'z', mods = 'SHIFT|CMD', action = act.TogglePaneZoomState },
 
