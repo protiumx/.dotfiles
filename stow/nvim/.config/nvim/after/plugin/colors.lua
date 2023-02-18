@@ -19,9 +19,31 @@ require('kanagawa').setup({
   transparent = true, -- do not set background color
   dimInactive = true, -- dim inactive window `:h hl-NormalNC`
   globalStatus = false, -- adjust window separators highlight for laststatus=3
-  terminalColors = true, -- define vim.g.terminal_color_{0,17}
+  terminalColors = false, -- define vim.g.terminal_color_{0,17}
+  colors = {
+    fujiWhite = '',
+    kw = '#5fafd7', -- keywords
+    oniViolet = '#5fafd7', -- keywords
+    crystalBlue = '#cacaca',
+    st = '#d7af5f', -- string
+    co = '#cacaca', -- constant
+    fg = '#cacaca',
+    id = '#cacaca', -- identifier
+    op = '#af87d7', -- operator
+    br = '#af87d7',
+    waveAqua2 = '#FFA066',
+    sakuraPink = '#E46876',
+    waveBlue1 = '#363535', -- visual
+    waveBlue2 = '#363545', -- popup visual
+    surimiOrange = '#5faf5f',
+  },
+  overrides = {
+    ['@attribute'] = { fg = colors.accent },
+    ['@string.escape'] = { fg = colors.accent },
+    Special = { fg = '#ffaf00' },
+    Boolean = { fg = '#ffaf00' },
+  }
 })
-
 -- setup must be called before loading
 vim.cmd("colorscheme kanagawa")
 vim.g['PaperColor_Theme_Options'] = {
@@ -33,11 +55,11 @@ vim.g['PaperColor_Theme_Options'] = {
 -- Highlights
 
 -- Transparent background
--- vim.api.nvim_set_hl(0, 'LineNr', { bg = 'none' })
--- vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
--- vim.api.nvim_set_hl(0, 'SignColumn', { bg = 'none' })
--- vim.api.nvim_set_hl(0, 'NonText', { bg = 'none', ctermbg = 'none' })
--- vim.api.nvim_set_hl(0, 'Normal', { bg = 'none', ctermbg = 'none' })
+vim.api.nvim_set_hl(0, 'LineNr', { bg = 'none' })
+vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
+vim.api.nvim_set_hl(0, 'SignColumn', { bg = 'none' })
+vim.api.nvim_set_hl(0, 'NonText', { bg = 'none', ctermbg = 'none' })
+vim.api.nvim_set_hl(0, 'Normal', { bg = 'none', ctermbg = 'none' })
 vim.api.nvim_set_hl(0, 'TelescopeBorder', { bg = 'none', ctermbg = 'none' })
 vim.api.nvim_set_hl(0, 'Conceal', { bg = 'none', ctermbg = 'none' })
 vim.api.nvim_set_hl(0, 'MsgArea', { bg = 'none', ctermbg = 'none' })
@@ -80,4 +102,4 @@ vim.api.nvim_set_hl(0, 'DiagnosticFloatingError', { bg = 'none', fg = colors.red
 
 vim.api.nvim_set_hl(0, 'MatchParen', { fg = colors.accent, bg = 'none' })
 vim.api.nvim_set_hl(0, 'ErrorMsg', { bg = 'none', fg = '#bf1131' })
-vim.api.nvim_set_hl(0, 'Todo', { bg = 'none', ctermbg = 'none' })
+vim.api.nvim_set_hl(0, 'Todo', { fg = '#ff8700', bold = true, bg = 'none', ctermbg = 'none' })
