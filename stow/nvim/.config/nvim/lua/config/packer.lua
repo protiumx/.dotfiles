@@ -44,8 +44,8 @@ return require('packer').startup(function(use)
 
   -- Themes
   use('NLKNguyen/papercolor-theme')
-  use 'Yazeed1s/minimal.nvim'
   use "rebelot/kanagawa.nvim"
+
   -- Icons
   use('kyazdani42/nvim-web-devicons')
 
@@ -70,12 +70,21 @@ return require('packer').startup(function(use)
   })
 
   -- Enhancement
-  use({
-    'feline-nvim/feline.nvim', -- Status line
+  -- use({
+  --   'feline-nvim/feline.nvim', -- Status line
+  --   config = function()
+  --     require('config.feline').setup()
+  --   end
+  -- })
+
+
+  use {
+    'nvim-lualine/lualine.nvim',
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true },
     config = function()
-      require('config.feline').setup()
+      require('config.lualine').setup()
     end
-  })
+  }
 
   use({
     'ahmedkhalf/project.nvim',
