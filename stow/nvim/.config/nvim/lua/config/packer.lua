@@ -44,7 +44,6 @@ return require('packer').startup(function(use)
 
   -- Themes
   use('NLKNguyen/papercolor-theme')
-  use "rebelot/kanagawa.nvim"
 
   -- Icons
   use('kyazdani42/nvim-web-devicons')
@@ -69,22 +68,13 @@ return require('packer').startup(function(use)
     cmd = 'TSPlay',
   })
 
-  -- Enhancement
-  -- use({
-  --   'feline-nvim/feline.nvim', -- Status line
-  --   config = function()
-  --     require('config.feline').setup()
-  --   end
-  -- })
-
-
-  use {
+  use({
     'nvim-lualine/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons', opt = true },
     config = function()
       require('config.lualine').setup()
     end
-  }
+  })
 
   use({
     'ahmedkhalf/project.nvim',
@@ -109,13 +99,6 @@ return require('packer').startup(function(use)
     config = function()
       vim.keymap.set('n', '<C-w>m', '<Cmd>WinShift<CR>')
       vim.keymap.set('n', '<C-w>x', '<Cmd>WinShift swap<CR>')
-    end
-  })
-
-  use({
-    'nvim-zh/colorful-winsep.nvim',
-    config = function()
-      require('colorful-winsep').setup()
     end
   })
 
@@ -285,7 +268,16 @@ return require('packer').startup(function(use)
       'rafamadriz/friendly-snippets',
 
       -- Show lsp progress
-      'j-hui/fidget.nvim',
+      {
+        'j-hui/fidget.nvim',
+        config = function()
+          require('fidget').setup({
+            window = {
+              blend = 0,
+            }
+          })
+        end
+      },
 
       -- Better UI for LSP commands
       {
