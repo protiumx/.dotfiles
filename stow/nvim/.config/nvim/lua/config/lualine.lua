@@ -1,18 +1,5 @@
+local colors = require('config.colors')
 local M = {}
-
-local colors = {
-  bg = '#1c1c1c',
-  fg = '#abb2bf',
-  yellow = '#e0af68',
-  cyan = '#56b6c2',
-  darkblue = '#081633',
-  green = '#98c379',
-  orange = '#d19a66',
-  violet = '#a9a1e1',
-  magenta = '#c678dd',
-  blue = '#61afef',
-  red = '#e86671'
-}
 
 local modes = {
   ["__"] = "--",
@@ -61,24 +48,34 @@ local mode_colors = {
 
 local base_theme = {
   a = {},
-  b = { bg = colors.bg, fg = colors.blue },
-  x = { fg = colors.magenta, gui = 'bold' },
+  b = { bg = colors.background, fg = colors.blue },
+  x = { fg = colors.purple, gui = 'bold' },
   y = { fg = colors.cyan },
-  z = { fg = colors.fg },
+  z = { fg = colors.light_grey },
 }
 local theme = {
   normal = base_theme,
   insert = base_theme,
   visual = base_theme,
   replace = base_theme,
-  inactive = base_theme,
+  inactive = {
+    a = { bg = colors.background, fg = colors.light_grey }
+  },
 }
 
-function lsp_symbol()
+local function lsp_symbol()
   return require('lspsaga.symbolwinbar'):get_winbar() or ''
 end
 
 function M.setup()
+  local file_section = {
+    'filename',
+    path = 1,
+    symbols = {
+      modified = ' * ',
+      readonly = '  ',
+    }
+  }
   require('lualine').setup {
     options = {
       icons_enabled = true,
@@ -124,16 +121,7 @@ function M.setup()
           end,
         },
       },
-      lualine_b = {
-        {
-          'filename',
-          path = 1,
-          symbols = {
-            modified = ' * ',
-            readonly = '  ',
-          }
-        },
-      },
+      lualine_b = { file_section },
       lualine_c = { lsp_symbol },
 
       lualine_w = { 'diagnostics' },
@@ -142,7 +130,7 @@ function M.setup()
       lualine_z = { 'progress' },
     },
     inactive_sections = {
-      lualine_a = { 'filename' },
+      lualine_a = { file_section },
       lualine_b = {},
       lualine_c = {},
       lualine_w = {},
