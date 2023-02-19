@@ -11,7 +11,7 @@ local theme = {
   NormalNC = { bg = 'none', fg = colors.foreground },
   SignColumn = { bg = 'none' },
   TelescopeBorder = { bg = 'none', ctermbg = 'none' },
-  WinSeparator = { bg = 'none', ctermbg = 'none' },
+  WinSeparator = { bg = 'none', fg = colors.grey },
 
   ---
 
