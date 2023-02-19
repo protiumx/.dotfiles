@@ -1,7 +1,7 @@
 local M = {}
 
 local function setup_text_objects()
-  require 'nvim-treesitter.configs'.setup({
+  require('nvim-treesitter.configs').setup({
     textobjects = {
       select = {
         enable = true,
@@ -87,7 +87,6 @@ function M.setup()
       additional_vim_regex_highlighting = false,
     },
   })
-  vim.api.nvim_set_hl(0, '@text.todo', { link = 'Todo' })
 
   setup_text_objects()
 end
