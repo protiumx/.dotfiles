@@ -2,9 +2,54 @@ local colors = require('config.colors')
 
 local theme = {
   -- VIM
-  Special = { fg = colors.dark_yellow },
+  Special = { fg = colors.accent },
+
+  -- Transparent background
+
+  Conceal = { bg = 'none', fg = colors.foreground },
+  LineNr = { bg = 'none', fg = colors.grey },
+  MsgArea = { bg = 'none', fg = colors.foreground },
+  NonText = { bg = 'none', fg = colors.foreground },
+  Normal = { bg = 'none', fg = colors.foreground },
+  NormalNC = { bg = 'none', fg = colors.foreground },
+  SignColumn = { bg = 'none' },
+  TelescopeBorder = { bg = 'none', ctermbg = 'none' },
+  WinSeparator = { bg = 'none', ctermbg = 'none' },
+
+  ------
+
+  ColorColumn = { bg = colors.dark_grey },
+  Cursor = { bg = colors.accent },
+  CursorColumn = { bg = 'none', fg = colors.accent },
+  CursorLine = { bg = 'none', fg = 'none' },
+  ErrorMsg = { bg = 'none', fg = '#bf1131' },
+  FloatBorder = { bg = 'none' },
+  IncSearch = { bg = colors.accent, fg = colors.foreground },
+  MatchParen = { fg = colors.accent, bg = 'none' },
+  NormalFloat = { bg = 'none' },
+  Search = { bg = colors.accent },
+  SpellBad = { bg = 'none', fg = 'none', undercurl = true, ctermbg = 'none', ctermfg = 'none' },
+  SpellLocal = { bg = 'none', fg = 'none', undercurl = true, ctermbg = 'none', ctermfg = 'none' },
+  SpellRare = { bg = 'none', fg = 'none', undercurl = true, ctermbg = 'none', ctermfg = 'none' },
+  StatusLine = { fg = colors.white, bg = colors.background },
+  Todo = { fg = '#ff8700', bold = true, bg = 'none', ctermbg = 'none' },
+  VertSplit = { bg = 'none', fg = colors.grey },
+
+  -- Diagnostic
+
+  DiagnosticError = { fg = colors.red },
+  DiagnosticFloatingError = { bg = 'none', fg = colors.red },
+  DiagnosticFloatingHint = { bg = 'none' },
+  DiagnosticFloatingInfo = { bg = 'none' },
+  DiagnosticFloatingWarn = { bg = 'none', fg = colors.yellow },
+  DiagnosticSignHint = { fg = colors.grey, bold = true },
+  DiagnosticUnderlineError = { undercurl = true },
+  DiagnosticVirtualTextHint = { bg = 'none' },
+  DiagnosticWarn = { fg = colors.yellow },
+
 
   -- Treesitter
+
   ['@text.literal'] = { fg = colors.yellow, bg = '' },
   -- ['@text.reference'] = { fg = '', bg = '' },
   ['@text.title'] = { fg = colors.blue, bg = '' },
@@ -25,9 +70,10 @@ local theme = {
   ['@constant.macro'] = { fg = colors.dark_orange, bg = '' },
   -- ['@define'] = { fg = '', bg = '' },
   ['@macro'] = { fg = colors.dark_orange, bg = '' },
-  ['@string'] = { fg = colors.yellow, bg = '' },
-  ['@string.escape'] = { fg = colors.dark_orange, bold = true, bg = '' },
-  ['@string.special'] = { fg = colors.dark_orange, bold = true },
+  -- ['@string'] = { fg = colors.yellow, bg = '' },
+  ['@string.escape'] = { fg = colors.dark_orange, bg = '' },
+  ['@string.special'] = { fg = colors.dark_orange },
+  ['@string.regex'] = { fg = colors.green },
   ['@character'] = { fg = colors.foreground, bg = '' },
   ['@character.special'] = { fg = colors.dark_orange, bold = true, bg = '' },
   ['@number'] = { fg = colors.light_pink, bg = '' },
@@ -35,7 +81,7 @@ local theme = {
   ['@float'] = { fg = colors.light_pink, bg = '' },
 
   ['@function'] = { fg = colors.foreground, bg = '' },
-  ['@function.builtin'] = { fg = colors.blue, bg = '' },
+  ['@function.builtin'] = { fg = colors.green, bg = '' },
   ['@function.macro'] = { fg = colors.dark_orange, bg = '' },
   ['@parameter'] = { fg = colors.foreground, bg = '' },
   ['@method'] = { fg = colors.foreground, bg = '' },
@@ -48,6 +94,7 @@ local theme = {
   ['@label'] = { fg = colors.blue, bg = '' },
   ['@operator'] = { fg = colors.purple, bg = '' },
   ['@keyword'] = { fg = colors.blue, bg = '' },
+  ['@keyword.return'] = { fg = colors.dark_orange },
   ['@exception'] = { fg = colors.dark_orange, bg = '' },
 
   ['@variable'] = { fg = colors.foreground, bg = '' },
