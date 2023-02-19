@@ -22,8 +22,6 @@ local function keymaps()
 
   -- File browser always relative to buffer
   local opts_file_browser = vim.tbl_extend('force', dropdown, {
-    grouped = true,
-    hidden = true,
     path = '%:p:h',
   })
 
@@ -168,6 +166,14 @@ function M.setup()
     pickers = {
       find_files = {
         find_command = { 'fd', '-t', 'f', '--hidden', '--strip-cwd-prefix', '-i' }
+      },
+    },
+
+    extensions = {
+      file_browser = {
+        grouped = true,
+        hidden = true,
+        git_status = false,
       },
     },
   })
