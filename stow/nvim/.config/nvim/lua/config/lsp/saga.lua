@@ -55,6 +55,8 @@ function M.setup()
     },
     diagnostic = {
       custom_fix = 'Code Actions',
+      on_insert = false,
+      on_insert_follow = false,
     },
     ui = {
       border = 'single',
