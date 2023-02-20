@@ -6,42 +6,44 @@ function M.setup()
   local luasnip = require('luasnip')
 
   local kind_icons = {
-    Array = '',
-    Boolean = '',
-    Class = '',
-    Constant = '',
-    Constructor = '',
-    Enum = '了',
-    EnumMember = '',
-    Event = '',
-    Field = '',
-    File = '',
-    Folder = '',
-    Function = '',
-    Interface = '',
-    Key = '',
-    Keyword = '',
-    Macro = '',
-    Method = '',
-    Module = '',
-    Namespace = '',
-    Null = '',
-    Number = '',
-    Object = '',
-    Operator = '',
-    Package = '',
-    Parameter = '',
-    Property = '',
-    Snippet = '',
-    StaticMethod = 'ﴂ',
-    String = '',
-    Struct = '',
-    Text = '',
-    TypeAlias = '',
-    TypeParameter = '',
-    Unit = '',
-    Value = '',
-    Variable = '',
+    Array = "[]",
+    Boolean = " ",
+    Calendar = "",
+    Class = "ﴯ ",
+    Color = " ",
+    Constant = " ",
+    Constructor = " ",
+    Copilot = " ",
+    Enum = " ",
+    EnumMember = " ",
+    Event = " ",
+    Field = "ﰠ ",
+    File = " ",
+    Folder = " ",
+    Function = " ",
+    Interface = " ",
+    Keyword = " ",
+    Method = " ",
+    Module = " ",
+    Null = "ﳠ",
+    Number = " ",
+    Object = " ",
+    Operator = " ",
+    Package = "",
+    Property = "ﰠ ",
+    Reference = " ",
+    Snippet = " ",
+    String = " ",
+    Struct = "פּ ",
+    Table = "",
+    Tag = "",
+    Text = " ",
+    TypeParameter = " ",
+    Unit = "塞 ",
+    Value = " ",
+    Variable = " ",
+    Watch = " ",
+    Namespace = "",
   }
 
   cmp.event:on(
@@ -57,8 +59,8 @@ function M.setup()
     },
 
     window = {
-      completion = cmp.config.window.bordered(),
-      documentation = cmp.config.window.bordered(),
+      completion = nil,
+      documentation = nil,
     },
 
     sources = {
@@ -90,13 +92,10 @@ function M.setup()
         behavior = cmp.ConfirmBehavior.Replace,
         select = true,
       }),
-
+      ['<C-e>'] = cmp.mapping.close(),
       ['<C-Space>'] = cmp.mapping.complete(),
-
       ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-
       ['<C-u>'] = cmp.mapping.scroll_docs(4),
-
       ['<Tab>'] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
@@ -106,7 +105,6 @@ function M.setup()
           fallback()
         end
       end, { 'i', 's' }),
-
       ['<S-Tab>'] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_prev_item()
