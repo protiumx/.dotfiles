@@ -54,42 +54,14 @@ local theme = {
 
   -- Telescope
 
-  TelescopeBorder = {
-    fg = colors.background,
-    bg = colors.background,
-  },
-
-  TelescopePromptBorder = {
-    fg = colors.dark_grey,
-    bg = colors.dark_grey,
-  },
-
-  TelescopePromptNormal = {
-    fg = colors.foreground,
-    bg = colors.dark_grey,
-  },
-
-  TelescopePromptPrefix = {
-    fg = colors.foreground,
-    bg = colors.dark_grey,
-  },
-
+  TelescopeBorder = { fg = colors.background, bg = colors.background },
+  TelescopePromptBorder = { fg = colors.dark_grey, bg = colors.dark_grey },
+  TelescopePromptNormal = { fg = colors.foreground, bg = colors.dark_grey },
+  TelescopePromptPrefix = { fg = colors.foreground, bg = colors.dark_grey },
   TelescopeNormal = { bg = colors.background },
-
-  TelescopePreviewTitle = {
-    fg = colors.background,
-    bg = colors.light_orange,
-  },
-
-  TelescopePromptTitle = {
-    fg = colors.background,
-    bg = colors.light_orange,
-  },
-
-  TelescopeResultsTitle = {
-    fg = colors.background,
-    bg = colors.light_orange,
-  },
+  TelescopePreviewTitle = { fg = colors.background, bg = colors.light_orange },
+  TelescopePromptTitle = { fg = colors.background, bg = colors.light_orange },
+  TelescopeResultsTitle = { fg = colors.background, bg = colors.light_orange },
 
   -- TelescopeSelection = { bg = colors.black2, fg = colors.white },
 
@@ -104,6 +76,45 @@ local theme = {
   -- TelescopeResultsDiffDelete = {
   --   fg = colors.red,
   -- },
+
+  -- nvim cmp
+  CmpItemAbbr           = { fg = colors.foreground },
+  CmpItemAbbrMatch      = { fg = colors.cyan },
+  CmpItemAbbrMatchFuzzy = { fg = colors.cyan },
+  -- CmpBorder = { fg = colors.grey },
+  -- CmpDocBorder = { fg = colors.darker_black, bg = colors.darker_black },
+  CmPmenu               = { bg = colors.background },
+
+  -- cmp item kinds
+  CmpItemKindConstant = { fg = colors.light_pink },
+  CmpItemKindFunction = { fg = colors.blue },
+  CmpItemKindIdentifier = { fg = colors.purple },
+  CmpItemKindField = { fg = colors.dark_orange },
+  CmpItemKindVariable = { fg = colors.purple },
+  CmpItemKindSnippet = { fg = colors.light_pink },
+  CmpItemKindText = { fg = colors.foreground },
+  CmpItemKindStructure = { fg = colors.blue },
+  CmpItemKindType = { fg = colors.orange },
+  CmpItemKindKeyword = { fg = colors.blue },
+  CmpItemKindMethod = { fg = colors.purple },
+  CmpItemKindConstructor = { fg = colors.blue },
+  CmpItemKindFolder = { fg = colors.blue },
+  CmpItemKindModule = { fg = colors.dark_orange },
+  CmpItemKindProperty = { fg = colors.dark_orange },
+  -- CmpItemKindEnum = { fg = colors.green },
+  CmpItemKindUnit = { fg = colors.green },
+  CmpItemKindClass = { fg = colors.blue },
+  CmpItemKindFile = { fg = colors.blue },
+  CmpItemKindInterface = { fg = colors.blue },
+  CmpItemKindColor = { fg = colors.yellow },
+  CmpItemKindReference = { fg = colors.blue },
+  CmpItemKindEnumMember = { fg = colors.green },
+  CmpItemKindStruct = { fg = colors.blue },
+  -- CmpItemKindValue = { fg = "" },
+  -- CmpItemKindEvent = { fg = "" },
+  CmpItemKindOperator = { fg = colors.purple },
+  CmpItemKindTypeParameter = { fg = colors.light_pink },
+  CmpItemKindCopilot = { fg = colors.green },
 
   -- Treesitter
 
