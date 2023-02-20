@@ -27,7 +27,7 @@ vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.ignorecase = true
 vim.opt.smartindent = true
-vim.o.completeopt = 'menuone,noselect'
+vim.o.completeopt = 'menu,menuone,noselect'
 
 vim.opt.undodir = os.getenv('HOME') .. '/.vim/undodir'
 vim.opt.undofile = true

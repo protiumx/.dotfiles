@@ -10,7 +10,6 @@ local theme = {
   Normal = { bg = 'none', fg = colors.foreground },
   NormalNC = { bg = 'none', fg = colors.foreground },
   SignColumn = { bg = 'none' },
-  TelescopeBorder = { bg = 'none', ctermbg = 'none' },
   WinSeparator = { bg = 'none', fg = colors.grey },
   ---
 
@@ -52,6 +51,60 @@ local theme = {
   DiagnosticUnderlineError = { undercurl = true },
   DiagnosticVirtualTextHint = { bg = 'none' },
   DiagnosticWarn = { fg = colors.yellow },
+
+  -- Telescope
+
+  TelescopeBorder = {
+    fg = colors.background,
+    bg = colors.background,
+  },
+
+  TelescopePromptBorder = {
+    fg = colors.dark_grey,
+    bg = colors.dark_grey,
+  },
+
+  TelescopePromptNormal = {
+    fg = colors.foreground,
+    bg = colors.dark_grey,
+  },
+
+  TelescopePromptPrefix = {
+    fg = colors.foreground,
+    bg = colors.dark_grey,
+  },
+
+  TelescopeNormal = { bg = colors.background },
+
+  TelescopePreviewTitle = {
+    fg = colors.background,
+    bg = colors.light_orange,
+  },
+
+  TelescopePromptTitle = {
+    fg = colors.background,
+    bg = colors.light_orange,
+  },
+
+  TelescopeResultsTitle = {
+    fg = colors.background,
+    bg = colors.light_orange,
+  },
+
+  -- TelescopeSelection = { bg = colors.black2, fg = colors.white },
+
+  -- TelescopeResultsDiffAdd = {
+  --   fg = colors.green,
+  -- },
+
+  -- TelescopeResultsDiffChange = {
+  --   fg = colors.yellow,
+  -- },
+
+  -- TelescopeResultsDiffDelete = {
+  --   fg = colors.red,
+  -- },
+
   -- Treesitter
 
   -- ['@debug'] = { fg = '', bg = '' },
