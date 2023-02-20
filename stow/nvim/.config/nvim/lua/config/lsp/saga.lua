@@ -56,6 +56,9 @@ function M.setup()
       on_insert = false,
       on_insert_follow = false,
     },
+    rename = {
+      in_select = false,
+    },
     ui = {
       border = 'single',
       code_action = '',
