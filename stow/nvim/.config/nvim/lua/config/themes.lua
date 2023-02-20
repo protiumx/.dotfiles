@@ -12,7 +12,6 @@ local theme = {
   SignColumn = { bg = 'none' },
   TelescopeBorder = { bg = 'none', ctermbg = 'none' },
   WinSeparator = { bg = 'none', fg = colors.grey },
-
   ---
 
   ColorColumn = { bg = colors.dark_grey },
@@ -20,7 +19,7 @@ local theme = {
   Cursor = { bg = colors.accent },
   CursorColumn = { bg = 'none', fg = colors.accent },
   CursorLine = { bg = 'none', fg = 'none' },
-  ErrorMsg = { bg = 'none', fg = '#bf1131' },
+  ErrorMsg = { bg = 'none', fg = colors.red },
   FloatBorder = { bg = 'none' },
   Function = { fg = colors.foreground, bg = '' },
   Identifier = { fg = colors.foreground, bg = '' },
@@ -42,7 +41,6 @@ local theme = {
   Todo = { fg = colors.orange, bg = '', bold = true },
   VertSplit = { bg = 'none', fg = colors.grey },
   Visual = { bg = colors.grey, fg = colors.foreground },
-
   -- Diagnostic
 
   DiagnosticError = { fg = colors.red },
@@ -54,7 +52,6 @@ local theme = {
   DiagnosticUnderlineError = { undercurl = true },
   DiagnosticVirtualTextHint = { bg = 'none' },
   DiagnosticWarn = { fg = colors.yellow },
-
   -- Treesitter
 
   -- ['@debug'] = { fg = '', bg = '' },
@@ -77,6 +74,7 @@ local theme = {
   ['@constructor'] = { fg = colors.blue, bg = '' },
   ['@exception'] = { fg = colors.dark_orange, bg = '' },
   ['@field'] = { link = 'Identifier' },
+  ['@field.yaml'] = { fg = colors.light_orange },
   ['@float'] = { fg = colors.light_pink, bg = '' },
   ['@function'] = { link = 'Function' },
   ['@function.builtin'] = { fg = colors.green, bg = '' },
