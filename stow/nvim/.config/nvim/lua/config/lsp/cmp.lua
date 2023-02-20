@@ -72,15 +72,8 @@ function M.setup()
     },
 
     formatting = {
-      format = function(entry, vim_item)
-        vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
-        vim_item.menu = ({
-          buffer = "[Buffer]",
-          nvim_lsp = "[LSP]",
-          luasnip = "[LuaSnip]",
-          nvim_lua = "[Lua]",
-          latex_symbols = "[LaTeX]",
-        })[entry.source.name]
+      format = function(_, vim_item)
+        vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind)
         vim_item.abbr = string.sub(vim_item.abbr, 1, 50)
         return vim_item
       end
