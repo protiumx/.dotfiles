@@ -49,9 +49,9 @@ local mode_colors = {
 local base_theme = {
   a = {},
   b = { bg = colors.background, fg = colors.blue },
-  x = { fg = colors.purple, gui = 'bold' },
-  y = { fg = colors.cyan },
-  z = { fg = colors.light_grey },
+  x = { bg = colors.background, fg = colors.purple, gui = 'bold' },
+  y = { bg = colors.background, fg = colors.cyan },
+  z = { bg = colors.background, fg = colors.light_grey },
 }
 local theme = {
   normal = base_theme,
@@ -72,8 +72,8 @@ function M.setup()
     'filename',
     path = 1,
     symbols = {
-      modified = ' * ',
-      readonly = '  ',
+      modified = '*',
+      readonly = '',
     }
   }
   require('lualine').setup {
