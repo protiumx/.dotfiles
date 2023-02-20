@@ -84,13 +84,14 @@ function M.setup()
       section_separators = '',
       disabled_filetypes = {
         statusline = {
-          'packer',
+          'DiffviewFiles',
+          'FTerm',
           'fugitive',
           'fugitiveblame',
-          'qf',
           'help',
           'lspsagaoutline',
-          'DiffviewFiles',
+          'packer',
+          'qf',
         },
       },
       ignore_focus = {},

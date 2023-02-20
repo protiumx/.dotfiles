@@ -94,6 +94,13 @@ return require('packer').startup(function(use)
   })
 
   use({
+    'numToStr/FTerm.nvim',
+    config = function()
+      require('config.term').setup()
+    end
+  })
+
+  use({
     'sindrets/winshift.nvim',
     cmd = 'WinShift',
     config = function()
@@ -102,13 +109,13 @@ return require('packer').startup(function(use)
     end
   })
 
-  use {
+  use({
     'AckslD/nvim-neoclip.lua',
     requires = { 'nvim-telescope/telescope.nvim' },
     config = function()
       require('config.neoclip').setup()
     end
-  }
+  })
 
   -- Better jump
   use({
