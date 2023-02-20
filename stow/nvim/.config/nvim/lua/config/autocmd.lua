@@ -13,7 +13,13 @@ augroup('remove_white_spaces', { clear = true })
 autocmd({ 'BufWritePre' }, {
   group = 'remove_white_spaces',
   pattern = "*",
-  command = [[%s/\s\+$//e]],
+  callback = function()
+    if next(vim.lsp.buf_get_clients(0)) ~= nil then
+      return
+    end
+
+    vim.cmd [[%s/\s\+$//e]]
+  end,
 })
 
 augroup('yank_post', { clear = true })
