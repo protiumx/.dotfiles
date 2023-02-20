@@ -11,6 +11,7 @@ function M.setup(bufnr)
 
   nmap('gy', vim.lsp.buf.type_definition, 'show type definition')
   nmap('gi', vim.lsp.buf.implementation, 'go to implementation')
+  nmap('gd', vim.lsp.buf.definition, 'go to definition')
 end
 
 return M

@@ -10,8 +10,6 @@ local function keymaps()
   keymap('n', '<F2>', '<cmd>Lspsaga rename<CR>', { silent = true })
 
   keymap('n', 'gD', '<cmd>Lspsaga peek_definition<CR>', { silent = true })
-  -- Go to definition
-  keymap('n', 'gd', '<cmd>Lspsaga goto_definition<CR>')
 
   -- Show buffer diagnostics
   keymap('n', '<Leader>ld', '<cmd>Lspsaga show_buf_diagnostics<CR>')
