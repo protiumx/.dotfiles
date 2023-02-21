@@ -74,6 +74,7 @@ function M.setup()
       'markdown_inline',
       'python',
       'rust',
+      'sql',
       'terraform',
       'toml',
       'typescript',
