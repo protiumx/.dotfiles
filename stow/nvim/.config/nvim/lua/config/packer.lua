@@ -226,7 +226,6 @@ return require('packer').startup(function(use)
     cond = function()
       return vim.fn.isdirectory(vim.fn.getcwd() .. '/.git/')
     end,
-    event = 'BufRead',
     config = function()
       require('config.gitsigns').setup()
     end
