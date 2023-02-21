@@ -57,12 +57,17 @@ function M.setup()
         luasnip.lsp_expand(args.body)
       end,
     },
-
     window = {
-      completion = nil,
-      documentation = nil,
+      completion = cmp.config.window.bordered({
+        border = 'none',
+        scrollbar = false,
+        winhighlight = 'Normal:XMenu,FloatBorder:XMenuBorder,CursorLine:Visual,Search:None',
+      }),
+      documentation = cmp.config.window.bordered({
+        winhighlight = 'Normal:XMenu,FloatBorder:XMenuBorder,CursorLine:Visual,Search:None',
+        scrollbar = false,
+      }),
     },
-
     sources = {
       { name = 'nvim_lsp' },
       { name = 'nvim_lsp_signature_help' },
@@ -70,7 +75,6 @@ function M.setup()
       { name = 'path' },
       { name = 'luasnip' },
     },
-
     formatting = {
       format = function(_, vim_item)
         vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind)
@@ -78,7 +82,6 @@ function M.setup()
         return vim_item
       end
     },
-
     mapping = cmp.mapping.preset.insert({
 
       ['<CR>'] = cmp.mapping.confirm({
@@ -87,7 +90,7 @@ function M.setup()
       }),
       ['<C-e>'] = cmp.mapping.close(),
       ['<C-Space>'] = cmp.mapping.complete(),
-      ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-d>'] = cmp.mapping.scroll_docs( -4),
       ['<C-u>'] = cmp.mapping.scroll_docs(4),
       ['<Tab>'] = cmp.mapping(function(fallback)
         if cmp.visible() then
@@ -116,8 +119,8 @@ function M.setup()
       end, { 'i', 's' }),
 
       ['<C-k>'] = cmp.mapping(function(fallback)
-        if luasnip.jumpable(-1) then
-          luasnip.jump(-1)
+        if luasnip.jumpable( -1) then
+          luasnip.jump( -1)
         else
           fallback()
         end
