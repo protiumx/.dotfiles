@@ -139,7 +139,7 @@ return {
     {
       key = 'Enter',
       mods = 'SHIFT|CMD',
-      action = wezterm.action.ToggleFullScreen,
+      action = act.ToggleFullScreen,
     },
     { key = ':',   mods = 'SHIFT|CMD',  action = wezterm.action.ShowDebugOverlay },
 
