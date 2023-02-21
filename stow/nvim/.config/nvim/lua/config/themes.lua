@@ -25,6 +25,7 @@ local theme = {
   Keyword                    = { fg = colors.blue, bg = '' },
   MatchParen                 = { fg = colors.accent, bg = 'none' },
   NormalFloat                = { bg = colors.background },
+  Pmenu                      = { link = 'XMenu' },
   Operator                   = { fg = colors.purple, bg = '' },
   Repeat                     = { fg = colors.blue, bg = '' },
   Search                     = { bg = colors.accent },
@@ -41,22 +42,24 @@ local theme = {
   Visual                     = { bg = colors.grey, fg = colors.foreground },
   -- Diagnostic
 
+  DiagnosticBorder           = { link = 'XMenu' },
+  DiagnosticNormal           = { link = 'XMenu' },
   DiagnosticError            = { fg = colors.red },
-  DiagnosticFloatingError    = { bg = 'none', fg = colors.red },
-  DiagnosticFloatingHint     = { bg = 'none' },
-  DiagnosticFloatingInfo     = { bg = 'none' },
-  DiagnosticFloatingWarn     = { bg = 'none', fg = colors.yellow },
-  DiagnosticSignHint         = { fg = colors.grey, bold = true },
+  DiagnosticFloatingError    = { bg = colors.dark_grey, fg = colors.red },
+  DiagnosticFloatingHint     = { link = 'XMenu' },
+  DiagnosticFloatingInfo     = { link = 'XMenu' },
+  DiagnosticFloatingWarn     = { link = 'XMenu', fg = colors.yellow },
+  DiagnosticSignHint         = { fg = colors.grey, bold = true, bg = 'none' },
   DiagnosticUnderlineError   = { undercurl = true },
   DiagnosticVirtualTextHint  = { bg = 'none' },
   DiagnosticWarn             = { fg = colors.yellow },
   -- Telescope
 
-  TelescopeBorder            = { fg = colors.background, bg = colors.background },
-  TelescopePromptBorder      = { fg = colors.dark_grey, bg = colors.dark_grey },
-  TelescopePromptNormal      = { fg = colors.foreground, bg = colors.dark_grey },
-  TelescopePromptPrefix      = { fg = colors.foreground, bg = colors.dark_grey },
-  TelescopeNormal            = { bg = colors.background },
+  TelescopeBorder            = { link = 'FloatBorder' },
+  TelescopePromptBorder      = { link = 'XMenuBorder' },
+  TelescopePromptNormal      = { link = 'XMenu', fg = colors.foreground },
+  TelescopePromptPrefix      = { link = 'XMenu', fg = colors.foreground },
+  TelescopeNormal            = { link = 'NormalFloat' },
   TelescopePreviewTitle      = { fg = colors.background, bg = colors.light_orange },
   TelescopePromptTitle       = { fg = colors.background, bg = colors.light_orange },
   TelescopeResultsTitle      = { fg = colors.background, bg = colors.light_orange },
@@ -78,9 +81,10 @@ local theme = {
   CmpItemAbbr                = { fg = colors.foreground },
   CmpItemAbbrMatch           = { fg = colors.cyan },
   CmpItemAbbrMatchFuzzy      = { fg = colors.cyan },
-  -- CmpBorder = { fg = colors.grey },
-  -- CmpDocBorder = { fg = colors.darker_black, bg = colors.darker_black },
-  CmPmenu                    = { bg = colors.background },
+  CmpBorder                  = { link = 'FloatBorder' },
+  CmpDocBorder               = { link = 'FloatBorder' },
+  CmpItemMenuDefault         = { link = 'NormalFloat' },
+  CmPmenu                    = { link = 'NormalFloat' },
   -- cmp item kinds
   CmpItemKindConstant        = { fg = colors.light_pink },
   CmpItemKindFunction        = { fg = colors.blue },
@@ -111,6 +115,12 @@ local theme = {
   CmpItemKindOperator        = { fg = colors.purple },
   CmpItemKindTypeParameter   = { fg = colors.light_pink },
   CmpItemKindCopilot         = { fg = colors.green },
+  -- LSPSaga
+  SagaNormal                 = { link = 'NormalFloat' },
+  SagaBorder                 = { link = 'FloatBorder' },
+  RenameNormal               = { link = 'XMenu' },
+  RenameBorder               = { link = 'XMenuBorder' },
+  DiffViewSignColumn         = { bg = 'none' },
   -- Treesitter
 
   -- ['@debug'] = { fg = '', bg = '' },
@@ -175,6 +185,8 @@ local theme = {
 local M = {}
 
 function M.load()
+  vim.api.nvim_set_hl(0, 'XMenu', { bg = colors.dark_grey, default = true })
+  vim.api.nvim_set_hl(0, 'XMenuBorder', { bg = colors.dark_grey, fg = colors.dark_grey, default = true })
   for group, colors in pairs(theme) do
     if not vim.tbl_isempty(colors) then
       vim.api.nvim_set_hl(0, group, colors)
