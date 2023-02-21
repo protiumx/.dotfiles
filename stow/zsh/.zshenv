@@ -63,7 +63,7 @@ glog() {
 
 # Print git remote
 gremote() {
-  git remote -v | grep fetch | awk '{print $2}' | sed 's/git@/https:\/\//' | sed 's/com:/com\//' | sed 's/\.git$//' | head -n1
+  git remote -v | grep fetch | awk '{print $2}' | sed -E 's/(ssh:\/\/)?git@/https:\/\//' | sed 's/com:/com\//' | sed 's/\.git$//' | head -n1
 }
 
 mkcd(){
