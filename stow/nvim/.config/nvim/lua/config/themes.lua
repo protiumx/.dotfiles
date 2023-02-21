@@ -45,10 +45,10 @@ local theme = {
   DiagnosticBorder           = { link = 'XMenu' },
   DiagnosticNormal           = { link = 'XMenu' },
   DiagnosticError            = { fg = colors.red },
-  DiagnosticFloatingError    = { bg = colors.dark_grey, fg = colors.red },
-  DiagnosticFloatingHint     = { link = 'XMenu' },
-  DiagnosticFloatingInfo     = { link = 'XMenu' },
-  DiagnosticFloatingWarn     = { link = 'XMenu', fg = colors.yellow },
+  DiagnosticFloatingError    = { link = 'NormalFloat' },
+  DiagnosticFloatingHint     = { link = 'NormalFloat' },
+  DiagnosticFloatingInfo     = { link = 'NormalFloat' },
+  DiagnosticFloatingWarn     = { link = 'NormalFloat' },
   DiagnosticSignHint         = { fg = colors.grey, bold = true, bg = 'none' },
   DiagnosticUnderlineError   = { undercurl = true },
   DiagnosticVirtualTextHint  = { bg = 'none' },
@@ -116,10 +116,13 @@ local theme = {
   CmpItemKindTypeParameter   = { fg = colors.light_pink },
   CmpItemKindCopilot         = { fg = colors.green },
   -- LSPSaga
+  OutlinePreviewBorder       = { link = 'NormalFloat' },
+  OutlinePreviewNormal       = { link = 'FloatBorder' },
   SagaNormal                 = { link = 'NormalFloat' },
   SagaBorder                 = { link = 'FloatBorder' },
   RenameNormal               = { link = 'XMenu' },
   RenameBorder               = { link = 'XMenuBorder' },
+  -- Diffview
   DiffViewSignColumn         = { bg = 'none' },
   -- Treesitter
 
