@@ -65,7 +65,7 @@ return require('packer').startup(function(use)
 
   use({
     'nvim-treesitter/playground',
-    cmd = 'TSPlay',
+    cmd = 'TSPlaygroundToggle',
   })
 
   use({

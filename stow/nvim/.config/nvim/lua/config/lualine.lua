@@ -92,6 +92,7 @@ function M.setup()
           'lspsagaoutline',
           'packer',
           'qf',
+          'tsplayground',
         },
       },
       ignore_focus = {},
