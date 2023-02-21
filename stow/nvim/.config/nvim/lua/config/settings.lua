@@ -97,16 +97,3 @@ local builtins = {
 for _, plugin in ipairs(builtins) do
   vim.g['loaded_' .. plugin] = 1
 end
-
-
-local colors = require('config.colors')
-local themes = require('config.themes')
-
-vim.cmd("colorscheme PaperColor")
-vim.g['PaperColor_Theme_Options'] = {
-  theme = {
-    default = { dark = { override = { color07 = { colors.foreground, '' } } } }
-  }
-}
-
-themes.load()
