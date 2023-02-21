@@ -60,7 +60,7 @@ vim.keymap.set('n', '``', '<C-^>zz', { silent = true })
 -- Close buffer without changing window layout
 vim.keymap.set('n', '--', ':bp|bd #<CR>', { silent = true })
 -- Close all but current buffer
-vim.keymap.set('n', '<M-q>', ':%bp|e #<CR>', { silent = true })
+vim.keymap.set('n', '<M-Q>', ':%bd|e #<CR>', { silent = true })
 
 -- Go next/prev buffer using Tab
 vim.keymap.set('n', '<Tab>', ':bn<CR>', { silent = true })
