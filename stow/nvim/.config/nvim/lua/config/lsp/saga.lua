@@ -55,6 +55,7 @@ function M.setup()
       custom_fix = 'Code Actions',
       on_insert = false,
       on_insert_follow = false,
+      max_width = 0.4,
     },
     rename = {
       in_select = false,
