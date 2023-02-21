@@ -40,6 +40,7 @@ autocmd({ 'BufNewFile', 'BufRead' }, {
 })
 
 autocmd({ 'BufNewFile', 'BufRead' }, {
+  desc = 'Set file type for Dockerfile*',
   pattern = 'Dockerfile*',
   command = [[set ft=dockerfile]],
 })
@@ -88,7 +89,7 @@ autocmd('CmdlineLeave', {
     cmd_timer = vim.defer_fn(function()
       vim.api.nvim_command('echo ""')
       cmd_timer = nil
-    end, 3000)
+    end, 5000)
   end,
 })
 
