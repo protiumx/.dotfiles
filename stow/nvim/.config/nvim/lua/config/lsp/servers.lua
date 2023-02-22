@@ -14,7 +14,19 @@ local servers = {
       },
     }
   },
-  yamlls = {},
+  yamlls = {
+    yaml = {
+      format = {
+        enable = true,
+        proseWrap = 'never',
+        printWidth = 200,
+      },
+      validate = true,
+      schemaStore = {
+        enable = true,
+      },
+    },
+  },
   terraformls = {},
   bashls = {
     cmd_env = {
