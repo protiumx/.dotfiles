@@ -12,6 +12,7 @@ function M.setup(bufnr)
   nmap('gy', vim.lsp.buf.type_definition, 'Show type definition')
   nmap('gi', vim.lsp.buf.implementation, 'Go to implementation')
   nmap('gd', vim.lsp.buf.definition, 'Go to definition')
+  nmap('K', vim.lsp.buf.hover, 'Show docs')
 end
 
 return M

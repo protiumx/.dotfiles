@@ -14,8 +14,6 @@ local function keymaps()
   -- Show buffer diagnostics
   keymap('n', '<Leader>ld', '<cmd>Lspsaga show_buf_diagnostics<CR>')
 
-  keymap('n', 'K', '<cmd>Lspsaga hover_doc<CR>', { silent = true })
-
   -- Diagnostic jump
   keymap('n', '[d', '<cmd>Lspsaga diagnostic_jump_prev<CR>')
   keymap('n', ']d', '<cmd>Lspsaga diagnostic_jump_next<CR>')
