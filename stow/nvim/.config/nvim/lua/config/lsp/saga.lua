@@ -29,7 +29,7 @@ local function keymaps()
   end, { silent = true })
 
   -- Outline
-  keymap('n', '<M-S-H>', '<cmd>Lspsaga outline<CR>', { silent = true })
+  keymap('n', '<M-H>', '<cmd>Lspsaga outline<CR>', { silent = true })
 end
 
 function M.setup()
