@@ -141,9 +141,20 @@ function M.setup()
       preview_title = '',
       selection_caret = '❯ ',
       multi_icon = '+ ',
-
+      sorting_strategy = 'ascending',
       layout_strategy = 'flex',
-      layout_config = { height = 0.9, width = 0.9 },
+      layout_config = {
+        horizontal = {
+          prompt_position = 'top',
+          preview_width = 0.55,
+        },
+        vertical = {
+          mirror = false,
+        },
+        width = 0.85,
+        height = 0.80,
+      },
+      path_display = { 'truncate' },
 
       mappings = {
         i = {
@@ -162,13 +173,11 @@ function M.setup()
 
       file_ignore_patterns = { 'target/*', 'node_modules/*', '^.git/*', '^.yarn/*' },
     },
-
     pickers = {
       find_files = {
         find_command = { 'fd', '-t', 'f', '--hidden', '--strip-cwd-prefix', '-i' }
       },
     },
-
     extensions = {
       file_browser = {
         grouped = true,
