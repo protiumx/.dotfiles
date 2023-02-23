@@ -91,12 +91,32 @@ end
 
 
 function M.setup()
-  require('mason').setup()
+  require('mason').setup({
+    max_concurrent_installers = 2,
+  })
 
   local servers = require('config.lsp.servers')
 
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+
+  capabilities.textDocument.completion.completionItem = {
+    documentationFormat = { 'markdown', 'plaintext' },
+    snippetSupport = true,
+    preselectSupport = true,
+    insertReplaceSupport = true,
+    labelDetailsSupport = true,
+    deprecatedSupport = true,
+    commitCharactersSupport = true,
+    tagSupport = { valueSet = { 1 } },
+    resolveSupport = {
+      properties = {
+        'documentation',
+        'detail',
+        'additionalTextEdits',
+      },
+    },
+  }
 
   -- Ensure the servers above are installed
   local mason_lspconfig = require('mason-lspconfig')
