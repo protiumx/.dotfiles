@@ -43,9 +43,9 @@ local on_attach = function(client, bufnr)
     return
   end
 
-  if client.name == "yamlls" then
-    client.server_capabilities.documentFormattingProvider = true
-  end
+  -- if client.name == "yamlls" then
+  --   client.server_capabilities.documentFormattingProvider = true
+  -- end
 
   local colors = require('config.colors')
   require('config.lsp.keymaps').setup(bufnr)

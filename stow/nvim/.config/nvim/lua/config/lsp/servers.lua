@@ -17,7 +17,7 @@ local servers = {
   yamlls = {
     yaml = {
       format = {
-        enable = true,
+        enable = false,
         proseWrap = 'never',
         printWidth = 200,
       },
