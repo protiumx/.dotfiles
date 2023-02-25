@@ -29,6 +29,7 @@ vim.opt.ignorecase = true
 vim.opt.smartindent = true
 vim.opt.listchars = { eol = '' }
 vim.opt.list = false
+vim.opt.statusline = '2'
 vim.o.completeopt = 'menu,menuone,noselect'
 
 vim.opt.undodir = os.getenv('HOME') .. '/.vim/undodir'
