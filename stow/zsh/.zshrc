@@ -102,7 +102,17 @@ export GOPATH="$HOME/go"
 
 # Excluded dirs are set in ../fd/ignore
 export FZF_DEFAULT_COMMAND="fd -d 1 --hidden --follow --color=never --strip-cwd-prefix"
-export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --prompt ' ' --bind 'ctrl-p:preview(bat {})' --preview-window hidden --no-info --color 'gutter:-1,hl+:#82aaff,hl:#82aaff,bg+:-1,pointer:#82aaff'"
+export FZF_DEFAULT_OPTS="
+  --height 40%
+  --layout=reverse
+  --prompt ' '
+  --pointer ' '
+  --marker '~ '
+  --multi
+  --bind 'ctrl-p:preview(bat {}),ctrl-e:become(nvim {})'
+  --preview-window hidden
+  --no-info
+  --color 'gutter:-1,hl+:#82aaff,hl:#82aaff,bg+:-1,pointer:#82aaff'"
 export FZF_COMPLETION_OPTS=$FZF_DEFAULT_OPTS
 
 _fzf_compgen_path() {

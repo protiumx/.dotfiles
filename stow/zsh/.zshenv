@@ -140,11 +140,12 @@ gotest() {
 }
 
 # Aliases
-alias tree="exa --tree --level=5 --icons --group-directories-first --color auto"
-alias lt="dust -b -H -r -X '.git'"
-alias yw="yarn workspace"
 alias cat="bat -p --paging=never --theme='TwoDark'"
 alias dc="docker compose"
+alias lt="dust -b -H -r -X '.git'"
+alias tree="exa --tree --level=5 --icons --group-directories-first --color auto"
+alias vi="nvim"
+alias yw="yarn workspace"
 
 # Kubernetes
 alias kx="kubectx"
