@@ -70,6 +70,7 @@ truncate_to_repo = false
 truncation_length = 1
 style = "#0c90ad"
 read_only = " "
+format = '[\[$path\]]($style)[$read_only]($read_only_style) '
 
 [c]
 format = "[$symbol($version(-$name) )]($style)"
