@@ -23,7 +23,26 @@ end
 
 vim.cmd [[packadd packer.nvim]]
 
-return require('packer').startup(function(use)
+local packer = require('packer')
+
+packer.reset()
+packer.init({
+  auto_clean = true,
+  compile_on_sync = true,
+  git = { clone_timeout = 6000 },
+  display = {
+    working_sym = "ﲊ",
+    error_sym = "✗ ",
+    done_sym = " ",
+    removed_sym = " ",
+    moved_sym = "",
+    open_fn = function()
+      return require("packer.util").float { border = "single" }
+    end,
+  },
+})
+
+return packer.startup(function(use)
   -- Packer can manage itself
   use('wbthomason/packer.nvim')
 
@@ -201,7 +220,7 @@ return require('packer').startup(function(use)
   use {
     'windwp/nvim-autopairs',
     config = function()
-      require('nvim-autopairs').setup({})
+      require('config.autopairs').setup()
     end
   }
 
