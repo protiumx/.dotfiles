@@ -48,10 +48,10 @@ local mode_colors = {
 
 local base_theme = {
   a = {},
-  b = { bg = colors.background, fg = colors.blue },
-  x = { bg = colors.background, fg = colors.purple, gui = 'bold' },
-  y = { bg = colors.background, fg = colors.cyan },
-  z = { bg = colors.background, fg = colors.light_grey },
+  b = { bg = 'none', fg = colors.blue },
+  x = { bg = 'none', fg = colors.purple },
+  y = { bg = 'none', fg = colors.light_grey },
+  z = { bg = 'none', fg = colors.light_grey },
 }
 local theme = {
   normal = base_theme,
@@ -59,7 +59,7 @@ local theme = {
   visual = base_theme,
   replace = base_theme,
   inactive = {
-    a = { bg = colors.background, fg = colors.light_grey }
+    a = { bg = 'none', fg = colors.light_grey }
   },
 }
 
@@ -72,8 +72,8 @@ function M.setup()
     'filename',
     path = 1,
     symbols = {
-      modified = '*',
-      readonly = '',
+      modified = '[+]',
+      readonly = '[]',
     }
   }
   require('lualine').setup {
@@ -136,7 +136,7 @@ function M.setup()
       lualine_w = { 'diagnostics' },
       lualine_x = { 'branch' },
       lualine_y = { 'location' },
-      lualine_z = { 'progress' },
+      lualine_z = { { 'progress', fmt = string.lower } },
     },
     inactive_sections = {
       lualine_a = { file_section },
