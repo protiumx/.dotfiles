@@ -2,6 +2,7 @@ taps=(
   homebrew/cask
   homebrew/cask-fonts
   homebrew/core
+  ox/ox
   vmware-tanzu/carvel
   wez/wezterm
 )
@@ -48,6 +49,7 @@ packages=(
   shellcheck
   stow
   telnet
+  usql                     #  https://github.com/xo/usql
   websocat                 #  https://github.com/vi/websocat
   yarn
   wget
