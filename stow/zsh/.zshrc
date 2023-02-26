@@ -128,7 +128,7 @@ _fzf_compgen_dir() {
 [ -f ~/.fzf.zsh ] && source $HOME/.fzf.zsh
 
 # K8s completions
-[[ $commands[kubectl] ]] && source <(kubectl completion zsh)
+[[ -x "$(command -v kubectl)" ]] && source <(kubectl completion zsh)
 
 # Source all profile files
 for file in $HOME/.profile*; do
