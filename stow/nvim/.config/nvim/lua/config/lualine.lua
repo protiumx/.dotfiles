@@ -124,7 +124,14 @@ function M.setup()
         },
       },
       lualine_b = { file_section },
-      lualine_c = { lsp_symbol },
+      lualine_c = {
+        {
+          lsp_symbol,
+          cond = function()
+            return next(vim.lsp.buf_get_clients(0)) ~= nil
+          end
+        },
+      },
 
       lualine_w = { 'diagnostics' },
       lualine_x = { 'branch' },
