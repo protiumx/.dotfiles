@@ -174,7 +174,6 @@ alias kpf="kubectl port-forward"
 alias krrd="kubectl rollout restart deployment"
 alias ksd="kubectl scale deployment"
 
-alias icat="kitty +kitten icat --align left"
 # Create 5 random passwords
 alias mkpwd="xkcdpass --count=5 --acrostic=\"chaos\" -C \"first\" -R --min=5 --max=6 -D \"#@^&~_-;\""
 alias isodate='date -u +"%Y-%m-%dT%H:%M:%SZ"'
