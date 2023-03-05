@@ -1,5 +1,166 @@
-local wezterm = require 'wezterm'
+local wezterm = require('wezterm')
 local act = wezterm.action
+local is_window = wezterm.target_triple == 'x86_64-pc-windows-msvc'
+local cascadia_font = is_window and 'CaskaydiaCove NF' or 'CaskaydiaCove Nerd Font'
+local key_mod_panes = is_window and 'ALT' or 'CMD'
+
+local keys = {
+  {
+    key = 'p',
+    mods = key_mod_panes,
+    action = act.ShowLauncherArgs { flags = 'FUZZY|TABS|WORKSPACES' },
+  },
+  {
+    key = 'Enter',
+    mods = 'SHIFT|' .. key_mod_panes,
+    action = act.ToggleFullScreen,
+  },
+  { key = ':', mods = 'SHIFT|' .. key_mod_panes, action = act.ShowDebugOverlay },
+
+  -- Panes
+  {
+    key = 'd',
+    mods = key_mod_panes,
+    action = act.SplitVertical { domain = 'CurrentPaneDomain' },
+  },
+  {
+    key = 'D',
+    mods = 'SHIFT|' .. key_mod_panes,
+    action = act.SplitHorizontal { domain = 'CurrentPaneDomain' },
+  },
+  {
+    key = 'w',
+    mods = key_mod_panes,
+    action = act.CloseCurrentPane { confirm = true },
+  },
+  { key = 'z', mods = 'SHIFT|' .. key_mod_panes, action = act.TogglePaneZoomState },
+  { key = 'c', mods = 'CTRL|' .. key_mod_panes,  action = act.ActivateCopyMode },
+
+  -- Activation
+  {
+    key = 'h',
+    mods = key_mod_panes,
+    action = act.ActivatePaneDirection 'Left',
+  },
+  {
+    key = 'l',
+    mods = key_mod_panes,
+    action = act.ActivatePaneDirection 'Right',
+  },
+  {
+    key = 'k',
+    mods = key_mod_panes,
+    action = act.ActivatePaneDirection 'Up',
+  },
+  {
+    key = 'j',
+    mods = key_mod_panes,
+    action = act.ActivatePaneDirection 'Down',
+  },
+
+  -- Size
+  {
+    key = 'H',
+    mods = 'SHIFT|' .. key_mod_panes,
+    action = act.AdjustPaneSize { 'Left', 1 },
+  },
+  {
+    key = 'J',
+    mods = 'SHIFT|' .. key_mod_panes,
+    action = act.AdjustPaneSize { 'Down', 1 },
+  },
+  {
+    key = 'K',
+    mods = 'SHIFT|' .. key_mod_panes,
+    action = act.AdjustPaneSize { 'Up', 1 }
+  },
+  {
+    key = 'L',
+    mods = 'SHIFT|' .. key_mod_panes,
+    action = act.AdjustPaneSize { 'Right', 1 },
+  },
+
+  -- Rotate
+  {
+    key = 'r',
+    mods = 'CMD',
+    action = act.RotatePanes 'CounterClockwise',
+  },
+  {
+    key = 'R',
+    mods = 'SHIFT|CMD',
+    action = act.RotatePanes 'Clockwise',
+  },
+
+  {
+    key = 'S',
+    mods = 'SHIFT|CMD',
+    action = act.PaneSelect,
+  },
+
+
+  -- Tabs
+  { key = 'T',   mods = 'SHIFT|' .. key_mod_panes, action = act.ShowTabNavigator },
+  { key = 'Tab', mods = 'SHIFT|CTRL',              action = act.ActivateTabRelative( -1) },
+  { key = 'Tab', mods = 'CTRL',                    action = act.ActivateTabRelative(1) },
+
+
+  {
+    key = '0',
+    mods = key_mod_panes,
+    action = act.ResetFontAndWindowSize,
+  },
+
+  -- Utils
+  {
+    key = 'P',
+    mods = 'SHIFT|' .. key_mod_panes,
+    action = act.SplitPane {
+      direction = 'Right',
+      size = { Percent = 35 },
+    },
+  },
+
+  -- Jump word to the left
+  {
+    key = 'LeftArrow',
+    mods = 'OPT',
+    action = act.SendKey {
+      key = 'b',
+      mods = 'ALT',
+    },
+  },
+
+  -- Jump word to the right
+  {
+    key = 'RightArrow',
+    mods = 'OPT',
+    action = act.SendKey { key = 'f', mods = 'ALT' },
+  },
+
+  -- Go to beginning of line
+  {
+    key = 'LeftArrow',
+    mods = 'CMD',
+    action = act.SendKey {
+      key = 'a',
+      mods = 'CTRL',
+    },
+  },
+
+  -- Go to end of line
+  {
+    key = 'RightArrow',
+    mods = 'CMD',
+    action = act.SendKey { key = 'e', mods = 'CTRL' },
+  },
+
+  -- Bypass
+  { key = '/', mods = 'CTRL', action = act.SendKey { key = '/', mods = 'CTRL' } },
+  { key = 'q', mods = 'CTRL', action = act.SendKey { key = 'q', mods = 'CTRL' } },
+  { key = 'k', mods = 'CTRL', action = act.SendKey { key = 'k', mods = 'CTRL' } },
+
+}
 
 local process_icons = {
   ['docker'] = {
@@ -110,15 +271,15 @@ wezterm.on('update-right-status', function(window)
   }))
 end)
 
-return {
+local config = {
   audible_bell = 'Disabled',
   color_scheme = '3024 (base16)',
   max_fps = 120,
-  font = wezterm.font('CaskaydiaCove Nerd Font', { weight = 'Medium', stretch = 'Normal', style = 'Normal' }),
+  font = wezterm.font(cascadia_font, { weight = 'Medium', stretch = 'Normal', style = 'Normal' }),
   font_rules = {
     {
       intensity = 'Bold',
-      font = wezterm.font('CaskaydiaCove Nerd Font', { weight = 'Bold', stretch = 'Normal', style = 'Normal' }),
+      font = wezterm.font(cascadia_font, { weight = 'Bold', stretch = 'Normal', style = 'Normal' }),
     },
   },
   font_size = 18.0,
@@ -130,177 +291,14 @@ return {
     brightness = 0.85,
   },
   window_background_opacity = 0.85,
-  keys = {
+  wls_domains = {
     {
-      key = 'p',
-      mods = 'CMD',
-      action = wezterm.action.ShowLauncherArgs { flags = 'FUZZY|TABS|WORKSPACES' },
+      name = 'WSL:Ubuntu-20.04',
+      distribution = 'Ubuntu-20.04',
+      default_cwd = '~'
     },
-    {
-      key = 'Enter',
-      mods = 'SHIFT|CMD',
-      action = act.ToggleFullScreen,
-    },
-    { key = ':',   mods = 'SHIFT|CMD',  action = wezterm.action.ShowDebugOverlay },
-
-    -- Panes
-    {
-      key = 'd',
-      mods = 'CMD',
-      action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' },
-    },
-    {
-      key = 'D',
-      mods = 'SHIFT|CMD',
-      action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' },
-    },
-    {
-      key = 'w',
-      mods = 'CMD',
-      action = wezterm.action.CloseCurrentPane { confirm = true },
-    },
-
-    -- Activation
-    {
-      key = 'h',
-      mods = 'CMD',
-      action = act.ActivatePaneDirection 'Left',
-    },
-    {
-      key = 'l',
-      mods = 'CMD',
-      action = act.ActivatePaneDirection 'Right',
-    },
-    {
-      key = 'k',
-      mods = 'CMD',
-      action = act.ActivatePaneDirection 'Up',
-    },
-    {
-      key = 'j',
-      mods = 'CMD',
-      action = act.ActivatePaneDirection 'Down',
-    },
-    {
-      key = ']',
-      mods = 'CMD',
-      action = act.ActivatePaneDirection 'Next',
-    },
-    {
-      key = '[',
-      mods = 'CMD',
-      action = act.ActivatePaneDirection 'Prev',
-    },
-
-    -- Size
-    {
-      key = 'H',
-      mods = 'SHIFT|CMD',
-      action = act.AdjustPaneSize { 'Left', 1 },
-    },
-    {
-      key = 'J',
-      mods = 'SHIFT|CMD',
-      action = act.AdjustPaneSize { 'Down', 1 },
-    },
-    {
-      key = 'K',
-      mods = 'SHIFT|CMD',
-      action = act.AdjustPaneSize { 'Up', 1 }
-    },
-    {
-      key = 'L',
-      mods = 'SHIFT|CMD',
-      action = act.AdjustPaneSize { 'Right', 1 },
-    },
-
-    -- Rotate
-    {
-      key = 'r',
-      mods = 'CMD',
-      action = act.RotatePanes 'CounterClockwise',
-    },
-    {
-      key = 'R',
-      mods = 'SHIFT|CMD',
-      action = act.RotatePanes 'Clockwise',
-    },
-
-    {
-      key = 'S',
-      mods = 'SHIFT|CMD',
-      action = act.PaneSelect,
-    },
-
-
-    -- Tabs
-    { key = 'N',   mods = 'SHIFT|CMD',  action = wezterm.action.ShowTabNavigator },
-    { key = 'Tab', mods = 'SHIFT|CTRL', action = act.ActivateTabRelative( -1) },
-    { key = 'Tab', mods = 'CTRL',       action = act.ActivateTabRelative(1) },
-
-    {
-      key = 'k',
-      mods = 'CTRL',
-      action = act.SendKey { key = 'k', mods = 'CTRL' },
-    },
-
-    {
-      key = '0',
-      mods = 'CMD',
-      action = wezterm.action.ResetFontAndWindowSize,
-    },
-
-    -- Utils
-    {
-      key = 'P',
-      mods = 'SHIFT|CMD',
-      action = wezterm.action.SplitPane {
-        direction = 'Right',
-        size = { Percent = 35 },
-      },
-    },
-
-    -- Jump word to the left
-    {
-      key = 'LeftArrow',
-      mods = 'OPT',
-      action = act.SendKey {
-        key = 'b',
-        mods = 'ALT',
-      },
-    },
-
-    -- Jump word to the right
-    {
-      key = 'RightArrow',
-      mods = 'OPT',
-      action = act.SendKey { key = 'f', mods = 'ALT' },
-    },
-
-    -- Go to beginning of line
-    {
-      key = 'LeftArrow',
-      mods = 'CMD',
-      action = act.SendKey {
-        key = 'a',
-        mods = 'CTRL',
-      },
-    },
-
-    -- Go to end of line
-    {
-      key = 'RightArrow',
-      mods = 'CMD',
-      action = act.SendKey { key = 'e', mods = 'CTRL' },
-    },
-
-    { key = '/', mods = 'CTRL',      action = act.SendKey { key = '/', mods = 'CTRL' } },
-    { key = 'q', mods = 'CTRL',      action = act.SendKey { key = 'q', mods = 'CTRL' } },
-
-    { key = 'z', mods = 'SHIFT|CMD', action = act.TogglePaneZoomState },
-
-    { key = 'c', mods = 'SHIFT|ALT', action = act.ActivateCopyMode },
   },
+  keys = keys,
   mouse_bindings = {
     -- Change the default click behavior so that it only selects
     -- text and doesn't open hyperlinks
@@ -316,7 +314,7 @@ return {
       action = act.OpenLinkAtMouseCursor,
     },
   },
-  scrollback_lines = 6000,
+  scrollback_lines = 2000,
   send_composed_key_when_left_alt_is_pressed = false,
   show_new_tab_button_in_tab_bar = false,
   switch_to_last_active_tab_when_closing_tab = true,
@@ -329,7 +327,7 @@ return {
     -- Whatever font is selected here, it will have the
     -- main font setting appended to it to pick up any
     -- fallback fonts you may have used there.
-    font = wezterm.font { family = 'CaskaydiaCove Nerd Font', weight = 'Bold' },
+    font = wezterm.font { family = cascadia_font, weight = 'Bold' },
 
     -- The size of the font in the tab bar.
     -- Default to 10. on Windows but 12.0 on other systems
@@ -387,3 +385,10 @@ return {
     },
   },
 }
+
+-- https://wezfurlong.org/wezterm/config/lua/wezterm/target_triple.html
+if is_window then
+  config.default_prog = { 'wsl.exe', '-d', 'Ubuntu-20.04', '--cd', '~' }
+end
+
+return config
