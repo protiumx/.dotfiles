@@ -128,7 +128,7 @@ local function keymaps()
 
   -- Rg with args
 
-  map('n', '<M-s>f', telescope.extensions.live_grep_args.live_grep_args, '[S]earch [L]ive Rg')
+  map('n', '<M-s>f', telescope.extensions.live_grep_args.live_grep_args, 'Ripgrep with args')
 end
 
 function M.setup()
