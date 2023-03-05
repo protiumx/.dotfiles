@@ -57,32 +57,32 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_set_hl(0, 'LspReferenceText', { fg = colors.accent })
     vim.api.nvim_set_hl(0, 'LspReferenceWrite', { fg = colors.accent })
 
-    vim.api.nvim_create_augroup('lsp_document_highlight', { clear = true })
+    -- vim.api.nvim_create_augroup('lsp_document_highlight', { clear = true })
     -- Highlight references only in normal mode
-    local timer = nil
-    vim.api.nvim_create_autocmd('CursorHold', {
-      group = 'lsp_document_highlight',
-      buffer = bufnr,
-      callback = function()
-        timer = vim.defer_fn(function()
-          vim.lsp.buf.document_highlight()
-          timer = nil
-        end, 1000)
-      end
-    })
+    -- local timer = nil
+    -- vim.api.nvim_create_autocmd('CursorHold', {
+    --   group = 'lsp_document_highlight',
+    --   buffer = bufnr,
+    --   callback = function()
+    --     timer = vim.defer_fn(function()
+    --       vim.lsp.buf.document_highlight()
+    --       timer = nil
+    --     end, 1000)
+    --   end
+    -- })
 
-    vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
-      group = 'lsp_document_highlight',
-      buffer = bufnr,
-      callback = function()
-        if timer ~= nil then
-          timer:stop()
-          timer = nil
-        else
-          vim.lsp.buf.clear_references()
-        end
-      end
-    })
+    -- vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+    --   group = 'lsp_document_highlight',
+    --   buffer = bufnr,
+    --   callback = function()
+    --     if timer ~= nil then
+    --       timer:stop()
+    --       timer = nil
+    --     else
+    --       vim.lsp.buf.clear_references()
+    --     end
+    --   end
+    -- })
   end
 
   -- open diagnostic on cursor hold
