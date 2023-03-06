@@ -116,7 +116,7 @@
 
   # Push and set upstream origin for branch
   up = !git push -u origin `git branch --show-current`
-  upt = !git push origin --tags
+  upt = "!f() { git push origin --tags ${1:-}; }; f"
 
 [init]
   templatedir = ~/.config/git/templates
