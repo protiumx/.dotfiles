@@ -13,6 +13,8 @@ function M.setup(bufnr)
   nmap('gi', vim.lsp.buf.implementation, 'Go to implementation')
   nmap('gd', vim.lsp.buf.definition, 'Go to definition')
   nmap('K', vim.lsp.buf.hover, 'Show docs')
+  nmap('<C-l>h', vim.lsp.buf.document_highlight, 'Highlight node')
+  nmap('<C-l>c', vim.lsp.buf.document_highlight, 'Clear highlights')
 end
 
 return M

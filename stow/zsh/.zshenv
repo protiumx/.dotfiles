@@ -139,6 +139,14 @@ gotest() {
   go test -v -race -failfast $1 | sed ''/PASS/s//$(printf "\033[32mPASS\033[0m")/'' | sed ''/FAIL/s//$(printf "\033[31mFAIL\033[0m")/''
 }
 
+dstop-all() {
+  docker stop $(docker ps -aq)
+}
+
+drm-all() {
+  docker rm $(docker ps -aq)
+}
+
 # Aliases
 alias cat="bat -p --paging=never --theme='TwoDark'"
 alias dc="docker compose"
@@ -153,7 +161,8 @@ alias kx="kubectx"
 alias k="kubectl"
 alias k9="k9s -c pod --readonly"
 alias kfp="kf pods"
-alias klp="kf pods | xargs -o -I % kubectl logs --since 10s -f %"
+alias klp="kf pods | xargs -o -I % kubectl logs --since 1m -f %"
+alias kld="kf deployment | xargs -o -I % kubectl logs -f deployment/% --all-containers=true --since=1m"
 alias kfs="kf services"
 alias ksh="kubectl get pods --no-headers | fzf | awk '{print $1}' | xargs -o -I % kubectl exec -it % bash"
 alias kex="kubectl exec -ti"
