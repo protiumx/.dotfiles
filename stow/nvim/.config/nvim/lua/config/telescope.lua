@@ -133,6 +133,8 @@ end
 
 function M.setup()
   local telescope = require('telescope')
+  local action_state = require("telescope.actions.state")
+
   telescope.setup({
     defaults = {
       prompt_prefix = '❯ ',
@@ -158,7 +160,9 @@ function M.setup()
 
       mappings = {
         i = {
-          ['<M-D>'] = 'delete_buffer'
+          ['<M-D>'] = 'delete_buffer',
+          ['<C-Down>'] = 'cycle_history_next',
+          ['<C-Up>'] = 'cycle_history_prev',
         },
       },
 
