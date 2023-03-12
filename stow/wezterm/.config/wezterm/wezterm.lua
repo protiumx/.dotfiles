@@ -1,8 +1,8 @@
 local wezterm = require('wezterm')
 local act = wezterm.action
-local is_window = wezterm.target_triple == 'x86_64-pc-windows-msvc'
-local cascadia_font = is_window and 'CaskaydiaCove NF' or 'CaskaydiaCove Nerd Font'
-local key_mod_panes = is_window and 'ALT' or 'CMD'
+local is_windows = wezterm.target_triple == 'x86_64-pc-windows-msvc'
+local cascadia_font = is_windows and 'CaskaydiaCove NF' or 'CaskaydiaCove Nerd Font'
+local key_mod_panes = is_windows and 'ALT' or 'CMD'
 
 local keys = {
   {
@@ -282,7 +282,7 @@ local config = {
       font = wezterm.font(cascadia_font, { weight = 'Bold', stretch = 'Normal', style = 'Normal' }),
     },
   },
-  font_size = 18.0,
+  font_size = is_windows and 14.0 or 18.0,
   -- Disable font ligatures
   harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
   hide_tab_bar_if_only_one_tab = true,
@@ -387,7 +387,7 @@ local config = {
 }
 
 -- https://wezfurlong.org/wezterm/config/lua/wezterm/target_triple.html
-if is_window then
+if is_windows then
   config.default_prog = { 'wsl.exe', '-d', 'Ubuntu-20.04', '--cd', '~' }
 end
 
