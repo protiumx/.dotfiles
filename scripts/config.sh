@@ -52,9 +52,11 @@ stow_dotfiles() {
     ".aliases"
     ".config/starship.toml"
     ".gitconfig"
+    ".jq"
     ".profile*"
     ".vimrc"
     ".zshrc"
+    ".zshenv"
     ".zprofile"
   )
   local folders=(
