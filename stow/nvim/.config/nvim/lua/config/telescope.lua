@@ -157,15 +157,13 @@ function M.setup()
         height = 0.80,
       },
       path_display = { 'truncate' },
-
       mappings = {
         i = {
-          ['<M-D>'] = 'delete_buffer',
-          ['<C-Down>'] = 'cycle_history_next',
-          ['<C-Up>'] = 'cycle_history_prev',
+              ['<M-D>'] = 'delete_buffer',
+              ['<M-Down>'] = 'cycle_history_next',
+              ['<M-Up>'] = 'cycle_history_prev',
         },
       },
-
       vimgrep_arguments = {
         'rg',
         '--line-number',
@@ -174,7 +172,6 @@ function M.setup()
         '--smart-case',
         '-u'
       },
-
       file_ignore_patterns = { 'target/*', 'node_modules/*', '^.git/*', '^.yarn/*' },
     },
     pickers = {
