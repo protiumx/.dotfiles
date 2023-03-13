@@ -106,6 +106,6 @@ else
 end
 
 -- Git
-vim.keymap.set('n', '<C-g>s', ':silent exec "!git stage %"<CR>')
-vim.keymap.set('n', '<C-g><Up>', ':silent exec "!git push"<CR>')
-vim.keymap.set('n', '<C-g><Down>', ':silent exec "!git pull"<CR>')
+vim.keymap.set('n', '<C-g>s', ':!git stage %<CR>')
+vim.keymap.set('n', '<C-g><Up>', ':!git push<CR>')
+vim.keymap.set('n', '<C-g><Down>', ':!git pull<CR>')
