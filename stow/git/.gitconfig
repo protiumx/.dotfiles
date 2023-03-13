@@ -84,7 +84,7 @@
 
   last = log -1 HEAD --stat
   logf = !git log --pretty=format:\"%C(magenta)%h%Creset -%C(red)%d%Creset %s %C(dim green)(%cr) [%an]\" --abbrev-commit -30
-  main = checkout main
+  main = !git checkout main && git pull
 
   # Clean up merged branches to a given branch ("main" is default)
   purge = "!f() { git branch --merged ${1-main} | grep -v " ${1-main}$" | xargs -r git branch -d; }; f"
