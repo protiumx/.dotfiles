@@ -30,7 +30,7 @@ local function on_attach(bufnr)
 
   map('n', '<C-g>tb', gs.toggle_current_line_blame, '[Git] Toggle line blame')
   map('n', '<C-g>td', gs.toggle_deleted, '[Git] Toggle deleted preview')
-  map('n', '<C-g>rh', gs.reset_hunk, '[Git] Reset hunk')
+  map({ 'n', 'v' }, '<C-g>rh', gs.reset_hunk, '[Git] Reset hunk')
 
   -- Text object
   map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', '[Git] Hunk Text Object')
