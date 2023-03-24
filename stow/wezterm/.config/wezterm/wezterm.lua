@@ -1,5 +1,6 @@
 local wezterm = require('wezterm')
 local act = wezterm.action
+-- https://wezfurlong.org/wezterm/config/lua/wezterm/target_triple.html
 local is_windows = wezterm.target_triple == 'x86_64-pc-windows-msvc'
 local cascadia_font = is_windows and 'CaskaydiaCove NF' or 'CaskaydiaCove Nerd Font'
 local key_mod_panes = is_windows and 'ALT' or 'CMD'
@@ -101,7 +102,7 @@ local keys = {
 
   -- Tabs
   { key = 'T',   mods = 'SHIFT|' .. key_mod_panes, action = act.ShowTabNavigator },
-  { key = 'Tab', mods = 'SHIFT|CTRL',              action = act.ActivateTabRelative( -1) },
+  { key = 'Tab', mods = 'SHIFT|CTRL',              action = act.ActivateTabRelative(-1) },
   { key = 'Tab', mods = 'CTRL',                    action = act.ActivateTabRelative(1) },
 
 
@@ -163,61 +164,61 @@ local keys = {
 }
 
 local process_icons = {
-  ['docker'] = {
+      ['docker'] = {
     { Text = wezterm.nerdfonts.linux_docker },
   },
-  ['docker-compose'] = {
+      ['docker-compose'] = {
     { Text = wezterm.nerdfonts.linux_docker },
   },
-  ['kuberlr'] = {
+      ['kuberlr'] = {
     { Text = wezterm.nerdfonts.linux_docker },
   },
-  ['kubectl'] = {
+      ['kubectl'] = {
     { Text = wezterm.nerdfonts.linux_docker },
   },
-  ['nvim'] = {
+      ['nvim'] = {
     { Text = wezterm.nerdfonts.custom_vim },
   },
-  ['vim'] = {
+      ['vim'] = {
     { Text = wezterm.nerdfonts.dev_vim },
   },
-  ['node'] = {
+      ['node'] = {
     { Text = wezterm.nerdfonts.mdi_hexagon },
   },
-  ['zsh'] = {
+      ['zsh'] = {
     { Text = wezterm.nerdfonts.dev_terminal },
   },
-  ['bash'] = {
+      ['bash'] = {
     { Text = wezterm.nerdfonts.cod_terminal_bash },
   },
-  ['btm'] = {
+      ['btm'] = {
     { Text = wezterm.nerdfonts.mdi_chart_donut_variant },
   },
-  ['htop'] = {
+      ['htop'] = {
     { Text = wezterm.nerdfonts.mdi_chart_donut_variant },
   },
-  ['cargo'] = {
+      ['cargo'] = {
     { Text = wezterm.nerdfonts.dev_rust },
   },
-  ['go'] = {
+      ['go'] = {
     { Text = wezterm.nerdfonts.mdi_language_go },
   },
-  ['lazydocker'] = {
+      ['lazydocker'] = {
     { Text = wezterm.nerdfonts.linux_docker },
   },
-  ['git'] = {
+      ['git'] = {
     { Text = wezterm.nerdfonts.dev_git },
   },
-  ['lua'] = {
+      ['lua'] = {
     { Text = wezterm.nerdfonts.seti_lua },
   },
-  ['wget'] = {
+      ['wget'] = {
     { Text = wezterm.nerdfonts.mdi_arrow_down_box },
   },
-  ['curl'] = {
+      ['curl'] = {
     { Text = wezterm.nerdfonts.mdi_flattr },
   },
-  ['gh'] = {
+      ['gh'] = {
     { Text = wezterm.nerdfonts.dev_github_badge },
   },
 }
@@ -273,8 +274,45 @@ end)
 
 local config = {
   audible_bell = 'Disabled',
+  canonicalize_pasted_newlines = 'LineFeed',
   color_scheme = '3024 (base16)',
-  max_fps = 120,
+  colors = {
+    background = '#1c1c1c',
+    cursor_bg = '#fe5186',
+    cursor_border = '#fe5186',
+    selection_fg = '#1c1c1c',
+    selection_bg = '#fe5186',
+    tab_bar = {
+      -- The color of the strip that goes along the top of the window
+      -- (does not apply when fancy tab bar is in use)
+      -- background = '#1c1c1c',
+      background = 'rgba(28, 28, 28, 0.9)',
+      inactive_tab_edge = 'rgba(28, 28, 28, 0.9)',
+      active_tab = {
+        bg_color = 'rgba(28, 28, 28, 0.9)',
+        fg_color = '#c0c0c0',
+      },
+      -- Inactive tabs are the tabs that do not have focus
+      inactive_tab = {
+        bg_color = 'rgba(28, 28, 28, 0.9)',
+        fg_color = '#808080',
+        -- The same options that were listed under the `active_tab` section above
+        -- can also be used for `inactive_tab`.
+      },
+      -- You can configure some alternate styling when the mouse pointer
+      -- moves over inactive tabs
+      inactive_tab_hover = {
+        bg_color = 'rgba(28, 28, 28, 0.9)',
+        fg_color = '#808080',
+        -- The same options that were listed under the `active_tab` section above
+        -- can also be used for `inactive_tab_hover`.
+      },
+    },
+  },
+  command_palette_font_size = 16.0,
+  cursor_blink_rate = 400,
+  cursor_thickness = 1.5,
+  default_cursor_style = 'BlinkingBar',
   font = wezterm.font(cascadia_font, { weight = 'Medium', stretch = 'Normal', style = 'Normal' }),
   font_rules = {
     {
@@ -286,19 +324,22 @@ local config = {
   -- Disable font ligatures
   harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
   hide_tab_bar_if_only_one_tab = true,
+  hyperlink_rules = wezterm.default_hyperlink_rules(),
   inactive_pane_hsb = {
     saturation = 1.0,
     brightness = 0.85,
   },
-  window_background_opacity = 0.85,
-  wls_domains = {
-    {
-      name = 'WSL:Ubuntu-20.04',
-      distribution = 'Ubuntu-20.04',
-      default_cwd = '~'
+  keys = keys,
+  key_tables = {
+    copy_mode = {
+      {
+        key = 'e',
+        mods = 'NONE',
+        action = act.CopyMode 'MoveForwardWordEnd',
+      },
     },
   },
-  keys = keys,
+  max_fps = 120,
   mouse_bindings = {
     -- Change the default click behavior so that it only selects
     -- text and doesn't open hyperlinks
@@ -314,11 +355,14 @@ local config = {
       action = act.OpenLinkAtMouseCursor,
     },
   },
-  scrollback_lines = 2000,
+  scrollback_lines = 10000,
   send_composed_key_when_left_alt_is_pressed = false,
   show_new_tab_button_in_tab_bar = false,
   switch_to_last_active_tab_when_closing_tab = true,
   tab_max_width = 60,
+  underline_position = -3,
+  use_fancy_tab_bar = true,
+  window_background_opacity = 0.85,
   window_decorations = 'RESIZE',
   window_frame = {
     -- The font used in the tab bar.
@@ -328,67 +372,27 @@ local config = {
     -- main font setting appended to it to pick up any
     -- fallback fonts you may have used there.
     font = wezterm.font { family = cascadia_font, weight = 'Bold' },
-
     -- The size of the font in the tab bar.
     -- Default to 10. on Windows but 12.0 on other systems
     font_size = 16.0,
-
     -- The overall background color of the tab bar when
     -- the window is focused
     active_titlebar_bg = '#1c1c1c',
-
     -- The overall background color of the tab bar when
     -- the window is not focused
     inactive_titlebar_bg = '#1c1c1c',
   },
-  cursor_blink_rate = 400,
-  default_cursor_style = 'BlinkingBar',
-  cursor_thickness = 1.5,
-  underline_position = -3,
-  use_fancy_tab_bar = true,
-  colors = {
-    background = '#1c1c1c',
-    cursor_bg = '#fe5186',
-    cursor_border = '#fe5186',
-    selection_fg = '#1c1c1c',
-    selection_bg = '#fe5186',
-    tab_bar = {
-      -- The color of the strip that goes along the top of the window
-      -- (does not apply when fancy tab bar is in use)
-      -- background = '#1c1c1c',
-      background = 'rgba(28, 28, 28, 0.9)',
-      inactive_tab_edge = 'rgba(28, 28, 28, 0.9)',
-
-      active_tab = {
-        bg_color = 'rgba(28, 28, 28, 0.9)',
-        fg_color = '#c0c0c0',
-      },
-
-      -- Inactive tabs are the tabs that do not have focus
-      inactive_tab = {
-        bg_color = 'rgba(28, 28, 28, 0.9)',
-        fg_color = '#808080',
-
-        -- The same options that were listed under the `active_tab` section above
-        -- can also be used for `inactive_tab`.
-      },
-
-      -- You can configure some alternate styling when the mouse pointer
-      -- moves over inactive tabs
-      inactive_tab_hover = {
-        bg_color = 'rgba(28, 28, 28, 0.9)',
-        fg_color = '#808080',
-
-        -- The same options that were listed under the `active_tab` section above
-        -- can also be used for `inactive_tab_hover`.
-      },
-    },
-  },
 }
 
--- https://wezfurlong.org/wezterm/config/lua/wezterm/target_triple.html
 if is_windows then
   config.default_prog = { 'wsl.exe', '-d', 'Ubuntu-20.04', '--cd', '~' }
+  config.wls_domains = {
+    {
+      name = 'WSL:Ubuntu-20.04',
+      distribution = 'Ubuntu-20.04',
+      default_cwd = '~'
+    },
+  }
 end
 
 return config
