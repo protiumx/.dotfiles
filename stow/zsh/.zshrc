@@ -20,6 +20,16 @@ export HOMEBREW_NO_INSECURE_REDIRECT=1
 
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/rg"
 
+export MANPAGER='less -s'
+# Enable highlighting in Less, useful for manpages
+export LESS_TERMCAP_mb=$'\e[1;31m'     # begin bold
+export LESS_TERMCAP_md=$'\e[1;94m'     # begin blink
+export LESS_TERMCAP_so=$'\e[01;44;37m' # begin reverse video
+export LESS_TERMCAP_us=$'\e[01;37m'    # begin underline
+export LESS_TERMCAP_me=$'\e[0m'        # reset bold/blink
+export LESS_TERMCAP_se=$'\e[0m'        # reset reverse video
+export LESS_TERMCAP_ue=$'\e[0m'        # reset underline
+
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 else
@@ -43,14 +53,16 @@ DISABLE_AUTO_TITLE="true"
 
 # Change the command execution time stamp shown in the history command output
 HIST_STAMPS="dd.mm.yyyy"
+
 ZSH_THEME=""
 
-# Fast pasting big chunks
-unset zle_bracketed_paste
+# Fix slow bracketed-paste
+DISABLE_MAGIC_FUNCTIONS="true"
+
 setopt HIST_FIND_NO_DUPS
 setopt HIST_IGNORE_ALL_DUPS
 setopt appendhistory           # Immediately append history instead of overwriting
-setopt nobeep                  # No beep
+setopt nobeep
 
 plugins=(
   docker                  # auto-completion for docker
@@ -78,12 +90,11 @@ source $BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 
-# changes hex 0x15 to delete everything to the left of the cursor, rather than the whole line
+# changes ctrl-u to delete everything to the left of the cursor, rather than the whole line
 bindkey "^U" backward-kill-line
-# binds hex 0x18 0x7f with deleting everything to the left of the cursor
-bindkey "^X\\x7f" backward-kill-line
-# adds redo
-bindkey "^X^_" redo
+bindkey "^E" kill-line
+# alt-del delete word forwards
+bindkey '^[[3;3~' kill-word
 
 # zsh syntax highlighting clears and restores aliases after .zshenv is loaded
 # this keeps ls and ll aliased correctly
@@ -130,6 +141,8 @@ _fzf_compgen_dir() {
 # K8s completions
 [[ -x "$(command -v kubectl)" ]] && source <(kubectl completion zsh)
 
+export PATH
+
 # Source all profile files
 for file in $HOME/.profile*; do
   source "$file"
@@ -138,5 +151,3 @@ done
 if [[ "$OSTYPE" =~ ^linux ]]; then
   eval $(ssh-agent) >/dev/null
 fi
-
-export PATH
