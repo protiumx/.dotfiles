@@ -39,7 +39,7 @@ style = "fg:#d13e11"
 
 [git_status]
 format = '([\[ $all_status$ahead_behind\]]($style) )'
-diverged = " ﰛ${ahead_count} ﰗ${behind_count}"
+diverged = " ﰛ${ahead_count} ﰗ${behind_count} "
 conflicted = "=${count} "
 behind = "ﰗ${count} "
 ahead = "ﰛ${count} "
