@@ -25,6 +25,7 @@ vim.keymap.set('n', 'g*', 'g*zz', { silent = true })
 vim.keymap.set('n', 'G', 'Gzz', { silent = true })
 vim.keymap.set('n', '<C-o>', '<C-o>zz', { silent = true })
 vim.keymap.set('n', '<C-i>', '<C-i>zz', { silent = true })
+vim.keymap.set('n', '<C-\'>', '<C-\'>zz', { silent = true })
 
 -- Move down/up centered
 vim.keymap.set('n', '<C-d>', '<C-d>zz', { silent = true })
@@ -55,7 +56,7 @@ else
 end
 
 -- Toggle between current and prev buffers
-vim.keymap.set('n', '``', '<C-^>zz', { silent = true })
+vim.keymap.set('n', '``', '<C-^>', { silent = true })
 
 -- Close buffer without changing window layout
 vim.keymap.set('n', '--', ':bp|bd #<CR>', { silent = true })
