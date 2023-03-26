@@ -102,7 +102,7 @@ local keys = {
 
   -- Tabs
   { key = 'T',   mods = 'SHIFT|' .. key_mod_panes, action = act.ShowTabNavigator },
-  { key = 'Tab', mods = 'SHIFT|CTRL',              action = act.ActivateTabRelative(-1) },
+  { key = 'Tab', mods = 'SHIFT|CTRL',              action = act.ActivateTabRelative( -1) },
   { key = 'Tab', mods = 'CTRL',                    action = act.ActivateTabRelative(1) },
 
 
@@ -164,61 +164,61 @@ local keys = {
 }
 
 local process_icons = {
-      ['docker'] = {
+  ['docker'] = {
     { Text = wezterm.nerdfonts.linux_docker },
   },
-      ['docker-compose'] = {
+  ['docker-compose'] = {
     { Text = wezterm.nerdfonts.linux_docker },
   },
-      ['kuberlr'] = {
+  ['kuberlr'] = {
     { Text = wezterm.nerdfonts.linux_docker },
   },
-      ['kubectl'] = {
+  ['kubectl'] = {
     { Text = wezterm.nerdfonts.linux_docker },
   },
-      ['nvim'] = {
+  ['nvim'] = {
     { Text = wezterm.nerdfonts.custom_vim },
   },
-      ['vim'] = {
+  ['vim'] = {
     { Text = wezterm.nerdfonts.dev_vim },
   },
-      ['node'] = {
+  ['node'] = {
     { Text = wezterm.nerdfonts.mdi_hexagon },
   },
-      ['zsh'] = {
+  ['zsh'] = {
     { Text = wezterm.nerdfonts.dev_terminal },
   },
-      ['bash'] = {
+  ['bash'] = {
     { Text = wezterm.nerdfonts.cod_terminal_bash },
   },
-      ['btm'] = {
+  ['btm'] = {
     { Text = wezterm.nerdfonts.mdi_chart_donut_variant },
   },
-      ['htop'] = {
+  ['htop'] = {
     { Text = wezterm.nerdfonts.mdi_chart_donut_variant },
   },
-      ['cargo'] = {
+  ['cargo'] = {
     { Text = wezterm.nerdfonts.dev_rust },
   },
-      ['go'] = {
+  ['go'] = {
     { Text = wezterm.nerdfonts.mdi_language_go },
   },
-      ['lazydocker'] = {
+  ['lazydocker'] = {
     { Text = wezterm.nerdfonts.linux_docker },
   },
-      ['git'] = {
+  ['git'] = {
     { Text = wezterm.nerdfonts.dev_git },
   },
-      ['lua'] = {
+  ['lua'] = {
     { Text = wezterm.nerdfonts.seti_lua },
   },
-      ['wget'] = {
+  ['wget'] = {
     { Text = wezterm.nerdfonts.mdi_arrow_down_box },
   },
-      ['curl'] = {
+  ['curl'] = {
     { Text = wezterm.nerdfonts.mdi_flattr },
   },
-      ['gh'] = {
+  ['gh'] = {
     { Text = wezterm.nerdfonts.dev_github_badge },
   },
 }
@@ -272,43 +272,45 @@ wezterm.on('update-right-status', function(window)
   }))
 end)
 
+local colors = {
+  background = '#1c1c1c',
+  cursor_bg = '#fe5186',
+  cursor_border = '#fe5186',
+  selection_fg = '#1c1c1c',
+  selection_bg = '#fe5186',
+  tab_bar = {
+    -- The color of the strip that goes along the top of the window
+    -- (does not apply when fancy tab bar is in use)
+    -- background = '#1c1c1c',
+    background = 'rgba(28, 28, 28, 0.9)',
+    inactive_tab_edge = 'rgba(28, 28, 28, 0.9)',
+    active_tab = {
+      bg_color = 'rgba(28, 28, 28, 0.9)',
+      fg_color = '#c0c0c0',
+    },
+    -- Inactive tabs are the tabs that do not have focus
+    inactive_tab = {
+      bg_color = 'rgba(28, 28, 28, 0.9)',
+      fg_color = '#808080',
+      -- The same options that were listed under the `active_tab` section above
+      -- can also be used for `inactive_tab`.
+    },
+    -- You can configure some alternate styling when the mouse pointer
+    -- moves over inactive tabs
+    inactive_tab_hover = {
+      bg_color = 'rgba(28, 28, 28, 0.9)',
+      fg_color = '#808080',
+      -- The same options that were listed under the `active_tab` section above
+      -- can also be used for `inactive_tab_hover`.
+    },
+  },
+}
+
 local config = {
   audible_bell = 'Disabled',
   canonicalize_pasted_newlines = 'LineFeed',
   color_scheme = '3024 (base16)',
-  colors = {
-    background = '#1c1c1c',
-    cursor_bg = '#fe5186',
-    cursor_border = '#fe5186',
-    selection_fg = '#1c1c1c',
-    selection_bg = '#fe5186',
-    tab_bar = {
-      -- The color of the strip that goes along the top of the window
-      -- (does not apply when fancy tab bar is in use)
-      -- background = '#1c1c1c',
-      background = 'rgba(28, 28, 28, 0.9)',
-      inactive_tab_edge = 'rgba(28, 28, 28, 0.9)',
-      active_tab = {
-        bg_color = 'rgba(28, 28, 28, 0.9)',
-        fg_color = '#c0c0c0',
-      },
-      -- Inactive tabs are the tabs that do not have focus
-      inactive_tab = {
-        bg_color = 'rgba(28, 28, 28, 0.9)',
-        fg_color = '#808080',
-        -- The same options that were listed under the `active_tab` section above
-        -- can also be used for `inactive_tab`.
-      },
-      -- You can configure some alternate styling when the mouse pointer
-      -- moves over inactive tabs
-      inactive_tab_hover = {
-        bg_color = 'rgba(28, 28, 28, 0.9)',
-        fg_color = '#808080',
-        -- The same options that were listed under the `active_tab` section above
-        -- can also be used for `inactive_tab_hover`.
-      },
-    },
-  },
+  colors = colors,
   command_palette_font_size = 16.0,
   cursor_blink_rate = 400,
   cursor_thickness = 1.5,
@@ -377,16 +379,16 @@ local config = {
     font_size = 16.0,
     -- The overall background color of the tab bar when
     -- the window is focused
-    active_titlebar_bg = '#1c1c1c',
+    active_titlebar_bg = colors.background,
     -- The overall background color of the tab bar when
     -- the window is not focused
-    inactive_titlebar_bg = '#1c1c1c',
+    inactive_titlebar_bg = colors.background,
   },
 }
 
 if is_windows then
   config.default_prog = { 'wsl.exe', '-d', 'Ubuntu-20.04', '--cd', '~' }
-  config.wls_domains = {
+  config.wsl_domains = {
     {
       name = 'WSL:Ubuntu-20.04',
       distribution = 'Ubuntu-20.04',
