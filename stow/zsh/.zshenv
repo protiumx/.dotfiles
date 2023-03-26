@@ -6,6 +6,10 @@ cheat() {
   curl -s "cheat.sh/$1";
 }
 
+fmv() {
+  mv "$@" $(fd -t d -H | fzf)
+}
+
 # Show package.json scripts with fzf and run selected
 pkgrun() {
   name=$(jq .scripts package.json | sed '1d;$d' | fzf --height 40% | awk -F ': ' '{gsub(/"/, "", $1); print $1}')
@@ -16,8 +20,7 @@ pkgrun() {
 
 # Jump to folder (zoxide) and open nvim.
 zv() {
- z "$1"
- nvim .
+ z "$1" && nvim .
 }
 
 # Retrieve process real memory
