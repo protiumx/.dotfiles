@@ -28,7 +28,7 @@ function M.setup()
   vim.api.nvim_create_user_command('TermScratch', function(opts)
     local cmd = opts.args
     if cmd:find('go test') then
-      cmd = string.gsub(opts.args, '%%', vim.fn.expand('%:h')) .. '/...'
+      cmd = string.gsub(opts.args, '%%', './' .. vim.fn.expand('%:h')) .. '/...'
     end
     fterm.scratch(vim.tbl_extend('force', {
       cmd = cmd,
@@ -38,6 +38,9 @@ function M.setup()
     nargs = '+',
     desc = 'Open scratch term with provided command'
   })
+
+  vim.keymap.set('', '<M-t>', fterm.toggle, { desc = 'Toggle floating term' })
+  vim.keymap.set('t', '<M-t>', fterm.toggle, { desc = 'Toggle floating term' })
 end
 
 return M
