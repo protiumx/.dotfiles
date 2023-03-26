@@ -22,7 +22,7 @@ local theme = {
   Error                      = { fg = colors.red },
   Exception                  = { fg = colors.dark_orange },
   Float                      = { fg = colors.light_pink },
-  Function                   = { fg = colors.foreground },
+  Function                   = { fg = colors.light_yellow },
   Identifier                 = { fg = colors.foreground },
   Ignore                     = { fg = colors.light_grey },
   Include                    = { fg = colors.dark_orange },
@@ -67,7 +67,7 @@ local theme = {
   StatusLineNC               = { fg = 'none', bg = 'none' },
   Title                      = { fg = colors.blue, bg = '', bold = true },
   VertSplit                  = { bg = 'none', fg = colors.grey },
-  Visual                     = { bg = colors.grey, fg = colors.foreground },
+  Visual                     = { bg = colors.grey, fg = 'none' },
   -- Diagnostic
 
   DiagnosticBorder           = { link = 'XMenu' },
@@ -179,7 +179,7 @@ local theme = {
   ['@keyword.return']        = { fg = colors.dark_orange },
   ['@label']                 = { fg = colors.blue },
   ['@macro']                 = { fg = colors.dark_orange },
-  ['@method']                = { fg = colors.foreground },
+  ['@method']                = { fg = colors.light_yellow },
   ['@namespace']             = { fg = colors.foreground },
   ['@number']                = { link = 'Number' },
   ['@operator']              = { link = 'Operator' },

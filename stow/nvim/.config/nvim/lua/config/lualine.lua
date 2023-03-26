@@ -84,10 +84,7 @@ function M.setup()
       section_separators = '',
       disabled_filetypes = {
         statusline = {
-          'DiffviewFiles',
           'FTerm',
-          'fugitive',
-          'fugitiveblame',
           'help',
           'lspsagaoutline',
           'packer',
