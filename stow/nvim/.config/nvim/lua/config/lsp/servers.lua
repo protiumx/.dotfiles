@@ -2,6 +2,7 @@ local servers = {
   dockerls = {},
   graphql = {},
   tsserver = {},
+  jsonls = {},
   eslint = {},
   rust_analyzer = {},
   clangd = {},
@@ -15,15 +16,18 @@ local servers = {
     }
   },
   yamlls = {
-    yaml = {
-      format = {
-        enable = false,
-        proseWrap = 'never',
-        printWidth = 200,
-      },
-      validate = true,
-      schemaStore = {
-        enable = true,
+    settings = {
+      yaml = {
+        keyOrdering = false,
+        format = {
+          enable = true,
+          proseWrap = 'never',
+          printWidth = 200,
+        },
+        validate = true,
+        schemaStore = {
+          enable = true,
+        },
       },
     },
   },
@@ -59,7 +63,6 @@ local servers = {
         neededFileStatus = true,
         ["codestyle-check"] = "Any",
       },
-
       format = {
         enable = true,
         defaultConfig = {
@@ -67,12 +70,10 @@ local servers = {
           indent_size = "2",
         }
       },
-
       runtime = {
         -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
         version = 'LuaJIT',
       },
-
       workspace = {
         checkThirdParty = false,
         library = {

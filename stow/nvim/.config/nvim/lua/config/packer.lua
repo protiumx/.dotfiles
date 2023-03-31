@@ -267,6 +267,7 @@ return packer.startup(function(use)
     ft = {
       'go',
       'lua',
+      'json',
       'python',
       'rust',
       'bash',
