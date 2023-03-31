@@ -218,9 +218,9 @@ local M = {}
 function M.load()
   vim.api.nvim_set_hl(0, 'XMenu', { bg = colors.dark_grey, default = true })
   vim.api.nvim_set_hl(0, 'XMenuBorder', { bg = colors.dark_grey, fg = colors.dark_grey, default = true })
-  for group, colors in pairs(theme) do
-    if not vim.tbl_isempty(colors) then
-      vim.api.nvim_set_hl(0, group, colors)
+  for group, hl in pairs(theme) do
+    if not vim.tbl_isempty(hl) then
+      vim.api.nvim_set_hl(0, group, hl)
     end
   end
 end
