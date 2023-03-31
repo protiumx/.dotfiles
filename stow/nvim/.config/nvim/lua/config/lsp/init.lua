@@ -26,11 +26,11 @@ function M.setup()
 
   vim.diagnostic.config({
     virtual_text = {
-      -- spacing = 1,
-      -- format = function(_)
-      --   -- just show the sign
-      --   return ''
-      -- end
+      spacing = 1,
+      format = function(_)
+        -- just show the sign
+        return ''
+      end
     },
     float = {
       focusable = false,
