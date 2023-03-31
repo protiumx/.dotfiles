@@ -1,7 +1,7 @@
 local M = {}
 
 -- https://github.com/neovim/nvim-lspconfig/issues/115#issuecomment-902680058
-local function organize_imports(timeoutms)
+local function organize_go_imports(timeoutms)
   local params = vim.lsp.util.make_range_params()
   params.context = { only = { 'source.organizeImports' } }
   local result = vim.lsp.buf_request_sync(0, 'textDocument/codeAction', params, timeoutms)
@@ -32,7 +32,7 @@ local function setup_autocmd(bufnr)
     group = 'lsp_format',
     pattern = '*.go',
     callback = function()
-      organize_imports(500)
+      organize_go_imports(500)
     end
   })
 end
@@ -86,7 +86,7 @@ local on_attach = function(client, bufnr)
   end
 
   -- open diagnostic on cursor hold
-  -- vim.cmd [[autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focus = false })]]
+  vim.cmd [[autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focus = false })]]
 end
 
 
