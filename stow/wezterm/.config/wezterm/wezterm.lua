@@ -101,8 +101,13 @@ local keys = {
 
 
   -- Tabs
+  {
+    key = 't',
+    mods = 'CMD',
+    action = act.SpawnTab('DefaultDomain')
+  },
   { key = 'T',   mods = 'SHIFT|' .. key_mod_panes, action = act.ShowTabNavigator },
-  { key = 'Tab', mods = 'SHIFT|CTRL',              action = act.ActivateTabRelative( -1) },
+  { key = 'Tab', mods = 'SHIFT|CTRL',              action = act.ActivateTabRelative(-1) },
   { key = 'Tab', mods = 'CTRL',                    action = act.ActivateTabRelative(1) },
 
 
@@ -315,7 +320,10 @@ local config = {
   cursor_blink_rate = 400,
   cursor_thickness = 1.5,
   default_cursor_style = 'BlinkingBar',
-  font = wezterm.font(cascadia_font, { weight = 'Medium', stretch = 'Normal', style = 'Normal' }),
+  default_cwd = wezterm.home_dir,
+  font = wezterm.font(cascadia_font,
+    { weight = is_windows and 'Regular' or 'DemiBold', stretch = 'Normal', style = 'Normal' }
+  ),
   font_rules = {
     {
       intensity = 'Bold',
