@@ -56,7 +56,7 @@ local theme = {
   ErrorMsg                   = { bg = 'none', fg = colors.red },
   FloatBorder                = { bg = colors.background, fg = colors.background },
   IncSearch                  = { bg = colors.accent, fg = colors.foreground },
-  MatchParen                 = { fg = colors.accent, bg = 'none' },
+  MatchParen                 = { fg = colors.accent, bg = 'none', bold = true },
   NormalFloat                = { bg = colors.background },
   Pmenu                      = { link = 'XMenu' },
   Search                     = { bg = colors.accent },
