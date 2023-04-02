@@ -84,7 +84,6 @@ function M.setup()
       section_separators = '',
       disabled_filetypes = {
         statusline = {
-          'FTerm',
           'help',
           'lspsagaoutline',
           'packer',

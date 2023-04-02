@@ -53,7 +53,7 @@ autocmd('TermOpen', {
   pattern = '*',
   command = [[
     startinsert
-    setlocal nonumber norelativenumber nospell laststatus=0 signcolumn=no noruler
+    setlocal nonumber norelativenumber nospell signcolumn=no noruler
   ]],
 })
 
@@ -66,7 +66,7 @@ autocmd('FileType', {
 })
 
 autocmd('FileType', {
-  pattern = { 'gitcommit', 'fugitive' },
+  pattern = { 'gitcommit' },
   command = [[
     setlocal nonumber signcolumn=no
   ]]
