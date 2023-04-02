@@ -60,7 +60,7 @@ vim.opt.spelloptions = 'camel'
 vim.opt.showmode = false
 vim.opt.startofline = false
 
-vim.opt.wildmode = 'full'     -- Shows a menu bar as opposed to an enormous list
+vim.opt.wildmode = 'full' -- Shows a menu bar as opposed to an enormous list
 vim.opt.wildignorecase = true -- Ignore case when completing file names and directories
 vim.opt.wildignore = {
   '*.o', '*.obj', '*~', '*.exe', '*.a', '*.pdb', '*.lib',
@@ -82,19 +82,20 @@ vim.filetype.add({
 })
 
 local builtins = {
-  'gzip',
-  'zip',
-  'zipPlugin',
+  '2html_plugin',
   'fzf',
-  'tar',
-  'tarPlugin',
   'getscript',
   'getscriptPlugin',
+  'gzip',
+  'logiPat',
+  'netrwPlugin',
+  'rrhelper',
+  'tar',
+  'tarPlugin',
   'vimball',
   'vimballPlugin',
-  '2html_plugin',
-  'logiPat',
-  'rrhelper',
+  'zip',
+  'zipPlugin',
 }
 
 for _, plugin in ipairs(builtins) do

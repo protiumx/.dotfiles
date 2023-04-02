@@ -43,6 +43,19 @@ local function keymaps()
     }, extra or {})
   end
 
+  vim.api.nvim_create_augroup('startup', { clear = true })
+  vim.api.nvim_create_autocmd('VimEnter', {
+    group = 'startup',
+    pattern = '*',
+    callback = function()
+      -- Open file browser if argument is a folder
+      local arg = vim.api.nvim_eval('argv(0)')
+      if arg and vim.fn.isdirectory(arg) then
+        builtin.find_files(with_title(dropdown))
+      end
+    end
+  })
+
   map({ 'i', 'n' }, '<M-]>', function()
     builtin.find_files(with_title(dropdown))
   end, 'Find files')
@@ -159,9 +172,9 @@ function M.setup()
       path_display = { 'truncate' },
       mappings = {
         i = {
-              ['<M-D>'] = 'delete_buffer',
-              ['<M-Down>'] = 'cycle_history_next',
-              ['<M-Up>'] = 'cycle_history_prev',
+          ['<M-D>'] = 'delete_buffer',
+          ['<M-Down>'] = 'cycle_history_next',
+          ['<M-Up>'] = 'cycle_history_prev',
         },
       },
       vimgrep_arguments = {
