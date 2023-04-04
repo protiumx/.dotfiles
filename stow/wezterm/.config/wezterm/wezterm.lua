@@ -322,12 +322,16 @@ local config = {
   default_cursor_style = 'BlinkingBar',
   default_cwd = wezterm.home_dir,
   font = wezterm.font(cascadia_font,
-    { weight = is_windows and 'Regular' or 'DemiBold', stretch = 'Normal', style = 'Normal' }
+    { weight = is_windows and 'Regular' or 'DemiBold', stretch = 'Normal', style = 'Normal', italic = false }
   ),
   font_rules = {
     {
       intensity = 'Bold',
       font = wezterm.font(cascadia_font, { weight = 'Bold', stretch = 'Normal', style = 'Normal' }),
+    },
+    {
+      intensity = 'Normal',
+      font = wezterm.font(cascadia_font, { weight = 'DemiBold', stretch = 'Normal', style = 'Normal', italic = false }),
     },
   },
   font_size = is_windows and 14.0 or 18.0,
@@ -372,7 +376,7 @@ local config = {
   tab_max_width = 60,
   underline_position = -3,
   use_fancy_tab_bar = true,
-  window_background_opacity = 0.85,
+  window_background_opacity = 1,
   window_decorations = 'RESIZE',
   window_frame = {
     -- The font used in the tab bar.
