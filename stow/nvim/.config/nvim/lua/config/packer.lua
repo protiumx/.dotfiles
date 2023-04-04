@@ -197,6 +197,7 @@ return packer.startup(function(use)
       'typescriptreact',
       'vue',
       'xml',
+      'zsh',
     },
   })
 
