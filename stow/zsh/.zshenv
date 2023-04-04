@@ -91,11 +91,42 @@ cdi() {
   fi
 }
 
-# Fuzzy find kubernetes resource
+# Fuzzy find kubernetes resource and apply an action
 kf() {
-  r=$(kubectl get $1 | sed 1d | awk '{print $1}' | fzf --height 40%)
-  echo "$r" | tr -d '\n' | pbcopy
-  echo -e "Copied \e[1;32m\"$r\"\e[0m to clipboard"
+  local r=$(kubectl get $1 | sed 1d | awk '{print $1}' | fzf --height 40% -q ${2:-""} | tr -d '\n')
+  local action="${3:-pb}"
+
+  case $action in
+    log)
+      klog $1 $r
+      ;;
+
+    sh)
+      kubectl exec -it $r -- sh
+      ;;
+
+    describe)
+      kubectl describe $1 $r
+      ;;
+
+    pb)
+      echo "$r" | pbcopy
+      echo -e "Copied \e[1;32m\"$r\"\e[0m to clipboard"
+      ;;
+  esac
+}
+
+klog() {
+  if  [[ "$1" == "deployment" ]]; then
+    kubectl logs -f deployment/ --all-containers=true --since=1m $2
+  else
+    kubectl logs -f --since 1m $1
+  fi
+}
+
+# Watch kubernetes resources. Highlights differences.
+kwatch() {
+  watch -n 5 -d "kubectl get $1 | grep $2"
 }
 
 kube_view_config() {
@@ -170,13 +201,11 @@ alias yw="yarn workspace"
 alias kx="kubectx"
 alias k="kubectl"
 alias k9="k9s -c pod --readonly"
+
 alias kfp="kf pods"
 alias kfs="kf services"
-
-alias kfplog="kf pods | xargs -o -I % kubectl logs --since 1m -f %"
-alias kfdlog="kf deployment | xargs -o -I % kubectl logs -f deployment/% --all-containers=true --since=1m"
-alias ksh="kubectl get pods --no-headers | fzf | awk '{print $1}' | xargs -o -I % kubectl exec -it % bash"
-alias kex="kubectl exec -ti"
+alias kfplog="kf pods log"
+alias kfdlog="kf deployment log"
 
 alias kdc="kubectl describe configmap"
 alias kdd="kubectl describe deployment"
