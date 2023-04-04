@@ -44,6 +44,13 @@ function M.setup()
       hide_keyword = true,
       show_file = false,
     },
+    definition = {
+      edit = "<CR>",
+      vsplit = "<C-v>",
+      split = "<C-c>i",
+      tabe = "<C-c>t",
+      quit = "q",
+    },
     outline = {
       win_width = 35,
       keys = {
