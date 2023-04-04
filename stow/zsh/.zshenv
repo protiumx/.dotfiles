@@ -215,15 +215,15 @@ alias kds="kubectl describe svc"
 alias kgctx="kubectl config get-contexts"
 alias kgcj="kubectl get cronjob"
 alias kgconf="kubectl get configmap"
+
 alias kgd="kubectl get deployements"
 alias kge="kubectl get events"
 alias kgi="kubectl get ingress"
 alias kgp="kubectl get pods"
+alias kgs="kubectl get svc"
 # List pods images
 alias kgpv="kgp -o jsonpath='{.items[*].spec.containers[*].image}' | tr -s '[[:space:]]' '\n' | sort | cut -d'/' -f3 | column -t -s':' | uniq -c | fzf --height 40%"
-alias kgs="kubectl get svc"
 
-alias klft="kubectl logs --since 1s -f"
 alias kpf="kubectl port-forward"
 alias krrd="kubectl rollout restart deployment"
 alias ksd="kubectl scale deployment"
