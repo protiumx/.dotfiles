@@ -42,7 +42,7 @@ vim.opt.termguicolors = true
 
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = 'yes'
-vim.opt.cursorline = false
+vim.opt.cursorline = true
 vim.opt.colorcolumn = '100'
 
 vim.opt.isfname:append('@-@')
@@ -60,7 +60,7 @@ vim.opt.spelloptions = 'camel'
 vim.opt.showmode = false
 vim.opt.startofline = false
 
-vim.opt.wildmode = 'full' -- Shows a menu bar as opposed to an enormous list
+vim.opt.wildmode = 'full'     -- Shows a menu bar as opposed to an enormous list
 vim.opt.wildignorecase = true -- Ignore case when completing file names and directories
 vim.opt.wildignore = {
   '*.o', '*.obj', '*~', '*.exe', '*.a', '*.pdb', '*.lib',

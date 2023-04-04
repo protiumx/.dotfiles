@@ -52,6 +52,7 @@ local theme = {
   Cursor                     = { bg = colors.accent },
   CursorColumn               = { bg = 'none', fg = colors.accent },
   CursorLine                 = { bg = 'none', fg = 'none' },
+  CursorLineNr               = { bg = 'none', fg = colors.light_pink },
   Directory                  = { fg = colors.cyan, bold = true },
   ErrorMsg                   = { bg = 'none', fg = colors.red },
   FloatBorder                = { bg = colors.background, fg = colors.background },
