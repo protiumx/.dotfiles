@@ -93,24 +93,29 @@ cdi() {
 
 # Fuzzy find kubernetes resource and apply an action
 kf() {
-  local r=$(kubectl get $1 | sed 1d | awk '{print $1}' | fzf --height 40% -q ${2:-""} | tr -d '\n')
+  local r=$(kubectl get $1 | sed 1d | awk '{print $1}' | fzf --height 40% -q ${2:-""})
   local action="${3:-pb}"
+
+  echo "Using $1 $r"
 
   case $action in
     log)
+      echo "Fetching logs"
       klog $1 $r
       ;;
 
     sh)
+      echo "Running exec"
       kubectl exec -it $r -- sh
       ;;
 
     describe)
+      echo "Kube"
       kubectl describe $1 $r
       ;;
 
     pb)
-      echo "$r" | pbcopy
+      echo -n "$r" | pbcopy
       echo -e "Copied \e[1;32m\"$r\"\e[0m to clipboard"
       ;;
   esac
@@ -120,7 +125,7 @@ klog() {
   if  [[ "$1" == "deployment" ]]; then
     kubectl logs -f deployment/ --all-containers=true --since=1m $2
   else
-    kubectl logs -f --since 1m $1
+    kubectl logs -f --since 1m $2
   fi
 }
 
@@ -204,8 +209,8 @@ alias k9="k9s -c pod --readonly"
 
 alias kfp="kf pods"
 alias kfs="kf services"
-alias kfplog="kf pods log"
-alias kfdlog="kf deployment log"
+alias kfplog="kf pods '' log"
+alias kfdlog="kf deployment '' log"
 
 alias kdc="kubectl describe configmap"
 alias kdd="kubectl describe deployment"
