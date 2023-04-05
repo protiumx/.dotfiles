@@ -15,9 +15,7 @@ function M.setup()
   fterm.setup(term_opts)
 
   vim.api.nvim_create_user_command('TermExit', fterm.exit, { bang = true })
-
   vim.api.nvim_create_user_command('TermToggle', fterm.toggle, { bang = true })
-
   vim.api.nvim_create_user_command('TermRun', function(opts)
     fterm.run(opts.args)
   end, {
@@ -39,8 +37,7 @@ function M.setup()
     desc = 'Open scratch term with provided command'
   })
 
-  vim.keymap.set('', '<M-t>', fterm.toggle, { desc = 'Toggle floating term' })
-  vim.keymap.set('t', '<M-t>', fterm.toggle, { desc = 'Toggle floating term' })
+  vim.keymap.set({ 'n', 'v', 't' }, '<M-t>', fterm.toggle, { desc = 'Toggle floating term' })
 end
 
 return M
