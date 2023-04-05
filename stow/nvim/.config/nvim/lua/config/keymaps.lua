@@ -23,9 +23,6 @@ vim.keymap.set('n', '*', '*zz', { silent = true })
 vim.keymap.set('n', '#', '#zz', { silent = true })
 vim.keymap.set('n', 'g*', 'g*zz', { silent = true })
 vim.keymap.set('n', 'G', 'Gzz', { silent = true })
-vim.keymap.set('n', '<C-o>', '<C-o>zz', { silent = true })
-vim.keymap.set('n', '<C-i>', '<C-i>zz', { silent = true })
-vim.keymap.set('n', '<C-\'>', '<C-\'>zz', { silent = true })
 
 -- Move down/up centered
 vim.keymap.set('n', '<C-d>', '<C-d>zz', { silent = true })
@@ -110,4 +107,5 @@ end
 vim.keymap.set('n', '<C-g>s', ':!git stage %<CR>')
 vim.keymap.set('n', '<C-g><Up>', ':!git push<CR>')
 vim.keymap.set('n', '<C-g><Down>', ':!git pull<CR>')
-vim.keymap.set('n', '<M-v>', 'gv', { silent = true, desc = 'Last selection' })
+
+vim.keymap.set('n', '<M-v>', 'gv', { silent = true, desc = 'Activate previous visual block' })
