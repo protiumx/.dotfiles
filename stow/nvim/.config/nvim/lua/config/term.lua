@@ -3,7 +3,7 @@ local M = {}
 function M.setup()
   local fterm = require('FTerm')
   local term_opts = {
-    hl = 'NormalFloat',
+    hl = 'XMenu',
     border = 'single',
     dimensions = {
       height = 0.3,

@@ -216,9 +216,53 @@ local theme = {
 
 local M = {}
 
-function M.load()
+local function _load(config)
+  for group, hl in pairs(config) do
+    if not vim.tbl_isempty(hl) then
+      vim.api.nvim_set_hl(0, group, hl)
+    end
+  end
+end
+
+function M.setup()
   vim.api.nvim_set_hl(0, 'XMenu', { bg = colors.dark_grey, default = true })
   vim.api.nvim_set_hl(0, 'XMenuBorder', { bg = colors.dark_grey, fg = colors.dark_grey, default = true })
+  vim.api.nvim_create_user_command('ThemeOverrides', M.load_overrides, { bang = true })
+end
+
+-- Preferred overrides for any theme I use
+function M.load_overrides()
+  local config = {
+    CursorLine              = { bg = 'none', fg = 'none' },
+    -- Avoid changing the foreground color
+    FloatBorder             = { link = 'XMenuBorder' },
+    DiagnosticFloatingError = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticFloatingError', true), { bg = colors.dark_grey }),
+    DiagnosticFloatingWarn  = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticFloatingWarn', true), { bg = colors.dark_grey }),
+    DiagnosticFloatingInfo  = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticFloatingInfo', true), { bg = colors.dark_grey }),
+    DiagnosticFloatingHint  = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticFloatingHint', true), { bg = colors.dark_grey }),
+    DiagnosticSignError     = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticSignError', true), { bg = colors.dark_grey }),
+    DiagnosticSignWarn      = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticSignWarn', true), { bg = colors.dark_grey }),
+    DiagnosticSignInfo      = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticSignInfo', true), { bg = colors.dark_grey }),
+    DiagnosticSignHint      = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticSignHint', true), { bg = colors.dark_grey }),
+    -- Telescope
+    TelescopeBorder         = { link = 'XMenuBorder' },
+    TelescopePromptBorder   = { link = 'XMenuBorder' },
+    TelescopePromptNormal   = { link = 'XMenu', fg = colors.foreground },
+    TelescopePromptPrefix   = { link = 'XMenu', fg = colors.foreground },
+    TelescopeNormal         = { bg = colors.background },
+    TelescopePreviewTitle   = { fg = colors.background, bg = colors.light_orange },
+    TelescopePromptTitle    = { fg = colors.background, bg = colors.light_orange },
+    TelescopeResultsTitle   = { fg = colors.background, bg = colors.light_orange },
+    TelescopeResultsBorder  = { link = 'XMenuBorder' },
+    TelescopeResultsNormal  = { link = 'XMenu' },
+    MatchParen              = { bg = 'none', bold = true },
+    Visual                  = { bg = colors.grey, fg = 'none' },
+  }
+  vim.g.terminal_color_0 = colors.dark_grey
+  _load(config)
+end
+
+function M.load()
   for group, hl in pairs(theme) do
     if not vim.tbl_isempty(hl) then
       vim.api.nvim_set_hl(0, group, hl)
