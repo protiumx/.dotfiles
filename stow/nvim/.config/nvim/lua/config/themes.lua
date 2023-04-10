@@ -1,5 +1,48 @@
 local colors = require('config.colors')
 
+-- Base highlights to override themes to my preferences
+local base = {
+  CursorLine             = { bg = 'none', fg = 'none' },
+  -- Avoid changing the foreground color from the main theme
+  FloatBorder            = { link = 'XMenuBorder' },
+  MatchParen             = { bg = 'none', bold = true },
+  Visual                 = { bg = colors.grey, fg = 'none' },
+  ActionPreviewBorder    = { link = 'XMenuBorder' },
+  ActionPreviewNormal    = { link = 'XMenu' },
+  CallHierarchyBorder    = { link = 'XMenuBorder' },
+  CallHierarchyNormal    = { link = 'XMenu' },
+  CodeActionBorder       = { link = 'XMenuBorder' },
+  CodeActionNormal       = { link = 'XMenu' },
+  DefinitionBorder       = { link = 'XMenuBorder' },
+  DefinitionNormal       = { link = 'XMenu' },
+  FinderBorder           = { link = 'XMenuBorder' },
+  FinderNormal           = { link = 'XMenu' },
+  HoverBorder            = { link = 'XMenuBorder' },
+  HoverNormal            = { link = 'XMenu' },
+  OutlinePreviewBorder   = { link = 'XMenuBorder' },
+  OutlinePreviewNormal   = { link = 'XMenu' },
+  RenameBorder           = { link = 'XMenuBorder' },
+  RenameNormal           = { link = 'XMenu' },
+  TerminalBorder         = { link = 'XMenuBorder' },
+  TerminalNormal         = { link = 'XMenu' },
+  SagaNormal             = { link = 'XMenu' },
+  SagaBorder             = { link = 'XMenuBorder' },
+  -- Telescope
+  TelescopeBorder        = { link = 'XMenuBorder' },
+  TelescopePromptBorder  = { link = 'XMenuBorder' },
+  TelescopePromptNormal  = { link = 'XMenu', fg = colors.foreground },
+  TelescopePromptPrefix  = { link = 'XMenu', fg = colors.foreground },
+  TelescopeNormal        = { bg = colors.background },
+  TelescopePreviewBorder = { link = 'XMenuBorder' },
+  TelescopePreviewNormal = { link = 'XMenu', fg = colors.foreground },
+  TelescopePreviewTitle  = { fg = colors.background, bg = colors.light_orange },
+  TelescopePreviewLine   = { fg = colors.background, bg = colors.orange },
+  TelescopePromptTitle   = { fg = colors.background, bg = colors.light_orange },
+  TelescopeResultsTitle  = { fg = colors.background, bg = colors.light_orange },
+  TelescopeResultsBorder = { link = 'XMenuBorder' },
+  TelescopeResultsNormal = { link = 'XMenu' },
+}
+
 local theme = {
   -- Transparent background
   Conceal                    = { bg = 'none', fg = colors.foreground },
@@ -82,30 +125,6 @@ local theme = {
   DiagnosticUnderlineError   = { undercurl = true },
   DiagnosticVirtualTextHint  = { bg = 'none' },
   DiagnosticWarn             = { fg = colors.yellow },
-  -- Telescope
-
-  TelescopeBorder            = { link = 'FloatBorder' },
-  TelescopePromptBorder      = { link = 'XMenuBorder' },
-  TelescopePromptNormal      = { link = 'XMenu', fg = colors.foreground },
-  TelescopePromptPrefix      = { link = 'XMenu', fg = colors.foreground },
-  TelescopeNormal            = { link = 'NormalFloat' },
-  TelescopePreviewTitle      = { fg = colors.background, bg = colors.light_orange },
-  TelescopePromptTitle       = { fg = colors.background, bg = colors.light_orange },
-  TelescopeResultsTitle      = { fg = colors.background, bg = colors.light_orange },
-  -- TelescopeSelection = { bg = colors.black2, fg = colors.white },
-
-  -- TelescopeResultsDiffAdd = {
-  --   fg = colors.green,
-  -- },
-
-  -- TelescopeResultsDiffChange = {
-  --   fg = colors.yellow,
-  -- },
-
-  -- TelescopeResultsDiffDelete = {
-  --   fg = colors.red,
-  -- },
-
   -- nvim cmp
   CmpItemAbbr                = { fg = colors.foreground },
   CmpItemAbbrMatch           = { fg = colors.dark_orange },
@@ -147,10 +166,6 @@ local theme = {
   -- LSPSaga
   OutlinePreviewBorder       = { link = 'NormalFloat' },
   OutlinePreviewNormal       = { link = 'FloatBorder' },
-  SagaNormal                 = { link = 'XMenu' },
-  SagaBorder                 = { link = 'FloatBorder' },
-  RenameNormal               = { link = 'XMenu' },
-  RenameBorder               = { link = 'XMenuBorder' },
   -- Diffview
   DiffViewSignColumn         = { bg = 'none' },
   -- Treesitter
@@ -224,61 +239,35 @@ local function _load(config)
   end
 end
 
+local function _load_diagnostics()
+  local diagnostics = {
+    DiagnosticFloatingError = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticFloatingError', true), { bg = colors.dark_grey }),
+    DiagnosticFloatingWarn  = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticFloatingWarn', true), { bg = colors.dark_grey }),
+    DiagnosticFloatingInfo  = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticFloatingInfo', true), { bg = colors.dark_grey }),
+    DiagnosticFloatingHint  = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticFloatingHint', true), { bg = colors.dark_grey }),
+    DiagnosticSignError     = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticSignError', true), { bg = colors.dark_grey }),
+    DiagnosticSignWarn      = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticSignWarn', true), { bg = colors.dark_grey }),
+    DiagnosticSignInfo      = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticSignInfo', true), { bg = colors.dark_grey }),
+    DiagnosticSignHint      = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticSignHint', true), { bg = colors.dark_grey }),
+  }
+  _load(diagnostics)
+end
+
 function M.setup()
   vim.api.nvim_set_hl(0, 'XMenu', { bg = colors.dark_grey, default = true })
   vim.api.nvim_set_hl(0, 'XMenuBorder', { bg = colors.dark_grey, fg = colors.dark_grey, default = true })
-  vim.api.nvim_create_user_command('ThemeOverrides', M.load_overrides, { bang = true })
-end
-
--- Preferred overrides for any theme I use
-function M.load_overrides()
-  local config = {
-    CursorLine              = { bg = 'none', fg = 'none' },
-    -- Avoid changing the foreground color
-    FloatBorder             = { link = 'XMenuBorder' },
-    DiagnosticFloatingError = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticFloatingError', true),
-      { bg = colors.dark_grey }),
-    DiagnosticFloatingWarn  = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticFloatingWarn', true),
-      { bg = colors.dark_grey }),
-    DiagnosticFloatingInfo  = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticFloatingInfo', true),
-      { bg = colors.dark_grey }),
-    DiagnosticFloatingHint  = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticFloatingHint', true),
-      { bg = colors.dark_grey }),
-    DiagnosticSignError     = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticSignError', true),
-      { bg = colors.dark_grey }),
-    DiagnosticSignWarn      = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticSignWarn', true),
-      { bg = colors.dark_grey }),
-    DiagnosticSignInfo      = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticSignInfo', true),
-      { bg = colors.dark_grey }),
-    DiagnosticSignHint      = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticSignHint', true),
-      { bg = colors.dark_grey }),
-    -- Telescope
-    TelescopeBorder         = { link = 'XMenuBorder' },
-    TelescopePromptBorder   = { link = 'XMenuBorder' },
-    TelescopePromptNormal   = { link = 'XMenu', fg = colors.foreground },
-    TelescopePromptPrefix   = { link = 'XMenu', fg = colors.foreground },
-    TelescopeNormal         = { bg = colors.background },
-    TelescopePreviewBorder  = { link = 'XMenuBorder' },
-    TelescopePreviewNormal  = { link = 'XMenu', fg = colors.foreground },
-    TelescopePreviewTitle   = { fg = colors.background, bg = colors.light_orange },
-    TelescopePreviewLine    = { fg = colors.background, bg = colors.orange },
-    TelescopePromptTitle    = { fg = colors.background, bg = colors.light_orange },
-    TelescopeResultsTitle   = { fg = colors.background, bg = colors.light_orange },
-    TelescopeResultsBorder  = { link = 'XMenuBorder' },
-    TelescopeResultsNormal  = { link = 'XMenu' },
-    MatchParen              = { bg = 'none', bold = true },
-    Visual                  = { bg = colors.grey, fg = 'none' },
-  }
   vim.g.terminal_color_0 = colors.dark_grey
-  _load(config)
 end
 
-function M.load()
-  for group, hl in pairs(theme) do
-    if not vim.tbl_isempty(hl) then
-      vim.api.nvim_set_hl(0, group, hl)
-    end
+function M.load(full)
+  _load(base)
+  _load_diagnostics()
+
+  if not full then
+    return
   end
+
+  _load(theme)
 end
 
 return M
