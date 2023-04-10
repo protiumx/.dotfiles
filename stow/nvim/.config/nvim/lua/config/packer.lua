@@ -25,6 +25,13 @@ vim.cmd [[packadd packer.nvim]]
 
 local packer = require('packer')
 
+local packer_group = vim.api.nvim_create_augroup('Packer', { clear = true })
+vim.api.nvim_create_autocmd('BufWritePost', {
+  command = 'source <afile> | PackerCompile',
+  group = packer_group,
+  pattern = vim.fn.expand('$MYVIMRC'),
+})
+
 packer.reset()
 packer.init({
   auto_clean = true,
@@ -267,6 +274,7 @@ return packer.startup(function(use)
   use({
     'neovim/nvim-lspconfig',
     ft = {
+      'c',
       'go',
       'lua',
       'json',
