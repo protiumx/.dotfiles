@@ -13,6 +13,8 @@ local function keymaps()
   end
 
   local dropdown = themes.get_dropdown({
+    hidden = true,
+    no_ignore = true,
     previewer = false,
     prompt_title = '',
     preview_title = '',
@@ -50,7 +52,7 @@ local function keymaps()
     callback = function()
       -- Open file browser if argument is a folder
       local arg = vim.api.nvim_eval('argv(0)')
-      if arg and vim.fn.isdirectory(arg) then
+      if arg and vim.fn.isdirectory(arg) ~= 0 then
         builtin.find_files(with_title(dropdown))
       end
     end
@@ -74,11 +76,11 @@ local function keymaps()
 
   map({ 'i', 'n' }, '<C-b>', function() builtin.buffers(dropdown) end, 'Find buffers')
 
-  map('n', '<M-f>', function()
+  map({ 'i', 'n' }, '<M-f>', function()
     telescope.extensions.file_browser.file_browser(with_title(opts_file_browser))
   end, 'Browse files relative to buffer')
 
-  map('n', '<M-F>', function()
+  map({ 'i', 'n' }, '<M-F>', function()
     telescope.extensions.file_browser.file_browser({
       path = '%:p:h',
       grouped = true,
@@ -86,32 +88,32 @@ local function keymaps()
     })
   end, 'Browse files relative to buffer with preview')
 
-  map('n', '<M-s>g', function()
+  map({ 'i', 'n' }, '<M-s>g', function()
     builtin.live_grep(with_title({}))
   end, '[S]earch Live [G]rep')
 
-  map('n', '<M-s>G', function()
+  map({ 'i', 'n' }, '<M-s>G', function()
     builtin.live_grep(with_title({ cwd = vim.fn.expand('%:p:h') }))
   end, '[S]earch Live [G]rep relative buffer')
 
-  map('n', '<M-s>w', function()
+  map({ 'i', 'n' }, '<M-s>w', function()
     builtin.grep_string(with_title({}))
   end, '[S]earch [W]ord under cursor in cwd')
 
-  map('n', '<M-s>W', function()
+  map({ 'i', 'n' }, '<M-s>W', function()
     builtin.grep_string(with_title({ cwd = vim.fn.expand('%:p:h') }))
   end, '[S]earch [W]ord under cursor in cwd relative to buffer')
 
   map('n', '<M-s>h', builtin.help_tags, '[S]earch [H]elp')
   map('n', '<M-s>k', builtin.keymaps, '[S]earch [K]eymaps')
 
-  map('n', '<M-s>/', function()
+  map({ 'i', 'n' }, '<M-s>/', function()
     builtin.current_buffer_fuzzy_find({
       theme = 'dropdown',
     })
   end, 'Fuzzy search in buffer')
 
-  map('n', '<M-s>s', function()
+  map({ 'i', 'n' }, '<M-s>s', function()
     builtin.spell_suggest(themes.get_cursor())
   end, '[S]pell [S]uggestions')
 
@@ -120,10 +122,10 @@ local function keymaps()
   map('n', '<C-g>C', builtin.git_commits, '[G]it [C]ommits')
 
   map('n', '<M-s>d', builtin.diagnostics, '[S]earch [D]iagnostics')
-  map('n', '<M-s>S', builtin.lsp_document_symbols, '[S]earch [S]ymbols (LSP)')
-  map('n', '<M-s>r', builtin.resume, 'Resume last search')
+  map({ 'i', 'n' }, '<M-s>S', builtin.lsp_document_symbols, '[S]earch [S]ymbols (LSP)')
+  map({ 'i', 'n' }, '<M-s>r', builtin.resume, 'Resume last search')
   map('n', '<M-s>p', builtin.pickers, '[S]earch [P]revious pickers')
-  map('n', '<M-s>t', function() builtin.treesitter(dropdown) end, '[S]earch [T]reesitter')
+  map({ 'i', 'n' }, '<M-s>t', function() builtin.treesitter(dropdown) end, '[S]earch [T]reesitter')
 
   -- Projects
   map('n', '<M-s>P', function()
@@ -141,7 +143,7 @@ local function keymaps()
 
   -- Rg with args
 
-  map('n', '<M-s>f', telescope.extensions.live_grep_args.live_grep_args, 'Ripgrep with args')
+  map({ 'i', 'n' }, '<M-s>f', telescope.extensions.live_grep_args.live_grep_args, 'Ripgrep with args')
 end
 
 function M.setup()
@@ -194,6 +196,7 @@ function M.setup()
     },
     extensions = {
       file_browser = {
+        respect_gitignore = false,
         grouped = true,
         hidden = true,
         git_status = false,
