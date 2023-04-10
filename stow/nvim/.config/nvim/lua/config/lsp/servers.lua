@@ -39,13 +39,11 @@ local servers = {
     filetypes = { 'sh', 'zsh' },
   },
   gopls = {
-    gofumpt = true,
-    experimentalPostfixCompletions = true,
     analyses = {
       unusedparams = true,
+      unusedvariable = true,
+      useany = true,
     },
-    staticcheck = true,
-    linksInHover = false,
     codelenses = {
       generate = true,
       gc_details = true,
@@ -54,6 +52,10 @@ local servers = {
       upgrade_depdendency = true,
       vendor = true,
     },
+    experimentalPostfixCompletions = true,
+    gofumpt = true,
+    linksInHover = false,
+    staticcheck = true,
     usePlaceholders = true,
   },
   lua_ls = {
