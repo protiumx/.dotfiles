@@ -6,8 +6,10 @@ vim.g.mapleader = ' '
 vim.keymap.set('n', '<Leader>d', '"_d', { silent = true })
 vim.keymap.set('v', '<Leader>d', '"_d', { silent = true })
 
--- Insert date time as YYYY-MM-DD-HH:mm
-vim.keymap.set('n', '<Leader>pb', '"=strftime("%Y%m%d%H%M")<CR>p')
+-- Insert current date as ISO YYYY-MM-DD-HH:mm
+vim.keymap.set('n', '<Leader>id', '"=strftime("%Y-%m-%dT%H:%M")<CR>p')
+-- Insert build date
+vim.keymap.set('n', '<Leader>bd', '"=strftime("%Y%m%d%H%M")<CR>p')
 
 -- Prepare replace all occurrences of word under cursor
 vim.keymap.set('n', '<Leader>wr', [[:%s/\<<C-r><C-w>\>//g<Left><Left>]])
@@ -36,7 +38,7 @@ vim.keymap.set('i', '<C-k>', '<Esc>:m .-2<CR>==gi', { silent = true })
 vim.keymap.set('v', 'J', ':m \'>+1<CR>gv=gv', { silent = true })
 vim.keymap.set('v', 'K', ':m \'<-2<CR>gv=gv', { silent = true })
 
--- Join line with cursor at beginning of line
+-- Join line with cursor at beginning of line using z as mark
 vim.keymap.set("n", "J", "mzJ`z", { silent = true })
 
 -- Resize windows
@@ -45,12 +47,6 @@ vim.keymap.set('n', '<Leader><Down>', ':resize +2<CR>', { silent = true })
 vim.keymap.set('n', '<Leader><Left>', ':vertical resize +2<CR>', { silent = true })
 vim.keymap.set('n', '<Leader><Right>', ':vertical resize -2<CR>', { silent = true })
 
--- Copy to system clipboard
-if macos then
-  vim.keymap.set('v', '<C-y>', '"*y', { silent = true })
-else
-  vim.keymap.set('v', '<C-y>', '"+y', { silent = true })
-end
 
 -- Toggle between current and prev buffers
 vim.keymap.set('n', '``', '<C-^>', { silent = true })
@@ -94,13 +90,16 @@ vim.keymap.set('n', '<F10>', ':vs term://zsh<CR>', { silent = true })
 vim.keymap.set('t', '<C-q>', '<C-\\><C-n>:bd!<CR>', { silent = true })
 -- Esc goes to normal mode
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { silent = true })
+
 vim.keymap.set('n', '<Leader>S', ':mks! .session.vim<CR>')
 
--- Copy current file relative path to clipboard
 if macos then
-  vim.keymap.set('n', '<Leader>P', ':let @*=expand("%:~:.")<CR>')
+  -- Copy to system clipboard
+  vim.keymap.set('v', '<C-y>', '"*y', { silent = true })
+  vim.keymap.set('n', '<Leader>P', ':let @*=expand("%:~:.")<CR>', { desc = 'copy current path to clipboard' })
 else
-  vim.keymap.set('n', '<Leader>P', ':let @+=expand("%:~:.")<CR>')
+  vim.keymap.set('v', '<C-y>', '"+y', { silent = true })
+  vim.keymap.set('n', '<Leader>P', ':let @+=expand("%:~:.")<CR>', { desc = 'copy current path to clipboard' })
 end
 
 -- Git
@@ -109,3 +108,5 @@ vim.keymap.set('n', '<C-g><Up>', ':!git push<CR>')
 vim.keymap.set('n', '<C-g><Down>', ':!git pull<CR>')
 
 vim.keymap.set('n', '<M-v>', 'gv', { silent = true, desc = 'Activate previous visual block' })
+vim.keymap.set('i', '<M-v>', '<Esc>v', { silent = true, desc = 'Activate Visual Mode' })
+vim.keymap.set('i', '<M-V>', '<Esc>V', { silent = true, desc = 'Activate Visual Line Mode' })
