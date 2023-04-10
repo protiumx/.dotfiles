@@ -1,6 +1,8 @@
 local colors = require('config.colors')
 local themes = require('config.themes')
 
+themes.setup()
+
 -- vim.cmd("colorscheme PaperColor")
 -- vim.g['PaperColor_Theme_Options'] = {
 --   theme = {
@@ -26,5 +28,4 @@ require("gruvbox").setup({
 })
 vim.cmd("colorscheme gruvbox")
 
-themes.setup()
-themes.load_overrides()
+themes.load(false)
