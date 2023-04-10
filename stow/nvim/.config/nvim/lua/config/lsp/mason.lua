@@ -25,7 +25,9 @@ local function setup_autocmd(bufnr)
   vim.api.nvim_create_autocmd('BufWritePre', {
     group = 'lsp_format',
     pattern = '*',
-    callback = vim.lsp.buf.formatting_sync,
+    callback = function()
+      vim.lsp.buf.format()
+    end,
   })
 
   vim.api.nvim_create_autocmd('BufWritePre', {
@@ -37,20 +39,23 @@ local function setup_autocmd(bufnr)
   })
 end
 
-local on_attach = function(client, bufnr)
+local on_lsp_attach = function(client, bufnr)
   if client.name == 'eslint' then
     vim.cmd.LspStop('eslint')
     return
   end
 
-  -- if client.name == "yamlls" then
-  --   client.server_capabilities.documentFormattingProvider = true
-  -- end
+  if client.name == "yamlls" then
+    client.server_capabilities.documentFormattingProvider = true
+  end
 
   local colors = require('config.colors')
   require('config.lsp.keymaps').setup(bufnr)
 
   setup_autocmd(bufnr)
+
+  -- open diagnostic on cursor hold
+  vim.cmd [[autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focus = false })]]
 
   if client.server_capabilities.documentHighlightProvider then
     vim.api.nvim_set_hl(0, 'LspReferenceRead', { fg = colors.accent })
@@ -84,9 +89,6 @@ local on_attach = function(client, bufnr)
     --   end
     -- })
   end
-
-  -- open diagnostic on cursor hold
-  vim.cmd [[autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focus = false })]]
 end
 
 
@@ -129,11 +131,20 @@ function M.setup()
     function(server_name)
       require('lspconfig')[server_name].setup {
         capabilities = capabilities,
-        on_attach = on_attach,
         settings = servers[server_name],
       }
     end,
   }
+
+
+  vim.api.nvim_create_autocmd("LspAttach", {
+    group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+    callback = function(args)
+      local bufnr = args.buf
+      local client = vim.lsp.get_client_by_id(args.data.client_id)
+      on_lsp_attach(client, bufnr)
+    end,
+  })
 end
 
 return M
