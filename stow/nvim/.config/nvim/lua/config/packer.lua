@@ -1,3 +1,4 @@
+---@diagnostic disable: different-requires
 -- Automatically install packer
 local fn = vim.fn
 local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
@@ -24,13 +25,6 @@ end
 vim.cmd [[packadd packer.nvim]]
 
 local packer = require('packer')
-
-local packer_group = vim.api.nvim_create_augroup('Packer', { clear = true })
-vim.api.nvim_create_autocmd('BufWritePost', {
-  command = 'source <afile> | PackerCompile',
-  group = packer_group,
-  pattern = vim.fn.fnamemodify(vim.fn.expand('$MYVIMRC'), ':h') .. '/lua/config/packer.lua'
-})
 
 packer.reset()
 packer.init({
@@ -270,6 +264,22 @@ return packer.startup(function(use)
     requires = 'nvim-lua/plenary.nvim',
   })
 
+  -- Autocompletion
+  use({
+    'hrsh7th/nvim-cmp',
+    requires = {
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-nvim-lua',
+      'hrsh7th/cmp-nvim-lsp-signature-help',
+      'saadparwaiz1/cmp_luasnip',
+    },
+    config = function()
+      require('config.lsp.cmp').setup()
+    end
+  })
+
   -- LSP
   use({
     'neovim/nvim-lspconfig',
@@ -290,14 +300,6 @@ return packer.startup(function(use)
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
 
-      -- Autocompletion
-      'hrsh7th/nvim-cmp',
-      'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-path',
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-nvim-lua',
-      'hrsh7th/cmp-nvim-lsp-signature-help',
-      'saadparwaiz1/cmp_luasnip',
 
       -- Snippets
       'L3MON4D3/LuaSnip',

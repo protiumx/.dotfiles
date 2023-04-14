@@ -1,9 +1,7 @@
----@diagnostic disable: different-requires
 local M = {}
 
 function M.setup()
   require('config.lsp.mason').setup()
-  require('config.lsp.cmp').setup()
   require('config.lsp.saga').setup()
   require('fidget').setup({
     text = {
