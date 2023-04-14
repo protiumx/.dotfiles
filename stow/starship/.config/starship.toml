@@ -24,7 +24,17 @@ $zig\
 $cmd_duration\
 $status\
 $line_break\
-$character"""
+$time $character"""
+
+[character]
+success_symbol = "[|](bold green)"
+error_symbol = "[|](bold red)"
+
+[time]
+disabled = false
+format = '[\[$time\]]($style)'
+style = "fg:#4e4e4e"
+time_format = "%H:%M"
 
 [memory_usage]
 disabled = false
@@ -71,7 +81,7 @@ truncate_to_repo = false
 truncation_length = 1
 style = "#0c90ad"
 read_only = " "
-format = '[\[$path\]]($style)[$read_only]($read_only_style) '
+format = '[$path]($style)[$read_only]($read_only_style) '
 
 [c]
 format = "[$symbol($version(-$name) )]($style)"
