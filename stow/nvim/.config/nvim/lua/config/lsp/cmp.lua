@@ -77,7 +77,6 @@ function M.setup()
       end
     },
     mapping = cmp.mapping.preset.insert({
-
       ['<CR>'] = cmp.mapping.confirm({
         behavior = cmp.ConfirmBehavior.Replace,
         select = true,

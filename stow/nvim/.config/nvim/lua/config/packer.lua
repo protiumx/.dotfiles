@@ -29,7 +29,7 @@ local packer_group = vim.api.nvim_create_augroup('Packer', { clear = true })
 vim.api.nvim_create_autocmd('BufWritePost', {
   command = 'source <afile> | PackerCompile',
   group = packer_group,
-  pattern = vim.fn.expand('$MYVIMRC'),
+  pattern = vim.fn.fnamemodify(vim.fn.expand('$MYVIMRC'), ':h') .. '/lua/config/packer.lua'
 })
 
 packer.reset()
@@ -304,16 +304,7 @@ return packer.startup(function(use)
       'rafamadriz/friendly-snippets',
 
       -- Show lsp progress
-      {
-        'j-hui/fidget.nvim',
-        config = function()
-          require('fidget').setup({
-            window = {
-              blend = 0,
-            }
-          })
-        end
-      },
+      'j-hui/fidget.nvim',
 
       -- Better UI for LSP commands
       {

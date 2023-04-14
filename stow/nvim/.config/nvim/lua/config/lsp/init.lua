@@ -1,3 +1,4 @@
+---@diagnostic disable: different-requires
 local M = {}
 
 function M.setup()
@@ -7,6 +8,9 @@ function M.setup()
   require('fidget').setup({
     text = {
       done = "",
+    },
+    window = {
+      blend = 0,
     }
   })
 
