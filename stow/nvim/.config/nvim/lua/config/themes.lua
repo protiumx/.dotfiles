@@ -5,7 +5,7 @@ local base = {
   CursorLine             = { bg = 'none', fg = 'none' },
   -- Avoid changing the foreground color from the main theme
   FloatBorder            = { link = 'XMenuBorder' },
-  MatchParen             = { bg = 'none', bold = true },
+  MatchParen             = { fg = colors.accent, bg = 'none', bold = true },
   Visual                 = { bg = colors.grey, fg = 'none' },
   ActionPreviewBorder    = { link = 'XMenuBorder' },
   ActionPreviewNormal    = { link = 'XMenu' },
@@ -27,6 +27,9 @@ local base = {
   TerminalNormal         = { link = 'XMenu' },
   SagaNormal             = { link = 'XMenu' },
   SagaBorder             = { link = 'XMenuBorder' },
+  -- Mason
+  MasonHeader            = { link = 'XMenu' },
+  MasonNormal            = { link = 'XMenu' },
   -- Telescope
   TelescopeBorder        = { link = 'XMenuBorder' },
   TelescopePromptBorder  = { link = 'XMenuBorder' },
@@ -241,14 +244,22 @@ end
 
 local function _load_diagnostics()
   local diagnostics = {
-    DiagnosticFloatingError = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticFloatingError', true), { bg = colors.dark_grey }),
-    DiagnosticFloatingWarn  = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticFloatingWarn', true), { bg = colors.dark_grey }),
-    DiagnosticFloatingInfo  = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticFloatingInfo', true), { bg = colors.dark_grey }),
-    DiagnosticFloatingHint  = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticFloatingHint', true), { bg = colors.dark_grey }),
-    DiagnosticSignError     = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticSignError', true), { bg = colors.dark_grey }),
-    DiagnosticSignWarn      = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticSignWarn', true), { bg = colors.dark_grey }),
-    DiagnosticSignInfo      = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticSignInfo', true), { bg = colors.dark_grey }),
-    DiagnosticSignHint      = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticSignHint', true), { bg = colors.dark_grey }),
+    DiagnosticFloatingError = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticFloatingError', true),
+      { bg = colors.dark_grey }),
+    DiagnosticFloatingWarn  = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticFloatingWarn', true),
+      { bg = colors.dark_grey }),
+    DiagnosticFloatingInfo  = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticFloatingInfo', true),
+      { bg = colors.dark_grey }),
+    DiagnosticFloatingHint  = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticFloatingHint', true),
+      { bg = colors.dark_grey }),
+    DiagnosticSignError     = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticSignError', true),
+      { bg = colors.dark_grey }),
+    DiagnosticSignWarn      = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticSignWarn', true),
+      { bg = colors.dark_grey }),
+    DiagnosticSignInfo      = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticSignInfo', true),
+      { bg = colors.dark_grey }),
+    DiagnosticSignHint      = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticSignHint', true),
+      { bg = colors.dark_grey }),
   }
   _load(diagnostics)
 end
