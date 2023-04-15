@@ -49,6 +49,7 @@ local mode_colors = {
 local base_theme = {
   a = {},
   b = { bg = 'none', fg = colors.blue },
+  w = { bg = 'none' },
   x = { bg = 'none', fg = colors.purple },
   y = { bg = 'none', fg = colors.light_grey },
   z = { bg = 'none', fg = colors.light_grey },
@@ -104,11 +105,9 @@ function M.setup()
       lualine_a = {
         {
           'mode',
-
           fmt = function()
             return '| ' .. modes[vim.fn.mode()] .. ' '
           end,
-
           color = function()
             local val = {
               fg = mode_colors[vim.fn.mode()],
@@ -128,8 +127,7 @@ function M.setup()
           end
         },
       },
-
-      lualine_w = { 'diagnostics' },
+      lualine_w = { { 'diagnostics', sources = { 'nvim_diagnostic' } } },
       lualine_x = { 'branch' },
       lualine_y = { 'location' },
       lualine_z = { { 'progress', fmt = string.lower } },
