@@ -27,8 +27,8 @@ $line_break\
 $time $character"""
 
 [character]
-success_symbol = "[|](bold green)"
-error_symbol = "[|](bold red)"
+success_symbol = "[|](bold #af87d7)"
+error_symbol = "[|](bold #af87d7)"
 
 [time]
 disabled = false
