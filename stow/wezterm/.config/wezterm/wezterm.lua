@@ -95,10 +95,9 @@ local keys = {
 
   {
     key = 'S',
-    mods = 'SHIFT|CMD',
+    mods = 'SHIFT|' .. key_mod_panes,
     action = act.PaneSelect,
   },
-
 
   -- Tabs
   {
@@ -252,15 +251,29 @@ end
 wezterm.on(
   'format-tab-title',
   function(tab, tabs, panes, config, hover, max_width)
-    return wezterm.format({
-      { Attribute = { Intensity = 'Half' } },
-      { Text = string.format(' %s  ', wezterm.nerdfonts.fa_chevron_right) },
-      'ResetAttributes',
-      { Text = get_process(tab) },
-      { Text = ' ~ ' },
-      { Text = get_current_working_dir(tab) },
-      { Text = '  ' },
-    })
+    local has_unseen_output = false
+    if not tab.is_active then
+      for _, pane in ipairs(tab.panes) do
+        if pane.has_unseen_output then
+          has_unseen_output = true
+          break
+        end
+      end
+    end
+
+    local title = string.format(' %s  %s ~ %s  ', wezterm.nerdfonts.fa_chevron_right, get_process(tab),
+      get_current_working_dir(tab))
+
+    if has_unseen_output then
+      return {
+        { Foreground = { Color = 'Orange' } },
+        { Text = title },
+      }
+    end
+
+    return {
+      { Text = title },
+    }
   end
 )
 
