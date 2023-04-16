@@ -27,13 +27,13 @@ $line_break\
 $time $character"""
 
 [character]
-success_symbol = "[|](bold #af87d7)"
-error_symbol = "[|](bold #af87d7)"
+success_symbol = "[|](bold #e46876)"
+error_symbol = "[|](bold #e46876)"
 
 [time]
 disabled = false
 format = '[\[$time\]]($style)'
-style = "fg:#4e4e4e"
+style = "fg:#5e5e5e"
 time_format = "%H:%M"
 
 [memory_usage]
@@ -45,10 +45,10 @@ format = "[$symbol ${ram}]($style)"
 [git_branch]
 symbol = " "
 format = "[$symbol$branch(:$remote_branch)]($style) "
-style = "fg:#d13e11"
+style = "fg:#a9a1e1"
 
 [git_status]
-format = '([\[ $all_status$ahead_behind\]]($style) )'
+format = '([\( $all_status$ahead_behind\)]($style) )'
 diverged = " ﰛ${ahead_count} ﰗ${behind_count} "
 conflicted = "=${count} "
 behind = "ﰗ${count} "
@@ -59,7 +59,7 @@ stashed = "~${count} "
 staged = "+${count} "
 deleted = "x${count} "
 renamed = "»${count} "
-style = "fg:#d13e11"
+style = "fg:#a9a1e1"
 
 [status]
 disabled = false
