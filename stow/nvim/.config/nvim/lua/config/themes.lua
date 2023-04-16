@@ -25,6 +25,7 @@ local base = {
   RenameNormal           = { link = 'XMenu' },
   TerminalBorder         = { link = 'XMenuBorder' },
   TerminalNormal         = { link = 'XMenu' },
+  Todo                   = { fg = colors.orange, bold = true },
   SagaNormal             = { link = 'XMenu' },
   SagaBorder             = { link = 'XMenuBorder' },
   -- Mason
