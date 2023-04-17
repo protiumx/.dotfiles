@@ -1,10 +1,11 @@
 local M = {}
 
 local function keymaps()
+  local utils = require('config.utils')
+  local plenary = require('plenary.path')
   local telescope = require('telescope')
   local builtin = require('telescope.builtin')
   local themes = require('telescope.themes')
-  local Path = require('plenary.path')
 
   local map = function(mode, l, r, desc)
     local opts = { silent = true, desc = '[Telescope] ' .. desc }
@@ -35,7 +36,7 @@ local function keymaps()
     local buf_path = vim.fn.expand('%:p:h')
     local cwd = vim.fn.getcwd()
     if path ~= nil and buf_path ~= cwd then
-      title = Path:new(buf_path):make_relative(cwd)
+      title = plenary:new(buf_path):make_relative(cwd)
     else
       title = vim.fn.fnamemodify(cwd, ':t')
     end
@@ -88,16 +89,21 @@ local function keymaps()
     })
   end, 'Browse files relative to buffer with preview')
 
-  map({ 'i', 'n' }, '<M-s>g', function()
+  map({ 'i', 'n' }, '<M-g>', function()
     builtin.live_grep(with_title({}))
   end, '[S]earch Live [G]rep')
 
-  map({ 'i', 'n' }, '<M-s>G', function()
+  map({ 'i', 'n' }, '<M-G>', function()
     builtin.live_grep(with_title({ cwd = vim.fn.expand('%:p:h') }))
   end, '[S]earch Live [G]rep relative buffer')
 
+  map({ 'v' }, '<M-s>g', function()
+    local search = utils.vtext()
+    builtin.grep_string({ search = search })
+  end, '[S]earch Live [G]rep from visual selection')
+
   map({ 'i', 'n' }, '<M-s>w', function()
-    builtin.grep_string(with_title({}))
+    builtin.grep_string({})
   end, '[S]earch [W]ord under cursor in cwd')
 
   map({ 'i', 'n' }, '<M-s>W', function()
@@ -107,7 +113,7 @@ local function keymaps()
   map('n', '<M-s>h', builtin.help_tags, '[S]earch [H]elp')
   map('n', '<M-s>k', builtin.keymaps, '[S]earch [K]eymaps')
 
-  map({ 'i', 'n' }, '<M-s>/', function()
+  map({ 'i', 'n' }, '<M-/>', function()
     builtin.current_buffer_fuzzy_find({
       theme = 'dropdown',
     })
