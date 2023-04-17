@@ -11,7 +11,7 @@ function M.setup(bufnr)
 
   nmap('gy', vim.lsp.buf.type_definition, 'Show type definition')
   nmap('gi', vim.lsp.buf.implementation, 'Go to implementation')
-  nmap('gd', '<cmd>lua vim.lsp.buf.definition()<CR>zz', 'Go to definition')
+  -- nmap('gd', '<cmd>lua vim.lsp.buf.definition()<CR>zz', 'Go to definition')
   nmap('[d', vim.diagnostic.goto_prev, 'Go to prev diagnostic')
   nmap(']d', vim.diagnostic.goto_next, 'Go to next diagnostic')
   nmap('[e', function()
