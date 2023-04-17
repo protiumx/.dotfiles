@@ -16,19 +16,18 @@ local servers = {
     }
   },
   yamlls = {
-    settings = {
-      yaml = {
-        keyOrdering = false,
-        format = {
-          enable = true,
-          proseWrap = 'never',
-          printWidth = 200,
-        },
-        validate = true,
-        schemaStore = {
-          enable = true,
-        },
+    yaml = {
+      completion = true,
+      format = {
+        enable = true,
+        proseWrap = 'never',
+        printWidth = 200,
       },
+      keyOrdering = false,
+      schemaStore = {
+        enable = true,
+      },
+      validate = true,
     },
   },
   terraformls = {},
