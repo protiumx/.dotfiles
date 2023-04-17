@@ -44,8 +44,9 @@ packages=(
   procs                    #  https://github.com/dalance/procs/
   python3
   protobuf
-  ripgrep                  #  https://github.com/BurntSushi/ripgrep
+  ripgrep                  #  https://github.com/BurntSushi/ripgre
   rustup
+  sd                       #  https://github.com/chmln/sd
   shellcheck
   stow
   telnet
