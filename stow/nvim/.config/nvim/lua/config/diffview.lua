@@ -26,6 +26,13 @@ function M.setup()
         height = 40,
       },
     },
+    hooks = {
+      diff_buf_read = function(bufnr)
+        vim.opt_local.wrap = false
+        vim.opt_local.list = false
+        vim.opt_local.relativenumber = false
+      end,
+    },
     keymaps = {
       view = {
         { 'n', '<C-o>',     actions.goto_file_tab, { desc = 'Open the file in a new tabpage' } },
