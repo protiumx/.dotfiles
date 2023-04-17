@@ -108,6 +108,11 @@ local keys = {
   { key = 'T',   mods = 'SHIFT|' .. key_mod_panes, action = act.ShowTabNavigator },
   { key = 'Tab', mods = 'SHIFT|CTRL',              action = act.ActivateTabRelative(-1) },
   { key = 'Tab', mods = 'CTRL',                    action = act.ActivateTabRelative(1) },
+  {
+    key = '(',
+    mods = 'CMD',
+    action = act.ActivateLastTab,
+  },
 
 
   {
@@ -347,7 +352,7 @@ local config = {
       font = wezterm.font(cascadia_font, { weight = 'DemiBold', stretch = 'Normal', style = 'Normal', italic = false }),
     },
   },
-  font_size = is_windows and 14.0 or 18.0,
+  font_size = is_windows and 14.0 or 18.6,
   -- Disable font ligatures
   harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
   hide_tab_bar_if_only_one_tab = true,
