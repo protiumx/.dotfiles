@@ -89,11 +89,11 @@ local function keymaps()
     })
   end, 'Browse files relative to buffer with preview')
 
-  map({ 'i', 'n' }, '<M-g>', function()
+  map({ 'i', 'n' }, '<M-G>', function()
     builtin.live_grep(with_title({}))
   end, '[S]earch Live [G]rep')
 
-  map({ 'i', 'n' }, '<M-G>', function()
+  map({ 'i', 'n' }, '<M-g>', function()
     builtin.live_grep(with_title({ cwd = vim.fn.expand('%:p:h') }))
   end, '[S]earch Live [G]rep relative buffer')
 

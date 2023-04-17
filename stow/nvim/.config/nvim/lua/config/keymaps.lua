@@ -47,7 +47,6 @@ vim.keymap.set('n', '<Leader><Down>', ':resize +2<CR>', { silent = true })
 vim.keymap.set('n', '<Leader><Left>', ':vertical resize +2<CR>', { silent = true })
 vim.keymap.set('n', '<Leader><Right>', ':vertical resize -2<CR>', { silent = true })
 
-
 -- Toggle between current and prev buffers
 vim.keymap.set('n', '``', '<C-^>', { silent = true })
 
