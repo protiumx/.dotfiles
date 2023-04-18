@@ -139,7 +139,7 @@ local function keymaps()
   end, '[S]earch [P]rojects')
 
   -- Neoclip
-  map({ 'n', 'i' }, '<M-y>', function()
+  map({ 'n', 'i', 'v', 'x' }, '<M-y>', function()
     telescope.extensions.neoclip.default(themes.get_dropdown())
   end, 'Search Yanks')
 
