@@ -2,13 +2,13 @@ local M = {}
 
 function M.setup()
   -- `s` is used for vim-sneak
-  vim.keymap.set('n', 'za', '<Plug>(sandwich-add)', { remap = true })
+  vim.keymap.set('n', '<M-s>a', '<Plug>(sandwich-add)', { remap = true })
   vim.keymap.set({ 'x', 'o', 'v' }, 'sa', '<Plug>(sandwich-add)', { remap = true })
 
-  vim.keymap.set('n', 'zdb', '<Plug>(sandwich-delete-auto)', { remap = true })
+  vim.keymap.set('n', '<M-s>d', '<Plug>(sandwich-delete-auto)', { remap = true })
   vim.keymap.set({ 'x', 'o', 'v' }, 'sd', '<Plug>(sandwich-delete)', { remap = true })
 
-  vim.keymap.set('n', 'zrb', '<Plug>(sandwich-replace-auto)', { remap = true })
+  vim.keymap.set('n', '<M-s>r', '<Plug>(sandwich-replace-auto)', { remap = true })
   vim.keymap.set({ 'x', 'o', 'v' }, 'sr', '<Plug>(sandwich-replace)', { remap = true })
 
   -- Additional text objects e.g. via to select inner text with auto detection
