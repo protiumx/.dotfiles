@@ -203,10 +203,11 @@ return packer.startup(function(use)
     },
   })
 
-  use({
-    'arthurxavierx/vim-caser',
-    cmd = { 'CaserCamelCase', 'CaserSnakeCase', 'CaserUpperCase', 'CaserKebabCase' },
-  })
+  use { "johmsalas/text-case.nvim",
+    config = function()
+      require('textcase').setup {}
+    end
+  }
 
   -- Change surroundings
   use({
