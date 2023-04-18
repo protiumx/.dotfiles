@@ -273,6 +273,7 @@ return packer.startup(function(use)
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-nvim-lua',
       'hrsh7th/cmp-nvim-lsp-signature-help',
+      'f3fora/cmp-spell',
       'saadparwaiz1/cmp_luasnip',
     },
     config = function()
