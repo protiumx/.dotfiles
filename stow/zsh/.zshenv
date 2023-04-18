@@ -259,4 +259,4 @@ alias gci="gcommit ci"
 alias gdo="gcommit docs"
 alias gmi="gcommit misc"
 
-alias vi="nvim"
+alias e="nvim"
