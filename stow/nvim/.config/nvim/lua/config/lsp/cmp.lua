@@ -120,7 +120,7 @@ function M.setup()
         compare.locality,
       },
     },
-    preselect = false,
+    -- preselect = false,
     mapping = cmp.mapping.preset.insert({
       ['<CR>'] = cmp.mapping.confirm({
         behavior = cmp.ConfirmBehavior.Replace,
