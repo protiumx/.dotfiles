@@ -209,6 +209,7 @@ alias k9="k9s -c pod --readonly"
 
 alias kfp="kf pods"
 alias kfs="kf services"
+alias kfd="kf deployements"
 alias kfplog="kf pods '' log"
 alias kfdlog="kf deployment '' log"
 
