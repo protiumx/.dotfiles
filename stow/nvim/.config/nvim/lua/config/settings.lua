@@ -27,7 +27,7 @@ vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.ignorecase = true
 vim.opt.smartindent = true
-vim.opt.listchars = { eol = '' }
+vim.opt.listchars = { eol = '', tab = '  ' }
 vim.opt.list = true
 vim.opt.statusline = '2'
 vim.o.completeopt = 'menu,menuone,noselect'

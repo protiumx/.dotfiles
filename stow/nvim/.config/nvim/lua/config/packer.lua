@@ -64,7 +64,7 @@ return packer.startup(function(use)
 
   -- Themes
   use('NLKNguyen/papercolor-theme')
-  use { "ellisonleao/gruvbox.nvim" }
+  use('ellisonleao/gruvbox.nvim')
 
   -- Icons
   use('kyazdani42/nvim-web-devicons')
