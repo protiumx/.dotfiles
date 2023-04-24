@@ -205,7 +205,7 @@ return packer.startup(function(use)
 
   use { "johmsalas/text-case.nvim",
     config = function()
-      require('textcase').setup {}
+      require('config.text-case').setup()
     end
   }
 
