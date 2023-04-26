@@ -45,7 +45,7 @@ function M.setup()
     underline = false,
     severity_sort = true,
     signs = false,
-    update_in_insert = false,
+    update_in_insert = true,
   })
 end
 

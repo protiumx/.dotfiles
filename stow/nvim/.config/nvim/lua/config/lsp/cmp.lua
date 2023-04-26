@@ -115,8 +115,8 @@ function M.setup()
     sorting = {
       comparators = {
         compare.recently_used,
-        compare.kind,
         compare.exact,
+        compare.kind,
         compare.locality,
       },
     },
