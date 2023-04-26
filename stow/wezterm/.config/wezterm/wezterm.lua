@@ -16,7 +16,7 @@ local keys = {
     mods = 'SHIFT|' .. key_mod_panes,
     action = act.ToggleFullScreen,
   },
-  { key = ':', mods = 'SHIFT|' .. key_mod_panes, action = act.ShowDebugOverlay },
+  { key = ':', mods = 'SHIFT|' .. key_mod_panes,      action = act.ShowDebugOverlay },
 
   -- Panes
   {
@@ -34,8 +34,16 @@ local keys = {
     mods = key_mod_panes,
     action = act.CloseCurrentPane { confirm = true },
   },
-  { key = 'z', mods = 'SHIFT|' .. key_mod_panes, action = act.TogglePaneZoomState },
-  { key = 'c', mods = 'CTRL|' .. key_mod_panes,  action = act.ActivateCopyMode },
+  { key = 'z', mods = key_mod_panes,                  action = act.TogglePaneZoomState },
+  { key = 'c', mods = 'CTRL|' .. key_mod_panes,       action = act.ActivateCopyMode },
+  { key = 'c', mods = 'CTRL|SHIFT|' .. key_mod_panes, action = act.QuickSelect },
+  {
+    key = '!',
+    mods = 'SHIFT|' .. key_mod_panes,
+    action = wezterm.action_callback(function(_win, pane)
+      pane:move_to_new_tab()
+    end),
+  },
 
   -- Activation
   {
@@ -105,11 +113,11 @@ local keys = {
     mods = 'CMD',
     action = act.SpawnTab('DefaultDomain')
   },
-  { key = 'T',   mods = 'SHIFT|' .. key_mod_panes, action = act.ShowTabNavigator },
-  { key = 'Tab', mods = 'SHIFT|CTRL',              action = act.ActivateTabRelative(-1) },
-  { key = 'Tab', mods = 'CTRL',                    action = act.ActivateTabRelative(1) },
+  { key = 'T', mods = 'SHIFT|' .. key_mod_panes, action = act.ShowTabNavigator },
+  { key = '[', mods = key_mod_panes,             action = act.ActivateTabRelative(-1) },
+  { key = ']', mods = key_mod_panes,             action = act.ActivateTabRelative(1) },
   {
-    key = '(',
+    key = '`',
     mods = 'CMD',
     action = act.ActivateLastTab,
   },
