@@ -172,7 +172,7 @@ unpack() {
   fi
 }
 
-brew_updater() {
+brewit() {
   brew update &&
     brew upgrade &&
     brew autoremove &&
@@ -196,10 +196,10 @@ drm-all() {
 # Aliases
 alias cat="bat -p --paging=never --theme='TwoDark'"
 alias dc="docker compose"
+alias e="nvim"
 alias icat="wezterm imgcat"
 alias lt="dust -b -H -r -X '.git'"
 alias tree="exa --tree --level=5 --icons --group-directories-first --color auto"
-alias vi="nvim"
 alias yw="yarn workspace"
 
 # Kubernetes
@@ -259,5 +259,3 @@ alias gst="gcommit style"
 alias gci="gcommit ci"
 alias gdo="gcommit docs"
 alias gmi="gcommit misc"
-
-alias e="nvim"
