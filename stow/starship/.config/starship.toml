@@ -33,7 +33,7 @@ error_symbol = "[|](bold #e46876)"
 [time]
 disabled = false
 format = '[\[$time\]]($style)'
-style = "fg:#5e5e5e"
+style = "fg:#585858"
 time_format = "%H:%M"
 
 [memory_usage]
@@ -59,7 +59,7 @@ stashed = "~${count} "
 staged = "+${count} "
 deleted = "x${count} "
 renamed = "»${count} "
-style = "fg:#a9a1e1"
+style = "fg:#585858"
 
 [status]
 disabled = false
@@ -117,3 +117,6 @@ symbol = " "
 [lua]
 format = "[$symbol($version )]($style)"
 symbol = " "
+
+[jobs]
+symbol = " "
