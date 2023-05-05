@@ -39,7 +39,7 @@ local keys = {
   { key = 'c', mods = 'CTRL|SHIFT|' .. key_mod_panes, action = act.QuickSelect },
   {
     key = '!',
-    mods = 'SHIFT|' .. key_mod_panes,
+    mods = key_mod_panes,
     action = wezterm.action_callback(function(_win, pane)
       pane:move_to_new_tab()
     end),
@@ -117,8 +117,8 @@ local keys = {
   { key = '[', mods = key_mod_panes,             action = act.ActivateTabRelative(-1) },
   { key = ']', mods = key_mod_panes,             action = act.ActivateTabRelative(1) },
   {
-    key = '`',
-    mods = 'CMD',
+    key = 'o',
+    mods = key_mod_panes,
     action = act.ActivateLastTab,
   },
 
