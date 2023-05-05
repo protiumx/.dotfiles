@@ -31,12 +31,12 @@ vim.keymap.set('n', '<C-d>', '<C-d>zz', { silent = true })
 vim.keymap.set('n', '<C-u>', '<C-u>zz', { silent = true })
 
 -- Moving lines up or down preserving format
-vim.keymap.set('n', '<Leader>j', ':m .+1<CR>==', { silent = true })
-vim.keymap.set('n', '<Leader>k', ':m .-2<CR>==', { silent = true })
+vim.keymap.set('n', '<M-j>', ':m .+1<CR>==', { silent = true })
+vim.keymap.set('n', '<M-k>', ':m .-2<CR>==', { silent = true })
 vim.keymap.set('i', '<C-j>', '<Esc>:m .+1<CR>==gi', { silent = true })
 vim.keymap.set('i', '<C-k>', '<Esc>:m .-2<CR>==gi', { silent = true })
-vim.keymap.set('v', 'J', ':m \'>+1<CR>gv=gv', { silent = true })
-vim.keymap.set('v', 'K', ':m \'<-2<CR>gv=gv', { silent = true })
+vim.keymap.set('v', '<C-j>', ':m \'>+1<CR>gv=gv', { silent = true })
+vim.keymap.set('v', '<C-k>', ':m \'<-2<CR>gv=gv', { silent = true })
 
 -- Join line with cursor at beginning of line using z as mark
 vim.keymap.set("n", "J", "mzJ`z", { silent = true })
