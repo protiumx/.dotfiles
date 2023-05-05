@@ -123,7 +123,7 @@ kf() {
 
 klog() {
   if  [[ "$1" == "deployment" ]]; then
-    kubectl logs -f deployment/ --all-containers=true --since=1m $2
+    kubectl logs -f --all-containers=true --since=1m "deployments/$2"
   else
     kubectl logs -f --since 1m $2
   fi
