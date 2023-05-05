@@ -70,39 +70,24 @@ function M.setup()
     sources = {
       {
         name = 'nvim_lsp_signature_help',
-        priority = 100,
-        group_index = 1,
       },
       {
         name = 'nvim_lsp',
-        priority = 100,
-        group_index = 1,
       },
       {
         name = 'nvim_lua',
-        priority = 100,
-        group_index = 1,
       },
       {
         name = 'luasnip',
-        priority = 90,
-        group_index = 2,
       },
       {
         name = 'buffer',
-        priority = 80,
-        autocomplete = false,
-        group_index = 3,
       },
       {
         name = 'path',
-        priority = 80,
-        group_index = 3,
       },
       {
         name = 'spell',
-        priority = 50,
-        group_index = 3,
       },
     },
     formatting = {
