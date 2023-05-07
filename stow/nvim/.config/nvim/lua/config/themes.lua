@@ -28,6 +28,7 @@ local base = {
   Todo                   = { fg = colors.orange, bold = true },
   SagaNormal             = { link = 'XMenu' },
   SagaBorder             = { link = 'XMenuBorder' },
+  StatusLine             = { bg = colors.background, fg = colors.foreground },
   -- Mason
   MasonHeader            = { link = 'XMenu' },
   MasonNormal            = { link = 'XMenu' },
