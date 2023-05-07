@@ -137,7 +137,7 @@ local theme = {
   CmpBorder                  = { link = 'FloatBorder' },
   CmpDocBorder               = { link = 'FloatBorder' },
   CmpItemMenuDefault         = { link = 'NormalFloat' },
-  CmPmenu                    = { link = 'NormalFloat' },
+  CmpMenu                    = { link = 'NormalFloat' },
   -- cmp item kinds
   CmpItemKindConstant        = { fg = colors.light_pink },
   CmpItemKindFunction        = { fg = colors.blue },

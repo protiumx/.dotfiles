@@ -1,3 +1,4 @@
+local colors = require('config.colors')
 local M = {}
 
 function M.setup()
@@ -39,6 +40,7 @@ function M.setup()
 
   local api = require('nvim-tree.api')
   vim.keymap.set({ 'n', 'v', 'x' }, '<M-T>', api.tree.focus, { silent = true })
+  vim.api.nvim_set_hl(0, 'NvimTreeCursorLine', { bg = colors.dark_grey, fg = colors.foreground })
 end
 
 return M
