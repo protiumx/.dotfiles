@@ -96,7 +96,7 @@
   search = grep -n -C 1
 
   # Short status
-  ss = status -sb
+  s = status -sb
 
   # Stash the working directory, the index and the untracked files
   stall = stash save --include-untracked
