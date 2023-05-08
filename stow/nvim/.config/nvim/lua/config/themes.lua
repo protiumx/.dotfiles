@@ -32,6 +32,8 @@ local base = {
   -- Mason
   MasonHeader            = { link = 'XMenu' },
   MasonNormal            = { link = 'XMenu' },
+  NvimTreeCursorColumn   = { bg = 'none', fg = 'none' },
+  NvimTreeCursorLine     = { bg = colors.dark_grey, fg = colors.accent },
   -- Telescope
   TelescopeBorder        = { link = 'XMenuBorder' },
   TelescopePromptBorder  = { link = 'XMenuBorder' },
