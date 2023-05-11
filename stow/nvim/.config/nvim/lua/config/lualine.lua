@@ -107,12 +107,12 @@ function M.setup()
         {
           'mode',
           fmt = function()
-            return '| ' .. modes[vim.fn.mode()] .. ' '
+            return modes[vim.fn.mode()] .. ' | '
           end,
           color = function()
             local val = {
               fg = mode_colors[vim.fn.mode()],
-              bg = "#2c2c2c",
+              bg = "none",
               gui = 'bold'
             }
             return val
