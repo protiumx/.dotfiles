@@ -105,7 +105,6 @@ local theme = {
   CursorLineNr               = { bg = 'none', fg = colors.light_pink },
   Directory                  = { fg = colors.cyan, bold = true },
   ErrorMsg                   = { bg = 'none', fg = colors.red },
-  FloatBorder                = { bg = colors.background, fg = colors.background },
   IncSearch                  = { bg = colors.accent, fg = colors.foreground },
   MatchParen                 = { fg = colors.accent, bg = 'none', bold = true },
   NormalFloat                = { bg = colors.background },
@@ -120,14 +119,13 @@ local theme = {
   VertSplit                  = { bg = 'none', fg = colors.grey },
   Visual                     = { bg = colors.grey, fg = 'none' },
   -- Diagnostic
-
-  DiagnosticBorder           = { link = 'XMenu' },
+  DiagnosticBorder           = { link = 'XMenuBorder' },
   DiagnosticNormal           = { link = 'XMenu' },
   DiagnosticError            = { fg = colors.red },
-  DiagnosticFloatingError    = { link = 'NormalFloat' },
-  DiagnosticFloatingHint     = { link = 'NormalFloat' },
-  DiagnosticFloatingInfo     = { link = 'NormalFloat' },
-  DiagnosticFloatingWarn     = { link = 'NormalFloat' },
+  DiagnosticFloatingError    = { link = 'XMenu' },
+  DiagnosticFloatingHint     = { link = 'XMenu' },
+  DiagnosticFloatingInfo     = { link = 'XMenu' },
+  DiagnosticFloatingWarn     = { link = 'XMenu' },
   DiagnosticSignHint         = { fg = colors.grey, bold = true, bg = 'none' },
   DiagnosticUnderlineError   = { undercurl = true },
   DiagnosticVirtualTextHint  = { bg = 'none' },
@@ -176,7 +174,6 @@ local theme = {
   -- Diffview
   DiffViewSignColumn         = { bg = 'none' },
   -- Treesitter
-
   -- ['@string'] = { fg = colors.yellow, bg = '' },
   ['@boolean']               = { fg = colors.dark_yellow },
   ['@character']             = { fg = colors.foreground },
@@ -276,9 +273,9 @@ end
 
 function M.load(full)
   _load(base)
-  _load_diagnostics()
 
   if not full then
+    _load_diagnostics()
     return
   end
 
