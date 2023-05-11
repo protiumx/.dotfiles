@@ -293,6 +293,7 @@ return packer.startup(function(use)
   use({
     'neovim/nvim-lspconfig',
     ft = {
+      'asm',
       'c',
       'go',
       'lua',
