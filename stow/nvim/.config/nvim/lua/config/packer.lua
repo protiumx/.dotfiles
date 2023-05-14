@@ -79,7 +79,9 @@ return packer.startup(function(use)
   -- Treesitter
   use({
     'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate',
+    run = function()
+      pcall(require('nvim-treesitter.install').update { with_sync = true })
+    end,
     event = 'BufRead',
     config = function()
       require('config.treesitter').setup()
@@ -94,6 +96,21 @@ return packer.startup(function(use)
   use({
     'nvim-treesitter/playground',
     cmd = 'TSPlaygroundToggle',
+  })
+
+  use({
+    "folke/noice.nvim",
+    config = function()
+      require('config.noice').setup()
+    end,
+    requires = {
+      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+      "MunifTanjim/nui.nvim",
+      -- OPTIONAL:
+      --   `nvim-notify` is only needed, if you want to use the notification view.
+      --   If not available, we use `mini` as the fallback
+      "rcarriga/nvim-notify",
+    }
   })
 
   use({
@@ -310,6 +327,8 @@ return packer.startup(function(use)
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
 
+      'ray-x/go.nvim',
+      'ray-x/guihua.lua',
 
       -- Snippets
       'L3MON4D3/LuaSnip',
