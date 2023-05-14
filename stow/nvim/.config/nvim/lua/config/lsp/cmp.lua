@@ -51,6 +51,9 @@ function M.setup()
     confirmation = {
       default_behavior = types.cmp.ConfirmBehavior.Replace,
     },
+    completion = {
+      keyword_length = 3,
+    },
     snippet = {
       expand = function(args)
         luasnip.lsp_expand(args.body)
@@ -70,21 +73,30 @@ function M.setup()
     sources = {
       {
         name = 'nvim_lsp',
+        priority = 100,
       },
       {
         name = 'luasnip',
+        priority = 80,
       },
       {
         name = 'nvim_lua',
+        priority = 20,
       },
       {
         name = 'buffer',
+        max_item_count = 3,
+        priority = 60,
       },
       {
         name = 'path',
+        group_index = 1,
+        priority = 40,
       },
       {
         name = 'spell',
+        max_item_count = 3,
+        group_index = 40,
       },
     },
     formatting = {
@@ -102,7 +114,7 @@ function M.setup()
         compare.exact,
       },
     },
-    -- preselect = false,
+    preselect = cmp.PreselectMode.Item,
     mapping = cmp.mapping.preset.insert({
       ['<CR>'] = cmp.mapping.confirm({
         behavior = cmp.ConfirmBehavior.Replace,
@@ -143,7 +155,7 @@ function M.setup()
           fallback()
         end
       end, { 'i', 's' })
-    })
+    }),
   })
 
   luasnip.config.set_config({
