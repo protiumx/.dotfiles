@@ -4,7 +4,6 @@ local colors = require('config.colors')
 local base = {
   CursorLine             = { bg = 'none', fg = 'none' },
   -- Avoid changing the foreground color from the main theme
-  FloatBorder            = { link = 'XMenuBorder' },
   MatchParen             = { fg = colors.accent, bg = 'none', bold = true },
   Visual                 = { bg = colors.grey, fg = 'none' },
   ActionPreviewBorder    = { link = 'XMenuBorder' },
@@ -17,8 +16,11 @@ local base = {
   DefinitionNormal       = { link = 'XMenu' },
   FinderBorder           = { link = 'XMenuBorder' },
   FinderNormal           = { link = 'XMenu' },
+  FloatBorder            = { link = 'XMenuBorder' },
+  FloatNormal            = { link = 'XMenu' },
   HoverBorder            = { link = 'XMenuBorder' },
   HoverNormal            = { link = 'XMenu' },
+  NormalFloat            = { link = 'XMenu' },
   OutlinePreviewBorder   = { link = 'XMenuBorder' },
   OutlinePreviewNormal   = { link = 'XMenu' },
   RenameBorder           = { link = 'XMenuBorder' },
@@ -29,6 +31,9 @@ local base = {
   SagaNormal             = { link = 'XMenu' },
   SagaBorder             = { link = 'XMenuBorder' },
   StatusLine             = { bg = colors.background, fg = colors.foreground },
+  TitleString            = { link = 'XMenu' },
+  TitleIcon              = { link = 'XMenu' },
+  ActionPreviewTitle     = { link = 'XMenu' },
   -- Mason
   MasonHeader            = { link = 'XMenu' },
   MasonNormal            = { link = 'XMenu' },
@@ -107,7 +112,6 @@ local theme = {
   ErrorMsg                   = { bg = 'none', fg = colors.red },
   IncSearch                  = { bg = colors.accent, fg = colors.foreground },
   MatchParen                 = { fg = colors.accent, bg = 'none', bold = true },
-  NormalFloat                = { bg = colors.background },
   Pmenu                      = { link = 'XMenu' },
   Search                     = { bg = colors.accent },
   SpellBad                   = { bg = 'none', fg = 'none', undercurl = true, ctermbg = 'none', ctermfg = 'none' },
