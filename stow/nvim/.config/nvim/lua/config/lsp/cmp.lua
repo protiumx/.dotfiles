@@ -69,16 +69,13 @@ function M.setup()
     },
     sources = {
       {
-        name = 'nvim_lsp_signature_help',
-      },
-      {
         name = 'nvim_lsp',
       },
       {
-        name = 'nvim_lua',
+        name = 'luasnip',
       },
       {
-        name = 'luasnip',
+        name = 'nvim_lua',
       },
       {
         name = 'buffer',
@@ -99,10 +96,10 @@ function M.setup()
     },
     sorting = {
       comparators = {
-        compare.recently_used,
-        compare.exact,
-        compare.kind,
         compare.locality,
+        compare.recently_used,
+        compare.kind,
+        compare.exact,
       },
     },
     -- preselect = false,
