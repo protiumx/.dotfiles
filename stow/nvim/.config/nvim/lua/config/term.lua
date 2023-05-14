@@ -6,8 +6,8 @@ function M.setup()
     hl = 'XMenu',
     border = 'single',
     dimensions = {
-      height = 0.3,
-      width = 0.2,
+      height = 0.4,
+      width = 0.3,
       x = 1,
       y = 0,
     },
