@@ -34,7 +34,8 @@ local function setup_autocmd(bufnr)
     group = 'lsp_format',
     pattern = '*.go',
     callback = function()
-      organize_go_imports(500)
+      -- organize_go_imports(500)
+      require('go.format').goimport()
     end
   })
 end
@@ -119,6 +120,32 @@ function M.setup()
       },
     },
   }
+
+  require("go").setup({
+    icons = false,
+    max_line_len = 100,
+    lsp_diag_hdlr = false,
+    lsp_diag_underline = false,
+    -- virtual text setup
+    lsp_diag_virtual_text = false,
+    lsp_diag_signs = false,
+    lsp_diag_update_in_insert = false,
+    lsp_document_formatting = true,
+    lsp_cfg = {
+      capabilities = capabilities,
+      -- other setups
+    },
+    lsp_inlay_hints = {
+      enable = false,
+    },
+    run_in_floaterm = true,
+    luasnip = true,
+    floaterm = {
+      posititon = 'right', -- one of {`top`, `bottom`, `left`, `right`, `center`, `auto`}
+      width = 0.25,        -- width of float window if not auto
+      height = 0.3,        -- height of float window if not auto
+    },
+  })
 
   -- Ensure the servers above are installed
   local mason_lspconfig = require('mason-lspconfig')

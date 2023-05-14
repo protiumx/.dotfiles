@@ -20,7 +20,7 @@ function M.setup(bufnr)
   nmap(']e', function()
     vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })
   end, 'Go to next error')
-  -- nmap('K', vim.lsp.buf.hover, 'Show docs')
+  nmap('K', vim.lsp.buf.hover, 'Show docs')
   nmap('<C-l>h', vim.lsp.buf.document_highlight, 'Highlight node')
   nmap('<C-l>c', vim.lsp.buf.document_highlight, 'Clear highlights')
 end

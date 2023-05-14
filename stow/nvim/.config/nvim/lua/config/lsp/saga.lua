@@ -3,7 +3,7 @@ local M = {}
 local function keymaps()
   local keymap = vim.keymap.set
   keymap('n', 'gh', '<cmd>Lspsaga lsp_finder<CR>', { silent = true })
-  keymap('n', 'K', '<cmd>Lspsaga hover_doc<CR>', { silent = true })
+  -- keymap('n', 'K', '<cmd>Lspsaga hover_doc<CR>', { silent = true })
   keymap('i', '<M-h>', '<Esc><cmd>Lspsaga lsp_finder<CR>', { silent = true })
 
   keymap({ 'n', 'v' }, '<Leader>ca', '<cmd>Lspsaga code_action<CR>', { silent = true })
