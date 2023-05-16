@@ -19,9 +19,6 @@ require("gruvbox").setup({
     dark0 = colors.background,
     dark1 = colors.background,
   },
-  overrides = {
-    Pmenu = { bg = colors.dark_grey },
-  },
   dim_inactive = true,
   transparent_mode = false,
 })
