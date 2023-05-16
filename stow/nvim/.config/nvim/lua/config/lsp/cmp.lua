@@ -52,7 +52,7 @@ function M.setup()
       default_behavior = types.cmp.ConfirmBehavior.Replace,
     },
     completion = {
-      keyword_length = 3,
+      keyword_length = 2,
     },
     snippet = {
       expand = function(args)
