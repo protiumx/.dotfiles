@@ -12,6 +12,9 @@ function M.setup()
 
   local actions = require('diffview.actions')
   require('diffview').setup({
+    default_args = {
+      DiffviewOpen = { '--imply-local' },
+    },
     file_panel = {
       win_config = {
         -- See ':h diffview-config-win_config'
