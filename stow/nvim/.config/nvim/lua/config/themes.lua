@@ -14,6 +14,7 @@ local base = {
   CodeActionNormal       = { link = 'XMenu' },
   DefinitionBorder       = { link = 'XMenuBorder' },
   DefinitionNormal       = { link = 'XMenu' },
+  EndOfBuffer            = { fg = colors.background },
   FinderBorder           = { link = 'XMenuBorder' },
   FinderNormal           = { link = 'XMenu' },
   FloatBorder            = { link = 'XMenuBorder' },
