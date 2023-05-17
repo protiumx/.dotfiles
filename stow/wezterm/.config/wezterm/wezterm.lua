@@ -274,7 +274,7 @@ wezterm.on(
       end
     end
 
-    local title = string.format(' %s  %s ~ %s  ', wezterm.nerdfonts.fa_chevron_right, get_process(tab),
+    local title = string.format(' %s  %s ~ %s  ', '❯', get_process(tab),
       get_current_working_dir(tab))
 
     if has_unseen_output then
