@@ -53,8 +53,10 @@ local function keymaps()
     callback = function()
       -- Open file browser if argument is a folder
       local arg = vim.api.nvim_eval('argv(0)')
-      if arg and vim.fn.isdirectory(arg) ~= 0 then
-        builtin.find_files(with_title(dropdown))
+      if arg and (vim.fn.isdirectory(arg) ~= 0 or arg == "") then
+        vim.defer_fn(function()
+          builtin.find_files(with_title(dropdown))
+        end, 50)
       end
     end
   })
