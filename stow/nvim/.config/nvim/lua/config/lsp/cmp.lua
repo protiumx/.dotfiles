@@ -73,7 +73,7 @@ function M.setup()
     sources = {
       {
         name = 'nvim_lsp',
-        priority = 100,
+        priority = 1000,
       },
       {
         name = 'luasnip',
