@@ -12,6 +12,7 @@ local base = {
   CallHierarchyNormal    = { link = 'XMenu' },
   CodeActionBorder       = { link = 'XMenuBorder' },
   CodeActionNormal       = { link = 'XMenu' },
+  ColorColumn            = { bg = colors.dark_grey },
   DefinitionBorder       = { link = 'XMenuBorder' },
   DefinitionNormal       = { link = 'XMenu' },
   EndOfBuffer            = { fg = colors.background },
@@ -61,7 +62,7 @@ local theme = {
   -- Transparent background
   Conceal                    = { bg = 'none', fg = colors.foreground },
   FoldCoumn                  = { bg = 'none' },
-  LineNr                     = { bg = 'none', fg = colors.grey },
+  LineNr                     = { bg = 'none', fg = colors.light_grey },
   MsgArea                    = { bg = 'none', fg = colors.foreground },
   NonText                    = { bg = 'none', fg = colors.light_grey },
   Normal                     = { bg = 'none', fg = colors.foreground },
@@ -105,7 +106,6 @@ local theme = {
   Typedef                    = { fg = colors.foreground },
   Underlined                 = { fg = colors.foreground },
   -- Rest
-  ColorColumn                = { bg = colors.dark_grey },
   Cursor                     = { bg = colors.accent },
   CursorColumn               = { bg = 'none', fg = colors.accent },
   CursorLine                 = { bg = 'none', fg = 'none' },

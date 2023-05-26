@@ -56,7 +56,7 @@ local function keymaps()
       if arg and (vim.fn.isdirectory(arg) ~= 0 or arg == "") then
         vim.defer_fn(function()
           builtin.find_files(with_title(dropdown))
-        end, 10)
+        end, 50)
       end
     end
   })

@@ -22,7 +22,7 @@ function M.setup()
             arrow_closed = "",
             arrow_open = "",
             default = "",
-            open = "",
+            open = "",
             empty = "",
             empty_open = "",
             symlink = "",
@@ -30,6 +30,9 @@ function M.setup()
           },
         }
       }
+    },
+    view = {
+      width = 35,
     },
     update_focused_file = {
       enable = true,
