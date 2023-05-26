@@ -363,7 +363,7 @@ local config = {
   font_size = is_windows and 14.0 or 18.6,
   -- Disable font ligatures
   harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
-  hide_tab_bar_if_only_one_tab = true,
+  hide_tab_bar_if_only_one_tab = false,
   hyperlink_rules = wezterm.default_hyperlink_rules(),
   inactive_pane_hsb = {
     saturation = 1.0,
@@ -414,7 +414,7 @@ local config = {
     font = wezterm.font { family = cascadia_font, weight = 'Bold' },
     -- The size of the font in the tab bar.
     -- Default to 10. on Windows but 12.0 on other systems
-    font_size = 16.0,
+    font_size = is_windows and 16.0 or 16.8,
     -- The overall background color of the tab bar when
     -- the window is focused
     active_titlebar_bg = colors.background,
