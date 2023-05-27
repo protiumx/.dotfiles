@@ -41,7 +41,7 @@ function M.setup()
     },
     cmdline = {
       format = {
-        cmdline = { pattern = "^:", icon = "❯", lang = "vim" },
+        cmdline = { pattern = "^:", icon = "❯", lang = '' },
         search_down = { kind = "search", pattern = "^/", icon = "/ ", lang = "regex" },
         search_up = { kind = "search", pattern = "^%?", icon = "? ", lang = "regex" },
         filter = false,
