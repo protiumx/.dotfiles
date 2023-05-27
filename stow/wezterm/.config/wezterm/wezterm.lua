@@ -297,7 +297,6 @@ wezterm.on('update-right-status', function(window)
   end
 
   window:set_right_status(wezterm.format({
-    { Attribute = { Intensity = 'Bold' } },
     { Foreground = { Color = '#808080' } },
     { Text = wezterm.strftime(' %R ') },
   }))
@@ -411,7 +410,7 @@ local config = {
     -- Whatever font is selected here, it will have the
     -- main font setting appended to it to pick up any
     -- fallback fonts you may have used there.
-    font = wezterm.font { family = cascadia_font, weight = 'Bold' },
+    font = wezterm.font { family = cascadia_font, weight = 'Medium' },
     -- The size of the font in the tab bar.
     -- Default to 10. on Windows but 12.0 on other systems
     font_size = is_windows and 16.0 or 16.8,
