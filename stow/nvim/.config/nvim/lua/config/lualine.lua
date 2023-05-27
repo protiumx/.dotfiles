@@ -49,7 +49,6 @@ local mode_colors = {
 local base_theme = {
   a = {},
   b = { bg = 'none', fg = colors.blue },
-  w = { bg = 'none' },
   x = { bg = 'none', fg = colors.purple },
   y = { bg = 'none', fg = colors.light_grey },
   z = { bg = 'none', fg = colors.light_grey },
@@ -128,16 +127,22 @@ function M.setup()
           end
         },
       },
-      lualine_w = { { 'diagnostics', sources = { 'nvim_diagnostic' } } },
-      lualine_x = { 'branch', 'diff' },
-      lualine_y = { 'location' },
-      lualine_z = { { 'progress', fmt = string.lower } },
+      lualine_x = { { 'diagnostics', sources = { 'nvim_diagnostic' } } },
+      lualine_y = { 'branch', 'diff' },
+      lualine_z = {
+        {
+          require("noice").api.status.search.get,
+          cond = require("noice").api.status.search.has,
+          color = { fg = "ff9e64" },
+        },
+        { 'location' },
+        { 'progress', fmt = string.lower },
+      },
     },
     inactive_sections = {
       lualine_a = { file_section },
       lualine_b = {},
       lualine_c = {},
-      lualine_w = {},
       lualine_y = {},
       lualine_x = {},
       lualine_z = {}

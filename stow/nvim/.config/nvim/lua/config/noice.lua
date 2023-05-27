@@ -87,6 +87,7 @@ function M.setup()
     },
   })
 
+  -- It scrolls the file as well
   -- vim.keymap.set({ 'n', 'i', 's' }, '<c-f>', function()
   --   if not require('noice.lsp').scroll(4) then
   --     return '<C-f>'
