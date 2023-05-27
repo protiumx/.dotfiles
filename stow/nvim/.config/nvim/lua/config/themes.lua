@@ -253,23 +253,28 @@ local function _load(config)
 end
 
 local function _load_diagnostics()
+  vim.fn.sign_define("DiagnosticSignError", { text = " ", texthl = "DiagnosticSignError" })
+  vim.fn.sign_define("DiagnosticSignWarn", { text = " ", texthl = "DiagnosticSignWarn" })
+  vim.fn.sign_define("DiagnosticSignInfo", { text = " ", texthl = "DiagnosticSignInfo" })
+  vim.fn.sign_define("DiagnosticSignHint", { text = "", texthl = "DiagnosticSignHint" })
+
   local diagnostics = {
     DiagnosticFloatingError = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticFloatingError', true),
-      { bg = colors.dark_grey }),
+      { bg = 'none' }),
     DiagnosticFloatingWarn  = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticFloatingWarn', true),
-      { bg = colors.dark_grey }),
+      { bg = 'none' }),
     DiagnosticFloatingInfo  = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticFloatingInfo', true),
-      { bg = colors.dark_grey }),
+      { bg = 'none' }),
     DiagnosticFloatingHint  = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticFloatingHint', true),
-      { bg = colors.dark_grey }),
+      { bg = 'none' }),
     DiagnosticSignError     = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticSignError', true),
-      { bg = colors.dark_grey }),
+      { bg = 'none' }),
     DiagnosticSignWarn      = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticSignWarn', true),
-      { bg = colors.dark_grey }),
+      { bg = 'none' }),
     DiagnosticSignInfo      = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticSignInfo', true),
-      { bg = colors.dark_grey }),
+      { bg = 'none' }),
     DiagnosticSignHint      = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticSignHint', true),
-      { bg = colors.dark_grey }),
+      { bg = 'none' }),
   }
   _load(diagnostics)
 end
