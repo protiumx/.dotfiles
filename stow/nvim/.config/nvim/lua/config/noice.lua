@@ -42,8 +42,8 @@ function M.setup()
     cmdline = {
       format = {
         cmdline = { pattern = "^:", icon = "❯", lang = '' },
-        search_down = { kind = "search", pattern = "^/", icon = "/ ", lang = "regex" },
-        search_up = { kind = "search", pattern = "^%?", icon = "? ", lang = "regex" },
+        search_down = { kind = "search", pattern = "^/", icon = "/", lang = "regex" },
+        search_up = { kind = "search", pattern = "^%?", icon = "?", lang = "regex" },
         filter = false,
         lua = false,
         help = false,
@@ -81,8 +81,8 @@ function M.setup()
     -- add any options here
     routes = {
       {
-        view = "split",
-        filter = { event = "msg_show", min_height = 10 },
+        view = "popup",
+        filter = { event = "msg_show", min_height = 6 },
       },
     },
   })
