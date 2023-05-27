@@ -31,8 +31,7 @@ local base = {
   TerminalBorder         = { link = 'XMenuBorder' },
   TerminalNormal         = { link = 'XMenu' },
   Todo                   = { fg = colors.orange, bold = true },
-  SagaNormal             = { link = 'XMenu' },
-  SagaBorder             = { link = 'XMenuBorder' },
+  SignColumn             = { bg = 'none' },
   StatusLine             = { bg = colors.background, fg = colors.foreground },
   TitleString            = { link = 'XMenu' },
   TitleIcon              = { link = 'XMenu' },
@@ -56,6 +55,12 @@ local base = {
   TelescopeResultsTitle  = { fg = colors.background, bg = colors.light_orange },
   TelescopeResultsBorder = { link = 'XMenuBorder' },
   TelescopeResultsNormal = { link = 'XMenu' },
+  SagaNormal             = { link = 'XMenu' },
+  SagaBorder             = { link = 'XMenuBorder' },
+  -- Neotree
+  NeoTreeFloatBorder     = { link = 'XMenuBorder' },
+  NeoTreeFloatTitle      = { fg = colors.background, bg = colors.light_orange },
+  NeoTreeTitleBar        = { fg = colors.background, bg = colors.light_orange },
 }
 
 local theme = {
@@ -67,7 +72,6 @@ local theme = {
   NonText                    = { bg = 'none', fg = colors.light_grey },
   Normal                     = { bg = 'none', fg = colors.foreground },
   NormalNC                   = { bg = 'none', fg = colors.foreground },
-  SignColumn                 = { bg = 'none' },
   WinSeparator               = { bg = 'none', fg = colors.grey },
   -- Language Syntax
   Boolean                    = { fg = colors.grey },

@@ -88,7 +88,7 @@ function M.setup()
           'help',
           'lspsagaoutline',
           'packer',
-          'NvimTree',
+          'neo-tree',
           'qf',
           'tsplayground',
         },

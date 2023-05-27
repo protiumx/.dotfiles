@@ -77,8 +77,6 @@ local function keymaps()
     builtin.find_files(with_title({ cwd = vim.fn.expand('%:p:h') }))
   end, 'Find files with preview relative to buffer')
 
-  map({ 'i', 'n' }, '<C-b>', function() builtin.buffers(dropdown) end, 'Find buffers')
-
   map({ 'i', 'n' }, '<M-f>', function()
     telescope.extensions.file_browser.file_browser(with_title(opts_file_browser))
   end, 'Browse files relative to buffer')
@@ -142,11 +140,11 @@ local function keymaps()
 
   -- Neoclip
   map({ 'n', 'i', 'v', 'x' }, '<M-y>', function()
-    telescope.extensions.neoclip.default(themes.get_dropdown())
+    telescope.extensions.neoclip.default(dropdown)
   end, 'Search Yanks')
 
   map('n', '<M-s>m', function()
-    telescope.extensions.macroscope.default(themes.get_dropdown())
+    telescope.extensions.macroscope.default(dropdown)
   end, '[S]earch [M]acros')
 
   -- Rg with args
