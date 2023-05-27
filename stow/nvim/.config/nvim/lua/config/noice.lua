@@ -1,19 +1,6 @@
 local M = {}
 
 function M.setup()
-  require('notify').setup({
-    render = 'compact',
-    stages = 'fade',
-    top_down = false,
-    icons = {
-      DEBUG = "",
-      ERROR = "",
-      INFO = "",
-      TRACE = "",
-      WARN = ""
-    },
-  })
-
   require("noice").setup({
     views = {
       cmdline_popup = {
