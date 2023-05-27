@@ -22,13 +22,26 @@ Check my [Medium article](https://medium.com/@protiumx/bash-gnu-stow-take-a-walk
 
 ## Apps
 Main apps installed:
-- Terminal: [Kitty](https://github.com/kovidgoyal/kitty) and [Wezterm](https://wezfurlong.org/wezterm/)
-- Editor: [neovim](https://neovim.io/)
-- Firefox
-- Spotify
-- VLC
+- Terminal: [Wezterm](https://wezfurlong.org/wezterm/)
+- Text Editor: [neovim](https://neovim.io/)
+- Browser: Chrome, Firefox
+- Music: Spotify
+- Video: VLC
 
 For more details check the [apps](./scripts/apps.sh) script.
+
+## Neovim Plugins
+
+Main plugins are:
+- [Telescope](https://github.com/nvim-telescope/telescope.nvim)
+- [Lualine](https://github.com/nvim-lualine/lualine.nvim)
+- [Neotree](https://github.com/nvim-neo-tree/neo-tree.nvim)
+- [Mason](https://github.com/williamboman/mason.nvim)
+- [Cmp](https://github.com/hrsh7th/nvim-cmp)
+
+Theme: [gruvbox](https://github.com/ellisonleao/gruvbox.nvim)
+
+Check the `packer` config [file](./stow/nvim/.config/nvim/lua/config/packer.lua)
 
 ### CLI
 All CLI apps are listed in the [packages](./scripts/packages.sh) script.
