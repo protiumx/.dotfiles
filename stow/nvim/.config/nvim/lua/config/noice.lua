@@ -6,7 +6,7 @@ function M.setup()
       cmdline_popup = {
         border = {
           style = "none",
-          padding = { 2, 3 },
+          padding = { 1, 2 },
         },
         filter_options = {},
         win_options = {
@@ -44,7 +44,13 @@ function M.setup()
         cmdline = { pattern = "^:", icon = "❯", lang = "vim" },
         search_down = { kind = "search", pattern = "^/", icon = "/ ", lang = "regex" },
         search_up = { kind = "search", pattern = "^%?", icon = "? ", lang = "regex" },
+        filter = false,
+        lua = false,
+        help = false,
       }
+    },
+    messages = {
+      view_search = false,
     },
     lsp = {
       progress = {
@@ -73,6 +79,12 @@ function M.setup()
       lsp_doc_border = false,       -- add a border to hover docs and signature help
     },
     -- add any options here
+    routes = {
+      {
+        view = "split",
+        filter = { event = "msg_show", min_height = 10 },
+      },
+    },
   })
 
   -- vim.keymap.set({ 'n', 'i', 's' }, '<c-f>', function()
