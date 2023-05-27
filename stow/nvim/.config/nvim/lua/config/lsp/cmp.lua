@@ -2,6 +2,7 @@ local M = {}
 
 function M.setup()
   local cmp = require('cmp')
+  local cmp_types = require('cmp.types')
   local compare = require('cmp.config.compare')
   local types = require('cmp.types')
   local luasnip = require('luasnip')
@@ -70,10 +71,17 @@ function M.setup()
         scrollbar = false,
       }),
     },
+    perfomance = {
+      throttle = 100,
+      max_view_entries = 10,
+    },
     sources = {
       {
         name = 'nvim_lsp',
         priority = 1000,
+        entry_filter = function(entry, _)
+          return cmp_types.lsp.CompletionItemKind[entry:get_kind()] ~= 'Text'
+        end
       },
       {
         name = 'luasnip',
@@ -90,13 +98,11 @@ function M.setup()
       },
       {
         name = 'path',
-        group_index = 1,
         priority = 40,
       },
       {
         name = 'spell',
         max_item_count = 3,
-        group_index = 40,
       },
     },
     formatting = {
@@ -108,9 +114,9 @@ function M.setup()
     },
     sorting = {
       comparators = {
+        compare.kind,
         compare.locality,
         compare.recently_used,
-        compare.kind,
         compare.exact,
       },
     },

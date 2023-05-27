@@ -7,6 +7,7 @@ function M.setup()
   require('nvim-autopairs').setup({
     fast_wrap = {},
     disable_filetype = { 'TelescopePrompt', 'vim' },
+    check_ts = true,
   })
 
   cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
