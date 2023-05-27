@@ -32,13 +32,13 @@ packer.init({
   compile_on_sync = true,
   git = { clone_timeout = 6000 },
   display = {
-    working_sym = "ﲊ",
-    error_sym = "✗ ",
-    done_sym = " ",
-    removed_sym = " ",
-    moved_sym = "",
+    working_sym = 'ﲊ',
+    error_sym = '✗ ',
+    done_sym = ' ',
+    removed_sym = ' ',
+    moved_sym = '',
     open_fn = function()
-      return require("packer.util").float { border = "none" }
+      return require('packer.util').float { border = 'none' }
     end,
   },
 })
@@ -89,13 +89,13 @@ return packer.startup(function(use)
   })
 
   use({
-    "folke/noice.nvim",
+    'folke/noice.nvim',
     config = function()
       require('config.noice').setup()
     end,
     requires = {
-      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-      "MunifTanjim/nui.nvim",
+      -- if you lazy-load any plugin below, make sure to add proper `module='...'` entries
+      'MunifTanjim/nui.nvim',
     }
   })
 
@@ -212,7 +212,7 @@ return packer.startup(function(use)
     },
   })
 
-  use { "johmsalas/text-case.nvim",
+  use { 'johmsalas/text-case.nvim',
     config = function()
       require('config.text-case').setup()
     end
@@ -221,7 +221,7 @@ return packer.startup(function(use)
   -- Change surroundings
   use({
     'machakann/vim-sandwich',
-    event = "BufRead",
+    event = 'BufRead',
     setup = function()
       vim.g['sandwich_no_default_key_mappings'] = 1
     end,
@@ -252,17 +252,19 @@ return packer.startup(function(use)
     event = 'BufRead',
   })
 
+  use('nvim-tree/nvim-web-devicons')
+
   use {
-    "nvim-neo-tree/neo-tree.nvim",
-    branch = "v2.x",
+    'nvim-neo-tree/neo-tree.nvim',
+    branch = 'v2.x',
 
     requires = {
-      "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons",
-      "MunifTanjim/nui.nvim",
+      'nvim-lua/plenary.nvim',
+      'nvim-tree/nvim-web-devicons',
+      'MunifTanjim/nui.nvim',
       {
         's1n7ax/nvim-window-picker',
-        tag = "v1.*",
+        tag = 'v1.*',
         config = function()
           local picker = require('window-picker')
           picker.setup({
@@ -272,18 +274,18 @@ return packer.startup(function(use)
               -- filter using buffer options
               bo = {
                 -- if the file type is one of following, the window will be ignored
-                filetype = { 'neo-tree', "neo-tree-popup", "notify" },
+                filetype = { 'neo-tree', 'neo-tree-popup', 'notify' },
                 -- if the buffer type is one of following, the window will be ignored
-                buftype = { 'terminal', "quickfix" },
+                buftype = { 'terminal', 'quickfix' },
               },
             },
             other_win_hl_color = '#e35e4f',
           })
 
-          vim.keymap.set("n", "<leader>w", function()
+          vim.keymap.set('n', '<leader>w', function()
             local picked_window_id = picker.pick_window() or vim.api.nvim_get_current_win()
             vim.api.nvim_set_current_win(picked_window_id)
-          end, { desc = "Pick a window" })
+          end, { desc = 'Pick a window' })
         end,
       },
     },
@@ -322,7 +324,6 @@ return packer.startup(function(use)
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-nvim-lua',
-      'hrsh7th/cmp-nvim-lsp-signature-help',
       'f3fora/cmp-spell',
       'saadparwaiz1/cmp_luasnip',
     },
