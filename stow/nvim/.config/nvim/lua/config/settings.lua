@@ -20,7 +20,7 @@ vim.opt.updatetime = 200
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.sessionoptions:append { 'curdir', 'winsize' }
-vim.opt.shortmess:append { c = true, F = true }
+vim.opt.shortmess:append { c = true, F = true, s = true }
 vim.opt.wrap = false
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
