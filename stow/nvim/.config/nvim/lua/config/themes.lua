@@ -13,6 +13,7 @@ local base = {
   CodeActionBorder       = { link = 'XMenuBorder' },
   CodeActionNormal       = { link = 'XMenu' },
   ColorColumn            = { bg = colors.dark_grey },
+  CursorLineNr           = { bg = 'none' },
   DefinitionBorder       = { link = 'XMenuBorder' },
   DefinitionNormal       = { link = 'XMenu' },
   EndOfBuffer            = { fg = colors.background },
