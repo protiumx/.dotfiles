@@ -127,8 +127,8 @@ function M.setup()
           end
         },
       },
-      lualine_x = { { 'diagnostics', sources = { 'nvim_diagnostic' } } },
-      lualine_y = { 'branch', 'diff' },
+      lualine_x = { 'branch', 'diff' },
+      lualine_y = { { 'diagnostics', sources = { 'nvim_diagnostic' } } },
       lualine_z = {
         {
           require("noice").api.status.search.get,
