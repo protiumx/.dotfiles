@@ -30,6 +30,8 @@ export LESS_TERMCAP_me=$'\e[0m'        # reset bold/blink
 export LESS_TERMCAP_se=$'\e[0m'        # reset reverse video
 export LESS_TERMCAP_ue=$'\e[0m'        # reset underline
 
+export PICO_SDK_PATH="$HOME/dev/pico-sdk"
+
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 else
@@ -112,7 +114,7 @@ export GOPATH="$HOME/go"
 # FZF
 
 # Excluded dirs are set in ../fd/ignore
-export FZF_DEFAULT_COMMAND="fd -d 1 --hidden --follow --color=never --strip-cwd-prefix"
+export FZF_DEFAULT_COMMAND="fd -d 1 --hidden --no-ignore-vcs --follow --color=never --strip-cwd-prefix"
 export FZF_DEFAULT_OPTS="
   --height 40%
   --layout=reverse
