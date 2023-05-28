@@ -34,14 +34,12 @@ local base = {
   Todo                   = { fg = colors.orange, bold = true },
   SignColumn             = { bg = 'none' },
   StatusLine             = { bg = colors.background, fg = colors.foreground },
-  TitleString            = { link = 'XMenu' },
   TitleIcon              = { link = 'XMenu' },
   ActionPreviewTitle     = { link = 'XMenu' },
   -- Mason
   MasonHeader            = { link = 'XMenu' },
   MasonNormal            = { link = 'XMenu' },
-  NvimTreeCursorColumn   = { bg = 'none', fg = 'none' },
-  NvimTreeCursorLine     = { bg = colors.dark_grey, fg = colors.accent },
+  NeoTreeCursorLine      = { bg = colors.dark_grey, fg = colors.accent },
   -- Telescope
   TelescopeBorder        = { link = 'XMenuBorder' },
   TelescopePromptBorder  = { link = 'XMenuBorder' },
@@ -56,6 +54,8 @@ local base = {
   TelescopeResultsTitle  = { fg = colors.background, bg = colors.light_orange },
   TelescopeResultsBorder = { link = 'XMenuBorder' },
   TelescopeResultsNormal = { link = 'XMenu' },
+  -- LSPSaga title
+  TitleString            = { fg = colors.background, bg = colors.light_orange },
   SagaNormal             = { link = 'XMenu' },
   SagaBorder             = { link = 'XMenuBorder' },
   -- Neotree
