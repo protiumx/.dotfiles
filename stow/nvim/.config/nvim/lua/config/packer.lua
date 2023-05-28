@@ -212,11 +212,12 @@ return packer.startup(function(use)
     },
   })
 
-  use { 'johmsalas/text-case.nvim',
+  use({
+    'johmsalas/text-case.nvim',
     config = function()
       require('config.text-case').setup()
     end
-  }
+  })
 
   -- Change surroundings
   use({
@@ -282,7 +283,7 @@ return packer.startup(function(use)
             other_win_hl_color = '#e35e4f',
           })
 
-          vim.keymap.set('n', '<leader>w', function()
+          vim.keymap.set('n', '<Leader>W', function()
             local picked_window_id = picker.pick_window() or vim.api.nvim_get_current_win()
             vim.api.nvim_set_current_win(picked_window_id)
           end, { desc = 'Pick a window' })
@@ -334,10 +335,19 @@ return packer.startup(function(use)
 
   -- LSP
   use({
+    'ray-x/go.nvim',
+    ft = { 'go' },
+    requires = {
+      'ray-x/guihua.lua',
+    }
+  })
+
+  use({
     'neovim/nvim-lspconfig',
     ft = {
       'asm',
       'c',
+      'cpp',
       'go',
       'lua',
       'json',
@@ -352,9 +362,6 @@ return packer.startup(function(use)
       -- LSP Support
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
-
-      'ray-x/go.nvim',
-      'ray-x/guihua.lua',
 
       -- Snippets
       'L3MON4D3/LuaSnip',
