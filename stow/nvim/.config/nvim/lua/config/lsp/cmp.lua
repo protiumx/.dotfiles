@@ -54,6 +54,7 @@ function M.setup()
     },
     completion = {
       keyword_length = 2,
+      completeopt = 'menu, menuone',
     },
     snippet = {
       expand = function(args)
