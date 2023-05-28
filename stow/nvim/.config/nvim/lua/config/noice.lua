@@ -13,7 +13,7 @@ function M.setup()
           winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
         },
         position = {
-          row = "45%",
+          row = "42%",
           col = "50%",
         },
         size = {
@@ -24,7 +24,7 @@ function M.setup()
       popupmenu = {
         relative = "editor",
         position = {
-          row = "64%",
+          row = "58%",
           col = "50%",
         },
         size = {
