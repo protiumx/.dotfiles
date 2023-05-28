@@ -15,6 +15,14 @@ function M.setup()
     default_args = {
       DiffviewOpen = { '--imply-local' },
     },
+    view = {
+      merge_tool = {
+        -- Config for conflicted files in diff views during a merge or rebase.
+        layout = "diff3_mixed",
+        disable_diagnostics = true, -- Temporarily disable diagnostics for conflict buffers while in the view.
+        winbar_info = true,       -- See ':h diffview-config-view.x.winbar_info'
+      },
+    },
     file_panel = {
       win_config = {
         -- See ':h diffview-config-win_config'
@@ -34,6 +42,7 @@ function M.setup()
         vim.opt_local.wrap = false
         vim.opt_local.list = false
         vim.opt_local.relativenumber = false
+        vim.opt_local.signcolumn = 'no'
       end,
     },
     keymaps = {
