@@ -121,8 +121,10 @@ function M.setup()
     },
   }
 
+  ---@diagnostic disable-next-line: different-requires
   require("go").setup({
     icons = false,
+    comment_placeholder = '',
     max_line_len = 100,
     lsp_diag_hdlr = false,
     lsp_diag_underline = false,
@@ -138,12 +140,12 @@ function M.setup()
     lsp_inlay_hints = {
       enable = false,
     },
+    test_runner = 'gotestsum',
     run_in_floaterm = true,
     luasnip = true,
     floaterm = {
       posititon = 'right', -- one of {`top`, `bottom`, `left`, `right`, `center`, `auto`}
-      width = 0.25,        -- width of float window if not auto
-      height = 0.3,        -- height of float window if not auto
+      width = 0.3,         -- width of float window if not auto
     },
   })
 

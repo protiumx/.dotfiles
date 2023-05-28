@@ -12,6 +12,7 @@ function M.setup()
     }
   })
 
+  -- Done by noice.nvim
   -- vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
   --   vim.lsp.handlers.hover,
   --   {
