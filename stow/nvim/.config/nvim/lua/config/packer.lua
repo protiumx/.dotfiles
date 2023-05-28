@@ -337,9 +337,12 @@ return packer.startup(function(use)
   use({
     'ray-x/go.nvim',
     ft = { 'go' },
+    config = function()
+      require('config.lsp.go').setup()
+    end,
     requires = {
       'ray-x/guihua.lua',
-    }
+    },
   })
 
   use({
