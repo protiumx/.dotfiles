@@ -85,7 +85,6 @@ vim.filetype.add({
 
 local builtins = {
   '2html_plugin',
-  'fzf',
   'getscript',
   'getscriptPlugin',
   'gzip',

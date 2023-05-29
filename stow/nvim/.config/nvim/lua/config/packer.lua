@@ -85,7 +85,7 @@ return packer.startup(function(use)
 
   use({
     'nvim-treesitter/playground',
-    cmd = 'TSPlaygroundToggle',
+    cmd = { 'TSPlaygroundToggle', 'TSNodeUnderCursor' },
   })
 
   use({

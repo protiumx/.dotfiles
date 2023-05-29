@@ -94,7 +94,6 @@ function M.setup()
       },
       {
         name = 'buffer',
-        max_item_count = 3,
         priority = 60,
       },
       {
@@ -103,7 +102,6 @@ function M.setup()
       },
       {
         name = 'spell',
-        max_item_count = 3,
       },
     },
     formatting = {
@@ -116,8 +114,8 @@ function M.setup()
     sorting = {
       comparators = {
         compare.kind,
-        compare.locality,
         compare.recently_used,
+        compare.locality,
         compare.exact,
       },
     },
