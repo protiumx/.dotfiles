@@ -2,7 +2,7 @@ local wezterm = require('wezterm')
 local act = wezterm.action
 -- https://wezfurlong.org/wezterm/config/lua/wezterm/target_triple.html
 local is_windows = wezterm.target_triple == 'x86_64-pc-windows-msvc'
-local cascadia_font = is_windows and 'CaskaydiaCove NF' or 'CaskaydiaCove Nerd Font'
+local font = is_windows and 'CaskaydiaCove NF' or 'FiraCode Nerd Font Mono'
 local key_mod_panes = is_windows and 'ALT' or 'CMD'
 
 local keys = {
@@ -346,20 +346,20 @@ local config = {
   cursor_thickness = 1.5,
   default_cursor_style = 'BlinkingBar',
   default_cwd = wezterm.home_dir,
-  font = wezterm.font(cascadia_font,
-    { weight = is_windows and 'Regular' or 'DemiBold', stretch = 'Normal', style = 'Normal', italic = false }
+  font = wezterm.font(font,
+    { weight = 'Regular', stretch = 'Normal', style = 'Normal', italic = false }
   ),
   font_rules = {
     {
       intensity = 'Bold',
-      font = wezterm.font(cascadia_font, { weight = 'Bold', stretch = 'Normal', style = 'Normal' }),
+      font = wezterm.font(font, { weight = 'DemiBold', stretch = 'Normal', style = 'Normal' }),
     },
     {
       intensity = 'Normal',
-      font = wezterm.font(cascadia_font, { weight = 'DemiBold', stretch = 'Normal', style = 'Normal', italic = false }),
+      font = wezterm.font(font, { weight = 'Medium', stretch = 'Normal', style = 'Normal', italic = false }),
     },
   },
-  font_size = is_windows and 14.0 or 18.6,
+  font_size = is_windows and 14.0 or 18.8,
   -- Disable font ligatures
   harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
   hide_tab_bar_if_only_one_tab = false,
@@ -410,10 +410,10 @@ local config = {
     -- Whatever font is selected here, it will have the
     -- main font setting appended to it to pick up any
     -- fallback fonts you may have used there.
-    font = wezterm.font { family = cascadia_font, weight = 'Medium' },
+    font = wezterm.font { family = font, weight = 'Medium' },
     -- The size of the font in the tab bar.
     -- Default to 10. on Windows but 12.0 on other systems
-    font_size = is_windows and 16.0 or 16.8,
+    font_size = is_windows and 16.0 or 18,
     -- The overall background color of the tab bar when
     -- the window is focused
     active_titlebar_bg = colors.background,
