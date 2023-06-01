@@ -106,7 +106,7 @@ function M.setup()
         {
           'mode',
           fmt = function()
-            return modes[vim.fn.mode()] .. ' | '
+            return modes[vim.fn.mode()] .. ' |'
           end,
           color = function()
             local val = {
@@ -127,7 +127,18 @@ function M.setup()
           end
         },
       },
-      lualine_x = { 'branch', 'diff' },
+      lualine_x = {
+        {
+          'branch',
+          fmt = function(s)
+            if string.len(s) > 10 then
+              return s:sub(1, 10) .. '..'
+            end
+
+            return s
+          end,
+        },
+      },
       lualine_y = { { 'diagnostics', sources = { 'nvim_diagnostic' } } },
       lualine_z = {
         {
