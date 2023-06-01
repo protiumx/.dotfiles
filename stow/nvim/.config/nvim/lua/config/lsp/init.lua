@@ -37,8 +37,6 @@ function M.setup()
     },
     float = {
       focusable = false,
-      style = 'minimal',
-      border = 'single',
       source = 'always',
       header = '',
       prefix = '',

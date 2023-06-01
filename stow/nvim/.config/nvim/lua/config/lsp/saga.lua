@@ -8,7 +8,6 @@ local function keymaps()
 
   keymap({ 'n', 'v' }, '<Leader>ca', '<cmd>Lspsaga code_action<CR>', { silent = true })
   keymap('n', 'gr', '<cmd>Lspsaga rename<CR>', { silent = true })
-  keymap('n', '<F2>', '<cmd>Lspsaga rename<CR>', { silent = true })
 
   keymap('n', 'gD', '<cmd>Lspsaga peek_definition<CR>', { silent = true })
   keymap('n', 'gd', '<cmd>Lspsaga goto_definition<CR>', { silent = true })
