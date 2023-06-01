@@ -140,11 +140,11 @@ local function keymaps()
 
   -- Neoclip
   map({ 'n', 'i', 'v', 'x' }, '<M-y>', function()
-    telescope.extensions.neoclip.default(dropdown)
+    telescope.extensions.neoclip.default(themes.get_dropdown())
   end, 'Search Yanks')
 
   map('n', '<M-s>m', function()
-    telescope.extensions.macroscope.default(dropdown)
+    telescope.extensions.macroscope.default(themes.get_dropdown())
   end, '[S]earch [M]acros')
 
   -- Rg with args
