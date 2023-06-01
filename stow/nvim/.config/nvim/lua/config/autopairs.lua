@@ -10,6 +10,7 @@ function M.setup()
     check_ts = true,
   })
 
+  -- Add parens to functions
   cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 end
 

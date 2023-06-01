@@ -73,7 +73,7 @@ vim.keymap.set('i', '<M-a>', '<Esc>ggVG', { silent = true })
 vim.keymap.set('n', '<Leader>o', ':e <C-R>=expand("%:h") . "/"<CR>')
 vim.keymap.set('n', '<Leader>vo', ':vsp | e <C-R>=expand("%:h") . "/"<CR>')
 -- Go to previous buffer and open # in vertical split
-vim.keymap.set('n', '<Leader>ts', ':bp | vs #')
+vim.keymap.set('n', '<Leader>bs', ':bp | vs #')
 
 -- Paste formatted
 vim.keymap.set('n', 'p', 'p=`]', { silent = true })
