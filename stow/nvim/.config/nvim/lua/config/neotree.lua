@@ -224,6 +224,7 @@ function M.setup()
 
   vim.keymap.set({ 'n', 'i' }, '<M-T>', '<cmd>Neotree toggle<CR>', { desc = 'Toggle Neotree' })
   vim.keymap.set({ 'n', 'i' }, '<C-b>', '<cmd>Neotree source=buffers<CR>', { desc = 'Toggle Neotree Buffers' })
+  vim.keymap.set({ 'n', 'i' }, '<F2>', '<cmd>Neotree close<CR>', { desc = 'Close Neotree' })
 end
 
 return M
