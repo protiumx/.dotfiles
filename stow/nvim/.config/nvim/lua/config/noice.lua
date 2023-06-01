@@ -59,9 +59,10 @@ function M.setup()
       },
       hover = {
         enabled = true,
-        silent = false, -- set to true to not show a message if hover is not available
-        view = nil,     -- when nil, use defaults from documentation
-        opts = {},      -- merged with defaults from documentation
+        view = 'hover', -- when nil, use defaults from documentation
+        opts = {
+          source = true,
+        }, -- merged with defaults from documentation
       },
       -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
       override = {
@@ -87,18 +88,17 @@ function M.setup()
     },
   })
 
-  -- It scrolls the file as well
-  -- vim.keymap.set({ 'n', 'i', 's' }, '<c-f>', function()
-  --   if not require('noice.lsp').scroll(4) then
-  --     return '<C-f>'
-  --   end
-  -- end, { silent = true, expr = true })
+  vim.keymap.set({ 'n', 'i', 's' }, '<C-d>', function()
+    if not require('noice.lsp').scroll(4) then
+      return '<C-d>'
+    end
+  end, { silent = true, expr = true })
 
-  -- vim.keymap.set({ 'n', 'i', 's' }, '<c-b>', function()
-  --   if not require('noice.lsp').scroll(-4) then
-  --     return '<C-b>'
-  --   end
-  -- end, { silent = true, expr = true })
+  vim.keymap.set({ 'n', 'i', 's' }, '<C-u>', function()
+    if not require('noice.lsp').scroll(-4) then
+      return '<C-u>'
+    end
+  end, { silent = true, expr = true })
 end
 
 return M
