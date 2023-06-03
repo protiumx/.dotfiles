@@ -72,7 +72,7 @@ local groups = {
   CallHierarchyNormal     = { link = 'XMenu' },
   DefinitionBorder        = { link = 'XBorder' },
   DefinitionNormal        = { link = 'XMenu' },
-  DiagnosticBorder        = { link = 'XBoder' },
+  DiagnosticBorder        = { link = 'XBorder' },
   DiagnosticNormal        = { link = 'XMenu' },
   DiagnosticShowNormal    = { link = 'XMenu' },
   DiagnosticShowBorder    = { link = 'XBorder' },
