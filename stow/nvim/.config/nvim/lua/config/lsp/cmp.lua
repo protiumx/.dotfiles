@@ -65,10 +65,10 @@ function M.setup()
       completion = cmp.config.window.bordered({
         border = 'none',
         scrollbar = false,
-        winhighlight = 'Normal:XMenu,FloatBorder:XMenuBorder,CursorLine:Visual,Search:None',
+        winhighlight = 'Normal:NormalFloat,CursorLine:Visual,Search:None',
       }),
       documentation = cmp.config.window.bordered({
-        winhighlight = 'Normal:XMenu,FloatBorder:XMenuBorder,CursorLine:Visual,Search:None',
+        winhighlight = 'Normal:NormalFloat,CursorLine:Visual,Search:None',
         scrollbar = false,
       }),
     },
@@ -105,10 +105,10 @@ function M.setup()
       },
     },
     formatting = {
-      format = function(_, vim_item)
-        vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind)
-        vim_item.abbr = string.sub(vim_item.abbr, 1, 50)
-        return vim_item
+      format = function(_, item)
+        item.kind = kind_icons[item.kind]
+        item.abbr = string.sub(item.abbr, 1, 50)
+        return item
       end
     },
     sorting = {
