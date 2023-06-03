@@ -45,7 +45,7 @@ format = "[$symbol ${ram}]($style)"
 [git_branch]
 symbol = " "
 format = "[$symbol$branch(:$remote_branch)]($style) "
-style = "fg:#a9a1e1"
+style = "purple"
 
 [git_status]
 format = '([\( $all_status$ahead_behind\)]($style) )'
@@ -59,7 +59,7 @@ stashed = "$${count} "
 staged = "+${count} "
 deleted = "x${count} "
 renamed = "»${count} "
-style = "fg:#585858"
+style = "grey"
 
 [status]
 disabled = false
@@ -79,7 +79,7 @@ format = "[ $duration](grey) "
 [directory]
 truncate_to_repo = false
 truncation_length = 1
-style = "#0c90ad"
+style = "blue"
 read_only = " "
 format = '[$path]($style)[$read_only]($read_only_style) '
 
