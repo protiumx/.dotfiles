@@ -1,17 +1,6 @@
 local colors = require('config.colors')
-local themes = require('config.themes')
--- local photon = require('config.themes.photon')
 
-
--- vim.cmd("colorscheme PaperColor")
--- vim.g['PaperColor_Theme_Options'] = {
---   theme = {
---     default = { dark = { override = { color07 = { colors.foreground, '' } } } }
---   }
--- }
-
-themes.setup()
-require("gruvbox").setup({
+require('gruvbox').setup({
   undercurl = true,
   underline = true,
   bold = true,
@@ -22,7 +11,9 @@ require("gruvbox").setup({
   dim_inactive = true,
   transparent_mode = false,
 })
-vim.cmd("colorscheme gruvbox")
 
-themes.load(false)
--- photon.load()
+vim.cmd('colorscheme gruvbox')
+
+colors.load()
+
+-- vim.cmd [[colorscheme photon]]
