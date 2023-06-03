@@ -32,6 +32,7 @@ packer.init({
   compile_on_sync = true,
   git = { clone_timeout = 6000 },
   display = {
+    open_cmd = '40vnew \\[packer\\]',
     working_sym = 'ﲊ',
     error_sym = '✗ ',
     done_sym = ' ',
@@ -63,7 +64,6 @@ return packer.startup(function(use)
   })
 
   -- Themes
-  use('NLKNguyen/papercolor-theme')
   use('ellisonleao/gruvbox.nvim')
 
   -- Treesitter
@@ -253,7 +253,21 @@ return packer.startup(function(use)
     event = 'BufRead',
   })
 
-  use('nvim-tree/nvim-web-devicons')
+  use({
+    'nvim-tree/nvim-web-devicons',
+    config = function()
+      require('nvim-web-devicons').setup({
+        override_by_extension = {
+          ['go'] = {
+            icon = '',
+            color = "#519aba",
+            cterm_color = "74",
+            name = "Go",
+          },
+        },
+      })
+    end
+  })
 
   use {
     'nvim-neo-tree/neo-tree.nvim',
