@@ -89,6 +89,26 @@ return packer.startup(function(use)
   })
 
   use({
+    'rcarriga/nvim-notify',
+    config = function()
+      require('notify').setup({
+        render = 'minimal',
+        stages = 'static',
+        top_down = false,
+        minimum_width = 30,
+        timeout = 4000,
+        icons = {
+          DEBUG = "",
+          ERROR = "",
+          INFO = "",
+          TRACE = "",
+          WARN = ""
+        },
+      })
+    end
+  })
+
+  use({
     'folke/noice.nvim',
     config = function()
       require('config.noice').setup()

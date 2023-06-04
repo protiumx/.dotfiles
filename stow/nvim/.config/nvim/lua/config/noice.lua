@@ -51,6 +51,7 @@ function M.setup()
     },
     messages = {
       view_search = false,
+      view_history = 'popup',
     },
     lsp = {
       progress = {
