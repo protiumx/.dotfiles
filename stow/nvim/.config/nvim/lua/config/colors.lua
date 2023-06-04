@@ -102,30 +102,25 @@ local groups = {
 }
 
 
-local function _load(config)
-  for group, hl in pairs(config) do
+-- local function _load_diagnostics()
+--   local diagnostics = {
+--     DiagnosticSignError = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticSignError', true),
+--       { bg = nil }),
+--     DiagnosticSignWarn  = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticSignWarn', true),
+--       { bg = nil }),
+--     DiagnosticSignInfo  = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticSignInfo', true),
+--       { bg = nil }),
+--     DiagnosticSignHint  = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticSignHint', true),
+--       { bg = nil }),
+--   }
+-- end
+
+function colors.load()
+  for group, hl in pairs(groups) do
     if not vim.tbl_isempty(hl) then
       vim.api.nvim_set_hl(0, group, hl)
     end
   end
-end
-
-local function _load_diagnostics()
-  local diagnostics = {
-    DiagnosticSignError = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticSignError', true),
-      { bg = nil }),
-    DiagnosticSignWarn  = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticSignWarn', true),
-      { bg = nil }),
-    DiagnosticSignInfo  = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticSignInfo', true),
-      { bg = nil }),
-    DiagnosticSignHint  = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticSignHint', true),
-      { bg = nil }),
-  }
-  _load(diagnostics)
-end
-
-function colors.load()
-  _load(groups)
   vim.g.terminal_color_0 = colors.background
 end
 
