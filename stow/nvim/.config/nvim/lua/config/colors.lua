@@ -32,9 +32,11 @@ local groups = {
   XMenu                   = { bg = colors.dark_grey, default = true },
   XBorder                 = { bg = colors.dark_grey, fg = colors.dark_grey, default = true },
   -- Base groups
+  Cursor                  = { fg = colors.background, bg = colors.dark_orange },
+  TermCursor              = { link = 'Cursor' },
   ColorColumn             = { bg = colors.grey },
   CursorLine              = { bg = 'none', fg = nil },
-  CursorLineNr            = { bg = nil },
+  CursorLineNr            = { bg = 'none' },
   EndOfBuffer             = { fg = colors.background },
   ErrorMsg                = { fg = colors.red, bg = nil, bold = true },
   FloatBorder             = { link = 'XBorder' },
