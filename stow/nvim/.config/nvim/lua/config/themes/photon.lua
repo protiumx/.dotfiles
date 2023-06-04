@@ -95,7 +95,7 @@ local groups = {
   DiffDelete                  = { fg = colors.red, reverse = true },
   DiffAdd                     = { fg = colors.green, reverse = true },
   DiffChange                  = { fg = colors.yellow, reverse = true },
-  DiffText                    = { fg = colors.purple, reverse = true },
+  DiffText                    = { fg = colors.yellow, bg = colors.green },
   SpellCap                    = { fg = colors.yellow, undercurl = true },
   SpellBad                    = { undercurl = true },
   SpellLocal                  = { undercurl = true },
