@@ -45,7 +45,7 @@ U.defaults = {
 }
 
 local min_width = 80
-local min_height = 60
+local min_height = 20
 
 ---Create terminal dimension relative to the viewport
 ---@param opts Dimensions
