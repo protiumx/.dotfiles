@@ -13,6 +13,11 @@ function M.setup()
 
   -- Additional text objects e.g. via to select inner text with auto detection
   -- of surroundings
+  vim.keymap.set('x', 'is', '<Plug>(textobj-sandwich-query-i)', { remap = true })
+  vim.keymap.set('x', 'as', '<Plug>(textobj-sandwich-query-a)', { remap = true })
+  vim.keymap.set('o', 'is', '<Plug>(textobj-sandwich-query-i)', { remap = true })
+  vim.keymap.set('o', 'as', '<Plug>(textobj-sandwich-query-a)', { remap = true })
+
   vim.keymap.set('x', 'ia', '<Plug>(textobj-sandwich-auto-i)', { remap = true })
   vim.keymap.set('x', 'aa', '<Plug>(textobj-sandwich-auto-a)', { remap = true })
   vim.keymap.set('o', 'ia', '<Plug>(textobj-sandwich-auto-i)', { remap = true })
