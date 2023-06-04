@@ -33,7 +33,7 @@ local groups = {
   XBorder                 = { bg = colors.dark_grey, fg = colors.dark_grey, default = true },
   -- Base groups
   ColorColumn             = { bg = colors.grey },
-  CursorLine              = { bg = nil, fg = nil },
+  CursorLine              = { bg = 'none', fg = nil },
   CursorLineNr            = { bg = nil },
   EndOfBuffer             = { fg = colors.background },
   ErrorMsg                = { fg = colors.red, bg = nil, bold = true },
@@ -98,7 +98,15 @@ local groups = {
   NeoTreeTitleBar         = { fg = colors.background, bg = colors.light_orange },
   -- Noice.nvim
   NoiceCmdlineIcon        = { fg = colors.dark_orange },
+  NoiceCmdlineIconInput   = { fg = colors.dark_orange },
+  NoiceCmdlineIconSearch  = { fg = colors.dark_orange },
   NoiceCmdlinePopupBorder = { link = 'XBorder' },
+  -- notify.nvim
+  NotifyERRORBorder       = { fg = colors.background },
+  NotifyWARNBorder        = { fg = colors.background },
+  NotifyINFOBorder        = { fg = colors.background },
+  NotifyDEBUGBorder       = { fg = colors.background },
+  NotifyTRACEBorder       = { fg = colors.background },
 }
 
 
