@@ -6,6 +6,7 @@ cheat() {
   curl -s "cheat.sh/$1";
 }
 
+# Move files fuzzy find destination
 fmv() {
   mv "$@" $(fd -t d -H | fzf)
 }
@@ -74,10 +75,6 @@ gremote() {
   git config --get remote.origin.url | sed -E 's/(ssh:\/\/)?git@/https:\/\//' | sed 's/com:/com\//' | sed 's/\.git$//' | head -n1
 }
 
-mkcd(){
-  mkdir -p "$1" && cd "$1" || exit
-}
-
 # Print all 256 ANSI colors
 ansi_colors() {
   python3 -c "print(''.join(f'\u001b[48;5;{s}m{s.rjust(4)}' + ('\n' if not (int(s)+1) % 8 else '') for s in (str(i) for i in range(256))) + '\u001b[0m')"
@@ -121,6 +118,7 @@ kf() {
   esac
 }
 
+# Kubernetes follow logs since 1m
 klog() {
   if  [[ "$1" == "deployment" ]]; then
     kubectl logs -f --all-containers=true --since=1m "deployments/$2"
@@ -129,12 +127,12 @@ klog() {
   fi
 }
 
-# Watch kubernetes resources. Highlights differences.
+# Watch kubernetes resources every 5 seconds. Highlights differences.
 kwatch() {
   watch -n 5 -d "kubectl get $1 | grep $2"
 }
 
-kube_view_config() {
+kube-serv-config() {
   if [ -z "$1" ]; then
     echo "No service supplied. \nUsage: $funcstack[1] <service>"
   else
@@ -144,7 +142,7 @@ kube_view_config() {
 }
 
 # View the envionment variables of a provided pod
-kube_view_env() {
+kube-pod-env() {
   if [ -z "$1" ]; then
     echo "No pod supplied. \nUsage: $funcstack[1] <pod_name>"
   else
@@ -180,11 +178,6 @@ brewit() {
     brew doctor
 }
 
-# Run test of a given path with colored output
-gotest() {
-  go test -v -race -failfast $1 | sed ''/PASS/s//$(printf "\033[32mPASS\033[0m")/'' | sed ''/FAIL/s//$(printf "\033[31mFAIL\033[0m")/''
-}
-
 dstop-all() {
   docker stop $(docker ps -aq)
 }
@@ -209,7 +202,7 @@ alias k9="k9s -c pod --readonly"
 
 alias kfp="kf pods"
 alias kfs="kf services"
-alias kfd="kf deployements"
+alias kfd="kf deployments"
 alias kfplog="kf pods '' log"
 alias kfdlog="kf deployment '' log"
 
