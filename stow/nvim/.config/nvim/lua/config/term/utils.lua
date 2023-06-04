@@ -44,6 +44,9 @@ U.defaults = {
   },
 }
 
+local min_width = 80
+local min_height = 60
+
 ---Create terminal dimension relative to the viewport
 ---@param opts Dimensions
 ---@return table
@@ -53,8 +56,16 @@ function U.get_dimension(opts)
   local ln = vim.o.lines
 
   -- calculate our floating window size
-  local width = math.max(math.ceil(cl * opts.width), 80)
+  local width = math.ceil(cl * opts.width)
   local height = math.ceil(ln * opts.height - 4)
+
+  if width < min_width then
+    width = min_width
+  end
+
+  if height < min_height then
+    height = min_height
+  end
 
   -- and its starting position
   local col = math.ceil((cl - width) * opts.x)
