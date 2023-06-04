@@ -193,7 +193,7 @@ function M.setup()
         '--smart-case',
         '-u'
       },
-      file_ignore_patterns = { 'target/*', 'node_modules/*', '^.git/*', '^.yarn/*' },
+      file_ignore_patterns = { 'target/*', 'node_modules/*', '.git/*', '.yarn/*' },
     },
     pickers = {
       find_files = {
