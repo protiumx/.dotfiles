@@ -1,4 +1,4 @@
--- https://github.com/numToStr/FTerm.nvim
+-- from https://github.com/numToStr/FTerm.nvim
 
 local Term = require('config.term.terminal')
 
@@ -74,16 +74,15 @@ function M.setup()
 
   t:setup(cfg)
 
-  vim.api.nvim_create_user_command('TermExit', M.exit, { bang = true })
-  vim.api.nvim_create_user_command('TermToggle', M.toggle, { bang = true })
-  vim.api.nvim_create_user_command('TermRun', function(opts)
+  -- e.g. TRun go tests -v %
+  vim.api.nvim_create_user_command('TRun', function(opts)
     M.run(opts.args)
   end, {
     bang = true,
     nargs = '+',
   })
 
-  vim.api.nvim_create_user_command('TermScratch', function(opts)
+  vim.api.nvim_create_user_command('TScratch', function(opts)
     local cmd = opts.args
     if cmd:find('go test') then
       cmd = string.gsub(opts.args, '%%', './' .. vim.fn.expand('%:h')) .. '/...'
