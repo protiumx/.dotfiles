@@ -8,6 +8,9 @@ require('gruvbox').setup({
     dark0 = colors.background,
     dark1 = colors.background,
   },
+  overrides = {
+    NotifyINFOIcon = { link = 'GruvboxFg1' },
+  },
   dim_inactive = true,
   transparent_mode = false,
 })
