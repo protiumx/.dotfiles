@@ -304,10 +304,10 @@ end)
 
 local colors = {
   background = '#1c1c1c',
-  cursor_bg = '#fe5186',
-  cursor_border = '#fe5186',
+  cursor_bg = '#ff5d62',
+  cursor_border = '#ff5d62',
   selection_fg = '#1c1c1c',
-  selection_bg = '#fe5186',
+  selection_bg = '#ff5d62',
   tab_bar = {
     -- The color of the strip that goes along the top of the window
     -- (does not apply when fancy tab bar is in use)
@@ -339,7 +339,7 @@ local colors = {
 local config = {
   audible_bell = 'Disabled',
   canonicalize_pasted_newlines = 'LineFeed',
-  color_scheme = 'GruvboxDarkHard',
+  color_scheme = 'Tomorrow Night Burns',
   colors = colors,
   command_palette_font_size = 16.0,
   cursor_blink_rate = 500,
