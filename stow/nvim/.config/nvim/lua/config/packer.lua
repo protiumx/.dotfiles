@@ -95,7 +95,7 @@ return packer.startup(function(use)
         render = 'minimal',
         stages = 'static',
         top_down = false,
-        minimum_width = 30,
+        minimum_width = 10,
         timeout = 4000,
         icons = {
           DEBUG = "",
@@ -141,13 +141,6 @@ return packer.startup(function(use)
           '!.git/worktrees',
         },
       })
-    end
-  })
-
-  use({
-    'numToStr/FTerm.nvim',
-    config = function()
-      require('config.term').setup()
     end
   })
 
