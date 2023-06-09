@@ -41,7 +41,7 @@ local groups = {
   ErrorMsg                = { fg = colors.red, bg = nil, bold = true },
   FloatBorder             = { link = 'XBorder' },
   FloatNormal             = { link = 'XMenu' },
-  MatchParen              = { fg = colors.accent, bg = nil, bold = true },
+  MatchParen              = { fg = colors.accent, bg = 'none', bold = true },
   NormalFloat             = { link = 'XMenu' },
   -- NonText                    = { fg = colors.light_grey },
   Pmenu                   = { link = 'XMenu' },
@@ -109,21 +109,24 @@ local groups = {
   NotifyINFOBorder        = { fg = colors.background },
   NotifyDEBUGBorder       = { fg = colors.background },
   NotifyTRACEBorder       = { fg = colors.background },
+  -- web-dev-icons
+  DevIconDefault          = { fg = colors.dark_orange, bg = 'none' },
 }
 
 
--- local function _load_diagnostics()
---   local diagnostics = {
---     DiagnosticSignError = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticSignError', true),
---       { bg = nil }),
---     DiagnosticSignWarn  = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticSignWarn', true),
---       { bg = nil }),
---     DiagnosticSignInfo  = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticSignInfo', true),
---       { bg = nil }),
---     DiagnosticSignHint  = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticSignHint', true),
---       { bg = nil }),
---   }
--- end
+-- Remove background from Diagnostics Signs if it was added by a color scheme
+local function _load_diagnostics()
+  local diagnostics = {
+    DiagnosticSignError = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticSignError', true) or {},
+      { bg = 'none' }),
+    DiagnosticSignWarn  = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticSignWarn', true) or {},
+      { bg = 'none' }),
+    DiagnosticSignInfo  = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticSignInfo', true) or {},
+      { bg = 'none' }),
+    DiagnosticSignHint  = vim.tbl_extend('force', vim.api.nvim_get_hl_by_name('DiagnosticSignHint', true) or {},
+      { bg = 'none' }),
+  }
+end
 
 function colors.load()
   for group, hl in pairs(groups) do
@@ -131,6 +134,8 @@ function colors.load()
       vim.api.nvim_set_hl(0, group, hl)
     end
   end
+  _load_diagnostics()
+
   vim.g.terminal_color_0 = colors.background
 end
 
