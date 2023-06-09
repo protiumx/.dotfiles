@@ -133,6 +133,9 @@ return packer.startup(function(use)
         detection_methods = { 'pattern' },
         show_hidden = true,
         silent_chdir = false,
+        update_focused_file = {
+          enable = false,
+        },
         patterns = {
           'go.mod',
           'Makefile',
@@ -271,6 +274,7 @@ return packer.startup(function(use)
     'nvim-tree/nvim-web-devicons',
     config = function()
       require('nvim-web-devicons').setup({
+        color_icons = false,
         override_by_extension = {
           ['go'] = {
             icon = '',
