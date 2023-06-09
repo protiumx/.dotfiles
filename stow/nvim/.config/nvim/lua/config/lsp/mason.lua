@@ -16,28 +16,35 @@ local function organize_go_imports(timeoutms)
   end
 end
 
-local function setup_autocmd(bufnr)
-  vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-    vim.lsp.buf.format()
-  end, { desc = 'Format current buffer with LSP' })
-
+local function setup_autocmd(client, bufnr)
   vim.api.nvim_create_augroup('lsp_format', { clear = true })
-  vim.api.nvim_create_autocmd('BufWritePre', {
-    group = 'lsp_format',
-    pattern = '*',
-    callback = function()
-      vim.lsp.buf.format()
-    end,
-  })
 
-  vim.api.nvim_create_autocmd('BufWritePre', {
-    group = 'lsp_format',
-    pattern = '*.go',
-    callback = function()
-      -- organize_go_imports(500)
-      require('go.format').goimport()
-    end
-  })
+  if client.server_capabilities.documentFormattingProvider then
+    vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
+      vim.lsp.buf.format()
+    end, { desc = 'Format current buffer with LSP' })
+
+    vim.api.nvim_create_autocmd('BufWritePre', {
+      group = 'lsp_format',
+      pattern = '*',
+      callback = function()
+        vim.lsp.buf.format()
+      end,
+    })
+  end
+
+
+  if client.name == 'gopls' then
+    vim.api.nvim_create_autocmd('BufWritePre', {
+      group = 'lsp_format',
+      pattern = '*.go',
+      callback = function()
+        -- organize_go_imports(500)
+        -- use go.nvim
+        require('go.format').goimport()
+      end
+    })
+  end
 end
 
 local on_lsp_attach = function(client, bufnr)
@@ -53,7 +60,7 @@ local on_lsp_attach = function(client, bufnr)
   local colors = require('config.colors')
   require('config.lsp.keymaps').setup(bufnr)
 
-  setup_autocmd(bufnr)
+  setup_autocmd(client, bufnr)
 
   -- open diagnostic on cursor hold
   vim.cmd [[autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focus = false })]]

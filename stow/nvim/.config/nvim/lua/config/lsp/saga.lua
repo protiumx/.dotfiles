@@ -44,6 +44,9 @@ function M.setup()
       hide_keyword = true,
       show_file = false,
     },
+    hover = {
+      max_width = 0.4,
+    },
     definition = {
       edit = "<CR>",
       vsplit = "<C-v>",
@@ -52,7 +55,6 @@ function M.setup()
       quit = "q",
     },
     outline = {
-      win_width = 35,
       keys = {
         jump = '<CR>',
       }
@@ -62,6 +64,7 @@ function M.setup()
       on_insert = false,
       on_insert_follow = false,
       max_width = 0.4,
+      max_show_width = 0.7,
     },
     rename = {
       in_select = false,
@@ -70,20 +73,6 @@ function M.setup()
       border = 'single',
       code_action = '',
       diagnostic = '',
-      -- colors = {
-      --   normal_bg = colors.background,
-      --   title_bg = colors.background,
-      --   red = colors.red,
-      --   magenta = colors.light_pink,
-      --   orange = colors.orange,
-      --   yellow = colors.dark_yellow,
-      --   green = colors.green,
-      --   cyan = colors.cyan,
-      --   blue = colors.blue,
-      --   purple = colors.purple,
-      --   white = colors.foreground,
-      --   black = colors.background,
-      -- },
     },
   })
 
