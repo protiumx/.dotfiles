@@ -38,6 +38,23 @@ function M.setup()
           winhighlight = { Normal = "NormalFloat", FloatBorder = "FloatBorder" },
         },
       },
+      confirm = {
+        relative = "editor",
+        position = {
+          row = "58%",
+          col = "50%",
+        },
+        size = {
+          width = 60,
+          height = 10,
+        },
+        border = {
+          padding = { 0, 1 },
+        },
+        win_options = {
+          winhighlight = { Normal = "NormalFloat", FloatBorder = "FloatBorder" },
+        },
+      },
     },
     cmdline = {
       format = {
@@ -61,8 +78,7 @@ function M.setup()
         enabled = true,
         view = 'hover', -- when nil, use defaults from documentation
         opts = {
-          source = true,
-        }, -- merged with defaults from documentation
+        },              -- merged with defaults from documentation
       },
       -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
       override = {
@@ -83,7 +99,7 @@ function M.setup()
     routes = {
       {
         view = "popup",
-        filter = { event = "msg_show", min_height = 6 },
+        filter = { event = "msg_show", min_length = 100, min_height = 6 },
       },
     },
   })
