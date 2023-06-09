@@ -85,6 +85,7 @@ function M.setup()
       'go',
       'help',
       'javascript',
+      'json',
       'lua',
       'markdown',
       'markdown_inline',
