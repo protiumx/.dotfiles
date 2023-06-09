@@ -33,9 +33,9 @@ local servers = {
   terraformls = {},
   bashls = {
     cmd_env = {
-      GLOB_PATTERN = '*@(.sh|.inc|.bash|.command|.zsh)',
+      GLOB_PATTERN = '*@(.sh|)',
     },
-    filetypes = { 'sh', 'zsh' },
+    filetypes = { 'sh', 'zsh', '.bash', '.zsh', '.zshenv', '.profile' },
   },
   gopls = {
     analyses = {
