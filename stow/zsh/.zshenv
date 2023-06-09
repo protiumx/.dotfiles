@@ -88,6 +88,11 @@ cdi() {
   fi
 }
 
+# Compare json files
+jcmp() {
+  delta <(jq --sort-keys . $1) <(jq --sort-keys . $2)
+}
+
 # Fuzzy find kubernetes resource and apply an action
 kf() {
   local r=$(kubectl get $1 | sed 1d | awk '{print $1}' | fzf --height 40% -q ${2:-""})
