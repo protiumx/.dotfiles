@@ -93,6 +93,8 @@ local function keymaps()
     builtin.live_grep(with_title({}))
   end, '[S]earch Live [G]rep')
 
+  map({ 'i', 'n' }, '<M-b>', function() builtin.buffers(dropdown) end, 'Find buffers')
+
   map({ 'i', 'n' }, '<M-g>', function()
     builtin.live_grep(with_title({ cwd = vim.fn.expand('%:p:h') }))
   end, '[S]earch Live [G]rep relative buffer')
@@ -169,12 +171,12 @@ function M.setup()
       layout_config = {
         horizontal = {
           prompt_position = 'top',
-          preview_width = 0.55,
+          preview_width = 0.7,
         },
         vertical = {
           mirror = false,
         },
-        width = 0.85,
+        width = { 0.85, max = 148 },
         height = 0.80,
       },
       path_display = { 'truncate' },
