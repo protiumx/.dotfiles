@@ -32,7 +32,6 @@ packer.init({
   compile_on_sync = true,
   git = { clone_timeout = 6000 },
   display = {
-    open_cmd = '40vnew \\[packer\\]',
     working_sym = 'ﲊ',
     error_sym = '✗ ',
     done_sym = ' ',
@@ -65,6 +64,7 @@ return packer.startup(function(use)
 
   -- Themes
   use('ellisonleao/gruvbox.nvim')
+  use('folke/tokyonight.nvim')
 
   -- Treesitter
   use({
@@ -98,11 +98,11 @@ return packer.startup(function(use)
         minimum_width = 10,
         timeout = 4000,
         icons = {
-          DEBUG = "",
-          ERROR = "",
-          INFO = "",
-          TRACE = "",
-          WARN = ""
+          DEBUG = '',
+          ERROR = '',
+          INFO = '',
+          TRACE = '',
+          WARN = ''
         },
       })
     end
@@ -116,6 +116,7 @@ return packer.startup(function(use)
     requires = {
       -- if you lazy-load any plugin below, make sure to add proper `module='...'` entries
       'MunifTanjim/nui.nvim',
+      'rcarriga/nvim-notify',
     }
   })
 
@@ -174,18 +175,18 @@ return packer.startup(function(use)
   })
 
   use({
-    'norcalli/nvim-colorizer.lua', -- colorize hexa and rgb strings
+    'norcalli/nvim-colorizer.lua',
     cmd = { 'ColorizerToggle', 'ColorizerAttachToBuffer' },
     config = function()
       require('colorizer').setup({
         user_default_options = {
-          RGB = true,
+          RGB = false,
           RRGGBB = true,
           names = false,
           RRGGBBAA = false,
           css = false,
           css_fn = true,
-          mode = 'foreground',
+          mode = 'background',
         },
       })
     end
@@ -196,9 +197,9 @@ return packer.startup(function(use)
     cmd = 'EasyAlign',
     config = function()
       -- Start interactive EasyAlign in visual mode (e.g. vipga)
-      vim.keymap.set('x', 'ga', '<Plug>(EasyAlign)', { remap = true })
+      vim.keymap.set('x', 'gA', '<Plug>(EasyAlign)', { remap = true })
       -- Start interactive EasyAlign for a motion/text object (e.g. gaip)
-      vim.keymap.set('n', 'ga', '<Plug>(EasyAlign)', { remap = true })
+      vim.keymap.set('n', 'gA', '<Plug>(EasyAlign)', { remap = true })
     end
   })
 
@@ -208,29 +209,23 @@ return packer.startup(function(use)
       vim.g['user_emmet_leader_key'] = '<C-X>'
     end,
     ft = {
-      'django-html',
-      'ejs',
-      'glimmer',
       'handlebars',
       'hbs',
       'html',
-      'htmldjango',
       'javascriptreact',
       'jsx',
-      'php',
       'pug',
-      'rescript',
       'svelte',
       'tsx',
       'typescriptreact',
       'vue',
       'xml',
-      'zsh',
     },
   })
 
   use({
     'johmsalas/text-case.nvim',
+    after = 'telescope.nvim',
     config = function()
       require('config.text-case').setup()
     end
@@ -275,14 +270,6 @@ return packer.startup(function(use)
     config = function()
       require('nvim-web-devicons').setup({
         color_icons = false,
-        override_by_extension = {
-          ['go'] = {
-            icon = '',
-            color = "#519aba",
-            cterm_color = "74",
-            name = "Go",
-          },
-        },
       })
     end
   })
@@ -308,8 +295,6 @@ return packer.startup(function(use)
               bo = {
                 -- if the file type is one of following, the window will be ignored
                 filetype = { 'neo-tree', 'neo-tree-popup', 'notify' },
-                -- if the buffer type is one of following, the window will be ignored
-                buftype = { 'terminal', 'quickfix' },
               },
             },
             other_win_hl_color = '#e35e4f',
@@ -403,7 +388,10 @@ return packer.startup(function(use)
       'rafamadriz/friendly-snippets',
 
       -- Show lsp progress
-      'j-hui/fidget.nvim',
+      {
+        'j-hui/fidget.nvim',
+        tag = 'legacy',
+      },
 
       -- Better UI for LSP commands
       {
