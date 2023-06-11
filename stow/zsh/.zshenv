@@ -194,6 +194,7 @@ drm-all() {
 # Aliases
 alias cat="bat -p --paging=never --theme='TwoDark'"
 alias dc="docker compose"
+alias dot="cd ~/.dotfiles && nvim"
 alias e="nvim"
 alias icat="wezterm imgcat"
 alias lt="dust -b -H -r -X '.git'"
