@@ -1,12 +1,12 @@
 local M = {}
 
 function M.setup(bufnr)
-  local nmap = function(keys, func, desc)
+  local nmap = function(keys, cmd, desc)
     if desc then
       desc = '[LSP] ' .. desc
     end
 
-    vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
+    vim.keymap.set('n', keys, cmd, { buffer = bufnr, desc = desc })
   end
 
   nmap('gy', vim.lsp.buf.type_definition, 'Show type definition')

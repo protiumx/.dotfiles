@@ -63,7 +63,14 @@ local on_lsp_attach = function(client, bufnr)
   setup_autocmd(client, bufnr)
 
   -- open diagnostic on cursor hold
-  vim.cmd [[autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focus = false })]]
+  vim.api.nvim_create_augroup('lsp_diagnostic_hold', { clear = true })
+  vim.api.nvim_create_autocmd('CursorHold', {
+    group = 'lsp_diagnostic_hold',
+    buffer = bufnr,
+    callback = function()
+      vim.diagnostic.open_float({ bufnr = bufnr, focus = false, border = 'single' })
+    end,
+  })
 
   if client.server_capabilities.documentHighlightProvider then
     vim.api.nvim_set_hl(0, 'LspReferenceRead', { fg = colors.accent })
