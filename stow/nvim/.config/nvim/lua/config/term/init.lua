@@ -97,6 +97,7 @@ function M.setup()
   })
 
   vim.keymap.set({ 'n', 'v', 't' }, '<M-t>', M.toggle, { desc = 'Toggle floating term' })
+  vim.keymap.set({ 'n', 'v', 't' }, '<M-[>', M.close, { desc = 'Close floating term' })
 end
 
 return M

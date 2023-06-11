@@ -215,7 +215,12 @@ end
 function Term:toggle()
   -- If window is stored and valid then it is already opened, then close it
   if U.is_win_valid(self.win) then
-    self:close()
+    if vim.api.nvim_get_current_win() ~= self.win then
+      self:open()
+      self:prompt()
+    else
+      self:close()
+    end
   else
     self:open()
   end
