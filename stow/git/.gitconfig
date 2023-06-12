@@ -30,7 +30,7 @@
   rebase = true
 
 [merge]
-  conflictstyle = diff3
+  conflictstyle = zdiff3
 
 [rebase]
   # Stash and pop uncommitted changes on rebase
