@@ -109,6 +109,10 @@ local baseHls = {
   NoiceCmdlinePopupBorder = { link = 'XBorder' },
   NoiceConfirm            = { link = 'XMenu' },
   NoiceConfirmBorder      = { link = 'XBorder' },
+  NoicePopup              = { link = 'XMenu' },
+  NoicePopupBorder        = { link = 'XBorder' },
+  NoicePopupmenu          = { link = 'XMenu' },
+  NoicePopupmenuBorder    = { link = 'XBorder' },
   -- notify.nvim
   NotifyERRORBorder       = { fg = colors.background },
   NotifyWARNBorder        = { fg = colors.background },
