@@ -1,66 +1,67 @@
 local M = {}
 
 function M.setup()
-  require("noice").setup({
+  require('noice').setup({
     views = {
       cmdline_popup = {
+        relative = 'editor',
         border = {
-          style = "none",
+          style = 'none',
           padding = { 1, 2 },
         },
         filter_options = {},
         win_options = {
-          winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
+          winhighlight = 'NormalFloat:NormalFloat,FloatBorder:FloatBorder',
         },
         position = {
-          row = "42%",
-          col = "50%",
+          row = '42%',
+          col = '50%',
         },
         size = {
           width = 60,
-          height = "auto",
+          height = 'auto',
         },
       },
       popupmenu = {
-        relative = "editor",
+        relative = 'editor',
         position = {
-          row = "58%",
-          col = "50%",
+          row = '58%',
+          col = '50%',
         },
         size = {
           width = 60,
-          height = 10,
+          height = 'auto',
         },
         border = {
           padding = { 0, 1 },
         },
         win_options = {
-          winhighlight = { Normal = "NormalFloat", FloatBorder = "FloatBorder" },
+          winhighlight = { Normal = 'NormalFloat', FloatBorder = 'FloatBorder' },
         },
       },
       confirm = {
-        relative = "editor",
+        relative = 'editor',
         position = {
-          row = "58%",
-          col = "50%",
+          row = '88%',
+          col = '50%',
         },
         size = {
           width = 60,
-          height = 10,
+          height = 'auto',
         },
         border = {
           padding = { 0, 1 },
         },
         win_options = {
-          winhighlight = { Normal = "NormalFloat", FloatBorder = "FloatBorder" },
+          winhighlight = { Normal = 'NormalFloat', FloatBorder = 'FloatBorder' },
         },
       },
     },
     cmdline = {
       format = {
-        cmdline = { pattern = "^:", icon = "❯", lang = '' },
-        search_down = { kind = "search", pattern = "^/", icon = "/", lang = "regex" },
-        search_up = { kind = "search", pattern = "^%?", icon = "?", lang = "regex" },
+        cmdline = { pattern = '^:', icon = '❯', lang = '' },
+        search_down = { kind = 'search', pattern = '^/', icon = '/', lang = 'regex' },
+        search_up = { kind = 'search', pattern = '^%?', icon = '?', lang = 'regex' },
         filter = false,
         lua = false,
         help = false,
@@ -82,9 +83,9 @@ function M.setup()
       },
       -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
       override = {
-        ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-        ["vim.lsp.util.stylize_markdown"] = true,
-        ["cmp.entry.get_documentation"] = true,
+        ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
+        ['vim.lsp.util.stylize_markdown'] = true,
+        ['cmp.entry.get_documentation'] = true,
       },
     },
     -- you can enable a preset for easier configuration
@@ -98,8 +99,8 @@ function M.setup()
     -- add any options here
     routes = {
       {
-        view = "popup",
-        filter = { event = "msg_show", min_length = 100, min_height = 6 },
+        view = 'popup',
+        filter = { event = 'msg_show', min_length = 100, min_height = 6 },
       },
     },
   })
