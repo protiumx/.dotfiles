@@ -22,6 +22,7 @@ packages=(
   git-delta                #  https://github.com/dandavison/delta
   gpg
   go
+  graphviz                 #  https://graphviz.org/
   grpcurl                  #  https://github.com/fullstorydev/grpcurl
   httpie                   #  https://github.com/httpie/httpie
   imagemagick
