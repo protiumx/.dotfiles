@@ -304,11 +304,11 @@ end)
 
 local colors = {
   background = '#1c1c1c',
-  cursor_bg = '#ff5d62',
+  cursor_bg = '#fb4934',
   cursor_fg = '#1c1c1c',
-  cursor_border = '#ff5d62',
+  cursor_border = '#fb4934',
   selection_fg = '#1c1c1c',
-  selection_bg = '#ff5d62',
+  selection_bg = '#fb4934',
   tab_bar = {
     -- The color of the strip that goes along the top of the window
     -- (does not apply when fancy tab bar is in use)
