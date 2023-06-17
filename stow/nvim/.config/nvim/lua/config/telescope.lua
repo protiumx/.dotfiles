@@ -171,7 +171,7 @@ function M.setup()
       layout_config = {
         horizontal = {
           prompt_position = 'top',
-          preview_width = 0.7,
+          preview_width = 0.64,
         },
         vertical = {
           mirror = false,
