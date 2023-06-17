@@ -122,9 +122,12 @@ export FZF_DEFAULT_OPTS="
   --pointer ' '
   --marker '~ '
   --multi
-  --bind 'ctrl-p:preview(bat {}),ctrl-e:become(nvim {})'
-  --preview-window hidden
+  --bind 'ctrl-p:toggle-preview'
+  --bind 'ctrl-e:become(nvim {})'
+  --preview='bat {}'
+  --preview-window 'hidden,border-left'
   --no-info
+  --scrollbar=▏▕
   --color 'gutter:-1,hl+:#82aaff,hl:#82aaff,bg+:-1,pointer:#82aaff'"
 export FZF_COMPLETION_OPTS=$FZF_DEFAULT_OPTS
 
