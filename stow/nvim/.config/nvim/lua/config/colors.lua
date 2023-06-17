@@ -18,13 +18,13 @@ local colors = {
   magenta = '#c678dd',
   orange = '#ff8700',
   purple = '#af87d7',
-  red = '#c4384b',
+  red = '#fb4934',
   violet = '#a9a1e1',
   white = '#e3e3e3',
   yellow = '#d7af5f',
 }
 
-colors.accent = colors.dark_orange
+colors.accent = colors.red
 
 -- Overrides for all color schemes
 local baseHls = {
@@ -34,17 +34,17 @@ local baseHls = {
   -- Base groups
   Normal                  = { bg = colors.background },
   NormalNC                = { bg = colors.background },
-  Cursor                  = { fg = colors.background, bg = colors.dark_orange },
+  Cursor                  = { fg = colors.background, bg = colors.accent },
   TermCursor              = { link = 'Cursor' },
   ColorColumn             = { bg = colors.grey },
-  CursorLine              = { bg = 'none', fg = 'none' },
-  CursorLineNr            = { bg = 'none' },
-  LineNr                  = { bg = 'none' },
+  -- CursorLine              = { bg = 'none', fg = 'none' },
+  -- CursorLineNr            = { bg = 'none' },
+  -- LineNr                  = { bg = 'none' },
   EndOfBuffer             = { fg = colors.background },
   ErrorMsg                = { fg = colors.red, bg = 'none', bold = true },
   FloatBorder             = { link = 'XBorder' },
   FloatNormal             = { link = 'XMenu' },
-  MatchParen              = { fg = colors.accent, bg = 'none', bold = true },
+  MatchParen              = { fg = colors.purple, bg = 'none', bold = true },
   NormalFloat             = { link = 'XMenu' },
   -- NonText                    = { fg = colors.light_grey },
   Pmenu                   = { link = 'XMenu' },
@@ -101,6 +101,7 @@ local baseHls = {
   NeoTreeFloatBorder      = { link = 'XBorder' },
   NeoTreeFloatTitle       = { fg = colors.background, bg = colors.light_orange },
   NeoTreeTitleBar         = { fg = colors.background, bg = colors.light_orange },
+  NeoTreeNormal           = { bg = colors.background },
   -- Noice.nvim
   NoiceCmdlineIcon        = { fg = colors.dark_orange },
   NoiceCmdlineIconInput   = { fg = colors.dark_orange },
