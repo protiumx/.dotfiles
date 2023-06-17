@@ -45,7 +45,7 @@ function M.setup()
       show_file = false,
     },
     hover = {
-      max_width = 0.4,
+      max_width = 0.5,
     },
     definition = {
       edit = "<CR>",
