@@ -3,99 +3,75 @@ local colors = {
   bg_01 = '#222222',
   bg_02 = '#303030',
   dark_orange = '#ff5d62',
-  foreground = '#d1d1d1',
+  foreground = '#fbf1c7',
   green = '#87af87',
-  grey = '#888888',
+  grey = '#a89984',
   light_grey = '#767676',
   light_orange = '#ffa066',
   purple = '#af87d7',
-  red = '#d75f5f',
+  red = '#fb4934',
   yellow = '#d7af5f',
 }
 
 local groups = {
   -- Groups
-  MonoMenu                    = { bg = colors.bg_01, default = true },
+  MonoMenu                    = { bg = colors.bg_01, default = true, fg = colors.foreground },
   MonoBorder                  = { bg = colors.bg_01, fg = colors.bg_01, default = true },
   -- Base
-  Normal                      = { fg = colors.foreground },
-  NonText                     = { fg = colors.bg_00 },
-  CursorLine                  = { bg = colors.bg_00 },
-  CursorColumn                = { link = "CursorLine" },
+  Normal                      = { fg = colors.foreground, bg = colors.bg_00 },
+  NormalFloat                 = { link = 'MonoMenu' },
+  NonText                     = { fg = colors.bg_02 },
+  EndOfBuffer                 = { fg = colors.bg_00 },
+  CursorColumn                = { bg = colors.bg_00 },
   FloatBorder                 = { link = 'MonoBorder' },
   TabLineFill                 = { fg = colors.grey, bg = colors.bg_01 },
   TabLineSel                  = { fg = colors.green, bg = colors.bg_01 },
   TabLine                     = { link = "TabLineFill" },
-  MatchParen                  = { bg = colors.bg_00, bold = true },
-  ColorColumn                 = { bg = colors.bg_01 },
-  Conceal                     = { fg = colors.yellow },
+  MatchParen                  = { bg = colors.bg_00, fg = colors.foreground, bold = true },
+  ColorColumn                 = { bg = colors.bg_02 },
+  Conceal                     = { fg = colors.bg_00 },
+  CursorLine                  = { bg = 'none' },
   CursorLineNr                = { fg = colors.foreground },
-  SpecialKey                  = { fg = colors.light_grey },
+  SpecialKey                  = { fg = colors.foreground },
   Visual                      = { bg = colors.bg_02 },
   VisualNOS                   = { link = "Visual" },
-  Search                      = { fg = colors.dark_orange, bg = colors.bg_00 },
-  IncSearch                   = { fg = colors.dark_orange, bg = colors.bg_00 },
-  CurSearch                   = { fg = colors.dark_orange, bg = colors.bg_00 },
+  Search                      = { fg = colors.red, bg = colors.bg_00 },
+  IncSearch                   = { fg = colors.red, bg = colors.bg_00 },
+  CurSearch                   = { fg = colors.red, bg = colors.bg_00 },
   QuickFixLine                = { fg = colors.bg_00, bg = colors.dark_orange, bold = true },
   Underlined                  = { underline = true },
   StatusLine                  = { fg = colors.grey, bg = colors.bg_00 },
-  StatusLineNC                = { fg = nil, bg = colors.bg_00 },
+  StatusLineNC                = { fg = 'none', bg = colors.bg_00 },
   WinBar                      = { bg = colors.bg_00 },
   WinBarNC                    = { bg = colors.bg_00 },
-  WinSeparator                = { fg = colors.bg_02, bg = colors.bg_00 },
-  WildMenu                    = { fg = colors.purple, bg = colors.bg_01 },
-  Directory                   = { fg = colors.grey },
+  WinSeparator                = { fg = colors.bg_02, bg = 'none' },
+  WildMenu                    = { fg = colors.red, bg = colors.bg_01 },
+  Directory                   = { fg = colors.foreground },
   Title                       = { fg = colors.foreground, bold = true },
   ErrorMsg                    = { fg = colors.red, bg = colors.bg_00, bold = true },
   MoreMsg                     = { fg = colors.grey, bg = colors.bg_00 },
   ModeMsg                     = { fg = colors.grey },
   Question                    = { fg = colors.foreground },
   WarningMsg                  = { fg = colors.yellow, bg = colors.bg_00 },
-  LineNr                      = { fg = colors.grey },
-  SignColumn                  = { bg = nil },
+  LineNr                      = { fg = colors.bg_02 },
+  SignColumn                  = { bg = 'none' },
   Folded                      = { fg = colors.grey, bg = nil },
   FoldColumn                  = { fg = colors.grey, bg = nil },
-  Cursor                      = { fg = colors.bg_01, bg = colors.dark_orange },
+  Cursor                      = { fg = colors.bg_00, bg = colors.dark_orange },
   vCursor                     = { link = "Cursor" },
   iCursor                     = { link = "Cursor" },
   lCursor                     = { link = "Cursor" },
-  Special                     = { fg = colors.dark_orange },
+  Special                     = { fg = colors.foreground },
   Comment                     = { fg = colors.grey },
-  helpHyperTextJump           = { bg = nil, fg = colors.purple },
-  Todo                        = { fg = colors.dark_orange, bg = colors.bg_00, bold = true },
-  Error                       = { fg = colors.red, bold = true },
-  Statement                   = { link = 'Include' },
-  Conditional                 = { fg = colors.grey },
-  Repeat                      = { fg = colors.grey },
-  Label                       = { fg = colors.dark_orange },
-  Exception                   = { fg = colors.dark_orange },
-  Operator                    = { fg = colors.grey },
-  Keyword                     = { fg = colors.grey },
-  Identifier                  = { fg = colors.foreground },
-  Function                    = { fg = colors.foreground },
-  PreProc                     = { fg = colors.dark_orange },
-  Include                     = { fg = colors.grey },
-  Define                      = { fg = colors.dark_orange },
-  Macro                       = { fg = colors.dark_orange },
-  PreCondit                   = { fg = colors.dark_orange },
-  Constant                    = { fg = colors.foreground },
-  Character                   = { fg = colors.dark_orange },
-  String                      = { fg = colors.foreground },
-  Boolean                     = { fg = colors.dark_orange },
-  Number                      = { fg = colors.foreground },
-  Float                       = { fg = colors.foreground },
-  Type                        = { fg = colors.grey },
-  StorageClass                = { fg = colors.dark_orange },
-  Structure                   = { fg = colors.grey },
-  Typedef                     = { fg = colors.foreground },
+  helpHyperTextJump           = { bg = 'none', fg = colors.red },
   Pmenu                       = { link = 'MonoMenu' },
-  PmenuSel                    = { fg = colors.bg_01, bg = colors.dark_orange, bold = true },
+  PmenuSel                    = { fg = colors.bg_01, bg = colors.red, bold = true },
   PmenuSbar                   = { bg = colors.bg_01 },
   PmenuThumb                  = { bg = colors.bg_01 },
   DiffDelete                  = { fg = colors.red, reverse = true },
   DiffAdd                     = { fg = colors.green, reverse = true },
   DiffChange                  = { fg = colors.yellow, reverse = true },
-  DiffText                    = { fg = colors.yellow, bg = colors.green },
+  DiffText                    = { fg = colors.bg_00, bg = colors.green },
   SpellCap                    = { fg = colors.yellow, undercurl = true },
   SpellBad                    = { undercurl = true },
   SpellLocal                  = { undercurl = true },
@@ -188,7 +164,7 @@ local groups = {
   TelescopePromptBorder       = { link = 'MonoBorder' },
   TelescopePromptNormal       = { link = 'MonoMenu', fg = colors.foreground },
   TelescopePromptPrefix       = { link = 'MonoMenu', fg = colors.light_orange },
-  TelescopeNormal             = { bg = colors.bg_00 },
+  TelescopeNormal             = { bg = colors.bg_01, fg = colors.foreground },
   TelescopePreviewBorder      = { link = 'MonoBorder' },
   TelescopePreviewNormal      = { link = 'MonoMenu' },
   TelescopePreviewTitle       = { fg = colors.bg_00, bg = colors.light_orange },
@@ -201,14 +177,38 @@ local groups = {
   FoldCoumn                   = { bg = 'none' },
   NormalNC                    = { bg = 'none', fg = colors.foreground },
   -- Language Syntax
+  Boolean                     = { fg = colors.foreground },
+  Character                   = { fg = colors.foreground },
+  Conditional                 = { fg = colors.foreground },
+  Constant                    = { fg = colors.foreground },
   Debug                       = { fg = colors.dark_orange },
+  Define                      = { fg = colors.foreground },
   Delimiter                   = { fg = colors.grey },
+  Error                       = { fg = colors.red, bold = true },
+  Exception                   = { fg = colors.grey },
+  Float                       = { fg = colors.foreground },
+  Function                    = { fg = colors.foreground },
+  Identifier                  = { fg = colors.foreground },
   Ignore                      = { fg = colors.grey },
+  Include                     = { fg = colors.grey },
+  Keyword                     = { fg = colors.grey },
+  Label                       = { fg = colors.grey },
+  Macro                       = { fg = colors.foreground },
+  Number                      = { fg = colors.foreground },
+  Operator                    = { fg = colors.grey },
+  PreCondit                   = { fg = colors.foreground },
+  PreProc                     = { fg = colors.foreground },
+  Repeat                      = { fg = colors.foreground },
   SpecialChar                 = { fg = colors.dark_orange },
   SpecialComment              = { fg = colors.dark_orange },
+  Statement                   = { link = 'Include' },
+  StorageClass                = { fg = colors.foreground },
+  String                      = { fg = colors.foreground },
+  Structure                   = { fg = colors.foreground },
   Tag                         = { fg = colors.dark_orange },
-  -- Rest
-  NormalFloat                 = { link = 'MonoMenu' },
+  Todo                        = { fg = colors.red, bg = colors.bg_00, bold = true },
+  Type                        = { fg = colors.foreground },
+  Typedef                     = { fg = colors.foreground },
   -- nvim-cmp
   CmpItemAbbr                 = { fg = colors.foreground },
   CmpItemAbbrMatch            = { fg = colors.dark_orange },
@@ -248,6 +248,7 @@ local groups = {
   CmpItemKindCopilot          = { fg = colors.grey },
   -- Diffview
   DiffViewSignColumn          = { bg = nil },
+  DiffViewFilePanelSelected   = { bg = colors.bg_00, fg = colors.red },
   -- lspsaga.nvim
   LspSagaCodeActionTitle      = { link = "Title" },
   LspSagaCodeActionBorder     = { link = 'MonoBorder' },
@@ -266,121 +267,129 @@ local groups = {
   -- neotree.nvim
   NeoTreeCursorLine           = { bg = colors.bg_01, fg = colors.dark_orange },
   DevIconDefault              = { bg = nil, fg = colors.dark_orange },
-  NoiceCmdlineIcon            = { fg = colors.dark_orange },
+  NoiceCmdlineIcon            = { fg = colors.red },
+  NoiceCmdlineIconInput       = { fg = colors.red },
+  NoiceCmdlineIconSearch      = { fg = colors.red },
   NoiceCmdlinePopupBorder     = { link = 'MonoBorder' },
+  -- Notify.nvim
+  NotifyERRORBorder           = { fg = colors.bg_00 },
+  NotifyWARNBorder            = { fg = colors.bg_00 },
+  NotifyINFOBorder            = { fg = colors.bg_00 },
+  NotifyDEBUGBorder           = { fg = colors.bg_00 },
+  NotifyTRACEBorder           = { fg = colors.bg_00 },
 }
 
 -- https://github.com/nvim-treesitter/nvim-treesitter/blob/master/CONTRIBUTING.md
 local tree_sitter_groups = {
   -- Misc
-  ['@comment']               = { link = 'Comment' },        -- line and block comments
-  ['@comment.documentation'] = { link = 'Comment' },        -- comments documenting code
-  ['@error']                 = { fg = colors.dark_orange }, -- syntax/parser errors
+  ['@comment']               = { link = 'Comment' },       -- line and block comments
+  ['@comment.documentation'] = { link = 'Comment' },       -- comments documenting code
+  ['@error']                 = { fg = colors.red },        -- syntax/parser errors
   -- ['@none']                  = { bg = nil, fg = nil },                  -- completely disable the highlight
-  ['@preproc']               = { link = 'PreProc' },        -- various preprocessor directives & shebangs
-  ['@define']                = { link = 'Define' },         -- preprocessor definition directives
-  ['@operator']              = { link = 'Operator' },       -- symbolic operators (e.g. `+` / `*`)
+  ['@preproc']               = { link = 'PreProc' },       -- various preprocessor directives & shebangs
+  ['@define']                = { link = 'Define' },        -- preprocessor definition directives
+  ['@operator']              = { link = 'Operator' },      -- symbolic operators (e.g. `+` / `*`)
   -- Punctuation
-  ['@punctuation.delimiter'] = { fg = colors.grey },        -- delimiters (e.g. `;` / `.` / `,`)
-  ['@punctuation.bracket']   = { fg = colors.grey },        -- brackets (e.g. `()` / `{}` / `[]`)
-  ['@punctuation.special']   = { fg = colors.dark_orange }, -- special symbols (e.g. `{}` in string interpolation)
+  ['@punctuation.delimiter'] = { fg = colors.grey },       -- delimiters (e.g. `;` / `.` / `,`)
+  ['@punctuation.bracket']   = { fg = colors.grey },       -- brackets (e.g. `()` / `{}` / `[]`)
+  ['@punctuation.special']   = { fg = colors.foreground }, -- special symbols (e.g. `{}` in string interpolation)
   -- Literals
-  ['@string']                = { link = 'String' },         -- string literals
-  ['@string.documentation']  = { fg = colors.dark_orange }, -- string documenting code (e.g. Python docstrings)
-  ['@string.regex']          = { fg = colors.dark_orange }, -- regular expressions
-  ['@string.escape']         = { fg = colors.dark_orange }, -- escape sequences
-  ['@string.special']        = { fg = colors.dark_orange }, -- other special strings (e.g. dates)
-  ['@character']             = { fg = colors.grey },        -- character literals
-  ['@character.special']     = { fg = colors.dark_orange }, -- special characters (e.g. wildcards)
-  ['@boolean']               = { link = 'Boolean' },        -- boolean literals
-  ['@number']                = { link = 'Number' },         -- numeric literals
-  ['@float']                 = { link = 'Number' },         -- floating-point number literals
+  ['@string']                = { link = 'String' },        -- string literals
+  ['@string.documentation']  = { fg = colors.grey },       -- string documenting code (e.g. Python docstrings)
+  ['@string.regex']          = { fg = colors.foreground }, -- regular expressions
+  ['@string.escape']         = { fg = colors.foreground }, -- escape sequences
+  ['@string.special']        = { fg = colors.foreground }, -- other special strings (e.g. dates)
+  ['@character']             = { fg = colors.foreground }, -- character literals
+  ['@character.special']     = { fg = colors.foreground }, -- special characters (e.g. wildcards)
+  ['@boolean']               = { link = 'Boolean' },       -- boolean literals
+  ['@number']                = { link = 'Number' },        -- numeric literals
+  ['@float']                 = { link = 'Number' },        -- floating-point number literals
   -- Functions
-  ['@function']              = { link = 'Function' },       -- function definitions
-  ['@function.builtin']      = { fg = colors.dark_orange }, -- built-in functions
-  ['@function.call']         = { fg = colors.foreground },  -- function calls
-  ['@function.macro']        = { fg = colors.dark_orange }, -- preprocessor macros
-  ['@method']                = { fg = colors.foreground },  -- method definitions
-  ['@method.call']           = { fg = colors.foreground },  -- method calls
-  ['@constructor']           = { fg = colors.foreground },  -- constructor calls and definitions
-  ['@parameter']             = { fg = colors.foreground },  -- parameters of a function
+  ['@function']              = { link = 'Function' },      -- function definitions
+  ['@function.builtin']      = { fg = colors.foreground }, -- built-in functions
+  ['@function.call']         = { fg = colors.foreground }, -- function calls
+  ['@function.macro']        = { fg = colors.foreground }, -- preprocessor macros
+  ['@method']                = { fg = colors.foreground }, -- method definitions
+  ['@method.call']           = { fg = colors.foreground }, -- method calls
+  ['@constructor']           = { fg = colors.foreground }, -- constructor calls and definitions
+  ['@parameter']             = { fg = colors.foreground }, -- parameters of a function
   -- Keywords
-  ['@keyword']               = { link = 'Keyword' },        -- various keywords
-  ['@keyword.coroutine']     = { fg = colors.purple },      -- keywords related to coroutines (e.g. `go` in Go, `async/await` in Python)
-  ['@keyword.function']      = { fg = colors.grey },        -- keywords that define a function (e.g. `func` in Go, `def` in Python)
-  ['@keyword.operator']      = { fg = colors.dark_orange }, -- operators that are English words (e.g. `and` / `or`)
-  ['@keyword.return']        = { fg = colors.grey },        -- keywords like `return` and `yield`
-  ['@conditional']           = { fg = colors.grey },        -- keywords related to conditionals (e.g. `if` / `else`)
-  ['@conditional.ternary']   = { fg = colors.purple },      -- ternary operator (e.g. `?` / `:`)
-  ['@repeat']                = { fg = colors.grey },        -- keywords related to loops (e.g. `for` / `while`)
-  ['@debug']                 = { link = 'Debug' },          -- keywords related to debugging
-  ['@label']                 = { fg = colors.dark_orange }, -- GOTO and other labels (e.g. `label:` in C)
-  ['@include']               = { link = 'Include' },        -- keywords for including modules (e.g. `import` / `from` in Python)
-  ['@exception']             = { link = 'Exception' },      -- keywords related to exceptions (e.g. `throw` / `catch`)
+  ['@keyword']               = { link = 'Keyword' },       -- various keywords
+  ['@keyword.coroutine']     = { fg = colors.grey },       -- keywords related to coroutines (e.g. `go` in Go, `async/await` in Python)
+  ['@keyword.function']      = { fg = colors.grey },       -- keywords that define a function (e.g. `func` in Go, `def` in Python)
+  ['@keyword.operator']      = { fg = colors.grey },       -- operators that are English words (e.g. `and` / `or`)
+  ['@keyword.return']        = { fg = colors.grey },       -- keywords like `return` and `yield`
+  ['@conditional']           = { fg = colors.grey },       -- keywords related to conditionals (e.g. `if` / `else`)
+  ['@conditional.ternary']   = { fg = colors.grey },       -- ternary operator (e.g. `?` / `:`)
+  ['@repeat']                = { fg = colors.grey },       -- keywords related to loops (e.g. `for` / `while`)
+  ['@debug']                 = { link = 'Debug' },         -- keywords related to debugging
+  ['@label']                 = { fg = colors.grey },       -- GOTO and other labels (e.g. `label:` in C)
+  ['@include']               = { link = 'Include' },       -- keywords for including modules (e.g. `import` / `from` in Python)
+  ['@exception']             = { link = 'Exception' },     -- keywords related to exceptions (e.g. `throw` / `catch`)
   -- Types
-  ['@type']                  = { link = 'Type' },           -- type or class definitions and annotations
+  ['@type']                  = { link = 'Type' },          -- type or class definitions and annotations
   ['@type.toml']             = { fg = colors.foreground },
-  ['@type.builtin']          = { fg = colors.grey },        -- built-in types
-  ['@type.definition']       = { link = 'Typedef' },        -- type definitions (e.g. `typedef` in C)
-  ['@type.qualifier']        = { fg = colors.grey },        -- type qualifiers (e.g. `const`)
-  ['@storageclass']          = { fg = colors.dark_orange }, -- modifiers that affect storage in memory or life-time
-  ['@attribute']             = { fg = colors.dark_orange }, -- attribute annotations (e.g. Python decorators)
-  ['@field']                 = { fg = colors.foreground },  -- object and struct fields
-  ['@field.yaml']            = { fg = colors.dark_orange },
-  ['@field.toml']            = { fg = colors.dark_orange },
-  ['@property']              = { fg = colors.grey },                    -- similar to `@field`
+  ['@type.builtin']          = { fg = colors.foreground }, -- built-in types
+  ['@type.definition']       = { link = 'Typedef' },       -- type definitions (e.g. `typedef` in C)
+  ['@type.qualifier']        = { fg = colors.foreground }, -- type qualifiers (e.g. `const`)
+  ['@storageclass']          = { fg = colors.foreground }, -- modifiers that affect storage in memory or life-time
+  ['@attribute']             = { fg = colors.foreground }, -- attribute annotations (e.g. Python decorators)
+  ['@field']                 = { fg = colors.foreground }, -- object and struct fields
+  ['@field.yaml']            = { fg = colors.foreground },
+  ['@field.toml']            = { fg = colors.foreground },
+  ['@property']              = { fg = colors.foreground },                   -- similar to `@field`
   -- Identifiers
-  ['@variable']              = { fg = colors.foreground },              -- various variable names
-  ['@variable.builtin']      = { fg = colors.purple },                  -- built-in variable names (e.g. `this`)
-  ['@constant']              = { fg = colors.foreground },              -- constant identifiers
-  ['@constant.builtin']      = { fg = colors.dark_orange },             -- built-in constant values
-  ['@constant.macro']        = { fg = colors.dark_orange },             -- constants defined by the preprocessor
-  ['@namespace']             = { fg = colors.foreground },              -- modules or namespaces
-  ['@symbol']                = { fg = colors.purple },                  -- symbols or atoms
+  ['@variable']              = { fg = colors.foreground },                   -- various variable names
+  ['@variable.builtin']      = { fg = colors.foreground },                   -- built-in variable names (e.g. `this`)
+  ['@constant']              = { fg = colors.foreground },                   -- constant identifiers
+  ['@constant.builtin']      = { fg = colors.foreground },                   -- built-in constant values
+  ['@constant.macro']        = { fg = colors.foreground },                   -- constants defined by the preprocessor
+  ['@namespace']             = { fg = colors.foreground },                   -- modules or namespaces
+  ['@symbol']                = { fg = colors.foreground },                   -- symbols or atoms
   -- Text - Mainly markup languages
-  ['@text']                  = { fg = colors.grey },                    -- non-structured text
-  ['@text.strong']           = { fg = colors.foreground, bold = true }, -- bold text
-  ['@text.emphasis']         = { fg = colors.foreground },              -- text with emphasis
-  ['@text.underline']        = { link = 'Underlined' },                 -- underlined text
-  ['@text.strike']           = { fg = colors.grey },                    -- strikethrough text
-  ['@text.title']            = { link = 'Title' },                      -- text that is part of a title
-  ['@text.literal']          = { fg = colors.grey },                    -- literal or verbatim text (e.g., inline code)
-  ['@text.quote']            = { fg = colors.foreground },              -- text quotations
-  ['@text.uri']              = { fg = colors.grey, undercurl = true },  -- URIs (e.g. hyperlinks)
-  ['@text.math']             = { fg = colors.foreground },              -- math environments (e.g. `$ ... $` in LaTeX)
-  ['@text.environment']      = { fg = colors.grey },                    -- text environments of markup languages
-  ['@text.environment.name'] = { fg = colors.grey },                    -- text indicating the type of an environment
-  ['@text.reference']        = { fg = colors.foreground },              -- text references, footnotes, citations, etc.
-  ['@text.todo']             = { link = 'Todo' },                       -- todo notes
-  ['@text.note']             = { link = 'Todo' },                       -- info notes
-  ['@text.warning']          = { fg = colors.yellow },                  -- warning notes
-  ['@text.danger']           = { fg = colors.dark_orange },             -- danger/error notes
-  ['@text.diff.add']         = { fg = colors.green },                   -- added text (for diff files)
-  ['@text.diff.delete']      = { fg = colors.dark_orange },             -- deleted text (for diff files)
+  ['@text']                  = { fg = colors.foreground },                   -- non-structured text
+  ['@text.strong']           = { fg = colors.foreground, bold = true },      -- bold text
+  ['@text.emphasis']         = { fg = colors.foreground },                   -- text with emphasis
+  ['@text.underline']        = { link = 'Underlined' },                      -- underlined text
+  ['@text.strike']           = { fg = colors.foreground },                   -- strikethrough text
+  ['@text.title']            = { link = 'Title' },                           -- text that is part of a title
+  ['@text.literal']          = { fg = colors.foreground },                   -- literal or verbatim text (e.g., inline code)
+  ['@text.quote']            = { fg = colors.foreground },                   -- text quotations
+  ['@text.uri']              = { fg = colors.foreground, undercurl = true }, -- URIs (e.g. hyperlinks)
+  ['@text.math']             = { fg = colors.foreground },                   -- math environments (e.g. `$ ... $` in LaTeX)
+  ['@text.environment']      = { fg = colors.foreground },                   -- text environments of markup languages
+  ['@text.environment.name'] = { fg = colors.foreground },                   -- text indicating the type of an environment
+  ['@text.reference']        = { fg = colors.foreground },                   -- text references, footnotes, citations, etc.
+  ['@text.todo']             = { link = 'Todo' },                            -- todo notes
+  ['@text.note']             = { link = 'Todo' },                            -- info notes
+  ['@text.warning']          = { fg = colors.yellow },                       -- warning notes
+  ['@text.danger']           = { fg = colors.red },                          -- danger/error notes
+  ['@text.diff.add']         = { fg = colors.green },                        -- added text (for diff files)
+  ['@text.diff.delete']      = { fg = colors.red },                          -- deleted text (for diff files)
   -- Tags
-  ['@tag']                   = { link = 'Tag' },                        -- XML tag names
-  ['@tag.attribute']         = { link = 'Tag' },                        -- XML tag attributes
-  ['@tag.delimiter']         = { link = 'Tag' },                        -- XML tag delimiters
+  ['@tag']                   = { link = 'Tag' },                             -- XML tag names
+  ['@tag.attribute']         = { link = 'Tag' },                             -- XML tag attributes
+  ['@tag.delimiter']         = { link = 'Tag' },                             -- XML tag delimiters
   -- @conceal ; for captures that are only used for concealing
   -- Spell
   -- @spell   ; for defining regions to be spellchecked
   -- @nospell ; for defining regions that should NOT be spellchecked
   -- Locals
-  ['@definition']            = { fg = colors.grey },        -- various definitions
-  ['@definition.constant']   = { fg = colors.grey },        -- constants
-  ['@definition.function']   = { fg = colors.foreground },  -- functions
-  ['@definition.method']     = { fg = colors.grey },        -- methods
-  ['@definition.var']        = { fg = colors.grey },        -- variables
-  ['@definition.parameter']  = { fg = colors.grey },        -- parameters
-  ['@definition.macro']      = { fg = colors.grey },        -- preprocessor macros
-  ['@definition.type']       = { fg = colors.grey },        -- types or classes
-  ['@definition.field']      = { fg = colors.foreground },  -- fields or properties
-  ['@definition.enum']       = { fg = colors.grey },        -- enumerations
-  ['@definition.namespace']  = { fg = colors.grey },        -- modules or namespaces
-  ['@definition.import']     = { fg = colors.grey },        -- imported names
-  ['@definition.associated'] = { fg = colors.grey },        -- the associated type of a variable
-  ['@scope']                 = { fg = colors.grey },        -- scope block
-  ['@reference']             = { fg = colors.dark_orange }, -- identifier reference
+  ['@definition']            = { fg = colors.foreground }, -- various definitions
+  ['@definition.constant']   = { fg = colors.foreground }, -- constants
+  ['@definition.function']   = { fg = colors.foreground }, -- functions
+  ['@definition.method']     = { fg = colors.foreground }, -- methods
+  ['@definition.var']        = { fg = colors.foreground }, -- variables
+  ['@definition.parameter']  = { fg = colors.foreground }, -- parameters
+  ['@definition.macro']      = { fg = colors.foreground }, -- preprocessor macros
+  ['@definition.type']       = { fg = colors.foreground }, -- types or classes
+  ['@definition.field']      = { fg = colors.foreground }, -- fields or properties
+  ['@definition.enum']       = { fg = colors.foreground }, -- enumerations
+  ['@definition.namespace']  = { fg = colors.foreground }, -- modules or namespaces
+  ['@definition.import']     = { fg = colors.foreground }, -- imported names
+  ['@definition.associated'] = { fg = colors.foreground }, -- the associated type of a variable
+  ['@scope']                 = { fg = colors.foreground }, -- scope block
+  ['@reference']             = { fg = colors.foreground }, -- identifier reference
 }
 
 local M = {}
