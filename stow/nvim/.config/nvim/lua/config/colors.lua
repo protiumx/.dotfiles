@@ -1,5 +1,5 @@
 local colors = {
-  background = '#1c1c1c',
+  background = '#161616',
   foreground = '#cacaca',
   accent = '#fe5186',
   blue = '#61afef',
@@ -103,9 +103,9 @@ local baseHls = {
   NeoTreeTitleBar         = { fg = colors.background, bg = colors.light_orange },
   NeoTreeNormal           = { bg = colors.background },
   -- Noice.nvim
-  NoiceCmdlineIcon        = { fg = colors.dark_orange },
-  NoiceCmdlineIconInput   = { fg = colors.dark_orange },
-  NoiceCmdlineIconSearch  = { fg = colors.dark_orange },
+  NoiceCmdlineIcon        = { fg = colors.red },
+  NoiceCmdlineIconInput   = { fg = colors.red },
+  NoiceCmdlineIconSearch  = { fg = colors.red },
   NoiceCmdlinePopup       = { link = 'XMenu' },
   NoiceCmdlinePopupBorder = { link = 'XBorder' },
   NoiceConfirm            = { link = 'XMenu' },
