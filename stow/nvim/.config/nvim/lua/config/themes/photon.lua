@@ -14,7 +14,6 @@ local colors = {
 }
 
 local groups = {
-  -- Groups
   MonoMenu                    = { bg = colors.bg_01, default = true, fg = colors.foreground },
   MonoBorder                  = { bg = colors.bg_01, fg = colors.bg_01, default = true },
   -- Base
@@ -27,8 +26,8 @@ local groups = {
   TabLineFill                 = { fg = colors.grey, bg = colors.bg_01 },
   TabLineSel                  = { fg = colors.green, bg = colors.bg_01 },
   TabLine                     = { link = "TabLineFill" },
-  MatchParen                  = { bg = colors.bg_00, fg = colors.foreground, bold = true },
-  ColorColumn                 = { bg = colors.bg_02 },
+  MatchParen                  = { bg = colors.bg_00, fg = colors.red, bold = true },
+  ColorColumn                 = { bg = colors.bg_01 },
   Conceal                     = { fg = colors.bg_00 },
   CursorLine                  = { bg = 'none' },
   CursorLineNr                = { fg = colors.foreground },
@@ -53,7 +52,7 @@ local groups = {
   ModeMsg                     = { fg = colors.grey },
   Question                    = { fg = colors.foreground },
   WarningMsg                  = { fg = colors.yellow, bg = colors.bg_00 },
-  LineNr                      = { fg = colors.bg_02 },
+  LineNr                      = { fg = colors.grey },
   SignColumn                  = { bg = 'none' },
   Folded                      = { fg = colors.grey, bg = nil },
   FoldColumn                  = { fg = colors.grey, bg = nil },
