@@ -2,7 +2,9 @@ local servers = {
   dockerls = {},
   graphql = {},
   tsserver = {},
-  jsonls = {},
+  jsonls = {
+    schemas = require("schemastore").json.schemas(),
+  },
   eslint = {},
   rust_analyzer = {},
   clangd = {},
@@ -26,7 +28,9 @@ local servers = {
       keyOrdering = false,
       schemaStore = {
         enable = true,
+        url = "https://www.schemastore.org/api/json/catalog.json",
       },
+      schemas = require("schemastore").yaml.schemas(),
       validate = true,
     },
   },
@@ -62,13 +66,13 @@ local servers = {
       diagnostics = {
         globals = { 'vim', 'jit' },
         neededFileStatus = true,
-        ["codestyle-check"] = "Any",
+        ['codestyle-check'] = 'Any',
       },
       format = {
         enable = true,
         defaultConfig = {
-          indent_style = "space",
-          indent_size = "2",
+          indent_style = 'space',
+          indent_size = '2',
         }
       },
       runtime = {

@@ -30,7 +30,22 @@ packer.reset()
 packer.init({
   auto_clean = true,
   compile_on_sync = true,
-  git = { clone_timeout = 6000 },
+  git = {
+    subcommands = {
+      update         = 'pull --ff-only --progress --rebase=false --force',
+      install        = 'clone --depth %i --no-single-branch --progress',
+      fetch          = 'fetch --depth 999999 --progress --force',
+      checkout       = 'checkout %s --',
+      update_branch  = 'merge --ff-only @{u}',
+      current_branch = 'branch --show-current',
+      diff           = 'log --color=never --pretty=format:FMT --no-show-signature HEAD@{1}...HEAD',
+      diff_fmt       = '%%h %%s (%%cr)',
+      get_rev        = 'rev-parse --short HEAD',
+      get_msg        = 'log --color=never --pretty=format:FMT --no-show-signature HEAD -n 1',
+      submodules     = 'submodule update --init --recursive --progress'
+    },
+    clone_timeout = 60, -- Timeout, in seconds, for git clones
+  },
   display = {
     working_sym = 'ﲊ',
     error_sym = '✗ ',
@@ -397,7 +412,11 @@ return packer.startup(function(use)
       {
         'glepnir/lspsaga.nvim',
         branch = 'main',
-      }
+      },
+
+      {
+        'b0o/schemastore.nvim',
+      },
     },
     config = function()
       require('config.lsp').setup()
