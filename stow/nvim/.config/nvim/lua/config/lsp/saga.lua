@@ -34,8 +34,27 @@ end
 function M.setup()
   local colors = require('config.colors')
   require('lspsaga').setup({
+    preview = {
+      lines_above = 0,
+      lines_below = 10,
+    },
+    scroll_preview = {
+      scroll_down = "<C-d>",
+      scroll_up = "<C-u>",
+    },
     lightbulb = {
       enable = false,
+    },
+    finder = {
+      max_width = 0.6,
+      keys = {
+        jump_to = '<CR>',
+        expand_or_jump = '<CR>',
+        vsplit = '<C-v>',
+        split = '<C-x>',
+        quit = { 'q', '<ESC>' },
+        close_in_preview = '<ESC>',
+      },
     },
     request_timeout = 5000,
     symbol_in_winbar = {
@@ -50,8 +69,7 @@ function M.setup()
     definition = {
       edit = "<CR>",
       vsplit = "<C-v>",
-      split = "<C-c>i",
-      tabe = "<C-c>t",
+      split = "<C-x>",
       quit = "q",
     },
     outline = {
