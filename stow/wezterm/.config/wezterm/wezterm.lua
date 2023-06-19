@@ -2,7 +2,7 @@ local wezterm = require('wezterm')
 local act = wezterm.action
 -- https://wezfurlong.org/wezterm/config/lua/wezterm/target_triple.html
 local is_windows = wezterm.target_triple == 'x86_64-pc-windows-msvc'
-local font = is_windows and 'CaskaydiaCove NF' or 'FiraCode Nerd Font'
+local font = 'FiraCode Nerd Font'
 local key_mod_panes = is_windows and 'ALT' or 'CMD'
 
 local keys = {
@@ -121,7 +121,6 @@ local keys = {
     mods = key_mod_panes,
     action = act.ActivateLastTab,
   },
-
 
   {
     key = '0',
