@@ -303,7 +303,7 @@ wezterm.on('update-right-status', function(window)
 end)
 
 local colors = {
-  background = '#1c1c1c',
+  background = '#161616',
   cursor_bg = '#fb4934',
   cursor_fg = '#1c1c1c',
   cursor_border = '#fb4934',
@@ -313,15 +313,16 @@ local colors = {
     -- The color of the strip that goes along the top of the window
     -- (does not apply when fancy tab bar is in use)
     -- background = '#1c1c1c',
-    background = 'rgba(28, 28, 28, 0.9)',
+    -- background = 'rgba(28, 28, 28, 0.9)',
+    background = '#161616',
     inactive_tab_edge = 'rgba(28, 28, 28, 0.9)',
     active_tab = {
-      bg_color = 'rgba(28, 28, 28, 0.9)',
+      bg_color = '#161616',
       fg_color = '#c0c0c0',
     },
     -- Inactive tabs are the tabs that do not have focus
     inactive_tab = {
-      bg_color = 'rgba(28, 28, 28, 0.9)',
+      bg_color = '#161616',
       fg_color = '#808080',
       -- The same options that were listed under the `active_tab` section above
       -- can also be used for `inactive_tab`.
@@ -329,7 +330,7 @@ local colors = {
     -- You can configure some alternate styling when the mouse pointer
     -- moves over inactive tabs
     inactive_tab_hover = {
-      bg_color = 'rgba(28, 28, 28, 0.9)',
+      bg_color = '#161616',
       fg_color = '#808080',
       -- The same options that were listed under the `active_tab` section above
       -- can also be used for `inactive_tab_hover`.

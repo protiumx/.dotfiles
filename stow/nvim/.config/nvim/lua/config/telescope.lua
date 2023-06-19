@@ -176,7 +176,7 @@ function M.setup()
         vertical = {
           mirror = false,
         },
-        width = { 0.85, max = 148 },
+        width = { 0.85, max = 158 },
         height = 0.80,
       },
       path_display = { 'truncate' },
