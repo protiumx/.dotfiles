@@ -41,6 +41,7 @@ function M.setup()
       boder = 'single',
       header = '',
       prefix = '',
+      max_width = 100,
     },
     underline = false,
     severity_sort = true,
