@@ -10,7 +10,7 @@ local colors = {
   dark_red = '#bf1131',
   dark_yellow = '#ffaf00',
   green = '#98c379',
-  grey = '#2a2a2a',
+  grey = '#202020',
   light_grey = '#727169',
   light_orange = '#ffa066',
   light_pink = '#e46876',
@@ -29,7 +29,7 @@ colors.accent = colors.red
 -- Overrides for all color schemes
 local baseHls = {
   -- Custom for floats and borders
-  XMenu                   = { bg = colors.dark_grey, default = true },
+  XMenu                   = { bg = colors.dark_grey, default = true, fg = colors.foreground },
   XBorder                 = { bg = colors.dark_grey, fg = colors.dark_grey, default = true },
   -- Base groups
   Normal                  = { bg = colors.background },
