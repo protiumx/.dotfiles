@@ -14,6 +14,7 @@ packages=(
   cmake
   ctags
   curl
+  dasel                    #  https://github.com/TomWright/dasel
   dust                     #  https://github.com/bootandy/dust
   exa                      #  https://github.com/ogham/exa
   fzf                      #  https://github.com/junegunn/fzf
