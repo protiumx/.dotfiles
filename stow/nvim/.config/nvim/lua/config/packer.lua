@@ -79,7 +79,6 @@ return packer.startup(function(use)
 
   -- Themes
   use('ellisonleao/gruvbox.nvim')
-  use('folke/tokyonight.nvim')
 
   -- Treesitter
   use({
