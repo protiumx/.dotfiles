@@ -309,8 +309,6 @@ local colors = {
   selection_fg = '#1c1c1c',
   selection_bg = '#fb4934',
   tab_bar = {
-    -- The color of the strip that goes along the top of the window
-    -- (does not apply when fancy tab bar is in use)
     -- background = '#1c1c1c',
     -- background = 'rgba(28, 28, 28, 0.9)',
     background = '#161616',
@@ -319,20 +317,13 @@ local colors = {
       bg_color = '#161616',
       fg_color = '#c0c0c0',
     },
-    -- Inactive tabs are the tabs that do not have focus
     inactive_tab = {
       bg_color = '#161616',
       fg_color = '#808080',
-      -- The same options that were listed under the `active_tab` section above
-      -- can also be used for `inactive_tab`.
     },
-    -- You can configure some alternate styling when the mouse pointer
-    -- moves over inactive tabs
     inactive_tab_hover = {
       bg_color = '#161616',
       fg_color = '#808080',
-      -- The same options that were listed under the `active_tab` section above
-      -- can also be used for `inactive_tab_hover`.
     },
   },
 }
@@ -340,7 +331,7 @@ local colors = {
 local config = {
   audible_bell = 'Disabled',
   canonicalize_pasted_newlines = 'LineFeed',
-  color_scheme = 'Tomorrow Night Burns',
+  color_scheme = 'Classic Dark (base16)',
   colors = colors,
   command_palette_font_size = 16.0,
   cursor_blink_rate = 500,
@@ -381,8 +372,6 @@ local config = {
   },
   max_fps = 120,
   mouse_bindings = {
-    -- Change the default click behavior so that it only selects
-    -- text and doesn't open hyperlinks
     {
       event = { Up = { streak = 1, button = 'Left' } },
       mods = 'NONE',
@@ -405,21 +394,9 @@ local config = {
   window_background_opacity = 1,
   window_decorations = 'RESIZE',
   window_frame = {
-    -- The font used in the tab bar.
-    -- Roboto Bold is the default; this font is bundled
-    -- with wezterm.
-    -- Whatever font is selected here, it will have the
-    -- main font setting appended to it to pick up any
-    -- fallback fonts you may have used there.
     font = wezterm.font { family = font, weight = 'Medium' },
-    -- The size of the font in the tab bar.
-    -- Default to 10. on Windows but 12.0 on other systems
     font_size = is_windows and 16.0 or 18,
-    -- The overall background color of the tab bar when
-    -- the window is focused
     active_titlebar_bg = colors.background,
-    -- The overall background color of the tab bar when
-    -- the window is not focused
     inactive_titlebar_bg = colors.background,
   },
 }
