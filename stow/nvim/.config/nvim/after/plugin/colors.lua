@@ -12,9 +12,6 @@ require('gruvbox').setup({
   transparent_mode = false,
 })
 
-require("tokyonight").setup({
-  transparent = true,
-})
 
 vim.cmd('colorscheme gruvbox')
 

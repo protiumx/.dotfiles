@@ -103,6 +103,31 @@ return packer.startup(function(use)
   })
 
   use({
+    'Wansmer/treesj',
+    requires = { 'nvim-treesitter' },
+    config = function()
+      local tree = require('treesj')
+      tree.setup({
+        use_default_keymaps = false,
+        check_syntax_error = true,
+        max_join_length = 100,
+        -- hold|start|end:
+        -- hold - cursor follows the node/place on which it was called
+        -- start - cursor jumps to the first symbol of the node being formatted
+        -- end - cursor jumps to the last symbol of the node being formatted
+        cursor_behavior = 'hold',
+        -- Notify about possible problems or not
+        notify = true,
+        -- Use `dot` for repeat action
+        dot_repeat = true,
+      })
+
+      vim.keymap.set('n', '<Leader>ts', require('treesj').split, { desc = 'TS Split lines', silent = true })
+      vim.keymap.set('n', '<Leader>tj', require('treesj').join, { desc = 'TS Join line', silent = true })
+    end,
+  })
+
+  use({
     'rcarriga/nvim-notify',
     config = function()
       require('notify').setup({
