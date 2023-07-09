@@ -2,7 +2,7 @@ local wezterm = require('wezterm')
 local act = wezterm.action
 -- https://wezfurlong.org/wezterm/config/lua/wezterm/target_triple.html
 local is_windows = wezterm.target_triple == 'x86_64-pc-windows-msvc'
-local font = 'FiraCode Nerd Font'
+local font = 'MonoLisa'
 local key_mod_panes = is_windows and 'ALT' or 'CMD'
 
 local keys = {
@@ -293,8 +293,7 @@ wezterm.on(
       end
     end
 
-    local title = string.format(' %s  %s ~ %s  ', '❯', get_process(tab),
-      get_current_working_dir(tab))
+    local title = string.format(' ❯  %s ~ %s  ', get_process(tab), get_current_working_dir(tab))
 
     if has_unseen_output then
       return {
@@ -359,21 +358,21 @@ local config = {
   default_cursor_style = 'BlinkingBar',
   default_cwd = wezterm.home_dir,
   font = wezterm.font(font,
-    { weight = 'Regular', stretch = 'Normal', style = 'Normal', italic = false }
+    { weight = 'Regular', italic = false }
   ),
   font_rules = {
     {
       intensity = 'Bold',
-      font = wezterm.font(font, { weight = 'DemiBold', stretch = 'Normal', style = 'Normal' }),
+      font = wezterm.font(font, { italic = false }),
     },
     {
       intensity = 'Normal',
-      font = wezterm.font(font, { weight = 'Medium', stretch = 'Normal', style = 'Normal', italic = false }),
+      font = wezterm.font(font, { italic = false }),
     },
   },
-  font_size = is_windows and 14.0 or 18.8,
+  font_size = is_windows and 14.0 or 19,
   -- Disable font ligatures
-  harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
+  harfbuzz_features = { 'calt=1', 'clig=0', 'liga=0', 'zero', 'ss01' },
   hide_tab_bar_if_only_one_tab = false,
   hyperlink_rules = wezterm.default_hyperlink_rules(),
   inactive_pane_hsb = {
