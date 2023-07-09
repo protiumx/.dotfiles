@@ -9,6 +9,7 @@ vim.cmd [[
   filetype plugin indent on
   set fillchars=diff:\ ,
   set pumheight=10
+  set undolevels=100
 ]]
 
 vim.opt.shell = 'zsh'
