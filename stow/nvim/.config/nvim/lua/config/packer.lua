@@ -47,11 +47,11 @@ packer.init({
     clone_timeout = 60, -- Timeout, in seconds, for git clones
   },
   display = {
-    working_sym = 'ﲊ',
+    working_sym = '󱦟 ',
     error_sym = '✗ ',
-    done_sym = ' ',
+    done_sym = ' ',
     removed_sym = ' ',
-    moved_sym = '',
+    moved_sym = ' ',
     open_fn = function()
       return require('packer.util').float { border = 'none' }
     end,
@@ -430,6 +430,13 @@ return packer.startup(function(use)
       {
         'j-hui/fidget.nvim',
         tag = 'legacy',
+        config = function()
+          require('fidget').setup {
+            text = {
+              done = "", -- character shown when all tasks are complete
+            },
+          }
+        end
       },
 
       -- Better UI for LSP commands
