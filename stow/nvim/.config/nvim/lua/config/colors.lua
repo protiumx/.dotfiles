@@ -44,7 +44,7 @@ local baseHls = {
   ErrorMsg                = { fg = colors.red, bg = 'none', bold = true },
   FloatBorder             = { link = 'XBorder' },
   FloatNormal             = { link = 'XMenu' },
-  MatchParen              = { fg = colors.red, bg = 'none', bold = true },
+  MatchParen              = { fg = colors.background, bg = colors.violet },
   NormalFloat             = { link = 'XMenu' },
   -- NonText                    = { fg = colors.light_grey },
   Pmenu                   = { link = 'XMenu' },
