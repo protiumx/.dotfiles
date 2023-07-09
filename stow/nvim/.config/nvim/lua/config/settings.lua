@@ -31,7 +31,7 @@ vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.ignorecase = true
 vim.opt.smartindent = true
-vim.opt.listchars = { eol = '', tab = '  ' }
+vim.opt.listchars = { eol = '󰘌', tab = '  ' }
 vim.opt.list = true
 vim.opt.statusline = '2'
 vim.o.completeopt = 'menu,menuone,noselect'
@@ -88,7 +88,7 @@ vim.filetype.add({
 vim.fn.sign_define("DiagnosticSignError", { text = "", texthl = "DiagnosticSignError" })
 vim.fn.sign_define("DiagnosticSignWarn", { text = "", texthl = "DiagnosticSignWarn" })
 vim.fn.sign_define("DiagnosticSignInfo", { text = "", texthl = "DiagnosticSignInfo" })
-vim.fn.sign_define("DiagnosticSignHint", { text = "", texthl = "DiagnosticSignHint" })
+vim.fn.sign_define("DiagnosticSignHint", { text = "", texthl = "DiagnosticSignHint" })
 
 local builtins = {
   '2html_plugin',
