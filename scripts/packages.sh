@@ -54,7 +54,6 @@ packages=(
   telnet
   usql                     #  https://github.com/xo/usql
   websocat                 #  https://github.com/vi/websocat
-  yarn
   wget
   zsh
   zsh-autosuggestions

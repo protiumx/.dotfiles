@@ -130,10 +130,11 @@ local function keymaps()
   map('n', '<C-g>C', builtin.git_commits, '[G]it [C]ommits')
 
   map('n', '<M-s>d', builtin.diagnostics, '[S]earch [D]iagnostics')
-  map({ 'i', 'n' }, '<M-s>S', builtin.lsp_document_symbols, '[S]earch [S]ymbols (LSP)')
+  map({ 'i', 'n' }, '<M-s>t', function()
+    builtin.lsp_document_symbols(dropdown)
+  end, '[S]earch [S]ymbols (LSP)')
   map({ 'i', 'n' }, '<M-s>r', builtin.resume, 'Resume last search')
   map('n', '<M-s>p', builtin.pickers, '[S]earch [P]revious pickers')
-  map({ 'i', 'n' }, '<M-s>t', function() builtin.treesitter(dropdown) end, '[S]earch [T]reesitter')
 
   -- Projects
   map('n', '<M-s>P', function()

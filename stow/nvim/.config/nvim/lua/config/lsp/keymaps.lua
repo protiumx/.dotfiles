@@ -2,13 +2,10 @@ local M = {}
 
 function M.setup(bufnr)
   local nmap = function(keys, cmd, desc)
-    if desc then
-      desc = '[LSP] ' .. desc
-    end
-
-    vim.keymap.set('n', keys, cmd, { buffer = bufnr, desc = desc })
+    vim.keymap.set('n', keys, cmd, { buffer = bufnr, desc = '[LSP] ' .. desc })
   end
 
+  nmap('gd', vim.lsp.buf.definition, 'Go to definition')
   nmap('gy', vim.lsp.buf.type_definition, 'Show type definition')
   nmap('gi', vim.lsp.buf.implementation, 'Go to implementation')
   -- nmap('gd', '<cmd>lua vim.lsp.buf.definition()<CR>zz', 'Go to definition')
@@ -22,7 +19,7 @@ function M.setup(bufnr)
   end, 'Go to next error')
   nmap('K', vim.lsp.buf.hover, 'Show docs')
   nmap('<C-l>h', vim.lsp.buf.document_highlight, 'Highlight node')
-  nmap('<C-l>c', vim.lsp.buf.document_highlight, 'Clear highlights')
+  nmap('<C-l>c', vim.lsp.buf.clear_references, 'Clear highlights')
 end
 
 return M

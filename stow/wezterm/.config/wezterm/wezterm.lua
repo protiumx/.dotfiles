@@ -11,11 +11,19 @@ local keys = {
     mods = key_mod_panes,
     action = act.ShowLauncherArgs { flags = 'FUZZY|TABS|WORKSPACES' },
   },
+
+  {
+    key = '.',
+    mods = 'CMD',
+    action = wezterm.action.ActivateCommandPalette,
+  },
+
   {
     key = 'Enter',
     mods = 'SHIFT|' .. key_mod_panes,
     action = act.ToggleFullScreen,
   },
+
   { key = ':', mods = 'SHIFT|' .. key_mod_panes,      action = act.ShowDebugOverlay },
 
   -- Panes
@@ -29,14 +37,17 @@ local keys = {
     mods = 'SHIFT|' .. key_mod_panes,
     action = act.SplitHorizontal { domain = 'CurrentPaneDomain' },
   },
+
   {
     key = 'w',
     mods = key_mod_panes,
     action = act.CloseCurrentPane { confirm = true },
   },
+
   { key = 'z', mods = key_mod_panes,                  action = act.TogglePaneZoomState },
   { key = 'c', mods = 'CTRL|' .. key_mod_panes,       action = act.ActivateCopyMode },
   { key = 'c', mods = 'CTRL|SHIFT|' .. key_mod_panes, action = act.QuickSelect },
+
   {
     key = '!',
     mods = key_mod_panes,
@@ -51,16 +62,19 @@ local keys = {
     mods = key_mod_panes,
     action = act.ActivatePaneDirection 'Left',
   },
+
   {
     key = 'l',
     mods = key_mod_panes,
     action = act.ActivatePaneDirection 'Right',
   },
+
   {
     key = 'k',
     mods = key_mod_panes,
     action = act.ActivatePaneDirection 'Up',
   },
+
   {
     key = 'j',
     mods = key_mod_panes,
@@ -73,16 +87,19 @@ local keys = {
     mods = 'SHIFT|' .. key_mod_panes,
     action = act.AdjustPaneSize { 'Left', 1 },
   },
+
   {
     key = 'J',
     mods = 'SHIFT|' .. key_mod_panes,
     action = act.AdjustPaneSize { 'Down', 1 },
   },
+
   {
     key = 'K',
     mods = 'SHIFT|' .. key_mod_panes,
     action = act.AdjustPaneSize { 'Up', 1 }
   },
+
   {
     key = 'L',
     mods = 'SHIFT|' .. key_mod_panes,
@@ -95,6 +112,7 @@ local keys = {
     mods = 'CMD',
     action = act.RotatePanes 'CounterClockwise',
   },
+
   {
     key = 'R',
     mods = 'SHIFT|CMD',
@@ -113,9 +131,11 @@ local keys = {
     mods = 'CMD',
     action = act.SpawnTab('DefaultDomain')
   },
+
   { key = 'T', mods = 'SHIFT|' .. key_mod_panes, action = act.ShowTabNavigator },
   { key = '[', mods = key_mod_panes,             action = act.ActivateTabRelative(-1) },
   { key = ']', mods = key_mod_panes,             action = act.ActivateTabRelative(1) },
+
   {
     key = 'o',
     mods = key_mod_panes,

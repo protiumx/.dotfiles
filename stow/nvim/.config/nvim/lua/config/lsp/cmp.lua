@@ -37,6 +37,9 @@ function M.setup()
 
 
   cmp.setup({
+    enabled = function()
+      return vim.api.nvim_buf_get_option(0, 'filetype') ~= 'sagarename'
+    end,
     confirmation = {
       default_behavior = types.cmp.ConfirmBehavior.Replace,
     },
@@ -61,8 +64,7 @@ function M.setup()
       }),
     },
     perfomance = {
-      throttle = 100,
-      max_view_entries = 10,
+      throttle = 150,
     },
     sources = {
       {
@@ -82,6 +84,16 @@ function M.setup()
       },
       {
         name = 'buffer',
+        keyword_length = 5,
+        option = {
+          get_bufnrs = function()
+            local bufs = {}
+            for _, win in ipairs(vim.api.nvim_list_wins()) do
+              bufs[vim.api.nvim_win_get_buf(win)] = true
+            end
+            return vim.tbl_keys(bufs)
+          end,
+        },
         priority = 60,
       },
       {
@@ -102,10 +114,28 @@ function M.setup()
     },
     sorting = {
       comparators = {
-        compare.kind,
-        compare.recently_used,
-        compare.locality,
-        compare.exact,
+        cmp.config.compare.offset,
+        cmp.config.compare.exact,
+        cmp.config.compare.score,
+
+        -- copied from cmp-under, but I don't think I need the plugin for this.
+        -- I might add some more of my own.
+        function(entry1, entry2)
+          local _, entry1_under = entry1.completion_item.label:find "^_+"
+          local _, entry2_under = entry2.completion_item.label:find "^_+"
+          entry1_under = entry1_under or 0
+          entry2_under = entry2_under or 0
+          if entry1_under > entry2_under then
+            return false
+          elseif entry1_under < entry2_under then
+            return true
+          end
+        end,
+
+        cmp.config.compare.kind,
+        cmp.config.compare.sort_text,
+        -- cmp.config.compare.length,
+        -- cmp.config.compare.order,
       },
     },
     preselect = cmp.PreselectMode.Item,

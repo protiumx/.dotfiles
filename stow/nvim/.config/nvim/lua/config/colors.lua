@@ -96,6 +96,8 @@ local baseHls = {
   SagaShadow              = { fg = colors.background, bg = colors.background },
   TitleIcon               = { fg = colors.foreground, bg = colors.light_orange },
   TitleString             = { fg = colors.background, bg = colors.light_orange },
+  -- LSP
+  LspReferenceText        = { bg = colors.red, fg = colors.foreground },
   -- Neotree
   NeoTreeCursorLine       = { bg = colors.dark_grey, fg = colors.accent },
   NeoTreeFloatBorder      = { link = 'XBorder' },

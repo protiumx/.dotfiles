@@ -8,6 +8,7 @@ vim.cmd [[
   syntax sync minlines=3000
   filetype plugin indent on
   set fillchars=diff:\ ,
+  set pumheight=10
 ]]
 
 vim.opt.shell = 'zsh'
