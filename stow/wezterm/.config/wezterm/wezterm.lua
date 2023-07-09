@@ -7,6 +7,24 @@ local key_mod_panes = is_windows and 'ALT' or 'CMD'
 
 local keys = {
   {
+    key = 'l',
+    mods = 'CTRL|' .. key_mod_panes,
+    action = act.PromptInputLine {
+      description = 'Launc',
+      action = wezterm.action_callback(function(window, pane, line)
+        if line then
+          window:perform_action(act.SpawnCommandInNewWindow {
+            args = wezterm.shell_split(line),
+            set_environment_variables = {
+              PATH = '/Users/bmayo/.go/current/bin:' .. os.getenv('PATH')
+            },
+          }, pane)
+        end
+      end),
+    },
+  },
+
+  {
     key = 'p',
     mods = key_mod_panes,
     action = act.ShowLauncherArgs { flags = 'FUZZY|TABS|WORKSPACES' },
@@ -45,7 +63,6 @@ local keys = {
   },
 
   { key = 'z', mods = key_mod_panes,                  action = act.TogglePaneZoomState },
-  { key = 'c', mods = 'CTRL|' .. key_mod_panes,       action = act.ActivateCopyMode },
   { key = 'c', mods = 'CTRL|SHIFT|' .. key_mod_panes, action = act.QuickSelect },
 
   {
@@ -53,6 +70,14 @@ local keys = {
     mods = key_mod_panes,
     action = wezterm.action_callback(function(_win, pane)
       pane:move_to_new_tab()
+    end),
+  },
+
+  {
+    key = '!',
+    mods = 'SHIFT|' .. key_mod_panes,
+    action = wezterm.action_callback(function(_win, pane)
+      pane:move_to_new_window()
     end),
   },
 
@@ -349,12 +374,12 @@ local colors = {
 
 local config = {
   audible_bell = 'Disabled',
-  canonicalize_pasted_newlines = 'LineFeed',
+  canonicalize_pasted_newlines = 'None',
   color_scheme = 'Classic Dark (base16)',
   colors = colors,
   command_palette_font_size = 16.0,
   cursor_blink_rate = 500,
-  cursor_thickness = 1.5,
+  command_palette_bg_color = '#1c1c1c',
   default_cursor_style = 'BlinkingBar',
   default_cwd = wezterm.home_dir,
   font = wezterm.font(font,
@@ -380,15 +405,6 @@ local config = {
     brightness = 0.85,
   },
   keys = keys,
-  key_tables = {
-    copy_mode = {
-      {
-        key = 'e',
-        mods = 'NONE',
-        action = act.CopyMode 'MoveForwardWordEnd',
-      },
-    },
-  },
   max_fps = 120,
   mouse_bindings = {
     {
@@ -403,8 +419,13 @@ local config = {
       action = act.OpenLinkAtMouseCursor,
     },
   },
+  quote_dropped_files = 'Posix',
   scrollback_lines = 10000,
   send_composed_key_when_left_alt_is_pressed = false,
+  set_environment_variables = {
+    EDITOR = 'nvim',
+    PATH = '/Users/bmayo/go:' .. os.getenv('PATH')
+  },
   show_new_tab_button_in_tab_bar = false,
   switch_to_last_active_tab_when_closing_tab = true,
   tab_max_width = 60,
@@ -413,7 +434,7 @@ local config = {
   window_background_opacity = 1,
   window_decorations = 'RESIZE',
   window_frame = {
-    font = wezterm.font { family = font, weight = 'Medium' },
+    font = wezterm.font { family = font, weight = 'Regular' },
     font_size = is_windows and 16.0 or 18,
     active_titlebar_bg = colors.background,
     inactive_titlebar_bg = colors.background,
