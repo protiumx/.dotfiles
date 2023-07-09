@@ -2,21 +2,23 @@ local M = {}
 
 local function keymaps()
   local keymap = vim.keymap.set
-  keymap('n', 'gh', '<cmd>Lspsaga lsp_finder<CR>', { silent = true })
+  keymap('n', 'gh', '<cmd>Lspsaga finder<CR>', { silent = true })
+  keymap('i', '<M-h>', '<Esc><cmd>Lspsaga finder<CR>', { silent = true })
+
   -- keymap('n', 'K', '<cmd>Lspsaga hover_doc<CR>', { silent = true })
-  keymap('i', '<M-h>', '<Esc><cmd>Lspsaga lsp_finder<CR>', { silent = true })
 
   keymap({ 'n', 'v' }, '<Leader>ca', '<cmd>Lspsaga code_action<CR>', { silent = true })
   keymap('n', 'gr', '<cmd>Lspsaga rename<CR>', { silent = true })
 
   keymap('n', 'gD', '<cmd>Lspsaga peek_definition<CR>', { silent = true })
+  keymap('n', 'gT', '<cmd>Lspsaga peek_type_definition<CR>', { silent = true })
   -- keymap('n', 'gd', '<cmd>Lspsaga goto_definition<CR>', { silent = true })
 
   -- Show buffer diagnostics
   keymap('n', '<C-g>d', '<cmd>Lspsaga show_buf_diagnostics<CR>')
 
   -- Diagnostic jump
-  -- keymap('n', '[d', '<cmd>Lspsaga diagnostic_jump_prev<CR>')kekeke
+  -- keymap('n', '[d', '<cmd>Lspsaga diagnostic_jump_prev<CR>')
   -- keymap('n', ']d', '<cmd>Lspsaga diagnostic_jump_next<CR>')
 
   -- Only jump to errors
@@ -48,12 +50,11 @@ function M.setup()
     finder = {
       max_width = 0.6,
       keys = {
-        jump_to = '<CR>',
-        expand_or_jump = '<CR>',
+        toggle_or_open = '<CR>',
         vsplit = '<C-v>',
         split = '<C-x>',
         quit = { 'q', '<ESC>' },
-        close_in_preview = '<ESC>',
+        close = '<ESC>',
       },
     },
     request_timeout = 5000,
