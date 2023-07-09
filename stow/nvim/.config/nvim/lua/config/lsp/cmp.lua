@@ -38,7 +38,8 @@ function M.setup()
 
   cmp.setup({
     enabled = function()
-      return vim.api.nvim_buf_get_option(0, 'filetype') ~= 'sagarename'
+      local ftype = vim.api.nvim_buf_get_option(0, 'filetype')
+      return ftype ~= 'sagarename' and ftype ~= 'TelescopePrompt'
     end,
     confirmation = {
       default_behavior = types.cmp.ConfirmBehavior.Replace,
@@ -132,8 +133,8 @@ function M.setup()
           end
         end,
 
-        cmp.config.compare.kind,
         cmp.config.compare.sort_text,
+        cmp.config.compare.kind,
         -- cmp.config.compare.length,
         -- cmp.config.compare.order,
       },
