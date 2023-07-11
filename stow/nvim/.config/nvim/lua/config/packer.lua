@@ -34,7 +34,7 @@ packer.init({
     subcommands = {
       update         = 'pull --ff-only --progress --rebase=false --force',
       install        = 'clone --depth %i --no-single-branch --progress',
-      fetch          = 'fetch --depth 999999 --progress --force',
+      fetch          = 'fetch --depth 10 --progress --force',
       checkout       = 'checkout %s --',
       update_branch  = 'merge --ff-only @{u}',
       current_branch = 'branch --show-current',
@@ -166,6 +166,14 @@ return packer.startup(function(use)
     end
   })
 
+  use {
+    'phaazon/hop.nvim',
+    branch = 'v2',
+    config = function()
+      require('config.hop').setup()
+    end
+  }
+
   use({
     'ahmedkhalf/project.nvim',
     config = function()
@@ -201,15 +209,6 @@ return packer.startup(function(use)
     requires = { 'nvim-telescope/telescope.nvim' },
     config = function()
       require('config.neoclip').setup()
-    end
-  })
-
-  -- Better jump
-  use({
-    'justinmk/vim-sneak',
-    event = 'BufRead',
-    config = function()
-      require('config.vim-sneak').setup()
     end
   })
 
