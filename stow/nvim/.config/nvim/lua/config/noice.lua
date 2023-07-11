@@ -24,10 +24,6 @@ function M.setup()
       },
       popupmenu = {
         relative = 'editor',
-        position = {
-          row = '64%',
-          col = '50%',
-        },
         size = {
           width = 60,
           height = 'auto',
