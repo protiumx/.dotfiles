@@ -20,6 +20,7 @@ local colors = {
   purple = '#af87d7',
   red = '#fb4934',
   violet = '#a9a1e1',
+  visual = '#2a2a2a',
   white = '#e3e3e3',
   yellow = '#d7af5f',
 }
@@ -51,7 +52,7 @@ local baseHls = {
   SignColumn              = { bg = 'none' },
   StatusLine              = { bg = colors.background, fg = colors.foreground },
   Todo                    = { fg = colors.orange, bold = true },
-  Visual                  = { bg = colors.grey, fg = nil },
+  Visual                  = { bg = colors.visual, fg = nil },
   -- Mason
   MasonHeader             = { link = 'XMenu' },
   MasonNormal             = { link = 'XMenu' },
