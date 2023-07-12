@@ -108,9 +108,19 @@ else
 end
 
 -- Git
-vim.keymap.set('n', '<C-g>s', ':!git stage %<CR>')
-vim.keymap.set('n', '<C-g><Up>', ':!git push<CR>')
-vim.keymap.set('n', '<C-g><Down>', ':!git pull<CR>')
+vim.keymap.set('n', '<C-g>s', function()
+  vim.cmd([[!git stage %]])
+  print('Staged: ' .. vim.fn.expand('%'))
+end, { desc = '[Git] Stage current file', silent = true })
+
+vim.keymap.set('n', '<C-g><Up>', ':!git push<CR>', { desc = '[Git] Push', silent = true })
+
+vim.keymap.set('n', '<C-g><Down>', ':!git pull<CR>', { desc = '[Git] Pull', silent = true })
+
+vim.keymap.set('n', '<C-g>R', function()
+  vim.cmd([[!git checkout origin/main %]])
+  print('Reset: ' .. vim.fn.expand('%'))
+end, { desc = '[Git] Reset current file', silent = true })
 
 vim.keymap.set('n', '<M-v>', 'gv', { silent = true, desc = 'Activate previous visual block' })
 vim.keymap.set('i', '<M-v>', '<Esc>v', { silent = true, desc = 'Activate Visual Mode' })
