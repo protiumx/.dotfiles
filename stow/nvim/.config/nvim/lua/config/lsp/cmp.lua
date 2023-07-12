@@ -103,6 +103,7 @@ function M.setup()
       },
       {
         name = 'spell',
+        priority = 10,
       },
     },
     formatting = {
