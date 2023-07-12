@@ -20,7 +20,7 @@ local colors = {
   purple = '#af87d7',
   red = '#fb4934',
   violet = '#a9a1e1',
-  visual = '#2a2a2a',
+  visual = '#262626',
   white = '#e3e3e3',
   yellow = '#d7af5f',
 }
