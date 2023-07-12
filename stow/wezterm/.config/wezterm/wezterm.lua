@@ -8,16 +8,13 @@ local key_mod_panes = is_windows and 'ALT' or 'CMD'
 local keys = {
   {
     key = 'l',
-    mods = 'CTRL|' .. key_mod_panes,
+    mods = 'CTRL|ALT',
     action = act.PromptInputLine {
-      description = 'Launc',
+      description = 'Launch',
       action = wezterm.action_callback(function(window, pane, line)
         if line then
           window:perform_action(act.SpawnCommandInNewWindow {
             args = wezterm.shell_split(line),
-            set_environment_variables = {
-              PATH = '/Users/bmayo/.go/current/bin:' .. os.getenv('PATH')
-            },
           }, pane)
         end
       end),
@@ -405,6 +402,7 @@ local config = {
     brightness = 0.85,
   },
   keys = keys,
+  -- line_height = 0.9,
   max_fps = 120,
   mouse_bindings = {
     {
@@ -424,7 +422,7 @@ local config = {
   send_composed_key_when_left_alt_is_pressed = false,
   set_environment_variables = {
     EDITOR = 'nvim',
-    PATH = '/Users/bmayo/go:' .. os.getenv('PATH')
+    PATH = '/opt/homebrew/bin:/home/bmayo/.go/current/bin:' .. os.getenv('PATH')
   },
   show_new_tab_button_in_tab_bar = false,
   switch_to_last_active_tab_when_closing_tab = true,
