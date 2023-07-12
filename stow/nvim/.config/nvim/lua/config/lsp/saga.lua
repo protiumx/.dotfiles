@@ -48,6 +48,7 @@ function M.setup()
       enable = false,
     },
     finder = {
+      default = 'imp+ref',
       max_width = 0.6,
       keys = {
         toggle_or_open = '<CR>',
