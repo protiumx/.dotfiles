@@ -35,7 +35,7 @@ local keys = {
 
   {
     key = 'Enter',
-    mods = 'SHIFT|' .. key_mod_panes,
+    mods = key_mod_panes,
     action = act.ToggleFullScreen,
   },
 
@@ -244,7 +244,7 @@ local process_icons = {
     { Text = wezterm.nerdfonts.mdi_hexagon },
   },
   ['zsh'] = {
-    { Text = wezterm.nerdfonts.dev_terminal },
+    { Text = wezterm.nerdfonts.cod_terminal },
   },
   ['bash'] = {
     { Text = wezterm.nerdfonts.cod_terminal_bash },
@@ -315,7 +315,7 @@ wezterm.on(
       end
     end
 
-    local title = string.format(' ❯  %s ~ %s  ', get_process(tab), get_current_working_dir(tab))
+    local title = string.format(' %s ~ %s  ', get_process(tab), get_current_working_dir(tab))
 
     if has_unseen_output then
       return {
@@ -427,7 +427,7 @@ local config = {
   show_new_tab_button_in_tab_bar = false,
   switch_to_last_active_tab_when_closing_tab = true,
   tab_max_width = 60,
-  underline_position = -3,
+  underline_position = -4,
   use_fancy_tab_bar = true,
   window_background_opacity = 1,
   window_decorations = 'RESIZE',
