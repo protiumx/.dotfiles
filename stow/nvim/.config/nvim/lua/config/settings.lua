@@ -9,7 +9,7 @@ vim.cmd [[
   filetype plugin indent on
   set fillchars=diff:\ ,
   set pumheight=10
-  set undolevels=100
+  set undolevels=50
 ]]
 
 vim.opt.shell = 'zsh'
@@ -84,11 +84,6 @@ vim.filetype.add({
     ['[jt]sconfig.*.json'] = 'jsonc',
   },
 })
-
-vim.fn.sign_define("DiagnosticSignError", { text = "", texthl = "DiagnosticSignError" })
-vim.fn.sign_define("DiagnosticSignWarn", { text = "", texthl = "DiagnosticSignWarn" })
-vim.fn.sign_define("DiagnosticSignInfo", { text = "", texthl = "DiagnosticSignInfo" })
-vim.fn.sign_define("DiagnosticSignHint", { text = "", texthl = "DiagnosticSignHint" })
 
 local builtins = {
   '2html_plugin',
