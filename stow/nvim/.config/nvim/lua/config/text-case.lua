@@ -7,7 +7,7 @@ function M.setup()
   require('telescope').load_extension('textcase')
 
   vim.keymap.set('n', 'ga.', '<cmd>Telescope textcase normal_mode_quick_change theme=dropdown<CR>',
-  { desc = "Telescope" })
+    { desc = "Telescope" })
 
   vim.keymap.set('n', 'gau', function() textcase.operator('to_upper_case') end, { silent = true })
   vim.keymap.set('n', 'gal', function() textcase.operator('to_lower_case') end, { silent = true })
