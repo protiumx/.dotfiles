@@ -133,6 +133,7 @@ local function keymaps()
   map({ 'i', 'n' }, '<M-s>t', function()
     builtin.lsp_document_symbols(dropdown)
   end, '[S]earch [S]ymbols (LSP)')
+
   map({ 'i', 'n' }, '<M-s>r', builtin.resume, 'Resume last search')
   map('n', '<M-s>p', builtin.pickers, '[S]earch [P]revious pickers')
 
@@ -157,15 +158,14 @@ end
 
 function M.setup()
   local telescope = require('telescope')
-  local action_state = require("telescope.actions.state")
 
   telescope.setup({
     defaults = {
-      prompt_prefix = '❯ ',
+      prompt_prefix = '󰿟 ',
       prompt_title = '',
       results_title = '',
       preview_title = '',
-      selection_caret = '❯ ',
+      selection_caret = ' ',
       multi_icon = '+ ',
       sorting_strategy = 'ascending',
       layout_strategy = 'flex',
@@ -183,9 +183,24 @@ function M.setup()
       path_display = { 'truncate' },
       mappings = {
         i = {
-          ['<M-D>'] = 'delete_buffer',
+          ['<M-d>'] = 'delete_buffer',
           ['<M-Down>'] = 'cycle_history_next',
           ['<M-Up>'] = 'cycle_history_prev',
+          ['<C-g>'] = function(prompt_bufnr)
+            -- Use nvim-window-picker to choose the window by dynamically attaching a function
+            local action_set = require('telescope.actions.set')
+            local action_state = require('telescope.actions.state')
+
+            local picker = action_state.get_current_picker(prompt_bufnr)
+            picker.get_selection_window = function(picker, entry)
+              local picked_window_id = require('window-picker').pick_window() or vim.api.nvim_get_current_win()
+              -- Unbind after using so next instance of the picker acts normally
+              picker.get_selection_window = nil
+              return picked_window_id
+            end
+
+            return action_set.edit(prompt_bufnr, 'edit')
+          end,
         },
       },
       vimgrep_arguments = {
