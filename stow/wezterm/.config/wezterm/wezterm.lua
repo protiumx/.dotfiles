@@ -1,3 +1,4 @@
+---@diagnostic disable: unused-local
 local wezterm = require('wezterm')
 local act = wezterm.action
 -- https://wezfurlong.org/wezterm/config/lua/wezterm/target_triple.html
@@ -392,7 +393,7 @@ local config = {
       font = wezterm.font(font, { italic = false }),
     },
   },
-  font_size = is_windows and 14.0 or 19,
+  font_size = is_windows and 14.0 or 19.0,
   -- Disable font ligatures
   harfbuzz_features = { 'calt=1', 'clig=0', 'liga=0', 'zero', 'ss01' },
   hide_tab_bar_if_only_one_tab = false,
@@ -433,7 +434,7 @@ local config = {
   window_decorations = 'RESIZE',
   window_frame = {
     font = wezterm.font { family = font, weight = 'Regular' },
-    font_size = is_windows and 16.0 or 18,
+    font_size = is_windows and 12.0 or 18.0,
     active_titlebar_bg = colors.background,
     inactive_titlebar_bg = colors.background,
   },
