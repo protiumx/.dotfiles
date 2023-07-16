@@ -6,11 +6,11 @@ function M.setup()
 
   hop.setup({})
 
-  vim.keymap.set({ 'n', 'v' }, 's', function()
+  vim.keymap.set({ 'n' }, 's', function()
     hop.hint_char2({ direction = directions.AFTER_CURSOR })
   end, { remap = true })
 
-  vim.keymap.set({ 'n', 'v' }, 'S', function()
+  vim.keymap.set({ 'n' }, 'S', function()
     hop.hint_char2({ direction = directions.BEFORE_CURSOR })
   end, { remap = true })
 
