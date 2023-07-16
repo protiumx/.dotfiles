@@ -101,10 +101,10 @@ function M.setup()
         name = 'path',
         priority = 40,
       },
-      {
-        name = 'spell',
-        priority = 10,
-      },
+      -- {
+      --   name = 'spell',
+      --   priority = 10,
+      -- },
     },
     formatting = {
       fields = { "abbr", "kind" },
