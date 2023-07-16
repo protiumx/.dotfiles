@@ -314,7 +314,7 @@ return packer.startup(function(use)
 
   use {
     'nvim-neo-tree/neo-tree.nvim',
-    branch = 'v2.x',
+    branch = 'v3.x',
 
     requires = {
       'nvim-lua/plenary.nvim',
@@ -322,7 +322,7 @@ return packer.startup(function(use)
       'MunifTanjim/nui.nvim',
       {
         's1n7ax/nvim-window-picker',
-        tag = 'v1.*',
+        tag = '2.*',
         config = function()
           local picker = require('window-picker')
           picker.setup({
@@ -412,9 +412,11 @@ return packer.startup(function(use)
       'python',
       'rust',
       'bash',
+      'sh',
       'dockerfile',
       'terraform',
       'yaml',
+      'zsh',
     },
     requires = {
       -- LSP Support
@@ -429,13 +431,6 @@ return packer.startup(function(use)
       {
         'j-hui/fidget.nvim',
         tag = 'legacy',
-        config = function()
-          require('fidget').setup {
-            text = {
-              done = "", -- character shown when all tasks are complete
-            },
-          }
-        end
       },
 
       -- Better UI for LSP commands
