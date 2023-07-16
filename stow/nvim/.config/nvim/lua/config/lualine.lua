@@ -64,7 +64,7 @@ local theme = {
 }
 
 local function lsp_symbol()
-  return require('lspsaga.symbolwinbar'):get_winbar() or ''
+  return require('lspsaga.symbol.winbar'):get_bar() or ''
 end
 
 function M.setup()
@@ -73,7 +73,7 @@ function M.setup()
     path = 1,
     symbols = {
       modified = '[+]',
-      readonly = '',
+      readonly = '',
     }
   }
   require('lualine').setup {
@@ -142,7 +142,7 @@ function M.setup()
           function()
             for _, buf in ipairs(vim.api.nvim_list_bufs()) do
               if vim.api.nvim_buf_get_option(buf, 'modified') then
-                return '+󱙄'
+                return '󰽃'
               end
             end
             return ''
