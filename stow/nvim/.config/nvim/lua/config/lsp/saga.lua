@@ -48,8 +48,10 @@ function M.setup()
       enable = false,
     },
     finder = {
-      default = 'imp+ref',
+      default = 'def+imp+ref',
       max_width = 0.6,
+      left_width = 0.25,
+      right_width = 0.4,
       keys = {
         toggle_or_open = '<CR>',
         vsplit = '<C-v>',
@@ -58,7 +60,7 @@ function M.setup()
         close = '<ESC>',
       },
     },
-    request_timeout = 5000,
+    request_timeout = 2500,
     symbol_in_winbar = {
       enable = false, -- showing symbols in feline
       separator = '  ',
@@ -69,10 +71,12 @@ function M.setup()
       max_width = 0.5,
     },
     definition = {
-      edit = "<CR>",
-      vsplit = "<C-v>",
-      split = "<C-x>",
-      quit = "q",
+      keys = {
+        edit = '<CR>',
+        vsplit = '<C-v>',
+        split = '<C-x>',
+        quit = 'q',
+      }
     },
     outline = {
       keys = {
@@ -88,11 +92,15 @@ function M.setup()
     },
     rename = {
       in_select = false,
+      keys = {
+        quit = '<C-c>'
+      }
     },
     ui = {
       border = 'single',
       code_action = '',
       diagnostic = '',
+      max_width = 0.6,
     },
   })
 
