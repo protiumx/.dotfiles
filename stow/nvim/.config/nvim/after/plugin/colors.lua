@@ -9,7 +9,7 @@ require('gruvbox').setup({
     dark1 = colors.background,
   },
   dim_inactive = false,
-  transparent_mode = false,
+  transparent_mode = true,
 })
 
 vim.cmd('colorscheme gruvbox')
