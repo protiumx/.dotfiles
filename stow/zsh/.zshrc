@@ -118,8 +118,8 @@ export FZF_DEFAULT_COMMAND="fd -d 1 --hidden --no-ignore-vcs --follow --color=ne
 export FZF_DEFAULT_OPTS="
   --height 40%
   --layout=reverse
-  --prompt ' '
-  --pointer ' '
+  --prompt '  '
+  --pointer ' '
   --marker '~ '
   --multi
   --bind 'ctrl-p:toggle-preview'
