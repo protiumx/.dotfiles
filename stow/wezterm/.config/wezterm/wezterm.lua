@@ -40,7 +40,7 @@ local keys = {
     action = act.ToggleFullScreen,
   },
 
-  { key = ':', mods = 'SHIFT|' .. key_mod_panes,      action = act.ShowDebugOverlay },
+  { key = ':', mods = 'SHIFT|' .. key_mod_panes, action = act.ShowDebugOverlay },
 
   -- Panes
   {
@@ -60,8 +60,8 @@ local keys = {
     action = act.CloseCurrentPane { confirm = true },
   },
 
-  { key = 'z', mods = key_mod_panes,                  action = act.TogglePaneZoomState },
-  { key = 'c', mods = 'CTRL|SHIFT|' .. key_mod_panes, action = act.QuickSelect },
+  { key = 'z', mods = key_mod_panes,             action = act.TogglePaneZoomState },
+  { key = 'x', mods = 'SHIFT|' .. key_mod_panes, action = act.ActivateCopyMode },
 
   {
     key = '!',
