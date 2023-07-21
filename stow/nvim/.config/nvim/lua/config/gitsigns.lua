@@ -22,16 +22,16 @@ local function on_attach(bufnr)
   end, { expr = true })
 
   -- Actions
-  map('n', '<C-g>b', gs.blame_line, '[Git] Blame line short')
+  map('n', '<C-g>bl', gs.blame_line, '[Git] Blame line short')
   map('n', '<C-g>B', function()
     gs.blame_line({ full = true })
   end, '[Git] Blame line full')
-  map('n', '<C-g>p', '<cmd>Gitsigns preview_hunk<CR>', '[Git] Blame line short')
   map('n', '<C-g>tb', gs.toggle_current_line_blame, '[Git] Toggle line blame')
   map('n', '<C-g>td', gs.toggle_deleted, '[Git] Toggle deleted preview')
-  map('n', '<C-g>r', gs.reset_hunk, '[Git] Reset hunk')
-  map('v', '<C-g>r', function() gs.reset_hunk { vim.fn.line("."), vim.fn.line("v") } end)
-  map('n', '<C-g>R', gs.reset_buffer)
+  map('n', '<C-g>hr', gs.reset_hunk, '[Git] Reset hunk')
+  map('v', '<C-g>hr', function() gs.reset_hunk { vim.fn.line("."), vim.fn.line("v") } end)
+  map('n', '<C-g>hp', '<cmd>Gitsigns preview_hunk<CR>', '[Git] Blame line short')
+  map('n', '<C-g>br', gs.reset_buffer)
 
   -- Text object
   map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', '[Git] Hunk Text Object')
