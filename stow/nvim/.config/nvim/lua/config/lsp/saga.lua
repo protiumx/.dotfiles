@@ -50,8 +50,8 @@ function M.setup()
     finder = {
       default = 'def+imp+ref',
       max_width = 0.6,
-      left_width = 0.25,
-      right_width = 0.4,
+      left_width = 0.3,
+      right_width = 0.6,
       keys = {
         toggle_or_open = '<CR>',
         vsplit = '<C-v>',
