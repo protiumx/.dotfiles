@@ -101,7 +101,8 @@ vim.keymap.set('n', '<Leader>S', ':mks! .session.vim<CR>')
 if macos then
   -- Copy to system clipboard
   vim.keymap.set('v', '<C-y>', '"*y', { silent = true })
-  vim.keymap.set('n', '<Leader>P', ':let @*=expand("%:~:.")<CR>', { desc = 'copy current path to clipboard' })
+  vim.keymap.set('n', '<Leader>P', ':let @*=expand("%:~:.")<CR>',
+    { silent = true, desc = 'copy current path to clipboard' })
 else
   vim.keymap.set('v', '<C-y>', '"+y', { silent = true })
   vim.keymap.set('n', '<Leader>P', ':let @+=expand("%:~:.")<CR>', { desc = 'copy current path to clipboard' })
