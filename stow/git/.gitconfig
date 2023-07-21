@@ -118,6 +118,8 @@
   up = !git push -u origin `git branch --show-current`
   upt = "!f() { git push origin --tags ${1:-}; }; f"
 
+  wt = worktree
+
 [init]
   templatedir = ~/.config/git/templates
   defaultBranch = main
@@ -129,3 +131,6 @@
   current = yellow reverse
   local = yellow
   remote = green
+
+[rerere]
+	enabled = true
