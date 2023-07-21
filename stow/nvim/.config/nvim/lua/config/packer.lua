@@ -322,7 +322,7 @@ return packer.startup(function(use)
       'MunifTanjim/nui.nvim',
       {
         's1n7ax/nvim-window-picker',
-        tag = '2.*',
+        tag = 'v2.*',
         config = function()
           local picker = require('window-picker')
           picker.setup({
