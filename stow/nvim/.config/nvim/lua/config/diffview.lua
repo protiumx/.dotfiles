@@ -34,6 +34,7 @@ function M.setup()
         -- See ':h diffview-config-win_config'
         position = 'left',
         height = 40,
+        width = 40,
       },
     },
     hooks = {
