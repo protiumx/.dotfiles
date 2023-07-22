@@ -215,7 +215,7 @@ function M.setup()
     },
     pickers = {
       find_files = {
-        find_command = { 'fd', '-t', 'f', '--hidden', '--strip-cwd-prefix', '-i', '--ignore' }
+        find_command = { 'fd', '-t', 'f', '--hidden', '--strip-cwd-prefix', '-i', '--ignore', '--exclude', '.git/*' }
       },
     },
     extensions = {
