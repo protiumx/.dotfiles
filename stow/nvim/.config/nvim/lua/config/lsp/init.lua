@@ -6,6 +6,8 @@ function M.setup()
   vim.fn.sign_define('DiagnosticSignInfo', { text = '', texthl = 'DiagnosticSignInfo' })
   vim.fn.sign_define('DiagnosticSignHint', { text = '', texthl = 'DiagnosticSignHint' })
 
+  vim.lsp.set_log_level('off')
+
   require('config.lsp.mason').setup()
   require('config.lsp.saga').setup()
   require('fidget').setup({
@@ -31,6 +33,7 @@ function M.setup()
   --     border = 'single',
   --   }
   -- )
+  --
 
   vim.diagnostic.config({
     virtual_text = {
