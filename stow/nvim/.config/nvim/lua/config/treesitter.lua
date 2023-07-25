@@ -44,21 +44,21 @@ local function setup_text_objects()
       swap = {
         enable = true,
         swap_next = {
-          ['<leader>a'] = '@parameter.inner',
+          ['<leader>ta'] = '@parameter.inner',
         },
         swap_previous = {
-          ['<leader>A'] = '@parameter.inner',
+          ['<leader>tA'] = '@parameter.inner',
         },
       },
       move = {
         enable = true,
         set_jumps = true, -- whether to set jumps in the jumplist
         goto_next_start = {
-          [']m'] = '@function.outer',
+          [']M'] = '@function.outer',
           [']c'] = '@class.outer'
         },
         goto_next_end = {
-          [']M'] = '@function.outer',
+          [']m'] = '@function.outer',
           [']C'] = '@class.outer'
         },
         goto_previous_start = {
@@ -107,6 +107,12 @@ function M.setup()
   })
 
   setup_text_objects()
+  local ts_repeat_move = require('nvim-treesitter.textobjects.repeatable_move')
+
+  -- Repeat movement with ; and ,
+  -- ensure ; goes forward and , goes backward regardless of the last direction
+  vim.keymap.set({ 'n', 'x', 'o' }, ';', ts_repeat_move.repeat_last_move_next)
+  vim.keymap.set({ 'n', 'x', 'o' }, ',', ts_repeat_move.repeat_last_move_previous)
 end
 
 return M
