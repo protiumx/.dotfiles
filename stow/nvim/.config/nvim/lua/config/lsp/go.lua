@@ -21,7 +21,7 @@ function M.setup()
     luasnip = true,
     floaterm = {
       posititon = 'right', -- one of {`top`, `bottom`, `left`, `right`, `center`, `auto`}
-      width = 0.4,         -- width of float window if not auto
+      width = 0.5,         -- width of float window if not auto
     },
   })
 
