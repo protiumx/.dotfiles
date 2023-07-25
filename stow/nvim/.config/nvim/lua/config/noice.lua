@@ -58,7 +58,8 @@ function M.setup()
         enabled = true,
         view = 'hover', -- when nil, use defaults from documentation
         opts = {
-        },              -- merged with defaults from documentation
+          focusable = true,
+        }, -- merged with defaults from documentation
       },
       -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
       override = {
