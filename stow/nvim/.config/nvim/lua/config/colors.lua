@@ -55,6 +55,7 @@ local baseHls = {
   Visual                  = { bg = colors.visual, fg = nil },
   -- Mason
   MasonHeader             = { link = 'XMenu' },
+  MasonHeading            = { link = 'XBorder' },
   MasonNormal             = { link = 'XMenu' },
   -- Telescope
   TelescopeBorder         = { link = 'XBorder' },
