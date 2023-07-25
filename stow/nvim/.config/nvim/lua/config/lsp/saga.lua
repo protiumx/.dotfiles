@@ -48,7 +48,7 @@ function M.setup()
       enable = false,
     },
     finder = {
-      default = 'def+imp+ref',
+      default = 'imp+def+ref',
       max_width = 0.6,
       left_width = 0.3,
       right_width = 0.6,
