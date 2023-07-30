@@ -27,6 +27,7 @@ packages=(
   grpcurl                  #  https://github.com/fullstorydev/grpcurl
   httpie                   #  https://github.com/httpie/httpie
   imagemagick
+  jless                    #  https://github.com/PaulJuliusMartinez/jless
   jq
   k9s                      #  https://github.com/derailed/k9s
   kubernetes-cli
