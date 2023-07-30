@@ -6,8 +6,7 @@ apps=(
   docker
   firefox
   google-chrome
-  kitty
-  rectangle           # Window manager
+  rectangle           # Window util
   slack
   spotify
   visual-studio-code
@@ -15,7 +14,7 @@ apps=(
   wez/wezterm/wezterm # Terminal https://wezfurlong.org/wezterm
 )
 
-masApps=(
+mas_apps=(
   "937984704"   # Amphetamine
   "1444383602"  # Good Notes 5
   "768053424"   # Gappling (svg viewer)
@@ -28,7 +27,7 @@ install_macos_apps() {
 
 install_masApps() {
   info "Installing App Store apps..."
-  for app in "${masApps[@]}"; do
+  for app in "${mas_apps[@]}"; do
     mas install "$app"
   done
 }
