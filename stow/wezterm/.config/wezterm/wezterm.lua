@@ -22,6 +22,9 @@ local keys = {
     },
   },
 
+  { key = 'PageUp',   mods = 'SHIFT', action = act.ScrollByPage(-1) },
+  { key = 'PageDown', mods = 'SHIFT', action = act.ScrollByPage(1) },
+
   {
     key = 'p',
     mods = key_mod_panes,
