@@ -3,6 +3,7 @@
 .elixir_ls
 node_modules
 _build
+target
 tags
 tmp
 coverage
