@@ -82,25 +82,26 @@ autocmd('FileType', {
   command = [[nnoremap <buffer><silent> q :quit<CR>]]
 })
 
-local cmd_timer = nil
-augroup('clear_cmdline', { clear = true })
-autocmd('CmdlineLeave', {
-  group = 'clear_cmdline',
-  pattern = '*',
-  callback = function()
-    cmd_timer = vim.defer_fn(function()
-      vim.api.nvim_command('echo ""')
-      cmd_timer = nil
-    end, 5000)
-  end,
-})
+-- NOTE: noice.nvim uses notifications
+-- local cmd_timer = nil
+-- augroup('clear_cmdline', { clear = true })
+-- autocmd('CmdlineLeave', {
+--   group = 'clear_cmdline',
+--   pattern = '*',
+--   callback = function()
+--     cmd_timer = vim.defer_fn(function()
+--       vim.api.nvim_command('echo ""')
+--       cmd_timer = nil
+--     end, 5000)
+--   end,
+-- })
 
-autocmd({ 'CmdlineEnter', 'CmdlineChanged' }, {
-  group = 'clear_cmdline',
-  pattern = '*',
-  callback = function()
-    if cmd_timer ~= nil then
-      cmd_timer:stop()
-    end
-  end,
-})
+-- autocmd({ 'CmdlineEnter', 'CmdlineChanged' }, {
+--   group = 'clear_cmdline',
+--   pattern = '*',
+--   callback = function()
+--     if cmd_timer ~= nil then
+--       cmd_timer:stop()
+--     end
+--   end,
+-- })
