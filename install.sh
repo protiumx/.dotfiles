@@ -66,15 +66,19 @@ main() {
   success "Finished installing python packages"
 
   info "################################################################################"
+  info "Rust cargo tools"
+  info "################################################################################"
+  wait_input
+  install_rust_tools
+  success "Finished installing Rust tools"
+
+  info "################################################################################"
   info "Configuration"
   info "################################################################################"
   wait_input
 
   setup_osx
   success "Finished configuring MacOS defaults. NOTE: A restart is needed"
-
-  code_as_default_text_editor
-  success "Finished setting up VSCode as default text editor"
 
   stow_dotfiles
   success "Finished stowing dotfiles"
