@@ -6,7 +6,19 @@ local servers = {
     schemas = require("schemastore").json.schemas(),
   },
   eslint = {},
-  rust_analyzer = {},
+  rust_analyzer = {
+    ["rust-analyzer"] = {
+      assist = {
+        importEnforceGranularity = true,
+        importPrefix = "create"
+      },
+      cargo = { allFeatures = true },
+      checkOnSave = {
+        command = "clippy",
+        allFeatures = true
+      }
+    },
+  },
   clangd = {},
   pyright = {
     python = {
@@ -17,6 +29,7 @@ local servers = {
       },
     }
   },
+  sqlls = {},
   yamlls = {
     yaml = {
       completion = true,
@@ -35,12 +48,7 @@ local servers = {
     },
   },
   terraformls = {},
-  bashls = {
-    cmd_env = {
-      GLOB_PATTERN = '*@(.sh|)',
-    },
-    filetypes = { 'sh', 'zsh', '.bash', '.zsh', '.zshenv', '.profile' },
-  },
+  bashls = {},
   gopls = {
     analyses = {
       unusedparams = true,
