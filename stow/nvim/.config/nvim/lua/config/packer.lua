@@ -86,7 +86,6 @@ return packer.startup(function(use)
     run = function()
       pcall(require('nvim-treesitter.install').update { with_sync = true })
     end,
-    event = 'BufRead',
     config = function()
       require('config.treesitter').setup()
     end
@@ -186,6 +185,7 @@ return packer.startup(function(use)
         },
         patterns = {
           'go.mod',
+          'Cargo.toml',
           'Makefile',
           'package.json',
           '.git',
@@ -389,6 +389,14 @@ return packer.startup(function(use)
   })
 
   -- LSP
+  -- use({
+  --   'simrat39/rust-tools.nvim',
+  --   ft = { 'rust' },
+  --   config = function()
+  --     require('config.lsp.rust').setup()
+  --   end,
+  -- })
+
   use({
     'ray-x/go.nvim',
     ft = { 'go' },
@@ -404,16 +412,17 @@ return packer.startup(function(use)
     'neovim/nvim-lspconfig',
     ft = {
       'asm',
+      'bash',
       'c',
       'cpp',
+      'dockerfile',
       'go',
-      'lua',
       'json',
+      'lua',
       'python',
       'rust',
-      'bash',
       'sh',
-      'dockerfile',
+      'sql',
       'terraform',
       'yaml',
       'zsh',
