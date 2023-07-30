@@ -28,6 +28,7 @@ function M.setup()
           width = 60,
           height = 'auto',
         },
+        position = 'auto',
         border = {
           padding = { 1, 2 },
         },
