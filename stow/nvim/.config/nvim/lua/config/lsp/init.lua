@@ -11,6 +11,10 @@ function M.setup()
   require('config.lsp.mason').setup()
   require('config.lsp.saga').setup()
   require('fidget').setup({
+    align = {
+      bottom = false, -- align fidgets along bottom edge of buffer
+      right = true, -- align fidgets along right edge of buffer
+    },
     text = {
       done = "",
     },
@@ -19,7 +23,7 @@ function M.setup()
     }
   })
 
-  -- Done by noice.nvim
+  -- NOTE: noice.nvim sets these 2 handlers
   -- vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
   --   vim.lsp.handlers.hover,
   --   {
@@ -44,7 +48,7 @@ function M.setup()
       end
     },
     float = {
-      focusable = false,
+      focusable = true,
       source = true,
       boder = 'single',
       header = '',
