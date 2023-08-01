@@ -183,7 +183,7 @@ function M.setup()
       path_display = { 'truncate' },
       mappings = {
         i = {
-          ['<M-d>'] = 'delete_buffer',
+          ['<M-D>'] = 'delete_buffer',
           ['<M-Down>'] = 'cycle_history_next',
           ['<M-Up>'] = 'cycle_history_prev',
           ['<C-g>'] = function(prompt_bufnr)
@@ -216,7 +216,7 @@ function M.setup()
     pickers = {
       find_files = {
         find_command = { 'fd', '-t', 'f', '--hidden', '--strip-cwd-prefix', '-i', '--ignore', '--exclude',
-          '.git/*', '-E', 'target/*' }
+          '.git/*', '-E', 'target/*', '-E', '**/node_modules' }
       },
     },
     extensions = {
