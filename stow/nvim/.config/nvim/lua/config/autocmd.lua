@@ -36,6 +36,11 @@ autocmd('TextYankPost', {
   end,
 })
 
+autocmd('BufReadPost', {
+  pattern = '*.svelte',
+  command = [[setlocal ft=html syntax=html]],
+})
+
 autocmd({ 'BufNewFile', 'BufRead' }, {
   pattern = '*.heex',
   command = [[setlocal ft=html syntax=html]],
