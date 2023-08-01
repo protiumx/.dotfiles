@@ -146,6 +146,14 @@ local keys = {
   },
 
   {
+    key = 's',
+    mods = key_mod_panes,
+    action = act.PaneSelect {
+      mode = 'SwapWithActive',
+    },
+  },
+
+  {
     key = 'S',
     mods = 'SHIFT|' .. key_mod_panes,
     action = act.PaneSelect,
