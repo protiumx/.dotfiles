@@ -242,26 +242,6 @@ return packer.startup(function(use)
   })
 
   use({
-    'mattn/emmet-vim',
-    setup = function()
-      vim.g['user_emmet_leader_key'] = '<C-X>'
-    end,
-    ft = {
-      'handlebars',
-      'hbs',
-      'html',
-      'javascriptreact',
-      'jsx',
-      'pug',
-      'svelte',
-      'tsx',
-      'typescriptreact',
-      'vue',
-      'xml',
-    },
-  })
-
-  use({
     'johmsalas/text-case.nvim',
     after = 'telescope.nvim',
     config = function()
@@ -416,7 +396,9 @@ return packer.startup(function(use)
       'c',
       'cpp',
       'dockerfile',
+      'html',
       'go',
+      'javascript',
       'json',
       'lua',
       'python',
@@ -424,6 +406,8 @@ return packer.startup(function(use)
       'sh',
       'sql',
       'terraform',
+      'typescript',
+      'svelte',
       'yaml',
       'zsh',
     },
