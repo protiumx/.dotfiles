@@ -91,6 +91,7 @@ function M.setup()
       'python',
       'rust',
       'sql',
+      'svelte',
       'terraform',
       'toml',
       'typescript',

@@ -2,6 +2,7 @@ local servers = {
   dockerls = {},
   graphql = {},
   tsserver = {},
+  html = {},
   jsonls = {
     schemas = require("schemastore").json.schemas(),
   },
