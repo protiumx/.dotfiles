@@ -48,7 +48,7 @@ packer.init({
   },
   display = {
     working_sym = '󱦟 ',
-    error_sym = '✗ ',
+    error_sym = ' ',
     done_sym = ' ',
     removed_sym = ' ',
     moved_sym = ' ',
@@ -315,7 +315,18 @@ return packer.startup(function(use)
                 filetype = { 'neo-tree', 'neo-tree-popup', 'notify' },
               },
             },
-            other_win_hl_color = '#e35e4f',
+            highlights = {
+              statusline = {
+                focused = {
+                  bg = '#e35e4f',
+                  bold = true,
+                },
+                unfocused = {
+                  bg = '#e35e4f',
+                  bold = true,
+                },
+              },
+            },
           })
 
           vim.keymap.set('n', '<Leader>W', function()
@@ -386,6 +397,20 @@ return packer.startup(function(use)
     requires = {
       'ray-x/guihua.lua',
     },
+  })
+
+  use({
+    "nvim-neotest/neotest",
+    requires = {
+      "nvim-neotest/neotest-go",
+    },
+    ft = {
+      'go',
+      'rust',
+    },
+    config = function()
+      require('config.lsp.neotest').setup()
+    end,
   })
 
   use({
