@@ -2,7 +2,7 @@ vim.g.netrw_banner = 0
 vim.g.netrw_browse_split = 0
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
-vim.g.netrw_liststyle = 3 -- Tree-style view
+vim.g.netrw_liststyle = 3
 
 vim.cmd [[
   syntax sync minlines=3000
@@ -78,6 +78,21 @@ vim.opt.wildignore = {
   '*/.git/*', '*.DS_Store',
   '*/node_modules/*', '*/build/*', '*/logs/*', '*/dist/*', '*/tmp/*',
 }
+
+if vim.fn.has('wsl') == 1 then
+  vim.g.clipboard = {
+    name = 'WslClipboard',
+    copy = {
+      ['+'] = 'clip.exe',
+      ['*'] = 'clip.exe',
+    },
+    paste = {
+      ['+'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+      ['*'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+    },
+    cache_enabled = 0,
+  }
+end
 
 vim.filetype.add({
   pattern = {
