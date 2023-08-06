@@ -89,6 +89,7 @@ function M.setup()
       'markdown',
       'markdown_inline',
       'python',
+      'regex',
       'rust',
       'sql',
       'svelte',
