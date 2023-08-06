@@ -61,7 +61,7 @@ function M.setup()
       }),
       documentation = cmp.config.window.bordered({
         winhighlight = 'Normal:NormalFloat,CursorLine:Visual,Search:None',
-        scrollbar = false,
+        scrollbar = true,
       }),
     },
     perfomance = {
@@ -111,6 +111,7 @@ function M.setup()
       format = function(_, item)
         item.kind = kind_icons[item.kind]
         item.abbr = string.sub(item.abbr, 1, 50)
+        item.menu = ''
         return item
       end
     },
@@ -134,9 +135,9 @@ function M.setup()
         -- end,
 
         cmp.config.compare.sort_text,
-        cmp.config.compare.recently_used,
         -- cmp.config.compare.kind,
         cmp.config.compare.score,
+        cmp.config.compare.recently_used,
         -- cmp.config.compare.length,
         -- cmp.config.compare.order,
       },
