@@ -14,9 +14,10 @@ autocmd({ 'BufWritePre' }, {
   group = 'remove_white_spaces',
   pattern = "*",
   callback = function()
-    local _, client = next(vim.lsp.buf_get_clients(0))
+    local _, client = next(vim.lsp.buf_get_clients())
     -- Skip if LSP provides formatting
-    if client and client.server_capabilities.documentFormattingProvider then
+    if vim.lsp.buf_is_attached() and
+        client and client.server_capabilities.documentFormattingProvider then
       return
     end
 
