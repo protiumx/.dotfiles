@@ -13,7 +13,7 @@ function M.setup()
   require('fidget').setup({
     align = {
       bottom = false, -- align fidgets along bottom edge of buffer
-      right = true, -- align fidgets along right edge of buffer
+      right = true,   -- align fidgets along right edge of buffer
     },
     text = {
       done = "",
@@ -54,6 +54,7 @@ function M.setup()
       header = '',
       prefix = '',
       max_width = 100,
+      zindex = 40,
     },
     underline = false,
     severity_sort = true,
