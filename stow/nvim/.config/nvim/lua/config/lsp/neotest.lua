@@ -12,7 +12,8 @@ function M.setup()
     },
   }, neotest_ns)
 
-  require("neotest").setup({
+  local neotest = require("neotest")
+  neotest.setup({
     adapters = {
       require("neotest-go"),
     },
@@ -33,6 +34,13 @@ function M.setup()
       watching = ""
     },
   })
+
+  vim.keymap.set('n', '<Leader>tF', function()
+    neotest.run.run(vim.fn.expand('%'))
+  end, { silent = true })
+  vim.keymap.set('n', '<Leader>tF', function()
+    neotest.run.run(vim.fn.expand())
+  end, { silent = true })
 end
 
 return M

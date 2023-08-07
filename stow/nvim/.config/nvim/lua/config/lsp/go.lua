@@ -25,8 +25,6 @@ function M.setup()
     },
   })
 
-  vim.keymap.set('n', '<Leader>tF', '<cmd>GoTestFile<CR>')
-  vim.keymap.set('n', '<Leader>tf', '<cmd>GoTestFunc<CR>')
   vim.keymap.set('n', '<Leader>tp', '<cmd>GoTestPkg<CR>')
   vim.keymap.set('n', '<Leader>ga', '<cmd>GoAlt!<CR>')
   vim.keymap.set('n', '<Leader>gA', '<cmd>GoAltV!<CR>')
