@@ -79,6 +79,8 @@ function M.setup()
       }
     },
     outline = {
+      auto_preview = false,
+      left_width = 0.4,
       keys = {
         jump = '<CR>',
       }
