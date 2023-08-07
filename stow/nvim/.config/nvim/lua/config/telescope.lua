@@ -211,12 +211,20 @@ function M.setup()
         '--smart-case',
         '-u'
       },
-      -- file_ignore_patterns = { 'target/*', 'node_modules/*', '.git/*', '.yarn/*' },
     },
     pickers = {
       find_files = {
-        find_command = { 'fd', '-t', 'f', '--hidden', '--strip-cwd-prefix', '-i', '--ignore', '--exclude',
-          '.git/*', '-E', 'target/*', '-E', '**/node_modules' }
+        find_command = {
+          'fd',
+          '-t', 'f',
+          '--hidden',
+          '--strip-cwd-prefix',
+          '-i',
+          '-E', '.git/*',
+          '-E', 'target/*',
+          '-E', '**/node_modules',
+          '-E', '.DS_Store',
+        }
       },
     },
     extensions = {
