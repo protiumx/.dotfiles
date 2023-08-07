@@ -2,9 +2,16 @@ local M = {}
 
 local commands = {
   git_file = function()
-    local remote = vim.fn.system('gremote')
+    local remote = vim.fn.system('gremote'):gsub('[\n\r]', '')
     local branch = vim.fn.system('git rev-parse --abbrev-ref HEAD')
-    print(string.format('%s/tree/%s/%s', remote, branch, vim.fn.expand('%')):gsub('[\n\r]', ''))
+    local file = vim.fn.expand('%')
+    local url = string.format('%s/tree/%s/%s', remote, branch, file)
+    if string.find(remote, "bitbucket") then
+      url = string.format('%s/browse/%s?at=refs/heads/%s', remote, file, branch)
+    end
+
+    vim.cmd('let @*="' .. url .. '"')
+    print(url .. ' copied to clipboard')
   end
 }
 
