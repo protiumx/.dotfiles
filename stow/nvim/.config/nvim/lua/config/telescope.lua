@@ -158,6 +158,24 @@ end
 
 function M.setup()
   local telescope = require('telescope')
+  local open_in_existing_window = function(prompt_bufnr)
+    local action_set = require('telescope.actions.set')
+    local action_state = require('telescope.actions.state')
+
+    local picker = action_state.get_current_picker(prompt_bufnr)
+    picker.get_selection_window = function(_, _)
+      local picked_window_id = require('window-picker').pick_window({
+        filter_rules = {
+          autoselect_one = false,
+        },
+      }) or vim.api.nvim_get_current_win()
+      -- Unbind after using so next instance of the picker acts normally
+      picker.get_selection_window = nil
+      return picked_window_id
+    end
+
+    return action_set.edit(prompt_bufnr, 'edit')
+  end
 
   telescope.setup({
     defaults = {
@@ -183,24 +201,10 @@ function M.setup()
       path_display = { 'truncate' },
       mappings = {
         i = {
-          ['<M-D>'] = 'delete_buffer',
+          ['<M-b>d'] = 'delete_buffer',
+          ['<M-b>s'] = open_in_existing_window,
           ['<M-Down>'] = 'cycle_history_next',
           ['<M-Up>'] = 'cycle_history_prev',
-          ['<C-g>'] = function(prompt_bufnr)
-            -- Use nvim-window-picker to choose the window by dynamically attaching a function
-            local action_set = require('telescope.actions.set')
-            local action_state = require('telescope.actions.state')
-
-            local picker = action_state.get_current_picker(prompt_bufnr)
-            picker.get_selection_window = function(picker, entry)
-              local picked_window_id = require('window-picker').pick_window() or vim.api.nvim_get_current_win()
-              -- Unbind after using so next instance of the picker acts normally
-              picker.get_selection_window = nil
-              return picked_window_id
-            end
-
-            return action_set.edit(prompt_bufnr, 'edit')
-          end,
         },
       },
       vimgrep_arguments = {
