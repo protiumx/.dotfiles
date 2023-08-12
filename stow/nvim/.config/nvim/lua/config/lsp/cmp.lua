@@ -45,7 +45,6 @@ function M.setup()
       default_behavior = types.cmp.ConfirmBehavior.Replace,
     },
     completion = {
-      keyword_length = 2,
       completeopt = 'menu, menuone',
     },
     snippet = {
@@ -99,6 +98,7 @@ function M.setup()
       },
       {
         name = 'path',
+        keyword_length = 3,
         priority = 40,
       },
       -- {
