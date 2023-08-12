@@ -26,7 +26,7 @@ local function setup_autocmd(client, bufnr)
 
     vim.api.nvim_create_autocmd('BufWritePre', {
       group = 'lsp_format',
-      pattern = '*',
+      buffer = bufnr,
       callback = function()
         vim.lsp.buf.format()
       end,
@@ -151,15 +151,6 @@ function M.setup()
       }
     end,
   }
-
-  -- vim.api.nvim_create_autocmd("LspAttach", {
-  --   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
-  --   callback = function(args)
-  --     local bufnr = args.buf
-  --     local client = vim.lsp.get_client_by_id(args.data.client_id)
-  --     on_lsp_attach(client, bufnr)
-  --   end,
-  -- })
 end
 
 return M
