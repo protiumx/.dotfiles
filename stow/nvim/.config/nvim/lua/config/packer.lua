@@ -403,6 +403,7 @@ return packer.startup(function(use)
     "nvim-neotest/neotest",
     requires = {
       "nvim-neotest/neotest-go",
+      "rouge8/neotest-rust",
     },
     ft = {
       'go',

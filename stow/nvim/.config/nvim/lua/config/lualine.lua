@@ -88,6 +88,7 @@ function M.setup()
           'lspsagaoutline',
           'packer',
           'neo-tree',
+          'neotest-summary',
           'qf',
           'tsplayground',
         },
