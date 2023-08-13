@@ -9,10 +9,9 @@ autocmd({ 'BufRead', 'BufNewFile' }, {
 })
 
 -- Trim white spaces before writing
-augroup('remove_white_spaces', { clear = true })
 autocmd({ 'BufWritePre' }, {
-  group = 'remove_white_spaces',
-  pattern = "*",
+  group = augroup('remove_white_spaces', { clear = true }),
+  pattern = '*',
   callback = function()
     local _, client = next(vim.lsp.buf_get_clients())
     -- Skip if LSP provides formatting
@@ -25,9 +24,8 @@ autocmd({ 'BufWritePre' }, {
   end,
 })
 
-augroup('yank_post', { clear = true })
 autocmd('TextYankPost', {
-  group = 'yank_post',
+  group = augroup('yank_post', { clear = true }),
   pattern = '*',
   callback = function()
     vim.highlight.on_yank({
@@ -48,9 +46,8 @@ autocmd({ 'BufNewFile', 'BufRead' }, {
   command = [[set ft=dockerfile]],
 })
 
-augroup('term_open_insert', { clear = true })
 autocmd('TermOpen', {
-  group = 'term_open_insert',
+  group = augroup('term_open_insert', { clear = true }),
   pattern = '*',
   command = [[
     startinsert
@@ -73,9 +70,28 @@ autocmd('FileType', {
   ]]
 })
 
-autocmd('FileType', {
-  pattern = { 'help', 'startuptime', 'qf', 'lspinfo' },
-  command = [[nnoremap <buffer><silent> q :close<CR>]],
+-- close some filetypes with <q>
+vim.api.nvim_create_autocmd('FileType', {
+  group = augroup('close_with_q', { clear = true }),
+  pattern = {
+    'PlenaryTestPopup',
+    'help',
+    'lspinfo',
+    'man',
+    'notify',
+    'qf',
+    'spectre_panel',
+    'startuptime',
+    'tsplayground',
+    'neotest-output',
+    'checkhealth',
+    'neotest-summary',
+    'neotest-output-panel',
+  },
+  callback = function(event)
+    vim.bo[event.buf].buflisted = false
+    vim.keymap.set('n', 'q', '<cmd>close<cr>', { buffer = event.buf, silent = true })
+  end,
 })
 
 autocmd('FileType', {
@@ -91,7 +107,7 @@ autocmd('FileType', {
 --   pattern = '*',
 --   callback = function()
 --     cmd_timer = vim.defer_fn(function()
---       vim.api.nvim_command('echo ""')
+--       vim.api.nvim_command('echo ''')
 --       cmd_timer = nil
 --     end, 5000)
 --   end,
@@ -106,3 +122,17 @@ autocmd('FileType', {
 --     end
 --   end,
 -- })
+
+-- Check if we need to reload the file when it changed
+vim.api.nvim_create_autocmd({ 'FocusGained', 'TermClose', 'TermLeave' }, {
+  group = augroup('checktime', { clear = true }),
+  command = 'checktime',
+})
+
+-- resize splits if window got resized
+vim.api.nvim_create_autocmd({ 'VimResized' }, {
+  group = augroup('resize_splits', { clear = true }),
+  callback = function()
+    vim.cmd('tabdo wincmd =')
+  end,
+})
