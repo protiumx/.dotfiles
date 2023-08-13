@@ -60,6 +60,11 @@ function M.setup()
       unknown = "",
       watching = ""
     },
+    status = {
+      enabled = true,
+      signs = true,
+      virtual_text = false
+    },
     floating = {
       border = "rounded",
       max_height = 0.6,
