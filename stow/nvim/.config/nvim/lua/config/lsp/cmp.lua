@@ -118,26 +118,12 @@ function M.setup()
     sorting = {
       comparators = {
         cmp.config.compare.offset,
-        cmp.config.compare.exact,
 
-        -- -- copied from cmp-under, but I don't think I need the plugin for this.
-        -- -- I might add some more of my own.
-        -- function(entry1, entry2)
-        --   local _, entry1_under = entry1.completion_item.label:find "^_+"
-        --   local _, entry2_under = entry2.completion_item.label:find "^_+"
-        --   entry1_under = entry1_under or 0
-        --   entry2_under = entry2_under or 0
-        --   if entry1_under > entry2_under then
-        --     return false
-        --   elseif entry1_under < entry2_under then
-        --     return true
-        --   end
-        -- end,
-
-        cmp.config.compare.sort_text,
         -- cmp.config.compare.kind,
-        cmp.config.compare.score,
+        -- cmp.config.compare.score,
+        cmp.config.compare.exact,
         cmp.config.compare.recently_used,
+        cmp.config.compare.sort_text,
         -- cmp.config.compare.length,
         -- cmp.config.compare.order,
       },
@@ -145,13 +131,12 @@ function M.setup()
     preselect = cmp.PreselectMode.Item,
     mapping = cmp.mapping.preset.insert({
       ['<CR>'] = cmp.mapping.confirm({
-        behavior = cmp.ConfirmBehavior.Replace,
         select = true,
       }),
       ['<C-e>'] = cmp.mapping.close(),
       ['<C-Space>'] = cmp.mapping.complete(),
-      ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-      ['<C-u>'] = cmp.mapping.scroll_docs(4),
+      ['<C-d>'] = cmp.mapping.scroll_docs(4),
+      ['<C-u>'] = cmp.mapping.scroll_docs(-4),
       ['<Tab>'] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
