@@ -107,7 +107,7 @@ function Term:create_win(buf)
 
   local win = A.nvim_open_win(buf, true, {
     border = cfg.border,
-    relative = 'editor',
+    relative = 'win',
     style = 'minimal',
     width = dim.width,
     height = dim.height,
