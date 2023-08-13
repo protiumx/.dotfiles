@@ -1,5 +1,7 @@
-; extends
+;; extends
 
-(double_quote_scalar) @spell
-(single_quote_scalar) @spell
-(string_scalar) @spell
+[
+  (double_quote_scalar)
+  (single_quote_scalar)
+  (string_scalar)
+] @spell

@@ -1,4 +1,4 @@
-; extends
+;; extends
 
 ; go.nvim provides hl for SQL and json
 ; (short_var_declaration
