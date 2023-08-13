@@ -16,23 +16,8 @@ local function organize_go_imports(timeoutms)
   end
 end
 
-local function setup_autocmd(client, bufnr)
-  vim.api.nvim_create_augroup('lsp_format', { clear = true })
-
-  if client.server_capabilities.documentFormattingProvider then
-    vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-      vim.lsp.buf.format()
-    end, { desc = 'Format current buffer with LSP' })
-
-    vim.api.nvim_create_autocmd('BufWritePre', {
-      group = 'lsp_format',
-      buffer = bufnr,
-      callback = function()
-        vim.lsp.buf.format()
-      end,
-    })
-  end
-
+local function setup_autocmd(client)
+  require('config.lsp.format').setup()
 
   if client.name == 'gopls' then
     vim.api.nvim_create_autocmd('BufWritePre', {
@@ -48,21 +33,14 @@ local function setup_autocmd(client, bufnr)
 end
 
 local on_lsp_attach = function(client, bufnr)
-  if client.name == 'eslint' then
-    vim.cmd.LspStop('eslint')
-    return
-  end
+  require('config.lsp.keymaps').setup(bufnr)
+  setup_autocmd(client)
 
   if client.name == "yamlls" then
     client.server_capabilities.documentFormattingProvider = true
   end
 
   local colors = require('config.colors')
-  require('config.lsp.keymaps').setup(bufnr)
-
-  setup_autocmd(client, bufnr)
-
-  -- open diagnostic on cursor hold
   vim.api.nvim_create_augroup('lsp_diagnostic_hold', { clear = true })
   vim.api.nvim_create_autocmd('CursorHold', {
     group = 'lsp_diagnostic_hold',
