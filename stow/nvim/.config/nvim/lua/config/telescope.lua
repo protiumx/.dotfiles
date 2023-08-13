@@ -89,26 +89,26 @@ local function keymaps()
     })
   end, 'Browse files relative to buffer with preview')
 
+  map({ 'i', 'n' }, '<M-g>', function()
+    builtin.live_grep(with_title({ cwd = vim.fn.expand('%:p:h') }))
+  end, '[S]earch Live [G]rep relative buffer')
+
   map({ 'i', 'n' }, '<M-G>', function()
     builtin.live_grep(with_title({}))
   end, '[S]earch Live [G]rep')
 
   map({ 'i', 'n' }, '<M-b>', function() builtin.buffers(dropdown) end, 'Find buffers')
 
-  map({ 'i', 'n' }, '<M-g>', function()
-    builtin.live_grep(with_title({ cwd = vim.fn.expand('%:p:h') }))
-  end, '[S]earch Live [G]rep relative buffer')
-
   map({ 'v' }, '<M-s>g', function()
     local search = utils.vtext()
-    builtin.grep_string({ search = search })
+    builtin.grep_string({ search = search, prompt_title = 'Searh: ' .. string.sub(search, 0, 20) })
   end, '[S]earch Live [G]rep from visual selection')
 
-  map({ 'i', 'n' }, '<M-s>w', function()
+  map({ 'i', 'n' }, '<M-s>W', function()
     builtin.grep_string({})
   end, '[S]earch [W]ord under cursor in cwd')
 
-  map({ 'i', 'n' }, '<M-s>W', function()
+  map({ 'i', 'n' }, '<M-s>w', function()
     builtin.grep_string(with_title({ cwd = vim.fn.expand('%:p:h') }))
   end, '[S]earch [W]ord under cursor in cwd relative to buffer')
 
