@@ -35,6 +35,8 @@ vim.opt.listchars = { eol = '', tab = '  ' }
 vim.opt.list = true
 vim.opt.statusline = '2'
 vim.o.completeopt = 'menu,menuone,noselect'
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 
 vim.opt.undodir = os.getenv('HOME') .. '/.vim/undodir'
 vim.opt.undofile = true
