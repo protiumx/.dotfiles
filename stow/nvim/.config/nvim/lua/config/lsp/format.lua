@@ -1,4 +1,11 @@
-local M = {}
+local M = {
+  enabled = true,
+}
+
+function M.toggle()
+  M.enabled = not M.enabled
+  vim.notify("LSP formatting " .. (M.enabled and "enabled" or "disabled"))
+end
 
 function M.format()
   local buf = vim.api.nvim_get_current_buf()
@@ -60,6 +67,7 @@ function M.setup()
   })
 
   vim.api.nvim_create_user_command('Format', M.format, { desc = 'Format current buffer with LSP' })
+  vim.api.nvim_create_user_command('LSPFormatToggle', M.toggle, { desc = 'Enable/disable LSP format' })
 end
 
 return M
