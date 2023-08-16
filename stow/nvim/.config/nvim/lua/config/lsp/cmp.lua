@@ -118,6 +118,7 @@ function M.setup()
     sorting = {
       comparators = {
         cmp.config.compare.offset,
+        cmp.config.compare.exact,
 
         -- cmp.config.compare.kind,
         -- cmp.config.compare.score,
