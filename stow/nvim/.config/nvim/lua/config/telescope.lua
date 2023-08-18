@@ -201,8 +201,8 @@ function M.setup()
       path_display = { 'truncate' },
       mappings = {
         i = {
-          ['<M-b>d'] = 'delete_buffer',
-          ['<M-b>s'] = open_in_existing_window,
+          ['<M-r>'] = 'delete_buffer',
+          ['<M-O>'] = open_in_existing_window,
           ['<M-Down>'] = 'cycle_history_next',
           ['<M-Up>'] = 'cycle_history_prev',
         },
