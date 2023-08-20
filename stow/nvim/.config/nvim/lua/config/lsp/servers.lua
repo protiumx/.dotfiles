@@ -62,7 +62,6 @@ local servers = {
       validate = true,
     },
   },
-  terraformls = {},
   bashls = {},
   gopls = {
     analyses = {
