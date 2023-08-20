@@ -130,6 +130,8 @@ export FZF_DEFAULT_OPTS="
   --scrollbar=▏▕
   --color 'gutter:-1,hl+:#82aaff,hl:#82aaff,bg+:-1,pointer:#82aaff'"
 export FZF_COMPLETION_OPTS=$FZF_DEFAULT_OPTS
+# zoxide fzf opts
+export _ZO_FZF_OPTS=$FZF_DEFAULT_OPTS
 
 _fzf_compgen_path() {
   fd --hidden --follow --exclude ".git/" . "$1"
