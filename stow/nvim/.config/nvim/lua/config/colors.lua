@@ -38,7 +38,7 @@ local baseHls = {
   Cursor                  = { fg = colors.background, bg = colors.accent },
   TermCursor              = { link = 'Cursor' },
   ColorColumn             = { bg = colors.dark_grey },
-  -- CursorLine              = { bg = 'none', fg = 'none' },
+  CursorLine              = { bg = 'none', fg = 'none' },
   -- CursorLineNr            = { bg = 'none' },
   -- LineNr                  = { bg = 'none' },
   EndOfBuffer             = { fg = colors.background },
@@ -97,6 +97,7 @@ local baseHls = {
   TerminalBorder          = { link = 'XBorder' },
   TerminalNormal          = { link = 'XMenu' },
   SagaShadow              = { fg = colors.background, bg = colors.background },
+  SpellBad                = { undercurl = true },
   TitleIcon               = { fg = colors.foreground, bg = colors.light_orange },
   TitleString             = { fg = colors.background, bg = colors.light_orange },
   -- LSP

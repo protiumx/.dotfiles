@@ -79,6 +79,10 @@ return packer.startup(function(use)
 
   -- Themes
   use('ellisonleao/gruvbox.nvim')
+  use {
+    "mcchrish/zenbones.nvim",
+    requires = "rktjmp/lush.nvim",
+  }
 
   -- Treesitter
   use({
