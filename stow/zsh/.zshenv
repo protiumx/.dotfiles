@@ -29,6 +29,14 @@ psrm() {
   ps -o rss= -p "$1" | awk '{ hr=$1/1024; printf "%13.2f Mb\n",hr }' | tr -d ' ';
 }
 
+epoch() {
+  if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    date --date "@$1" +"+%Y-%m-%dT%H:%M:%SZ"
+  else
+    date -r "$1" '+%Y-%m-%dT%H:%M:%SZ'
+  fi
+}
+
 # Watch process real memory
 psrml() {
   while true;
