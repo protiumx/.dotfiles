@@ -16,25 +16,9 @@ local function organize_go_imports(timeoutms)
   end
 end
 
-local function setup_autocmd(client)
-  require('config.lsp.format').setup()
-
-  if client.name == 'gopls' then
-    vim.api.nvim_create_autocmd('BufWritePre', {
-      group = 'lsp_format',
-      pattern = '*.go',
-      callback = function()
-        -- organize_go_imports(500)
-        -- use go.nvim
-        require('go.format').goimport()
-      end
-    })
-  end
-end
-
 local on_lsp_attach = function(client, bufnr)
   require('config.lsp.keymaps').setup(bufnr)
-  setup_autocmd(client)
+  require('config.lsp.format').setup()
 
   if client.name == "yamlls" then
     client.server_capabilities.documentFormattingProvider = true

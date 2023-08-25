@@ -2,12 +2,20 @@ local M = {
   enabled = true,
 }
 
+local goformat = require('go.format')
+
 function M.toggle()
   M.enabled = not M.enabled
-  vim.notify("LSP formatting " .. (M.enabled and "enabled" or "disabled"))
+  vim.notify('LSP formatting ' .. (M.enabled and 'enabled' or 'disabled'))
 end
 
 function M.format()
+  -- if vim.bo.filetype == 'go' then
+  --   goformat.goimport()
+  --   print('sadfh')
+  --   return
+  -- end
+
   local buf = vim.api.nvim_get_current_buf()
   local formatters = M.get_formatters(buf)
   local client_ids = vim.tbl_map(function(client)
@@ -56,13 +64,14 @@ function M.supports_format(client)
     return false
   end
 
-  return client.supports_method("textDocument/formatting")
-      or client.supports_method("textDocument/rangeFormatting")
+  return client.supports_method('textDocument/formatting')
+      or client.supports_method('textDocument/rangeFormatting')
 end
 
-function M.setup()
-  vim.api.nvim_create_autocmd("BufWritePre", {
-    group = vim.api.nvim_create_augroup("lsp_format", {}),
+function M.setup(client)
+  vim.api.nvim_create_augroup('lsp_format', {})
+  vim.api.nvim_create_autocmd('BufWritePre', {
+    group = 'lsp_format',
     callback = M.format,
   })
 
