@@ -469,7 +469,6 @@ return packer.startup(function(use)
       -- Better UI for LSP commands
       {
         'glepnir/lspsaga.nvim',
-        branch = 'main',
       },
 
       {
