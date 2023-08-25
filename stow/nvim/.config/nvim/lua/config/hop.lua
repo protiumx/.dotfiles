@@ -7,11 +7,11 @@ function M.setup()
   hop.setup({})
 
   vim.keymap.set({ 'n' }, 's', function()
-    hop.hint_char2({ direction = directions.AFTER_CURSOR })
+    hop.hint_char2({ direction = directions.AFTER_CURSOR, current_line_only = false })
   end, { remap = true })
 
   vim.keymap.set({ 'n' }, 'S', function()
-    hop.hint_char2({ direction = directions.BEFORE_CURSOR })
+    hop.hint_char2({ direction = directions.BEFORE_CURSOR, current_line_only = false })
   end, { remap = true })
 
   vim.keymap.set({ 'n', 'v', 'i' }, '<M-h>s', function()
