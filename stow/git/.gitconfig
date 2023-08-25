@@ -89,7 +89,7 @@
   # Clean up merged branches to a given branch ("main" is default)
   purge = "!f() { git branch --merged ${1-main} | grep -v " ${1-main}$" | xargs -r git branch -d; }; f"
 
-  send = push --force-with-lease
+  pwl = push --force-with-lease
 
   # Remove a remote branch
   rmrb = push origin -d
