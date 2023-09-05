@@ -122,7 +122,7 @@ function M.setup()
 
         -- cmp.config.compare.kind,
         -- cmp.config.compare.score,
-        cmp.config.compare.exact,
+        -- cmp.config.compare.exact,
         cmp.config.compare.recently_used,
         cmp.config.compare.sort_text,
         -- cmp.config.compare.length,
