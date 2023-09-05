@@ -200,7 +200,6 @@ return packer.startup(function(use)
         patterns = {
           'go.mod',
           'Cargo.toml',
-          'Makefile',
           'package.json',
           '.git',
           '!.git/worktrees',
