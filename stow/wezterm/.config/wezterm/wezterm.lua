@@ -291,6 +291,9 @@ local process_icons = {
   ['gh'] = {
     { Text = wezterm.nerdfonts.dev_github_badge },
   },
+  ['ruby'] = {
+    { Text = wezterm.nerdfonts.cod_ruby },
+  },
 }
 
 
