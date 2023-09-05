@@ -18,7 +18,7 @@ end
 
 local on_lsp_attach = function(client, bufnr)
   require('config.lsp.keymaps').setup(bufnr)
-  require('config.lsp.format').setup()
+  require('config.lsp.format').setup(bufnr)
 
   if client.name == "yamlls" then
     client.server_capabilities.documentFormattingProvider = true
