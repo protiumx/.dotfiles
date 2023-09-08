@@ -84,8 +84,9 @@ function M.setup()
       },
       {
         name = 'buffer',
-        keyword_length = 5,
+        keyword_length = 4,
         option = {
+          -- Only buffers in the current tab
           get_bufnrs = function()
             local bufs = {}
             for _, win in ipairs(vim.api.nvim_list_wins()) do
