@@ -249,6 +249,9 @@ local process_icons = {
   ['nvim'] = {
     { Text = wezterm.nerdfonts.custom_vim },
   },
+  ['make'] = {
+    { Text = wezterm.nerdfonts.seti_makefile },
+  },
   ['vim'] = {
     { Text = wezterm.nerdfonts.dev_vim },
   },
