@@ -6,6 +6,7 @@ function M.setup(bufnr)
   end
 
   nmap('gd', vim.lsp.buf.definition, 'Go to definition')
+  nmap('gv', ':vsplit | lua vim.lsp.buf.definition()<CR>', 'Go to definition vertical split')
   nmap('gy', vim.lsp.buf.type_definition, 'Show type definition')
   nmap('gi', vim.lsp.buf.implementation, 'Go to implementation')
   -- nmap('gd', '<cmd>lua vim.lsp.buf.definition()<CR>zz', 'Go to definition')
