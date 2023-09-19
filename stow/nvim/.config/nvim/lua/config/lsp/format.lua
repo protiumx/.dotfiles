@@ -9,11 +9,6 @@ function M.toggle()
 end
 
 function M.format()
-  if vim.bo.buftype == 'go' then
-    require('go.format').goimport()
-    return
-  end
-
   local buf = vim.api.nvim_get_current_buf()
   local formatters = M.get_formatters(buf)
   local client_ids = vim.tbl_map(function(client)
@@ -27,6 +22,7 @@ function M.format()
   vim.lsp.buf.format({
     bufnr = buf,
     async = false,
+    timeout_ms = 2000,
   })
 end
 
