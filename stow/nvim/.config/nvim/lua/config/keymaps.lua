@@ -114,9 +114,9 @@ vim.keymap.set('n', '<C-g>s', function()
   print('Staged: ' .. vim.fn.expand('%'))
 end, { desc = '[Git] Stage current file', silent = true })
 
-vim.keymap.set('n', '<C-g><Up>', ':!git push<CR>', { desc = '[Git] Push', silent = true })
+vim.keymap.set('n', '<C-g><Up>', ':!git push<CR>', { desc = '[Git] Push' })
 
-vim.keymap.set('n', '<C-g><Down>', ':!git pull<CR>', { desc = '[Git] Pull', silent = true })
+vim.keymap.set('n', '<C-g><Down>', ':!git pull<CR>', { desc = '[Git] Pull' })
 
 vim.keymap.set('n', '<C-g>R', function()
   vim.cmd([[!git checkout origin/main %]])
