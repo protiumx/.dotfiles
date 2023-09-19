@@ -35,7 +35,6 @@ function M.setup()
     Variable = '  ',
   }
 
-
   cmp.setup({
     enabled = function()
       local ftype = vim.api.nvim_buf_get_option(0, 'filetype')
@@ -100,6 +99,7 @@ function M.setup()
       {
         name = 'path',
         keyword_length = 3,
+        group_index = 2,
         priority = 40,
       },
       -- {
