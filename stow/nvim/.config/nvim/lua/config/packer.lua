@@ -32,7 +32,7 @@ packer.init({
   compile_on_sync = true,
   git = {
     subcommands = {
-      update         = 'pull --ff-only --progress --rebase=false --force',
+      update         = 'pull --ff-only --progress --rebase=true --force',
       install        = 'clone --depth %i --no-single-branch --progress',
       fetch          = 'fetch --depth 10 --progress --force',
       checkout       = 'checkout %s --',
