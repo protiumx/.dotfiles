@@ -234,69 +234,28 @@ local keys = {
 }
 
 local process_icons = {
-  ['docker'] = {
-    { Text = wezterm.nerdfonts.linux_docker },
-  },
-  ['docker-compose'] = {
-    { Text = wezterm.nerdfonts.linux_docker },
-  },
-  ['kuberlr'] = {
-    { Text = wezterm.nerdfonts.linux_docker },
-  },
-  ['kubectl'] = {
-    { Text = wezterm.nerdfonts.linux_docker },
-  },
-  ['nvim'] = {
-    { Text = wezterm.nerdfonts.custom_vim },
-  },
-  ['make'] = {
-    { Text = wezterm.nerdfonts.seti_makefile },
-  },
-  ['vim'] = {
-    { Text = wezterm.nerdfonts.dev_vim },
-  },
-  ['node'] = {
-    { Text = wezterm.nerdfonts.mdi_hexagon },
-  },
-  ['zsh'] = {
-    { Text = wezterm.nerdfonts.cod_terminal },
-  },
-  ['bash'] = {
-    { Text = wezterm.nerdfonts.cod_terminal_bash },
-  },
-  ['btm'] = {
-    { Text = wezterm.nerdfonts.mdi_chart_donut_variant },
-  },
-  ['htop'] = {
-    { Text = wezterm.nerdfonts.mdi_chart_donut_variant },
-  },
-  ['cargo'] = {
-    { Text = wezterm.nerdfonts.dev_rust },
-  },
-  ['go'] = {
-    { Text = wezterm.nerdfonts.mdi_language_go },
-  },
-  ['lazydocker'] = {
-    { Text = wezterm.nerdfonts.linux_docker },
-  },
-  ['git'] = {
-    { Text = wezterm.nerdfonts.dev_git },
-  },
-  ['lua'] = {
-    { Text = wezterm.nerdfonts.seti_lua },
-  },
-  ['wget'] = {
-    { Text = wezterm.nerdfonts.mdi_arrow_down_box },
-  },
-  ['curl'] = {
-    { Text = wezterm.nerdfonts.mdi_flattr },
-  },
-  ['gh'] = {
-    { Text = wezterm.nerdfonts.dev_github_badge },
-  },
-  ['ruby'] = {
-    { Text = wezterm.nerdfonts.cod_ruby },
-  },
+  ['docker'] = wezterm.nerdfonts.linux_docker,
+  ['docker-compose'] = wezterm.nerdfonts.linux_docker,
+  ['kuberlr'] = wezterm.nerdfonts.linux_docker,
+  ['kubectl'] = wezterm.nerdfonts.linux_docker,
+  ['nvim'] = wezterm.nerdfonts.custom_vim,
+  ['make'] = wezterm.nerdfonts.seti_makefile,
+  ['vim'] = wezterm.nerdfonts.dev_vim,
+  ['node'] = wezterm.nerdfonts.mdi_hexagon,
+  ['go'] = wezterm.nerdfonts.seti_go,
+  ['zsh'] = wezterm.nerdfonts.dev_terminal,
+  ['bash'] = wezterm.nerdfonts.cod_terminal_bash,
+  ['btm'] = wezterm.nerdfonts.mdi_chart_donut_variant,
+  ['htop'] = wezterm.nerdfonts.mdi_chart_donut_variant,
+  ['cargo'] = wezterm.nerdfonts.dev_rust,
+  ['go'] = wezterm.nerdfonts.mdi_language_go,
+  ['lazydocker'] = wezterm.nerdfonts.linux_docker,
+  ['git'] = wezterm.nerdfonts.dev_git,
+  ['lua'] = wezterm.nerdfonts.seti_lua,
+  ['wget'] = wezterm.nerdfonts.mdi_arrow_down_box,
+  ['curl'] = wezterm.nerdfonts.mdi_flattr,
+  ['gh'] = wezterm.nerdfonts.dev_github_badge,
+  ['ruby'] = wezterm.nerdfonts.cod_ruby,
 }
 
 
@@ -314,10 +273,9 @@ local function get_process(tab)
     process_name = 'kubectl'
   end
 
-  return wezterm.format(
-    process_icons[process_name]
-    or { { Text = string.format('[%s]', process_name) } }
-  )
+  return
+      process_icons[process_name]
+      or string.format('[%s]', process_name)
 end
 
 wezterm.on(
@@ -333,11 +291,16 @@ wezterm.on(
       end
     end
 
-    local title = string.format(' %s ~ %s  ', get_process(tab), get_current_working_dir(tab))
+    local cwd = wezterm.format({
+      { Attribute = { Intensity = 'Bold' } },
+      { Text = get_current_working_dir(tab) },
+    })
+
+    local title = string.format(' %s ~ %s  ', get_process(tab), cwd)
 
     if has_unseen_output then
       return {
-        { Foreground = { Color = 'Orange' } },
+        { Foreground = { Color = '#28719c' } },
         { Text = title },
       }
     end
@@ -403,7 +366,7 @@ local config = {
   font_rules = {
     {
       intensity = 'Bold',
-      font = wezterm.font(font, { italic = false }),
+      font = wezterm.font(font, { italic = false, weight = 'DemiBold' }),
     },
     {
       intensity = 'Normal',
@@ -450,7 +413,7 @@ local config = {
   window_background_opacity = 1,
   window_decorations = 'RESIZE',
   window_frame = {
-    font = wezterm.font { family = font, weight = 'Regular' },
+    font = wezterm.font { family = font },
     font_size = is_windows and 12.0 or 18.0,
     active_titlebar_bg = colors.background,
     inactive_titlebar_bg = colors.background,
