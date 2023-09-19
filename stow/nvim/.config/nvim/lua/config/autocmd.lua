@@ -56,6 +56,14 @@ autocmd('TermOpen', {
   ]],
 })
 
+autocmd({ 'BufWinEnter', 'WinEnter' }, {
+  group = augroup('term_insert', { clear = true }),
+  pattern = 'term://*',
+  command = [[
+    startinsert
+  ]],
+})
+
 -- dont list quickfix buffers
 autocmd('FileType', {
   pattern = 'qf',
