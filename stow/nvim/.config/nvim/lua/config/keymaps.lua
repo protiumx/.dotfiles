@@ -103,9 +103,13 @@ if macos then
   vim.keymap.set('v', '<C-y>', '"*y', { silent = true })
   vim.keymap.set('n', '<Leader>P', ':let @*=expand("%:~:.")<CR>',
     { silent = true, desc = 'copy current path to clipboard' })
+  vim.keymap.set('n', '<Leader>L', ':let @*=expand("%:h") . "/" . expand("%:t") . ":" . line(".")<CR>',
+    { silent = true, desc = 'copy current path with line and column to clipboard' })
 else
   vim.keymap.set('v', '<C-y>', '"+y', { silent = true })
   vim.keymap.set('n', '<Leader>P', ':let @+=expand("%:~:.")<CR>', { desc = 'copy current path to clipboard' })
+  vim.keymap.set('n', '<Leader>L', ':let @+=expand("%:h") . "/" . expand("%:t") . ":" . line(".")<CR>',
+    { silent = true, desc = 'copy current path with line and column to clipboard' })
 end
 
 -- Git
