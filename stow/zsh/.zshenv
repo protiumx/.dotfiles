@@ -2,6 +2,11 @@
 
 # Functions
 
+reload() {
+  source ~/.zshrc
+  source ~/.zshenv
+}
+
 cheat() {
   curl -s "cheat.sh/$1";
 }
@@ -246,8 +251,6 @@ alias mkpwd="xkcdpass --count=5 --acrostic=\"chaos\" -C \"first\" -R --min=5 --m
 alias isodate='date -u +"%Y-%m-%dT%H:%M:%SZ"'
 # Serve files in current dir with python http server
 alias serv="python3 -m http.server"
-# Reload shell
-alias reload="exec $SHELL -l"
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
 alias localip="ifconfig | grep 'inet ' | grep -v 127.0.0.1 | cut -d\  -f2"
