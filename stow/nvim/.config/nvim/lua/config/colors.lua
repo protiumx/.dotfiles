@@ -130,6 +130,7 @@ local baseHls = {
   NotifyTRACEBorder           = { fg = colors.background },
   -- web-dev-icons
   -- DevIconDefault          = { fg = colors.dark_orange, bg = 'none' },
+  CopilotSuggestion       = { fg = '#8e6aad', bg = colors.background },
 }
 
 local diagnosticsHls = {
