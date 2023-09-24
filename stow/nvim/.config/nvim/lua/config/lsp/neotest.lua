@@ -34,15 +34,23 @@ function M.setup()
         jumpto = "<C-o>",
         mark = "m",
         next_failed = "J",
-        output = "o",
+        output = "O",
         prev_failed = "K",
         run = "r",
         run_marked = "R",
-        short = "O",
+        short = "o",
         stop = "x",
         target = "t",
         watch = "w"
       },
+    },
+    output = {
+      enabled = true,
+      open_on_run = true,
+    },
+    output_panel = {
+      enabled = true,
+      open = "vertical topleft split | resize 15",
     },
     icons = {
       child_indent = "│",
@@ -68,7 +76,7 @@ function M.setup()
     floating = {
       border = "rounded",
       max_height = 0.6,
-      max_width = 0.6,
+      max_width = 0.8,
     },
   })
 
@@ -82,6 +90,10 @@ function M.setup()
 
   vim.keymap.set('n', '<Leader>tS', function()
     neotest.summary.toggle()
+  end, { silent = true })
+
+  vim.keymap.set('n', '<Leader>tO', function()
+    neotest.output_panel.toggle()
   end, { silent = true })
 
   vim.keymap.set('n', '<Leader>tn', function()
