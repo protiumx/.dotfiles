@@ -94,7 +94,6 @@ eval "$(zoxide init zsh)"
 
 # changes ctrl-u to delete everything to the left of the cursor, rather than the whole line
 bindkey "^U" backward-kill-line
-bindkey "^E" kill-line
 # alt-del delete word forwards
 bindkey '^[[3;3~' kill-word
 
