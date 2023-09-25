@@ -9,9 +9,6 @@ function M.setup()
     lsp_diag_hdlr = false,
     lsp_diag_underline = false,
     -- virtual text setup
-    lsp_diag_virtual_text = false,
-    lsp_diag_signs = false,
-    lsp_diag_update_in_insert = false,
     lsp_document_formatting = true,
     lsp_inlay_hints = {
       enable = false,
