@@ -78,7 +78,7 @@ zstyle ':completion:*:*:docker-*:*' option-stacking yes
 source $ZSH/oh-my-zsh.sh
 
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
-export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE='100'
+export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE='100' # limit suggestion to 100 chars
 
 source $BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
@@ -104,6 +104,8 @@ alias ll="exa --group-directories-first -l --color always --icons -a -s type"
 
 # Golang
 export GOPATH="$HOME/go"
+# export GOROOT="$HOME/go/current"
+
 [ -d "$GOPATH/bin" ] && PATH="$GOPATH/bin:$PATH"
 [ -d "/usr/local/go/bin" ] && PATH="/usr/local/go/bin:$PATH"
 
@@ -129,6 +131,7 @@ export FZF_DEFAULT_OPTS="
   --scrollbar=▏▕
   --color 'gutter:-1,hl+:#82aaff,hl:#82aaff,bg+:-1,pointer:#82aaff'"
 export FZF_COMPLETION_OPTS=$FZF_DEFAULT_OPTS
+
 # zoxide fzf opts
 export _ZO_FZF_OPTS=$FZF_DEFAULT_OPTS
 
@@ -154,6 +157,12 @@ for file in $HOME/.profile*; do
   source "$file"
 done
 
+# Start ssh agent
 if [[ "$OSTYPE" =~ ^linux ]]; then
   eval $(ssh-agent) >/dev/null
+fi
+
+# Add ssh keys to apple keychain
+if [[ "$OSTYPE" =~ ^darwin ]]; then
+  ssh-add --apple-load-keychain &>/dev/null
 fi
