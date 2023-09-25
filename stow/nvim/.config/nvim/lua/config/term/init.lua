@@ -67,8 +67,6 @@ function M.setup()
     dimensions = {
       height = 0.4,
       width = 0.3,
-      x = 1,
-      y = 0,
     },
   }
 
