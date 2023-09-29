@@ -6,8 +6,13 @@ function M.setup()
     icons = false,
     comment_placeholder = '',
     max_line_len = 100,
-    lsp_diag_hdlr = false,
-    lsp_diag_underline = false,
+    -- duplicate from ./init.lua
+    diagnostic = {
+      underline = false,
+      severity_sort = true,
+      signs = false,
+      update_in_insert = true,
+    },
     -- virtual text setup
     lsp_document_formatting = true,
     lsp_inlay_hints = {
