@@ -3,6 +3,7 @@ vim.g.netrw_browse_split = 0
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.g.netrw_liststyle = 3
+vim.g.omni_sql_no_default_maps = 1
 
 vim.cmd [[
   syntax sync minlines=3000
@@ -33,7 +34,7 @@ vim.opt.ignorecase = true
 vim.opt.smartindent = true
 vim.opt.listchars = { eol = '', tab = '  ' }
 vim.opt.list = true
-vim.opt.statusline = '2'
+vim.opt.statusline = '3'
 vim.o.completeopt = 'menu,menuone,noselect'
 -- vim.opt.foldmethod = "expr"
 -- vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
