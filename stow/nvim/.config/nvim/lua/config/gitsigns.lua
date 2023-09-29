@@ -40,6 +40,12 @@ end
 function M.setup()
   require('gitsigns').setup({
     on_attach = on_attach,
+    current_line_blame_opts = {
+      virt_text = true,
+      virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
+      delay = 1000,
+      ignore_whitespace = false,
+    },
     signs = {
       untracked = {
         hl = 'GitSignsAdd',
