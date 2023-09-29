@@ -53,6 +53,8 @@ local baseHls = {
   StatusLine                  = { bg = colors.background, fg = colors.foreground },
   Todo                        = { fg = colors.orange, bold = true },
   Visual                      = { bg = colors.visual, fg = nil },
+  -- Gitsigns
+  GitSignsCurrentLineBlame    = { fg = colors.light_pink },
   -- Mason
   MasonHeader                 = { link = 'XMenu' },
   MasonHeading                = { link = 'XBorder' },
@@ -130,7 +132,7 @@ local baseHls = {
   NotifyTRACEBorder           = { fg = colors.background },
   -- web-dev-icons
   -- DevIconDefault          = { fg = colors.dark_orange, bg = 'none' },
-  CopilotSuggestion       = { fg = '#8e6aad', bg = colors.background },
+  CopilotSuggestion           = { fg = '#8e6aad', bg = colors.background },
 }
 
 local diagnosticsHls = {
