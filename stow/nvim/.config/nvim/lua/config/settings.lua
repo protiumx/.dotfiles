@@ -34,8 +34,8 @@ vim.opt.ignorecase = true
 vim.opt.smartindent = true
 vim.opt.listchars = { eol = '', tab = '  ' }
 vim.opt.list = true
-vim.opt.statusline = '3'
 vim.o.completeopt = 'menu,menuone,noselect'
+vim.o.laststatus = 3
 -- vim.opt.foldmethod = "expr"
 -- vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 
