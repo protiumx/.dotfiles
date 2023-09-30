@@ -1,12 +1,12 @@
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 
-augroup('show_signcolumn', { clear = true })
-autocmd({ 'BufRead', 'BufNewFile' }, {
-  group = 'show_signcolumn',
-  pattern = '*',
-  command = 'setlocal signcolumn=yes',
-})
+-- augroup('show_signcolumn', { clear = true })
+-- autocmd({ 'BufRead', 'BufNewFile' }, {
+--   group = 'show_signcolumn',
+--   pattern = '*',
+--   command = 'setlocal signcolumn=yes',
+-- })
 
 -- Trim white spaces before writing
 autocmd({ 'BufWritePre' }, {
@@ -62,14 +62,6 @@ autocmd({ 'BufWinEnter', 'WinEnter' }, {
   command = [[
     startinsert
   ]],
-})
-
--- dont list quickfix buffers
-autocmd('FileType', {
-  pattern = 'qf',
-  callback = function()
-    vim.opt_local.buflisted = false
-  end,
 })
 
 autocmd('FileType', {
