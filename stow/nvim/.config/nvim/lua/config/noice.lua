@@ -36,6 +36,13 @@ function M.setup()
           winhighlight = { Normal = 'NormalFloat', FloatBorder = 'FloatBorder' },
         },
       },
+
+      popup = {
+        win_options = {
+          wrap = true,
+          linebreak = true,
+        },
+      }
     },
     cmdline = {
       format = {
