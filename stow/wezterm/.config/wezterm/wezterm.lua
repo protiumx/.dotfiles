@@ -323,12 +323,13 @@ wezterm.on('update-right-status', function(window)
   }))
 end)
 
+local background = '#0e0a00'
 local colors = {
-  background = '#161616',
-  cursor_bg = '#fb4934',
-  cursor_fg = '#1c1c1c',
+  background = background,
+  cursor_bg = '#a9a1e1',
+  cursor_fg = background,
   cursor_border = '#fb4934',
-  selection_fg = '#1c1c1c',
+  selection_fg = background,
   selection_bg = '#fb4934',
   tab_bar = {
     -- background = '#1c1c1c',
@@ -336,15 +337,15 @@ local colors = {
     background = '#161616',
     inactive_tab_edge = 'rgba(28, 28, 28, 0.9)',
     active_tab = {
-      bg_color = '#161616',
+      bg_color = background,
       fg_color = '#c0c0c0',
     },
     inactive_tab = {
-      bg_color = '#161616',
+      bg_color = background,
       fg_color = '#808080',
     },
     inactive_tab_hover = {
-      bg_color = '#161616',
+      bg_color = background,
       fg_color = '#808080',
     },
   },
