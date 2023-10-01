@@ -76,6 +76,7 @@ function M.setup()
       readonly = '',
     }
   }
+
   require('lualine').setup {
     options = {
       icons_enabled = true,
@@ -84,18 +85,20 @@ function M.setup()
       section_separators = '',
       disabled_filetypes = {
         statusline = {
-          'help',
+          -- 'help',
           'lspsagaoutline',
           'packer',
+          'noice',
           'neo-tree',
           'neotest-summary',
           'qf',
           'tsplayground',
+          'TelescopePrompt',
         },
       },
       ignore_focus = {},
       always_divide_middle = true,
-      globalstatus = false,
+      globalstatus = true,
       refresh = {
         statusline = 1000,
         tabline = 1000,
@@ -179,7 +182,7 @@ function M.setup()
     inactive_winbar = {},
     extensions = {},
     refresh = {
-      statusline = 500,
+      statusline = 300,
     },
   }
 end
