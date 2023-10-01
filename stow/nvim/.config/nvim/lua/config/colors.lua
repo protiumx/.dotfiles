@@ -1,11 +1,11 @@
 local colors = {
-  background = '#161616',
+  background = '#0E0A00',
   foreground = '#fbf1c7',
   accent = '#fe5186',
   blue = '#61afef',
   cyan = '#3e8fb0',
   dark_green = '#5faf5f',
-  dark_grey = '#1c1c1c',
+  dark_grey = '#131111',
   dark_orange = '#ff5d62',
   dark_red = '#bf1131',
   dark_yellow = '#ffaf00',
@@ -35,7 +35,7 @@ local baseHls = {
   -- Base groups
   Normal                      = { bg = colors.background },
   NormalNC                    = { bg = colors.background },
-  Cursor                      = { fg = colors.background, bg = colors.accent },
+  Cursor                      = { fg = colors.background, bg = colors.violet },
   TermCursor                  = { link = 'Cursor' },
   ColorColumn                 = { bg = colors.dark_grey },
   CursorLine                  = { bg = 'none', fg = 'none' },
@@ -55,6 +55,11 @@ local baseHls = {
   Visual                      = { bg = colors.visual, fg = nil },
   -- Gitsigns
   GitSignsCurrentLineBlame    = { fg = colors.light_pink },
+  -- Diffview
+  DiffviewFilePanelCounter    = { fg = colors.white },
+  DiffviewFilePanelRootPath   = { fg = colors.violet },
+  DiffviewFilePanelSelected   = { fg = colors.dark_orange, bold = true },
+  DiffviewFilePanelTitle      = { fg = colors.violet },
   -- Mason
   MasonHeader                 = { link = 'XMenu' },
   MasonHeading                = { link = 'XBorder' },
