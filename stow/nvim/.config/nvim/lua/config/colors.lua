@@ -17,6 +17,7 @@ local colors = {
   light_yellow = '#e6db74',
   magenta = '#c678dd',
   orange = '#ff8700',
+  dark_purple = '#21043c',
   purple = '#af87d7',
   red = '#fb4934',
   violet = '#a9a1e1',
@@ -52,6 +53,7 @@ local baseHls = {
   SignColumn                  = { bg = 'none' },
   StatusLine                  = { bg = colors.background, fg = colors.foreground },
   Todo                        = { fg = colors.orange, bold = true },
+  VertSplit                   = { fg = colors.violet },
   Visual                      = { bg = colors.visual, fg = nil },
   -- Gitsigns
   GitSignsCurrentLineBlame    = { fg = colors.light_pink },
