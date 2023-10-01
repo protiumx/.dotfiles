@@ -30,7 +30,11 @@ local on_lsp_attach = function(client, bufnr)
     group = 'lsp_diagnostic_hold',
     buffer = bufnr,
     callback = function()
-      vim.diagnostic.open_float({ bufnr = bufnr, focus = false, border = 'single' })
+      vim.diagnostic.open_float({
+        bufnr = bufnr,
+        focus = false,
+        border = 'single',
+      })
     end,
   })
 
