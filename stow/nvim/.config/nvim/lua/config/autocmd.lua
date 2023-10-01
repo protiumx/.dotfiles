@@ -84,15 +84,18 @@ vim.api.nvim_create_autocmd('FileType', {
     'spectre_panel',
     'startuptime',
     'tsplayground',
-    'neotest-output',
     'checkhealth',
+    -- 'neotest-output',
     'neotest-summary',
-    'neotest-output-panel',
+    -- 'neotest-output-panel',
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
-    vim.keymap.set('n', 'q', '<cmd>close<cr>', { buffer = event.buf, silent = true })
-    vim.cmd("stopinsert")
+    vim.keymap.set('n', 'q', '<cmd>close<CR>', { buffer = event.buf, silent = true })
+    vim.cmd([[
+      setlocal colorcolumn=0
+      stopinsert
+    ]])
   end,
 })
 
