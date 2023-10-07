@@ -1,11 +1,11 @@
 local colors = {
-  background = '#0E0A00',
+  background = '#0a0a00',
   foreground = '#fbf1c7',
   accent = '#fe5186',
   blue = '#61afef',
   cyan = '#3e8fb0',
   dark_green = '#5faf5f',
-  dark_grey = '#131111',
+  dark_grey = '#0f0f05',
   dark_orange = '#ff5d62',
   dark_red = '#bf1131',
   dark_yellow = '#ffaf00',
@@ -53,7 +53,7 @@ local baseHls = {
   SignColumn                  = { bg = 'none' },
   StatusLine                  = { bg = colors.background, fg = colors.foreground },
   Todo                        = { fg = colors.orange, bold = true },
-  VertSplit                   = { fg = colors.violet },
+  VertSplit                   = { fg = colors.grey },
   Visual                      = { bg = colors.visual, fg = nil },
   -- Gitsigns
   GitSignsCurrentLineBlame    = { fg = colors.light_pink },
