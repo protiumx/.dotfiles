@@ -87,7 +87,7 @@ vim.api.nvim_create_autocmd('FileType', {
     'checkhealth',
     -- 'neotest-output',
     'neotest-summary',
-    -- 'neotest-output-panel',
+    'neotest-output-panel',
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
