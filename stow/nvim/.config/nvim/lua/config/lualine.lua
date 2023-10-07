@@ -86,6 +86,7 @@ function M.setup()
       disabled_filetypes = {
         statusline = {
           -- 'help',
+          'FTerm',
           'lspsagaoutline',
           'packer',
           'noice',
