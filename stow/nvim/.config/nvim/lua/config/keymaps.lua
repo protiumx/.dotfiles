@@ -30,7 +30,7 @@ vim.keymap.set('n', 'G', 'Gzz', { silent = true })
 vim.keymap.set('n', '<C-d>', '<C-d>zz', { silent = true })
 vim.keymap.set('n', '<C-u>', '<C-u>zz', { silent = true })
 
--- Moving lines up or down preserving format
+-- Move lines up/down preserving format
 vim.keymap.set('n', '<M-j>', ':m .+1<CR>==', { silent = true })
 vim.keymap.set('n', '<M-k>', ':m .-2<CR>==', { silent = true })
 vim.keymap.set('i', '<C-j>', '<Esc>:m .+1<CR>==gi', { silent = true })
@@ -58,7 +58,7 @@ vim.keymap.set('n', '``', '<C-^>', { silent = true })
 
 -- Close buffer without changing window layout
 vim.keymap.set('n', '--', ':e # | bd #<CR>', { silent = true })
--- Close all but current buffer
+-- Close all except the current buffer
 vim.keymap.set('n', '<M-Q>', ':%bd | e #<CR>', { silent = true })
 
 -- Go next/prev buffer using Tab
@@ -128,5 +128,8 @@ vim.keymap.set('n', '<C-g>R', function()
 end, { desc = '[Git] Reset current file', silent = true })
 
 vim.keymap.set('n', '<M-v>', 'gv', { silent = true, desc = 'Activate previous visual block' })
-vim.keymap.set('i', '<M-v>', '<Esc>v', { silent = true, desc = 'Activate Visual Mode' })
-vim.keymap.set('i', '<M-V>', '<Esc>V', { silent = true, desc = 'Activate Visual Line Mode' })
+
+vim.keymap.set('i', '<M-U>', function()
+  local uuid, _ = vim.fn.system('uuidgen'):gsub('\n', ''):lower()
+  vim.api.nvim_put({ uuid }, "c", false, true)
+end, { silent = true, desc = "Insert UUID" })
