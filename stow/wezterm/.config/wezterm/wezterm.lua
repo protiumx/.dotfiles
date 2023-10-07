@@ -236,6 +236,7 @@ local keys = {
 local process_icons = {
   ['docker'] = wezterm.nerdfonts.linux_docker,
   ['docker-compose'] = wezterm.nerdfonts.linux_docker,
+  ['psql'] = wezterm.nerdfonts.dev_postgresql,
   ['kuberlr'] = wezterm.nerdfonts.linux_docker,
   ['kubectl'] = wezterm.nerdfonts.linux_docker,
   ['nvim'] = wezterm.nerdfonts.custom_vim,
@@ -323,7 +324,7 @@ wezterm.on('update-right-status', function(window)
   }))
 end)
 
-local background = '#0e0a00'
+local background = '#0a0a00'
 local colors = {
   background = background,
   cursor_bg = '#a9a1e1',
@@ -332,9 +333,7 @@ local colors = {
   selection_fg = background,
   selection_bg = '#fb4934',
   tab_bar = {
-    -- background = '#1c1c1c',
-    -- background = 'rgba(28, 28, 28, 0.9)',
-    background = '#161616',
+    background = background,
     inactive_tab_edge = 'rgba(28, 28, 28, 0.9)',
     active_tab = {
       bg_color = background,
