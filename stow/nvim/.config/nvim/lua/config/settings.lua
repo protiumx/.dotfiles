@@ -13,6 +13,11 @@ vim.cmd [[
   set undolevels=1000
 ]]
 
+-- vim.cmd(
+--   [[syntax match UuidV4 /\v[0-9a-fA-F]{8}(-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}/]]
+-- )
+-- vim.cmd([[highlight link UuidV4 Constant]])
+
 vim.opt.shell = 'zsh'
 vim.opt.background = 'dark'
 vim.opt.showtabline = 0
