@@ -179,6 +179,7 @@ function M.setup()
   })
 
   require('luasnip.loaders.from_vscode').lazy_load()
+  require('config.lsp.snippets').setup()
 end
 
 return M
