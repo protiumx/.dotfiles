@@ -85,7 +85,7 @@ vim.api.nvim_create_autocmd('FileType', {
     'startuptime',
     'tsplayground',
     'checkhealth',
-    -- 'neotest-output',
+    'neotest-output',
     'neotest-summary',
     'neotest-output-panel',
   },

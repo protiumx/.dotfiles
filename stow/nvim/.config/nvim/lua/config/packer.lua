@@ -288,13 +288,6 @@ return packer.startup(function(use)
     end
   })
 
-  -- Multiple cursors
-  use({
-    'mg979/vim-visual-multi',
-    branch = 'master',
-    event = 'BufRead',
-  })
-
   use({
     'nvim-tree/nvim-web-devicons',
     config = function()
