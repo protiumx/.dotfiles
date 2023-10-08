@@ -8,19 +8,18 @@ local function setup_text_objects()
         -- Automatically jump forward to textobj, similar to targets.vim
         lookahead = true,
         keymaps = {
-          -- You can use the capture groups defined in textobjects.scm
           ['aa'] = '@parameter.outer',
           ['ia'] = '@parameter.inner',
-          ['af'] = '@function.outer',
-          ['if'] = '@function.inner',
-          ['aC'] = '@class.outer',
-          ['iC'] = '@class.inner',
-          ['ac'] = '@conditional.outer',
-          ['ic'] = '@conditional.inner',
+          ['af'] = '@call.outer',
+          ['if'] = '@call.inner',
+          ['am'] = '@function.outer',
+          ['im'] = '@function.inner',
+          ['ac'] = '@class.outer',
+          ['ic'] = '@class.inner',
+          ['ai'] = '@conditional.outer',
+          ['ii'] = '@conditional.inner',
           ['al'] = '@loop.outer',
           ['il'] = '@loop.inner',
-          ['ax'] = '@call.outer',
-          ['ix'] = '@call.inner',
         },
         -- You can choose the select mode (default is charwise 'v')
         --
@@ -44,30 +43,40 @@ local function setup_text_objects()
       swap = {
         enable = true,
         swap_next = {
-          ['<leader>ta'] = '@parameter.inner',
+          ['<leader>na'] = '@parameter.inner',
+          ['<leader>nm'] = '@function.outer',
         },
         swap_previous = {
-          ['<leader>tA'] = '@parameter.inner',
+          ['<leader>pa'] = '@parameter.inner',
+          ['<leader>pm'] = '@function.outer',
         },
       },
       move = {
         enable = true,
         set_jumps = true, -- whether to set jumps in the jumplist
         goto_next_start = {
-          [']M'] = '@function.outer',
-          [']C'] = '@class.outer'
+          [']m'] = '@function.outer',
+          [']c'] = '@class.outer',
+          [']l'] = '@loop.outer',
+          [']i'] = '@conditional.outer',
         },
         goto_next_end = {
-          [']m'] = '@function.outer',
-          [']c'] = '@class.outer'
+          [']M'] = '@function.outer',
+          [']C'] = '@class.outer',
+          [']L'] = '@loop.outer',
+          [']I'] = '@conditional.outer',
         },
         goto_previous_start = {
-          ['[M'] = '@function.outer',
-          ['[C'] = '@class.outer'
+          ['[m'] = '@function.outer',
+          ['[c'] = '@class.outer',
+          ['[l'] = '@loop.outer',
+          ['[i'] = '@conditional.outer',
         },
         goto_previous_end = {
-          ['[m'] = '@function.outer',
-          ['[c'] = '@class.outer'
+          ['[M'] = '@function.outer',
+          ['[C'] = '@class.outer',
+          ['[L'] = '@loop.outer',
+          ['[I'] = '@conditional.outer',
         },
       },
     }
