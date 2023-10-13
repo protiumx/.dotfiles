@@ -136,8 +136,8 @@ function M.setup()
         {
           'branch',
           fmt = function(s)
-            if string.len(s) > 10 then
-              return s:sub(1, 10) .. '..'
+            if string.len(s) > 30 then
+              return s:sub(1, 30) .. '..'
             end
 
             return s
