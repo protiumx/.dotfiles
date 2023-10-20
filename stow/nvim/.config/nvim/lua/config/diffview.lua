@@ -7,7 +7,7 @@ function M.setup()
   end
 
   map('n', '<M-D>', '<cmd>DiffviewOpen<CR>', 'Open Diffview HEAD')
-  map('n', '<C-g>H', '<cmd>DiffviewHistory %<CR>', 'Open Diffview history current file')
+  map('n', '<M-H>', '<cmd>DiffviewFileHistory %<CR>', 'Open Diffview history current file')
 
   local actions = require('diffview.actions')
   require('diffview').setup({
