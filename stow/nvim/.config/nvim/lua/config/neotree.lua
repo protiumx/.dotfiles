@@ -84,7 +84,14 @@ function M.setup()
         StaticMethod = { icon = '󰠄 ', hl = 'Function' },
       }
     },
-    commands = {},
+    commands = {
+      system_open = function(state)
+        local node = state.tree:get_node()
+        local path = node:get_id()
+        -- macOs: open file in default application in the background.
+        vim.fn.jobstart({ "xdg-open", "-g", path }, { detach = true })
+      end,
+    },
     window = {
       position = 'left',
       width = 40,
@@ -138,6 +145,7 @@ function M.setup()
         ['?'] = 'show_help',
         ['<'] = 'prev_source',
         ['>'] = 'next_source',
+        ["o"] = "system_open",
       }
     },
     nesting_rules = {},
@@ -226,8 +234,9 @@ function M.setup()
     }
   })
 
-  vim.keymap.set({ 'n', 'i' }, '<M-T>', '<cmd>Neotree toggle<CR>', { desc = 'Toggle Neotree' })
-  vim.keymap.set({ 'n', 'i' }, '<C-b>', '<cmd>Neotree toggle buffers<CR>', { desc = 'Toggle Neotree Buffers' })
+  vim.keymap.set({ 'n', 'i' }, '<M-T>', '<cmd>Neotree toggle reveal<CR>', { desc = 'Toggle Neotree' })
+  vim.keymap.set({ 'n', 'i' }, '<C-b>', '<cmd>Neotree toggle source=buffers reveal<CR>',
+    { desc = 'Toggle Neotree Buffers' })
 end
 
 return M
