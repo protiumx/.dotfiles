@@ -16,7 +16,7 @@ layouts:
   # - floating
   # - widescreen-tall
   # - widescreen-tall-right
-  # - bsp
+  - bsp
 
 # First mod (default option + shift).
 mod1:
