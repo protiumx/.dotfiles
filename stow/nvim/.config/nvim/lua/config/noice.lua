@@ -87,8 +87,8 @@ function M.setup()
     -- add any options here
     routes = {
       {
-        view = 'popup',
         filter = { event = 'msg_show', min_length = 100, min_height = 6 },
+        view = 'popup',
       },
     },
   })

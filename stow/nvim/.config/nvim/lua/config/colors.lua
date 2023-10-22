@@ -34,8 +34,10 @@ local baseHls = {
   XMenu                       = { bg = colors.dark_grey, default = true, fg = colors.foreground },
   XBorder                     = { bg = colors.dark_grey, fg = colors.dark_grey, default = true },
   -- Base groups
-  Normal                      = { bg = colors.background },
-  NormalNC                    = { bg = colors.background },
+  -- Normal                      = { bg = colors.background },
+  -- NormalNC                    = { bg = colors.background },
+  Normal                      = { bg = 'none' },
+  NormalNC                    = { bg = 'none' },
   Cursor                      = { fg = colors.background, bg = colors.violet },
   TermCursor                  = { link = 'Cursor' },
   ColorColumn                 = { bg = colors.dark_grey },
@@ -54,7 +56,7 @@ local baseHls = {
   StatusLine                  = { bg = colors.background, fg = colors.foreground },
   Todo                        = { fg = colors.orange, bold = true },
   VertSplit                   = { fg = colors.grey },
-  Visual                      = { bg = colors.visual, fg = nil },
+  Visual                      = { bg = colors.violet, fg = 'none' },
   -- Gitsigns
   GitSignsCurrentLineBlame    = { fg = colors.light_pink },
   -- Diffview
@@ -118,7 +120,9 @@ local baseHls = {
   NeoTreeFloatBorder          = { link = 'XBorder' },
   NeoTreeFloatTitle           = { fg = colors.background, bg = colors.light_orange },
   NeoTreeTitleBar             = { fg = colors.background, bg = colors.light_orange },
-  NeoTreeNormal               = { bg = colors.background },
+  -- NeoTreeNormal               = { bg = colors.background },
+  NeoTreeNormal               = { bg = 'none' },
+  NeoTreeNormalNC             = { bg = 'none' },
   -- Noice.nvim
   NoiceCmdlineIcon            = { fg = colors.red },
   NoiceCmdlineIconInput       = { fg = colors.red },
@@ -139,7 +143,7 @@ local baseHls = {
   NotifyTRACEBorder           = { fg = colors.background },
   -- web-dev-icons
   -- DevIconDefault          = { fg = colors.dark_orange, bg = 'none' },
-  CopilotSuggestion           = { fg = '#8e6aad', bg = colors.background },
+  CopilotSuggestion           = { fg = '#8e6aad', bg = 'none' },
 }
 
 local diagnosticsHls = {
