@@ -352,6 +352,17 @@ local colors = {
 
 local config = {
   audible_bell = 'Disabled',
+  background = {
+    {
+      source = {
+        File = '~/.dotfiles/background/eclipse.jpg',
+      },
+      width = '100%',
+      hsb = { brightness = 0.2 },
+      vertical_align = 'Middle',
+      horizontal_align = 'Center',
+    },
+  },
   canonicalize_pasted_newlines = 'None',
   color_scheme = 'Classic Dark (base16)',
   colors = colors,
