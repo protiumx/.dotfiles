@@ -35,6 +35,7 @@ packages=(
   lazydocker               #  https://github.com/jesseduffield/lazydocker
   lf                       #  https://github.com/gokcehan/lf
   libpq
+  lynx                     #  https://lynx.invisible-island.net/
   mas                      #  https://github.com/mas-cli/mas
   minikube
   neovim
