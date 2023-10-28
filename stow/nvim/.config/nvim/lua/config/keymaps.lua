@@ -6,11 +6,6 @@ vim.g.mapleader = ' '
 vim.keymap.set('n', '<Leader>d', '"_d', { silent = true })
 vim.keymap.set('v', '<Leader>d', '"_d', { silent = true })
 
--- Insert current date as ISO YYYY-MM-DD-HH:mm
-vim.keymap.set('n', '<Leader>id', '"=strftime("%Y-%m-%dT%H:%M")<CR>p')
--- Insert build date
-vim.keymap.set('n', '<Leader>bd', '"=strftime("%Y%m%d%H%M")<CR>p')
-
 -- Prepare replace all occurrences of word under cursor
 vim.keymap.set('n', '<Leader>wr', [[:%s/\<<C-r><C-w>\>//g<Left><Left>]])
 vim.keymap.set('i', '<C-c>', '<Esc>', { silent = true })
@@ -129,7 +124,11 @@ end, { desc = '[Git] Reset current file', silent = true })
 
 vim.keymap.set('n', '<M-v>', 'gv', { silent = true, desc = 'Activate previous visual block' })
 
-vim.keymap.set('i', '<M-U>', function()
+vim.keymap.set('i', '<M-g>ud', function()
   local uuid, _ = vim.fn.system('uuidgen'):gsub('\n', ''):lower()
   vim.api.nvim_put({ uuid }, "c", false, true)
 end, { silent = true, desc = "Insert UUID" })
+-- Insert current date as ISO YYYY-MM-DD-HH:mm
+vim.keymap.set('i', '<M-g>id', '<Esc>"=strftime("%Y-%m-%dT%H:%M")<CR>p')
+-- Insert build date
+vim.keymap.set('i', '<M-g>bd', '"=strftime("%Y%m%d%H%M")<CR>p')
