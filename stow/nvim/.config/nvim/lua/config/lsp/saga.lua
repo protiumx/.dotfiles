@@ -52,7 +52,7 @@ function M.setup()
     finder = {
       default = 'imp+def+ref',
       max_width = 0.6,
-      left_width = 0.3,
+      left_width = 0.4,
       right_width = 0.6,
       keys = {
         toggle_or_open = '<CR>',
