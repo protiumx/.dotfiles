@@ -83,7 +83,8 @@ function M.setup()
       },
       {
         name = 'buffer',
-        keyword_length = 4,
+        group_index = 2,
+        keyword_length = 3,
         option = {
           -- Only buffers in the current tab
           get_bufnrs = function()
