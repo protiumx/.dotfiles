@@ -8,8 +8,8 @@ local key_mod_panes = is_windows and 'ALT' or 'CMD'
 
 local keys = {
   {
-    key = 'l',
-    mods = 'CTRL|ALT',
+    key = ',',
+    mods = 'CMD',
     action = act.PromptInputLine {
       description = 'Launch',
       action = wezterm.action_callback(function(window, pane, line)
@@ -43,7 +43,11 @@ local keys = {
     action = act.ToggleFullScreen,
   },
 
-  { key = ':', mods = 'SHIFT|' .. key_mod_panes, action = act.ShowDebugOverlay },
+  {
+    key = ';',
+    mods = key_mod_panes,
+    action = act.ShowDebugOverlay,
+  },
 
   -- Panes
   {
@@ -230,6 +234,7 @@ local keys = {
   { key = '/', mods = 'CTRL', action = act.SendKey { key = '/', mods = 'CTRL' } },
   { key = 'q', mods = 'CTRL', action = act.SendKey { key = 'q', mods = 'CTRL' } },
   { key = 'k', mods = 'CTRL', action = act.SendKey { key = 'k', mods = 'CTRL' } },
+  { key = 'i', mods = 'CTRL', action = act.SendKey { key = 'i', mods = 'CTRL' } },
 
 }
 
@@ -352,17 +357,17 @@ local colors = {
 
 local config = {
   audible_bell = 'Disabled',
-  background = {
-    {
-      source = {
-        File = '~/.dotfiles/background/eclipse.jpg',
-      },
-      width = '100%',
-      hsb = { brightness = 0.2 },
-      vertical_align = 'Middle',
-      horizontal_align = 'Center',
-    },
-  },
+  -- background = {
+  --   {
+  --     source = {
+  --       File = '/Users/bmayo/.dotfiles/background/eclipse.jpg'
+  --     },
+  --     width = '100%',
+  --     hsb = { brightness = 0.2 },
+  --     vertical_align = 'Middle',
+  --     horizontal_align = 'Center',
+  --   },
+  -- },
   canonicalize_pasted_newlines = 'None',
   color_scheme = 'Classic Dark (base16)',
   colors = colors,
@@ -377,21 +382,17 @@ local config = {
   font_rules = {
     {
       intensity = 'Bold',
-      font = wezterm.font(font, { italic = false, weight = 'DemiBold' }),
-    },
-    {
-      intensity = 'Normal',
-      font = wezterm.font(font, { italic = false }),
+      font = wezterm.font(font, { italic = false, weight = 'Bold' }),
     },
   },
-  font_size = is_windows and 14.0 or 19.0,
+  font_size = is_windows and 14.0 or 20.0,
   -- Disable font ligatures
   harfbuzz_features = { 'calt=1', 'clig=0', 'liga=0', 'zero', 'ss01' },
   hide_tab_bar_if_only_one_tab = false,
   hyperlink_rules = wezterm.default_hyperlink_rules(),
   inactive_pane_hsb = {
     saturation = 1.0,
-    brightness = 0.85,
+    brightness = 0.6,
   },
   keys = keys,
   -- line_height = 0.9,
@@ -421,7 +422,9 @@ local config = {
   tab_max_width = 60,
   underline_position = -4,
   use_fancy_tab_bar = true,
-  window_background_opacity = 1,
+  -- window_background_opacity = 1,
+  window_background_opacity = 0.6,
+  macos_window_background_blur = 10,
   window_decorations = 'RESIZE',
   window_frame = {
     font = wezterm.font { family = font },
