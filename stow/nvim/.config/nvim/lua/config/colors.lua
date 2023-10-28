@@ -56,7 +56,7 @@ local baseHls = {
   StatusLine                  = { bg = colors.background, fg = colors.foreground },
   Todo                        = { fg = colors.orange, bold = true },
   VertSplit                   = { fg = colors.grey },
-  Visual                      = { bg = colors.violet, fg = 'none' },
+  Visual                      = { bg = colors.violet, fg = colors.background },
   -- Gitsigns
   GitSignsCurrentLineBlame    = { fg = colors.light_pink },
   -- Diffview
