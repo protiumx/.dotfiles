@@ -101,6 +101,14 @@ return packer.startup(function(use)
   })
 
   use({
+    "lukas-reineke/indent-blankline.nvim",
+  })
+
+  use { "catppuccin/nvim", as = "catppuccin" }
+  use "savq/melange-nvim"
+  use "folke/tokyonight.nvim"
+
+  use({
     'nvim-treesitter/playground',
     cmd = { 'TSPlaygroundToggle', 'TSNodeUnderCursor' },
   })
