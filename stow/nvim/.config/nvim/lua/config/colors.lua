@@ -42,7 +42,7 @@ local baseHls = {
   TermCursor                  = { link = 'Cursor' },
   ColorColumn                 = { bg = colors.dark_grey },
   CursorLine                  = { bg = 'none', fg = 'none' },
-  -- CursorLineNr            = { bg = 'none' },
+  CursorLineNr                = { bg = 'none' },
   -- LineNr                  = { bg = 'none' },
   EndOfBuffer                 = { fg = colors.background },
   ErrorMsg                    = { fg = colors.red, bg = 'none', bold = true },
@@ -56,7 +56,7 @@ local baseHls = {
   StatusLine                  = { bg = colors.background, fg = colors.foreground },
   Todo                        = { fg = colors.orange, bold = true },
   VertSplit                   = { fg = colors.grey },
-  Visual                      = { bg = colors.violet, fg = colors.background },
+  -- Visual                      = { bg = colors.violet, fg = colors.background },
   -- Gitsigns
   GitSignsCurrentLineBlame    = { fg = colors.light_pink },
   -- Diffview
@@ -83,7 +83,7 @@ local baseHls = {
   TelescopeResultsBorder      = { link = 'XBorder' },
   TelescopeResultsNormal      = { link = 'XMenu' },
   TelescopeResultsTitle       = { fg = colors.background, bg = colors.light_orange },
-  TelescopeSelectionCaret     = { fg = colors.red, bg = 'none' },
+  -- TelescopeSelectionCaret     = { fg = colors.red, bg = 'none' },
   -- lspsaga.nvim
   ActionPreviewBorder         = { link = 'XBorder' },
   ActionPreviewNormal         = { link = 'XMenu' },

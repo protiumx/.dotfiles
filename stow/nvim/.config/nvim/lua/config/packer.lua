@@ -107,6 +107,8 @@ return packer.startup(function(use)
   use { "catppuccin/nvim", as = "catppuccin" }
   use "savq/melange-nvim"
   use "folke/tokyonight.nvim"
+  use 'sainnhe/gruvbox-material'
+  use 'sainnhe/sonokai'
 
   use({
     'nvim-treesitter/playground',
