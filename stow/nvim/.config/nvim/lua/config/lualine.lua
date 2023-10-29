@@ -147,7 +147,7 @@ function M.setup()
           function()
             for _, buf in ipairs(vim.api.nvim_list_bufs()) do
               if vim.api.nvim_buf_get_option(buf, 'modified') then
-                return '󰽃'
+                return ''
               end
             end
             return ''
