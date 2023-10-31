@@ -82,14 +82,16 @@ vim.keymap.set('i', '<M-o>', '<C-o>o', { silent = true })
 vim.keymap.set('i', '<M-O>', '<C-o>O', { silent = true })
 
 -- Terminal keymaps
-vim.keymap.set('i', '<F12>', '<Esc>:term<CR>', { silent = true })
+vim.keymap.set('i', '<F12>', '<Esc>:tabnew term://zsh<CR>', { silent = true })
+vim.keymap.set('n', '<F12>', ':$tabnew term://zsh<CR>', { silent = true })
 vim.keymap.set('i', '<F10>', '<Esc>:vs term://zsh<CR>', { silent = true })
-vim.keymap.set('n', '<F12>', ':term<CR>', { silent = true })
 vim.keymap.set('n', '<F10>', ':vs term://zsh<CR>', { silent = true })
+vim.keymap.set('n', '<C-\'>', ':tabn<CR>', { silent = true })
 -- Close terminal
 vim.keymap.set('t', '<C-q>', '<C-\\><C-n>:bd!<CR>', { silent = true })
 -- Esc goes to normal mode
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { silent = true })
+vim.keymap.set('t', '<C-\'>', '<C-\\><C-n>:tabn<CR>', { silent = true })
 
 vim.keymap.set('n', '<Leader>S', ':mks! .session.vim<CR>')
 
@@ -132,3 +134,7 @@ end, { silent = true, desc = "Insert UUID" })
 vim.keymap.set('i', '<M-g>id', '<Esc>"=strftime("%Y-%m-%dT%H:%M")<CR>p')
 -- Insert build date
 vim.keymap.set('i', '<M-g>bd', '"=strftime("%Y%m%d%H%M")<CR>p')
+
+-- Quickfix navigation
+vim.keymap.set('n', '<Leader>q', ':cn')
+vim.keymap.set('n', '<Leader>Q', ':cp')
