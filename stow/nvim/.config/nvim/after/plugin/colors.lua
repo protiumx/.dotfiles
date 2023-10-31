@@ -16,6 +16,7 @@ local colors = require('config.colors')
 vim.g.sonokai_style = 'default'
 vim.g.sonokai_better_performance = 1
 vim.g.sonokai_menu_selection_background = 'green'
+vim.g.sonokai_transparent_background = 2
 
 vim.cmd('colorscheme sonokai')
 
@@ -32,5 +33,5 @@ end)
 
 require("ibl").setup({
   indent = { char = " " },
-  scope = { enabled = true, char = "▏", highlight = { "NonText" }, show_start = false, show_end = false }
+  scope = { enabled = true, char = "│", highlight = { "NonText" }, show_start = false, show_end = false }
 })
