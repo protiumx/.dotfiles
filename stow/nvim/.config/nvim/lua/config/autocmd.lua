@@ -49,7 +49,7 @@ autocmd({ 'BufNewFile', 'BufRead' }, {
 
 autocmd('TermOpen', {
   group = augroup('term_open_insert', { clear = true }),
-  pattern = 'FTerm',
+  pattern = { 'FTerm', 'term://*' },
   command = [[
     startinsert
     setlocal nonumber norelativenumber nospell signcolumn=no noruler
@@ -58,7 +58,7 @@ autocmd('TermOpen', {
 
 autocmd({ 'BufWinEnter', 'WinEnter' }, {
   group = augroup('term_insert', { clear = true }),
-  pattern = 'term://*',
+  pattern = { 'FTerm', 'term://*zsh' },
   command = [[
     startinsert
   ]],
