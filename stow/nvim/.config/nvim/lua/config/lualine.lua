@@ -71,6 +71,7 @@ function M.setup()
   local file_section = {
     'filename',
     path = 1,
+    disabled_buftypes = { 'terminal' },
     symbols = {
       modified = '[+]',
       readonly = '',
