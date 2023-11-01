@@ -41,8 +41,7 @@ vim.keymap.set('n', '<Leader><Up>', ':resize -2<CR>', { silent = true })
 vim.keymap.set('n', '<Leader><Down>', ':resize +2<CR>', { silent = true })
 vim.keymap.set('n', '<Leader><Left>', ':vertical resize +2<CR>', { silent = true })
 vim.keymap.set('n', '<Leader><Right>', ':vertical resize -2<CR>', { silent = true })
-
-
+-- Navigate windows
 vim.keymap.set('n', '<Leader>h', '<C-w>h', { silent = true })
 vim.keymap.set('n', '<Leader>j', '<C-w>j', { silent = true })
 vim.keymap.set('n', '<Leader>k', '<C-w>k', { silent = true })
@@ -50,7 +49,6 @@ vim.keymap.set('n', '<Leader>l', '<C-w>l', { silent = true })
 
 -- Toggle between current and prev buffers
 vim.keymap.set('n', '``', '<C-^>', { silent = true })
-
 -- Close buffer without changing window layout
 vim.keymap.set('n', '--', ':e # | bd #<CR>', { silent = true })
 -- Close all except the current buffer
@@ -73,7 +71,7 @@ vim.keymap.set('n', '<Leader>bs', ':bp | vs #<CR>')
 -- Paste formatted
 vim.keymap.set('n', 'p', 'p=`]', { silent = true })
 vim.keymap.set('n', 'P', 'P=`]', { silent = true })
-vim.keymap.set('n', '<C-p>', 'p', { silent = true })
+vim.keymap.set('n', '<C-p>', 'p', { silent = true, desc = 'paste unformatted' })
 -- Fix indent in file
 vim.keymap.set('n', '<Leader>T', 'gg=G', { silent = true })
 
@@ -84,47 +82,61 @@ vim.keymap.set('i', '<M-O>', '<C-o>O', { silent = true })
 -- Terminal keymaps
 vim.keymap.set('i', '<F12>', '<Esc>:tabnew term://zsh<CR>', { silent = true })
 vim.keymap.set('n', '<F12>', ':$tabnew term://zsh<CR>', { silent = true })
-vim.keymap.set('i', '<F10>', '<Esc>:vs term://zsh<CR>', { silent = true })
-vim.keymap.set('n', '<F10>', ':vs term://zsh<CR>', { silent = true })
-vim.keymap.set('n', '<C-\'>', ':tabn<CR>', { silent = true })
+vim.keymap.set('n', '<M-0>', ':tabn<CR>', { silent = true })
 -- Close terminal
 vim.keymap.set('t', '<C-q>', '<C-\\><C-n>:bd!<CR>', { silent = true })
 -- Esc goes to normal mode
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { silent = true })
-vim.keymap.set('t', '<C-\'>', '<C-\\><C-n>:tabn<CR>', { silent = true })
+vim.keymap.set('t', '<M-0>', '<C-\\><C-n>:tabn<CR>', { silent = true })
+vim.keymap.set('t', '``', '<C-\\><C-n>:tabn<CR>', { silent = true })
 
 vim.keymap.set('n', '<Leader>S', ':mks! .session.vim<CR>')
 
 if macos then
   -- Copy to system clipboard
   vim.keymap.set('v', '<C-y>', '"*y', { silent = true })
-  vim.keymap.set('n', '<Leader>P', ':let @*=expand("%:~:.")<CR>',
-    { silent = true, desc = 'copy current path to clipboard' })
-  vim.keymap.set('n', '<Leader>L', ':let @*=expand("%:h") . "/" . expand("%:t") . ":" . line(".")<CR>',
-    { silent = true, desc = 'copy current path with line and column to clipboard' })
+  vim.keymap.set('n', '<Leader>P', function()
+    local path = vim.fn.expand("%:~:.")
+    vim.fn.setreg("*", path)
+    print('Copied: ' .. path)
+  end, { desc = 'copy current path to clipboard' })
+  vim.keymap.set('n', '<Leader>L', function()
+      local path = vim.fn.expand("%:h") .. "/" .. vim.fn.expand("%:t") .. ":" .. vim.fn.line(".")
+      vim.fn.setreg("*", path)
+      print('Copied: ' .. path)
+    end,
+    { desc = 'copy current path with line and column to clipboard' })
 else
   vim.keymap.set('v', '<C-y>', '"+y', { silent = true })
-  vim.keymap.set('n', '<Leader>P', ':let @+=expand("%:~:.")<CR>', { desc = 'copy current path to clipboard' })
-  vim.keymap.set('n', '<Leader>L', ':let @+=expand("%:h") . "/" . expand("%:t") . ":" . line(".")<CR>',
-    { silent = true, desc = 'copy current path with line and column to clipboard' })
+  vim.keymap.set('n', '<Leader>P', function()
+    local path = vim.fn.expand("%:~:.")
+    vim.fn.setreg("+", path)
+    print('Copied: ' .. path)
+  end, { desc = 'copy current path to clipboard' })
+  vim.keymap.set('n', '<Leader>L', function()
+      local path = vim.fn.expand("%:h") .. "/" .. vim.fn.expand("%:t") .. ":" .. vim.fn.line(".")
+      vim.fn.setreg("+", path)
+      print('Copied: ' .. path)
+    end,
+    { desc = 'copy current path with line and column to clipboard' })
 end
 
 -- Git
 vim.keymap.set('n', '<C-g>s', function()
   vim.cmd([[!git stage %]])
   print('Staged: ' .. vim.fn.expand('%'))
-end, { desc = '[Git] Stage current file', silent = true })
+end, { desc = '[Git] stage current file', silent = true })
 
-vim.keymap.set('n', '<C-g><Up>', ':!git push<CR>', { desc = '[Git] Push' })
+vim.keymap.set('n', '<C-g><Up>', ':!git push<CR>', { desc = '[Git] push' })
 
-vim.keymap.set('n', '<C-g><Down>', ':!git pull<CR>', { desc = '[Git] Pull' })
+vim.keymap.set('n', '<C-g><Down>', ':!git pull<CR>', { desc = '[Git] pull' })
 
 vim.keymap.set('n', '<C-g>R', function()
   vim.cmd([[!git checkout origin/main %]])
   print('Reset: ' .. vim.fn.expand('%'))
-end, { desc = '[Git] Reset current file', silent = true })
+end, { desc = '[Git] reset current file', silent = true })
 
-vim.keymap.set('n', '<M-v>', 'gv', { silent = true, desc = 'Activate previous visual block' })
+vim.keymap.set('n', '<M-v>', 'gv', { silent = true, desc = 'activate previous visual block' })
 
 vim.keymap.set('i', '<M-g>ud', function()
   local uuid, _ = vim.fn.system('uuidgen'):gsub('\n', ''):lower()
