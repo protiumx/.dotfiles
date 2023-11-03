@@ -58,7 +58,7 @@ autocmd('TermOpen', {
 
 autocmd({ 'BufWinEnter', 'WinEnter' }, {
   group = augroup('term_insert', { clear = true }),
-  pattern = { 'FTerm', 'term://*zsh' },
+  pattern = { 'FTerm' },
   command = [[
     startinsert
   ]],
