@@ -244,6 +244,7 @@ local process_icons = {
   ['psql'] = wezterm.nerdfonts.dev_postgresql,
   ['kuberlr'] = wezterm.nerdfonts.linux_docker,
   ['kubectl'] = wezterm.nerdfonts.linux_docker,
+  ['stern'] = wezterm.nerdfonts.linux_docker,
   ['nvim'] = wezterm.nerdfonts.custom_vim,
   ['make'] = wezterm.nerdfonts.seti_makefile,
   ['vim'] = wezterm.nerdfonts.dev_vim,
@@ -265,7 +266,7 @@ local process_icons = {
 }
 
 local function get_current_working_dir(tab)
-  local current_dir = tab.active_pane.current_working_dir.file_path or ''
+  local current_dir = tab.active_pane.current_working_dir or ''
   local HOME_DIR = string.format('file://%s', os.getenv('HOME'))
 
   return current_dir == HOME_DIR and '.'
