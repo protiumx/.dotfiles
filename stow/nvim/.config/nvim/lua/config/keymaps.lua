@@ -57,6 +57,9 @@ vim.keymap.set('n', '<M-Q>', ':%bd | e #<CR>', { silent = true })
 -- Go next/prev buffer using Tab
 vim.keymap.set('n', '<Tab>', ':bn<CR>', { silent = true })
 vim.keymap.set('n', '<S-Tab>', ':bp<CR>', { silent = true })
+-- Tab navigation
+vim.keymap.set({ 't', 'n' }, '<M-\'>', '<cmd>tabn<CR>', { silent = true })
+vim.keymap.set({ 't', 'n' }, '<M-\\>', '<cmd>tabp<CR>', { silent = true })
 
 -- Select all text in current buffer
 vim.keymap.set('n', '<M-a>', 'ggVG', { silent = true })
@@ -66,29 +69,25 @@ vim.keymap.set('i', '<M-a>', '<Esc>ggVG', { silent = true })
 vim.keymap.set('n', '<Leader>o', ':e <C-R>=expand("%:h") . "/"<CR>')
 vim.keymap.set('n', '<Leader>vo', ':vsp | e <C-R>=expand("%:h") . "/"<CR>')
 -- Go to previous buffer and open # in vertical split
-vim.keymap.set('n', '<Leader>bs', ':bp | vs #<CR>')
+vim.keymap.set('n', '<Leader>bb', ':bp | vs #<CR>')
 
 -- Paste formatted
 vim.keymap.set('n', 'p', 'p=`]', { silent = true })
 vim.keymap.set('n', 'P', 'P=`]', { silent = true })
 vim.keymap.set('n', '<C-p>', 'p', { silent = true, desc = 'paste unformatted' })
 -- Fix indent in file
-vim.keymap.set('n', '<Leader>T', 'gg=G', { silent = true })
+vim.keymap.set('n', '<Leader>T', 'gg=G')
 
 -- Quick new lines
 vim.keymap.set('i', '<M-o>', '<C-o>o', { silent = true })
 vim.keymap.set('i', '<M-O>', '<C-o>O', { silent = true })
 
 -- Terminal keymaps
-vim.keymap.set('i', '<F12>', '<Esc>:tabnew term://zsh<CR>', { silent = true })
-vim.keymap.set('n', '<F12>', ':$tabnew term://zsh<CR>', { silent = true })
-vim.keymap.set('n', '<M-0>', ':tabn<CR>', { silent = true })
+vim.keymap.set({ 'i', 'n' }, '<F12>', '<cmd>$tabnew term://zsh<CR>', { silent = true })
 -- Close terminal
-vim.keymap.set('t', '<C-q>', '<C-\\><C-n>:bd!<CR>', { silent = true })
--- Esc goes to normal mode
-vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { silent = true })
-vim.keymap.set('t', '<M-0>', '<C-\\><C-n>:tabn<CR>', { silent = true })
-vim.keymap.set('t', '``', '<C-\\><C-n>:tabn<CR>', { silent = true })
+vim.keymap.set('t', '<C-q>', '<cmd>bd!<CR>', { silent = true })
+vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { silent = true, desc = 'Normal mode from term' })
+vim.keymap.set('t', '``', '<cmd>tabn<CR>', { silent = true }) -- avoid switching buffers
 
 vim.keymap.set('n', '<Leader>S', ':mks! .session.vim<CR>')
 
@@ -132,7 +131,7 @@ vim.keymap.set('n', '<C-g><Up>', ':!git push<CR>', { desc = '[Git] push' })
 vim.keymap.set('n', '<C-g><Down>', ':!git pull<CR>', { desc = '[Git] pull' })
 
 vim.keymap.set('n', '<C-g>R', function()
-  vim.cmd([[!git checkout origin/main %]])
+  vim.cmd('!git checkout origin/main %')
   print('Reset: ' .. vim.fn.expand('%'))
 end, { desc = '[Git] reset current file', silent = true })
 
@@ -148,5 +147,5 @@ vim.keymap.set('i', '<M-g>id', '<Esc>"=strftime("%Y-%m-%dT%H:%M")<CR>p')
 vim.keymap.set('i', '<M-g>bd', '"=strftime("%Y%m%d%H%M")<CR>p')
 
 -- Quickfix navigation
-vim.keymap.set('n', '<Leader>q', ':cn')
-vim.keymap.set('n', '<Leader>Q', ':cp')
+vim.keymap.set('n', '<Leader>q', ':cn<CR>')
+vim.keymap.set('n', '<Leader>Q', ':cp<CR>')
