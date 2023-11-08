@@ -18,6 +18,7 @@ function M.setup()
     lsp_inlay_hints = {
       enable = false,
     },
+    lsp_keymaps = false,
     -- test_runner = 'gotestsum',
     run_in_floaterm = true,
     luasnip = true,
