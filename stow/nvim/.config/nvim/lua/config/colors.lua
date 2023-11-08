@@ -54,7 +54,7 @@ local baseHls = {
   Pmenu                       = { link = 'XMenu' },
   SignColumn                  = { bg = 'none' },
   StatusLine                  = { bg = colors.background, fg = colors.foreground },
-  Todo                        = { fg = colors.orange, bold = true },
+  -- Todo                        = { fg = colors.orange, bold = true },
   VertSplit                   = { fg = colors.grey },
   -- Visual                      = { bg = colors.violet, fg = colors.background },
   -- Gitsigns
@@ -116,7 +116,7 @@ local baseHls = {
   LspReferenceText            = { bg = colors.red, fg = colors.foreground },
   LspSignatureActiveParameter = { link = "Search" },
   -- Neotree
-  NeoTreeCursorLine           = { bg = colors.dark_grey, fg = colors.accent },
+  NeoTreeCursorLine           = { link = 'Visual' },
   NeoTreeFloatBorder          = { link = 'XBorder' },
   NeoTreeFloatTitle           = { fg = colors.background, bg = colors.light_orange },
   NeoTreeTitleBar             = { fg = colors.background, bg = colors.light_orange },
