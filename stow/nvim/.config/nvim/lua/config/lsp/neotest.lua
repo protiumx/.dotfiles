@@ -88,8 +88,24 @@ function M.setup()
     neotest.run.run()
   end, { silent = true })
 
+  vim.keymap.set('n', '<Leader>tD', function()
+    neotest.run.run(vim.fn.expand('%:p:h'))
+  end, { silent = true })
+
+  vim.keymap.set('n', '<Leader>tl', function()
+    neotest.run.run_last()
+  end, { silent = true })
+
+  vim.keymap.set('n', '<Leader>tx', function()
+    neotest.run.stop()
+  end, { silent = true })
+
   vim.keymap.set('n', '<Leader>tS', function()
-    neotest.summary.toggle()
+    neotest.summary.toggle({ enter = true })
+  end, { silent = true })
+
+  vim.keymap.set('n', '<Leader>to', function()
+    neotest.output.open({ enter = true, last_run = true })
   end, { silent = true })
 
   vim.keymap.set('n', '<Leader>tO', function()
@@ -102,6 +118,10 @@ function M.setup()
 
   vim.keymap.set('n', '<Leader>tN', function()
     neotest.jump.prev()
+  end, { silent = true })
+
+  vim.keymap.set('n', '<Leader>tw', function()
+    neotest.watch.toggle(vim.fn.expand("%"))
   end, { silent = true })
 end
 
