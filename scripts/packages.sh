@@ -53,6 +53,7 @@ packages=(
   sd                       #  https://github.com/chmln/sd
   shellcheck
   stow
+  stylua                   #  https://github.com/JohnnyMorganz/StyLua
   telnet
   usql                     #  https://github.com/xo/usql
   websocat                 #  https://github.com/vi/websocat
