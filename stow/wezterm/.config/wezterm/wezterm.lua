@@ -10,25 +10,28 @@ local keys = {
   {
     key = ',',
     mods = 'CMD',
-    action = act.PromptInputLine {
+    action = act.PromptInputLine({
       description = 'Launch',
       action = wezterm.action_callback(function(window, pane, line)
         if line then
-          window:perform_action(act.SpawnCommandInNewWindow {
-            args = wezterm.shell_split(line),
-          }, pane)
+          window:perform_action(
+            act.SpawnCommandInNewWindow({
+              args = wezterm.shell_split(line),
+            }),
+            pane
+          )
         end
       end),
-    },
+    }),
   },
 
-  { key = 'PageUp',   mods = 'SHIFT', action = act.ScrollByPage(-1) },
+  { key = 'PageUp', mods = 'SHIFT', action = act.ScrollByPage(-1) },
   { key = 'PageDown', mods = 'SHIFT', action = act.ScrollByPage(1) },
 
   {
     key = 'p',
     mods = key_mod_panes,
-    action = act.ShowLauncherArgs { flags = 'FUZZY|TABS|WORKSPACES' },
+    action = act.ShowLauncherArgs({ flags = 'FUZZY|TABS|WORKSPACES' }),
   },
 
   {
@@ -44,7 +47,7 @@ local keys = {
   },
 
   {
-    key = ';',
+    key = ':',
     mods = key_mod_panes,
     action = act.ShowDebugOverlay,
   },
@@ -53,21 +56,21 @@ local keys = {
   {
     key = 'd',
     mods = key_mod_panes,
-    action = act.SplitVertical { domain = 'CurrentPaneDomain' },
+    action = act.SplitHorizontal({ domain = 'CurrentPaneDomain' }),
   },
   {
     key = 'D',
     mods = 'SHIFT|' .. key_mod_panes,
-    action = act.SplitHorizontal { domain = 'CurrentPaneDomain' },
+    action = act.SplitVertical({ domain = 'CurrentPaneDomain' }),
   },
 
   {
     key = 'w',
     mods = key_mod_panes,
-    action = act.CloseCurrentPane { confirm = true },
+    action = act.CloseCurrentPane({ confirm = true }),
   },
 
-  { key = 'z', mods = key_mod_panes,             action = act.TogglePaneZoomState },
+  { key = 'z', mods = key_mod_panes, action = act.TogglePaneZoomState },
   { key = 'x', mods = 'SHIFT|' .. key_mod_panes, action = act.ActivateCopyMode },
 
   {
@@ -90,71 +93,71 @@ local keys = {
   {
     key = 'h',
     mods = key_mod_panes,
-    action = act.ActivatePaneDirection 'Left',
+    action = act.ActivatePaneDirection('Left'),
   },
 
   {
     key = 'l',
     mods = key_mod_panes,
-    action = act.ActivatePaneDirection 'Right',
+    action = act.ActivatePaneDirection('Right'),
   },
 
   {
     key = 'k',
     mods = key_mod_panes,
-    action = act.ActivatePaneDirection 'Up',
+    action = act.ActivatePaneDirection('Up'),
   },
 
   {
     key = 'j',
     mods = key_mod_panes,
-    action = act.ActivatePaneDirection 'Down',
+    action = act.ActivatePaneDirection('Down'),
   },
 
   -- Size
   {
     key = 'H',
     mods = 'SHIFT|' .. key_mod_panes,
-    action = act.AdjustPaneSize { 'Left', 1 },
+    action = act.AdjustPaneSize({ 'Left', 1 }),
   },
 
   {
     key = 'J',
     mods = 'SHIFT|' .. key_mod_panes,
-    action = act.AdjustPaneSize { 'Down', 1 },
+    action = act.AdjustPaneSize({ 'Down', 1 }),
   },
 
   {
     key = 'K',
     mods = 'SHIFT|' .. key_mod_panes,
-    action = act.AdjustPaneSize { 'Up', 1 }
+    action = act.AdjustPaneSize({ 'Up', 1 }),
   },
 
   {
     key = 'L',
     mods = 'SHIFT|' .. key_mod_panes,
-    action = act.AdjustPaneSize { 'Right', 1 },
+    action = act.AdjustPaneSize({ 'Right', 1 }),
   },
 
   -- Rotate
   {
     key = 'r',
     mods = 'CMD',
-    action = act.RotatePanes 'CounterClockwise',
+    action = act.RotatePanes('CounterClockwise'),
   },
 
   {
     key = 'R',
     mods = 'SHIFT|CMD',
-    action = act.RotatePanes 'Clockwise',
+    action = act.RotatePanes('Clockwise'),
   },
 
   {
     key = 's',
     mods = key_mod_panes,
-    action = act.PaneSelect {
+    action = act.PaneSelect({
       mode = 'SwapWithActive',
-    },
+    }),
   },
 
   {
@@ -167,12 +170,12 @@ local keys = {
   {
     key = 't',
     mods = 'CMD',
-    action = act.SpawnTab('DefaultDomain')
+    action = act.SpawnTab('DefaultDomain'),
   },
 
   { key = 'T', mods = 'SHIFT|' .. key_mod_panes, action = act.ShowTabNavigator },
-  { key = '[', mods = key_mod_panes,             action = act.ActivateTabRelative(-1) },
-  { key = ']', mods = key_mod_panes,             action = act.ActivateTabRelative(1) },
+  { key = '[', mods = key_mod_panes, action = act.ActivateTabRelative(-1) },
+  { key = ']', mods = key_mod_panes, action = act.ActivateTabRelative(1) },
 
   {
     key = 'o',
@@ -190,58 +193,58 @@ local keys = {
   {
     key = 'P',
     mods = 'SHIFT|' .. key_mod_panes,
-    action = act.SplitPane {
+    action = act.SplitPane({
       direction = 'Right',
       size = { Percent = 35 },
-    },
+    }),
   },
 
   -- Jump word to the left
   {
     key = 'LeftArrow',
     mods = 'OPT',
-    action = act.SendKey {
+    action = act.SendKey({
       key = 'b',
       mods = 'ALT',
-    },
+    }),
   },
 
   -- Jump word to the right
   {
     key = 'RightArrow',
     mods = 'OPT',
-    action = act.SendKey { key = 'f', mods = 'ALT' },
+    action = act.SendKey({ key = 'f', mods = 'ALT' }),
   },
 
   -- Go to beginning of line
   {
     key = 'LeftArrow',
     mods = 'CMD',
-    action = act.SendKey {
+    action = act.SendKey({
       key = 'a',
       mods = 'CTRL',
-    },
+    }),
   },
 
   -- Go to end of line
   {
     key = 'RightArrow',
     mods = 'CMD',
-    action = act.SendKey { key = 'e', mods = 'CTRL' },
+    action = act.SendKey({ key = 'e', mods = 'CTRL' }),
   },
 
   -- Bypass
-  { key = '/', mods = 'CTRL', action = act.SendKey { key = '/', mods = 'CTRL' } },
-  { key = 'q', mods = 'CTRL', action = act.SendKey { key = 'q', mods = 'CTRL' } },
-  { key = 'k', mods = 'CTRL', action = act.SendKey { key = 'k', mods = 'CTRL' } },
-  { key = 'i', mods = 'CTRL', action = act.SendKey { key = 'i', mods = 'CTRL' } },
-
+  { key = '/', mods = 'CTRL', action = act.SendKey({ key = '/', mods = 'CTRL' }) },
+  { key = 'q', mods = 'CTRL', action = act.SendKey({ key = 'q', mods = 'CTRL' }) },
+  { key = 'k', mods = 'CTRL', action = act.SendKey({ key = 'k', mods = 'CTRL' }) },
+  { key = 'i', mods = 'CTRL', action = act.SendKey({ key = 'i', mods = 'CTRL' }) },
 }
 
 local process_icons = {
   ['docker'] = wezterm.nerdfonts.linux_docker,
   ['docker-compose'] = wezterm.nerdfonts.linux_docker,
-  ['psql'] = wezterm.nerdfonts.dev_postgresql,
+  ['psql'] = '󱤢',
+  ['usql'] = '󱤢',
   ['kuberlr'] = wezterm.nerdfonts.linux_docker,
   ['kubectl'] = wezterm.nerdfonts.linux_docker,
   ['stern'] = wezterm.nerdfonts.linux_docker,
@@ -269,57 +272,55 @@ local function get_current_working_dir(tab)
   local current_dir = tab.active_pane.current_working_dir or ''
   local HOME_DIR = string.format('file://%s', os.getenv('HOME'))
 
-  return current_dir == HOME_DIR and '.'
-      or string.gsub(current_dir, '(.*[/\\])(.*)', '%2')
+  return current_dir == HOME_DIR and '.' or string.gsub(current_dir, '(.*[/\\])(.*)', '%2')
 end
 
 local function get_process(tab)
+  if not tab.active_pane or tab.active_pane.foreground_process_name == '' then
+    return '[?]'
+  end
+
   local process_name = string.gsub(tab.active_pane.foreground_process_name, '(.*[/\\])(.*)', '%2')
   if string.find(process_name, 'kubectl') then
     process_name = 'kubectl'
   end
 
-  return
-      process_icons[process_name]
-      or string.format('[%s]', process_name)
+  return process_icons[process_name] or string.format('[%s]', process_name)
 end
 
-wezterm.on(
-  'format-tab-title',
-  function(tab, tabs, panes, config, hover, max_width)
-    local has_unseen_output = false
-    if not tab.is_active then
-      for _, pane in ipairs(tab.panes) do
-        if pane.has_unseen_output then
-          has_unseen_output = true
-          break
-        end
+wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_width)
+  local has_unseen_output = false
+  if not tab.is_active then
+    for _, pane in ipairs(tab.panes) do
+      if pane.has_unseen_output then
+        has_unseen_output = true
+        break
       end
     end
+  end
 
-    local cwd = wezterm.format({
-      { Attribute = { Intensity = 'Bold' } },
-      { Text = get_current_working_dir(tab) },
-    })
+  local cwd = wezterm.format({
+    { Attribute = { Intensity = 'Bold' } },
+    { Text = get_current_working_dir(tab) },
+  })
 
-    local title = string.format(' %s ~ %s  ', get_process(tab), cwd)
+  local title = string.format(' %s ~ %s  ', get_process(tab), cwd)
 
-    if has_unseen_output then
-      return {
-        { Foreground = { Color = '#28719c' } },
-        { Text = title },
-      }
-    end
-
+  if has_unseen_output then
     return {
+      { Foreground = { Color = '#28719c' } },
       { Text = title },
     }
   end
-)
+
+  return {
+    { Text = title },
+  }
+end)
 
 wezterm.on('update-right-status', function(window)
   if not window:get_dimensions().is_full_screen then
-    window:set_right_status("")
+    window:set_right_status('')
     return
   end
 
@@ -376,9 +377,7 @@ local config = {
   command_palette_bg_color = '#1c1c1c',
   default_cursor_style = 'BlinkingBar',
   default_cwd = wezterm.home_dir,
-  font = wezterm.font(font,
-    { weight = 'Regular', italic = false }
-  ),
+  font = wezterm.font(font, { weight = 'Regular', italic = false }),
   font_rules = {
     {
       intensity = 'Bold',
@@ -401,7 +400,7 @@ local config = {
     {
       event = { Up = { streak = 1, button = 'Left' } },
       mods = 'NONE',
-      action = act.CompleteSelection 'PrimarySelection',
+      action = act.CompleteSelection('PrimarySelection'),
     },
 
     {
@@ -415,7 +414,7 @@ local config = {
   send_composed_key_when_left_alt_is_pressed = false,
   set_environment_variables = {
     EDITOR = 'nvim',
-    PATH = '/opt/homebrew/bin:/home/bmayo/.go/current/bin:' .. os.getenv('PATH')
+    PATH = '/opt/homebrew/bin:/home/bmayo/.go/current/bin:' .. os.getenv('PATH'),
   },
   show_new_tab_button_in_tab_bar = false,
   switch_to_last_active_tab_when_closing_tab = true,
@@ -423,11 +422,11 @@ local config = {
   underline_position = -4,
   use_fancy_tab_bar = true,
   -- window_background_opacity = 1,
-  window_background_opacity = 0.6,
-  macos_window_background_blur = 10,
+  -- window_background_opacity = 0.6,
+  -- macos_window_background_blur = 10,
   window_decorations = 'RESIZE',
   window_frame = {
-    font = wezterm.font { family = font },
+    font = wezterm.font({ family = font }),
     font_size = is_windows and 12.0 or 18.0,
     active_titlebar_bg = colors.background,
     inactive_titlebar_bg = colors.background,
@@ -440,7 +439,7 @@ if is_windows then
     {
       name = 'WSL:Ubuntu-20.04',
       distribution = 'Ubuntu-20.04',
-      default_cwd = '~'
+      default_cwd = '~',
     },
   }
 end
