@@ -88,6 +88,7 @@ vim.api.nvim_create_autocmd('FileType', {
     'neotest-output',
     'neotest-summary',
     'neotest-output-panel',
+    'guihua'
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
