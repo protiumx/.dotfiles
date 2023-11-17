@@ -145,6 +145,23 @@ _fzf_compgen_dir() {
   fd --type d --hidden --follow --exclude ".git/" . "$1"
 }
 
+# search changed files in git repo
+fzf-git-files-widget() {
+  if ! git rev-parse --git-dir > /dev/null 2>&1; then
+    return 1
+  fi
+
+  local selected
+  if selected=$(git diff --name-only | fzf); then
+    RBUFFER=$selected
+  fi
+  zle redisplay
+  zle end-of-line
+}
+
+zle     -N    fzf-git-files-widget
+bindkey '\eg' fzf-git-files-widget
+
 [ -f ~/.fzf.zsh ] && source $HOME/.fzf.zsh
 
 # K8s completions
