@@ -18,9 +18,15 @@ end
 
 local on_lsp_attach = function(client, bufnr)
   require('config.lsp.keymaps').setup(bufnr)
-  require('config.lsp.format').setup(bufnr)
+  -- require('config.lsp.format').setup(bufnr)
+  vim.api.nvim_create_autocmd('BufWritePre', {
+    pattern = '*',
+    callback = function(args)
+      require('conform').format({ bufnr = args.buf, lsp_fallback = true })
+    end,
+  })
 
-  if client.name == "yamlls" then
+  if client.name == 'yamlls' then
     client.server_capabilities.documentFormattingProvider = true
   end
 
@@ -73,7 +79,6 @@ local on_lsp_attach = function(client, bufnr)
   end
 end
 
-
 function M.setup()
   require('mason').setup({
     max_concurrent_installers = 2,
@@ -104,19 +109,19 @@ function M.setup()
   -- Ensure the servers above are installed
   local mason_lspconfig = require('mason-lspconfig')
 
-  mason_lspconfig.setup {
+  mason_lspconfig.setup({
     ensure_installed = vim.tbl_keys(servers),
-  }
+  })
 
-  mason_lspconfig.setup_handlers {
+  mason_lspconfig.setup_handlers({
     function(server_name)
-      require('lspconfig')[server_name].setup {
+      require('lspconfig')[server_name].setup({
         capabilities = capabilities,
         settings = servers[server_name],
         on_attach = on_lsp_attach,
-      }
+      })
     end,
-  }
+  })
 end
 
 return M

@@ -80,8 +80,8 @@ return packer.startup(function(use)
   -- Themes
   use('ellisonleao/gruvbox.nvim')
   use {
-    "mcchrish/zenbones.nvim",
-    requires = "rktjmp/lush.nvim",
+    'mcchrish/zenbones.nvim',
+    requires = 'rktjmp/lush.nvim',
   }
 
   -- Treesitter
@@ -101,7 +101,7 @@ return packer.startup(function(use)
   })
 
   use({
-    "lukas-reineke/indent-blankline.nvim",
+    'lukas-reineke/indent-blankline.nvim',
   })
 
   use 'sainnhe/sonokai'
@@ -112,9 +112,9 @@ return packer.startup(function(use)
   })
 
   use {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    event = "InsertEnter",
+    'zbirenbaum/copilot.lua',
+    cmd = 'Copilot',
+    event = 'InsertEnter',
     cond = jit.os == 'Linux',
     config = function()
       require('config.copilot').setup();
@@ -267,7 +267,6 @@ return packer.startup(function(use)
     end
   })
 
-  -- Change surroundings
   use({
     'machakann/vim-sandwich',
     event = 'BufRead',
@@ -402,10 +401,17 @@ return packer.startup(function(use)
   })
 
   use({
-    "nvim-neotest/neotest",
+    'stevearc/conform.nvim',
+    config = function()
+      require('config.conform').setup()
+    end,
+  })
+
+  use({
+    'nvim-neotest/neotest',
     requires = {
-      "nvim-neotest/neotest-go",
-      "rouge8/neotest-rust",
+      'nvim-neotest/neotest-go',
+      'rouge8/neotest-rust',
     },
     ft = {
       'go',
