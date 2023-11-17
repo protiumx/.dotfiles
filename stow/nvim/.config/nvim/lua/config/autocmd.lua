@@ -15,13 +15,15 @@ autocmd({ 'BufWritePre' }, {
   callback = function()
     local _, client = next(vim.lsp.buf_get_clients())
     -- Skip if LSP provides formatting
-    if vim.lsp.buf_is_attached() and
-        client and
-        client.server_capabilities.documentFormattingProvider then
+    if
+      vim.lsp.buf_is_attached()
+      and client
+      and client.server_capabilities.documentFormattingProvider
+    then
       return
     end
 
-    vim.cmd [[%s/\s\+$//e]]
+    vim.cmd([[%s/\s\+$//e]])
   end,
 })
 
@@ -68,7 +70,7 @@ autocmd('FileType', {
   pattern = { 'gitcommit' },
   command = [[
     setlocal nonumber signcolumn=no
-  ]]
+  ]],
 })
 
 -- close some filetypes with <q>
@@ -88,7 +90,7 @@ vim.api.nvim_create_autocmd('FileType', {
     'neotest-output',
     'neotest-summary',
     'neotest-output-panel',
-    'guihua'
+    'guihua',
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
@@ -102,7 +104,7 @@ vim.api.nvim_create_autocmd('FileType', {
 
 autocmd('FileType', {
   pattern = 'man',
-  command = [[nnoremap <buffer><silent> q :quit<CR>]]
+  command = [[nnoremap <buffer><silent> q :quit<CR>]],
 })
 
 -- NOTE: noice.nvim uses notifications

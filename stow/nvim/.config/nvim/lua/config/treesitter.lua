@@ -79,7 +79,7 @@ local function setup_text_objects()
           ['[I'] = '@conditional.outer',
         },
       },
-    }
+    },
   })
 end
 

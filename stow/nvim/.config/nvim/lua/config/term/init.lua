@@ -52,7 +52,10 @@ end
 ---@param cfg Config
 function M.scratch(cfg)
   if not cfg then
-    return vim.notify('FTerm: Please provide configuration for scratch terminal', vim.log.levels.ERROR)
+    return vim.notify(
+      'FTerm: Please provide configuration for scratch terminal',
+      vim.log.levels.ERROR
+    )
   end
 
   cfg.auto_close = false
@@ -91,7 +94,7 @@ function M.setup()
   end, {
     bang = true,
     nargs = '+',
-    desc = 'Open scratch term with provided command'
+    desc = 'Open scratch term with provided command',
   })
 
   vim.keymap.set({ 'n', 'v', 't' }, '<M-t>', M.toggle, { desc = 'Toggle floating term' })

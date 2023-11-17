@@ -5,10 +5,10 @@ function M.setup()
 
   vim.keymap.set('n', '<Leader>Dc', dap.run_to_cursor, { desc = 'Run to Cursor' })
   vim.keymap.set('n', '<Leader>DE', function()
-    dap.eval(vim.fn.input '[Expression] > ')
+    dap.eval(vim.fn.input('[Expression] > '))
   end, { desc = 'Evaluate Input' })
   vim.keymap.set('n', '<Leader>DB', function()
-    dap.set_breakpoint(vim.fn.input '[Condition] > ')
+    dap.set_breakpoint(vim.fn.input('[Condition] > '))
   end, { desc = 'Conditional Breakpoint' })
   vim.keymap.set('n', '<Leader>DU', dapui.toggle, { desc = 'Toggle UI' })
   vim.keymap.set('n', '<Leader>Dd', dap.disconnect, { desc = 'Disconnect' })
@@ -34,7 +34,6 @@ function M.setup()
   vim.keymap.set('n', '<Leader>Db', dap.step_back, { desc = 'Step Back' })
 
   vim.keymap.set('v', '<Leader>De', dapui.eval, { desc = 'Evaluate' })
-
 end
 
 return M

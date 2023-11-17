@@ -11,7 +11,7 @@ if fn.empty(fn.glob(install_path)) > 0 then
     '--depth',
     '1',
     'https://github.com/wbthomason/packer.nvim',
-    install_path
+    install_path,
   })
   vim.o.runtimepath = vim.fn.stdpath('data') .. '/site/pack/*/start/*,' .. vim.o.runtimepath
 end
@@ -22,7 +22,7 @@ if not status_ok then
   return
 end
 
-vim.cmd [[packadd packer.nvim]]
+vim.cmd([[packadd packer.nvim]])
 
 local packer = require('packer')
 
@@ -32,17 +32,17 @@ packer.init({
   compile_on_sync = true,
   git = {
     subcommands = {
-      update         = 'pull --ff-only --progress --rebase=true --force',
-      install        = 'clone --depth %i --no-single-branch --progress',
-      fetch          = 'fetch --depth 10 --progress --force',
-      checkout       = 'checkout %s --',
-      update_branch  = 'merge --ff-only @{u}',
+      update = 'pull --ff-only --progress --rebase=true --force',
+      install = 'clone --depth %i --no-single-branch --progress',
+      fetch = 'fetch --depth 10 --progress --force',
+      checkout = 'checkout %s --',
+      update_branch = 'merge --ff-only @{u}',
       current_branch = 'branch --show-current',
-      diff           = 'log --color=never --pretty=format:FMT --no-show-signature HEAD@{1}...HEAD',
-      diff_fmt       = '%%h %%s (%%cr)',
-      get_rev        = 'rev-parse --short HEAD',
-      get_msg        = 'log --color=never --pretty=format:FMT --no-show-signature HEAD -n 1',
-      submodules     = 'submodule update --init --recursive --progress'
+      diff = 'log --color=never --pretty=format:FMT --no-show-signature HEAD@{1}...HEAD',
+      diff_fmt = '%%h %%s (%%cr)',
+      get_rev = 'rev-parse --short HEAD',
+      get_msg = 'log --color=never --pretty=format:FMT --no-show-signature HEAD -n 1',
+      submodules = 'submodule update --init --recursive --progress',
     },
     clone_timeout = 60, -- Timeout, in seconds, for git clones
   },
@@ -53,7 +53,7 @@ packer.init({
     removed_sym = ' ',
     moved_sym = ' ',
     open_fn = function()
-      return require('packer.util').float { border = 'none' }
+      return require('packer.util').float({ border = 'none' })
     end,
   },
 })
@@ -74,25 +74,25 @@ return packer.startup(function(use)
       'nvim-telescope/telescope-live-grep-args.nvim',
       'nvim-telescope/telescope-file-browser.nvim',
       { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
-    }
+    },
   })
 
   -- Themes
   use('ellisonleao/gruvbox.nvim')
-  use {
+  use({
     'mcchrish/zenbones.nvim',
     requires = 'rktjmp/lush.nvim',
-  }
+  })
 
   -- Treesitter
   use({
     'nvim-treesitter/nvim-treesitter',
     run = function()
-      pcall(require('nvim-treesitter.install').update { with_sync = true })
+      pcall(require('nvim-treesitter.install').update({ with_sync = true }))
     end,
     config = function()
       require('config.treesitter').setup()
-    end
+    end,
   })
 
   use({
@@ -104,22 +104,22 @@ return packer.startup(function(use)
     'lukas-reineke/indent-blankline.nvim',
   })
 
-  use 'sainnhe/sonokai'
+  use('sainnhe/sonokai')
 
   use({
     'nvim-treesitter/playground',
     cmd = { 'TSPlaygroundToggle', 'TSNodeUnderCursor' },
   })
 
-  use {
+  use({
     'zbirenbaum/copilot.lua',
     cmd = 'Copilot',
     event = 'InsertEnter',
     cond = jit.os == 'Linux',
     config = function()
-      require('config.copilot').setup();
+      require('config.copilot').setup()
     end,
-  }
+  })
 
   use({
     'Wansmer/treesj',
@@ -141,8 +141,18 @@ return packer.startup(function(use)
         dot_repeat = true,
       })
 
-      vim.keymap.set('n', '<Leader>ts', require('treesj').split, { desc = 'TS Split lines', silent = true })
-      vim.keymap.set('n', '<Leader>tj', require('treesj').join, { desc = 'TS Join line', silent = true })
+      vim.keymap.set(
+        'n',
+        '<Leader>ts',
+        require('treesj').split,
+        { desc = 'TS Split lines', silent = true }
+      )
+      vim.keymap.set(
+        'n',
+        '<Leader>tj',
+        require('treesj').join,
+        { desc = 'TS Join line', silent = true }
+      )
     end,
   })
 
@@ -160,10 +170,10 @@ return packer.startup(function(use)
           ERROR = '',
           INFO = '',
           TRACE = '',
-          WARN = ''
+          WARN = '',
         },
       })
-    end
+    end,
   })
 
   use({
@@ -175,22 +185,22 @@ return packer.startup(function(use)
       -- if you lazy-load any plugin below, make sure to add proper `module='...'` entries
       'MunifTanjim/nui.nvim',
       'rcarriga/nvim-notify',
-    }
+    },
   })
 
   use({
     'nvim-lualine/lualine.nvim',
     config = function()
       require('config.lualine').setup()
-    end
+    end,
   })
 
-  use {
+  use({
     'smoka7/hop.nvim',
     config = function()
       require('config.hop').setup()
-    end
-  }
+    end,
+  })
 
   use({
     'ahmedkhalf/project.nvim',
@@ -210,7 +220,7 @@ return packer.startup(function(use)
           '!.git/worktrees',
         },
       })
-    end
+    end,
   })
 
   use({
@@ -219,7 +229,7 @@ return packer.startup(function(use)
     config = function()
       vim.keymap.set('n', '<C-w>m', '<Cmd>WinShift<CR>')
       vim.keymap.set('n', '<C-w>x', '<Cmd>WinShift swap<CR>')
-    end
+    end,
   })
 
   use({
@@ -227,7 +237,7 @@ return packer.startup(function(use)
     requires = { 'nvim-telescope/telescope.nvim' },
     config = function()
       require('config.neoclip').setup()
-    end
+    end,
   })
 
   use({
@@ -245,7 +255,7 @@ return packer.startup(function(use)
           mode = 'background',
         },
       })
-    end
+    end,
   })
 
   use({
@@ -256,7 +266,7 @@ return packer.startup(function(use)
       vim.keymap.set('x', 'gA', '<Plug>(EasyAlign)', { remap = true })
       -- Start interactive EasyAlign for a motion/text object (e.g. gaip)
       vim.keymap.set('n', 'gA', '<Plug>(EasyAlign)', { remap = true })
-    end
+    end,
   })
 
   use({
@@ -264,7 +274,7 @@ return packer.startup(function(use)
     after = 'telescope.nvim',
     config = function()
       require('config.text-case').setup()
-    end
+    end,
   })
 
   use({
@@ -278,19 +288,19 @@ return packer.startup(function(use)
     end,
   })
 
-  use {
+  use({
     'windwp/nvim-autopairs',
     config = function()
       require('config.autopairs').setup()
-    end
-  }
+    end,
+  })
 
   use({
     'numToStr/Comment.nvim',
     event = 'BufRead',
     config = function()
       require('config.comment').setup()
-    end
+    end,
   })
 
   use({
@@ -299,10 +309,10 @@ return packer.startup(function(use)
       require('nvim-web-devicons').setup({
         color_icons = true,
       })
-    end
+    end,
   })
 
-  use {
+  use({
     'nvim-neo-tree/neo-tree.nvim',
     branch = 'v3.x',
 
@@ -348,8 +358,8 @@ return packer.startup(function(use)
     },
     config = function()
       require('config.neotree').setup()
-    end
-  }
+    end,
+  })
 
   -- Show sign columns for changes in files
   use({
@@ -359,7 +369,7 @@ return packer.startup(function(use)
     end,
     config = function()
       require('config.gitsigns').setup()
-    end
+    end,
   })
 
   use({
@@ -386,7 +396,7 @@ return packer.startup(function(use)
     },
     config = function()
       require('config.lsp.cmp').setup()
-    end
+    end,
   })
 
   use({
@@ -471,11 +481,11 @@ return packer.startup(function(use)
     },
     config = function()
       require('config.lsp').setup()
-    end
+    end,
   })
 
   -- Debugging
-  use {
+  use({
     'mfussenegger/nvim-dap',
     opt = true,
     ft = {
@@ -494,7 +504,7 @@ return packer.startup(function(use)
     config = function()
       require('config.dap').setup()
     end,
-  }
+  })
 
   -- Sync plugins after installing packer
   if packer_bootstrap then

@@ -2,7 +2,6 @@ local M = {
   enabled = true,
 }
 
-
 function M.toggle()
   M.enabled = not M.enabled
   vim.notify('LSP formatting ' .. (M.enabled and 'enabled' or 'disabled'))
@@ -49,15 +48,15 @@ end
 ---@param client lsp.Client
 function M.supports_format(client)
   if
-      client.config
-      and client.config.capabilities
-      and client.config.capabilities.documentFormattingProvider == false
+    client.config
+    and client.config.capabilities
+    and client.config.capabilities.documentFormattingProvider == false
   then
     return false
   end
 
   return client.supports_method('textDocument/formatting')
-      or client.supports_method('textDocument/rangeFormatting')
+    or client.supports_method('textDocument/rangeFormatting')
 end
 
 function M.setup(bufnr)
@@ -70,7 +69,11 @@ function M.setup(bufnr)
   })
 
   vim.api.nvim_create_user_command('Format', M.format, { desc = 'Format current buffer with LSP' })
-  vim.api.nvim_create_user_command('LSPFormatToggle', M.toggle, { desc = 'Enable/disable LSP format' })
+  vim.api.nvim_create_user_command(
+    'LSPFormatToggle',
+    M.toggle,
+    { desc = 'Enable/disable LSP format' }
+  )
 end
 
 return M

@@ -5,13 +5,13 @@ vim.g.loaded_netrwPlugin = 1
 vim.g.netrw_liststyle = 3
 vim.g.omni_sql_no_default_maps = 1
 
-vim.cmd [[
+vim.cmd([[
   syntax sync minlines=3000
   filetype plugin indent on
   set fillchars=diff:\ ,
   set pumheight=20
   set undolevels=1000
-]]
+]])
 
 -- vim.cmd(
 --   [[syntax match UuidV4 /\v[0-9a-fA-F]{8}(-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}/]]
@@ -27,8 +27,8 @@ vim.opt.writebackup = false
 vim.opt.updatetime = 200
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.sessionoptions:append { 'curdir', 'winsize' }
-vim.opt.shortmess:append { c = true, F = true, s = true }
+vim.opt.sessionoptions:append({ 'curdir', 'winsize' })
+vim.opt.shortmess:append({ c = true, F = true, s = true })
 vim.opt.wrap = false
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
@@ -72,19 +72,76 @@ vim.opt.spelloptions = 'camel'
 vim.opt.showmode = false
 vim.opt.startofline = false
 
-vim.opt.wildmode = 'full'     -- Shows a menu bar as opposed to an enormous list
+vim.opt.wildmode = 'full' -- Shows a menu bar as opposed to an enormous list
 vim.opt.wildignorecase = true -- Ignore case when completing file names and directories
 vim.opt.wildignore = {
-  '*.o', '*.obj', '*~', '*.exe', '*.a', '*.pdb', '*.lib',
-  '*.so', '*.pyc', '*.pyo', '*.bin', '*.dex',
-  '*.log', '*.pyc', '*.sqlite', '*.sqlite3', '*.min.js', '*.min.css', '*.tags',
-  '*.zip', '*.7z', '*.rar', '*.gz', '*.tar', '*.gzip', '*.bz2', '*.tgz', '*.xz',
-  '*.png', '*.jpg', '*.gif', '*.bmp', '*.tga', '*.pcx', '*.ppm', '*.img', '*.iso',
-  '*.pdf', '*.dmg', '*.app', '*.ipa', '*.apk', '*.mobi', '*.epub',
-  '*.mp4', '*.avi', '*.flv', '*.mov', '*.mkv', '*.swf', '*.swc',
-  '*.ppt', '*.pptx', '*.doc', '*.docx', '*.xlt', '*.xls', '*.xlsx', '*.odt', '*.wps',
-  '*/.git/*', '*.DS_Store',
-  '*/node_modules/*', '*/build/*', '*/logs/*', '*/dist/*', '*/tmp/*',
+  '*.o',
+  '*.obj',
+  '*~',
+  '*.exe',
+  '*.a',
+  '*.pdb',
+  '*.lib',
+  '*.so',
+  '*.pyc',
+  '*.pyo',
+  '*.bin',
+  '*.dex',
+  '*.log',
+  '*.pyc',
+  '*.sqlite',
+  '*.sqlite3',
+  '*.min.js',
+  '*.min.css',
+  '*.tags',
+  '*.zip',
+  '*.7z',
+  '*.rar',
+  '*.gz',
+  '*.tar',
+  '*.gzip',
+  '*.bz2',
+  '*.tgz',
+  '*.xz',
+  '*.png',
+  '*.jpg',
+  '*.gif',
+  '*.bmp',
+  '*.tga',
+  '*.pcx',
+  '*.ppm',
+  '*.img',
+  '*.iso',
+  '*.pdf',
+  '*.dmg',
+  '*.app',
+  '*.ipa',
+  '*.apk',
+  '*.mobi',
+  '*.epub',
+  '*.mp4',
+  '*.avi',
+  '*.flv',
+  '*.mov',
+  '*.mkv',
+  '*.swf',
+  '*.swc',
+  '*.ppt',
+  '*.pptx',
+  '*.doc',
+  '*.docx',
+  '*.xlt',
+  '*.xls',
+  '*.xlsx',
+  '*.odt',
+  '*.wps',
+  '*/.git/*',
+  '*.DS_Store',
+  '*/node_modules/*',
+  '*/build/*',
+  '*/logs/*',
+  '*/dist/*',
+  '*/tmp/*',
 }
 
 if vim.fn.has('wsl') == 1 then

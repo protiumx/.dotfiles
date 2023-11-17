@@ -43,8 +43,8 @@ function M.setup()
       lines_below = 10,
     },
     scroll_preview = {
-      scroll_down = "<C-d>",
-      scroll_up = "<C-u>",
+      scroll_down = '<C-d>',
+      scroll_up = '<C-u>',
     },
     lightbulb = {
       enable = false,
@@ -78,14 +78,14 @@ function M.setup()
         vsplit = '<C-v>',
         split = '<C-x>',
         quit = 'q',
-      }
+      },
     },
     outline = {
       auto_preview = false,
       left_width = 0.4,
       keys = {
         jump = '<CR>',
-      }
+      },
     },
     diagnostic = {
       custom_fix = 'Code Actions',
@@ -97,8 +97,8 @@ function M.setup()
     rename = {
       in_select = false,
       keys = {
-        quit = '<C-c>'
-      }
+        quit = '<C-c>',
+      },
     },
     ui = {
       border = 'single',

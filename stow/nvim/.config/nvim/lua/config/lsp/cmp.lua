@@ -26,7 +26,7 @@ function M.setup()
     Operator = '  ',
     Property = '  ',
     Reference = '  ',
-    Snippet = "  ",
+    Snippet = '  ',
     Struct = '  ',
     Text = '  ',
     TypeParameter = '  ',
@@ -71,7 +71,7 @@ function M.setup()
         priority = 1000,
         entry_filter = function(entry, _)
           return cmp_types.lsp.CompletionItemKind[entry:get_kind()] ~= 'Text'
-        end
+        end,
       },
       {
         name = 'luasnip',
@@ -109,13 +109,13 @@ function M.setup()
       -- },
     },
     formatting = {
-      fields = { "abbr", "kind" },
+      fields = { 'abbr', 'kind' },
       format = function(_, item)
         item.kind = kind_icons[item.kind]
         item.abbr = string.sub(item.abbr, 1, 50)
         item.menu = ''
         return item
-      end
+      end,
     },
     sorting = {
       comparators = {
@@ -170,13 +170,13 @@ function M.setup()
         else
           fallback()
         end
-      end, { 'i', 's' })
+      end, { 'i', 's' }),
     }),
   })
 
   luasnip.config.set_config({
     region_check_events = 'InsertEnter',
-    delete_check_events = 'InsertLeave'
+    delete_check_events = 'InsertLeave',
   })
 
   require('luasnip.loaders.from_vscode').lazy_load()

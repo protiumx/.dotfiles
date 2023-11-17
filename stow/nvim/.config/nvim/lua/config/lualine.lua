@@ -2,32 +2,32 @@ local colors = require('config.colors')
 local M = {}
 
 local modes = {
-  ["__"] = "--",
-  ["c"] = "C",
-  ["i"] = "I",
-  ["ic"] = "I-C",
-  ["ix"] = "I-X",
-  ["multi"] = "M",
-  ["n"] = "N",
-  ["ni"] = "(I)",
-  ["no"] = "OP",
-  ["R"] = "R",
-  ["Rv"] = "V-R",
-  ["s"] = "S",
-  ["S"] = "S-L",
-  [""] = "S-B",
-  ["t"] = "T",
-  ["v"] = "V",
-  ["V"] = "V-L",
-  [""] = "V-B",
+  ['__'] = '--',
+  ['c'] = 'C',
+  ['i'] = 'I',
+  ['ic'] = 'I-C',
+  ['ix'] = 'I-X',
+  ['multi'] = 'M',
+  ['n'] = 'N',
+  ['ni'] = '(I)',
+  ['no'] = 'OP',
+  ['R'] = 'R',
+  ['Rv'] = 'V-R',
+  ['s'] = 'S',
+  ['S'] = 'S-L',
+  [''] = 'S-B',
+  ['t'] = 'T',
+  ['v'] = 'V',
+  ['V'] = 'V-L',
+  [''] = 'V-B',
 }
 
 local mode_colors = {
   n = colors.blue,
   i = colors.yellow,
   v = colors.magenta,
-  [""] = colors.lightblue,
-  [""] = colors.white,
+  [''] = colors.lightblue,
+  [''] = colors.white,
   V = colors.lightblue,
   c = colors.orange,
   no = colors.magenta,
@@ -41,8 +41,8 @@ local mode_colors = {
   ce = colors.orange,
   r = colors.cyan,
   rm = colors.cyan,
-  ["r?"] = colors.cyan,
-  ["!"] = colors.cyan,
+  ['r?'] = colors.cyan,
+  ['!'] = colors.cyan,
   t = colors.cyan,
 }
 
@@ -59,7 +59,7 @@ local theme = {
   visual = base_theme,
   replace = base_theme,
   inactive = {
-    a = { bg = 'none', fg = colors.light_grey }
+    a = { bg = 'none', fg = colors.light_grey },
   },
 }
 
@@ -75,10 +75,10 @@ function M.setup()
     symbols = {
       modified = '[+]',
       readonly = '',
-    }
+    },
   }
 
-  require('lualine').setup {
+  require('lualine').setup({
     options = {
       icons_enabled = true,
       theme = theme,
@@ -105,7 +105,7 @@ function M.setup()
         statusline = 1000,
         tabline = 1000,
         winbar = 1000,
-      }
+      },
     },
     sections = {
       lualine_a = {
@@ -117,8 +117,8 @@ function M.setup()
           color = function()
             local val = {
               fg = mode_colors[vim.fn.mode()],
-              bg = "none",
-              gui = 'bold'
+              bg = 'none',
+              gui = 'bold',
             }
             return val
           end,
@@ -130,7 +130,7 @@ function M.setup()
           lsp_symbol,
           cond = function()
             return next(vim.lsp.buf_get_clients(0)) ~= nil
-          end
+          end,
         },
       },
       lualine_x = {
@@ -158,14 +158,14 @@ function M.setup()
       lualine_y = { { 'diagnostics', sources = { 'nvim_diagnostic' } } },
       lualine_z = {
         {
-          require("noice").api.status.search.get,
-          cond = require("noice").api.status.search.has,
-          color = { fg = "ff9e64" },
+          require('noice').api.status.search.get,
+          cond = require('noice').api.status.search.has,
+          color = { fg = 'ff9e64' },
         },
         {
-          require("noice").api.status.mode.get,
-          cond = require("noice").api.status.mode.has,
-          color = { fg = "#ff9e64" },
+          require('noice').api.status.mode.get,
+          cond = require('noice').api.status.mode.has,
+          color = { fg = '#ff9e64' },
         },
         { 'location' },
         { 'progress', fmt = string.lower },
@@ -177,7 +177,7 @@ function M.setup()
       lualine_c = {},
       lualine_y = {},
       lualine_x = {},
-      lualine_z = {}
+      lualine_z = {},
     },
     tabline = {},
     winbar = {},
@@ -186,7 +186,7 @@ function M.setup()
     refresh = {
       statusline = 300,
     },
-  }
+  })
 end
 
 return M

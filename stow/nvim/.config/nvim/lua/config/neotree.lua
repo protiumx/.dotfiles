@@ -9,13 +9,13 @@ function M.setup()
     enable_git_status = true,
     enable_diagnostics = true,
     open_files_do_not_replace_types = { 'terminal', 'qf' }, -- when opening files, do not use windows containing these filetypes or buftypes
-    sort_case_insensitive = false,                          -- used when sorting files and directories in the tree
+    sort_case_insensitive = false, -- used when sorting files and directories in the tree
     source_selector = {
       winbar = true,
     },
     default_component_configs = {
       container = {
-        enable_character_fade = true
+        enable_character_fade = true,
       },
       indent = {
         indent_size = 2,
@@ -35,7 +35,7 @@ function M.setup()
         folder_closed = '',
         folder_open = '',
         folder_empty = '',
-        highlight = 'NeoTreeFileIcon'
+        highlight = 'NeoTreeFileIcon',
       },
       modified = {
         symbol = '[+]',
@@ -49,17 +49,17 @@ function M.setup()
       git_status = {
         symbols = {
           -- Change type
-          added     = '',
-          modified  = '~',
-          deleted   = 'x',
-          renamed   = '>',
+          added = '',
+          modified = '~',
+          deleted = 'x',
+          renamed = '>',
           -- Status type
           untracked = '?',
-          ignored   = '',
-          unstaged  = '-',
-          staged    = '+',
-          conflict  = '',
-        }
+          ignored = '',
+          unstaged = '-',
+          staged = '+',
+          conflict = '',
+        },
       },
     },
     document_symbols = {
@@ -82,14 +82,14 @@ function M.setup()
         Operator = { icon = '󰆕', hl = 'Operator' },
         TypeParameter = { icon = '󰊄', hl = 'Type' },
         StaticMethod = { icon = '󰠄 ', hl = 'Function' },
-      }
+      },
     },
     commands = {
       system_open = function(state)
         local node = state.tree:get_node()
         local path = node:get_id()
         -- macOs: open file in default application in the background.
-        vim.fn.jobstart({ "xdg-open", "-g", path }, { detach = true })
+        vim.fn.jobstart({ 'xdg-open', '-g', path }, { detach = true })
       end,
     },
     window = {
@@ -123,8 +123,8 @@ function M.setup()
           -- this command supports BASH style brace expansion ('x{a,b,c}' -> xa,xb,xc). see `:h neo-tree-file-actions` for details
           -- some commands may take optional config options, see `:h neo-tree-mappings` for details
           config = {
-            show_path = 'none' -- 'none', 'relative', 'absolute'
-          }
+            show_path = 'none', -- 'none', 'relative', 'absolute'
+          },
         },
         ['A'] = 'add_directory', -- also accepts the optional config.show_path option like 'add'. this also supports BASH style brace expansion.
         ['d'] = 'delete',
@@ -136,8 +136,8 @@ function M.setup()
         ['c'] = {
           'copy',
           config = {
-            show_path = 'none' -- 'none', 'relative', 'absolute'
-          }
+            show_path = 'none', -- 'none', 'relative', 'absolute'
+          },
         },
         ['m'] = 'move', -- takes text input for destination, also accepts the optional config.show_path option like 'add'.
         ['q'] = 'close_window',
@@ -145,8 +145,8 @@ function M.setup()
         ['?'] = 'show_help',
         ['<'] = 'prev_source',
         ['>'] = 'next_source',
-        ["o"] = "system_open",
-      }
+        ['o'] = 'system_open',
+      },
     },
     nesting_rules = {},
     filesystem = {
@@ -176,9 +176,9 @@ function M.setup()
         enable = true,
       },
       -- time the current file is changed while the tree is open.
-      group_empty_dirs = false,           -- when true, empty folders will be grouped together
+      group_empty_dirs = false, -- when true, empty folders will be grouped together
       hijack_netrw_behavior = 'disabled', -- netrw disabled, opening a directory opens neo-tree
-      use_libuv_file_watcher = true,      -- This will use the OS level file watchers to detect changes
+      use_libuv_file_watcher = true, -- This will use the OS level file watchers to detect changes
       -- instead of relying on nvim autocmd events.
       window = {
         mappings = {
@@ -202,7 +202,7 @@ function M.setup()
           ['<C-p>'] = 'move_cursor_up',
         },
       },
-      commands = {} -- Add a custom command or override a global one using the same function name
+      commands = {}, -- Add a custom command or override a global one using the same function name
     },
     buffers = {
       follow_current_file = {
@@ -215,28 +215,37 @@ function M.setup()
         mappings = {
           ['d'] = 'buffer_delete',
           ['<bs>'] = 'navigate_up',
-        }
+        },
       },
     },
     git_status = {
       window = {
         position = 'float',
         mappings = {
-          ['A']  = 'git_add_all',
+          ['A'] = 'git_add_all',
           ['gu'] = 'git_unstage_file',
           ['ga'] = 'git_add_file',
           ['gr'] = 'git_revert_file',
           ['gc'] = 'git_commit',
           ['gp'] = 'git_push',
           ['gg'] = 'git_commit_and_push',
-        }
-      }
-    }
+        },
+      },
+    },
   })
 
-  vim.keymap.set({ 'n', 'i' }, '<M-T>', '<cmd>Neotree toggle reveal<CR>', { desc = 'Toggle Neotree' })
-  vim.keymap.set({ 'n', 'i' }, '<C-b>', '<cmd>Neotree toggle source=buffers reveal<CR>',
-    { desc = 'Toggle Neotree Buffers' })
+  vim.keymap.set(
+    { 'n', 'i' },
+    '<M-T>',
+    '<cmd>Neotree toggle reveal<CR>',
+    { desc = 'Toggle Neotree' }
+  )
+  vim.keymap.set(
+    { 'n', 'i' },
+    '<C-b>',
+    '<cmd>Neotree toggle source=buffers reveal<CR>',
+    { desc = 'Toggle Neotree Buffers' }
+  )
 end
 
 return M

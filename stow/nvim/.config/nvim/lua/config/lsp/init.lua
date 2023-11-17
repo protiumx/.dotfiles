@@ -13,14 +13,14 @@ function M.setup()
   require('fidget').setup({
     align = {
       bottom = false, -- align fidgets along bottom edge of buffer
-      right = true,   -- align fidgets along right edge of buffer
+      right = true, -- align fidgets along right edge of buffer
     },
     text = {
-      done = "",
+      done = '',
     },
     window = {
       blend = 0,
-    }
+    },
   })
 
   -- NOTE: noice.nvim sets these 2 handlers
@@ -45,7 +45,7 @@ function M.setup()
       format = function(_)
         -- just show the sign
         return ''
-      end
+      end,
     },
     float = {
       focusable = true,

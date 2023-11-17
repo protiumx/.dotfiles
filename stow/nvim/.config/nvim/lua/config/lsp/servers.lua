@@ -4,14 +4,14 @@ local servers = {
   tsserver = {},
   html = {},
   jsonls = {
-    schemas = require("schemastore").json.schemas(),
+    schemas = require('schemastore').json.schemas(),
   },
   eslint = {},
   rust_analyzer = {
-    ["rust-analyzer"] = {
+    ['rust-analyzer'] = {
       assist = {
         importEnforceGranularity = true,
-        importPrefix = "create"
+        importPrefix = 'create',
       },
       cargo = {
         allFeatures = true,
@@ -21,15 +21,15 @@ local servers = {
       -- Add clippy lints for Rust.
       checkOnSave = {
         allFeatures = true,
-        command = "clippy",
-        extraArgs = { "--no-deps" },
+        command = 'clippy',
+        extraArgs = { '--no-deps' },
       },
       procMacro = {
         enable = true,
         ignored = {
-          ["async-trait"] = { "async_trait" },
-          ["napi-derive"] = { "napi" },
-          ["async-recursion"] = { "async_recursion" },
+          ['async-trait'] = { 'async_trait' },
+          ['napi-derive'] = { 'napi' },
+          ['async-recursion'] = { 'async_recursion' },
         },
       },
     },
@@ -40,9 +40,9 @@ local servers = {
       analysis = {
         autoSearchPaths = true,
         diagnosticMode = 'workspace',
-        useLibraryCodeForTypes = true
+        useLibraryCodeForTypes = true,
       },
-    }
+    },
   },
   sqlls = {},
   yamlls = {
@@ -56,9 +56,9 @@ local servers = {
       keyOrdering = false,
       schemaStore = {
         enable = true,
-        url = "https://www.schemastore.org/api/json/catalog.json",
+        url = 'https://www.schemastore.org/api/json/catalog.json',
       },
-      schemas = require("schemastore").yaml.schemas(),
+      schemas = require('schemastore').yaml.schemas(),
       validate = true,
     },
   },
@@ -95,7 +95,7 @@ local servers = {
         defaultConfig = {
           indent_style = 'space',
           indent_size = '2',
-        }
+        },
       },
       runtime = {
         -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
@@ -104,8 +104,8 @@ local servers = {
       workspace = {
         checkThirdParty = false,
         library = {
-          [vim.fn.expand '$VIMRUNTIME/lua'] = true,
-          [vim.fn.expand '$VIMRUNTIME/lua/vim/lsp'] = true,
+          [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+          [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
         },
         maxPreload = 100000,
         preloadFileSize = 10000,

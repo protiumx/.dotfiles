@@ -42,7 +42,7 @@ local function keymaps()
     end
 
     return vim.tbl_extend('force', opts, {
-      prompt_title = title
+      prompt_title = title,
     }, extra or {})
   end
 
@@ -53,12 +53,12 @@ local function keymaps()
     callback = function()
       -- Open file browser if argument is a folder
       local arg = vim.api.nvim_eval('argv(0)')
-      if arg and (vim.fn.isdirectory(arg) ~= 0 or arg == "") then
+      if arg and (vim.fn.isdirectory(arg) ~= 0 or arg == '') then
         vim.defer_fn(function()
           builtin.find_files(with_title(dropdown))
         end, 50)
       end
-    end
+    end,
   })
 
   map({ 'i', 'n' }, '<M-]>', function()
@@ -97,7 +97,9 @@ local function keymaps()
     builtin.live_grep(with_title({}))
   end, '[S]earch Live [G]rep')
 
-  map({ 'i', 'n' }, '<M-b>', function() builtin.buffers(dropdown) end, 'Find buffers')
+  map({ 'i', 'n' }, '<M-b>', function()
+    builtin.buffers(dropdown)
+  end, 'Find buffers')
 
   map({ 'v' }, '<M-s>g', function()
     local search = utils.vtext()
@@ -128,7 +130,7 @@ local function keymaps()
   map('n', '<C-g>b', builtin.git_branches, '[G]it [B]ranches')
   map('n', '<C-g>h', builtin.git_bcommits, '[G]it [H]istory of buffer')
   map('n', '<C-g>C', builtin.git_commits, '[G]it [C]ommits')
-  map('n', '<C-g>f', function ()
+  map('n', '<C-g>f', function()
     builtin.git_status(dropdown)
   end, '[G]it status [F]iles')
 
@@ -156,7 +158,12 @@ local function keymaps()
 
   -- Rg with args
 
-  map({ 'i', 'n' }, '<M-s>f', telescope.extensions.live_grep_args.live_grep_args, 'Ripgrep with args')
+  map(
+    { 'i', 'n' },
+    '<M-s>f',
+    telescope.extensions.live_grep_args.live_grep_args,
+    'Ripgrep with args'
+  )
 end
 
 function M.setup()
@@ -216,22 +223,27 @@ function M.setup()
         '--column',
         '--hidden',
         '--smart-case',
-        '-u'
+        '-u',
       },
     },
     pickers = {
       find_files = {
         find_command = {
           'fd',
-          '-t', 'f',
+          '-t',
+          'f',
           '--hidden',
           '--strip-cwd-prefix',
           '-i',
-          '-E', '.git/*',
-          '-E', 'target/*',
-          '-E', '**/node_modules',
-          '-E', '.DS_Store',
-        }
+          '-E',
+          '.git/*',
+          '-E',
+          'target/*',
+          '-E',
+          '**/node_modules',
+          '-E',
+          '.DS_Store',
+        },
       },
     },
     extensions = {
@@ -244,7 +256,6 @@ function M.setup()
     },
   })
 
-
   telescope.load_extension('fzf')
   telescope.load_extension('file_browser')
   telescope.load_extension('projects')
@@ -254,7 +265,7 @@ function M.setup()
   keymaps()
 
   -- wrap text in preview
-  vim.cmd [[autocmd User TelescopePreviewerLoaded setlocal wrap]]
+  vim.cmd([[autocmd User TelescopePreviewerLoaded setlocal wrap]])
 end
 
 return M
