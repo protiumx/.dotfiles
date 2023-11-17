@@ -9,7 +9,7 @@ vim.cmd [[
   syntax sync minlines=3000
   filetype plugin indent on
   set fillchars=diff:\ ,
-  set pumheight=10
+  set pumheight=20
   set undolevels=1000
 ]]
 
