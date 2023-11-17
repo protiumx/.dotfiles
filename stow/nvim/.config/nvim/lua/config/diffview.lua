@@ -13,13 +13,18 @@ function M.setup()
   require('diffview').setup({
     default_args = {
       DiffviewOpen = { '--imply-local' },
+      DiffviewFileHistory = { '--base=LOCAL' },
     },
+
     view = {
-      merge_tool = {
+      default = {
         -- Config for conflicted files in diff views during a merge or rebase.
-        layout = "diff3_mixed",
+        layout = 'diff2_horizontal',
         disable_diagnostics = true, -- Temporarily disable diagnostics for conflict buffers while in the view.
-        winbar_info = true,         -- See ':h diffview-config-view.x.winbar_info'
+        winbar_info = true, -- See ':h diffview-config-view.x.winbar_info'
+      },
+      merge_tool = {
+        layout = 'diff3_mixed',
       },
     },
     file_panel = {
@@ -46,23 +51,23 @@ function M.setup()
     },
     keymaps = {
       view = {
-        { 'n', '<C-o>',     actions.goto_file_tab, { desc = 'Open the file in a new tabpage' } },
-        { 'n', '<Leader>P', actions.focus_files,   { desc = 'Bring focus to the file panel' } },
-        { 'n', '<Leader>p', actions.toggle_files,  { desc = 'Toggle the file panel.' } },
+        { 'n', '<C-o>', actions.goto_file_tab, { desc = 'Open the file in a new tabpage' } },
+        { 'n', '<Leader>P', actions.focus_files, { desc = 'Bring focus to the file panel' } },
+        { 'n', '<Leader>p', actions.toggle_files, { desc = 'Toggle the file panel.' } },
       },
       file_panel = {
-        { 'n', '<C-o>',     actions.goto_file_tab,    { desc = 'Open the file in a new tabpage' } },
-        { 'n', '<Leader>P', actions.focus_files,      { desc = 'Bring focus to the file panel' } },
-        { 'n', '<Leader>p', actions.toggle_files,     { desc = 'Toggle the file panel' } },
-        { 'n', 'q',         '<cmd>DiffviewClose<CR>', { silent = true } },
-        { 'n', '<M-Up>',    ':!git push<CR>' },
-        { 'n', '<M-Down>',  ':!git pull<CR>' },
+        { 'n', '<C-o>', actions.goto_file_tab, { desc = 'Open the file in a new tabpage' } },
+        { 'n', '<Leader>P', actions.focus_files, { desc = 'Bring focus to the file panel' } },
+        { 'n', '<Leader>p', actions.toggle_files, { desc = 'Toggle the file panel' } },
+        { 'n', 'q', '<cmd>DiffviewClose<CR>', { silent = true } },
+        { 'n', '<M-Up>', ':!git push<CR>' },
+        { 'n', '<M-Down>', ':!git pull<CR>' },
       },
       file_history_panel = {
-        { 'n', '<C-o>',     actions.goto_file_tab,    { desc = 'Open the file in a new tabpage' } },
-        { 'n', '<Leader>P', actions.focus_files,      { desc = 'Bring focus to the file panel' } },
-        { 'n', '<Leader>p', actions.toggle_files,     { desc = 'Toggle the file panel' } },
-        { 'n', 'q',         '<cmd>DiffviewClose<CR>', { silent = true } },
+        { 'n', '<C-o>', actions.goto_file_tab, { desc = 'Open the file in a new tabpage' } },
+        { 'n', '<Leader>P', actions.focus_files, { desc = 'Bring focus to the file panel' } },
+        { 'n', '<Leader>p', actions.toggle_files, { desc = 'Toggle the file panel' } },
+        { 'n', 'q', '<cmd>DiffviewClose<CR>', { silent = true } },
       },
     },
   })
