@@ -74,6 +74,7 @@
   cnv = commit -n -m
   # Count the number of files changed in the current branch compared to main
   count = !git diff --name-only main... | wc -l
+
   dd = !git --no-pager diff
 
   # Clean up all current changes
@@ -83,7 +84,9 @@
   filter = "!f() { git logs --grep=$1; }; f"
 
   last = log -1 HEAD --stat
-  logf = !git log --pretty=format:\"%C(magenta)%h%Creset -%C(red)%d%Creset %s %C(dim green)(%cr) [%an]\" --abbrev-commit -30
+
+  lg = !git log --pretty=format:\"%C(magenta)%h%Creset -%C(red)%d%Creset %s %C(dim green)(%cr) [%an]\" --abbrev-commit
+
   main = !git checkout main && git pull
 
   # Clean up merged branches to a given branch ("main" is default)
@@ -114,10 +117,12 @@
 
   # Revert the last commit and put its changes in the index
   undolast = reset --soft HEAD^
+
   unstage = reset HEAD --
 
   # Push and set upstream origin for branch
   up = !git push -u origin `git branch --show-current`
+
   upt = "!f() { git push origin --tags ${1:-}; }; f"
 
   wt = worktree
