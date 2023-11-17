@@ -34,12 +34,17 @@ psrm() {
   ps -o rss= -p "$1" | awk '{ hr=$1/1024; printf "%13.2f Mb\n",hr }' | tr -d ' ';
 }
 
+# Parse unix epoch to ISO date
 epoch() {
   if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     date --date "@$1" +"+%Y-%m-%dT%H:%M:%SZ"
   else
     date -r "$1" '+%Y-%m-%dT%H:%M:%SZ'
   fi
+}
+
+urldecode() {
+  python3 -c "from urllib.parse import unquote; print(unquote('$1'));"
 }
 
 # Watch process real memory
