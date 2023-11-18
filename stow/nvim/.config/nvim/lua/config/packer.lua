@@ -111,15 +111,15 @@ return packer.startup(function(use)
     cmd = { 'TSPlaygroundToggle', 'TSNodeUnderCursor' },
   })
 
-  use({
-    'zbirenbaum/copilot.lua',
-    cmd = 'Copilot',
-    event = 'InsertEnter',
-    cond = jit.os == 'Linux',
-    config = function()
-      require('config.copilot').setup()
-    end,
-  })
+  -- use({
+  --   'zbirenbaum/copilot.lua',
+  --   cmd = 'Copilot',
+  --   event = 'InsertEnter',
+  --   cond = jit.os == 'Linux',
+  --   config = function()
+  --     require('config.copilot').setup()
+  --   end,
+  -- })
 
   use({
     'Wansmer/treesj',
