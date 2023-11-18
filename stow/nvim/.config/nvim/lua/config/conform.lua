@@ -1,11 +1,10 @@
 local M = {}
 
 function M.setup()
-  require('conform').setup({
+  local conform = require('conform')
+  conform.setup({
     formatters_by_ft = {
       lua = { 'stylua' },
-      sh = { 'shfmt' },
-      zsh = { 'shfmt' },
       python = { 'black' },
       -- Use a sub-list to run only the first available formatter
       javascript = { { 'prettierd', 'prettier' } },
@@ -22,7 +21,7 @@ function M.setup()
         ['end'] = { args.line2, end_line:len() },
       }
     end
-    require('conform').format({ async = true, lsp_fallback = true, range = range })
+    conform.format({ async = true, lsp_fallback = true, range = range })
   end, { range = true })
 
   vim.api.nvim_create_user_command('FormatDisable', function(args)
