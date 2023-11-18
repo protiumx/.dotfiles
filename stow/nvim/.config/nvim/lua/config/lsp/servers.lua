@@ -62,7 +62,9 @@ local servers = {
       validate = true,
     },
   },
-  bashls = {},
+  bashls = {
+    filetypes = { 'sh', 'zsh' },
+  },
   gopls = {
     analyses = {
       unusedparams = true,
