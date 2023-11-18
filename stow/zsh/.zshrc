@@ -33,9 +33,9 @@ export LESS_TERMCAP_ue=$'\e[0m'        # reset underline
 export PICO_SDK_PATH="$HOME/dev/pico-sdk"
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 else
-  eval "$(/opt/homebrew/bin/brew shellenv)"
+	eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
 BREW_PREFIX="$(brew --prefix)"
@@ -63,12 +63,12 @@ DISABLE_MAGIC_FUNCTIONS="true"
 
 setopt HIST_FIND_NO_DUPS
 setopt HIST_IGNORE_ALL_DUPS
-setopt appendhistory           # Immediately append history instead of overwriting
+setopt appendhistory # Immediately append history instead of overwriting
 setopt nobeep
 
 plugins=(
-  docker                  # auto-completion for docker
-  fzf-tab
+	docker # auto-completion for docker
+	fzf-tab
 )
 
 # Enable option-stacking for docker (i.e docker run -it <TAB>)
@@ -136,30 +136,41 @@ export FZF_COMPLETION_OPTS=$FZF_DEFAULT_OPTS
 export _ZO_FZF_OPTS=$FZF_DEFAULT_OPTS
 
 _fzf_compgen_path() {
-  fd --hidden --follow --exclude ".git/" . "$1"
+	fd --hidden --follow --exclude ".git/" . "$1"
 }
 
 # Use fd to generate the list for directory completion
 # Needs trigger **
 _fzf_compgen_dir() {
-  fd --type d --hidden --follow --exclude ".git/" . "$1"
+	fd --type d --hidden --follow --exclude ".git/" . "$1"
 }
 
 # search changed files in git repo
 fzf-git-files-widget() {
-  if ! git rev-parse --git-dir > /dev/null 2>&1; then
-    return 1
-  fi
+	if ! git rev-parse --git-dir >/dev/null 2>&1; then
+		return 1
+	fi
 
-  local selected
-  if selected=$(git diff --name-only | fzf); then
-    RBUFFER=$selected
-  fi
-  zle redisplay
-  zle end-of-line
+	local files=$(git diff --name-only)
+	local lines=$(echo $files | wc -l)
+	if [ $lines -eq 0 ]; then
+		return 0
+	fi
+
+	if [ $lines -eq 1 ]; then
+		RBUFFER=$files
+	else
+		local selected
+		if selected=$(echo $files | fzf); then
+			RBUFFER=$selected
+		fi
+	fi
+
+	zle redisplay
+	zle end-of-line
 }
 
-zle     -N    fzf-git-files-widget
+zle -N fzf-git-files-widget
 bindkey '\eg' fzf-git-files-widget
 
 [ -f ~/.fzf.zsh ] && source $HOME/.fzf.zsh
@@ -171,15 +182,15 @@ export PATH
 
 # Source all profile files
 for file in $HOME/.profile*; do
-  source "$file"
+	source "$file"
 done
 
 # Start ssh agent
 if [[ "$OSTYPE" =~ ^linux ]]; then
-  eval $(ssh-agent) >/dev/null
+	eval $(ssh-agent) >/dev/null
 fi
 
 # Add ssh keys to apple keychain
 if [[ "$OSTYPE" =~ ^darwin ]]; then
-  ssh-add --apple-load-keychain &>/dev/null
+	ssh-add --apple-load-keychain &>/dev/null
 fi
