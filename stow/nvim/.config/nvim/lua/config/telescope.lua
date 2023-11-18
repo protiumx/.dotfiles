@@ -1,84 +1,69 @@
-local M = {}
+local actions = require('config.telescope.actions')
+local pickers = require('config.telescope.pickers')
 
-local function keymaps()
-  local utils = require('config.utils')
-  local plenary = require('plenary.path')
-  local telescope = require('telescope')
-  local builtin = require('telescope.builtin')
-  local themes = require('telescope.themes')
+local builtin = require('telescope.builtin')
+local plenary = require('plenary.path')
+local telescope = require('telescope')
+local themes = require('telescope.themes')
+local utils = require('config.utils')
 
-  local map = function(mode, l, r, desc)
-    local opts = { silent = true, desc = '[Telescope] ' .. desc }
+local map = function(mode, l, r, desc)
+  local opts = { silent = true, desc = '[Telescope] ' .. desc }
+  vim.keymap.set(mode, l, r, opts)
+end
 
-    vim.keymap.set(mode, l, r, opts)
+-- Set current folder as prompt title
+local options_with_title = function(opts, extra)
+  extra = extra or {}
+  local path = opts.cwd or opts.path or extra.cwd or extra.path or nil
+  local title = ''
+  local buf_path = vim.fn.expand('%:p:h')
+  local cwd = vim.fn.getcwd()
+  if path ~= nil and buf_path ~= cwd then
+    title = plenary:new(buf_path):make_relative(cwd)
+  else
+    title = vim.fn.fnamemodify(cwd, ':t')
   end
 
-  local dropdown = themes.get_dropdown({
-    hidden = true,
-    no_ignore = true,
-    previewer = false,
-    prompt_title = '',
-    preview_title = '',
-    results_title = '',
-    layout_config = { prompt_position = 'top' },
-  })
+  return vim.tbl_extend('force', opts, {
+    prompt_title = title,
+  }, extra or {})
+end
 
+local dropdown = themes.get_dropdown({
+  hidden = true,
+  no_ignore = true,
+  previewer = false,
+  prompt_title = '',
+  preview_title = '',
+  results_title = '',
+  layout_config = { prompt_position = 'top' },
+})
+
+local function keymaps()
   -- File browser always relative to buffer
   local opts_file_browser = vim.tbl_extend('force', dropdown, {
     path = '%:p:h',
   })
 
-  -- Set current folder as prompt title
-  local with_title = function(opts, extra)
-    extra = extra or {}
-    local path = opts.cwd or opts.path or extra.cwd or extra.path or nil
-    local title = ''
-    local buf_path = vim.fn.expand('%:p:h')
-    local cwd = vim.fn.getcwd()
-    if path ~= nil and buf_path ~= cwd then
-      title = plenary:new(buf_path):make_relative(cwd)
-    else
-      title = vim.fn.fnamemodify(cwd, ':t')
-    end
-
-    return vim.tbl_extend('force', opts, {
-      prompt_title = title,
-    }, extra or {})
-  end
-
-  vim.api.nvim_create_augroup('startup', { clear = true })
-  vim.api.nvim_create_autocmd('VimEnter', {
-    group = 'startup',
-    pattern = '*',
-    callback = function()
-      -- Open file browser if argument is a folder
-      local arg = vim.api.nvim_eval('argv(0)')
-      if arg and (vim.fn.isdirectory(arg) ~= 0 or arg == '') then
-        vim.defer_fn(function()
-          builtin.find_files(with_title(dropdown))
-        end, 50)
-      end
-    end,
-  })
-
   map({ 'i', 'n' }, '<M-]>', function()
-    builtin.find_files(with_title(dropdown))
+    builtin.find_files(options_with_title(dropdown))
   end, 'Find files')
 
   map({ 'i', 'n' }, '<M-}>', function()
-    builtin.find_files(with_title(dropdown, { cwd = vim.fn.expand('%:p:h') }))
+    builtin.find_files(options_with_title(dropdown, { cwd = vim.fn.expand('%:p:h') }))
   end, 'Find files relative to buffer')
 
   map({ 'i', 'n' }, '<M-->', function()
-    builtin.find_files(with_title({}))
+    builtin.find_files(options_with_title({}))
   end, 'Find files with preview')
 
   map({ 'i', 'n' }, '<M-_>', function()
-    builtin.find_files(with_title({ cwd = vim.fn.expand('%:p:h') }))
+    builtin.find_files(options_with_title({ cwd = vim.fn.expand('%:p:h') }))
   end, 'Find files with preview relative to buffer')
 
   map({ 'i', 'n' }, '<M-f>', function()
-    telescope.extensions.file_browser.file_browser(with_title(opts_file_browser))
+    telescope.extensions.file_browser.file_browser(options_with_title(opts_file_browser))
   end, 'Browse files relative to buffer')
 
   map({ 'i', 'n' }, '<M-F>', function()
@@ -90,15 +75,15 @@ local function keymaps()
   end, 'Browse files relative to buffer with preview')
 
   map({ 'i', 'n' }, '<M-g>', function()
-    builtin.live_grep(with_title({ cwd = vim.fn.expand('%:p:h') }))
+    builtin.live_grep(options_with_title({ cwd = vim.fn.expand('%:p:h') }))
   end, '[S]earch Live [G]rep relative buffer')
 
   map({ 'i', 'n' }, '<M-G>', function()
-    builtin.live_grep(with_title({}))
+    builtin.live_grep(options_with_title({}))
   end, '[S]earch Live [G]rep')
 
   map({ 'i', 'n' }, '<M-b>', function()
-    builtin.buffers(dropdown)
+    pickers.buffers(dropdown)
   end, 'Find buffers')
 
   map({ 'v' }, '<M-s>g', function()
@@ -111,7 +96,7 @@ local function keymaps()
   end, '[S]earch [W]ord under cursor in cwd')
 
   map({ 'i', 'n' }, '<M-s>w', function()
-    builtin.grep_string(with_title({ cwd = vim.fn.expand('%:p:h') }))
+    builtin.grep_string(options_with_title({ cwd = vim.fn.expand('%:p:h') }))
   end, '[S]earch [W]ord under cursor in cwd relative to buffer')
 
   map('n', '<M-s>h', builtin.help_tags, '[S]earch [H]elp')
@@ -166,29 +151,27 @@ local function keymaps()
   )
 end
 
+local M = {}
+
 function M.setup()
-  local telescope = require('telescope')
-  local open_in_existing_window = function(prompt_bufnr)
-    local action_set = require('telescope.actions.set')
-    local action_state = require('telescope.actions.state')
-
-    local picker = action_state.get_current_picker(prompt_bufnr)
-    picker.get_selection_window = function(_, _)
-      local picked_window_id = require('window-picker').pick_window({
-        filter_rules = {
-          autoselect_one = false,
-        },
-      }) or vim.api.nvim_get_current_win()
-      -- Unbind after using so next instance of the picker acts normally
-      picker.get_selection_window = nil
-      return picked_window_id
-    end
-
-    return action_set.edit(prompt_bufnr, 'edit')
-  end
+  vim.api.nvim_create_augroup('startup', { clear = true })
+  vim.api.nvim_create_autocmd('VimEnter', {
+    group = 'startup',
+    pattern = '*',
+    callback = function()
+      -- Open file browser if argument is a folder
+      local arg = vim.api.nvim_eval('argv(0)')
+      if arg and (vim.fn.isdirectory(arg) ~= 0 or arg == '') then
+        vim.defer_fn(function()
+          builtin.find_files(options_with_title(dropdown))
+        end, 50)
+      end
+    end,
+  })
 
   telescope.setup({
     defaults = {
+      dynamic_preview_title = true,
       prompt_prefix = '󰿟 ',
       prompt_title = '',
       results_title = '',
@@ -212,7 +195,8 @@ function M.setup()
       mappings = {
         i = {
           ['<M-r>'] = 'delete_buffer',
-          ['<M-O>'] = open_in_existing_window,
+          ["<M-'>"] = actions.toggle_buffer_mark,
+          ['<M-O>'] = actions.select_window,
           ['<M-Down>'] = 'cycle_history_next',
           ['<M-Up>'] = 'cycle_history_prev',
         },
