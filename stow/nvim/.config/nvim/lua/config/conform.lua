@@ -4,6 +4,8 @@ function M.setup()
   require('conform').setup({
     formatters_by_ft = {
       lua = { 'stylua' },
+      sh = { 'shfmt' },
+      zsh = { 'shfmt' },
       python = { 'black' },
       -- Use a sub-list to run only the first available formatter
       javascript = { { 'prettierd', 'prettier' } },
