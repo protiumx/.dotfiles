@@ -1,11 +1,11 @@
 local Path = require('plenary.path')
+local strings = require('plenary.strings')
 
 local conf = require('telescope.config').values
 local entry_display = require('telescope.pickers.entry_display')
 local finders = require('telescope.finders')
 local make_entry = require('telescope.make_entry')
 local pickers = require('telescope.pickers')
-local strings = require('plenary.strings')
 local utils = require('telescope.utils')
 
 local sorters = require('config.telescope.sorters')
@@ -112,8 +112,12 @@ function M.buffers(opts)
     return vim.fn.getbufinfo(a)[1].lastused > vim.fn.getbufinfo(b)[1].lastused
   end)
 
-  table.sort(bufnrs, function(a, _)
-    return state.get_buffer(a) and true or false
+  table.sort(bufnrs, function(a, b)
+    if state.get_buffer(a) then
+      return true
+    end
+
+    return false
   end)
 
   local buffers = {}
