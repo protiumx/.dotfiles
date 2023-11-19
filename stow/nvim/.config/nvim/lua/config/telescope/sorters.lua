@@ -12,6 +12,8 @@ function M.buffer_sorter()
     end
     return sorter.internal(s, prompt, line, entry)
   end
+
+  return sorter
 end
 
 function M.file_sorter()
@@ -28,6 +30,8 @@ function M.file_sorter()
     end
     return sorter.internal(s, prompt, line, entry)
   end
+
+  return sorter
 end
 
 return M
