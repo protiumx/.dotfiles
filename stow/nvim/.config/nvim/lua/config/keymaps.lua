@@ -153,11 +153,13 @@ vim.keymap.set('i', '<M-g>id', '<Esc>"=strftime("%Y-%m-%dT%H:%M")<CR>p')
 vim.keymap.set('i', '<M-g>bd', '"=strftime("%Y%m%d%H%M")<CR>p')
 
 -- Quickfix navigation
-vim.keymap.set('n', '<Leader>q', '<cmd>cn<CR>')
-vim.keymap.set('n', '<Leader>Q', '<cmd>cp<CR>')
+vim.keymap.set('n', '<Leader>qn', '<cmd>cn<CR>')
+vim.keymap.set('n', '<Leader>qp', '<cmd>cp<CR>')
+vim.keymap.set('n', '<Leader>qo', '<cmd>copen<CR>')
+vim.keymap.set('n', '<Leader>Q', '<cmd>cclose<CR>')
 
-vim.keymap.set('n', 'H', '^', { silent = true })
-vim.keymap.set('n', 'L', '$', { silent = true })
+vim.keymap.set({ 'n', 'v' }, 'H', '^', { silent = true })
+vim.keymap.set({ 'n', 'v' }, 'L', '$', { silent = true })
 
 vim.keymap.set('n', '<Leader>s', '<cmd>w<CR>')
 vim.keymap.set('n', '<Leader>g', 'g<C-g>')
