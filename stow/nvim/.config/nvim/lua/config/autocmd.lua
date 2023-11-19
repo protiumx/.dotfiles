@@ -30,13 +30,25 @@ autocmd({ 'BufWritePre' }, {
 autocmd('TextYankPost', {
   group = augroup('yank_post', { clear = true }),
   pattern = '*',
-  silent = true,
   callback = function()
     vim.highlight.on_yank({
       higroup = 'IncSearch',
       timeout = 300,
     })
   end,
+})
+
+augroup('autoqf', { clear = true })
+autocmd('QuickFixCmdPost', {
+  group = 'autoqf',
+  pattern = '[^l]*',
+  command = 'cwindow'
+})
+
+autocmd('QuickFixCmdPost', {
+  group = 'autoqf',
+  pattern = 'l*',
+  command = 'lwindow'
 })
 
 autocmd({ 'BufNewFile', 'BufRead' }, {
