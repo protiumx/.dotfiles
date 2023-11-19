@@ -7,7 +7,12 @@ vim.keymap.set('n', '<Leader>d', '"_d', { silent = true })
 vim.keymap.set('v', '<Leader>d', '"_d', { silent = true })
 
 -- Prepare replace all occurrences of word under cursor
-vim.keymap.set('n', '<Leader>wr', [[:%s/\<<C-r><C-w>\>//g<Left><Left>]])
+vim.keymap.set(
+  'n',
+  '<Leader>wr',
+  [[:%s/\<<C-r><C-w>\>//g<Left><Left>]],
+  { desc = 'Prepare current word sustituion' }
+)
 vim.keymap.set('i', '<C-c>', '<Esc>', { silent = true })
 
 vim.keymap.set('n', 'Q', '<nop>', { silent = true })
@@ -69,12 +74,15 @@ vim.keymap.set('i', '<M-a>', '<Esc>ggVG', { silent = true })
 vim.keymap.set('n', '<Leader>o', '<cmd>e <C-R>=expand("%:h") . "/"<CR>')
 vim.keymap.set('n', '<Leader>vo', '<cmd>vsp | e <C-R>=expand("%:h") . "/"<CR>')
 -- Go to previous buffer and open # in vertical split
-vim.keymap.set('n', '<Leader>bb', '<cmd>bp | vs #<CR>')
+vim.keymap.set('n', '<Leader>bs', '<cmd>bp | vs #<CR>')
 
--- Paste formatted
-vim.keymap.set('n', 'p', 'p=`]', { silent = true })
-vim.keymap.set('n', 'P', 'P=`]', { silent = true })
-vim.keymap.set('n', '<C-p>', 'p', { silent = true, desc = 'paste unformatted' })
+-- Go to end after yank or paste
+vim.keymap.set({ 'n', 'v' }, 'p', 'p`]', { silent = true })
+vim.keymap.set({ 'n', 'v' }, 'P', 'P`]', { silent = true })
+vim.keymap.set('v', 'y', 'y`]', { silent = true })
+
+vim.keymap.set('n', 'gV', '`[v`]', { silent = true, desc = 'Select what was pasted' })
+
 -- Fix indent in file
 vim.keymap.set('n', '<Leader>T', 'gg=G')
 
@@ -148,4 +156,10 @@ vim.keymap.set('i', '<M-g>bd', '"=strftime("%Y%m%d%H%M")<CR>p')
 vim.keymap.set('n', '<Leader>q', '<cmd>cn<CR>')
 vim.keymap.set('n', '<Leader>Q', '<cmd>cp<CR>')
 
-vim.keymap.set('v', '\\', 'y/<C-R>"<CR>', { desc = 'search for highlighted text' })
+vim.keymap.set('n', 'H', '^', { silent = true })
+vim.keymap.set('n', 'L', '$', { silent = true })
+
+vim.keymap.set('n', '<Leader>s', '<cmd>w<CR>')
+vim.keymap.set('n', '<Leader>g', 'g<C-g>')
+
+vim.keymap.set('v', '\\', 'y/<C-R>"<CR>', { desc = 'Search for highlighted text' })
