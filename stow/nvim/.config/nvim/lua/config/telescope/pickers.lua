@@ -8,6 +8,7 @@ local make_entry = require('telescope.make_entry')
 local pickers = require('telescope.pickers')
 local utils = require('telescope.utils')
 
+local actions = require('config.telescope.actions')
 local sorters = require('config.telescope.sorters')
 local state = require('config.state')
 
@@ -121,21 +122,12 @@ function M.buffers(opts)
   end)
 
   local buffers = {}
-  local default_selection_idx = 1
   for _, bufnr in ipairs(bufnrs) do
-    local flag = bufnr == vim.fn.bufnr('') and '%' or (bufnr == vim.fn.bufnr('#') and '#' or ' ')
-
-    if opts.sort_lastused and not opts.ignore_current_buffer and flag == '#' then
-      default_selection_idx = 2
-    end
-
-    local element = {
+    table.insert(buffers, {
       bufnr = bufnr,
-      flag = flag,
+      flag = vim.fn.bufnr('') and '%' or (bufnr == vim.fn.bufnr('#') and '#' or ' '),
       info = vim.fn.getbufinfo(bufnr)[1],
-    }
-
-    table.insert(buffers, element)
+    })
   end
 
   pickers
@@ -146,7 +138,11 @@ function M.buffers(opts)
       }),
       previewer = conf.grep_previewer(opts),
       sorter = sorters.buffer_sorter(),
-      default_selection_index = default_selection_idx,
+      default_selection_index = 1,
+      attach_mappings = function(_, map)
+        map('i', "<M-'>", actions.toggle_buffer_mark)
+        return true
+      end,
     })
     :find()
 end

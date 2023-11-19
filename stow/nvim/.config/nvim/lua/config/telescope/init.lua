@@ -195,7 +195,6 @@ function M.setup()
       mappings = {
         i = {
           ['<M-r>'] = 'delete_buffer',
-          ["<M-'>"] = actions.toggle_buffer_mark,
           ['<M-O>'] = actions.select_window,
           ['<M-Down>'] = 'cycle_history_next',
           ['<M-Up>'] = 'cycle_history_prev',
