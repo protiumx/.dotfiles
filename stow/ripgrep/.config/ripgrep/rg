@@ -10,6 +10,7 @@
 --colors=line:none
 --colors=path:fg:62
 --colors=match:fg:205
+--engine=auto
 
 # add custom types
 --type-add
