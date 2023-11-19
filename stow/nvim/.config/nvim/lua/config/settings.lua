@@ -11,6 +11,8 @@ vim.cmd([[
   set fillchars=diff:\ ,
   set pumheight=20
   set undolevels=1000
+  set grepprg=rg\ --vimgrep\ --smart-case\ --hidden\ --no-heading
+  set grepformat=%f:%l:%c:%m
 ]])
 
 -- vim.cmd(
@@ -39,6 +41,9 @@ vim.opt.ignorecase = true
 vim.opt.smartindent = true
 vim.opt.listchars = { eol = '', tab = '  ' }
 vim.opt.list = true
+-- menuone: popup even when there's only one match
+-- noinsert: Do not insert text until a selection is made
+-- noselect: Do not select, force user to select one from the menu
 vim.o.completeopt = 'menu,menuone,noselect'
 vim.o.laststatus = 3
 -- vim.opt.foldmethod = "expr"
