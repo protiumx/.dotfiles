@@ -58,7 +58,7 @@ function M.setup()
         toggle_or_open = '<CR>',
         vsplit = '<C-v>',
         split = '<C-x>',
-        quit = { 'q', '<ESC>' },
+        quit = '<ESC>',
         close = '<ESC>',
       },
     },
