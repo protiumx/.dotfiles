@@ -6,9 +6,9 @@ function M.setup()
     formatters_by_ft = {
       lua = { 'stylua' },
       python = { 'black' },
-      -- Use a sub-list to run only the first available formatter
-      javascript = { { 'prettierd', 'prettier' } },
-      go = { 'gofumpt', 'goimports' },
+      javascript = { 'prettier' },
+      markdown = { 'marksman' },
+      go = { 'gofumpt', 'goimports' }, -- runs both
     },
   })
 

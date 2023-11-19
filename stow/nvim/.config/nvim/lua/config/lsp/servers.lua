@@ -7,6 +7,7 @@ local servers = {
     schemas = require('schemastore').json.schemas(),
   },
   eslint = {},
+  marksman = {},
   rust_analyzer = {
     ['rust-analyzer'] = {
       assist = {
