@@ -30,6 +30,7 @@ autocmd({ 'BufWritePre' }, {
 autocmd('TextYankPost', {
   group = augroup('yank_post', { clear = true }),
   pattern = '*',
+  silent = true,
   callback = function()
     vim.highlight.on_yank({
       higroup = 'IncSearch',
