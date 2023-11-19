@@ -19,13 +19,6 @@ end
 local on_lsp_attach = function(client, bufnr)
   require('config.lsp.keymaps').setup(bufnr)
   -- require('config.lsp.format').setup(bufnr)
-  vim.api.nvim_create_autocmd('BufWritePre', {
-    pattern = '*',
-    callback = function(args)
-      require('conform').format({ bufnr = args.buf, lsp_fallback = true })
-    end,
-  })
-
   if client.name == 'yamlls' then
     client.server_capabilities.documentFormattingProvider = true
   end
