@@ -20,8 +20,11 @@ function M.setup(bufnr)
     vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })
   end, 'Go to next error')
   nmap('K', vim.lsp.buf.hover, 'Show docs')
+  nmap('<C-k>', vim.lsp.buf.signature_help, 'Show signature help')
   nmap('<C-l>h', vim.lsp.buf.document_highlight, 'Highlight node')
   nmap('<C-l>c', vim.lsp.buf.clear_references, 'Clear highlights')
+  nmap('<C-l>l', vim.lsp.buf.setqflist, 'Set quickfix list with diagnostics')
+  nmap('<C-l>f', vim.lsp.buf.format, 'Format')
 end
 
 return M
