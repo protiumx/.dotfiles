@@ -140,7 +140,6 @@ function M.buffers(opts)
 
   pickers
     .new(opts, {
-      prompt_title = 'Buffers',
       finder = finders.new_table({
         results = buffers,
         entry_maker = entry_from_buffer(opts),

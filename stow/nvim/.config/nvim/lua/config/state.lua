@@ -33,7 +33,6 @@ function state.toggle_file_mark(filename)
   if GlobalState.marked_files[filename] then
     GlobalState.marked_files[filename] = nil
   else
-    print('marked file', filename)
     GlobalState.marked_files[filename] = true
   end
 
