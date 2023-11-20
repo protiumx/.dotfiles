@@ -14,6 +14,14 @@ local state = require('config.state')
 
 local M = {}
 
+local tbl_clone = function(original)
+  local copy = {}
+  for key, value in pairs(original) do
+    copy[key] = value
+  end
+  return copy
+end
+
 local function entry_from_buffer(opts)
   local icon_width = 0
   local icon, _ = utils.get_devicons('fname', false)
@@ -143,6 +151,54 @@ function M.buffers(opts)
         map('i', "<M-'>", actions.toggle_buffer_mark)
         return true
       end,
+    })
+    :find()
+end
+
+local fd_search_files_cmd = {
+  'fd',
+  '-t',
+  'f',
+  '-p',
+  '--hidden',
+  '-i',
+  '-E',
+  '.git/*',
+  '-E',
+  'target/*',
+  '-E',
+  '**/node_modules',
+  '-E',
+  '.DS_Store',
+}
+
+-- Find files on prompt change with fd
+function M.find_files(opts)
+  if opts.cwd then
+    opts.cwd = vim.fn.expand(opts.cwd)
+  else
+    opts.cwd = vim.loop.cwd()
+  end
+
+  local cmd_generator = function(prompt)
+    if not prompt or #prompt < 3 then
+      return nil
+    end
+
+    local args = tbl_clone(fd_search_files_cmd)
+    table.insert(args, prompt)
+    table.insert(args, opts.cwd)
+    return args
+  end
+
+  opts.entry_maker = opts.entry_maker or make_entry.gen_from_file(opts)
+
+  pickers
+    .new(opts, {
+      prompt_title = 'Find Files',
+      finder = finders.new_job(cmd_generator, opts.entry_maker, 0, opts.cwd),
+      previewer = conf.file_previewer(opts),
+      sorter = conf.file_sorter(opts),
     })
     :find()
 end

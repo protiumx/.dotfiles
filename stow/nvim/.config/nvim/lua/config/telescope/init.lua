@@ -1,11 +1,12 @@
 local actions = require('config.telescope.actions')
 local pickers = require('config.telescope.pickers')
-
-local builtin = require('telescope.builtin')
-local plenary = require('plenary.path')
-local telescope = require('telescope')
-local themes = require('telescope.themes')
 local utils = require('config.utils')
+
+local plenary = require('plenary.path')
+
+local telescope = require('telescope')
+local builtin = require('telescope.builtin')
+local themes = require('telescope.themes')
 
 local map = function(mode, l, r, desc)
   local opts = { silent = true, desc = '[Telescope] ' .. desc }
@@ -141,8 +142,6 @@ local function keymaps()
     telescope.extensions.macroscope.default(themes.get_dropdown())
   end, '[S]earch [M]acros')
 
-  -- Rg with args
-
   map(
     { 'i', 'n' },
     '<M-s>f',
@@ -163,7 +162,7 @@ function M.setup()
       local arg = vim.api.nvim_eval('argv(0)')
       if arg and (vim.fn.isdirectory(arg) ~= 0 or arg == '') then
         vim.defer_fn(function()
-          builtin.find_files(options_with_title(dropdown))
+          pickers.find_files(options_with_title(dropdown))
         end, 50)
       end
     end,
