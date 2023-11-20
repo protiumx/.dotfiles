@@ -3,8 +3,10 @@ local macos = jit.os == 'OSX'
 vim.g.mapleader = ' '
 
 -- Delete to blackhole register
-vim.keymap.set('n', '<Leader>d', '"_d', { silent = true })
-vim.keymap.set('v', '<Leader>d', '"_d', { silent = true })
+vim.keymap.set({ 'n', 'v' }, '<Leader>D', '"_d', { silent = true })
+-- Delete shortcuts
+vim.keymap.set({ 'n', 'v' }, '<Leader>d_', 'dt_')
+vim.keymap.set({ 'n', 'v' }, '<Leader>d-', 'dt-')
 
 -- Prepare replace all occurrences of word under cursor
 vim.keymap.set(
@@ -15,7 +17,6 @@ vim.keymap.set(
 )
 vim.keymap.set('i', '<C-c>', '<Esc>', { silent = true })
 
-vim.keymap.set('n', 'Q', '<nop>', { silent = true })
 vim.keymap.set('n', 'Y', 'y$', { silent = true })
 
 -- Jump next/prev but centered
@@ -143,7 +144,7 @@ end, { desc = '[Git] reset current file', silent = true })
 
 vim.keymap.set('n', '<M-v>', 'gv', { silent = true, desc = 'activate previous visual block' })
 
-vim.keymap.set('i', '<M-g>ud', function()
+vim.keymap.set('i', '<Leader>gu', function()
   local uuid, _ = vim.fn.system('uuidgen'):gsub('\n', ''):lower()
   vim.api.nvim_put({ uuid }, 'c', false, true)
 end, { silent = true, desc = 'Insert UUID' })
@@ -158,12 +159,14 @@ vim.keymap.set('n', '<Leader>qh', '<cmd>cp<CR>')
 vim.keymap.set('n', '<Leader>qo', '<cmd>copen<CR>')
 vim.keymap.set('n', '<Leader>Q', '<cmd>cclose<CR>')
 
+-- No Ops
 vim.keymap.set('n', '&', '<nop>')
+vim.keymap.set('n', 'Q', '<nop>', { silent = true })
 
 vim.keymap.set({ 'n', 'v' }, 'H', '^', { silent = true })
 vim.keymap.set({ 'n', 'v' }, 'L', '$', { silent = true })
 
 vim.keymap.set('n', '<Leader>s', '<cmd>w<CR>')
-vim.keymap.set('n', '<Leader>g', 'g<C-g>')
+vim.keymap.set('n', '<Leader>G', 'g<C-g>')
 
-vim.keymap.set('v', '\\', 'y/<C-R>"<CR>', { desc = 'Search for highlighted text' })
+vim.keymap.set('v', '<Leader>/', 'y/<C-R>"<CR>', { desc = 'Search for highlighted text' })
