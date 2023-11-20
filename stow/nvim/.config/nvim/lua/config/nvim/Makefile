@@ -8,5 +8,5 @@ ifeq ($(UNAME_S),Darwin)
 	CFLAGS=-shared -fPIC -Wl,-undefined -Wl,dynamic_lookup
 endif
 
-libmain.so: main.c
-	$(CC) $(CFLAGS) -o libmain.so main.c
+libnvim.so: main.c
+	$(CC) $(CFLAGS) -o libnvim.so main.c

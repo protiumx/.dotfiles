@@ -4,7 +4,7 @@ ffi.cdef([[
 char *file_under_cursor();
 ]])
 
-local lib = ffi.load('main')
+local lib = ffi.load('nvim')
 
 local M = {}
 
