@@ -88,17 +88,17 @@ local function keymaps()
   end, 'Find buffers')
 
   map({ 'v' }, '<M-s>g', function()
-    local search = utils.vtext()
+    local search = utils.get_selection_text()
     builtin.grep_string({ search = search, prompt_title = 'Searh: ' .. string.sub(search, 0, 20) })
   end, '[S]earch Live [G]rep from visual selection')
-
-  map({ 'i', 'n' }, '<M-s>W', function()
-    builtin.grep_string({})
-  end, '[S]earch [W]ord under cursor in cwd')
 
   map({ 'i', 'n' }, '<M-s>w', function()
     builtin.grep_string(options_with_title({ cwd = vim.fn.expand('%:p:h') }))
   end, '[S]earch [W]ord under cursor in cwd relative to buffer')
+
+  map({ 'i', 'n' }, '<M-s>W', function()
+    builtin.grep_string({})
+  end, '[S]earch [W]ord under cursor in cwd')
 
   map('n', '<M-s>h', builtin.help_tags, '[S]earch [H]elp')
   map('n', '<M-s>k', builtin.keymaps, '[S]earch [K]eymaps')
@@ -115,15 +115,16 @@ local function keymaps()
 
   map('n', '<C-g>b', builtin.git_branches, '[G]it [B]ranches')
   map('n', '<C-g>h', builtin.git_bcommits, '[G]it [H]istory of buffer')
-  map('n', '<C-g>C', builtin.git_commits, '[G]it [C]ommits')
-  map('n', '<C-g>f', function()
+  map('n', '<C-g>c', builtin.git_commits, '[G]it [C]ommits')
+  map('n', '<C-g>S', function()
     builtin.git_status(dropdown)
-  end, '[G]it status [F]iles')
+  end, '[G]it [S]tatus')
 
-  map('n', '<M-s>d', builtin.diagnostics, '[S]earch [D]iagnostics')
-  map({ 'i', 'n' }, '<M-s>t', function()
+  map('n', '<M-l>d', builtin.diagnostics, '[L]SP [D]iagnostics')
+  map('n', '<M-l>c', builtin.diagnostics, '[L]SP Incoming [C]alls')
+  map({ 'i', 'n' }, '<M-l>s', function()
     builtin.lsp_document_symbols(dropdown)
-  end, '[S]earch [S]ymbols (LSP)')
+  end, '[L]SP [S]ymbols')
 
   map({ 'i', 'n' }, '<M-s>R', builtin.resume, 'Resume last search')
   map('n', '<M-s>p', builtin.pickers, '[S]earch [P]revious pickers')
@@ -134,11 +135,11 @@ local function keymaps()
   end, '[S]earch [P]rojects')
 
   -- Neoclip
-  map({ 'n', 'i', 'v', 'x' }, '<M-y>', function()
+  map({ 'n', 'i', 'v' }, '<M-y>', function()
     telescope.extensions.neoclip.default(themes.get_dropdown())
   end, 'Search Yanks')
 
-  map('n', '<M-s>m', function()
+  map({ 'n', 'i' }, '<M-s>m', function()
     telescope.extensions.macroscope.default(themes.get_dropdown())
   end, '[S]earch [M]acros')
 
@@ -162,7 +163,7 @@ function M.setup()
       local arg = vim.api.nvim_eval('argv(0)')
       if arg and (vim.fn.isdirectory(arg) ~= 0 or arg == '') then
         vim.defer_fn(function()
-          pickers.find_files(options_with_title(dropdown))
+          builtin.find_files(options_with_title(dropdown))
         end, 50)
       end
     end,
@@ -193,7 +194,7 @@ function M.setup()
       path_display = { 'truncate' },
       mappings = {
         i = {
-          ['<M-r>'] = 'delete_buffer',
+          ['<M-x>'] = 'delete_buffer',
           ['<M-O>'] = actions.select_window,
           ['<M-Down>'] = 'cycle_history_next',
           ['<M-Up>'] = 'cycle_history_prev',
