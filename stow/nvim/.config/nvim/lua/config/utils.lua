@@ -36,19 +36,20 @@ function M.open_file_under_cursor()
   end
 
   local parts = vim.split(file, ':')
-  local winid = vim.fn.bufwinid(parts[1])
-  if winid == -1 then
-    vim.cmd('vs ' .. parts[1])
-    return
-  end
-
-  local cmd = 'call win_gotoid(' .. winid .. ')'
+  local pos_cmd = ''
   if #parts == 2 then
-    cmd = cmd .. ' | ' .. parts[2]
+    pos_cmd = parts[2]
   elseif #parts == 3 then
-    cmd = cmd .. string.format(' | call cursor(%s, %s)', parts[2], parts[3])
+    pos_cmd = string.format('call cursor(%s, %s)', parts[2], parts[3])
   end
 
+  -- local bufnr = vim.fn.bufnr(parts[1])
+  -- local winids = vim.fn.win_findbuf(bufnr)
+  -- if #winids == 0 then
+  --   vim.cmd(string.format('vs %s | %s', parts[1], pos_cmd))
+  --   return
+  -- end
+  local cmd = string.format('drop %s | %s', parts[1], pos_cmd)
   vim.cmd(cmd)
 end
 
