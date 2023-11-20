@@ -1,4 +1,7 @@
 local macos = jit.os == 'OSX'
+local system_clip_reg = macos and '*' or '+'
+
+local utils = require('config.utils')
 
 vim.g.mapleader = ' '
 
@@ -58,7 +61,7 @@ vim.keymap.set('n', '``', '<C-^>', { silent = true })
 -- Close buffer without changing window layout
 vim.keymap.set('n', '--', '<cmd>e # | bd #<CR>', { silent = true })
 -- Close all except the current buffer
-vim.keymap.set('n', '<M-Q>', '<cmd>%bd | e #<CR>', { silent = true })
+vim.keymap.set('n', '<M-X>', '<cmd>%bd | e #<CR>', { silent = true })
 
 -- Go next/prev buffer using Tab
 vim.keymap.set('n', '<Tab>', '<cmd>bn<CR>', { silent = true })
@@ -66,6 +69,10 @@ vim.keymap.set('n', '<S-Tab>', '<cmd>bp<CR>', { silent = true })
 -- Tab navigation
 vim.keymap.set({ 't', 'n' }, "<M-'>", '<cmd>tabn<CR>', { silent = true })
 vim.keymap.set({ 't', 'n' }, '<M-\\>', '<cmd>tabp<CR>', { silent = true })
+vim.keymap.set('t', '<M-h>', '<cmd>wincmd h<CR>', { silent = true })
+vim.keymap.set('t', '<M-j>', '<cmd>wincmd j<CR>', { silent = true })
+vim.keymap.set('t', '<M-k>', '<cmd>wincmd k<CR>', { silent = true })
+vim.keymap.set('t', '<M-l>', '<cmd>wincmd l<CR>', { silent = true })
 
 -- Select all text in current buffer
 vim.keymap.set('n', '<M-a>', 'ggVG', { silent = true })
@@ -80,7 +87,6 @@ vim.keymap.set('n', '<Leader>bs', '<cmd>bp | vs #<CR>')
 -- Go to end after yank or paste
 vim.keymap.set({ 'n', 'v' }, 'p', 'p`]', { silent = true })
 vim.keymap.set({ 'n', 'v' }, 'P', 'P`]', { silent = true })
-vim.keymap.set('v', 'y', 'y`]', { silent = true })
 
 vim.keymap.set('n', 'gV', '`[v`]', { silent = true, desc = 'Select what was pasted' })
 
@@ -92,7 +98,18 @@ vim.keymap.set('i', '<M-o>', '<C-o>o', { silent = true })
 vim.keymap.set('i', '<M-O>', '<C-o>O', { silent = true })
 
 -- Terminal keymaps
-vim.keymap.set({ 'i', 'n' }, '<F12>', '<cmd>$tabnew term://zsh<CR>', { silent = true })
+vim.keymap.set(
+  { 'i', 'n' },
+  '<F12>',
+  '<cmd>$tabnew term://zsh<CR>',
+  { silent = true, desc = 'Open terminal in new tab in last position' }
+)
+vim.keymap.set(
+  { 'i', 'n' },
+  '<F10>',
+  '<cmd>vs term://zsh<CR>',
+  { silent = true, desc = 'Open terminal in vertical split' }
+)
 -- Close terminal
 vim.keymap.set('t', '<C-q>', '<cmd>bd!<CR>', { silent = true })
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { silent = true, desc = 'Normal mode from term' })
@@ -100,32 +117,24 @@ vim.keymap.set('t', '``', '<cmd>tabn<CR>', { silent = true }) -- avoid switching
 
 vim.keymap.set('n', '<Leader>S', ':mks! .session.vim<CR>')
 
-if macos then
-  -- Copy to system clipboard
-  vim.keymap.set('v', '<C-y>', '"*y', { silent = true })
-  vim.keymap.set('n', '<Leader>P', function()
-    local path = vim.fn.expand('%:~:.')
-    vim.fn.setreg('*', path)
-    print('Copied: ' .. path)
-  end, { desc = 'copy current path to clipboard' })
-  vim.keymap.set('n', '<Leader>L', function()
-    local path = vim.fn.expand('%:h') .. '/' .. vim.fn.expand('%:t') .. ':' .. vim.fn.line('.')
-    vim.fn.setreg('*', path)
-    print('Copied: ' .. path)
-  end, { desc = 'copy current path with line and column to clipboard' })
-else
-  vim.keymap.set('v', '<C-y>', '"+y', { silent = true })
-  vim.keymap.set('n', '<Leader>P', function()
-    local path = vim.fn.expand('%:~:.')
-    vim.fn.setreg('+', path)
-    print('Copied: ' .. path)
-  end, { desc = 'copy current path to clipboard' })
-  vim.keymap.set('n', '<Leader>L', function()
-    local path = vim.fn.expand('%:h') .. '/' .. vim.fn.expand('%:t') .. ':' .. vim.fn.line('.')
-    vim.fn.setreg('+', path)
-    print('Copied: ' .. path)
-  end, { desc = 'copy current path with line and column to clipboard' })
-end
+vim.keymap.set(
+  'v',
+  '<C-y>',
+  '"' .. system_clip_reg .. 'y',
+  { silent = true, desc = 'Junk into ' .. system_clip_reg .. 'reg' }
+)
+
+vim.keymap.set('n', '<Leader>P', function()
+  local path = vim.fn.expand('%:~:.')
+  vim.fn.setreg(system_clip_reg, path)
+  print('Copied: ' .. path)
+end, { desc = 'Copy current path to clipboard' })
+
+vim.keymap.set('n', '<Leader>L', function()
+  local path = vim.fn.expand('%:h') .. '/' .. vim.fn.expand('%:t') .. ':' .. vim.fn.line('.')
+  vim.fn.setreg(system_clip_reg, path)
+  print('Copied: ' .. path)
+end, { desc = 'Copy current path with line and column to clipboard' })
 
 -- Git
 vim.keymap.set('n', '<C-g>s', function()
@@ -144,7 +153,7 @@ end, { desc = '[Git] reset current file', silent = true })
 
 vim.keymap.set('n', '<M-v>', 'gv', { silent = true, desc = 'activate previous visual block' })
 
-vim.keymap.set('i', '<Leader>gu', function()
+vim.keymap.set('i', '<M-i>u', function()
   local uuid, _ = vim.fn.system('uuidgen'):gsub('\n', ''):lower()
   vim.api.nvim_put({ uuid }, 'c', false, true)
 end, { silent = true, desc = 'Insert UUID' })
@@ -168,5 +177,7 @@ vim.keymap.set({ 'n', 'v' }, 'L', '$', { silent = true })
 
 vim.keymap.set('n', '<Leader>s', '<cmd>w<CR>')
 vim.keymap.set('n', '<Leader>G', 'g<C-g>')
+
+vim.keymap.set('n', '<Leader>gF', utils.open_file_under_cursor)
 
 vim.keymap.set('v', '<Leader>/', 'y/<C-R>"<CR>', { desc = 'Search for highlighted text' })
