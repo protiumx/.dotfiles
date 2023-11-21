@@ -1,5 +1,33 @@
 local M = {}
 
+local kind_icons = {
+  Class = '  ',
+  Color = '  ',
+  Constant = '  ',
+  Constructor = '  ',
+  Enum = '  ',
+  EnumMember = '  ',
+  Event = '  ',
+  Field = '  ',
+  File = '  ',
+  Folder = '  ',
+  Function = '  ',
+  Interface = '  ',
+  Keyword = '  ',
+  Method = '  ',
+  Module = '  ',
+  Operator = '  ',
+  Property = '  ',
+  Reference = '  ',
+  Snippet = '  ',
+  Struct = '  ',
+  Text = '  ',
+  TypeParameter = '  ',
+  Unit = '  ',
+  Value = '  ',
+  Variable = '  ',
+}
+
 function M.setup()
   local cmp = require('cmp')
   local cmp_types = require('cmp.types')
@@ -7,38 +35,66 @@ function M.setup()
   local types = require('cmp.types')
   local luasnip = require('luasnip')
 
-  local kind_icons = {
-    Class = '  ',
-    Color = '  ',
-    Constant = '  ',
-    Constructor = '  ',
-    Enum = '  ',
-    EnumMember = '  ',
-    Event = '  ',
-    Field = '  ',
-    File = '  ',
-    Folder = '  ',
-    Function = '  ',
-    Interface = '  ',
-    Keyword = '  ',
-    Method = '  ',
-    Module = '  ',
-    Operator = '  ',
-    Property = '  ',
-    Reference = '  ',
-    Snippet = '  ',
-    Struct = '  ',
-    Text = '  ',
-    TypeParameter = '  ',
-    Unit = '  ',
-    Value = '  ',
-    Variable = '  ',
+  local sources = {
+    lsp = {
+      name = 'nvim_lsp',
+      priority = 1000,
+      entry_filter = function(entry, _)
+        return cmp_types.lsp.CompletionItemKind[entry:get_kind()] ~= 'Text'
+      end,
+    },
+
+    snippets = {
+      name = 'luasnip',
+      priority = 80,
+    },
+
+    buffer = {
+      name = 'buffer',
+      group_index = 2,
+      keyword_length = 3,
+      option = {
+        -- Only buffers in the current tab
+        get_bufnrs = function()
+          local bufs = {}
+          for _, win in ipairs(vim.api.nvim_list_wins()) do
+            bufs[vim.api.nvim_win_get_buf(win)] = true
+          end
+          return vim.tbl_keys(bufs)
+        end,
+      },
+      priority = 60,
+    },
+
+    lua = {
+      name = 'nvim_lua',
+      priority = 20,
+    },
+
+    path = {
+      name = 'path',
+      keyword_length = 3,
+      group_index = 2,
+      priority = 40,
+    },
+
+    spell = {
+      name = 'spell',
+      priority = 10,
+    },
+  }
+
+  local excluded_ftypes = {
+    sagarename = true,
+    TelescopePrompt = true,
+    ['dap-repl'] = true,
+    dapui_watches = true,
   }
 
   cmp.setup({
     enabled = function()
       local ftype = vim.api.nvim_buf_get_option(0, 'filetype')
-      return ftype ~= 'sagarename' and ftype ~= 'TelescopePrompt'
+      return not excluded_ftypes[ftype]
     end,
     confirmation = {
       default_behavior = types.cmp.ConfirmBehavior.Replace,
@@ -66,47 +122,12 @@ function M.setup()
       throttle = 150,
     },
     sources = {
-      {
-        name = 'nvim_lsp',
-        priority = 1000,
-        entry_filter = function(entry, _)
-          return cmp_types.lsp.CompletionItemKind[entry:get_kind()] ~= 'Text'
-        end,
-      },
-      {
-        name = 'luasnip',
-        priority = 80,
-      },
-      {
-        name = 'nvim_lua',
-        priority = 20,
-      },
-      {
-        name = 'buffer',
-        group_index = 2,
-        keyword_length = 3,
-        option = {
-          -- Only buffers in the current tab
-          get_bufnrs = function()
-            local bufs = {}
-            for _, win in ipairs(vim.api.nvim_list_wins()) do
-              bufs[vim.api.nvim_win_get_buf(win)] = true
-            end
-            return vim.tbl_keys(bufs)
-          end,
-        },
-        priority = 60,
-      },
-      {
-        name = 'path',
-        keyword_length = 3,
-        group_index = 2,
-        priority = 40,
-      },
-      -- {
-      --   name = 'spell',
-      --   priority = 10,
-      -- },
+      sources.lsp,
+      sources.snippets,
+      sources.snippets,
+      sources.lua,
+      sources.buffer,
+      sources.path,
     },
     formatting = {
       fields = { 'abbr', 'kind' },
@@ -177,6 +198,21 @@ function M.setup()
   luasnip.config.set_config({
     region_check_events = 'InsertEnter',
     delete_check_events = 'InsertLeave',
+  })
+
+  vim.api.nvim_create_autocmd('FileType', {
+    group = vim.api.nvim_create_augroup('cmp-ft', { clear = true }),
+    pattern = { 'markdown' },
+    callback = function()
+      require('cmp').setup.buffer({
+        sources = {
+          sources.spell,
+          sources.snippets,
+          sources.path,
+          sources.buffer,
+        },
+      })
+    end,
   })
 
   require('luasnip.loaders.from_vscode').lazy_load()
