@@ -60,4 +60,23 @@ function M.find_buffer_by_name(name)
   return -1
 end
 
+--- Uses `errorformat` to get a file and position from the current line
+function M.open_file_from_error()
+  local elems = vim.fn.getqflist({
+    efm = vim.o.errorformat,
+    lines = { vim.api.nvim_get_current_line() },
+  }).items
+
+  if #elems < 1 then
+    return
+  end
+  local fname = vim.fn.bufname(elems[1].bufnr)
+  if not fname then
+    vim.notify('No buffer found', vim.log.levels.ERROR)
+    return
+  end
+
+  vim.cmd(string.format('drop %s | call cursor(%s, %s)', fname, elems[1].lnum, elems[1].col))
+end
+
 return M

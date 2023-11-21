@@ -88,6 +88,7 @@ vim.keymap.set('n', '<Leader>bs', '<cmd>bp | vs #<CR>')
 -- Go to end after yank or paste
 vim.keymap.set({ 'n', 'v' }, 'p', 'p`]', { silent = true })
 vim.keymap.set({ 'n', 'v' }, 'P', 'P`]', { silent = true })
+vim.keymap.set({ 'n', 'v' }, '<C-p>', 'p', { silent = true })
 
 vim.keymap.set('n', 'gV', '`[v`]', { silent = true, desc = 'Select what was pasted' })
 
@@ -180,6 +181,17 @@ vim.keymap.set({ 'n', 'v' }, 'L', '$', { silent = true })
 vim.keymap.set('n', '<Leader>s', '<cmd>w<CR>')
 vim.keymap.set('n', '<Leader>G', 'g<C-g>')
 
-vim.keymap.set('n', '<Leader>gF', utils.open_file_under_cursor)
+vim.keymap.set(
+  'n',
+  '<Leader>gF',
+  utils.open_file_under_cursor,
+  { silent = true, desc = 'Opens the file under cursor and sets position' }
+)
+vim.keymap.set(
+  'n',
+  '<Leader>ge',
+  utils.open_file_from_error,
+  { silent = true, desc = 'Opens the file from errorformat and sets position' }
+)
 
 vim.keymap.set('v', '<Leader>/', 'y/<C-R>"<CR>', { desc = 'Search for highlighted text' })
