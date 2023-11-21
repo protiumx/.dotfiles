@@ -36,12 +36,7 @@ function M.open_file_under_cursor()
   end
 
   local parts = vim.split(file, ':')
-  local pos_cmd = ''
-  if #parts == 2 then
-    pos_cmd = parts[2]
-  elseif #parts == 3 then
-    pos_cmd = string.format('call cursor(%s, %s)', parts[2], parts[3])
-  end
+  local pos_cmd = string.format('call cursor(%s, %s)', parts[2], #parts == 3 and parts[3] or '0')
 
   -- local bufnr = vim.fn.bufnr(parts[1])
   -- local winids = vim.fn.win_findbuf(bufnr)
