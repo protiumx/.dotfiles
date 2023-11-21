@@ -498,7 +498,6 @@ return packer.startup(function(use)
     requires = {
       'theHamsta/nvim-dap-virtual-text',
       'rcarriga/nvim-dap-ui',
-      { 'leoluz/nvim-dap-go', module = 'dap-go' },
     },
     config = function()
       require('config.dap').setup()

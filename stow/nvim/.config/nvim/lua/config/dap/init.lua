@@ -1,6 +1,9 @@
+local dap = require('dap')
+local dapui = require('dapui')
+
 local M = {}
 
-local function configure()
+local function configure_symbols()
   local dap_breakpoint = {
     error = {
       text = '',
@@ -34,7 +37,6 @@ local function configure_exts()
     commented = true,
   })
 
-  local dap, dapui = require('dap'), require('dapui')
   dapui.setup({}) -- use default
 
   dap.listeners.after.event_initialized['dapui_config'] = function()
@@ -49,11 +51,43 @@ local function configure_exts()
 end
 
 local function configure_debuggers()
-  require('config.dap.go').setup()
+  dap.adapters.delve = {
+    type = 'server',
+    port = '${port}',
+    executable = {
+      command = 'dlv',
+      args = { 'dap', '-l', '127.0.0.1:${port}' },
+    },
+  }
+
+  -- https://github.com/go-delve/delve/blob/master/Documentation/usage/dlv_dap.md
+  dap.configurations.go = {
+    {
+      type = 'delve',
+      name = 'Debug Go',
+      request = 'launch',
+      program = '${file}',
+    },
+    {
+      type = 'delve',
+      name = 'Debug Go test', -- configuration for debugging test files
+      request = 'launch',
+      mode = 'test',
+      program = '${file}',
+    },
+    -- works with go.mod packages and sub packages
+    {
+      type = 'delve',
+      name = 'Debug Go test (go.mod)',
+      request = 'launch',
+      mode = 'test',
+      program = './${relativeFileDirname}',
+    },
+  }
 end
 
 function M.setup()
-  configure()
+  configure_symbols()
   configure_exts()
   configure_debuggers()
   require('config.dap.keymaps').setup()
