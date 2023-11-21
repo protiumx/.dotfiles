@@ -60,6 +60,7 @@ vim.keymap.set('n', '<Leader>l', '<C-w>l', { silent = true })
 vim.keymap.set('n', '``', '<C-^>', { silent = true })
 -- Close buffer without changing window layout
 vim.keymap.set('n', '--', '<cmd>e # | bd #<CR>', { silent = true })
+vim.keymap.set('n', '<Leader>bb', '<cmd>bd<CR>', { silent = true })
 -- Close all except the current buffer
 vim.keymap.set('n', '<M-X>', '<cmd>%bd | e #<CR>', { silent = true })
 
@@ -166,6 +167,7 @@ vim.keymap.set('i', '<M-g>bd', '"=strftime("%Y%m%d%H%M")<CR>p')
 vim.keymap.set('n', '<Leader>ql', '<cmd>cn<CR>')
 vim.keymap.set('n', '<Leader>qh', '<cmd>cp<CR>')
 vim.keymap.set('n', '<Leader>qo', '<cmd>copen<CR>')
+vim.keymap.set('n', '<Leader>qx', '<cmd>call setqflist([])<CR>')
 vim.keymap.set('n', '<Leader>Q', '<cmd>cclose<CR>')
 
 -- No Ops
