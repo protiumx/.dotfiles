@@ -2,6 +2,6 @@
 
 branch="$(git rev-parse --abbrev-ref HEAD)"
 if [[ "$branch" =~ ^(master|main)$ ]]; then
-  echo "Nein! Committing to < $branch > forbidden -.-"
-  exit 1
+	echo "Nein! Committing to < $branch > forbidden -.-"
+	exit 1
 fi

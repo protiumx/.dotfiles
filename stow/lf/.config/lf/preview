@@ -6,16 +6,16 @@ h=$3
 x=$4
 y=$5
 
-if [[ "$( file -Lb --mime-type "$file")" =~ ^image ]]; then
-    kitty +icat --silent --transfer-mode file --place "${w}x${h}@${x}x${y}" "$file"
-    exit 1
+if [[ "$(file -Lb --mime-type "$file")" =~ ^image ]]; then
+	kitty +icat --silent --transfer-mode file --place "${w}x${h}@${x}x${y}" "$file"
+	exit 1
 fi
 
 case "$1" in
-  *.tgz|*.tar.gz) tar tzf "$1";;
-	*.tar.bz2|*.tbz2) tar tjf "$1";;
-	*.tar.txz|*.txz) xz --list "$1";;
-	*.tar) tar tf "$1";;
-	*.zip|*.jar|*.war|*.ear|*.oxt) unzip -l "$1";;
-  *) bat --color always --paging=never --style="changes" "$1";;
+*.tgz | *.tar.gz) tar tzf "$1" ;;
+*.tar.bz2 | *.tbz2) tar tjf "$1" ;;
+*.tar.txz | *.txz) xz --list "$1" ;;
+*.tar) tar tf "$1" ;;
+*.zip | *.jar | *.war | *.ear | *.oxt) unzip -l "$1" ;;
+*) bat --color always --paging=never --style="changes" "$1" ;;
 esac

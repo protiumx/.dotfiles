@@ -1,9 +1,9 @@
 fonts=(
-  font-fira-code
+	font-fira-code
 )
 
 install_fonts() {
-  info "Installing fonts..."
-  brew tap homebrew/cask-fonts
-  install_brew_casks "${fonts[@]}"
+	info "Installing fonts..."
+	brew tap homebrew/cask-fonts
+	install_brew_casks "${fonts[@]}"
 }
