@@ -199,6 +199,9 @@ function M.setup()
           ['<M-Down>'] = 'cycle_history_next',
           ['<M-Up>'] = 'cycle_history_prev',
         },
+        n = {
+          ['q'] = 'close',
+        },
       },
       vimgrep_arguments = {
         'rg',
