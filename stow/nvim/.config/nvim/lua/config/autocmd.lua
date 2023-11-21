@@ -42,13 +42,13 @@ augroup('autoqf', { clear = true })
 autocmd('QuickFixCmdPost', {
   group = 'autoqf',
   pattern = '[^l]*',
-  command = 'cwindow'
+  command = 'cwindow',
 })
 
 autocmd('QuickFixCmdPost', {
   group = 'autoqf',
   pattern = 'l*',
-  command = 'lwindow'
+  command = 'lwindow',
 })
 
 autocmd({ 'BufNewFile', 'BufRead' }, {
@@ -96,6 +96,7 @@ vim.api.nvim_create_autocmd('FileType', {
     'man',
     'notify',
     'qf',
+    'git',
     'spectre_panel',
     'startuptime',
     'tsplayground',
