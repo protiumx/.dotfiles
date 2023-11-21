@@ -132,16 +132,16 @@ vim.keymap.set(
   '"' .. system_clip_reg .. 'y',
   { silent = true, desc = 'Junk into reg ' .. system_clip_reg }
 )
--- Delete to blackhole register
-vim.keymap.set({ 'n', 'v' }, '<Leader>D', '"_d', { silent = true })
+vim.keymap.set({ 'n', 'v' }, '<Leader>dd', '"_d', { silent = true, desc = 'Delete to blackwhole' })
 -- Delete shortcuts
 vim.keymap.set({ 'n', 'v' }, '<Leader>d_', 'dt_')
 vim.keymap.set({ 'n', 'v' }, '<Leader>d-', 'dt-')
 
 -- Utils
--- Go to end after yank or paste
-vim.keymap.set({ 'n', 'v' }, 'p', 'p`]', { silent = true })
-vim.keymap.set({ 'n', 'v' }, 'P', 'P`]', { silent = true })
+-- Paste formatted and go to end of pasted block
+vim.keymap.set({ 'n', 'v' }, 'p', ']p`]', { silent = true })
+vim.keymap.set({ 'n', 'v' }, 'P', ']P`]', { silent = true })
+-- normal p
 vim.keymap.set({ 'n', 'v' }, '<C-p>', 'p', { silent = true })
 vim.keymap.set('n', '<M-V>', '`[v`]', { silent = true, desc = 'Select what was pasted' })
 vim.keymap.set('n', '<M-v>', 'gv', { silent = true, desc = 'activate previous visual block' })
