@@ -19,6 +19,7 @@ require('gruvbox').setup({
 -- vim.g.sonokai_transparent_background = 2
 
 vim.cmd('colorscheme gruvbox')
+
 colors.load()
 
 -- vim.api.nvim_set_hl(0, "RedRed", { fg = '#c04c0d', bg = 'none' })

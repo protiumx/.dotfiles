@@ -34,10 +34,10 @@ local baseHls = {
   XMenu = { bg = colors.dark_grey, default = true, fg = colors.foreground },
   XBorder = { bg = colors.dark_grey, fg = colors.dark_grey, default = true },
   -- Base groups
-  -- Normal                      = { bg = colors.background },
-  -- NormalNC                    = { bg = colors.background },
-  Normal = { bg = 'none' },
-  NormalNC = { bg = 'none' },
+  Normal = { bg = colors.background },
+  NormalNC = { bg = colors.background },
+  -- Normal = { bg = 'none' },
+  -- NormalNC = { bg = 'none' },
   Cursor = { fg = colors.background, bg = colors.violet },
   TermCursor = { link = 'Cursor' },
   ColorColumn = { bg = colors.dark_grey },
@@ -83,7 +83,7 @@ local baseHls = {
   TelescopeResultsBorder = { link = 'XBorder' },
   TelescopeResultsNormal = { link = 'XMenu' },
   TelescopeResultsTitle = { fg = colors.background, bg = colors.light_orange },
-  -- TelescopeSelectionCaret     = { fg = colors.red, bg = 'none' },
+  TelescopeSelectionCaret = { fg = colors.red, bg = 'none' },
   -- lspsaga.nvim
   ActionPreviewBorder = { link = 'XBorder' },
   ActionPreviewNormal = { link = 'XMenu' },
