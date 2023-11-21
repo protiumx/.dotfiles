@@ -2,6 +2,10 @@ local M = {}
 
 function M.setup(bufnr)
   local nmap = function(keys, cmd, desc)
+    if cmd == nil then
+      return
+    end
+
     vim.keymap.set('n', keys, cmd, { buffer = bufnr, desc = '[LSP] ' .. desc })
   end
 
@@ -23,7 +27,7 @@ function M.setup(bufnr)
   nmap('<C-k>', vim.lsp.buf.signature_help, 'Show signature help')
   nmap('<C-l>h', vim.lsp.buf.document_highlight, 'Highlight node')
   nmap('<C-l>c', vim.lsp.buf.clear_references, 'Clear highlights')
-  nmap('<C-l>l', vim.lsp.buf.setqflist, 'Set quickfix list with diagnostics')
+  nmap('<C-l>q', vim.lsp.buf.setqflist, 'Set quickfix list with diagnostics')
   nmap('<C-l>f', vim.lsp.buf.format, 'Format')
 end
 
