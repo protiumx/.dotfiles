@@ -487,7 +487,6 @@ return packer.startup(function(use)
   -- Debugging
   use({
     'mfussenegger/nvim-dap',
-    opt = true,
     ft = {
       'go',
     },
