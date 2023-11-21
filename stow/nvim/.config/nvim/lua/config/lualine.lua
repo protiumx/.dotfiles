@@ -75,6 +75,7 @@ function M.setup()
     symbols = {
       modified = '[+]',
       readonly = '',
+      newfile = '',
     },
   }
 
@@ -86,23 +87,23 @@ function M.setup()
       section_separators = '',
       disabled_filetypes = {
         statusline = {
-          -- 'help',
           'FTerm',
+          'TelescopePrompt',
+          'guihua',
           'lspsagaoutline',
-          'packer',
-          'noice',
           'neo-tree',
           'neotest-summary',
+          'noice',
+          'packer',
           'qf',
           'tsplayground',
-          'TelescopePrompt',
         },
       },
       ignore_focus = {},
       always_divide_middle = true,
       globalstatus = true,
       refresh = {
-        statusline = 1000,
+        statusline = 500,
         tabline = 1000,
         winbar = 1000,
       },
