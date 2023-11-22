@@ -20,13 +20,13 @@ end
 
 --- @param key string
 --- @param value any
-function state.set_key(key, value)
+function state.set(key, value)
   GlobalState[key] = value
 end
 
 --- @param key string
 --- @return any
-function state.get_key(key)
+function state.get(key)
   return GlobalState[key]
 end
 

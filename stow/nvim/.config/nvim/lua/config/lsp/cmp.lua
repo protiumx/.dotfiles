@@ -96,7 +96,7 @@ function M.setup()
 
   cmp.setup({
     enabled = function()
-      if state.get_key('quiet') then
+      if state.get('quiet') then
         return false
       end
 
