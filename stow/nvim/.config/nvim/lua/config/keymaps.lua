@@ -7,12 +7,18 @@ vim.g.mapleader = ' '
 vim.keymap.set('i', '<C-c>', '<Esc>', { silent = true })
 
 -- General movements
+-- Move down/up centered
+vim.keymap.set('n', '<C-d>', '<C-d>zz', { silent = true })
+vim.keymap.set('n', '<C-u>', '<C-u>zz', { silent = true })
+vim.keymap.set('n', '<C-o>', '<C-o>zz', { silent = true })
+vim.keymap.set('n', '<C-i>', '<C-i>zz', { silent = true })
 vim.keymap.set('n', 'n', 'nzzzv', { silent = true })
 vim.keymap.set('n', 'N', 'Nzzzv', { silent = true })
 vim.keymap.set('n', '*', '*zz', { silent = true })
 vim.keymap.set('n', '#', '#zz', { silent = true })
 vim.keymap.set('n', 'g*', 'g*zz', { silent = true })
 vim.keymap.set('n', 'G', 'Gzz', { silent = true })
+
 vim.keymap.set({ 'n', 'v' }, 'H', '^', { silent = true })
 vim.keymap.set({ 'n', 'v' }, 'L', '$', { silent = true })
 vim.keymap.set(
@@ -27,16 +33,20 @@ vim.keymap.set(
   utils.open_file_from_error,
   { silent = true, desc = 'Opens the file from errorformat and sets position' }
 )
--- Move down/up centered
-vim.keymap.set('n', '<C-d>', '<C-d>zz', { silent = true })
-vim.keymap.set('n', '<C-u>', '<C-u>zz', { silent = true })
 -- Move lines up/down preserving format
-vim.keymap.set('n', '<M-j>', '<cmd>m .+1<CR>==', { silent = true })
-vim.keymap.set('n', '<M-k>', '<cmd>m .-2<CR>==', { silent = true })
-vim.keymap.set('i', '<C-j>', '<cmd>m .+1<CR>==gi', { silent = true })
-vim.keymap.set('i', '<C-k>', '<cmd>m .-2<CR>==gi', { silent = true })
-vim.keymap.set('v', '<C-j>', "<cmd>m '>+1<CR>gv=gv", { silent = true })
-vim.keymap.set('v', '<C-k>', "<cmd>m '<-2<CR>gv=gv", { silent = true })
+vim.keymap.set('n', '<M-j>', ':m .+1<CR>==', { silent = true })
+vim.keymap.set('n', '<M-k>', ':m .-2<CR>==', { silent = true })
+vim.keymap.set('v', '<C-j>', ":m '>+1<CR>gv=gv", { silent = true })
+vim.keymap.set('v', '<C-k>', ":m '<-2<CR>gv=gv", { silent = true })
+vim.keymap.set('i', '<C-j>', '<Esc>:m .+1<CR>==gi', { silent = true })
+vim.keymap.set('i', '<C-k>', '<Esc>:m .-2<CR>==gi', { silent = true })
+
+-- Quickfix navigation
+vim.keymap.set('n', '<Leader>ql', '<cmd>cn<CR>')
+vim.keymap.set('n', '<Leader>qh', '<cmd>cp<CR>')
+vim.keymap.set('n', '<Leader>qo', '<cmd>copen<CR>')
+vim.keymap.set('n', '<Leader>qx', '<cmd>call setqflist([])<CR>')
+vim.keymap.set('n', '<Leader>Q', '<cmd>cclose<CR>')
 
 -- Window utils
 vim.keymap.set('n', '<Leader><Up>', '<cmd>resize -2<CR>', { silent = true })
@@ -49,10 +59,16 @@ vim.keymap.set('n', '<Leader>k', '<C-w>k', { silent = true })
 vim.keymap.set('n', '<Leader>l', '<C-w>l', { silent = true })
 
 -- Buffer utils
+vim.keymap.set('n', '<Leader>bs', '<cmd>bp | vs #<CR>', { desc = 'Open previous buffer in vsplit' })
 vim.keymap.set('n', '<Tab>', '<cmd>bn<CR>', { silent = true })
 vim.keymap.set('n', '<S-Tab>', '<cmd>bp<CR>', { silent = true })
 vim.keymap.set('n', '``', '<C-^>', { silent = true })
-vim.keymap.set('n', '--', '<cmd>e # | bd #<CR>', { silent = true })
+vim.keymap.set(
+  'n',
+  '--',
+  '<cmd>e # | bd #<CR>',
+  { silent = true, desc = 'Delete buffer and go to previous' }
+)
 vim.keymap.set('n', '<Leader>bb', '<cmd>bd<CR>', { silent = true })
 vim.keymap.set(
   'n',
@@ -65,10 +81,7 @@ vim.keymap.set(
 vim.keymap.set({ 't', 'n' }, "<M-'>", '<cmd>tabn<CR>', { silent = true })
 vim.keymap.set({ 't', 'n' }, '<M-\\>', '<cmd>tabp<CR>', { silent = true })
 
--- Fix indent in file
-vim.keymap.set('n', '<Leader>T', 'gg=G')
-
--- Terminal keymaps
+-- Terminal utils
 vim.keymap.set(
   { 'i', 'n', 'v' },
   '<F12>',
@@ -82,14 +95,14 @@ vim.keymap.set(
   { silent = true, desc = 'Open terminal in vertical split' }
 )
 vim.keymap.set('t', '<C-q>', '<cmd>bd!<CR>', { silent = true, desc = 'Close terminal buffer' })
-vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { silent = true, desc = 'Normal mode from term' })
+vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { silent = true, desc = 'Term normal mode' })
 vim.keymap.set('t', '``', '<cmd>tabn<CR>', { silent = true }) -- avoid switching buffers
 vim.keymap.set('t', '<M-h>', '<cmd>wincmd h<CR>', { silent = true })
 vim.keymap.set('t', '<M-j>', '<cmd>wincmd j<CR>', { silent = true })
 vim.keymap.set('t', '<M-k>', '<cmd>wincmd k<CR>', { silent = true })
 vim.keymap.set('t', '<M-l>', '<cmd>wincmd l<CR>', { silent = true })
 
--- Git
+-- Git utils
 vim.keymap.set('n', '<C-g>s', function()
   local cmd = vim.expand('git stage %')
   vim.cmd('!' .. cmd)
@@ -101,30 +114,37 @@ vim.keymap.set('n', '<C-g>R', function()
   local cmd = vim.expand('git checkout origin/main %')
   vim.cmd('!' .. cmd)
   print(cmd)
-end, { desc = '[Git] reset current file', silent = true })
+end, { desc = '[Git] checkout current file', silent = true })
 
 -- Generation
-vim.keymap.set('i', '<M-i>u', function()
+vim.keymap.set('i', '<M-g>id', function()
   local uuid, _ = vim.fn.system('uuidgen'):gsub('\n', ''):lower()
-  vim.api.nvim_put({ uuid }, 'c', false, true)
+  vim.api.nvim_put({ uuid }, 'c', true, true)
 end, { silent = true, desc = 'Insert UUID' })
--- Insert current date as ISO YYYY-MM-DD-HH:mm
-vim.keymap.set('i', '<M-g>id', '<Esc>"=strftime("%Y-%m-%dT%H:%M")<CR>p')
--- Insert build date
-vim.keymap.set('i', '<M-g>bd', '"=strftime("%Y%m%d%H%M")<CR>p')
-
--- Quickfix navigation
-vim.keymap.set('n', '<Leader>ql', '<cmd>cn<CR>')
-vim.keymap.set('n', '<Leader>qh', '<cmd>cp<CR>')
-vim.keymap.set('n', '<Leader>qo', '<cmd>copen<CR>')
-vim.keymap.set('n', '<Leader>qx', '<cmd>call setqflist([])<CR>')
-vim.keymap.set('n', '<Leader>Q', '<cmd>cclose<CR>')
+vim.keymap.set(
+  'i',
+  '<M-g>ed',
+  '<Esc>"=strftime("%s")<CR>p',
+  { desc = 'Current time as unix epoch', silent = true }
+)
+vim.keymap.set(
+  'i',
+  '<M-g>id',
+  '<Esc>"=strftime("%Y-%m-%dT%H:%M")<CR>p',
+  { desc = 'Current time as ISO date', silent = true }
+)
+vim.keymap.set(
+  'i',
+  '<M-g>bd',
+  '"=strftime("%Y%m%d%H%M")<CR>p',
+  { desc = 'Current time as build date', silent = true }
+)
 
 -- No OPs
 vim.keymap.set('n', '&', '<nop>')
 vim.keymap.set('n', 'Q', '<nop>', { silent = true })
 
--- Registers
+-- Registers utils
 vim.keymap.set('n', 'Y', 'y$', { silent = true })
 vim.keymap.set(
   'v',
@@ -136,21 +156,23 @@ vim.keymap.set({ 'n', 'v' }, '<Leader>dd', '"_d', { silent = true, desc = 'Delet
 -- Delete shortcuts
 vim.keymap.set({ 'n', 'v' }, '<Leader>d_', 'dt_')
 vim.keymap.set({ 'n', 'v' }, '<Leader>d-', 'dt-')
+vim.keymap.set({ 'n', 'v' }, '<Leacer>c_', 'ct_')
+vim.keymap.set({ 'n', 'v' }, '<Leacer>c-', 'ct-')
 
--- Utils
+-- General utils
+vim.keymap.set('n', '<Leader>T', 'gg=G', { desc = 'Fix indent in whole file' })
 -- Paste formatted and go to end of pasted block
 vim.keymap.set({ 'n', 'v' }, 'p', ']p`]', { silent = true })
 vim.keymap.set({ 'n', 'v' }, 'P', ']P`]', { silent = true })
--- normal p
+-- Normal p
 vim.keymap.set({ 'n', 'v' }, '<C-p>', 'p', { silent = true })
 vim.keymap.set('n', '<M-V>', '`[v`]', { silent = true, desc = 'Select what was pasted' })
 vim.keymap.set('n', '<M-v>', 'gv', { silent = true, desc = 'activate previous visual block' })
--- Prepare replace all occurrences of word under cursor
 vim.keymap.set(
   'n',
   '<Leader>wr',
   [[:%s/\<<C-r><C-w>\>//g<Left><Left>]],
-  { desc = 'Prepare current word sustituion' }
+  { desc = 'Prepare current word sustituion buffer wise' }
 )
 -- Join line with cursor at beginning of line using z as mark
 vim.keymap.set('n', 'J', 'mzJ`z', { silent = true })
@@ -167,15 +189,15 @@ vim.keymap.set('n', '<Leader>L', function()
   print('Copied: ' .. path)
 end, { desc = 'Copy current path with line and column to reg ' .. system_clip_reg })
 
-vim.keymap.set('n', '<Leader>s', '<cmd>w<CR>')
-vim.keymap.set('n', '<Leader>G', 'g<C-g>')
+vim.keymap.set('n', '<Leader>s', '<cmd>w<CR>', { desc = 'Quick save' })
+vim.keymap.set('n', '<Leader>G', 'g<C-g>', { desc = 'File stats' })
 vim.keymap.set('n', '<Leader>S', ':mks! .session.vim<CR>')
+-- Quick new lines
 vim.keymap.set('i', '<M-o>', '<C-o>o', { silent = true })
 vim.keymap.set('i', '<M-O>', '<C-o>O', { silent = true })
 -- Open new file adjacent to current file
 vim.keymap.set('n', '<Leader>o', ':e <C-R>=expand("%:h") . "/"')
 vim.keymap.set('n', '<Leader>vo', ':vsp | e <C-R>=expand("%:h") . "/"')
-vim.keymap.set('n', '<Leader>bs', '<cmd>bp | vs #<CR>')
 -- Select all text in current buffer
 vim.keymap.set('n', '<M-a>', 'ggVG', { silent = true })
 vim.keymap.set('i', '<M-a>', '<Esc>ggVG', { silent = true })
