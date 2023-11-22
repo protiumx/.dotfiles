@@ -1,4 +1,5 @@
 local colors = require('config.colors')
+local state = require('config.state')
 local M = {}
 
 local modes = {
@@ -167,6 +168,11 @@ function M.setup()
           require('noice').api.status.mode.get,
           cond = require('noice').api.status.mode.has,
           color = { fg = '#ff9e64' },
+        },
+        {
+          function()
+            return state.get('quiet') and '󰗅' or ''
+          end,
         },
         { 'location' },
         { 'progress', fmt = string.lower },
