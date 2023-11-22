@@ -171,7 +171,7 @@ function M.setup()
         },
         {
           function()
-            return state.get('quiet') and '󰗅' or ''
+            return state.get('quiet') and '󰊠' or ''
           end,
         },
         { 'location' },
