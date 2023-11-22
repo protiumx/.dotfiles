@@ -1,10 +1,15 @@
-local M = {}
+local utils = require('config.utils')
+
+local M = {
+  loaded = false,
+}
+
 local system_clip_reg = jit.os == 'OSX' and '*' or '+'
+local DevWatchGroup = 'DevWatch'
 
 ---@class DevBuffer
 ---@field source_buffer number
 ---@field output_buffer number
----@field autocmd_group string
 
 ---@type table<number, DevBuffer>
 local dev_buffers = {}
@@ -31,37 +36,56 @@ local function copy_current_git_file()
   print(url .. ' copied to clipboard')
 end
 
+local function set_buffer_text(buffer, content)
+  if content then
+    vim.api.nvim_buf_set_lines(buffer, -1, -1, false, content)
+  end
+end
+
 ---@param cmd string
 ---@param bufnr number
 local function print_cmd_output(cmd, bufnr)
   vim.fn.jobstart(vim.split(cmd, ' '), {
     stdout_bufered = true,
     on_stdout = function(_, content)
-      if content then
-        vim.api.nvim_buf_set_lines(bufnr, -1, -1, false, content)
-      end
+      set_buffer_text(bufnr, content)
     end,
     on_stderr = function(_, content)
-      if content then
-        vim.api.nvim_buf_set_lines(bufnr, -1, -1, false, content)
-      end
+      set_buffer_text(bufnr, content)
     end,
   })
+end
+
+---@param buffer number
+local function delete_buffer(buffer)
+  if vim.api.nvim_buf_is_valid(buffer) and vim.api.nvim_buf_is_loaded(buffer) then
+    local ok = pcall(vim.api.nvim_buf_delete, buffer, { force = true })
+    if not ok then
+      vim.notify('[dev] falied to delete output buffer', vim.log.levels.WARN)
+    end
+  end
 end
 
 ---@param source_buffer number
 local function tear_down_dev_buffer(source_buffer)
   local dev_buffer = dev_buffers[source_buffer]
 
-  vim.cmd('autocmd! ' .. dev_buffer.autocmd_group)
-  dev_buffers[source_buffer] = nil
+  if not dev_buffer then
+    return
+  end
 
+  vim.api.nvim_clear_autocmds({
+    group = DevWatchGroup,
+    event = 'BufWritePost',
+    buffer = dev_buffer.source_buffer,
+  })
+
+  dev_buffers[source_buffer] = nil
   vim.notify('[dev] stopped', vim.log.levels.INFO)
 end
 
---- Setup dev mode for the current buffer
 ---@param args string[]
-local function setup_dev_buffer(args)
+local function _setup_dev_buffer(args)
   local buffer = vim.api.nvim_get_current_buf()
   local bufname = vim.fn.bufname(buffer)
 
@@ -72,27 +96,42 @@ local function setup_dev_buffer(args)
   end
 
   local cmd = table.concat(args, ' '):gsub('%%', vim.fn.expand('%'))
+  local title = '[dev] - ' .. cmd
   local output_buffer = vim.api.nvim_create_buf(true, true)
-  vim.api.nvim_buf_set_name(output_buffer, 'dev[' .. bufname .. ']')
-  -- vim.api.nvim_buf_set_option(output_buffer, 'readonly', true)
+  pcall(vim.api.nvim_buf_set_option, output_buffer, 'filetype', DevWatchGroup)
 
   vim.cmd.split({ mods = { vertical = true } })
-  vim.api.nvim_win_set_buf(vim.api.nvim_get_current_win(), output_buffer)
-  vim.cmd('wincmd w')
+  local winid = vim.api.nvim_get_current_win()
+  vim.api.nvim_win_set_hl_ns(winid, M.namespace_id)
+  vim.api.nvim_win_set_option(winid, 'number', false)
+  vim.api.nvim_win_set_option(winid, 'relativenumber', false)
+  vim.api.nvim_win_set_option(winid, 'spell', false)
+  vim.api.nvim_win_set_buf(winid, output_buffer)
+  vim.api.nvim_buf_set_name(output_buffer, 'dev[' .. bufname .. ']')
+  vim.api.nvim_buf_set_keymap(output_buffer, 'n', 'q', '<cmd>q<CR>', { silent = true })
 
-  local autocmd_group = string.format('DevWatch-%d', buffer)
+  vim.cmd([[
+    wincmd w
+  ]])
+
   dev_buffers[buffer] = {
     source_buffer = buffer,
     output_buffer = output_buffer,
-    autocmd_group = autocmd_group,
   }
 
   local function header()
-    vim.api.nvim_buf_set_lines(output_buffer, 0, -1, false, { '[dev] - ' .. cmd, '' })
+    vim.api.nvim_buf_set_lines(output_buffer, 0, -1, false, { title, '' })
+    vim.api.nvim_buf_set_extmark(
+      output_buffer,
+      M.namespace_id,
+      0,
+      0,
+      { end_row = 1, hl_group = 'TelescopePromptTitle', hl_eol = true }
+    )
   end
 
   vim.api.nvim_create_autocmd('BufWritePost', {
-    group = vim.api.nvim_create_augroup(autocmd_group, { clear = true }),
+    group = DevWatchGroup,
     buffer = buffer,
     callback = function()
       header()
@@ -100,9 +139,22 @@ local function setup_dev_buffer(args)
     end,
   })
 
+  vim.api.nvim_create_autocmd('BufDelete', {
+    group = DevWatchGroup,
+    buffer = buffer,
+    once = true,
+    nested = true,
+    callback = function()
+      dev_buffers[buffer] = nil
+      delete_buffer(output_buffer)
+    end,
+  })
+
   vim.api.nvim_create_autocmd('BufUnload', {
     group = vim.api.nvim_create_augroup('dev_teardown', { clear = true }),
     buffer = output_buffer,
+    once = true,
+    nested = true,
     callback = function()
       tear_down_dev_buffer(buffer)
     end,
@@ -114,10 +166,19 @@ local function setup_dev_buffer(args)
   print_cmd_output(cmd, output_buffer)
 end
 
+--- Setup dev mode for the current buffer
+---@param args string[]
+local function setup_dev_buffer(args)
+  vim.schedule(function()
+    _setup_dev_buffer(args)
+  end)
+end
+
 local commands = {
-  git_file = copy_current_git_file,
-  dev = setup_dev_buffer,
   date = nil,
+  dev = setup_dev_buffer,
+  git_file = copy_current_git_file,
+  toggle_quiet = utils.toggle_quiet,
 }
 
 local function load_command(cmd, ...)
@@ -130,6 +191,13 @@ local function load_command(cmd, ...)
 end
 
 function M.load()
+  if M.loaded then
+    return
+  end
+
+  M.namespace_id = vim.api.nvim_create_namespace('XSpace')
+  vim.api.nvim_create_augroup(DevWatchGroup, { clear = true })
+
   vim.api.nvim_create_user_command('X', function(args)
     load_command(unpack(args.fargs))
   end, {
@@ -142,6 +210,8 @@ function M.load()
       end, list)
     end,
   })
+
+  M.loaded = true
 end
 
 return M
