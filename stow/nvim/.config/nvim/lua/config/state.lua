@@ -16,6 +16,18 @@ function state.get_file(filename)
   return GlobalState.marked_files[filename]
 end
 
+--- @param key string
+--- @param value any
+function state.set_key(key, value)
+  GlobalState[key] = value
+end
+
+--- @param key string
+--- @return any
+function state.get_key(key)
+  return GlobalState[key]
+end
+
 function state.toggle_buffer_mark(bufnr)
   if GlobalState.marked_buffers[bufnr] then
     GlobalState.marked_buffers[bufnr] = nil

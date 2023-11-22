@@ -1,5 +1,7 @@
 local cmp_types = require('cmp.types')
 
+local state = require('config.state')
+
 local M = {}
 
 local kind_icons = {
@@ -94,6 +96,10 @@ function M.setup()
 
   cmp.setup({
     enabled = function()
+      if state.get_key('quiet') then
+        return false
+      end
+
       local ftype = vim.api.nvim_buf_get_option(0, 'filetype')
       return not excluded_ftypes[ftype]
     end,

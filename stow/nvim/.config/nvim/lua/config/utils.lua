@@ -1,5 +1,7 @@
 local Path = require('plenary.path')
+
 local nvim = require('config.nvim')
+local state = require('config.state')
 
 local M = {}
 
@@ -77,6 +79,19 @@ function M.open_file_from_error()
   end
 
   vim.cmd(string.format('drop %s | call cursor(%s, %s)', fname, elems[1].lnum, elems[1].col))
+end
+
+--- Toggle LSP and global state 'quiet' value
+function M.toggle_quiet()
+  if state.get_key('quiet') then
+    vim.cmd('LspStart')
+    state.set_key('quiet', false)
+    vim.notify('Back to full power', vim.log.levels.INFO)
+  else
+    vim.cmd('LspStop')
+    state.set_key('quiet', true)
+    vim.notify('Quiet mode', vim.log.levels.INFO)
+  end
 end
 
 return M
