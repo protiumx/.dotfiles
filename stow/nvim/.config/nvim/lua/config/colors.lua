@@ -5,7 +5,7 @@ local colors = {
   blue = '#61afef',
   cyan = '#3e8fb0',
   dark_green = '#5faf5f',
-  dark_grey = '#0f0f05',
+  dark_grey = '#12100f',
   dark_orange = '#ff5d62',
   dark_red = '#bf1131',
   dark_yellow = '#ffaf00',
@@ -34,13 +34,13 @@ local baseHls = {
   XMenu = { bg = colors.dark_grey, default = true, fg = colors.foreground },
   XBorder = { bg = colors.dark_grey, fg = colors.dark_grey, default = true },
   -- Base groups
-  Normal = { bg = colors.background },
-  NormalNC = { bg = colors.background },
+  Normal = { bg = colors.background, fg = colors.foreground },
+  NormalNC = { bg = colors.background, fg = colors.foreground },
   -- Normal = { bg = 'none' },
   -- NormalNC = { bg = 'none' },
   Cursor = { fg = colors.background, bg = colors.violet },
   TermCursor = { link = 'Cursor' },
-  ColorColumn = { bg = colors.dark_grey },
+  ColorColumn = { bg = '#1a1717' },
   CursorLine = { bg = 'none', fg = 'none' },
   CursorLineNr = { bg = 'none' },
   -- LineNr                  = { bg = 'none' },
@@ -190,8 +190,8 @@ local diagnosticsHls = {
 }
 
 local function load(gs)
-  for group, hl in pairs(gs) do
-    vim.api.nvim_set_hl(0, group, hl)
+  for group, opts in pairs(gs) do
+    vim.api.nvim_set_hl(0, group, opts)
   end
 end
 
