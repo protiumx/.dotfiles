@@ -5,7 +5,7 @@ local M = {}
 
 local function configure_symbols()
   local dap_breakpoint = {
-    error = {
+    breakpoint = {
       text = '',
       texthl = 'LspDiagnosticsSignError',
       linehl = '',
@@ -19,6 +19,20 @@ local function configure_symbols()
       numhl = '',
     },
 
+    conditional = {
+      text = '',
+      texthl = 'LspDiagnosticsSignHint',
+      linehl = '',
+      numhl = '',
+    },
+
+    log = {
+      text = '󱁼',
+      texthl = 'LspDiagnosticsSignHint',
+      linehl = '',
+      numhl = '',
+    },
+
     stopped = {
       text = '',
       texthl = 'LspDiagnosticsSignInformation',
@@ -27,8 +41,10 @@ local function configure_symbols()
     },
   }
 
-  vim.fn.sign_define('DapBreakpoint', dap_breakpoint.error)
+  vim.fn.sign_define('DapBreakpoint', dap_breakpoint.breakpoint)
+  vim.fn.sign_define('DapBreakpointCondition', dap_breakpoint.conditional)
   vim.fn.sign_define('DapStopped', dap_breakpoint.stopped)
+  vim.fn.sign_define('DapLogPoint', dap_breakpoint.log)
   vim.fn.sign_define('DapBreakpointRejected', dap_breakpoint.rejected)
 end
 
