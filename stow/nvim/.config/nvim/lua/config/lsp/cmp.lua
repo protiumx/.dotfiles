@@ -1,3 +1,5 @@
+local cmp_types = require('cmp.types')
+
 local M = {}
 
 local kind_icons = {
@@ -28,61 +30,60 @@ local kind_icons = {
   Variable = '  ',
 }
 
+local sources = {
+  lsp = {
+    name = 'nvim_lsp',
+    priority = 1000,
+    entry_filter = function(entry, _)
+      return cmp_types.lsp.CompletionItemKind[entry:get_kind()] ~= 'Text'
+    end,
+  },
+
+  snippets = {
+    name = 'luasnip',
+    priority = 80,
+  },
+
+  buffer = {
+    name = 'buffer',
+    group_index = 2,
+    keyword_length = 3,
+    option = {
+      -- Only buffers in the current tab
+      get_bufnrs = function()
+        local bufs = {}
+        for _, win in ipairs(vim.api.nvim_list_wins()) do
+          bufs[vim.api.nvim_win_get_buf(win)] = true
+        end
+        return vim.tbl_keys(bufs)
+      end,
+    },
+    priority = 60,
+  },
+
+  lua = {
+    name = 'nvim_lua',
+    priority = 20,
+  },
+
+  path = {
+    name = 'path',
+    keyword_length = 3,
+    group_index = 2,
+    priority = 40,
+  },
+
+  spell = {
+    name = 'spell',
+    priority = 10,
+  },
+}
+
 function M.setup()
   local cmp = require('cmp')
-  local cmp_types = require('cmp.types')
   local compare = require('cmp.config.compare')
   local types = require('cmp.types')
   local luasnip = require('luasnip')
-
-  local sources = {
-    lsp = {
-      name = 'nvim_lsp',
-      priority = 1000,
-      entry_filter = function(entry, _)
-        return cmp_types.lsp.CompletionItemKind[entry:get_kind()] ~= 'Text'
-      end,
-    },
-
-    snippets = {
-      name = 'luasnip',
-      priority = 80,
-    },
-
-    buffer = {
-      name = 'buffer',
-      group_index = 2,
-      keyword_length = 3,
-      option = {
-        -- Only buffers in the current tab
-        get_bufnrs = function()
-          local bufs = {}
-          for _, win in ipairs(vim.api.nvim_list_wins()) do
-            bufs[vim.api.nvim_win_get_buf(win)] = true
-          end
-          return vim.tbl_keys(bufs)
-        end,
-      },
-      priority = 60,
-    },
-
-    lua = {
-      name = 'nvim_lua',
-      priority = 20,
-    },
-
-    path = {
-      name = 'path',
-      keyword_length = 3,
-      group_index = 2,
-      priority = 40,
-    },
-
-    spell = {
-      name = 'spell',
-      priority = 10,
-    },
-  }
 
   local excluded_ftypes = {
     sagarename = true,
@@ -142,7 +143,6 @@ function M.setup()
       comparators = {
         compare.offset,
         compare.exact,
-
         -- compare.kind,
         -- compare.score,
         -- compare.exact,
