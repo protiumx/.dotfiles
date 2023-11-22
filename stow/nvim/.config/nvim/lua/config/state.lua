@@ -1,6 +1,8 @@
 local Path = require('plenary.path')
 
-GlobalState = GlobalState or {}
+GlobalState = GlobalState or {
+  quiet = false,
+}
 GlobalState.marked_buffers = GlobalState.marked_buffers or {}
 GlobalState.marked_files = GlobalState.marked_files or {}
 
