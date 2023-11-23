@@ -45,7 +45,7 @@ local function configure_symbols()
   vim.fn.sign_define('DapBreakpointRejected', dap_breakpoint.rejected)
 end
 
-local function configure_exts()
+local function configure_ui()
   local dap = require('dap')
   local dapui = require('dapui')
 
@@ -64,6 +64,14 @@ local function configure_exts()
   dap.listeners.before.event_exited['dapui_config'] = function()
     dapui.close()
   end
+
+  vim.api.nvim_create_autocmd('FileType', {
+    group = vim.api.nvim_create_augroup('dap-nvim', { clear = true }),
+    pattern = 'dap-repl',
+    callback = function()
+      require('dap.ext.autocompl').attach()
+    end,
+  })
 end
 
 local function configure_debuggers()
@@ -119,7 +127,7 @@ end
 
 function M.setup()
   configure_symbols()
-  configure_exts()
+  configure_ui()
   configure_debuggers()
   require('config.dap.keymaps').setup()
 end
