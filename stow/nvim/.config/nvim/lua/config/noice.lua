@@ -22,6 +22,7 @@ function M.setup()
           height = 'auto',
         },
       },
+
       popupmenu = {
         relative = 'editor',
         size = {
@@ -45,6 +46,7 @@ function M.setup()
         },
       },
     },
+
     cmdline = {
       format = {
         cmdline = { pattern = '^:', icon = '', lang = '' },
@@ -55,10 +57,12 @@ function M.setup()
         help = false,
       },
     },
+
     messages = {
       view_search = false,
       view_history = 'popup',
     },
+
     lsp = {
       progress = {
         enabled = false,
@@ -87,15 +91,16 @@ function M.setup()
         },
       },
     },
-    -- you can enable a preset for easier configuration
+
     presets = {
       bottom_search = false, -- use a classic bottom cmdline for search
-      long_message_to_split = true, -- long messages will be sent to a split
+      long_message_to_split = false, -- long messages will be sent to a split
       inc_rename = false, -- enables an input dialog for inc-rename.nvim
       lsp_doc_border = true, -- add a border to hover docs and signature help
     },
-    -- add any options here
+
     routes = {
+      -- route messages larger than 100 chars or 6 lines to popup
       {
         filter = { event = 'msg_show', min_length = 100, min_height = 6 },
         view = 'popup',
