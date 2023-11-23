@@ -1,6 +1,8 @@
 local Path = require('plenary.path')
 local strings = require('plenary.strings')
 
+local telescope_actions = require('telescope.actions')
+local action_state = require('telescope.actions.state')
 local conf = require('telescope.config').values
 local entry_display = require('telescope.pickers.entry_display')
 local finders = require('telescope.finders')
@@ -10,6 +12,8 @@ local utils = require('telescope.utils')
 
 local actions = require('config.telescope.actions')
 local sorters = require('config.telescope.sorters')
+local themes = require('config.telescope.themes')
+
 local state = require('config.state')
 
 local M = {}
@@ -44,13 +48,13 @@ local function entry_from_buffer(opts)
     -- marked + bufnr_width + modes + icon + 4 spaces + : + lnum
     opts.__prefix = 1 + opts.bufnr_width + 4 + icon_width + 4 + 1 + #tostring(entry.lnum)
     local display_bufname = utils.transform_path(opts, entry.filename)
-    local icon, hl_group = utils.get_devicons(entry.filename, false)
+    local display_icon, hl_group = utils.get_devicons(entry.filename, false)
 
     return displayer({
       entry.marked and '󰤱' or ' ',
       { entry.bufnr, 'TelescopeResultsNumber' },
       { entry.indicator, 'TelescopeResultsComment' },
-      { icon, hl_group },
+      { display_icon, hl_group },
       display_bufname .. ':' .. entry.lnum,
     })
   end
@@ -171,6 +175,29 @@ local fd_search_files_cmd = {
   '-E',
   '.DS_Store',
 }
+
+---@param pattern string
+---@param callback fun(entry:string)
+function M.find_file_pattern(pattern, callback)
+  local opts = themes.get_dropdown()
+  opts.entry_maker = make_entry.gen_from_file(opts)
+  opts.prompt_title = 'Select File'
+
+  local cmd = { 'fd', '--hidden', '--no-ignore', '--type', 'f', '-g', pattern }
+  pickers
+    .new(opts, {
+      finder = finders.new_oneshot_job(cmd, opts),
+      sorter = conf.file_sorter(opts),
+      attach_mappings = function(buffer_number)
+        telescope_actions.select_default:replace(function()
+          telescope_actions.close(buffer_number)
+          callback(action_state.get_selected_entry()[1])
+        end)
+        return true
+      end,
+    })
+    :find()
+end
 
 -- Find files on prompt change with fd
 function M.find_files(opts)
