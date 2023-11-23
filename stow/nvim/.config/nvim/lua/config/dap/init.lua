@@ -1,6 +1,3 @@
-local dap = require('dap')
-local dapui = require('dapui')
-
 local M = {}
 
 local function configure_symbols()
@@ -49,6 +46,9 @@ local function configure_symbols()
 end
 
 local function configure_exts()
+  local dap = require('dap')
+  local dapui = require('dapui')
+
   require('nvim-dap-virtual-text').setup({
     commented = true,
   })
@@ -67,6 +67,9 @@ local function configure_exts()
 end
 
 local function configure_debuggers()
+  local dap = require('dap')
+  local pickers = require('config.telescope.pickers')
+
   dap.adapters.delve = {
     type = 'server',
     port = '${port}',
@@ -80,24 +83,36 @@ local function configure_debuggers()
   dap.configurations.go = {
     {
       type = 'delve',
-      name = 'Debug Go',
+      name = 'Debug',
       request = 'launch',
       program = '${file}',
     },
     {
       type = 'delve',
-      name = 'Debug Go test', -- configuration for debugging test files
+      name = 'Debug Test',
       request = 'launch',
       mode = 'test',
       program = '${file}',
     },
-    -- works with go.mod packages and sub packages
     {
       type = 'delve',
-      name = 'Debug Go test (go.mod)',
+      name = 'Debug Package',
       request = 'launch',
       mode = 'test',
       program = './${relativeFileDirname}',
+    },
+    {
+      name = 'Launch File',
+      type = 'delve',
+      request = 'launch',
+      cwd = '${workspaceFolder}',
+      program = function()
+        return coroutine.create(function(coro)
+          pickers.find_file_pattern('*.go', function(entry)
+            coroutine.resume(coro, entry)
+          end)
+        end)
+      end,
     },
   }
 end
