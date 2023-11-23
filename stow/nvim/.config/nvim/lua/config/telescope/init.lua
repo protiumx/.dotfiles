@@ -1,5 +1,6 @@
 local actions = require('config.telescope.actions')
 local pickers = require('config.telescope.pickers')
+local custom_themes = require('config.telescope.themes')
 local utils = require('config.utils')
 
 local plenary = require('plenary.path')
@@ -14,7 +15,7 @@ local map = function(mode, l, r, desc)
 end
 
 -- Set current folder as prompt title
-local options_with_title = function(opts, extra)
+local options_with_cwd_title = function(opts, extra)
   extra = extra or {}
   local path = opts.cwd or opts.path or extra.cwd or extra.path or nil
   local title = ''
@@ -23,6 +24,7 @@ local options_with_title = function(opts, extra)
   if path ~= nil and buf_path ~= cwd then
     title = plenary:new(buf_path):make_relative(cwd)
   else
+    -- get the tail
     title = vim.fn.fnamemodify(cwd, ':t')
   end
 
@@ -31,40 +33,31 @@ local options_with_title = function(opts, extra)
   }, extra or {})
 end
 
-local dropdown = themes.get_dropdown({
-  hidden = true,
-  no_ignore = true,
-  previewer = false,
-  prompt_title = '',
-  preview_title = '',
-  results_title = '',
-  layout_config = { prompt_position = 'top' },
-})
-
 local function keymaps()
+  local dropdown = custom_themes.get_dropdown()
   -- File browser always relative to buffer
-  local opts_file_browser = vim.tbl_extend('force', dropdown, {
+  local dropdown_with_path = custom_themes.get_dropdown({
     path = '%:p:h',
   })
 
   map({ 'i', 'n' }, '<M-]>', function()
-    builtin.find_files(options_with_title(dropdown))
+    builtin.find_files(options_with_cwd_title(dropdown))
   end, 'Find files')
 
   map({ 'i', 'n' }, '<M-}>', function()
-    builtin.find_files(options_with_title(dropdown, { cwd = vim.fn.expand('%:p:h') }))
+    builtin.find_files(options_with_cwd_title(dropdown, { cwd = vim.fn.expand('%:p:h') }))
   end, 'Find files relative to buffer')
 
   map({ 'i', 'n' }, '<M-->', function()
-    builtin.find_files(options_with_title({}))
+    builtin.find_files(options_with_cwd_title({}))
   end, 'Find files with preview')
 
   map({ 'i', 'n' }, '<M-_>', function()
-    builtin.find_files(options_with_title({ cwd = vim.fn.expand('%:p:h') }))
+    builtin.find_files(options_with_cwd_title({ cwd = vim.fn.expand('%:p:h') }))
   end, 'Find files with preview relative to buffer')
 
   map({ 'i', 'n' }, '<M-f>', function()
-    telescope.extensions.file_browser.file_browser(options_with_title(opts_file_browser))
+    telescope.extensions.file_browser.file_browser(options_with_cwd_title(dropdown_with_path))
   end, 'Browse files relative to buffer')
 
   map({ 'i', 'n' }, '<M-F>', function()
@@ -76,11 +69,11 @@ local function keymaps()
   end, 'Browse files relative to buffer with preview')
 
   map({ 'i', 'n' }, '<M-g>', function()
-    builtin.live_grep(options_with_title({ cwd = vim.fn.expand('%:p:h') }))
+    builtin.live_grep(options_with_cwd_title({ cwd = vim.fn.expand('%:p:h') }))
   end, '[S]earch Live [G]rep relative buffer')
 
   map({ 'i', 'n' }, '<M-G>', function()
-    builtin.live_grep(options_with_title({}))
+    builtin.live_grep(options_with_cwd_title({}))
   end, '[S]earch Live [G]rep')
 
   map({ 'i', 'n' }, '<M-b>', function()
@@ -93,7 +86,7 @@ local function keymaps()
   end, '[S]earch Live [G]rep from visual selection')
 
   map({ 'i', 'n' }, '<M-s>w', function()
-    builtin.grep_string(options_with_title({ cwd = vim.fn.expand('%:p:h') }))
+    builtin.grep_string(options_with_cwd_title({ cwd = vim.fn.expand('%:p:h') }))
   end, '[S]earch [W]ord under cursor in cwd relative to buffer')
 
   map({ 'i', 'n' }, '<M-s>W', function()
@@ -154,6 +147,8 @@ end
 local M = {}
 
 function M.setup()
+  local dropdown = custom_themes.get_dropdown()
+
   vim.api.nvim_create_augroup('startup', { clear = true })
   vim.api.nvim_create_autocmd('VimEnter', {
     group = 'startup',
@@ -163,7 +158,7 @@ function M.setup()
       local arg = vim.api.nvim_eval('argv(0)')
       if arg and (vim.fn.isdirectory(arg) ~= 0 or arg == '') then
         vim.defer_fn(function()
-          builtin.find_files(options_with_title(dropdown))
+          builtin.find_files(options_with_cwd_title(dropdown))
         end, 50)
       end
     end,
