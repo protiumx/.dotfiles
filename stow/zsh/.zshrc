@@ -73,7 +73,7 @@ zle -N fzf-git-files-widget
 bindkey '\eg' fzf-git-files-widget
 
 # go back to fg
-fancy-ctrl-z () {
+zsh-ctrl-z () {
   if [[ $#BUFFER -eq 0 ]]; then
     BUFFER="fg"
     zle accept-line
@@ -82,8 +82,18 @@ fancy-ctrl-z () {
     zle clear-screen
   fi
 }
-zle -N fancy-ctrl-z
-bindkey '^z' fancy-ctrl-z
+zle -N zsh-ctrl-z
+bindkey '^z' zsh-ctrl-z
+
+# edit current folder
+zsh-ctrl-o () {
+  if [[ $#BUFFER -eq 0 ]]; then
+    BUFFER="nvim ."
+    zle accept-line
+  fi
+}
+zle -N zsh-ctrl-o
+bindkey '^o' zsh-ctrl-o
 
 ################# Oh MyZsh ####################
 
