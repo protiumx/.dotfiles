@@ -61,7 +61,7 @@ local function delete_buffer(buffer)
   if vim.api.nvim_buf_is_valid(buffer) and vim.api.nvim_buf_is_loaded(buffer) then
     local ok = pcall(vim.api.nvim_buf_delete, buffer, { force = true })
     if not ok then
-      vim.notify('[dev] falied to delete output buffer', vim.log.levels.WARN)
+      vim.notify('[dev] failed to delete output buffer', vim.log.levels.WARN)
     end
   end
 end
@@ -81,7 +81,7 @@ local function tear_down_dev_buffer(source_buffer)
   })
 
   dev_buffers[source_buffer] = nil
-  vim.notify('[dev] stopped', vim.log.levels.INFO)
+  vim.notify('[dev] terminated', vim.log.levels.INFO)
 end
 
 ---@param args string[]
@@ -91,7 +91,7 @@ local function _setup_dev_buffer(args)
 
   local dev_buf = dev_buffers[buffer] --[[@as DevBuffer]]
   if dev_buf then
-    vim.notify('[dev] already enabled: ' .. bufname, vim.log.levels.INFO)
+    vim.notify('[dev] already started: ' .. bufname, vim.log.levels.INFO)
     return
   end
 
@@ -160,7 +160,7 @@ local function _setup_dev_buffer(args)
     end,
   })
 
-  vim.notify('[dev] enabled: ' .. bufname, vim.log.levels.INFO)
+  vim.notify('[dev] started: ' .. bufname, vim.log.levels.INFO)
 
   header()
   print_cmd_output(cmd, output_buffer)
@@ -169,6 +169,11 @@ end
 --- Setup dev mode for the current buffer
 ---@param args string[]
 local function setup_dev_buffer(args)
+  if args == nil or #args == 0 then
+    vim.notify('No argument given', vim.log.levels.ERROR)
+    return
+  end
+
   vim.schedule(function()
     _setup_dev_buffer(args)
   end)
