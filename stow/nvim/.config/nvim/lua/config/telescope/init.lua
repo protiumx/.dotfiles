@@ -135,7 +135,7 @@ local function keymaps()
 
   -- Neoclip
   map({ 'n', 'i', 'v' }, '<M-y>', function()
-    telescope.extensions.neoclip.default(themes.get_dropdown({ previewer = true }))
+    telescope.extensions.neoclip.default({})
   end, 'Search Yanks')
 
   map({ 'n', 'i' }, '<M-s>m', function()
