@@ -6,6 +6,7 @@ local utils = require('config.utils')
 local plenary = require('plenary.path')
 
 local telescope = require('telescope')
+local telescope_themes = require('telescope.themes')
 local builtin = require('telescope.builtin')
 
 local map = function(mode, l, r, desc)
@@ -13,52 +14,58 @@ local map = function(mode, l, r, desc)
   vim.keymap.set(mode, l, r, opts)
 end
 
--- Set current folder as prompt title
-local options_with_cwd_title = function(opts, extra)
-  extra = extra or {}
-  local path = opts.cwd or opts.path or extra.cwd or extra.path or nil
-  local title = ''
+--- Returns buffer directory relative to cwd
+---@param cwd string | nil
+local function get_buffer_dir(cwd)
+  cwd = cwd or vim.fn.getcwd()
   local buf_path = vim.fn.expand('%:p:h')
-  local cwd = vim.fn.getcwd()
-  if path ~= nil and buf_path ~= cwd then
-    title = plenary:new(buf_path):make_relative(cwd)
+  if buf_path ~= cwd then
+    return plenary:new(buf_path):make_relative(cwd)
   else
-    -- get the tail
-    title = vim.fn.fnamemodify(cwd, ':t')
+    return vim.fn.fnamemodify(cwd, ':t')
   end
-
-  return vim.tbl_extend('force', opts, {
-    prompt_title = title,
-  }, extra or {})
 end
 
 local function keymaps()
   local dropdown = themes.get_dropdown()
+  local extensions = telescope.extensions
 
   map({ 'i', 'n' }, '<M-]>', function()
-    builtin.find_files(options_with_cwd_title(dropdown))
+    builtin.find_files(themes.get_dropdown({
+      prompt_title = get_buffer_dir(),
+    }))
   end, 'Find files')
 
   map({ 'i', 'n' }, '<M-}>', function()
-    builtin.find_files(options_with_cwd_title(dropdown, { cwd = vim.fn.expand('%:p:h') }))
+    local cwd = vim.fn.expand('%:p:h')
+    builtin.find_files(themes.get_dropdown({
+      cwd = cwd,
+      prompt_title = get_buffer_dir(cwd),
+    }))
   end, 'Find files relative to buffer')
 
   map({ 'i', 'n' }, '<M-_>', function()
-    builtin.find_files(options_with_cwd_title({}))
+    builtin.find_files({
+      prompt_title = get_buffer_dir(),
+    })
   end, 'Find files with preview')
 
   map({ 'i', 'n' }, '<M-->', function()
-    builtin.find_files(options_with_cwd_title({ cwd = vim.fn.expand('%:p:h') }))
+    local cwd = vim.fn.expand('%:p:h')
+    builtin.find_files({
+      cwd = cwd,
+      prompt_title = get_buffer_dir(),
+    })
   end, 'Find files with preview relative to buffer')
 
   map({ 'i', 'n' }, '<M-f>', function()
-    telescope.extensions.file_browser.file_browser(options_with_cwd_title(dropdown, {
+    extensions.file_browser.file_browser(themes.get_dropdown({
       path = '%:p:h',
     }))
   end, 'Browse files relative to buffer')
 
   map({ 'i', 'n' }, '<M-F>', function()
-    telescope.extensions.file_browser.file_browser({
+    extensions.file_browser.file_browser({
       path = '%:p:h',
       grouped = true,
       hidden = true,
@@ -66,11 +73,12 @@ local function keymaps()
   end, 'Browse files relative to buffer with preview')
 
   map({ 'i', 'n' }, '<M-g>', function()
-    builtin.live_grep(options_with_cwd_title({ cwd = vim.fn.expand('%:p:h') }))
+    local cwd = vim.fn.expand('%:p:h')
+    builtin.live_grep({ cwd = cwd, prompt_title = get_buffer_dir(cwd) })
   end, '[S]earch Live [G]rep relative buffer')
 
   map({ 'i', 'n' }, '<M-G>', function()
-    builtin.live_grep(options_with_cwd_title({}))
+    builtin.live_grep({ prompt_title = get_buffer_dir() })
   end, '[S]earch Live [G]rep')
 
   map({ 'i', 'n' }, '<M-b>', function()
@@ -83,7 +91,8 @@ local function keymaps()
   end, '[S]earch Live [G]rep from visual selection')
 
   map({ 'i', 'n' }, '<M-s>w', function()
-    builtin.grep_string(options_with_cwd_title({ cwd = vim.fn.expand('%:p:h') }))
+    local cwd = vim.fn.expand('%:p:h')
+    builtin.grep_string({ cwd = cwd, prompt_title = get_buffer_dir(cwd) })
   end, '[S]earch [W]ord under cursor in cwd relative to buffer')
 
   map({ 'i', 'n' }, '<M-s>W', function()
@@ -144,8 +153,6 @@ end
 local M = {}
 
 function M.setup()
-  local dropdown = themes.get_dropdown()
-
   vim.api.nvim_create_augroup('startup', { clear = true })
   vim.api.nvim_create_autocmd('VimEnter', {
     group = 'startup',
@@ -155,7 +162,7 @@ function M.setup()
       local arg = vim.api.nvim_eval('argv(0)')
       if arg and (vim.fn.isdirectory(arg) ~= 0 or arg == '') then
         vim.defer_fn(function()
-          builtin.find_files(options_with_cwd_title(dropdown))
+          builtin.find_files(themes.get_dropdown({ prompt_title = get_buffer_dir() }))
         end, 50)
       end
     end,
