@@ -168,9 +168,9 @@ function M.setup()
       winblend = 20,
       show_line = false,
       borderchars = {
-        prompt = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-        results = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-        preview = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
+        prompt = { ' ' },
+        results = { ' ' },
+        preview = { ' ' },
       },
       prompt_prefix = '󰿟 ',
       prompt_title = '',
@@ -211,6 +211,9 @@ function M.setup()
         '--smart-case',
         '-u',
       },
+    },
+    preview = {
+      filesize_limit = 0.2, -- MB
     },
     pickers = {
       find_files = {
