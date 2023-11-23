@@ -7,7 +7,7 @@ local plenary = require('plenary.path')
 
 local telescope = require('telescope')
 local builtin = require('telescope.builtin')
-local themes = require('telescope.themes')
+local telescope_themes = require('telescope.themes')
 
 local map = function(mode, l, r, desc)
   local opts = { silent = true, desc = '[Telescope] ' .. desc }
@@ -35,10 +35,6 @@ end
 
 local function keymaps()
   local dropdown = custom_themes.get_dropdown()
-  -- File browser always relative to buffer
-  local dropdown_with_path = custom_themes.get_dropdown({
-    path = '%:p:h',
-  })
 
   map({ 'i', 'n' }, '<M-]>', function()
     builtin.find_files(options_with_cwd_title(dropdown))
@@ -48,16 +44,18 @@ local function keymaps()
     builtin.find_files(options_with_cwd_title(dropdown, { cwd = vim.fn.expand('%:p:h') }))
   end, 'Find files relative to buffer')
 
-  map({ 'i', 'n' }, '<M-->', function()
+  map({ 'i', 'n' }, '<M-_>', function()
     builtin.find_files(options_with_cwd_title({}))
   end, 'Find files with preview')
 
-  map({ 'i', 'n' }, '<M-_>', function()
+  map({ 'i', 'n' }, '<M-->', function()
     builtin.find_files(options_with_cwd_title({ cwd = vim.fn.expand('%:p:h') }))
   end, 'Find files with preview relative to buffer')
 
   map({ 'i', 'n' }, '<M-f>', function()
-    telescope.extensions.file_browser.file_browser(options_with_cwd_title(dropdown_with_path))
+    telescope.extensions.file_browser.file_browser(options_with_cwd_title(dropdown, {
+      path = '%:p:h',
+    }))
   end, 'Browse files relative to buffer')
 
   map({ 'i', 'n' }, '<M-F>', function()
@@ -103,7 +101,7 @@ local function keymaps()
   end, 'Fuzzy search in buffer')
 
   map({ 'i', 'n' }, '<M-s>s', function()
-    builtin.spell_suggest(themes.get_cursor())
+    builtin.spell_suggest(telescope_themes.get_cursor())
   end, '[S]pell [S]uggestions')
 
   map('n', '<C-g>b', builtin.git_branches, '[G]it [B]ranches')
@@ -129,11 +127,11 @@ local function keymaps()
 
   -- Neoclip
   map({ 'n', 'i', 'v' }, '<M-y>', function()
-    telescope.extensions.neoclip.default(themes.get_dropdown())
+    telescope.extensions.neoclip.default(telescope_themes.get_dropdown())
   end, 'Search Yanks')
 
   map({ 'n', 'i' }, '<M-s>m', function()
-    telescope.extensions.macroscope.default(themes.get_dropdown())
+    telescope.extensions.macroscope.default(telescope_themes.get_dropdown())
   end, '[S]earch [M]acros')
 
   map(
@@ -167,6 +165,13 @@ function M.setup()
   telescope.setup({
     defaults = {
       dynamic_preview_title = true,
+      winblend = 20,
+      show_line = false,
+      borderchars = {
+        prompt = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
+        results = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
+        preview = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
+      },
       prompt_prefix = '󰿟 ',
       prompt_title = '',
       results_title = '',
