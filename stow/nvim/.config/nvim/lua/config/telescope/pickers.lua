@@ -199,8 +199,24 @@ function M.find_file_pattern(pattern, callback)
     :find()
 end
 
--- Find files on prompt change with fd
-function M.find_files(opts)
+---@param opts table
+---@param callback fun(entry:string)
+function M.select_file(opts, callback)
+  local builtin = require('telescope.builtin')
+  opts = themes.get_dropdown(opts)
+  opts.attach_mappings = function(buffer_number)
+    telescope_actions.select_default:replace(function()
+      telescope_actions.close(buffer_number)
+      callback(action_state.get_selected_entry()[1])
+    end)
+    return true
+  end
+
+  builtin.find_files(opts)
+end
+
+--- Find files on prompt change with fd
+function M.find_files_live(opts)
   if opts.cwd then
     opts.cwd = vim.fn.expand(opts.cwd)
   else
