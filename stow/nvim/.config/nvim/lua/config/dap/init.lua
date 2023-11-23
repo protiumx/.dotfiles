@@ -78,7 +78,7 @@ local function configure_debuggers()
   local dap = require('dap')
   local pickers = require('config.telescope.pickers')
 
-  dap.adapters.delve = {
+  dap.adapters.go = {
     type = 'server',
     port = '${port}',
     executable = {
@@ -90,28 +90,28 @@ local function configure_debuggers()
   -- https://github.com/go-delve/delve/blob/master/Documentation/usage/dlv_dap.md
   dap.configurations.go = {
     {
-      type = 'delve',
+      type = 'go',
       name = 'Debug',
       request = 'launch',
       program = '${file}',
     },
     {
-      type = 'delve',
+      type = 'go',
       name = 'Debug Test',
       request = 'launch',
       mode = 'test',
       program = '${file}',
     },
     {
-      type = 'delve',
+      type = 'go',
       name = 'Debug Package',
       request = 'launch',
       mode = 'test',
       program = './${relativeFileDirname}',
     },
     {
+      type = 'go',
       name = 'Launch File',
-      type = 'delve',
       request = 'launch',
       cwd = '${workspaceFolder}',
       program = function()
