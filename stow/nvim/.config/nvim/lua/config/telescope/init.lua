@@ -1,13 +1,12 @@
 local actions = require('config.telescope.actions')
 local pickers = require('config.telescope.pickers')
-local custom_themes = require('config.telescope.themes')
+local themes = require('config.telescope.themes')
 local utils = require('config.utils')
 
 local plenary = require('plenary.path')
 
 local telescope = require('telescope')
 local builtin = require('telescope.builtin')
-local telescope_themes = require('telescope.themes')
 
 local map = function(mode, l, r, desc)
   local opts = { silent = true, desc = '[Telescope] ' .. desc }
@@ -34,7 +33,7 @@ local options_with_cwd_title = function(opts, extra)
 end
 
 local function keymaps()
-  local dropdown = custom_themes.get_dropdown()
+  local dropdown = themes.get_dropdown()
 
   map({ 'i', 'n' }, '<M-]>', function()
     builtin.find_files(options_with_cwd_title(dropdown))
@@ -127,11 +126,11 @@ local function keymaps()
 
   -- Neoclip
   map({ 'n', 'i', 'v' }, '<M-y>', function()
-    telescope.extensions.neoclip.default(telescope_themes.get_dropdown())
+    telescope.extensions.neoclip.default(themes.get_dropdown({ previewer = true }))
   end, 'Search Yanks')
 
   map({ 'n', 'i' }, '<M-s>m', function()
-    telescope.extensions.macroscope.default(telescope_themes.get_dropdown())
+    telescope.extensions.macroscope.default(themes.get_dropdown({ previewer = true }))
   end, '[S]earch [M]acros')
 
   map(
@@ -145,7 +144,7 @@ end
 local M = {}
 
 function M.setup()
-  local dropdown = custom_themes.get_dropdown()
+  local dropdown = themes.get_dropdown()
 
   vim.api.nvim_create_augroup('startup', { clear = true })
   vim.api.nvim_create_autocmd('VimEnter', {

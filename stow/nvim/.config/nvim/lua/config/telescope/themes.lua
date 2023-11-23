@@ -3,8 +3,8 @@ local themes = require('telescope.themes')
 local M = {}
 ---@param opts table | nil
 M.get_dropdown = function(opts)
-  local dropdown = themes.get_dropdown(opts or {})
-  return vim.tbl_extend('force', dropdown, {
+  opts = opts or {}
+  local dropdown = themes.get_dropdown({
     previewer = false,
     winblend = 20,
     show_line = false,
@@ -17,6 +17,7 @@ M.get_dropdown = function(opts)
     preview_title = '',
     results_title = '',
   })
+  return vim.tbl_extend('force', dropdown, opts)
 end
 
 return M
