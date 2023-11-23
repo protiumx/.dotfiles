@@ -32,15 +32,16 @@ function M.setup()
         border = {
           padding = { 1, 2 },
         },
-        win_options = {
-          winhighlight = { Normal = 'NormalFloat', FloatBorder = 'FloatBorder' },
-        },
       },
 
       popup = {
+        border = {
+          style = 'shadow',
+        },
         win_options = {
-          wrap = true,
           linebreak = true,
+          winblend = 20,
+          wrap = true,
         },
       },
     },
