@@ -221,3 +221,5 @@ fi
 if [[ "$OSTYPE" =~ ^darwin ]]; then
 	ssh-add --apple-load-keychain &>/dev/null
 fi
+
+echo "( .-.)"
