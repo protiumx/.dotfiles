@@ -186,8 +186,22 @@ local commands = {
   toggle_quiet = utils.toggle_quiet,
 }
 
+-- based off https://github.com/nvim-telescope/telescope.nvim/blob/master/lua/telescope/command.lua
 local function load_command(cmd, ...)
   local args = { ... }
+  -- local opts = {}
+
+  -- for _, arg in ipairs(args) do
+  --   if arg:find('=', 1) == nil then
+  --     user_opts['extension_type'] = arg
+  --   else
+  --     local param = vim.split(arg, '=')
+  --     local key = table.remove(param, 1)
+  --     param = table.concat(param, '=')
+  --     opts.opts[key] = param
+  --   end
+  -- end
+
   if next(args) ~= nil then
     (commands[cmd] --[[@as fun(args:any[])]])(args)
   else
@@ -208,11 +222,30 @@ function M.load()
   end, {
     desc = 'X command will help ya',
     nargs = '+',
-    complete = function(arg)
+    complete = function(args, line)
+      print('fash', args, line)
+      local l = vim.split(line, '%s+')
+      local n = #l - 2
+
+      if n == 1 then
+        print('asdfasdfsdf')
+        local list = vim.tbl_keys(commands)
+        table.sort(list)
+
+        return vim.tbl_filter(function(val)
+          return vim.startswith(val, l[2])
+        end, commands)
+      end
+
+      -- local options_list = vim.tbl_keys(require('telescope.config').values)
+      -- table.sort(options_list)
+
+      -- return vim.tbl_filter(function(val)
+      --   return vim.startswith(val, l[#l])
+      -- end, options_list)
       local list = vim.tbl_keys(commands)
-      return vim.tbl_filter(function(s)
-        return string.match(s, '^' .. arg)
-      end, list)
+      table.sort(list)
+      return list
     end,
   })
 
