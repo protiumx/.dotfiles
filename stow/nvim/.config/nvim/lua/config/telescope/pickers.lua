@@ -120,17 +120,20 @@ function M.buffers(opts)
     return
   end
 
-  -- always sort by most recent and marked buffers
   table.sort(bufnrs, function(a, b)
-    return vim.fn.getbufinfo(a)[1].lastused > vim.fn.getbufinfo(b)[1].lastused
-  end)
+    if state.get_buffer(a) and state.get_buffer(b) then
+      return vim.fn.getbufinfo(a)[1].lastused > vim.fn.getbufinfo(b)[1].lastused
+    end
 
-  table.sort(bufnrs, function(a, b)
     if state.get_buffer(a) then
       return true
     end
 
-    return false
+    if state.get_buffer(b) then
+      return false
+    end
+
+    return vim.fn.getbufinfo(a)[1].lastused > vim.fn.getbufinfo(b)[1].lastused
   end)
 
   local buffers = {}

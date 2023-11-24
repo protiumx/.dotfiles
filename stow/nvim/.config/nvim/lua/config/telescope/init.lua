@@ -78,7 +78,7 @@ local function keymaps()
   end, '[S]earch Live [G]rep relative buffer')
 
   map({ 'i', 'n' }, '<M-G>', function()
-    builtin.live_grep({ prompt_title = get_buffer_dir() })
+    builtin.live_grep()
   end, '[S]earch Live [G]rep')
 
   map({ 'i', 'n' }, '<M-b>', function()

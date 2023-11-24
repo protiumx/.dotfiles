@@ -5,36 +5,20 @@ local state = require('config.state')
 
 local M = {}
 
-local get_selected_entries = function(current_picker)
-  local selected = {}
-  local selections = current_picker:get_multi_selection()
-  if vim.tbl_isempty(selections) then
-    table.insert(selected, action_state.get_selected_entry())
-  else
-    for _, selection in ipairs(selections) do
-      table.insert(selected, selection)
-    end
-  end
-
-  return selected
-end
-
 function M.toggle_buffer_mark(prompt_bufnr)
   local current_picker = action_state.get_current_picker(prompt_bufnr)
-  local entries = get_selected_entries(current_picker)
-  for _, entry in ipairs(entries) do
-    local mark = '󰤱'
-    local old = ' '
-    if not state.toggle_buffer_mark(entry.bufnr) then
-      old = '󰤱'
-      mark = ' '
-    end
-
-    local row = current_picker:get_row(entry.index)
-    local start = #current_picker.selection_caret
-
-    vim.api.nvim_buf_set_text(current_picker.results_bufnr, row, start, row, start + #old, { mark })
+  local entry = action_state.get_selected_entry()
+  local mark = '󰤱'
+  local old = ' '
+  if not state.toggle_buffer_mark(entry.bufnr) then
+    old = '󰤱'
+    mark = ' '
   end
+
+  local row = current_picker:get_selection_row()
+  local col = current_picker:is_multi_selected(entry) and #current_picker.multi_icon
+    or #current_picker.selection_caret
+  vim.api.nvim_buf_set_text(current_picker.results_bufnr, row, col, row, col + #old, { mark })
 end
 
 function M.select_window(prompt_bufnr)
