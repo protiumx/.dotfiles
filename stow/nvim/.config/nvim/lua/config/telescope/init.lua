@@ -6,7 +6,6 @@ local utils = require('config.utils')
 local plenary = require('plenary.path')
 
 local telescope = require('telescope')
-local telescope_themes = require('telescope.themes')
 local builtin = require('telescope.builtin')
 
 local map = function(mode, l, r, desc)
@@ -27,6 +26,7 @@ local function get_buffer_dir(cwd)
 end
 
 local function keymaps()
+  local telescope_themes = require('telescope.themes')
   local dropdown = themes.get_dropdown()
   local extensions = telescope.extensions
 
