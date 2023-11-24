@@ -1,6 +1,11 @@
 local M = {}
 
 function M.setup()
+  local win_highlights = {
+    NormalFloat = 'NormalFloat',
+    FloatBorder = 'FloatBorder',
+  }
+
   require('noice').setup({
     views = {
       cmdline_popup = {
@@ -11,7 +16,7 @@ function M.setup()
         },
         filter_options = {},
         win_options = {
-          winhighlight = 'NormalFloat:NormalFloat,FloatBorder:FloatBorder',
+          winhighlight = win_highlights,
         },
         position = {
           row = '42%',
@@ -33,6 +38,9 @@ function M.setup()
         border = {
           padding = { 1, 2 },
         },
+        win_options = {
+          winhighlight = win_highlights,
+        },
       },
 
       popup = {
@@ -43,6 +51,38 @@ function M.setup()
           linebreak = true,
           winblend = 20,
           wrap = true,
+          winhighlight = win_highlights,
+        },
+      },
+
+      messages = {
+        view = 'popup',
+        relative = 'editor',
+        border = {
+          style = 'none',
+          padding = { 1, 2 },
+        },
+        win_options = {
+          wrap = true,
+          winblend = 20,
+          linebreak = true,
+          winhighlight = win_highlights,
+        },
+      },
+
+      hover = {
+        view = 'popup',
+        relative = 'cursor',
+        border = {
+          style = 'none',
+          padding = { 1, 2 },
+        },
+        position = { row = 2, col = 0 },
+        win_options = {
+          wrap = true,
+          winblend = 0,
+          linebreak = true,
+          winhighlight = win_highlights,
         },
       },
     },
@@ -96,7 +136,7 @@ function M.setup()
       bottom_search = false, -- use a classic bottom cmdline for search
       long_message_to_split = false, -- long messages will be sent to a split
       inc_rename = false, -- enables an input dialog for inc-rename.nvim
-      lsp_doc_border = true, -- add a border to hover docs and signature help
+      lsp_doc_border = false, -- add a border to hover docs and signature help
     },
 
     routes = {
