@@ -274,3 +274,5 @@ alias gst="gcommit style"
 alias gci="gcommit ci"
 alias gdo="gcommit docs"
 alias gmi="gcommit misc"
+
+alias rgv="rg --no-heading --vimgrep"
