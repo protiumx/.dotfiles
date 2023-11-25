@@ -59,7 +59,7 @@ function M.setup()
         vsplit = '<C-v>',
         split = '<C-x>',
         quit = '<ESC>',
-        close = '<ESC>',
+        close = 'q',
       },
     },
     request_timeout = 2500,
