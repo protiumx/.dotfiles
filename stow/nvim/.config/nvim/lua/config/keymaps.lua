@@ -153,6 +153,7 @@ vim.keymap.set(
   { silent = true, desc = 'Junk into reg ' .. system_clip_reg }
 )
 vim.keymap.set({ 'n', 'v' }, '<Leader>dd', '"_d', { silent = true, desc = 'Delete to blackwhole' })
+vim.keymap.set({ 'n', 'v' }, '<Leader>cc', '"_c', { silent = true, desc = 'Delete to blackwhole' })
 -- Delete shortcuts
 vim.keymap.set({ 'n', 'v' }, '<Leader>d_', 'dt_')
 vim.keymap.set({ 'n', 'v' }, '<Leader>d-', 'dt-')
@@ -163,6 +164,7 @@ vim.keymap.set({ 'n', 'v' }, '<Leacer>c-', 'ct-')
 vim.keymap.set('n', '<Leader>T', 'gg=G', { desc = 'Fix indent in whole file' })
 -- Paste formatted and go to end of pasted block
 vim.keymap.set({ 'n', 'v' }, 'p', ']p`]', { silent = true })
+vim.keymap.set({ 'n' }, 'P', ']P`]', { silent = true })
 -- Normal p
 vim.keymap.set({ 'n', 'v' }, '<C-p>', 'p', { silent = true })
 vim.keymap.set('n', '<M-V>', '`[v`]', { silent = true, desc = 'Select what was pasted' })
@@ -175,7 +177,12 @@ vim.keymap.set(
 )
 -- Join line with cursor at beginning of line using z as mark
 vim.keymap.set('n', 'J', 'mzJ`z', { silent = true })
-vim.keymap.set('v', '<Leader>/', 'y/<C-R>"<CR>', { desc = 'Search for highlighted text' })
+vim.keymap.set(
+  'v',
+  '<Leader>/',
+  '"yy/<C-R>y<CR>',
+  { desc = 'Yunk selected text into "y and put it in search' }
+)
 vim.keymap.set('n', '<Leader>P', function()
   local path = vim.fn.expand('%:~:.')
   vim.fn.setreg(system_clip_reg, path)
@@ -190,7 +197,7 @@ end, { desc = 'Copy current path with line and column to reg ' .. system_clip_re
 
 vim.keymap.set('n', '<Leader>s', '<cmd>w<CR>', { desc = 'Quick save' })
 vim.keymap.set('n', '<Leader>G', 'g<C-g>', { desc = 'File stats' })
-vim.keymap.set('n', '<Leader>S', ':mks! .session.vim<CR>')
+vim.keymap.set('n', '<Leader>S', '<cmd>mks! .session.vim<CR>')
 -- Quick new lines
 vim.keymap.set('i', '<M-o>', '<C-o>o', { silent = true })
 vim.keymap.set('i', '<M-O>', '<C-o>O', { silent = true })
