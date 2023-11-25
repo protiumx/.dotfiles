@@ -37,8 +37,13 @@ function Watcher:add_task(cmd, out)
     output = buffer
   end
 
-  local task = Task:new(self.file, cmd, output)
-  local error = task:validate()
+  local task = Task:new(
+    self.file,
+    cmd,
+    output,
+    string.format('dev[%s]#%d: %s', self.file, #self.tasks, table.concat(cmd, ' '))
+  )
+  local error = task:setup()
   if error then
     notify.error('Invalid task: ' .. error)
     task:destroy()

@@ -33,6 +33,7 @@ local baseHls = {
   -- Custom for floats and borders
   XMenu = { bg = colors.dark_grey, default = true, fg = colors.foreground },
   XBorder = { bg = colors.dark_grey, fg = colors.dark_grey, default = true },
+  DevOutputBufferTitle = { fg = colors.background, bg = colors.light_orange, bold = true },
   -- Base groups
   Normal = { bg = colors.background, fg = colors.foreground },
   NormalNC = { bg = colors.background, fg = colors.foreground },

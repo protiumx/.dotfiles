@@ -1,5 +1,7 @@
 local notify = require('config.dev.notify')
 
+local ns = vim.api.nvim_create_namespace('_dev_')
+
 ---@alias View
 ---| '"notify"'
 ---| '"popup"'
@@ -9,18 +11,21 @@ local notify = require('config.dev.notify')
 ---@field file string
 ---@field jobid number
 ---@field output number|View
+---@field name string
 ---@field runner function
 local Task = {}
 
 ---@param file string
 ---@param cmd string[]
 ---@param output number|View Output buffer number or view name
+---@param name string
 ---@return Task
-function Task:new(file, cmd, output)
+function Task:new(file, cmd, output, name)
   return setmetatable({
     cmd = cmd,
     file = file,
     jobid = -1,
+    name = name,
     output = output,
     runner = nil,
   }, { __index = self })
@@ -28,7 +33,7 @@ end
 
 ---Validates the command is a valid Lua module or OS executable
 ---@return string|nil
-function Task:validate()
+function Task:setup()
   local command = self.cmd[1]
   if command == 'neotest' then
     local ok, _ = pcall(require, 'neotest')
@@ -42,6 +47,7 @@ function Task:validate()
   end
 
   self.runner = self:_get_runner()
+  self:_set_title()
 
   return nil
 end
@@ -127,13 +133,25 @@ function Task:_output(content)
   self:_write_buffer(content)
 end
 
+function Task:_set_title()
+  vim.api.nvim_buf_set_lines(self.output, 0, -1, false, { self.name, '' })
+  vim.api.nvim_buf_set_extmark(
+    self.output,
+    ns,
+    0,
+    0,
+    { end_row = 1, hl_group = 'DevOutputBufferTitle', hl_eol = true }
+  )
+end
+
 ---@param content string[]
 function Task:_write_buffer(content)
   if not vim.api.nvim_buf_is_valid(self.output) then
     return
   end
 
-  vim.api.nvim_buf_set_lines(self.output, 0, -1, false, content)
+  -- skip title and empty line
+  vim.api.nvim_buf_set_lines(self.output, 2, -1, false, content)
 end
 
 return Task
