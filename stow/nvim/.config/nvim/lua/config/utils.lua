@@ -1,20 +1,7 @@
-local Path = require('plenary.path')
-
 local nvim = require('config.nvim')
 local state = require('config.state')
 
 local M = {}
-
-function M.get_vsel()
-  local vstart = vim.fn.getpos("'<")
-  local vend = vim.fn.getpos("'>")
-
-  local line_start = vstart[2]
-  local line_end = vend[2]
-
-  local lines = vim.fn.getline(line_start, line_end)
-  return lines and lines[0] or ''
-end
 
 --- Get text from visual selection
 function M.get_selection_text()
@@ -50,18 +37,6 @@ function M.open_file_under_cursor()
   vim.cmd(cmd)
 end
 
---- Find buffer by name relative to cwd
-function M.find_buffer_by_name(name)
-  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-    local buf_name = vim.api.nvim_buf_get_name(buf)
-    buf_name = Path:new(buf_name):make_relative(vim.loop.cwd())
-    if buf_name == name then
-      return buf
-    end
-  end
-  return -1
-end
-
 --- Uses `errorformat` to get a file and position from the current line
 function M.open_file_from_error()
   local elems = vim.fn.getqflist({
@@ -92,6 +67,28 @@ function M.toggle_quiet()
     state.set('quiet', true)
     vim.notify('Quiet mode', vim.log.levels.INFO)
   end
+end
+
+---@param filename string
+---@return string|nil
+function M.get_git_url(filename)
+  local remote_output = vim.fn.systemlist('gremote')
+  if #remote_output == 0 then
+    vim.notify('No remote found in current cwd', vim.log.levels.WARN)
+    return nil
+  end
+
+  local branch_output = vim.fn.systemlist('git rev-parse --abbrev-ref HEAD')
+
+  local remote = remote_output[1]
+  local branch = branch_output[1]
+
+  local url = string.format('%s/tree/%s/%s', remote, branch, filename)
+  if string.find(remote, 'bitbucket') then
+    url = string.format('%s/browse/%s?at=refs/heads/%s', remote, filename, branch)
+  end
+
+  return url
 end
 
 return M
