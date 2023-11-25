@@ -4,6 +4,7 @@ local Term = require('config.term.terminal')
 
 local M = {}
 
+-- default term
 local t = Term:new()
 
 ---Creates a custom terminal

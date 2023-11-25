@@ -4,12 +4,9 @@ local api = vim.api
 local fn = vim.fn
 local cmd = api.nvim_command
 
----@alias WinId number Floating Window's ID
----@alias BufId number Terminal Buffer's ID
-
 ---@class Term
----@field win WinId
----@field buf BufId
+---@field win number
+---@field buf number
 ---@field terminal? number Terminal's job id
 ---@field config Config
 local Term = {}
@@ -34,8 +31,8 @@ function Term:setup(cfg)
 end
 
 ---Term:store adds the given floating windows and buffer to the list
----@param win WinId
----@param buf BufId
+---@param win number
+---@param buf number
 ---@return Term
 function Term:store(win, buf)
   self.win = win
@@ -76,7 +73,7 @@ function Term:restore_cursor()
 end
 
 ---Term:create_buf creates a scratch buffer for floating window to consume
----@return BufId
+---@return number
 function Term:create_buf()
   -- If previous buffer exists then return it
   local prev = self.buf
@@ -94,8 +91,8 @@ function Term:create_buf()
 end
 
 ---Term:create_win creates a new window with a given buffer
----@param buf BufId
----@return WinId
+---@param buf number
+---@return number
 function Term:create_win(buf)
   local cfg = self.config
   local dim = utils.get_dimension(cfg.dimensions)
@@ -137,7 +134,7 @@ end
 ---@return Term
 function Term:open_term()
   -- NOTE: `termopen` will fails if the current buffer is modified
-  self.terminal = fn.termopen(utils.is_cmd(self.config.cmd), {
+  self.terminal = fn.termopen(utils.get_cmd(self.config.cmd), {
     clear_env = self.config.clear_env,
     env = self.config.env,
     on_stdout = self.config.on_stdout,
@@ -228,7 +225,7 @@ end
 function Term:run(command)
   self:open()
 
-  local exec = utils.is_cmd(command)
+  local exec = utils.get_cmd(command)
 
   api.nvim_chan_send(
     self.terminal,

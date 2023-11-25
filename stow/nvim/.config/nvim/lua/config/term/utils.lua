@@ -1,6 +1,6 @@
-local U = {}
+local M = {}
 
----@alias Command string|string[]
+---@alias Command string|string[]|fun():string
 
 ---@class Dimensions - Every field inside the dimensions should be b/w `0` to `1`
 ---@field height number: Height of the floating window (default: `0.8`)
@@ -23,8 +23,8 @@ local U = {}
 ---@field dimensions Dimensions: Dimensions of the floating window
 
 ---@type Config
-U.defaults = {
-  ft = 'FTerm',
+M.defaults = {
+  ft = 'xterm',
   cmd = function()
     return assert(
       os.getenv('SHELL'),
@@ -50,7 +50,7 @@ local min_height = 20
 ---Create terminal dimension relative to the viewport
 ---@param opts Dimensions
 ---@return table
-function U.get_dimension(opts)
+function M.get_dimension(opts)
   -- get lines and columns
   local cl = vim.o.columns
   local ln = vim.o.lines
@@ -82,22 +82,22 @@ end
 ---Check whether the window is valid
 ---@param win number Window ID
 ---@return boolean
-function U.is_win_valid(win)
+function M.is_win_valid(win)
   return win and vim.api.nvim_win_is_valid(win)
 end
 
 ---Check whether the buffer is valid
 ---@param buf number Buffer ID
 ---@return boolean
-function U.is_buf_valid(buf)
+function M.is_buf_valid(buf)
   return buf and vim.api.nvim_buf_is_loaded(buf)
 end
 
 ---Creates a valid command from user's input
 ---@param cmd Command
 ---@return Command
-function U.is_cmd(cmd)
+function M.get_cmd(cmd)
   return type(cmd) == 'function' and cmd() or cmd
 end
 
-return U
+return M
