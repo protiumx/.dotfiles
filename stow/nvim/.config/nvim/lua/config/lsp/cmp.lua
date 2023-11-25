@@ -103,31 +103,38 @@ function M.setup()
       local ftype = vim.api.nvim_buf_get_option(0, 'filetype')
       return not excluded_ftypes[ftype]
     end,
+
     confirmation = {
       default_behavior = types.cmp.ConfirmBehavior.Replace,
     },
+
     completion = {
       completeopt = 'menu, menuone',
     },
+
     snippet = {
       expand = function(args)
         luasnip.lsp_expand(args.body)
       end,
     },
+
     window = {
       completion = cmp.config.window.bordered({
         border = 'none',
         scrollbar = false,
         winhighlight = 'Normal:NormalFloat,CursorLine:Visual,Search:None',
       }),
+
       documentation = cmp.config.window.bordered({
         winhighlight = 'Normal:NormalFloat,CursorLine:Visual,Search:None',
         scrollbar = true,
       }),
     },
+
     perfomance = {
       throttle = 150,
     },
+
     sources = {
       sources.lsp,
       sources.snippets,
@@ -136,6 +143,7 @@ function M.setup()
       sources.buffer,
       sources.path,
     },
+
     formatting = {
       fields = { 'abbr', 'kind' },
       format = function(_, item)
@@ -145,6 +153,7 @@ function M.setup()
         return item
       end,
     },
+
     sorting = {
       comparators = {
         compare.offset,
@@ -158,7 +167,9 @@ function M.setup()
         -- compare.order,
       },
     },
+
     preselect = cmp.PreselectMode.Item,
+
     mapping = cmp.mapping.preset.insert({
       ['<CR>'] = cmp.mapping.confirm({
         select = true,
