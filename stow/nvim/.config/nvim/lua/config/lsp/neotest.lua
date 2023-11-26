@@ -124,6 +124,14 @@ function M.setup()
   vim.keymap.set('n', '<Leader>tw', function()
     neotest.watch.toggle(vim.fn.expand('%'))
   end, { silent = true })
+
+  vim.keymap.set('n', ']t', function()
+    neotest.jump.next({ status = 'failed' })
+  end, { silent = true })
+
+  vim.keymap.set('n', '[t', function()
+    neotest.jump.prev({ status = 'failed' })
+  end, { silent = true })
 end
 
 return M
