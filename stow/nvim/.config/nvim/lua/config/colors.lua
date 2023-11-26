@@ -35,10 +35,10 @@ local baseHls = {
   XBorder = { bg = colors.dark_grey, fg = colors.dark_grey, default = true },
   DevOutputBufferTitle = { fg = colors.background, bg = colors.light_orange, bold = true },
   -- Base groups
-  Normal = { bg = colors.background, fg = colors.foreground },
-  NormalNC = { bg = colors.background, fg = colors.foreground },
-  -- Normal = { bg = 'none' },
-  -- NormalNC = { bg = 'none' },
+  -- Normal = { bg = colors.background, fg = colors.foreground },
+  -- NormalNC = { bg = colors.background, fg = colors.foreground },
+  Normal = { bg = 'none' },
+  NormalNC = { bg = 'none' },
   Cursor = { fg = colors.background, bg = colors.violet },
   TermCursor = { link = 'Cursor' },
   ColorColumn = { bg = '#1a1717' },
@@ -65,6 +65,7 @@ local baseHls = {
   DiffviewFilePanelRootPath = { fg = colors.violet },
   DiffviewFilePanelSelected = { fg = colors.dark_orange, bold = true },
   DiffviewFilePanelTitle = { fg = colors.violet },
+  DiffviewStatusAdded = { fg = colors.green, bg = 'none', bold = true },
   -- Mason
   MasonHeader = { link = 'XMenu' },
   MasonHeading = { link = 'XBorder' },
