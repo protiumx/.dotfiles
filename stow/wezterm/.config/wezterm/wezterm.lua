@@ -361,9 +361,10 @@ local config = {
   -- background = {
   --   {
   --     source = {
-  --       File = '/Users/bmayo/.dotfiles/background/eclipse.jpg'
+  --       File = '/Users/bmayo/.dotfiles/background/moon.jpg',
   --     },
-  --     width = '100%',
+  --     width = 'Cover',
+  --     height = 'Cover',
   --     hsb = { brightness = 0.2 },
   --     vertical_align = 'Middle',
   --     horizontal_align = 'Center',
