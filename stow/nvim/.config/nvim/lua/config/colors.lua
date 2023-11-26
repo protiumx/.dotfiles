@@ -65,7 +65,7 @@ local baseHls = {
   DiffviewFilePanelRootPath = { fg = colors.violet },
   DiffviewFilePanelSelected = { fg = colors.dark_orange, bold = true },
   DiffviewFilePanelTitle = { fg = colors.violet },
-  DiffviewStatusAdded = { fg = colors.green, bg = 'none', bold = true },
+  DiffviewStatusUntracked = { fg = colors.green, bg = 'none', bold = true },
   -- Mason
   MasonHeader = { link = 'XMenu' },
   MasonHeading = { link = 'XBorder' },
@@ -86,6 +86,7 @@ local baseHls = {
   TelescopeResultsNormal = { link = 'XMenu' },
   TelescopeResultsTitle = { fg = colors.background, bg = colors.light_orange },
   TelescopeSelectionCaret = { fg = colors.red, bg = 'none' },
+  TelescopeSelection = { fg = colors.orange, bg = 'none' },
   -- lspsaga.nvim
   ActionPreviewBorder = { link = 'XBorder' },
   ActionPreviewNormal = { link = 'XMenu' },
