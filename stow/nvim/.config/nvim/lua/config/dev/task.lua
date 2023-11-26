@@ -1,37 +1,7 @@
-local Popup = require('nui.popup')
-local event = require('nui.utils.autocmd').event
-
 local notify = require('config.dev.notify')
+local ui = require('config.ui')
 
-local ns = vim.api.nvim_create_namespace('_dev_')
-
-local popup_config = {
-  enter = true,
-  focusable = true,
-  position = '50%',
-  size = {
-    width = '40%',
-    height = '60%',
-  },
-  relative = 'editor',
-  border = {
-    padding = {
-      top = 1,
-      bottom = 1,
-      left = 1,
-      right = 1,
-    },
-    style = 'none',
-  },
-  buf_options = {
-    modifiable = true,
-    readonly = false,
-  },
-  win_options = {
-    winblend = 20,
-    winhighlight = 'Normal:NormalFloat,FloatBorder:FloatBorder',
-  },
-}
+local ns = vim.api.nvim_create_namespace('dev-ns')
 
 ---@alias View
 ---| '"notify"'
@@ -68,7 +38,7 @@ function Task:new(file, cmd, output, name)
   if type(output) == 'number' then
     t.buffer = output
   elseif output == 'popup' then
-    t.popup = t._create_popup()
+    t.popup = ui.popup()
   end
 
   return t
@@ -106,18 +76,6 @@ function Task:destroy()
     self.popup:unmount()
     self.popup = nil
   end
-end
-
-function Task._create_popup()
-  local popup = Popup(popup_config)
-  popup:map('n', 'q', function()
-    popup:hide()
-  end)
-  popup:on(event.BufLeave, function()
-    popup:hide()
-  end)
-
-  return popup
 end
 
 ---Evaluates the cmd into a function
@@ -185,7 +143,7 @@ function Task:_output(content)
   if self.output == 'popup' then
     if not self.popup._.mounted then
       self.popup:mount()
-      vim.api.nvim_win_set_option(self.popup.border.winid, 'winblend', 20)
+      vim.api.nvim_win_set_option(self.popup.border.winid, 'winblend', ui.winblend)
     end
     self.popup:show()
   end
