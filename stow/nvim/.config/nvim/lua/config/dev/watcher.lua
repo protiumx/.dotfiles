@@ -1,23 +1,24 @@
 local notify = require('config.dev.notify')
 local Task = require('config.dev.task')
 
-local WatcherAugroup = vim.api.nvim_create_augroup('dev_watcher', { clear = true })
+local FILETYPE = 'dev-watcher'
+local Autocmd_group = vim.api.nvim_create_augroup('dev-watcher', { clear = true })
 
 ---@class Watcher
 ---@field autocmd_id number
----@field file string
+---@field pattern string
 ---@field tasks Task[]
 local Watcher = {}
 
----@param file string
-function Watcher:new(file)
+---@param pattern string
+function Watcher:new(pattern)
   local t = setmetatable({
     autocmd_id = -1,
-    file = file,
+    pattern = pattern,
     tasks = {},
   }, { __index = self })
 
-  t:_watch()
+  t:_set_events()
 
   return t
 end
@@ -25,8 +26,14 @@ end
 ---@param cmd string[]
 ---@param out string
 function Watcher:add_task(cmd, out)
-  if self:_has_cmd(cmd) then
-    notify.error(string.format('"%s" already running for file', table.concat(cmd, ' ')))
+  if self:_has_task_with_cmd(cmd) then
+    notify.error(
+      string.format(
+        'command "%s" already set for pattern "%s"',
+        table.concat(cmd, ' '),
+        self.pattern
+      )
+    )
     return
   end
 
@@ -37,12 +44,9 @@ function Watcher:add_task(cmd, out)
     output = buffer
   end
 
-  local task = Task:new(
-    self.file,
-    cmd,
-    output,
-    string.format('dev[%s]#%d: %s', self.file, #self.tasks, table.concat(cmd, ' '))
-  )
+  local task_name =
+    string.format('dev[%s]#%d: %s', self.pattern, #self.tasks, table.concat(cmd, ' '))
+  local task = Task:new(self.pattern, cmd, output, task_name)
   local error = task:setup()
   if error then
     notify.error('invalid task: ' .. error)
@@ -74,7 +78,7 @@ function Watcher:destroy()
 end
 
 ---@param cmd string[]
-function Watcher:_has_cmd(cmd)
+function Watcher:_has_task_with_cmd(cmd)
   local command_id = table.concat(cmd, '')
   for _, t in ipairs(self.tasks) do
     if command_id == table.concat(t.cmd, '') then
@@ -89,14 +93,14 @@ end
 ---@return number, number
 function Watcher:_create_buffer(vertical)
   local buffer = vim.api.nvim_create_buf(true, true)
-  local title = string.format('dev[%s]#%d', self.file, #self.tasks)
-  vim.api.nvim_buf_set_option(buffer, 'filetype', '_dev_')
+  local title = string.format('dev[%s]#%d', self.pattern, #self.tasks)
+  vim.api.nvim_buf_set_option(buffer, 'filetype', FILETYPE)
   vim.api.nvim_buf_set_name(buffer, title)
   vim.api.nvim_buf_set_keymap(buffer, 'n', 'q', '<cmd>q<CR>', { silent = true })
 
   vim.cmd.split({ mods = { vertical = vertical } })
   local winid = vim.api.nvim_get_current_win()
-  vim.cmd('wincmd w') -- immediately switch back to last window
+  vim.cmd('wincmd p') -- immediately switch back to last window
 
   vim.api.nvim_win_set_buf(winid, buffer)
   vim.api.nvim_win_set_option(winid, 'number', false)
@@ -116,10 +120,10 @@ function Watcher:_run_tasks()
   end
 end
 
-function Watcher:_watch()
+function Watcher:_set_events()
   vim.api.nvim_create_autocmd('BufWritePost', {
-    group = WatcherAugroup,
-    pattern = self.file,
+    group = Autocmd_group,
+    pattern = self.pattern,
     callback = function()
       self:_run_tasks()
     end,
