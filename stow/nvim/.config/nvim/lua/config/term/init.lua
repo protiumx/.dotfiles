@@ -67,7 +67,7 @@ end
 function M.setup()
   local cfg = {
     hl = 'NormalFloat',
-    border = 'shadow',
+    border = 'none',
     blend = 20,
     dimensions = {
       height = 0.4,
