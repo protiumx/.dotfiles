@@ -1,3 +1,4 @@
+local ui = require('config.ui')
 local actions = require('config.telescope.actions')
 local pickers = require('config.telescope.pickers')
 local themes = require('config.telescope.themes')
@@ -171,7 +172,7 @@ function M.setup()
   telescope.setup({
     defaults = {
       dynamic_preview_title = true,
-      winblend = 20,
+      winblend = ui.winblend,
       show_line = false,
       borderchars = {
         prompt = { ' ' },

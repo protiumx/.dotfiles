@@ -1,3 +1,5 @@
+local ui = require('config.ui')
+
 local M = {}
 
 function M.setup()
@@ -49,7 +51,7 @@ function M.setup()
         },
         win_options = {
           linebreak = true,
-          winblend = 20,
+          winblend = ui.winblend,
           wrap = true,
           winhighlight = win_highlights,
         },
@@ -64,7 +66,7 @@ function M.setup()
         },
         win_options = {
           wrap = true,
-          winblend = 20,
+          winblend = ui.winblend,
           linebreak = true,
           winhighlight = win_highlights,
         },

@@ -1,3 +1,4 @@
+local ui = require('config.ui')
 local themes = require('telescope.themes')
 
 local M = {}
@@ -6,7 +7,7 @@ M.get_dropdown = function(opts)
   opts = opts or {}
   local dropdown = themes.get_dropdown({
     previewer = false,
-    winblend = 20,
+    winblend = ui.winblend,
     show_line = false,
     borderchars = {
       prompt = { ' ' },
