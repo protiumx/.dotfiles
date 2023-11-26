@@ -45,7 +45,7 @@ function Watcher:add_task(cmd, out)
   )
   local error = task:setup()
   if error then
-    notify.error('Invalid task: ' .. error)
+    notify.error('invalid task: ' .. error)
     task:destroy()
     return
   end

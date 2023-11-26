@@ -15,7 +15,7 @@ local defaults = {
   out = 'vs',
 }
 
-local MAX_JOBS = 3
+local MAX_TASKS = 3
 local M = {}
 
 --- Watches a file and runs a command when the file is saved
@@ -31,8 +31,8 @@ function M.watch(config)
     State[config.file] = watcher
   end
 
-  if vim.tbl_count(watcher.tasks) >= MAX_JOBS then
-    notify.warn(string.format('File %s reched max watchers %d', config.file, MAX_JOBS))
+  if vim.tbl_count(watcher.tasks) >= MAX_TASKS then
+    notify.warn(string.format('file %s reached tasks limit [%d]', config.file, MAX_TASKS))
     return
   end
 
@@ -44,20 +44,20 @@ end
 function M.unwatch(file, task_id)
   local watcher = State[file] --[[@as Watcher]]
   if not watcher then
-    notify.warn('No watchers found for: ' .. file)
+    notify.warn('no watchers found for: ' .. file)
     return
   end
 
   if task_id ~= nil then
     watcher:remove_task(task_id)
-    notify.info(string.format('Task #%d removed from %s watcher', task_id, file))
+    notify.info(string.format('task #%d removed from %s watcher', task_id, file))
     return
   end
 
   watcher:destroy()
   State[file] = nil
 
-  vim.notify('Removed watcher for ' .. file)
+  vim.notify('removed watcher for ' .. file)
 end
 
 return M
