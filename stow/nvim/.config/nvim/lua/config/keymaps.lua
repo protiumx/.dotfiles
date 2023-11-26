@@ -36,10 +36,10 @@ vim.keymap.set(
 -- Move lines up/down preserving format
 vim.keymap.set('n', '<M-j>', ':m .+1<CR>==', { silent = true })
 vim.keymap.set('n', '<M-k>', ':m .-2<CR>==', { silent = true })
-vim.keymap.set('v', '<C-j>', ":m '>+1<CR>gv=gv", { silent = true })
-vim.keymap.set('v', '<C-k>', ":m '<-2<CR>gv=gv", { silent = true })
-vim.keymap.set('i', '<C-j>', '<Esc>:m .+1<CR>==gi', { silent = true })
-vim.keymap.set('i', '<C-k>', '<Esc>:m .-2<CR>==gi', { silent = true })
+vim.keymap.set('v', '<M-j>', ":m '>+1<CR>gv=gv", { silent = true })
+vim.keymap.set('v', '<M-k>', ":m '<-2<CR>gv=gv", { silent = true })
+vim.keymap.set('i', '<M-j>', '<Esc>:m .+1<CR>==gi', { silent = true })
+vim.keymap.set('i', '<M-k>', '<Esc>:m .-2<CR>==gi', { silent = true })
 
 -- Quickfix navigation
 vim.keymap.set('n', '<Leader>ql', '<cmd>cn<CR>')
@@ -57,9 +57,10 @@ vim.keymap.set('n', '<Leader>h', '<C-w>h', { silent = true })
 vim.keymap.set('n', '<Leader>j', '<C-w>j', { silent = true })
 vim.keymap.set('n', '<Leader>k', '<C-w>k', { silent = true })
 vim.keymap.set('n', '<Leader>l', '<C-w>l', { silent = true })
+vim.keymap.set('n', '<C-w>S', '<cmd>bp | vs #<CR>', { desc = 'Open previous buffer in vsplit' })
 
 -- Buffer utils
-vim.keymap.set('n', '<Leader>bs', '<cmd>bp | vs #<CR>', { desc = 'Open previous buffer in vsplit' })
+vim.keymap.set('n', '<C-w>B', '<cmd>bp | vs #<CR>', { desc = 'Open previous buffer in vsplit' })
 vim.keymap.set('n', '<Tab>', '<cmd>bn<CR>', { silent = true })
 vim.keymap.set('n', '<S-Tab>', '<cmd>bp<CR>', { silent = true })
 vim.keymap.set('n', '``', '<C-^>', { silent = true })
@@ -152,8 +153,8 @@ vim.keymap.set(
   '"' .. system_clip_reg .. 'y',
   { silent = true, desc = 'Junk into reg ' .. system_clip_reg }
 )
-vim.keymap.set({ 'n', 'v' }, '<Leader>dd', '"_d', { silent = true, desc = 'Delete to blackwhole' })
-vim.keymap.set({ 'n', 'v' }, '<Leader>cc', '"_c', { silent = true, desc = 'Delete to blackwhole' })
+vim.keymap.set({ 'n', 'v' }, '<Leader>D', '"_d', { silent = true, desc = 'Delete to blackwhole' })
+vim.keymap.set({ 'n', 'v' }, '<Leader>C', '"_c', { silent = true, desc = 'Delete to blackwhole' })
 -- Delete shortcuts
 vim.keymap.set({ 'n', 'v' }, '<Leader>d_', 'dt_')
 vim.keymap.set({ 'n', 'v' }, '<Leader>d-', 'dt-')
