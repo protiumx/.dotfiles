@@ -107,6 +107,7 @@ function M.setup()
       progress = {
         enabled = false,
       },
+
       hover = {
         enabled = true,
         view = 'hover', -- when nil, use defaults from documentation
@@ -115,20 +116,20 @@ function M.setup()
           scrollbar = true,
         }, -- merged with defaults from documentation
       },
-      -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+
+      signature = {
+        enabled = true,
+        opts = {
+          position = {
+            row = 2,
+          },
+        },
+      },
+
       override = {
         ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
         ['vim.lsp.util.stylize_markdown'] = true,
         ['cmp.entry.get_documentation'] = false,
-      },
-    },
-
-    signature = {
-      enabled = true,
-      opts = {
-        position = {
-          row = 2,
-        },
       },
     },
 
