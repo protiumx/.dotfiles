@@ -152,10 +152,6 @@ function Task:_handle_cmd_output(content)
   self:_write_output(content)
 
   if self.popup ~= nil then
-    if not self.popup._.mounted then
-      self.popup:mount()
-      vim.api.nvim_win_set_option(self.popup.border.winid, 'winblend', ui.winblend)
-    end
     self.popup:show()
   end
 end

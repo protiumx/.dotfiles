@@ -85,11 +85,6 @@ function Manager.inspect()
   Manager:_load_content()
   vim.api.nvim_buf_set_lines(Manager.popup.bufnr, 0, -1, false, Manager.lines)
 
-  if not Manager.popup._.mounted then
-    Manager.popup:mount()
-    vim.api.nvim_win_set_option(Manager.popup.border.winid, 'winblend', ui.winblend)
-  end
-
   Manager.popup:show()
 end
 
