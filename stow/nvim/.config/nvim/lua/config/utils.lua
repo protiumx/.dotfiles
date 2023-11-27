@@ -59,11 +59,17 @@ end
 --- Toggle LSP and global state 'quiet' value
 function M.toggle_quiet()
   if state.get('quiet') then
-    vim.cmd('LspStart')
+    vim.cmd([[
+      LspStart
+      set spell
+    ]])
     state.set('quiet', false)
     vim.notify('Back to full power', vim.log.levels.INFO)
   else
-    vim.cmd('LspStop')
+    vim.cmd([[
+      LspStop
+      set nospell
+    ]])
     state.set('quiet', true)
     vim.notify('Quiet mode', vim.log.levels.INFO)
   end
