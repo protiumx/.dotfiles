@@ -44,6 +44,10 @@ function Manager.watch(opts)
   assert(#opts.cmd > 0, 'Invalid command')
   assert(opts.pattern ~= '', 'Invalid watch pattern')
 
+  for i, c in ipairs(opts.cmd) do
+    opts.cmd[i] = vim.fn.expand(c)
+  end
+
   local watcher = Watchers[opts.pattern] ---@as Watcher
   if not watcher then
     watcher = Watcher:new(opts.pattern)
