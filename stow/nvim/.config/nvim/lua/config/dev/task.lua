@@ -16,6 +16,9 @@ local TaskAugroup = vim.api.nvim_create_augroup('dev-augroup', { clear = true })
 ---@field winid number
 local Task = {}
 
+---@type Output[]
+local WriteableOutputs = { 'vs', 'sp', 'popup' }
+
 ---@param name string
 ---@param opts WatchOptions
 ---@return Task
@@ -35,11 +38,6 @@ end
 ---Validates the command is a valid Lua module or OS executable
 ---@return string|nil
 function Task:setup()
-  local command = self.opts.cmd[1]
-  if command ~= 'lua' and vim.fn.executable(command) == 0 then
-    return 'not an executable command: "' .. command .. '"'
-  end
-
   local fn, error = self:_build_runner()
   if fn == nil or error ~= nil then
     return string.format('failed to setup task: %s', error)
@@ -99,7 +97,22 @@ function Task:_build_runner()
     end
   end
 
+  if vim.startswith(command, ':') then
+    if vim.fn.exists(command) ~= 2 then
+      return nil, 'invalid {expr}'
+    end
+
+    return function(file)
+      local expr = self.opts.raw_cmd:gsub('${file}', file)
+      self:_handle_cmd_output(vim.cmd(expr))
+    end
+  end
+
   -- OS commands
+  if vim.fn.executable(command) == 0 then
+    return nil, 'not an executable command: "' .. command .. '"'
+  end
+
   return function(file)
     local cmd = vim.list_slice(self.opts.cmd)
     if self.opts.raw_cmd:find('${file}') then
@@ -128,10 +141,7 @@ end
 
 ---@param file string
 function Task:run(file)
-  if self.buffer ~= -1 then
-    self:_write_output({ '...' })
-  end
-
+  self:_write_output({ '...' })
   self.runner(file)
 end
 
@@ -140,7 +150,7 @@ function Task:_handle_cmd_output(content)
     return
   end
 
-  if type(content) == 'table' then
+  if not vim.tbl_islist(content) then
     content = { vim.inspect(content) }
   elseif type(content) == 'string' then
     content = { content }
@@ -186,6 +196,10 @@ end
 
 ---@param content string[]
 function Task:_write_output(content)
+  if not vim.tbl_contains(WriteableOutputs, self.opts.output) then
+    return
+  end
+
   local buffer = self.popup and self.popup.bufnr or self.buffer
   -- skip title and empty line
   vim.api.nvim_buf_set_lines(buffer, 2, -1, false, content)
