@@ -8,8 +8,9 @@ local Watchers = {}
 ---@type WatchOptions
 local defaults = {
   cmd = {},
+  cwd = '',
   raw_cmd = '',
-  pattern = '',
+  pattern = '%',
   output = 'vs',
 }
 
@@ -32,7 +33,14 @@ vim.api.nvim_create_autocmd('VimLeavePre', {
 --- Watches a file and runs a command when the file is saved
 ---@param opts WatchOptions
 function Manager.watch(opts)
-  opts = vim.tbl_extend('force', defaults, opts or {}) --[[@as WatchOptions]]
+  opts = vim.tbl_extend('force', defaults, opts) --[[@as WatchOptions]]
+  opts.pattern = vim.fn.expand(opts.pattern)
+  if opts.cwd == '' then
+    opts.cwd = vim.loop.cwd()
+  else
+    opts.cwd = vim.fn.expand(opts.cwd)
+  end
+
   assert(#opts.cmd > 0, 'Invalid command')
   assert(opts.pattern ~= '', 'Invalid watch pattern')
 

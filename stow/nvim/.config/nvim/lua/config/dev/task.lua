@@ -122,7 +122,7 @@ function Task:_build_runner()
     end
 
     self.jobid = vim.fn.jobstart(cmd, {
-      cwd = vim.loop.cwd(),
+      cwd = self.opts.cwd,
       stderr_buffered = true,
       stdout_bufered = true,
       on_stdout = function(_, content)

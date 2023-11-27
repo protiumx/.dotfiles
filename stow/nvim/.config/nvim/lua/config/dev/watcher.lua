@@ -17,9 +17,9 @@ local Watcher = {}
 ---| '"none"'
 
 ---@class WatchOptions
+---@field cwd string
 ---@field cmd string[]
 ---@field raw_cmd string
----@field params? string
 ---@field pattern string
 ---@field output? Output
 
