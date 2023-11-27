@@ -64,7 +64,9 @@ function Watcher:add_task(opts)
   local task_id = #self.tasks
 
   task:on_terminated(function()
-    table.remove(self.tasks, task_id)
+    local task = table.remove(self.tasks, task_id)
+    task:destroy()
+    notify.info(string.format('Task #%d terminated', task_id - 1))
   end)
 end
 
