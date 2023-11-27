@@ -14,7 +14,7 @@ local TaskAugroup = vim.api.nvim_create_augroup('dev-augroup', { clear = true })
 ---@field jobid number
 ---@field name string
 ---@field popup table|nil
----@field on_destroy_handler function
+---@field on_terminated_callback function
 ---@field opts WatchOptions
 ---@field runner function
 ---@field winid number
@@ -28,7 +28,7 @@ function Task:new(name, opts)
     buffer = -1,
     jobid = -1,
     name = name,
-    on_destroy_handler = nil,
+    on_terminated_callback = nil,
     opts = opts,
     popup = nil,
     runner = nil,
@@ -65,14 +65,18 @@ end
 ---Register a callback when a task is terminated.
 ---Tasks are terminated if the output buffer (split or popup) is deleted.
 ---@param callback function
-function Task:on_destroy(callback)
-  self.on_destroy_handler = callback
+function Task:on_terminated(callback)
+  self.on_terminated_callback = callback
 end
 
-function Task:destroy()
+function Task:_stop_job()
   if self.jobid ~= -1 then
     vim.fn.jobstop(self.jobid)
   end
+end
+
+function Task:destroy()
+  self:_stop_job()
 
   if self.popup then
     self.popup:unmount()
@@ -81,10 +85,6 @@ function Task:destroy()
 
   if self.buffer ~= -1 and vim.api.nvim_buf_is_valid(self.buffer) then
     vim.api.nvim_buf_delete(self.buffer, { force = true })
-  end
-
-  if self.on_destroy_handler then
-    self.on_destroy_handler()
   end
 end
 
@@ -202,12 +202,16 @@ function Task:_setup_split()
   vim.api.nvim_win_set_option(winid, 'signcolumn', 'no')
   vim.api.nvim_win_set_option(winid, 'spell', false)
 
+  -- Terminate the task if the output buffer is deleted
   vim.api.nvim_create_autocmd('BufDelete', {
     buffer = buffer,
     group = TaskAugroup,
     once = true,
     callback = function()
-      self:destroy()
+      self:_stop_job()
+      if self.on_terminated_callback then
+        self.on_terminated_callback()
+      end
       notify.info(string.format('Task %s terminated', self.name))
     end,
   })
