@@ -2,6 +2,10 @@ local M = {}
 
 function M.setup()
   vim.g.sandwich_no_default_key_mappings = true
+  vim.cmd([[
+    call operator#sandwich#set('all', 'all', 'highlight', 1)
+  ]])
+
   -- `s` is used for vim-sneak
   vim.keymap.set('n', '<M-s>a', '<Plug>(sandwich-add)', { remap = true })
   vim.keymap.set({ 'x', 'o', 'v' }, 'sa', '<Plug>(sandwich-add)', { remap = true })
