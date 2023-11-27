@@ -3,6 +3,7 @@ local ui = require('config.ui')
 
 local FILETYPE = 'dev-watcher'
 local ns = vim.api.nvim_create_namespace('dev-ns')
+local TaskAugroup = vim.api.nvim_create_augroup('dev-augroup', { clear = true })
 
 ---@alias View
 ---| '"notify"'
@@ -13,6 +14,7 @@ local ns = vim.api.nvim_create_namespace('dev-ns')
 ---@field jobid number
 ---@field name string
 ---@field popup table|nil
+---@field on_destroy_handler function
 ---@field opts WatchOptions
 ---@field runner function
 ---@field winid number
@@ -26,6 +28,7 @@ function Task:new(name, opts)
     buffer = -1,
     jobid = -1,
     name = name,
+    on_destroy_handler = nil,
     opts = opts,
     popup = nil,
     runner = nil,
@@ -48,17 +51,22 @@ function Task:setup()
     return 'not an executable command: "' .. command .. '"'
   end
 
-  self.runner = self:_get_runner()
+  self.runner = self:_build()
 
   if self.opts.output == 'vs' or self.opts.output == 'sp' then
-    self:_setup_buffer_output()
-    self:_set_buffer_title(self.buffer)
+    self:_setup_split()
   elseif self.opts.output == 'popup' then
-    self.popup = ui.popup()
-    self:_set_buffer_title(self.popup.bufnr)
+    self:_setup_popup()
   end
 
   return nil
+end
+
+---Register a callback when a task is terminated.
+---Tasks are terminated if the output buffer (split or popup) is deleted.
+---@param callback function
+function Task:on_destroy(callback)
+  self.on_destroy_handler = callback
 end
 
 function Task:destroy()
@@ -74,11 +82,15 @@ function Task:destroy()
   if self.buffer ~= -1 and vim.api.nvim_buf_is_valid(self.buffer) then
     vim.api.nvim_buf_delete(self.buffer, { force = true })
   end
+
+  if self.on_destroy_handler then
+    self.on_destroy_handler()
+  end
 end
 
 ---Evaluates the cmd into a function
 ---@return function
-function Task:_get_runner()
+function Task:_build()
   local command = self.opts.cmd[1]
   if command == 'neotest' then
     return function()
@@ -167,7 +179,12 @@ function Task:_write_output(content)
   vim.api.nvim_buf_set_lines(buffer, 2, -1, false, content)
 end
 
-function Task:_setup_buffer_output()
+function Task:_setup_popup()
+  self.popup = ui.popup()
+  self:_set_buffer_title(self.popup.bufnr)
+end
+
+function Task:_setup_split()
   local buffer = vim.api.nvim_create_buf(true, true)
   vim.api.nvim_buf_set_option(buffer, 'filetype', FILETYPE)
   vim.api.nvim_buf_set_option(buffer, 'buftype', 'nofile')
@@ -184,6 +201,18 @@ function Task:_setup_buffer_output()
   vim.api.nvim_win_set_option(winid, 'colorcolumn', '')
   vim.api.nvim_win_set_option(winid, 'signcolumn', 'no')
   vim.api.nvim_win_set_option(winid, 'spell', false)
+
+  vim.api.nvim_create_autocmd('BufDelete', {
+    buffer = buffer,
+    group = TaskAugroup,
+    once = true,
+    callback = function()
+      self:destroy()
+      notify.info(string.format('Task %s terminated', self.name))
+    end,
+  })
+
+  self:_set_buffer_title(buffer)
 
   self.buffer = buffer
   self.winid = winid
