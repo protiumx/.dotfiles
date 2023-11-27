@@ -1,7 +1,6 @@
 local notify = require('config.dev.notify')
 local Task = require('config.dev.task')
 
-local FILETYPE = 'dev-watcher'
 local Autocmd_group = vim.api.nvim_create_augroup('dev-watcher', { clear = true })
 
 ---@class Watcher
@@ -9,6 +8,19 @@ local Autocmd_group = vim.api.nvim_create_augroup('dev-watcher', { clear = true 
 ---@field pattern string
 ---@field tasks Task[]
 local Watcher = {}
+
+---@alias Output
+---| '"vs"'
+---| '"sp"'
+---| '"notify"'
+---| '"popup"'
+
+---@class WatchOptions
+---@field cmd string[]
+---@field raw_cmd string
+---@field params? string
+---@field pattern string
+---@field output? Output
 
 ---@param pattern string
 function Watcher:new(pattern)
@@ -23,33 +35,21 @@ function Watcher:new(pattern)
   return t
 end
 
----@param cmd string[]
----@param out string
-function Watcher:add_task(cmd, out)
-  if self:_has_task_with_cmd(cmd) then
+---@param opts WatchOptions
+function Watcher:add_task(opts)
+  opts.raw_cmd = table.concat(opts.cmd, ' ')
+  if self:_has_task_with_cmd(opts.raw_cmd) then
     notify.error(
-      string.format(
-        'command "%s" already set for pattern "%s"',
-        table.concat(cmd, ' '),
-        self.pattern
-      )
+      string.format('command "%s" already set for pattern "%s"', opts.raw_cmd, self.pattern)
     )
     return
   end
 
-  ---@type string|number
-  local output = out
-  if out == 'vs' or out == 'sp' then
-    local _, buffer = self:_create_buffer(out == 'vs')
-    output = buffer
-  end
-
-  local task_name =
-    string.format('dev[%s]#%d: %s', self.pattern, #self.tasks, table.concat(cmd, ' '))
-  local task = Task:new(self.pattern, cmd, output, task_name)
+  local task_name = string.format('dev[%s]#%d: %s', self.pattern, #self.tasks, opts.raw_cmd)
+  local task = Task:new(task_name, opts)
   local error = task:setup()
   if error then
-    notify.error('invalid task: ' .. error)
+    notify.error('failed to setup task: ' .. error)
     task:destroy()
     return
   end
@@ -62,6 +62,7 @@ end
 function Watcher:remove_task(task_id)
   local task = table.remove(self.tasks, task_id) --[[@as Task]]
   if not task then
+    notify.error('invalid task id ' .. task_id)
     return
   end
 
@@ -77,39 +78,15 @@ function Watcher:destroy()
   self.tasks = nil
 end
 
----@param cmd string[]
-function Watcher:_has_task_with_cmd(cmd)
-  local command_id = table.concat(cmd, '')
+---@param raw_cmd string
+function Watcher:_has_task_with_cmd(raw_cmd)
   for _, t in ipairs(self.tasks) do
-    if command_id == table.concat(t.cmd, '') then
+    if raw_cmd == t.opts.raw_cmd then
       return true
     end
   end
 
   return false
-end
-
----@param vertical boolean
----@return number, number
-function Watcher:_create_buffer(vertical)
-  local buffer = vim.api.nvim_create_buf(true, true)
-  local title = string.format('dev[%s]#%d', self.pattern, #self.tasks)
-  vim.api.nvim_buf_set_option(buffer, 'filetype', FILETYPE)
-  vim.api.nvim_buf_set_name(buffer, title)
-  vim.api.nvim_buf_set_keymap(buffer, 'n', 'q', '<cmd>q<CR>', { silent = true })
-
-  vim.cmd.split({ mods = { vertical = vertical } })
-  local winid = vim.api.nvim_get_current_win()
-  vim.cmd('wincmd p') -- immediately switch back to last window
-
-  vim.api.nvim_win_set_buf(winid, buffer)
-  vim.api.nvim_win_set_option(winid, 'number', false)
-  vim.api.nvim_win_set_option(winid, 'relativenumber', false)
-  vim.api.nvim_win_set_option(winid, 'colorcolumn', '')
-  vim.api.nvim_win_set_option(winid, 'signcolumn', 'no')
-  vim.api.nvim_win_set_option(winid, 'spell', false)
-
-  return winid, buffer
 end
 
 function Watcher:_run_tasks()

@@ -1,6 +1,7 @@
 local notify = require('config.dev.notify')
 local ui = require('config.ui')
 
+local FILETYPE = 'dev-watcher'
 local ns = vim.api.nvim_create_namespace('dev-ns')
 
 ---@alias View
@@ -9,45 +10,33 @@ local ns = vim.api.nvim_create_namespace('dev-ns')
 
 ---@class Task
 ---@field buffer number
----@field cmd string[]
----@field file string
 ---@field jobid number
 ---@field name string
 ---@field popup table|nil
----@field output number|View
+---@field opts WatchOptions
 ---@field runner function
+---@field winid number
 local Task = {}
 
----@param file string
----@param cmd string[]
----@param output number|View Output buffer number or view name
 ---@param name string
+---@param opts WatchOptions
 ---@return Task
-function Task:new(file, cmd, output, name)
-  local t = setmetatable({
-    cmd = cmd,
-    file = file,
+function Task:new(name, opts)
+  return setmetatable({
+    buffer = -1,
     jobid = -1,
     name = name,
+    opts = opts,
     popup = nil,
-    output = output,
-    buffer = -1,
     runner = nil,
+    winid = -1,
   }, { __index = self })
-
-  if type(output) == 'number' then
-    t.buffer = output
-  elseif output == 'popup' then
-    t.popup = ui.popup()
-  end
-
-  return t
 end
 
 ---Validates the command is a valid Lua module or OS executable
 ---@return string|nil
 function Task:setup()
-  local command = self.cmd[1]
+  local command = self.opts.cmd[1]
   if command == 'neotest' then
     local ok, _ = pcall(require, 'neotest')
     if not ok then
@@ -60,8 +49,13 @@ function Task:setup()
   end
 
   self.runner = self:_get_runner()
-  if self.output ~= 'notify' then
-    self:_set_buffer_title()
+
+  if self.opts.output == 'vs' or self.opts.output == 'sp' then
+    self:_setup_buffer_output()
+    self:_set_buffer_title(self.buffer)
+  elseif self.opts.output == 'popup' then
+    self.popup = ui.popup()
+    self:_set_buffer_title(self.popup.bufnr)
   end
 
   return nil
@@ -76,50 +70,55 @@ function Task:destroy()
     self.popup:unmount()
     self.popup = nil
   end
+
+  if self.buffer ~= -1 and vim.api.nvim_buf_is_valid(self.buffer) then
+    vim.api.nvim_buf_delete(self.buffer, { force = true })
+  end
 end
 
 ---Evaluates the cmd into a function
 ---@return function
 function Task:_get_runner()
-  local command = self.cmd[1]
+  local command = self.opts.cmd[1]
   if command == 'neotest' then
     return function()
-      require('neotest').run.run(self.file)
+      require('neotest').run.run(self.opts.params or vim.fn.expand('%'))
     end
   end
 
   -- OS commands
   return function()
-    self.jobid = vim.fn.jobstart(self.cmd, {
+    self.jobid = vim.fn.jobstart(self.opts.cmd, {
       cwd = vim.loop.cwd(),
       stderr_buffered = true,
       stdout_bufered = true,
       on_stdout = function(_, content)
-        self:_output(content)
+        self:_handle_cmd_output(content)
       end,
       on_stderr = function(_, content)
-        self:_output(content)
+        self:_handle_cmd_output(content)
       end,
     })
 
     if self.jobid == -1 then
-      notify.error('failed to start job: ' .. self.cmd[1])
+      notify.error('failed to start job: ' .. self.opts.cmd[1])
     end
   end
 end
 
 function Task:run()
-  if self.output ~= 'notify' and self.output ~= 'popup' then
-    self:_write_buffer({ '...' })
+  if self.buffer ~= -1 then
+    self:_write_output({ '...' })
   end
   self.runner()
 end
 
-function Task:_output(content)
+function Task:_handle_cmd_output(content)
   if not content then
     return
   end
 
+  -- filter out trailing line break
   content = vim.tbl_filter(function(line)
     return line:gsub('%s+', '') ~= ''
   end, content)
@@ -128,7 +127,7 @@ function Task:_output(content)
     return
   end
 
-  if self.output == 'notify' then
+  if self.opts.output == 'notify' then
     local text = '[dev] ' .. self.name .. '\n'
     if type(content) == 'table' then
       text = text .. table.concat(content, '\n')
@@ -138,9 +137,9 @@ function Task:_output(content)
     return
   end
 
-  self:_write_buffer(content)
+  self:_write_output(content)
 
-  if self.output == 'popup' then
+  if self.popup ~= nil then
     if not self.popup._.mounted then
       self.popup:mount()
       vim.api.nvim_win_set_option(self.popup.border.winid, 'winblend', ui.winblend)
@@ -149,8 +148,8 @@ function Task:_output(content)
   end
 end
 
-function Task:_set_buffer_title()
-  local buffer = self.popup and self.popup.bufnr or self.buffer
+---@param buffer number
+function Task:_set_buffer_title(buffer)
   vim.api.nvim_buf_set_lines(buffer, 0, 1, false, { self.name, '' })
   vim.api.nvim_buf_set_extmark(
     buffer,
@@ -162,13 +161,32 @@ function Task:_set_buffer_title()
 end
 
 ---@param content string[]
-function Task:_write_buffer(content)
-  if self.output == 'notify' then
-    return
-  end
+function Task:_write_output(content)
   local buffer = self.popup and self.popup.bufnr or self.buffer
   -- skip title and empty line
   vim.api.nvim_buf_set_lines(buffer, 2, -1, false, content)
+end
+
+function Task:_setup_buffer_output()
+  local buffer = vim.api.nvim_create_buf(true, true)
+  vim.api.nvim_buf_set_option(buffer, 'filetype', FILETYPE)
+  vim.api.nvim_buf_set_option(buffer, 'buftype', 'nofile')
+  vim.api.nvim_buf_set_name(buffer, self.name)
+  vim.api.nvim_buf_set_keymap(buffer, 'n', 'q', '<cmd>q<CR>', { silent = true })
+
+  vim.cmd.split({ mods = { vertical = self.opts.output == 'vs' } })
+  local winid = vim.api.nvim_get_current_win()
+  vim.cmd('wincmd p') -- immediately switch back to last window
+
+  vim.api.nvim_win_set_buf(winid, buffer)
+  vim.api.nvim_win_set_option(winid, 'number', false)
+  vim.api.nvim_win_set_option(winid, 'relativenumber', false)
+  vim.api.nvim_win_set_option(winid, 'colorcolumn', '')
+  vim.api.nvim_win_set_option(winid, 'signcolumn', 'no')
+  vim.api.nvim_win_set_option(winid, 'spell', false)
+
+  self.buffer = buffer
+  self.winid = winid
 end
 
 return Task
