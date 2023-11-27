@@ -22,44 +22,58 @@ end
 ---@type XCommand
 local watch_command = {
   handler = function(args)
-    ---@type WatchConfig
-    local opts = {
-      file = vim.fn.expand('%'),
-    }
+    local opts = {}
     local cmd_index = -1
     local cmd_start = nil
     for i, param in ipairs(args) do
       local pairs = vim.split(param, '=')
-      if pairs[1] == 'cmd' then
+      if #pairs == 1 then
+        opts[pairs[1]] = true
+      elseif pairs[1] == 'cmd' then
         cmd_index = i
         cmd_start = pairs[2]
         break
+      else
+        opts[pairs[1]] = pairs[2]
       end
+    end
 
-      opts[pairs[1]] = pairs[2]
+    if opts.inspect then
+      dev.inspect()
+      return
     end
 
     if cmd_index == -1 then
       vim.notify('empty "cmd" option', vim.log.levels.ERROR)
       return
     end
+
     opts.cmd = { cmd_start }
+    -- Take the rest of the line
     for i = cmd_index + 1, #args do
       table.insert(opts.cmd, args[i])
     end
 
+    opts.pattern = opts.pattern or vim.fn.expand('%')
     dev.watch(opts)
   end,
   options = {
-    -- 'file',
-    'out',
     'cmd',
+    'inspect',
+    'out',
+    'pattern',
   },
 }
 
 local git_command = {
-  handler = copy_file_git_url,
-  options = {},
+  handler = function(args)
+    if vim.tbl_contains(args, 'url') then
+      copy_file_git_url()
+    end
+  end,
+  options = {
+    'url',
+  },
 }
 
 local quiet_command = {
@@ -69,8 +83,8 @@ local quiet_command = {
 
 ---@type table<string, XCommand>
 local commands = {
-  git_file = git_command,
-  toggle_quiet = quiet_command,
+  git = git_command,
+  quiet = quiet_command,
   watch = watch_command,
 }
 
@@ -86,28 +100,43 @@ function M.load()
     return
   end
 
-  local subcommands = vim.tbl_keys(commands)
-  table.sort(subcommands)
+  local commands_ids = vim.tbl_keys(commands)
+  table.sort(commands_ids)
 
   vim.api.nvim_create_user_command('X', function(args)
     load_command(unpack(args.fargs))
   end, {
     desc = 'X command will help ya',
+    bang = false,
+    bar = false,
+    range = false,
     nargs = '+',
+    ---@param args any
+    ---@param line string
     complete = function(args, line)
-      local l = vim.split(line, '%s+')
-      local n = #l - 2
+      local parts = vim.split(line, '%s+')
+      local n = #parts - 2
 
-      if n == 1 then
-        local command = commands[l[2]]
+      local candidates = {}
+      local position = 2
+
+      if n >= 1 then
+        local command = commands[parts[2]]
         if command then
-          return vim.tbl_filter(function(val)
-            return vim.startswith(val, l[3])
-          end, command.options)
+          candidates = command.options
+          position = n + 2
         end
       end
 
-      return subcommands
+      candidates = vim.tbl_filter(function(val)
+        return not line:find(val) and vim.startswith(val, parts[position])
+      end, candidates)
+
+      if #candidates > 0 then
+        return candidates
+      end
+
+      return commands_ids
     end,
   })
 
