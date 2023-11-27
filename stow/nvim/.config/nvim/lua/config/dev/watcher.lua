@@ -45,7 +45,7 @@ function Watcher:add_task(opts)
     return
   end
 
-  local task_name = string.format('dev[%s]#%d: %s', self.pattern, #self.tasks, opts.raw_cmd)
+  local task_name = string.format('watch[%s]: %s (#%d)', self.pattern, opts.raw_cmd, #self.tasks)
   local task = Task:new(task_name, opts)
   local error = task:setup()
   if error then
@@ -55,7 +55,15 @@ function Watcher:add_task(opts)
   end
 
   table.insert(self.tasks, task)
-  task:run()
+  local task_id = #self.tasks
+
+  task:on_terminated(function()
+    table.remove(self.tasks, task_id)
+  end)
+
+  if opts.output == 'vs' or opts.output == 'sp' then
+    task:run()
+  end
 end
 
 ---@param task_id number
@@ -98,7 +106,7 @@ function Watcher:_run_tasks()
 end
 
 function Watcher:_set_events()
-  vim.api.nvim_create_autocmd('BufWritePost', {
+  self.autocmd_id = vim.api.nvim_create_autocmd('BufWritePost', {
     group = Autocmd_group,
     pattern = self.pattern,
     callback = function()
