@@ -87,6 +87,8 @@ local baseHls = {
   TelescopeResultsTitle = { fg = colors.background, bg = colors.light_orange },
   TelescopeSelectionCaret = { fg = colors.red, bg = 'none' },
   TelescopeSelection = { fg = colors.orange, bg = 'none' },
+  -- vim-sandwich
+  OperatorSandwichAdd = { fg = 'none', bg = colors.violet },
   -- lspsaga.nvim
   ActionPreviewBorder = { link = 'XBorder' },
   ActionPreviewNormal = { link = 'XMenu' },
