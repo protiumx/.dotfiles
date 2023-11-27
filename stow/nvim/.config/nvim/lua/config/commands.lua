@@ -28,6 +28,7 @@ local watch_command = {
     for i, param in ipairs(args) do
       local pairs = vim.split(param, '=')
       if #pairs == 1 then
+        -- bool option
         opts[pairs[1]] = true
       elseif pairs[1] == 'cmd' then
         cmd_index = i
@@ -54,11 +55,11 @@ local watch_command = {
       table.insert(opts.cmd, args[i])
     end
 
-    opts.pattern = opts.pattern or vim.fn.expand('%')
     dev.watch(opts)
   end,
   options = {
     'cmd',
+    'cwd',
     'inspect',
     'out',
     'pattern',
