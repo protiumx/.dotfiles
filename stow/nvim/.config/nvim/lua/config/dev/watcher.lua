@@ -14,6 +14,7 @@ local Watcher = {}
 ---| '"sp"'
 ---| '"notify"'
 ---| '"popup"'
+---| '"none"'
 
 ---@class WatchOptions
 ---@field cmd string[]
@@ -37,7 +38,12 @@ end
 
 ---@param opts WatchOptions
 function Watcher:add_task(opts)
-  opts.raw_cmd = table.concat(opts.cmd, ' ')
+  if opts.cmd[1] == 'lua' then
+    opts.raw_cmd = table.concat(vim.list_slice(opts.cmd, 2), ' ')
+  else
+    opts.raw_cmd = table.concat(opts.cmd, ' ')
+  end
+
   if self:_has_task_with_cmd(opts.raw_cmd) then
     notify.error(
       string.format('command "%s" already set for pattern "%s"', opts.raw_cmd, self.pattern)
@@ -45,7 +51,7 @@ function Watcher:add_task(opts)
     return
   end
 
-  local task_name = string.format('watch[%s]: %s (#%d)', self.pattern, opts.raw_cmd, #self.tasks)
+  local task_name = string.format('watch[%s]: "%s" (#%d)', self.pattern, opts.raw_cmd, #self.tasks)
   local task = Task:new(task_name, opts)
   local error = task:setup()
   if error then
@@ -60,10 +66,6 @@ function Watcher:add_task(opts)
   task:on_terminated(function()
     table.remove(self.tasks, task_id)
   end)
-
-  if opts.output == 'vs' or opts.output == 'sp' then
-    task:run()
-  end
 end
 
 ---@param task_id number
@@ -97,10 +99,11 @@ function Watcher:_has_task_with_cmd(raw_cmd)
   return false
 end
 
-function Watcher:_run_tasks()
+---@param file string
+function Watcher:_run_tasks(file)
   for _, task in ipairs(self.tasks) do
     vim.schedule(function()
-      (task --[[@as Task]]):run()
+      (task --[[@as Task]]):run(file)
     end)
   end
 end
@@ -109,8 +112,8 @@ function Watcher:_set_events()
   self.autocmd_id = vim.api.nvim_create_autocmd('BufWritePost', {
     group = Autocmd_group,
     pattern = self.pattern,
-    callback = function()
-      self:_run_tasks()
+    callback = function(args)
+      self:_run_tasks(args.file)
     end,
   })
 end
