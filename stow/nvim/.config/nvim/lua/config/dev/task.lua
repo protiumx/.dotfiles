@@ -2,11 +2,13 @@ local notify = require('config.dev.notify')
 local ui = require('config.ui')
 
 local FILETYPE = 'dev-watcher'
-local ns = vim.api.nvim_create_namespace('dev-ns')
+local DevNamespcae = vim.api.nvim_create_namespace('dev-ns')
+local DevErrorNamespace = vim.api.nvim_create_namespace('dev-ns-error')
 local TaskAugroup = vim.api.nvim_create_augroup('dev-augroup', { clear = true })
 
 ---@class Task
 ---@field buffer number
+---@field destroying boolean
 ---@field jobid number
 ---@field name string
 ---@field popup table|nil
@@ -25,6 +27,7 @@ local WriteableOutputs = { 'vs', 'sp', 'popup' }
 function Task:new(name, opts)
   return setmetatable({
     buffer = -1,
+    destroying = false,
     jobid = -1,
     name = name,
     on_terminated_callback = nil,
@@ -68,6 +71,11 @@ function Task:_stop_job()
 end
 
 function Task:destroy()
+  if self.destroying then
+    return
+  end
+
+  self.destroying = true
   self:_stop_job()
 
   if self.popup then
@@ -126,10 +134,10 @@ function Task:_build_runner()
       stderr_buffered = true,
       stdout_bufered = true,
       on_stdout = function(_, content)
-        self:_handle_cmd_output(content)
+        self:_handle_cmd_output(content, false)
       end,
       on_stderr = function(_, content)
-        self:_handle_cmd_output(content)
+        self:_handle_cmd_output(content, true)
       end,
     })
 
@@ -141,11 +149,13 @@ end
 
 ---@param file string
 function Task:run(file)
-  self:_write_output({ '...' })
+  self:_write_output({ '...' }, false)
   self.runner(file)
 end
 
-function Task:_handle_cmd_output(content)
+---@param content? string|string[]|table
+---@param error boolean
+function Task:_handle_cmd_output(content, error)
   if not content then
     return
   end
@@ -175,7 +185,7 @@ function Task:_handle_cmd_output(content)
     return
   end
 
-  self:_write_output(content)
+  self:_write_output(content, error)
 
   if self.popup ~= nil then
     self.popup:show()
@@ -187,7 +197,7 @@ function Task:_set_buffer_title(buffer)
   vim.api.nvim_buf_set_lines(buffer, 0, 1, false, { self.name, '' })
   vim.api.nvim_buf_set_extmark(
     buffer,
-    ns,
+    DevNamespcae,
     0,
     0,
     { end_row = 1, hl_group = 'DevOutputBufferTitle', hl_eol = true }
@@ -195,14 +205,22 @@ function Task:_set_buffer_title(buffer)
 end
 
 ---@param content string[]
-function Task:_write_output(content)
+---@param error boolean
+function Task:_write_output(content, error)
   if not vim.tbl_contains(WriteableOutputs, self.opts.output) then
     return
   end
 
   local buffer = self.popup and self.popup.bufnr or self.buffer
+  vim.api.nvim_buf_clear_namespace(buffer, DevErrorNamespace, 2, -1)
   -- skip title and empty line
   vim.api.nvim_buf_set_lines(buffer, 2, -1, false, content)
+
+  if error then
+    for i, _ in ipairs(content) do
+      vim.api.nvim_buf_add_highlight(buffer, DevErrorNamespace, 'Error', i + 1, 0, -1)
+    end
+  end
 end
 
 function Task:_setup_popup()
@@ -234,11 +252,9 @@ function Task:_setup_split()
     group = TaskAugroup,
     once = true,
     callback = function()
-      self:_stop_job()
       if self.on_terminated_callback then
         self.on_terminated_callback()
       end
-      notify.info(string.format('Task %s terminated', self.name))
     end,
   })
 
