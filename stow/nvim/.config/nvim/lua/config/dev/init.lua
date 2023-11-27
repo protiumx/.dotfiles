@@ -72,9 +72,17 @@ function Manager.unwatch(pattern, task_id)
 end
 
 function Manager.inspect()
+  if vim.tbl_count(Watchers) == 0 then
+    notify.info('No watchers')
+    return
+  end
+
   Manager._setup_popup()
 
-  Manager._load_content(Watchers)
+  Manager.entries = {}
+  Manager.lines = {}
+
+  Manager:_load_content()
   vim.api.nvim_buf_set_lines(Manager.popup.bufnr, 0, -1, false, Manager.lines)
 
   if not Manager.popup._.mounted then
@@ -97,17 +105,23 @@ function Manager:_load_content()
     table.insert(entries, { watcher = key, summary = 'Watcher #' .. index })
     table.insert(lines, string.format('#%d [%s]', index, key))
 
-    for j, task in ipairs(watcher.tasks) do
-      table.insert(entries, { watcher = key, summary = 'Task #' .. (j - 1), task_id = j })
-      table.insert(
-        lines,
-        string.format('  #%d cmd="%s" output=%s', j - 1, task.opts.raw_cmd, task.opts.output)
-      )
+    if #watcher.tasks == 0 then
+      table.insert(lines, '  [No tasks]')
+      table.insert(entries, nil)
+    else
+      for j, task in ipairs(watcher.tasks) do
+        table.insert(entries, { watcher = key, summary = 'Task #' .. (j - 1), task_id = j })
+        table.insert(
+          lines,
+          string.format('  #%d cmd="%s" output=%s', j - 1, task.opts.raw_cmd, task.opts.output)
+        )
+      end
     end
 
     if index < vim.tbl_count(Watchers) - 1 then
       table.insert(lines, '')
     end
+
     index = index + 1
   end
 
@@ -128,6 +142,30 @@ function Manager._setup_popup()
   Manager.popup:map('n', 'D', function()
     Manager._handle_item_delete(true)
   end)
+
+  Manager.popup:map('n', 'x', function()
+    Manager._handle_delete_all(false)
+  end)
+
+  Manager.popup:map('n', 'X', function()
+    Manager._handle_delete_all(false)
+  end)
+end
+
+---@param force boolean
+function Manager._handle_delete_all(force)
+  local total = vim.tbl_count(Watchers)
+  local proceed = force or Manager.confirm(string.format('Remove all %d watchers? [y/n]', total))
+  if not proceed then
+    return
+  end
+
+  for _, watcher in pairs(Watchers) do
+    watcher:destroy()
+  end
+
+  notify.info(string.format('Removed %d watcher', total))
+  Manager.popup:hide()
 end
 
 ---@param force boolean
@@ -138,6 +176,10 @@ function Manager._handle_item_delete(force)
   end
 
   local entry = Manager.entries[row]
+  if not entry then
+    return
+  end
+
   local watcher = Watchers[entry.watcher]
   if force or Manager.confirm(string.format('Remove %s? [y/n]: ', entry.summary)) then
     if entry.task_id then
