@@ -5,10 +5,6 @@ local FILETYPE = 'dev-watcher'
 local ns = vim.api.nvim_create_namespace('dev-ns')
 local TaskAugroup = vim.api.nvim_create_augroup('dev-augroup', { clear = true })
 
----@alias View
----| '"notify"'
----| '"popup"'
-
 ---@class Task
 ---@field buffer number
 ---@field jobid number
@@ -16,7 +12,7 @@ local TaskAugroup = vim.api.nvim_create_augroup('dev-augroup', { clear = true })
 ---@field popup table|nil
 ---@field on_terminated_callback function
 ---@field opts WatchOptions
----@field runner function
+---@field runner fun(file:string)
 ---@field winid number
 local Task = {}
 
@@ -40,18 +36,16 @@ end
 ---@return string|nil
 function Task:setup()
   local command = self.opts.cmd[1]
-  if command == 'neotest' then
-    local ok, _ = pcall(require, 'neotest')
-    if not ok then
-      return 'neotest not available'
-    end
-  end
-
-  if vim.fn.executable(command) == 0 then
+  if command ~= 'lua' and vim.fn.executable(command) == 0 then
     return 'not an executable command: "' .. command .. '"'
   end
 
-  self.runner = self:_build()
+  local fn, error = self:_build_runner()
+  if fn == nil or error ~= nil then
+    return string.format('failed to setup task: %s', error)
+  end
+
+  self.runner = fn
 
   if self.opts.output == 'vs' or self.opts.output == 'sp' then
     self:_setup_split()
@@ -89,18 +83,32 @@ function Task:destroy()
 end
 
 ---Evaluates the cmd into a function
----@return function
-function Task:_build()
+---@return function?,string?
+function Task:_build_runner()
   local command = self.opts.cmd[1]
-  if command == 'neotest' then
-    return function()
-      require('neotest').run.run(self.opts.params or vim.fn.expand('%'))
+  if command == 'lua' then
+    local _, error = loadstring(self.opts.raw_cmd)
+    if error ~= nil then
+      return nil, error
+    end
+
+    return function(file)
+      local lua_string = self.opts.raw_cmd:gsub('${file}', file)
+      local fn, _ = loadstring(lua_string) --[[@as function]]
+      self:_handle_cmd_output(fn())
     end
   end
 
   -- OS commands
-  return function()
-    self.jobid = vim.fn.jobstart(self.opts.cmd, {
+  return function(file)
+    local cmd = vim.list_slice(self.opts.cmd)
+    if self.opts.raw_cmd:find('${file}') then
+      for i, _ in ipairs(cmd) do
+        cmd[i] = cmd[i]:gsub('${file}', file)
+      end
+    end
+
+    self.jobid = vim.fn.jobstart(cmd, {
       cwd = vim.loop.cwd(),
       stderr_buffered = true,
       stdout_bufered = true,
@@ -118,16 +126,24 @@ function Task:_build()
   end
 end
 
-function Task:run()
+---@param file string
+function Task:run(file)
   if self.buffer ~= -1 then
     self:_write_output({ '...' })
   end
-  self.runner()
+
+  self.runner(file)
 end
 
 function Task:_handle_cmd_output(content)
   if not content then
     return
+  end
+
+  if type(content) == 'table' then
+    content = { vim.inspect(content) }
+  elseif type(content) == 'string' then
+    content = { content }
   end
 
   -- filter out trailing line break
