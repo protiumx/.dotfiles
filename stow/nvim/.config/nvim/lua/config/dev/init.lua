@@ -3,33 +3,43 @@ local Watcher = require('config.dev.watcher')
 local notify = require('config.dev.notify')
 
 ---@type table<string, Watcher>
-local State = {}
+local Watchers = {}
 
 ---@type WatchOptions
 local defaults = {
   cmd = {},
+  raw_cmd = '',
   pattern = '',
   output = 'vs',
 }
 
 local MAX_TASKS = 3
-local M = {
+local Manager = {
   popup = nil,
   entries = {},
   lines = {},
 }
 
+vim.api.nvim_create_autocmd('VimLeavePre', {
+  pattern = '*',
+  callback = function()
+    for _, watcher in pairs(Watchers) do
+      watcher:destroy()
+    end
+  end,
+})
+
 --- Watches a file and runs a command when the file is saved
 ---@param opts WatchOptions
-function M.watch(opts)
+function Manager.watch(opts)
   opts = vim.tbl_extend('force', defaults, opts or {}) --[[@as WatchOptions]]
   assert(#opts.cmd > 0, 'Invalid command')
   assert(opts.pattern ~= '', 'Invalid watch pattern')
 
-  local watcher = State[opts.pattern] ---@as Watcher
+  local watcher = Watchers[opts.pattern] ---@as Watcher
   if not watcher then
     watcher = Watcher:new(opts.pattern)
-    State[opts.pattern] = watcher
+    Watchers[opts.pattern] = watcher
   end
 
   if vim.tbl_count(watcher.tasks) >= MAX_TASKS then
@@ -42,8 +52,8 @@ end
 
 ---@param pattern string
 ---@param task_id number|nil
-function M.unwatch(pattern, task_id)
-  local watcher = State[pattern] --[[@as Watcher]]
+function Manager.unwatch(pattern, task_id)
+  local watcher = Watchers[pattern] --[[@as Watcher]]
   if not watcher then
     notify.warn('no watchers found for: ' .. pattern)
     return
@@ -56,34 +66,34 @@ function M.unwatch(pattern, task_id)
   end
 
   watcher:destroy()
-  State[pattern] = nil
+  Watchers[pattern] = nil
 
   vim.notify('removed watcher for ' .. pattern)
 end
 
-function M.inspect()
-  M._setup_popup()
+function Manager.inspect()
+  Manager._setup_popup()
 
-  M._load_content(State)
-  vim.api.nvim_buf_set_lines(M.popup.bufnr, 0, -1, false, M.lines)
+  Manager._load_content(Watchers)
+  vim.api.nvim_buf_set_lines(Manager.popup.bufnr, 0, -1, false, Manager.lines)
 
-  if not M.popup._.mounted then
-    M.popup:mount()
-    vim.api.nvim_win_set_option(M.popup.border.winid, 'winblend', ui.winblend)
+  if not Manager.popup._.mounted then
+    Manager.popup:mount()
+    vim.api.nvim_win_set_option(Manager.popup.border.winid, 'winblend', ui.winblend)
   end
 
-  M.popup:show()
+  Manager.popup:show()
 end
 
-function M:_load_content()
-  if vim.tbl_count(State) == 0 then
+function Manager:_load_content()
+  if vim.tbl_count(Watchers) == 0 then
     return
   end
 
   local entries = {}
   local lines = {}
   local index = 0
-  for key, watcher in pairs(State) do
+  for key, watcher in pairs(Watchers) do
     table.insert(entries, { watcher = key, summary = 'Watcher #' .. index })
     table.insert(lines, string.format('#%d [%s]', index, key))
 
@@ -95,56 +105,56 @@ function M:_load_content()
       )
     end
 
-    if index < vim.tbl_count(State) - 1 then
+    if index < vim.tbl_count(Watchers) - 1 then
       table.insert(lines, '')
     end
     index = index + 1
   end
 
-  M.entries = entries
-  M.lines = lines
+  Manager.entries = entries
+  Manager.lines = lines
 end
 
-function M._setup_popup()
-  if M.popup then
+function Manager._setup_popup()
+  if Manager.popup then
     return
   end
 
-  M.popup = ui.popup()
-  M.popup:map('n', 'd', function()
-    M._handle_item_delete(false)
+  Manager.popup = ui.popup()
+  Manager.popup:map('n', 'd', function()
+    Manager._handle_item_delete(false)
   end)
 
-  M.popup:map('n', 'D', function()
-    M._handle_item_delete(true)
+  Manager.popup:map('n', 'D', function()
+    Manager._handle_item_delete(true)
   end)
 end
 
 ---@param force boolean
-function M._handle_item_delete(force)
+function Manager._handle_item_delete(force)
   local row = vim.api.nvim_win_get_cursor(0)[1]
-  if row > #M.entries then
+  if row > #Manager.entries then
     return
   end
 
-  local entry = M.entries[row]
-  local watcher = State[entry.watcher]
-  if force or M.confirm(string.format('Remove %s? [y/n]: ', entry.summary)) then
+  local entry = Manager.entries[row]
+  local watcher = Watchers[entry.watcher]
+  if force or Manager.confirm(string.format('Remove %s? [y/n]: ', entry.summary)) then
     if entry.task_id then
       watcher:remove_task(entry.task_id)
     else
       watcher:destroy()
-      State[entry.watcher] = nil
+      Watchers[entry.watcher] = nil
     end
 
     notify.info(entry.summary .. ' removed')
-    M.popup:hide()
+    Manager.popup:hide()
   end
 end
 
 ---@param prompt string
 ---@param value? string
-function M.confirm(prompt, value)
+function Manager.confirm(prompt, value)
   value = value or ''
   local confirmation = vim.fn.input(prompt, value)
   confirmation = string.lower(confirmation)
@@ -155,4 +165,4 @@ function M.confirm(prompt, value)
   return confirmation == 'y'
 end
 
-return M
+return Manager
