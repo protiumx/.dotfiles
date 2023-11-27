@@ -19,8 +19,8 @@ vim.keymap.set('n', '#', '#zz', { silent = true })
 vim.keymap.set('n', 'g*', 'g*zz', { silent = true })
 vim.keymap.set('n', 'G', 'Gzz', { silent = true })
 
-vim.keymap.set({ 'n', 'v', 'c' }, 'H', '^', { silent = true })
-vim.keymap.set({ 'n', 'v', 'c' }, 'L', '$', { silent = true })
+vim.keymap.set({ 'n', 'v' }, 'H', '^', { silent = true })
+vim.keymap.set({ 'n', 'v' }, 'L', '$', { silent = true })
 vim.keymap.set(
   'n',
   '<Leader>gF',
