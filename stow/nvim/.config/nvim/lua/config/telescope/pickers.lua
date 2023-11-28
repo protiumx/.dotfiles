@@ -2,6 +2,7 @@ local Path = require('plenary.path')
 local strings = require('plenary.strings')
 
 local telescope_actions = require('telescope.actions')
+local telescope_sorters = require('telescope.sorters')
 local action_state = require('telescope.actions.state')
 local conf = require('telescope.config').values
 local entry_display = require('telescope.pickers.entry_display')
@@ -157,19 +158,11 @@ end
 
 local fd_search_files_cmd = {
   'fd',
-  '-t',
-  'f',
   '-p',
   '--hidden',
   '-i',
-  '-E',
-  '.git/*',
-  '-E',
-  'target/*',
-  '-E',
-  '**/node_modules',
-  '-E',
-  '.DS_Store',
+  '-t',
+  'f',
 }
 
 ---@param pattern string
@@ -220,13 +213,13 @@ function M.find_files_live(opts)
   end
 
   local cmd_generator = function(prompt)
-    if not prompt or #prompt < 3 then
+    if #prompt < 3 then
       return nil
     end
 
     local args = utils.tbl_clone(fd_search_files_cmd)
     table.insert(args, prompt)
-    table.insert(args, opts.cwd)
+
     return args
   end
 
@@ -234,10 +227,10 @@ function M.find_files_live(opts)
 
   pickers
     .new(opts, {
-      prompt_title = '',
       finder = finders.new_job(cmd_generator, opts.entry_maker, 0, opts.cwd),
       previewer = conf.file_previewer(opts),
-      sorter = conf.file_sorter(opts),
+      -- disable sorting so that regex can be used in the prompt
+      sorter = telescope_sorters.empty(),
     })
     :find()
 end
