@@ -33,6 +33,8 @@ local baseHls = {
   -- Custom for floats and borders
   XMenu = { bg = colors.dark_grey, default = true, fg = colors.foreground },
   XBorder = { bg = colors.dark_grey, fg = colors.dark_grey, default = true },
+  OnYank = { bg = 'none', fg = colors.purple, bold = true },
+
   DevOutputBufferTitle = { fg = colors.background, bg = colors.light_orange, bold = true },
   -- Base groups
   -- Normal = { bg = colors.background, fg = colors.foreground },
@@ -60,12 +62,14 @@ local baseHls = {
   Visual = { bg = colors.violet, fg = colors.background },
   -- Gitsigns
   GitSignsCurrentLineBlame = { fg = colors.light_pink },
+
   -- Diffview
   DiffviewFilePanelCounter = { fg = colors.white },
   DiffviewFilePanelRootPath = { fg = colors.violet },
   DiffviewFilePanelSelected = { fg = colors.dark_orange, bold = true },
   DiffviewFilePanelTitle = { fg = colors.violet },
   DiffviewStatusUntracked = { fg = colors.green, bg = 'none', bold = true },
+  DiffviewStatusDeleted = { fg = colors.dark_red, bg = 'none', bold = true },
   -- Mason
   MasonHeader = { link = 'XMenu' },
   MasonHeading = { link = 'XBorder' },
@@ -112,6 +116,7 @@ local baseHls = {
   RenameNormal = { link = 'XMenu' },
   SagaBorder = { link = 'XBorder' },
   SagaNormal = { link = 'XMenu' },
+  SagaSep = { fg = colors.foreground, bg = 'none' },
   TerminalBorder = { link = 'XBorder' },
   TerminalNormal = { link = 'XMenu' },
   SagaShadow = { fg = colors.background, bg = colors.background },
@@ -149,7 +154,6 @@ local baseHls = {
   NotifyTRACEBorder = { fg = colors.background },
   -- web-dev-icons
   -- DevIconDefault          = { fg = colors.dark_orange, bg = 'none' },
-  CopilotSuggestion = { fg = '#8e6aad', bg = 'none' },
 }
 
 local diagnosticsHls = {
