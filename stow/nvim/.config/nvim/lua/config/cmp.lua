@@ -41,6 +41,11 @@ local sources = {
     end,
   },
 
+  lua = {
+    name = 'nvim_lua',
+    priority = 100,
+  },
+
   snippets = {
     name = 'luasnip',
     priority = 80,
@@ -61,11 +66,6 @@ local sources = {
       end,
     },
     priority = 60,
-  },
-
-  lua = {
-    name = 'nvim_lua',
-    priority = 20,
   },
 
   path = {
@@ -160,8 +160,8 @@ function M.setup()
         -- compare.kind,
         -- compare.score,
         -- compare.exact,
-        compare.recently_used,
         compare.sort_text,
+        compare.recently_used,
         -- compare.length,
         -- compare.order,
       },
