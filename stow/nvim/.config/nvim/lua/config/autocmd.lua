@@ -51,6 +51,14 @@ autocmd('QuickFixCmdPost', {
   command = 'lwindow',
 })
 
+autocmd('CmdwinEnter', {
+  group = augroup('cmdwin', { clear = true }),
+  pattern = '*',
+  callback = function()
+    vim.keymap.set('n', 'q', '<cmd>close<CR>', { silent = true })
+  end,
+})
+
 autocmd({ 'BufNewFile', 'BufRead' }, {
   pattern = '*.heex',
   command = [[setlocal ft=html syntax=html]],
