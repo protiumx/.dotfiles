@@ -1,12 +1,12 @@
 local Popup = require('nui.popup')
 local event = require('nui.utils.autocmd').event
 
+-- Global for all plugins and internal views
 local M = {
-  winblend = 20,
+  winblend = 15,
 }
 
--- nui.nvim popup config
-local popup_config = {
+local nui_popup_base = {
   enter = true,
   focusable = true,
   position = '50%',
@@ -36,7 +36,7 @@ local popup_config = {
 
 ---@param opts table|nil
 function M.popup(opts)
-  local popup = Popup(vim.tbl_extend('force', popup_config, opts or {}))
+  local popup = Popup(vim.tbl_extend('force', nui_popup_base, opts or {}))
 
   popup:map('n', 'q', function()
     popup:hide()
