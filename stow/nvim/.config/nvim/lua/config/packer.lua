@@ -408,7 +408,7 @@ return packer.startup(function(use)
       'L3MON4D3/LuaSnip',
     },
     config = function()
-      require('config.lsp.cmp').setup()
+      require('config.cmp').setup()
     end,
   })
 
