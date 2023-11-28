@@ -3,6 +3,11 @@ local state = require('config.state')
 
 local M = {}
 
+---Returns the current cwd folder name
+function M.get_cwd_name()
+  return vim.fn.fnamemodify(vim.loop.cwd(), ':t')
+end
+
 ---@param original table
 ---@return table
 function M.tbl_clone(original)
