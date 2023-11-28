@@ -1,14 +1,25 @@
 local M = {}
 
-function M.setup()
-  local luasnip = require('luasnip')
-  local s, sn = luasnip.snippet, luasnip.snippet_node
-  local d = luasnip.dynamic_node
-  local t = luasnip.text_node
+local function date(fmt)
+  return os.date(fmt)
+end
 
-  luasnip.config.set_config({
+function M.setup()
+  local ls = require('luasnip')
+  local fmt = require('luasnip.extras.fmt').fmt
+  local rep = require('luasnip.extras').rep
+
+  local s = ls.snippet
+  local sn = ls.snippet_node
+  local d = ls.dynamic_node
+  local i = ls.insert_node
+  local t = ls.text_node
+
+  ls.config.set_config({
     delete_check_events = 'InsertLeave',
     region_check_events = 'InsertEnter',
+    -- update dynamic nodes while typing
+    update_events = { 'TextChanged', 'TextChangedI' },
   })
 
   require('luasnip.loaders.from_vscode').lazy_load()
@@ -18,11 +29,11 @@ function M.setup()
     return id
   end
 
-  local function date(fmt)
-    return os.date(fmt)
-  end
+  ls.add_snippets('lua', {
+    s('reqf', fmt("local {} = require('{}')", { i(1, '_'), rep(1) })),
+  })
 
-  luasnip.add_snippets('all', {
+  ls.add_snippets('all', {
     s({
       trig = 'uuid',
       name = 'UUID',
