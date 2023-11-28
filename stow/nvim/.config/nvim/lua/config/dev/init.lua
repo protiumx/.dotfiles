@@ -30,7 +30,7 @@ vim.api.nvim_create_autocmd('VimLeavePre', {
   end,
 })
 
---- Watches a file and runs a command when the file is saved
+---Watches a file and runs a command when the file is saved
 ---@param opts WatchOptions
 function Manager.watch(opts)
   opts = vim.tbl_extend('force', defaults, opts) --[[@as WatchOptions]]

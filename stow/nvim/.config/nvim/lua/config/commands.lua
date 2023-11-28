@@ -8,7 +8,7 @@ local M = {
 local system_clip_reg = jit.os == 'OSX' and '*' or '+'
 local DevWatchGroup = 'DevWatch'
 
---- Copies the current file GIT URL to system clipboard
+---Copies the current file GIT URL to system clipboard
 local function copy_file_git_url()
   local url = utils.get_git_url(vim.fn.expand('%'))
   vim.fn.setreg(system_clip_reg, url)

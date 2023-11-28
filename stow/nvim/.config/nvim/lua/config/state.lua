@@ -17,14 +17,14 @@ function state.get_file(filename)
   return GlobalState.marked_files[filename]
 end
 
---- @param key string
---- @param value any
+---@param key string
+---@param value any
 function state.set(key, value)
   GlobalState[key] = value
 end
 
---- @param key string
---- @return any
+---@param key string
+---@return any
 function state.get(key)
   return GlobalState[key]
 end

@@ -8,7 +8,7 @@ local lib = ffi.load('nvim')
 
 local M = {}
 
---- @return string|nil
+---@return string|nil
 function M.file_under_cursor()
   local result = lib.file_under_cursor()
   if result == nil then
