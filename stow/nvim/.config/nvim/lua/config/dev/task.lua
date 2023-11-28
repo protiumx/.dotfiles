@@ -101,7 +101,7 @@ function Task:_build_runner()
     return function(file)
       local lua_string = self.opts.raw_cmd:gsub('${file}', file)
       local fn, _ = loadstring(lua_string) --[[@as function]]
-      self:_handle_cmd_output(fn())
+      self:_handle_cmd_output(fn(), false)
     end
   end
 
@@ -112,7 +112,7 @@ function Task:_build_runner()
 
     return function(file)
       local expr = self.opts.raw_cmd:gsub('${file}', file)
-      self:_handle_cmd_output(vim.cmd(expr))
+      self:_handle_cmd_output(vim.cmd(expr), false)
     end
   end
 
@@ -149,8 +149,14 @@ end
 
 ---@param file string
 function Task:run(file)
-  self:_write_output({ '...' }, false)
+  self:_reset_output()
   self.runner(file)
+end
+
+function Task:_reset_output()
+  local buffer = self.popup and self.popup.bufnr or self.buffer
+  vim.api.nvim_buf_clear_namespace(buffer, DevErrorNamespace, 0, -1)
+  vim.api.nvim_buf_set_lines(buffer, 1, -1, false, { '' })
 end
 
 ---@param content? string|string[]|table
@@ -194,7 +200,7 @@ end
 
 ---@param buffer number
 function Task:_set_buffer_title(buffer)
-  vim.api.nvim_buf_set_lines(buffer, 0, 1, false, { self.name, '' })
+  vim.api.nvim_buf_set_lines(buffer, 0, 0, false, { self.name })
   vim.api.nvim_buf_set_extmark(
     buffer,
     DevNamespcae,
@@ -212,14 +218,21 @@ function Task:_write_output(content, error)
   end
 
   local buffer = self.popup and self.popup.bufnr or self.buffer
-  vim.api.nvim_buf_clear_namespace(buffer, DevErrorNamespace, 2, -1)
-  -- skip title and empty line
-  vim.api.nvim_buf_set_lines(buffer, 2, -1, false, content)
+  local linecount = vim.api.nvim_buf_line_count(buffer)
 
   if error then
+    vim.api.nvim_buf_set_lines(buffer, -1, -1, false, { 'STDERR:' })
+    vim.api.nvim_buf_add_highlight(buffer, DevErrorNamespace, 'ErrorMsg', linecount, 0, -1)
+    vim.api.nvim_buf_set_lines(buffer, -1, -1, false, content)
+    vim.api.nvim_buf_set_lines(buffer, -1, -1, false, { '' })
+
     for i, _ in ipairs(content) do
-      vim.api.nvim_buf_add_highlight(buffer, DevErrorNamespace, 'Error', i + 1, 0, -1)
+      vim.api.nvim_buf_add_highlight(buffer, DevErrorNamespace, 'ErrorMsg', linecount + i, 0, -1)
     end
+  else
+    vim.api.nvim_buf_set_lines(buffer, -1, -1, false, { 'STDOUT:' })
+    vim.api.nvim_buf_set_lines(buffer, -1, -1, false, content)
+    vim.api.nvim_buf_set_lines(buffer, -1, -1, false, { '' })
   end
 end
 
