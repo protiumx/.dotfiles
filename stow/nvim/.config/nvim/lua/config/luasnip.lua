@@ -6,6 +6,13 @@ function M.setup()
   local d = luasnip.dynamic_node
   local t = luasnip.text_node
 
+  luasnip.config.set_config({
+    region_check_events = 'InsertEnter',
+    delete_check_events = 'InsertLeave',
+  })
+
+  require('luasnip.loaders.from_vscode').lazy_load()
+
   local function uuid()
     local id, _ = vim.fn.system('uuidgen'):gsub('\n', ''):lower()
     return id

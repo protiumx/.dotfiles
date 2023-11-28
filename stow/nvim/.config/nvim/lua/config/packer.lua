@@ -164,7 +164,7 @@ return packer.startup(function(use)
         stages = 'static',
         top_down = false,
         minimum_width = 10,
-        timeout = 4000,
+        timeout = 5000,
         icons = {
           DEBUG = '',
           ERROR = '',
@@ -206,6 +206,7 @@ return packer.startup(function(use)
     'ahmedkhalf/project.nvim',
     config = function()
       require('project_nvim').setup({
+        manual_mode = true,
         detection_methods = { 'pattern' },
         show_hidden = true,
         silent_chdir = false,
@@ -349,7 +350,7 @@ return packer.startup(function(use)
             },
           })
 
-          vim.keymap.set('n', '<Leader>W', function()
+          vim.keymap.set('n', '<C-w>S', function()
             local picked_window_id = picker.pick_window() or vim.api.nvim_get_current_win()
             vim.api.nvim_set_current_win(picked_window_id)
           end, { desc = 'Pick a window' })
@@ -383,6 +384,17 @@ return packer.startup(function(use)
     requires = 'nvim-lua/plenary.nvim',
   })
 
+  -- Snippets
+  use({
+    'L3MON4D3/LuaSnip',
+    requires = {
+      'rafamadriz/friendly-snippets',
+    },
+    config = function()
+      require('config.luasnip').setup()
+    end,
+  })
+
   -- Autocompletion
   use({
     'hrsh7th/nvim-cmp',
@@ -393,6 +405,7 @@ return packer.startup(function(use)
       'hrsh7th/cmp-nvim-lua',
       'f3fora/cmp-spell',
       'saadparwaiz1/cmp_luasnip',
+      'L3MON4D3/LuaSnip',
     },
     config = function()
       require('config.lsp.cmp').setup()
@@ -459,10 +472,6 @@ return packer.startup(function(use)
       -- LSP Support
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
-
-      -- Snippets
-      'L3MON4D3/LuaSnip',
-      'rafamadriz/friendly-snippets',
 
       -- Show lsp progress
       {

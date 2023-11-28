@@ -138,7 +138,6 @@ function M.setup()
     sources = {
       sources.lsp,
       sources.snippets,
-      sources.snippets,
       sources.lua,
       sources.buffer,
       sources.path,
@@ -212,11 +211,6 @@ function M.setup()
     }),
   })
 
-  luasnip.config.set_config({
-    region_check_events = 'InsertEnter',
-    delete_check_events = 'InsertLeave',
-  })
-
   vim.api.nvim_create_autocmd('FileType', {
     group = vim.api.nvim_create_augroup('cmp-ft', { clear = true }),
     pattern = { 'markdown' },
@@ -231,9 +225,6 @@ function M.setup()
       })
     end,
   })
-
-  require('luasnip.loaders.from_vscode').lazy_load()
-  require('config.lsp.snippets').setup()
 end
 
 return M
