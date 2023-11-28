@@ -33,7 +33,7 @@ local baseHls = {
   -- Custom for floats and borders
   XMenu = { bg = colors.dark_grey, default = true, fg = colors.foreground },
   XBorder = { bg = colors.dark_grey, fg = colors.dark_grey, default = true },
-  OnYank = { bg = 'none', fg = colors.purple, bold = true },
+  OnYank = { bg = colors.foreground, fg = colors.background, bold = true },
 
   DevOutputBufferTitle = { fg = colors.background, bg = colors.light_orange, bold = true },
   -- Base groups
