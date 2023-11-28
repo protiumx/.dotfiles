@@ -7,6 +7,7 @@ local utils = require('config.utils')
 local plenary = require('plenary.path')
 
 local telescope = require('telescope')
+local telescope_actions = require('telescope.actions')
 local builtin = require('telescope.builtin')
 
 local map = function(mode, l, r, desc)
@@ -212,9 +213,15 @@ function M.setup()
           ['<M-O>'] = actions.select_window,
           ['<M-Down>'] = 'cycle_history_next',
           ['<M-Up>'] = 'cycle_history_prev',
+          ['<M-a>'] = 'toggle_all', -- select/deselect all entries
+          ['<M-i>'] = 'insert_symbol_i',
+          ['<M-q>s'] = telescope_actions.send_selected_to_qflist + telescope_actions.open_qflist,
+          ['<M-q>a'] = 'add_selected_to_qflist',
+          ['<M-Q>'] = telescope_actions.send_to_qflist + telescope_actions.open_qflist,
         },
         n = {
           ['q'] = 'close',
+          ['<Esc>'] = 'close',
         },
       },
       vimgrep_arguments = {
