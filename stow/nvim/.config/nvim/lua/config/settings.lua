@@ -10,19 +10,15 @@ vim.cmd([[
   filetype plugin indent on
   set fillchars=diff:\ ,
   set pumheight=20
-  set undolevels=1000
+  set undolevels=100
   set grepprg=rg\ --vimgrep\ --smart-case\ --hidden\ --no-heading
   set grepformat=%f:%l:%c:%m
 ]])
 
--- vim.cmd(
---   [[syntax match UuidV4 /\v[0-9a-fA-F]{8}(-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}/]]
--- )
--- vim.cmd([[highlight link UuidV4 Constant]])
-
 vim.opt.shell = 'zsh'
 vim.opt.background = 'dark'
 vim.opt.showtabline = 0
+vim.opt.cmdwinheight = 12
 vim.opt.hidden = true
 vim.opt.backup = false
 vim.opt.writebackup = false
