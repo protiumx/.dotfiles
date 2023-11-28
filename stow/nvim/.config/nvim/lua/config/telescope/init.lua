@@ -14,7 +14,7 @@ local map = function(mode, l, r, desc)
   vim.keymap.set(mode, l, r, opts)
 end
 
---- Returns buffer directory relative to cwd
+---Returns buffer directory relative to cwd
 ---@param cwd string | nil
 local function get_buffer_dir(cwd)
   cwd = cwd or vim.fn.getcwd()
@@ -33,7 +33,7 @@ local function keymaps()
 
   map({ 'i', 'n' }, '<M-]>', function()
     builtin.find_files(themes.get_dropdown({
-      prompt_title = get_buffer_dir(),
+      prompt_title = utils.get_cwd_name(),
     }))
   end, 'Find files')
 
@@ -47,7 +47,7 @@ local function keymaps()
 
   map({ 'i', 'n' }, '<M-_>', function()
     builtin.find_files({
-      prompt_title = get_buffer_dir(),
+      prompt_title = utils.get_cwd_name(),
     })
   end, 'Find files with preview')
 
@@ -79,7 +79,9 @@ local function keymaps()
   end, '[S]earch Live [G]rep relative buffer')
 
   map({ 'i', 'n' }, '<M-G>', function()
-    builtin.live_grep()
+    builtin.live_grep({
+      prompt_title = utils.get_cwd_name(),
+    })
   end, '[S]earch Live [G]rep')
 
   map({ 'i', 'n' }, '<M-b>', function()
@@ -97,7 +99,9 @@ local function keymaps()
   end, '[S]earch [W]ord under cursor in cwd relative to buffer')
 
   map({ 'i', 'n' }, '<M-s>W', function()
-    builtin.grep_string({})
+    builtin.grep_string({
+      prompt_title = utils.get_cwd_name(),
+    })
   end, '[S]earch [W]ord under cursor in cwd')
 
   map('n', '<M-s>h', builtin.help_tags, '[S]earch [H]elp')
@@ -163,7 +167,10 @@ function M.setup()
       local arg = vim.api.nvim_eval('argv(0)')
       if arg and (vim.fn.isdirectory(arg) ~= 0 or arg == '') then
         vim.defer_fn(function()
-          builtin.find_files(themes.get_dropdown({ prompt_title = get_buffer_dir() }))
+          -- builtin.find_files(themes.get_dropdown({ prompt_title = get_buffer_dir() }))
+          pickers.find_files_live(themes.get_dropdown({
+            prompt_title = utils.get_cwd_name(),
+          }))
         end, 50)
       end
     end,
