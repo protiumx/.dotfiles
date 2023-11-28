@@ -44,7 +44,7 @@ function Manager.watch(opts)
   assert(#opts.cmd > 0, 'Invalid command')
   assert(opts.pattern ~= '', 'Invalid watch pattern')
 
-  if opts.pattern:find('dev%[.*%]') then
+  if opts.pattern:find('watch%[.*%]') then
     notify.error('cannot add watcher to a watcher buffer')
     return
   end

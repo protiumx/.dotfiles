@@ -28,7 +28,7 @@ local watch_command = {
     for i, param in ipairs(args) do
       local pairs = vim.split(param, '=')
       if #pairs == 1 then
-        -- bool option
+        -- boolean option
         opts[pairs[1]] = true
       elseif pairs[1] == 'cmd' then
         cmd_index = i
@@ -118,7 +118,7 @@ function M.load()
       local parts = vim.split(line, '%s+')
       local n = #parts - 2
 
-      local candidates = {}
+      local candidates = commands_ids
       local position = 2
 
       if n >= 1 then
