@@ -117,30 +117,6 @@ vim.keymap.set('n', '<C-g>R', function()
   print(cmd)
 end, { desc = '[Git] checkout current file', silent = true })
 
--- Generation
-vim.keymap.set('i', '<M-g>id', function()
-  local uuid, _ = vim.fn.system('uuidgen'):gsub('\n', ''):lower()
-  vim.api.nvim_put({ uuid }, 'c', true, true)
-end, { silent = true, desc = 'Insert UUID' })
-vim.keymap.set(
-  'i',
-  '<M-g>ed',
-  '<Esc>"=strftime("%s")<CR>p',
-  { desc = 'Current time as unix epoch', silent = true }
-)
-vim.keymap.set(
-  'i',
-  '<M-g>id',
-  '<Esc>"=strftime("%Y-%m-%dT%H:%M")<CR>p',
-  { desc = 'Current time as ISO date', silent = true }
-)
-vim.keymap.set(
-  'i',
-  '<M-g>bd',
-  '"=strftime("%Y%m%d%H%M")<CR>p',
-  { desc = 'Current time as build date', silent = true }
-)
-
 -- No OPs
 vim.keymap.set('n', '&', '<nop>')
 vim.keymap.set('n', 'Q', '<nop>', { silent = true })
