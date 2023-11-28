@@ -142,6 +142,7 @@ vim.keymap.set('n', '<Leader>T', 'gg=G', { desc = 'Fix indent in whole file' })
 -- Paste formatted and go to end of pasted block
 vim.keymap.set({ 'n', 'v' }, 'p', ']p`]', { silent = true })
 vim.keymap.set({ 'n' }, 'P', ']P`]', { silent = true })
+vim.keymap.set({ 'v' }, 'y', 'y`]', { silent = true })
 -- Normal p
 vim.keymap.set({ 'n', 'v' }, '<C-p>', 'p', { silent = true })
 vim.keymap.set('n', '<M-V>', '`[v`]', { silent = true, desc = 'Select what was pasted' })
