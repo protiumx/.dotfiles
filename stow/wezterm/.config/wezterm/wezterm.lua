@@ -365,7 +365,7 @@ local config = {
   --     },
   --     width = 'Cover',
   --     height = 'Cover',
-  --     hsb = { brightness = 0.2 },
+  --     hsb = { brightness = 0.1 },
   --     vertical_align = 'Middle',
   --     horizontal_align = 'Center',
   --   },
