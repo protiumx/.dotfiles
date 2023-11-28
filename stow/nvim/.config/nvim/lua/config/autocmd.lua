@@ -159,3 +159,11 @@ vim.api.nvim_create_autocmd({ 'VimResized' }, {
     vim.cmd('tabdo wincmd =')
   end,
 })
+
+autocmd('BufWritePost', {
+  group = augroup('mk-spell', { clear = true }),
+  pattern = '*.utf-8.add',
+  callback = function(args)
+    vim.cmd('mkspell! ' .. args.file)
+  end,
+})
