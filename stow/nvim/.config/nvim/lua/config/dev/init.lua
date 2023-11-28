@@ -44,6 +44,11 @@ function Manager.watch(opts)
   assert(#opts.cmd > 0, 'Invalid command')
   assert(opts.pattern ~= '', 'Invalid watch pattern')
 
+  if opts.pattern:find('dev%[.*%]') then
+    notify.error('cannot add watcher to a watcher buffer')
+    return
+  end
+
   for i, c in ipairs(opts.cmd) do
     opts.cmd[i] = vim.fn.expand(c)
   end
