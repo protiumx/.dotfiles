@@ -10,9 +10,12 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 My dotfiles to set up a dev environment in a **MacOS** machine.
-The `dotfiles` script installs all the packages and apps I use, [stow](https://www.gnu.org/software/stow/) my dotfiles and sets all my preferred MacOS configurations.
+Summary:
+- Installs all the packages and apps I use
+- [stows](https://www.gnu.org/software/stow/) all config files
+- Sets all my preferred MacOS configurations
 
-Check my [Medium article](https://medium.com/@protiumx/bash-gnu-stow-take-a-walk-while-your-new-macbook-is-being-set-up-351a6f2f9225).
+Checkout the [Medium article](https://medium.com/@protiumx/bash-gnu-stow-take-a-walk-while-your-new-macbook-is-being-set-up-351a6f2f9225).
 
 ## Previews
 
@@ -21,7 +24,7 @@ Check my [Medium article](https://medium.com/@protiumx/bash-gnu-stow-take-a-walk
 ![preview 2](./preview-2.png)
 
 ## Apps
-Main apps installed:
+Main apps:
 - Terminal: [Wezterm](https://wezfurlong.org/wezterm/)
 - Text Editor: [neovim](https://neovim.io/)
 - Browser: Chrome, Firefox
@@ -32,21 +35,24 @@ For more details check the [apps](./scripts/apps.sh) script.
 
 ## Neovim Plugins
 
-Main plugins are:
+Main plugins:
 - [Telescope](https://github.com/nvim-telescope/telescope.nvim)
 - [Lualine](https://github.com/nvim-lualine/lualine.nvim)
 - [Neotree](https://github.com/nvim-neo-tree/neo-tree.nvim)
 - [Mason](https://github.com/williamboman/mason.nvim)
 - [Cmp](https://github.com/hrsh7th/nvim-cmp)
-
-Theme: [gruvbox](https://github.com/ellisonleao/gruvbox.nvim)
+- Theme: [gruvbox](https://github.com/ellisonleao/gruvbox.nvim)
 
 Check the `packer` config [file](./stow/nvim/.config/nvim/lua/config/packer.lua)
 
 ### CLI
 All CLI apps are listed in the [packages](./scripts/packages.sh) script.
+CLIs from other sources like `cargo` and `go` are listed in [cli](./scripts/cli.sh) script.
 
 ## Installing
+
+> [!WARNING]
+> Please review the scripts and packages that are installed and settings before running the install script
 
 Run the `dotfiles` script:
 ```sh
@@ -60,6 +66,7 @@ In order to reuse these scripts, here a summary of files you can change/adapt to
 - `scripts/packages.sh`: all the `homebrew` taps and packages to install
 - `scripts/fonts.sh`: `homebrew` fonts to install
 - `scripts/apps.sh`: `homebrew` casks to install
+- `scripts/cli.sh`: CLI apps from different sources
 - `scripts/osx.sh`: **MacOS** settings
 - `scripts/config.sh`: general settings and dotfiles
 
@@ -72,4 +79,4 @@ stow -nSv vim
 ```
 
 ## License
-Licensed under MIT, © Brian Mayo 2022: https://protiumx.dev
+Licensed under MIT, © Brian Mayo 2023: https://protiumx.dev
