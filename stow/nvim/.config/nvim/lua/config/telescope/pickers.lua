@@ -8,27 +8,20 @@ local entry_display = require('telescope.pickers.entry_display')
 local finders = require('telescope.finders')
 local make_entry = require('telescope.make_entry')
 local pickers = require('telescope.pickers')
-local utils = require('telescope.utils')
+local telescope_utils = require('telescope.utils')
 
 local actions = require('config.telescope.actions')
 local sorters = require('config.telescope.sorters')
 local themes = require('config.telescope.themes')
+local utils = require('config.utils')
 
 local state = require('config.state')
 
 local M = {}
 
-local tbl_clone = function(original)
-  local copy = {}
-  for key, value in pairs(original) do
-    copy[key] = value
-  end
-  return copy
-end
-
 local function entry_from_buffer(opts)
   local icon_width = 0
-  local icon, _ = utils.get_devicons('fname', false)
+  local icon, _ = telescope_utils.get_devicons('fname', false)
   icon_width = strings.strdisplaywidth(icon)
 
   local displayer = entry_display.create({
@@ -47,8 +40,8 @@ local function entry_from_buffer(opts)
   local make_display = function(entry)
     -- marked + bufnr_width + modes + icon + 4 spaces + : + lnum
     opts.__prefix = 1 + opts.bufnr_width + 4 + icon_width + 4 + 1 + #tostring(entry.lnum)
-    local display_bufname = utils.transform_path(opts, entry.filename)
-    local display_icon, hl_group = utils.get_devicons(entry.filename, false)
+    local display_bufname = telescope_utils.transform_path(opts, entry.filename)
+    local display_icon, hl_group = telescope_utils.get_devicons(entry.filename, false)
 
     return displayer({
       entry.marked and '󰤱' or ' ',
@@ -218,7 +211,7 @@ function M.select_file(opts, callback)
   builtin.find_files(opts)
 end
 
---- Find files on prompt change with fd
+---Find files on prompt change with fd
 function M.find_files_live(opts)
   if opts.cwd then
     opts.cwd = vim.fn.expand(opts.cwd)
@@ -231,7 +224,7 @@ function M.find_files_live(opts)
       return nil
     end
 
-    local args = tbl_clone(fd_search_files_cmd)
+    local args = utils.tbl_clone(fd_search_files_cmd)
     table.insert(args, prompt)
     table.insert(args, opts.cwd)
     return args
@@ -241,7 +234,7 @@ function M.find_files_live(opts)
 
   pickers
     .new(opts, {
-      prompt_title = 'Find Files',
+      prompt_title = '',
       finder = finders.new_job(cmd_generator, opts.entry_maker, 0, opts.cwd),
       previewer = conf.file_previewer(opts),
       sorter = conf.file_sorter(opts),

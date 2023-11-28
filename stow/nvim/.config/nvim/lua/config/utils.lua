@@ -3,7 +3,17 @@ local state = require('config.state')
 
 local M = {}
 
---- Get text from visual selection
+---@param original table
+---@return table
+function M.tbl_clone(original)
+  local copy = {}
+  for key, value in pairs(original) do
+    copy[key] = value
+  end
+  return copy
+end
+
+---Get text from visual selection
 function M.get_selection_text()
   local a_orig = vim.fn.getreg('a')
   local mode = vim.fn.mode()
@@ -17,7 +27,7 @@ function M.get_selection_text()
   return text
 end
 
---- Open the file under cursor in existing window if available, else open a new vsplit
+---Open the file under cursor in existing window if available, else open a new vsplit
 function M.open_file_under_cursor()
   local file = nvim.file_under_cursor()
   if file == nil then
@@ -37,7 +47,7 @@ function M.open_file_under_cursor()
   vim.cmd(cmd)
 end
 
---- Uses `errorformat` to get a file and position from the current line
+---Uses `errorformat` to get a file and position from the current line
 function M.open_file_from_error()
   local elems = vim.fn.getqflist({
     efm = vim.o.errorformat,
@@ -56,7 +66,7 @@ function M.open_file_from_error()
   vim.cmd(string.format('drop %s | call cursor(%s, %s)', fname, elems[1].lnum, elems[1].col))
 end
 
---- Toggle LSP and global state 'quiet' value
+---Toggle LSP and global state 'quiet' value
 function M.toggle_quiet()
   if state.get('quiet') then
     vim.cmd([[
