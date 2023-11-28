@@ -68,8 +68,11 @@ local baseHls = {
   DiffviewFilePanelRootPath = { fg = colors.violet },
   DiffviewFilePanelSelected = { fg = colors.dark_orange, bold = true },
   DiffviewFilePanelTitle = { fg = colors.violet },
-  DiffviewStatusUntracked = { fg = colors.green, bg = 'none', bold = true },
+  DiffviewStatusAdded = { fg = colors.green, bg = 'none', bold = true },
   DiffviewStatusDeleted = { fg = colors.dark_red, bg = 'none', bold = true },
+  DiffviewStatusUnmerged = { fg = colors.dark_yellow, bg = 'none', bold = true },
+  DiffviewStatusUntracked = { fg = colors.green, bg = 'none', bold = true },
+  DiffviewStatusRenamed = { fg = colors.violet, bg = 'none', bold = true },
   -- Mason
   MasonHeader = { link = 'XMenu' },
   MasonHeading = { link = 'XBorder' },
