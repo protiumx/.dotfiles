@@ -225,6 +225,9 @@ function M.setup()
           ['<Esc>'] = 'close',
         },
       },
+      preview = {
+        filesize_limit = 1, -- MB
+      },
       vimgrep_arguments = {
         'rg',
         '--line-number',
@@ -234,9 +237,7 @@ function M.setup()
         '-u',
       },
     },
-    preview = {
-      filesize_limit = 0.2, -- MB
-    },
+
     pickers = {
       find_files = {
         find_command = {
@@ -257,6 +258,7 @@ function M.setup()
         },
       },
     },
+
     extensions = {
       file_browser = {
         respect_gitignore = false,
