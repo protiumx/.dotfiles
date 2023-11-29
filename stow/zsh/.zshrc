@@ -15,7 +15,8 @@ export EDITOR="nvim"
 export HISTSIZE=10000
 export SAVEHIST=10000
 
-export LD_LIBRARY_PATH="$HOME/.config/nvim/lua/config/nvim/"
+export LD_LIBRARY_PATH="$HOME/.config/nvim/lua/config/nvim"
+export DYLD_LIBRARY_PATH="$HOME/.config/nvim/lua/config/nvim"
 
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_INSECURE_REDIRECT=1
