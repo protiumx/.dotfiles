@@ -69,6 +69,8 @@ local function lsp_symbol()
 end
 
 function M.setup()
+  local icons = require('config.icons').lsp
+
   local file_section = {
     'filename',
     path = 1,
@@ -157,7 +159,18 @@ function M.setup()
           end,
         },
       },
-      lualine_y = { { 'diagnostics', sources = { 'nvim_diagnostic' } } },
+      lualine_y = {
+        {
+          'diagnostics',
+          sources = { 'nvim_lsp' },
+          symbols = {
+            error = icons.error .. ' ',
+            warn = icons.warn .. ' ',
+            info = icons.info .. ' ',
+            hint = icons.hint .. ' ',
+          },
+        },
+      },
       lualine_z = {
         {
           require('noice').api.status.search.get,
