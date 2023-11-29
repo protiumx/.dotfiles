@@ -115,7 +115,7 @@ local function keymaps()
   end, 'Fuzzy search in buffer')
 
   map({ 'i', 'n' }, '<M-s>s', function()
-    builtin.spell_suggest(telescope_themes.get_cursor())
+    builtin.spell_suggest(telescope_themes.get_cursor(themes.base))
   end, '[S]pell [S]uggestions')
 
   map('n', '<C-g>b', builtin.git_branches, '[G]it [B]ranches')

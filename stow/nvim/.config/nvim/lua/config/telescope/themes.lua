@@ -1,12 +1,8 @@
 local ui = require('config.ui')
 local themes = require('telescope.themes')
 
-local M = {}
----@param opts table | nil
-M.get_dropdown = function(opts)
-  opts = opts or {}
-  local dropdown = themes.get_dropdown({
-    previewer = false,
+local M = {
+  base = {
     winblend = ui.winblend,
     show_line = false,
     borderchars = {
@@ -15,6 +11,13 @@ M.get_dropdown = function(opts)
       preview = { ' ' },
     },
     prompt_title = '',
+  },
+}
+---@param opts table | nil
+M.get_dropdown = function(opts)
+  opts = vim.tbl_extend('force', M.base, opts or {})
+  local dropdown = themes.get_dropdown({
+    previewer = false,
     preview_title = '',
     results_title = '',
   })
