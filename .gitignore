@@ -1,3 +1,5 @@
 .DS_STORE
 stow/nvim/.config/nvim/.netrwhist
 stow/nvim/.config/nvim/plugin/packer_compiled.lua
+*.so
+*.dylib
