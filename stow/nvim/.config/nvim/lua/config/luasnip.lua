@@ -22,18 +22,13 @@ function M.setup()
   ls.config.set_config({
     -- delete_check_events = 'InsertLeave',
     -- region_check_events = 'InsertEnter',
-    -- update dynamic nodes while typing
     update_events = { 'TextChanged', 'TextChangedI' },
 
     history = false,
-
-    -- Crazy highlights!!
-    -- #vid3
-    -- ext_opts = nil,
     ext_opts = {
       [types.choiceNode] = {
         active = {
-          virt_text = { { ' « ', 'Comment' } },
+          virt_text = { { '  ', 'Comment' } },
         },
       },
     },
