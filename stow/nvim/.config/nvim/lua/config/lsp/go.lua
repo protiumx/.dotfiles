@@ -19,8 +19,8 @@ function M.setup()
       enable = false,
     },
     lsp_keymaps = false,
-    -- test_runner = 'gotestsum',
-    run_in_floaterm = true,
+    test_runner = 'go',
+    run_in_floaterm = false,
     luasnip = true,
     floaterm = {
       posititon = 'right', -- one of {`top`, `bottom`, `left`, `right`, `center`, `auto`}
