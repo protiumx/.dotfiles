@@ -168,11 +168,7 @@ function M.setup()
       local arg = vim.api.nvim_eval('argv(0)')
       if arg and (vim.fn.isdirectory(arg) ~= 0 or arg == '') then
         vim.defer_fn(function()
-          -- builtin.find_files(themes.get_dropdown({ prompt_title = get_buffer_dir() }))
-          -- avoid expensive task for big folders
-          pickers.find_files_live(themes.get_dropdown({
-            prompt_title = utils.get_cwd_name(),
-          }))
+          builtin.find_files(themes.get_dropdown({ prompt_title = get_buffer_dir() }))
         end, 50)
       end
     end,
