@@ -6,37 +6,17 @@ local function keymaps()
   keymap('n', 'gh', '<cmd>Lspsaga finder imp+def+ref<CR>', { silent = true })
   keymap('n', '<M-l>i', '<cmd>Lspsaga finder imp<CR>', { silent = true })
   keymap('n', '<M-l>r', '<cmd>Lspsaga finder ref<CR>', { silent = true })
-
   -- keymap('n', 'K', '<cmd>Lspsaga hover_doc<CR>', { silent = true })
-
   keymap({ 'n', 'v' }, '<Leader>ca', '<cmd>Lspsaga code_action<CR>', { silent = true })
   keymap('n', 'gr', '<cmd>Lspsaga rename<CR>', { silent = true })
-
   keymap('n', 'gD', '<cmd>Lspsaga peek_definition<CR>', { silent = true })
   keymap('n', 'gT', '<cmd>Lspsaga peek_type_definition<CR>', { silent = true })
   -- keymap('n', 'gd', '<cmd>Lspsaga goto_definition<CR>', { silent = true })
-
-  -- Show buffer diagnostics
   keymap('n', '<C-g>d', '<cmd>Lspsaga show_buf_diagnostics<CR>')
-
-  -- Diagnostic jump
-  -- keymap('n', '[d', '<cmd>Lspsaga diagnostic_jump_prev<CR>')
-  -- keymap('n', ']d', '<cmd>Lspsaga diagnostic_jump_next<CR>')
-
-  -- Only jump to errors
-  -- keymap('n', '[e', function()
-  --   require('lspsaga.diagnostic').goto_prev({ severity = vim.diagnostic.severity.ERROR })
-  -- end, { silent = true })
-  -- keymap('n', ']e', function()
-  --   require('lspsaga.diagnostic').goto_next({ severity = vim.diagnostic.severity.ERROR })
-  -- end, { silent = true })
-
-  -- Outline
   keymap('n', '<M-l>o', '<cmd>Lspsaga outline<CR>', { silent = true })
 end
 
 function M.setup()
-  local colors = require('config.colors')
   require('lspsaga').setup({
     preview = {
       lines_above = 0,
@@ -82,7 +62,8 @@ function M.setup()
     },
     outline = {
       auto_preview = false,
-      left_width = 0.4,
+      left_width = 0.3,
+      win_width = 0.3,
       keys = {
         jump = '<CR>',
       },
