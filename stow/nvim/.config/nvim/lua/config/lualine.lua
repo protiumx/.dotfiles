@@ -1,5 +1,5 @@
 local colors = require('config.colors')
-local state = require('config.state')
+local global_state = require('config.state')
 local M = {}
 
 local modes = {
@@ -90,7 +90,7 @@ function M.setup()
       section_separators = '',
       disabled_filetypes = {
         statusline = {
-          'FTerm',
+          'xterm',
           'TelescopePrompt',
           'guihua',
           'lspsagaoutline',
@@ -184,7 +184,7 @@ function M.setup()
         },
         {
           function()
-            return state.get('quiet') and '󰊠' or ''
+            return global_state.get('quiet') and '󰊠' or ''
           end,
         },
         { 'location' },
