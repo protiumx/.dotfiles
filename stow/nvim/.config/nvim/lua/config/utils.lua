@@ -112,4 +112,9 @@ function M.get_git_url(filename)
   return url
 end
 
+function M.uuid()
+  local id, _ = vim.fn.system('uuidgen'):gsub('\n', ''):lower()
+  return id
+end
+
 return M
