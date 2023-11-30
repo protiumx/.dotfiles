@@ -1,3 +1,4 @@
+local utils = require('config.utils')
 local M = {}
 
 local function date(fmt)
@@ -7,7 +8,10 @@ end
 function M.setup()
   local ls = require('luasnip')
   local fmt = require('luasnip.extras.fmt').fmt
-  local rep = require('luasnip.extras').rep
+  local extras = require('luasnip.extras')
+  local rep = extras.rep
+  local p = extras.partial
+  local types = require('luasnip.util.types')
 
   local s = ls.snippet
   local sn = ls.snippet_node
@@ -16,18 +20,26 @@ function M.setup()
   local t = ls.text_node
 
   ls.config.set_config({
-    delete_check_events = 'InsertLeave',
-    region_check_events = 'InsertEnter',
+    -- delete_check_events = 'InsertLeave',
+    -- region_check_events = 'InsertEnter',
     -- update dynamic nodes while typing
     update_events = { 'TextChanged', 'TextChangedI' },
+
+    history = false,
+
+    -- Crazy highlights!!
+    -- #vid3
+    -- ext_opts = nil,
+    ext_opts = {
+      [types.choiceNode] = {
+        active = {
+          virt_text = { { ' « ', 'Comment' } },
+        },
+      },
+    },
   })
 
   require('luasnip.loaders.from_vscode').lazy_load()
-
-  local function uuid()
-    local id, _ = vim.fn.system('uuidgen'):gsub('\n', ''):lower()
-    return id
-  end
 
   ls.add_snippets('lua', {
     s('reqf', fmt("local {} = require('{}')", { i(1, '_'), rep(1) })),
@@ -36,12 +48,9 @@ function M.setup()
   ls.add_snippets('all', {
     s({
       trig = 'uuid',
-      name = 'UUID',
-      dscr = 'Generate a unique UUID',
+      name = 'UUIDv4',
     }, {
-      d(1, function()
-        return sn(nil, t(uuid()))
-      end),
+      p(utils.uuid),
     }),
 
     s({
@@ -49,9 +58,7 @@ function M.setup()
       name = 'ISO',
       dscr = 'Now as ISO Date',
     }, {
-      d(1, function()
-        return sn(nil, t(date('%Y-%m-%dT%H:%M')))
-      end),
+      p(os.date, '%Y-%m-%dT%H:%M'),
     }),
 
     s({
@@ -59,9 +66,7 @@ function M.setup()
       name = 'Epoch',
       dscr = 'Now as unix epoch',
     }, {
-      d(1, function()
-        return sn(nil, t(date('%s')))
-      end),
+      p(os.date, '%s'),
     }),
 
     s({
@@ -69,11 +74,30 @@ function M.setup()
       name = 'Build date',
       dscr = 'Now as a build date time stamp',
     }, {
-      d(1, function()
-        return sn(nil, t(date('%Y%m%d%H%M')))
-      end),
+      p(os.date, '%Y%m%d%H%M'),
     }),
   })
+
+  vim.keymap.set({ 'i', 's' }, '<M-n>', function()
+    if ls.choice_active() then
+      ls.change_choice(1)
+    end
+  end)
+
+  vim.keymap.set('i', '<M-p>', require('luasnip.extras.select_choice'))
+
+  vim.keymap.set({ 'i', 's' }, '<C-l>', function()
+    if ls.jumpable() then
+      ls.jump(1)
+    end
+  end, { silent = true })
+
+  vim.keymap.set({ 'i', 's' }, '<C-h>', function()
+    if ls.jumpable(-1) then
+      ls.jump(-1)
+    end
+  end, { silent = true })
+  require('config.snippets.go').setup()
 end
 
 return M
