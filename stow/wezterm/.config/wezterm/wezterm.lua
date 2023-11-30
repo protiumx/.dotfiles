@@ -175,7 +175,9 @@ local keys = {
 
   { key = 'T', mods = 'SHIFT|' .. key_mod_panes, action = act.ShowTabNavigator },
   { key = '[', mods = key_mod_panes, action = act.ActivateTabRelative(-1) },
+  { key = 'H', mods = 'SHIFT|' .. key_mod_panes, action = act.ActivateTabRelative(-1) },
   { key = ']', mods = key_mod_panes, action = act.ActivateTabRelative(1) },
+  { key = 'L', mods = 'SHIFT|' .. key_mod_panes, action = act.ActivateTabRelative(1) },
 
   {
     key = 'o',
@@ -358,18 +360,18 @@ local colors = {
 
 local config = {
   audible_bell = 'Disabled',
-  -- background = {
-  --   {
-  --     source = {
-  --       File = '/Users/bmayo/.dotfiles/background/moon.jpg',
-  --     },
-  --     width = 'Cover',
-  --     height = 'Cover',
-  --     hsb = { brightness = 0.1 },
-  --     vertical_align = 'Middle',
-  --     horizontal_align = 'Center',
-  --   },
-  -- },
+  background = {
+    {
+      source = {
+        File = '/Users/bmayo/.dotfiles/background/goya.jpg',
+      },
+      width = 'Cover',
+      height = 'Cover',
+      hsb = { brightness = 0.15 },
+      vertical_align = 'Middle',
+      horizontal_align = 'Center',
+    },
+  },
   canonicalize_pasted_newlines = 'None',
   color_scheme = 'Classic Dark (base16)',
   colors = colors,
@@ -395,7 +397,6 @@ local config = {
     brightness = 0.6,
   },
   keys = keys,
-  -- line_height = 0.9,
   max_fps = 120,
   mouse_bindings = {
     {
