@@ -193,14 +193,6 @@ function M.setup()
           fallback()
         end
       end, { 'i', 's' }),
-      -- Jump to luasnip placeholders
-      ['<C-j>'] = cmp.mapping(function(fallback)
-        if luasnip.jumpable(-1) then
-          luasnip.jump(-1)
-        else
-          fallback()
-        end
-      end, { 'i', 's' }),
       ['<C-k>'] = cmp.mapping(function(fallback)
         if luasnip.expand_or_jumpable() then
           luasnip.expand_or_jumpable()
