@@ -87,6 +87,7 @@ return packer.startup(function(use)
   -- Treesitter
   use({
     'nvim-treesitter/nvim-treesitter',
+    event = 'BufRead',
     run = function()
       pcall(require('nvim-treesitter.install').update({ with_sync = true }))
     end,
@@ -101,25 +102,9 @@ return packer.startup(function(use)
   })
 
   use({
-    'lukas-reineke/indent-blankline.nvim',
-  })
-
-  use('sainnhe/sonokai')
-
-  use({
     'nvim-treesitter/playground',
     cmd = { 'TSPlaygroundToggle', 'TSNodeUnderCursor' },
   })
-
-  -- use({
-  --   'zbirenbaum/copilot.lua',
-  --   cmd = 'Copilot',
-  --   event = 'InsertEnter',
-  --   cond = jit.os == 'Linux',
-  --   config = function()
-  --     require('config.copilot').setup()
-  --   end,
-  -- })
 
   use({
     'Wansmer/treesj',
@@ -229,7 +214,7 @@ return packer.startup(function(use)
     cmd = 'WinShift',
     config = function()
       vim.keymap.set('n', '<C-w>m', '<Cmd>WinShift<CR>')
-      vim.keymap.set('n', '<C-w>x', '<Cmd>WinShift swap<CR>')
+      vim.keymap.set('n', "<C-w>'", '<Cmd>WinShift swap<CR>')
     end,
   })
 
@@ -316,7 +301,7 @@ return packer.startup(function(use)
   use({
     'nvim-neo-tree/neo-tree.nvim',
     branch = 'v3.x',
-
+    cmd = 'Neotree',
     requires = {
       'nvim-lua/plenary.nvim',
       'nvim-tree/nvim-web-devicons',
@@ -362,7 +347,7 @@ return packer.startup(function(use)
     end,
   })
 
-  -- Show sign columns for changes in files
+  -- Git
   use({
     'lewis6991/gitsigns.nvim',
     cond = function()
