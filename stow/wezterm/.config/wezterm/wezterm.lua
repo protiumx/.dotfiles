@@ -74,7 +74,7 @@ local keys = {
   { key = 'x', mods = 'SHIFT|' .. key_mod_panes, action = act.ActivateCopyMode },
 
   {
-    key = '!',
+    key = '1',
     mods = key_mod_panes,
     action = wezterm.action_callback(function(_win, pane)
       pane:move_to_new_tab()
@@ -174,9 +174,7 @@ local keys = {
   },
 
   { key = 'T', mods = 'SHIFT|' .. key_mod_panes, action = act.ShowTabNavigator },
-  { key = '[', mods = key_mod_panes, action = act.ActivateTabRelative(-1) },
   { key = 'H', mods = 'SHIFT|' .. key_mod_panes, action = act.ActivateTabRelative(-1) },
-  { key = ']', mods = key_mod_panes, action = act.ActivateTabRelative(1) },
   { key = 'L', mods = 'SHIFT|' .. key_mod_panes, action = act.ActivateTabRelative(1) },
 
   {
@@ -238,8 +236,10 @@ local keys = {
   -- Bypass
   { key = '/', mods = 'CTRL', action = act.SendKey({ key = '/', mods = 'CTRL' }) },
   { key = 'q', mods = 'CTRL', action = act.SendKey({ key = 'q', mods = 'CTRL' }) },
+  { key = 'o', mods = 'CTRL', action = act.SendKey({ key = 'o', mods = 'CTRL' }) },
   { key = 'k', mods = 'CTRL', action = act.SendKey({ key = 'k', mods = 'CTRL' }) },
   { key = 'i', mods = 'CTRL', action = act.SendKey({ key = 'i', mods = 'CTRL' }) },
+  { key = 'g', mods = 'ALT', action = act.SendKey({ key = 'g', mods = 'ALT' }) },
 }
 
 local process_icons = {
