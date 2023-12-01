@@ -3,9 +3,8 @@ local M = {}
 function M.setup()
   ---@diagnostic disable-next-line: redundant-parameter
   require('go').setup({
-    icons = false,
     comment_placeholder = '',
-    max_line_len = 100,
+    gocoverage_sign = '┃',
     -- duplicate from ./init.lua
     diagnostic = {
       underline = false,
@@ -13,19 +12,21 @@ function M.setup()
       signs = false,
       update_in_insert = true,
     },
+    floaterm = {
+      posititon = 'right', -- one of {`top`, `bottom`, `left`, `right`, `center`, `auto`}
+      width = 0.5, -- width of float window if not auto
+    },
+    icons = false,
     -- virtual text setup
     lsp_document_formatting = true,
     lsp_inlay_hints = {
       enable = false,
     },
     lsp_keymaps = false,
+    luasnip = true,
+    max_line_len = 100,
     test_runner = 'go',
     run_in_floaterm = false,
-    luasnip = true,
-    floaterm = {
-      posititon = 'right', -- one of {`top`, `bottom`, `left`, `right`, `center`, `auto`}
-      width = 0.5, -- width of float window if not auto
-    },
   })
 
   vim.keymap.set('n', '<Leader>tp', '<cmd>GoTestPkg<CR>')
