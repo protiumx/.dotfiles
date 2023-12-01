@@ -123,7 +123,7 @@ local function go_result_type(info)
   end
 
   if not function_node then
-    print('Not inside of a function')
+    -- not inside of a function
     return t('')
   end
 
