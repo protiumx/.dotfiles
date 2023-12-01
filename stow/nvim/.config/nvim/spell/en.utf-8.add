@@ -17,3 +17,5 @@ neo
 nvim
 plugin
 teardown
+coroutine
+coroutines
