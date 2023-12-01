@@ -11,6 +11,7 @@ function M.setup()
       lua = { 'stylua' },
       python = { 'black' },
       javascript = { 'prettier' },
+      json = { 'prettier' },
       markdown = { 'marksman' },
       go = { 'gofumpt', 'goimports' }, -- runs both
     },
