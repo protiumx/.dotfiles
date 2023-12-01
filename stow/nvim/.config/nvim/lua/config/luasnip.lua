@@ -34,7 +34,25 @@ function M.setup()
     },
   })
 
-  require('luasnip.loaders.from_vscode').lazy_load()
+  require('luasnip.loaders.from_vscode').lazy_load({
+    include = {
+      'c',
+      'cpp',
+      'docker',
+      'eelixir',
+      'elixir',
+      'go',
+      'html',
+      'license',
+      'lua',
+      'markdown',
+      'ocaml',
+      'python',
+      'rust',
+      'shell',
+      'sql',
+    },
+  })
 
   ls.add_snippets('lua', {
     s('reqf', fmt("local {} = require('{}')", { i(1, '_'), rep(1) })),
@@ -92,6 +110,7 @@ function M.setup()
       ls.jump(-1)
     end
   end, { silent = true })
+
   require('config.snippets.go').setup()
 end
 
