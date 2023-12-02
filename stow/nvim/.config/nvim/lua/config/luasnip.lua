@@ -1,23 +1,27 @@
 local utils = require('config.utils')
+
 local M = {}
 
-local function date(fmt)
-  return os.date(fmt)
-end
+local ISO_FORMAT = '%Y-%m-%dT%H:%M:%S'
+local BUILD_DATE = '%Y%m%d%H%M'
 
 function M.setup()
   local ls = require('luasnip')
   local fmt = require('luasnip.extras.fmt').fmt
+  local postfix = require('luasnip.extras.postfix').postfix
+  local types = require('luasnip.util.types')
+
+  local snippet = ls.snippet
+
+  -- local d = ls.dynamic_node
+  local f = ls.function_node
+  local i = ls.insert_node
+  -- local sn = ls.snippet_node
+  -- local t = ls.text_node
+
   local extras = require('luasnip.extras')
   local rep = extras.rep
   local p = extras.partial
-  local types = require('luasnip.util.types')
-
-  local s = ls.snippet
-  local sn = ls.snippet_node
-  local d = ls.dynamic_node
-  local i = ls.insert_node
-  local t = ls.text_node
 
   ls.config.set_config({
     -- delete_check_events = 'InsertLeave',
@@ -55,26 +59,26 @@ function M.setup()
   })
 
   ls.add_snippets('lua', {
-    s('reqf', fmt("local {} = require('{}')", { i(1, '_'), rep(1) })),
+    snippet('reqf', fmt("local {} = require('{}')", { i(1, '_'), rep(1) })),
   })
 
   ls.add_snippets('all', {
-    s({
+    snippet({
       trig = 'uuid',
       name = 'UUIDv4',
     }, {
       p(utils.uuid),
     }),
 
-    s({
+    snippet({
       trig = 'iso',
       name = 'ISO',
       dscr = 'Now as ISO Date',
     }, {
-      p(os.date, '%Y-%m-%dT%H:%M'),
+      p(os.date, ISO_FORMAT),
     }),
 
-    s({
+    snippet({
       trig = 'epo',
       name = 'Epoch',
       dscr = 'Now as unix epoch',
@@ -82,12 +86,25 @@ function M.setup()
       p(os.date, '%s'),
     }),
 
-    s({
+    snippet({
       trig = 'build',
       name = 'Build date',
       dscr = 'Now as a build date time stamp',
     }, {
-      p(os.date, '%Y%m%d%H%M'),
+      p(os.date, BUILD_DATE),
+    }),
+
+    postfix({
+      trig = '.toiso',
+      name = 'epoch to ISO',
+      match_pattern = '%d+$',
+    }, {
+      f(function(_, parent)
+        if #parent.snippet.env.POSTFIX_MATCH < 9 then
+          return os.date(ISO_FORMAT)
+        end
+        return os.date(ISO_FORMAT, tonumber(parent.snippet.env.POSTFIX_MATCH))
+      end, {}),
     }),
   })
 
