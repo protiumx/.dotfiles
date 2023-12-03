@@ -101,7 +101,6 @@ local servers = {
         },
       },
       runtime = {
-        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
         version = 'LuaJIT',
       },
       workspace = {
@@ -110,7 +109,7 @@ local servers = {
           [vim.fn.expand('$VIMRUNTIME/lua')] = true,
           [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
         },
-        maxPreload = 100000,
+        maxPreload = 10000,
         preloadFileSize = 10000,
       },
       telemetry = { enable = false },
