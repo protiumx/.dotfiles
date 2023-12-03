@@ -155,6 +155,8 @@ local baseHls = {
   NotifyINFOBorder = { fg = colors.background },
   NotifyDEBUGBorder = { fg = colors.background },
   NotifyTRACEBorder = { fg = colors.background },
+  -- text fg only when using `minimal` notify style
+  NotifyINFOIcon = { fg = colors.foreground },
   -- web-dev-icons
   -- DevIconDefault          = { fg = colors.dark_orange, bg = 'none' },
 }
