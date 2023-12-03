@@ -97,6 +97,7 @@ function M.setup()
       'lua',
       'markdown',
       'markdown_inline',
+      'ocaml',
       'python',
       'regex',
       'rust',

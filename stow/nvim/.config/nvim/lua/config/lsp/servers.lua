@@ -7,6 +7,16 @@ local servers = {
     schemas = require('schemastore').json.schemas(),
   },
   eslint = {},
+  ocamllsp = {
+    settings = {
+      codelens = { enable = true },
+    },
+
+    get_language_id = function(_, ftype)
+      return ftype
+    end,
+  },
+
   marksman = {},
   rust_analyzer = {
     ['rust-analyzer'] = {

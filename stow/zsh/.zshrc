@@ -206,6 +206,8 @@ _fzf_compgen_dir() {
 # K8s completions
 [[ -x "$(command -v kubectl)" ]] && source <(kubectl completion zsh)
 
+[[ ! -r $HOME/.opam/opam-init/init.zsh ]] || source $HOME/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+
 export PATH
 
 # Source all profile files

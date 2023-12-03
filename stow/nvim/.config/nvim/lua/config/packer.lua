@@ -442,6 +442,7 @@ return packer.startup(function(use)
       'javascript',
       'json',
       'lua',
+      'ocaml',
       'python',
       'rust',
       'sh',
