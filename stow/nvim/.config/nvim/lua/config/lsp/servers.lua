@@ -8,13 +8,7 @@ local servers = {
   },
   eslint = {},
   ocamllsp = {
-    settings = {
-      codelens = { enable = true },
-    },
-
-    get_language_id = function(_, ftype)
-      return ftype
-    end,
+    codelens = { enable = true },
   },
 
   marksman = {},
