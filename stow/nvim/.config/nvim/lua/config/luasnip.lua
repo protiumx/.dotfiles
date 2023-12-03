@@ -24,12 +24,16 @@ function M.setup()
   local p = extras.partial
 
   ls.config.set_config({
-    -- delete_check_events = 'InsertLeave',
-    -- region_check_events = 'InsertEnter',
+    delete_check_events = 'InsertLeave',
     update_events = { 'TextChanged', 'TextChangedI' },
 
-    history = false,
     ext_opts = {
+      [types.insertNode] = {
+        active = {
+          hl_group = 'GruvboxRed',
+        },
+      },
+
       [types.choiceNode] = {
         active = {
           virt_text = { { '  ', 'Comment' } },
@@ -98,6 +102,7 @@ function M.setup()
       trig = '.toiso',
       name = 'epoch to ISO',
       match_pattern = '%d+$',
+      docTrig = '0',
     }, {
       f(function(_, parent)
         if #parent.snippet.env.POSTFIX_MATCH < 9 then
