@@ -134,14 +134,13 @@ vim.keymap.set({ 'n', 'v' }, '<Leader>C', '"_c', { silent = true, desc = 'Delete
 -- Delete shortcuts
 vim.keymap.set({ 'n', 'v' }, '<Leader>d_', 'dt_')
 vim.keymap.set({ 'n', 'v' }, '<Leader>d-', 'dt-')
-vim.keymap.set({ 'n', 'v' }, '<Leacer>c_', 'ct_')
-vim.keymap.set({ 'n', 'v' }, '<Leacer>c-', 'ct-')
+vim.keymap.set({ 'n', 'v' }, '<Leader>c_', 'ct_')
+vim.keymap.set({ 'n', 'v' }, '<Leader>c-', 'ct-')
 
 -- General utils
 vim.keymap.set('n', '<Leader>T', 'gg=G', { desc = 'Fix indent in whole file' })
--- Paste formatted and go to end of pasted block
-vim.keymap.set({ 'n', 'v' }, 'p', ']p`]', { silent = true })
-vim.keymap.set({ 'n' }, 'P', ']P`]', { silent = true })
+vim.keymap.set({ 'n', 'v' }, 'p', ']p', { silent = true })
+vim.keymap.set({ 'n' }, 'P', ']P', { silent = true })
 vim.keymap.set({ 'v' }, 'y', 'y`]', { silent = true })
 -- Normal p
 vim.keymap.set({ 'n', 'v' }, '<C-p>', 'p', { silent = true })
@@ -180,8 +179,8 @@ vim.keymap.set('n', '<Leader>S', '<cmd>mks! .session.vim<CR>')
 vim.keymap.set('i', '<M-o>', '<C-o>o', { silent = true })
 vim.keymap.set('i', '<M-O>', '<C-o>O', { silent = true })
 -- Open new file adjacent to current file
-vim.keymap.set('n', '<Leader>o', ':e <C-R>=expand("%:h") . "/"')
-vim.keymap.set('n', '<Leader>vo', ':vsp | e <C-R>=expand("%:h") . "/"')
+vim.keymap.set('n', '<Leader>o', ':e <C-R>=expand("%:h")<CR> . "/"')
+vim.keymap.set('n', '<Leader>vo', ':vsp | e <C-R>=expand("%:h")<CR> . "/"')
 -- Select all text in current buffer
 vim.keymap.set('n', '<M-a>', 'ggVG', { silent = true })
 vim.keymap.set('i', '<M-a>', '<Esc>ggVG', { silent = true })
