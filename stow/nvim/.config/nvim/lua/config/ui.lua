@@ -3,7 +3,7 @@ local event = require('nui.utils.autocmd').event
 
 -- Global for all plugins and internal views
 local M = {
-  winblend = 15,
+  winblend = 12,
 }
 
 local nui_popup_base = {
