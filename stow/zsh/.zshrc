@@ -43,59 +43,6 @@ fi
 
 BREW_PREFIX="$(brew --prefix)"
 
-################# ZSH widgets ####################
-
-# search changed files in git repo
-fzf-git-files-widget() {
-	if ! git rev-parse --git-dir >/dev/null 2>&1; then
-		return 1
-	fi
-
-	local files=$(git diff --name-only)
-	local lines=$(echo $files | wc -l)
-	if [ $lines -eq 0 ]; then
-		return 0
-	fi
-
-	if [ $lines -eq 1 ]; then
-		RBUFFER=$files
-	else
-		local selected
-		if selected=$(echo $files | fzf); then
-			RBUFFER=$selected
-		fi
-	fi
-
-	zle redisplay
-	zle end-of-line
-}
-
-zle -N fzf-git-files-widget
-bindkey '\eg' fzf-git-files-widget
-
-# go back to fg
-zsh-ctrl-z () {
-  if [[ $#BUFFER -eq 0 ]]; then
-    BUFFER="fg"
-    zle accept-line
-  else
-    zle push-input
-    zle clear-screen
-  fi
-}
-zle -N zsh-ctrl-z
-bindkey '^z' zsh-ctrl-z
-
-# edit current folder
-zsh-ctrl-o () {
-  if [[ $#BUFFER -eq 0 ]]; then
-    BUFFER="nvim ."
-    zle accept-line
-  fi
-}
-zle -N zsh-ctrl-o
-bindkey '^o' zsh-ctrl-o
-
 ################# Oh MyZsh ####################
 
 export ZSH="$HOME/.oh-my-zsh"
@@ -224,5 +171,61 @@ fi
 if [[ "$OSTYPE" =~ ^darwin ]]; then
 	ssh-add --apple-load-keychain &>/dev/null
 fi
+
+################# ZSH widgets ####################
+
+# search changed files in git repo
+fzf-git-files-widget() {
+  if ! git rev-parse --git-dir >/dev/null 2>&1; then
+    return 1
+  fi
+
+  local files=$(git diff --name-only)
+  local lines=$(echo $files | wc -l)
+  if [ $lines -eq 0 ]; then
+    return 0
+  fi
+
+  if [ $lines -eq 1 ]; then
+    RBUFFER=$files
+  else
+    local selected
+    if selected=$(echo $files | fzf); then
+      RBUFFER=$selected
+    fi
+  fi
+
+  zle redisplay
+  zle end-of-line
+}
+
+zle -N fzf-git-files-widget
+bindkey -r '\eg'
+bindkey '\eg' fzf-git-files-widget
+
+# go back to fg
+zsh-ctrl-z () {
+  if [[ $#BUFFER -eq 0 ]]; then
+    BUFFER="fg"
+    zle accept-line
+  else
+    zle push-input
+    zle clear-screen
+  fi
+}
+zle -N zsh-ctrl-z
+bindkey '^z' zsh-ctrl-z
+
+# edit current folder
+zsh-ctrl-o () {
+  if [[ $#BUFFER -eq 0 ]]; then
+    BUFFER="nvim ."
+    zle accept-line
+  fi
+}
+zle -N zsh-ctrl-o
+bindkey -r '^o'
+bindkey '^o' zsh-ctrl-o
+
 
 echo "( .-.)"
