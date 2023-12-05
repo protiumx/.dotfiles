@@ -10,6 +10,7 @@ function M.setup()
     formatters_by_ft = {
       lua = { 'stylua' },
       python = { 'black' },
+      ocaml = { 'ocamlformat' },
       javascript = { 'prettier' },
       json = { 'prettier' },
       markdown = { 'marksman' },
