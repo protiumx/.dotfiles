@@ -28,12 +28,6 @@ function M.setup()
     update_events = { 'TextChanged', 'TextChangedI' },
 
     ext_opts = {
-      [types.insertNode] = {
-        active = {
-          hl_group = 'GruvboxRed',
-        },
-      },
-
       [types.choiceNode] = {
         active = {
           virt_text = { { '  ', 'Comment' } },
