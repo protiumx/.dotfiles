@@ -236,10 +236,8 @@ local keys = {
   -- Bypass
   { key = '/', mods = 'CTRL', action = act.SendKey({ key = '/', mods = 'CTRL' }) },
   { key = 'q', mods = 'CTRL', action = act.SendKey({ key = 'q', mods = 'CTRL' }) },
-  { key = 'o', mods = 'CTRL', action = act.SendKey({ key = 'o', mods = 'CTRL' }) },
   { key = 'k', mods = 'CTRL', action = act.SendKey({ key = 'k', mods = 'CTRL' }) },
   { key = 'i', mods = 'CTRL', action = act.SendKey({ key = 'i', mods = 'CTRL' }) },
-  { key = 'g', mods = 'ALT', action = act.SendKey({ key = 'g', mods = 'ALT' }) },
 }
 
 local process_icons = {
