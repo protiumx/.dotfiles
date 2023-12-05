@@ -26,7 +26,7 @@ function M.setup()
     luasnip = true,
     max_line_len = 100,
     test_runner = 'go',
-    run_in_floaterm = false,
+    run_in_floaterm = true,
   })
 
   vim.keymap.set('n', '<Leader>tp', '<cmd>GoTestPkg<CR>')
