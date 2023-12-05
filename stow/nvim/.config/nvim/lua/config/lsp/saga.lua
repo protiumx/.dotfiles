@@ -63,7 +63,7 @@ function M.setup()
     outline = {
       auto_preview = false,
       left_width = 0.3,
-      win_width = 0.3,
+      win_width = 40,
       keys = {
         jump = '<CR>',
       },
