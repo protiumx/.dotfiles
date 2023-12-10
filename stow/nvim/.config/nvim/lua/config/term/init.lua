@@ -99,7 +99,7 @@ function M.setup()
     desc = 'Open scratch term with provided command',
   })
 
-  vim.keymap.set({ 'n', 'v', 't' }, '<M-t>', M.toggle, { desc = 'Toggle floating term' })
+  vim.keymap.set({ 'i', 'n', 'v', 't' }, '<M-t>', M.toggle, { desc = 'Toggle floating term' })
   vim.keymap.set({ 'n', 'v', 't' }, '<M-[>', M.close, { desc = 'Close floating term' })
 end
 
