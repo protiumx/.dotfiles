@@ -1,13 +1,6 @@
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 
--- augroup('show_signcolumn', { clear = true })
--- autocmd({ 'BufRead', 'BufNewFile' }, {
---   group = 'show_signcolumn',
---   pattern = '*',
---   command = 'setlocal signcolumn=yes',
--- })
-
 -- Trim white spaces before writing
 autocmd({ 'BufWritePre' }, {
   group = augroup('remove_white_spaces', { clear = true }),
@@ -75,7 +68,7 @@ autocmd('TermOpen', {
   pattern = { 'FTerm', 'term://*' },
   command = [[
     startinsert
-    setlocal nonumber norelativenumber nospell signcolumn=no noruler
+    setlocal nonumber norelativenumber nospell signcolumn=no noruler scrolloff=0
   ]],
 })
 
