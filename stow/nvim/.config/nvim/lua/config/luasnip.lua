@@ -95,7 +95,7 @@ function M.setup()
     postfix({
       trig = '.toiso',
       name = 'epoch to ISO',
-      match_pattern = '%d+$',
+      match_pattern = '(%d)+$',
       docTrig = '0',
     }, {
       f(function(_, parent)
