@@ -167,10 +167,10 @@ if [[ "$OSTYPE" =~ ^linux ]]; then
 	eval $(ssh-agent) >/dev/null
 fi
 
-# Add ssh keys to apple keychain
-if [[ "$OSTYPE" =~ ^darwin ]]; then
-	ssh-add --apple-load-keychain &>/dev/null
-fi
+# # Add ssh keys to apple keychain
+# if [[ "$OSTYPE" =~ ^darwin ]]; then
+# 	ssh-add --apple-load-keychain &>/dev/null
+# fi
 
 ################# ZSH widgets ####################
 
