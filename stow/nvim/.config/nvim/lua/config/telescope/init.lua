@@ -222,7 +222,7 @@ function M.setup()
         },
       },
       preview = {
-        filesize_limit = 1, -- MB
+        filesize_limit = 5, -- MB
       },
       vimgrep_arguments = {
         'rg',

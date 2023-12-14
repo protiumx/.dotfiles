@@ -8,6 +8,7 @@ local fmt = require('luasnip.extras.fmt').fmt
 local sn = ls.snippet_node
 local i = ls.insert_node
 local t = ls.text_node
+local f = ls.function_node
 local d = ls.dynamic_node
 local c = ls.choice_node
 
@@ -157,7 +158,7 @@ local go_ret_vals = function(args)
   )
 end
 
-local snip = [[
+local efi_tpl = [[
 <val>, <err> := <func>(<args>)
 if <err_r> != nil {
   return <ret>
@@ -165,12 +166,25 @@ if <err_r> != nil {
 <finish>
 ]]
 
+local test_tpl = [[
+func Test<name>(t *testint.T) {
+  tests := map[string]struct{
+    <struct>
+  }{}
+
+  for name, tt := range tests {
+    t.Run(name, func (t *testing.T) {
+    })
+  }
+}
+]]
+
 return {
   setup = function()
     ls.add_snippets('go', {
       ls.s(
         'efi',
-        fmta(snip, {
+        fmta(efi_tpl, {
           val = i(1),
           err = i(2, 'err'),
           func = i(3),
@@ -180,6 +194,23 @@ return {
           finish = i(0),
         })
       ),
+
+      -- ls.s(
+      --   {
+      --     name = 'Go Test',
+      --     trig = 'Test(%S+)',
+      --     trigEngine = 'pattern',
+      --     reTrig = true,
+      --     docTrig = 'TestXXX',
+      --   },
+      --   d(1, function(_, parent)
+      --     print(vim.inspect(parent.captures))
+      --     return fmta(test_tpl, {
+      --       name = parent.captures[1],
+      --       struct = i(1),
+      --     })
+      --   end)
+      -- ),
     })
   end,
 }
