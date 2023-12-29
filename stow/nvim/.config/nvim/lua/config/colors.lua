@@ -44,7 +44,7 @@ local baseHls = {
   Cursor = { fg = colors.background, bg = colors.violet },
   TermCursor = { link = 'Cursor' },
   ColorColumn = { bg = '#1a1717' },
-  CursorLine = { bg = 'none', fg = 'none' },
+  CursorLine = { bg = 'none' },
   CursorLineNr = { fg = colors.orange, bg = 'none' },
   -- LineNr                  = { bg = 'none' },
   EndOfBuffer = { fg = colors.background },

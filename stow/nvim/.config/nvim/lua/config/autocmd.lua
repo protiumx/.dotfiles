@@ -67,8 +67,8 @@ autocmd('TermOpen', {
   group = augroup('term_open_insert', { clear = true }),
   pattern = { 'FTerm', 'term://*' },
   command = [[
-    startinsert
     setlocal nonumber norelativenumber nospell signcolumn=no noruler scrolloff=0
+    startinsert
   ]],
 })
 
