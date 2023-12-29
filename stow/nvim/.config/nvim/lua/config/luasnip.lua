@@ -105,7 +105,7 @@ function M.setup()
         return os.date(ISO_FORMAT, tonumber(parent.snippet.env.POSTFIX_MATCH))
       end, {}),
     }),
-  })
+  }, { key = 'all' })
 
   vim.keymap.set({ 'i', 's' }, '<M-n>', function()
     if ls.choice_active() then
