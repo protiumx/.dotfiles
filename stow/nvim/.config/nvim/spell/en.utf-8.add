@@ -20,3 +20,4 @@ teardown
 coroutine
 coroutines
 kubernetes
+wildcard
