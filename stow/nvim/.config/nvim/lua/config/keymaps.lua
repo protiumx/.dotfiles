@@ -179,8 +179,8 @@ vim.keymap.set('n', '<Leader>S', '<cmd>mks! .session.vim<CR>')
 vim.keymap.set('i', '<M-o>', '<C-o>o', { silent = true })
 vim.keymap.set('i', '<M-O>', '<C-o>O', { silent = true })
 -- Open new file adjacent to current file
-vim.keymap.set('n', '<Leader>o', ':e <C-R>=expand("%:h")<CR> . "/"')
-vim.keymap.set('n', '<Leader>vo', ':vsp | e <C-R>=expand("%:h")<CR> . "/"')
+vim.keymap.set('n', '<Leader>o', ':e <C-R>=expand("%:h") . "/" <CR>')
+vim.keymap.set('n', '<Leader>vo', ':vsp | e <C-R>=expand("%:h") . "/"<CR>')
 -- Select all text in current buffer
 vim.keymap.set('n', '<M-a>', 'ggVG', { silent = true })
 vim.keymap.set('i', '<M-a>', '<Esc>ggVG', { silent = true })
