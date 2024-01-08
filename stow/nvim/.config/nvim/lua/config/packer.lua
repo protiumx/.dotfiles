@@ -274,13 +274,6 @@ return packer.startup(function(use)
   })
 
   use({
-    'windwp/nvim-autopairs',
-    config = function()
-      require('config.autopairs').setup()
-    end,
-  })
-
-  use({
     'numToStr/Comment.nvim',
     event = 'BufRead',
     config = function()
