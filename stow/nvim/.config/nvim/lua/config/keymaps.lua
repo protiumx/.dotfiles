@@ -63,7 +63,7 @@ vim.keymap.set('n', '<C-w>S', '<cmd>bp | vs #<CR>', { desc = 'Open previous buff
 vim.keymap.set('n', '<C-w>B', '<cmd>vs #<CR>', { desc = 'Open previous buffer in vsplit' })
 vim.keymap.set('n', '<Tab>', '<cmd>bn<CR>', { silent = true })
 vim.keymap.set('n', '<S-Tab>', '<cmd>bp<CR>', { silent = true })
-vim.keymap.set('n', '``', '<C-^>', { silent = true })
+vim.keymap.set('n', '<Leader>`', '<C-^>', { silent = true })
 vim.keymap.set(
   'n',
   '--',
