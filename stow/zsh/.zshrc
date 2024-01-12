@@ -168,9 +168,9 @@ if [[ "$OSTYPE" =~ ^linux ]]; then
 fi
 
 # # Add ssh keys to apple keychain
-# if [[ "$OSTYPE" =~ ^darwin ]]; then
-# 	ssh-add --apple-load-keychain &>/dev/null
-# fi
+if [[ "$OSTYPE" =~ ^darwin ]]; then
+	ssh-add --apple-load-keychain &>/dev/null
+fi
 
 ################# ZSH widgets ####################
 
