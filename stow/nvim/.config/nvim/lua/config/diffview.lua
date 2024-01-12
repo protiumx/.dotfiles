@@ -54,7 +54,6 @@ function M.setup()
         { 'n', '<C-o>', actions.goto_file_tab, { desc = 'Open the file in a new tabpage' } },
         { 'n', '<Leader>P', actions.focus_files, { desc = 'Bring focus to the file panel' } },
         { 'n', '<Leader>p', actions.toggle_files, { desc = 'Toggle the file panel.' } },
-        { 'n', '``', '<nop>', { silent = true } },
       },
       file_panel = {
         { 'n', '<C-o>', actions.goto_file_tab, { desc = 'Open the file in a new tabpage' } },
@@ -63,14 +62,12 @@ function M.setup()
         { 'n', 'q', '<cmd>DiffviewClose<CR>', { silent = true } },
         { 'n', '<M-Up>', ':!git push<CR>' },
         { 'n', '<M-Down>', ':!git pull<CR>' },
-        { 'n', '``', '<nop>', { silent = true } },
       },
       file_history_panel = {
         { 'n', '<C-o>', actions.goto_file_tab, { desc = 'Open the file in a new tabpage' } },
         { 'n', '<Leader>P', actions.focus_files, { desc = 'Bring focus to the file panel' } },
         { 'n', '<Leader>p', actions.toggle_files, { desc = 'Toggle the file panel' } },
         { 'n', 'q', '<cmd>DiffviewClose<CR>', { silent = true } },
-        { 'n', '``', '<nop>', { silent = true } },
       },
     },
   })
