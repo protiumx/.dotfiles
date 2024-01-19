@@ -7,10 +7,6 @@ local servers = {
     schemas = require('schemastore').json.schemas(),
   },
   eslint = {},
-  ocamllsp = {
-    codelens = { enable = true },
-  },
-
   marksman = {},
   rust_analyzer = {
     ['rust-analyzer'] = {
@@ -120,5 +116,11 @@ local servers = {
     },
   },
 }
+
+if jit.os ~= 'OSX' then
+  servers.ocamllsp = {
+    codelens = { enable = true },
+  }
+end
 
 return servers
