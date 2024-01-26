@@ -7,6 +7,7 @@ function M.setup()
     gocoverage_sign = '┃',
     -- duplicate from ./init.lua
     diagnostic = {
+      virtual_text = true,
       underline = false,
       severity_sort = true,
       signs = false,
@@ -17,8 +18,7 @@ function M.setup()
       width = 0.5, -- width of float window if not auto
     },
     icons = false,
-    -- virtual text setup
-    lsp_document_formatting = true,
+    lsp_document_formatting = false,
     lsp_inlay_hints = {
       enable = false,
     },
