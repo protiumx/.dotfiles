@@ -318,15 +318,17 @@ wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_wid
   }
 end)
 
-wezterm.on('update-right-status', function(window)
-  if not window:get_dimensions().is_full_screen then
-    window:set_right_status('')
-    return
+wezterm.on('update-right-status', function(window, pane)
+  local info = pane:get_foreground_process_info()
+  wezterm.log_info(info)
+  local text = info and (info.name .. ' <args ' .. #info.argv .. '>') or ''
+  if window:get_dimensions().is_full_screen then
+    text = text .. ' | ' .. wezterm.strftime(' %R ')
   end
 
   window:set_right_status(wezterm.format({
     { Foreground = { Color = '#808080' } },
-    { Text = wezterm.strftime(' %R ') },
+    { Text = text },
   }))
 end)
 
