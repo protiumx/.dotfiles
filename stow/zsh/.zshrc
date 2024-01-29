@@ -102,8 +102,8 @@ bindkey '^[[3;3~' kill-word
 
 # zsh syntax highlighting clears and restores aliases after .zshenv is loaded
 # this keeps ls and ll aliased correctly
-alias ls="exa --group-directories-first -G  --color auto --icons -a -s type"
-alias ll="exa --group-directories-first -l --color always --icons -a -s type"
+alias ls="eza --group-directories-first -G  --color auto --icons -a -s type"
+alias ll="eza --group-directories-first -l --color always --icons -a -s type"
 
 # Golang
 export GOPATH="$HOME/go"

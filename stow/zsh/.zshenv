@@ -216,7 +216,7 @@ alias dot="cd ~/.dotfiles && nvim"
 alias e="nvim"
 alias icat="wezterm imgcat"
 alias lt="dust -b -H -r -X '.git'"
-alias tree="exa --tree --level=5 --icons --group-directories-first --color auto"
+alias tree="eza --tree --level=5 --icons --group-directories-first --color auto"
 alias yw="yarn workspace"
 
 # Kubernetes

@@ -16,7 +16,7 @@ packages=(
 	curl
 	dasel #  https://github.com/TomWright/dasel
 	dust  #  https://github.com/bootandy/dust
-	exa   #  https://github.com/ogham/exa
+	eza   #  https://github.com/eza-community/eza
 	fzf   #  https://github.com/junegunn/fzf
 	fd    #  https://github.com/sharkdp/fd
 	gettext
