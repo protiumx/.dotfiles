@@ -246,6 +246,8 @@ local process_icons = {
   ['psql'] = '󱤢',
   ['usql'] = '󱤢',
   ['kuberlr'] = wezterm.nerdfonts.linux_docker,
+  ['ssh'] = wezterm.nerdfonts.fa_exchange,
+  ['ssh-add'] = wezterm.nerdfonts.fa_exchange,
   ['kubectl'] = wezterm.nerdfonts.linux_docker,
   ['stern'] = wezterm.nerdfonts.linux_docker,
   ['nvim'] = wezterm.nerdfonts.custom_vim,
@@ -269,10 +271,11 @@ local process_icons = {
 }
 
 local function get_current_working_dir(tab)
-  local current_dir = tab.active_pane.current_working_dir or ''
+  local current_dir = tab.active_pane and tab.active_pane.current_working_dir or { file_path = '' }
   local HOME_DIR = string.format('file://%s', os.getenv('HOME'))
 
-  return current_dir == HOME_DIR and '.' or string.gsub(current_dir, '(.*[/\\])(.*)', '%2')
+  return current_dir == HOME_DIR and '.'
+    or string.gsub(current_dir.file_path, '(.*[/\\])(.*)', '%2')
 end
 
 local function get_process(tab)
@@ -318,21 +321,32 @@ wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_wid
   }
 end)
 
+local background = '#0a0a00'
 wezterm.on('update-right-status', function(window, pane)
+  local status = ''
+  local max_args = 3
+
   local info = pane:get_foreground_process_info()
-  wezterm.log_info(info)
-  local text = info and (info.name .. ' <args ' .. #info.argv .. '>') or ''
+  if info then
+    status = info.name
+    for i = 2, #info.argv do
+      status = status .. ' ' .. info.argv[i]
+    end
+  end
+
+  local time = ''
   if window:get_dimensions().is_full_screen then
-    text = text .. ' | ' .. wezterm.strftime(' %R ')
+    time = ' | ' .. wezterm.strftime('%R ')
   end
 
   window:set_right_status(wezterm.format({
+    { Foreground = { Color = '#7eb282' } },
+    { Text = status },
     { Foreground = { Color = '#808080' } },
-    { Text = text },
+    { Text = time },
   }))
 end)
 
-local background = '#0a0a00'
 local colors = {
   background = background,
   cursor_bg = '#a9a1e1',
