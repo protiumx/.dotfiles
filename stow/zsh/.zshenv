@@ -7,12 +7,16 @@ reload() {
   source ~/.zshenv
 }
 
+jwt-decode() {
+  jq -R 'split(".") |.[0:2] | map(@base64d) | map(fromjson)' <<< $1
+}
+
 cheat() {
   curl -s "cheat.sh/$1";
 }
 
 # Move files fuzzy find destination
-fmv() {
+fzmv() {
   mv "$@" $(fd -t d -H | fzf)
 }
 
@@ -30,7 +34,7 @@ zv() {
 }
 
 # Retrieve process real memory
-psrm() {
+psmem() {
   ps -o rss= -p "$1" | awk '{ hr=$1/1024; printf "%13.2f Mb\n",hr }' | tr -d ' ';
 }
 
@@ -45,15 +49,6 @@ epoch() {
 
 urldecode() {
   python3 -c "from urllib.parse import unquote; print(unquote('$1'));"
-}
-
-# Watch process real memory
-psrml() {
-  while true;
-  do
-    psrm "$1";
-    sleep 1;
-  done
 }
 
 # Run jq using fzf and clipboard as source
@@ -107,7 +102,7 @@ cdi() {
 }
 
 # Compare json files
-jcmp() {
+jsondiff() {
   delta <(jq --sort-keys . $1) <(jq --sort-keys . $2)
 }
 
