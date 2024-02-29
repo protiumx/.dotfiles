@@ -454,7 +454,6 @@ return packer.startup(function(use)
       -- Show lsp progress
       {
         'j-hui/fidget.nvim',
-        tag = 'legacy',
       },
 
       -- Better UI for LSP commands
