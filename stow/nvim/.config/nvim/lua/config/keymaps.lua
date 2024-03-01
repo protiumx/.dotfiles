@@ -6,6 +6,12 @@ local utils = require('config.utils')
 vim.g.mapleader = ' '
 vim.keymap.set('i', '<C-c>', '<Esc>', { silent = true })
 
+vim.keymap.set('n', 'gx', function()
+  local file = vim.fn.expand('<cfile>')
+  file = vim.fn.shellescape(file)
+  vim.cmd('!open ' .. file)
+end, { silent = true })
+
 -- General movements
 -- Move down/up centered
 vim.keymap.set('n', '<C-d>', '<C-d>zz', { silent = true })
