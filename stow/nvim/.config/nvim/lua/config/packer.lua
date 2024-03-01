@@ -133,6 +133,12 @@ return packer.startup(function(use)
       )
       vim.keymap.set(
         'n',
+        '<Leader>tt',
+        require('treesj').toggle,
+        { desc = 'TS Split lines', silent = true }
+      )
+      vim.keymap.set(
+        'n',
         '<Leader>tj',
         require('treesj').join,
         { desc = 'TS Join line', silent = true }
