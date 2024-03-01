@@ -6,6 +6,10 @@ local is_windows = wezterm.target_triple == 'x86_64-pc-windows-msvc'
 local font = 'MonoLisa'
 local key_mod_panes = is_windows and 'ALT' or 'CMD'
 
+local state = {
+  debug_mode = false,
+}
+
 local keys = {
   {
     key = ',',
@@ -23,6 +27,14 @@ local keys = {
         end
       end),
     }),
+  },
+
+  {
+    key = '>',
+    mods = 'CMD|SHIFT',
+    action = wezterm.action_callback(function()
+      state.debug_mode = not state.debug_mode
+    end),
   },
 
   { key = 'PageUp', mods = 'SHIFT', action = act.ScrollByPage(-1) },
@@ -255,6 +267,7 @@ local process_icons = {
   ['vim'] = wezterm.nerdfonts.dev_vim,
   ['node'] = wezterm.nerdfonts.mdi_hexagon,
   ['go'] = wezterm.nerdfonts.seti_go,
+  ['python3'] = '',
   ['zsh'] = wezterm.nerdfonts.dev_terminal,
   ['bash'] = wezterm.nerdfonts.cod_terminal_bash,
   ['btm'] = wezterm.nerdfonts.mdi_chart_donut_variant,
@@ -326,17 +339,19 @@ wezterm.on('update-right-status', function(window, pane)
   local status = ''
   local max_args = 3
 
-  local info = pane:get_foreground_process_info()
-  if info then
-    status = info.name
-    for i = 2, #info.argv do
-      status = status .. ' ' .. info.argv[i]
+  if state.debug_mode then
+    local info = pane:get_foreground_process_info()
+    if info then
+      status = info.name
+      for i = 2, #info.argv do
+        status = status .. ' ' .. info.argv[i]
+      end
     end
   end
 
   local time = ''
   if window:get_dimensions().is_full_screen then
-    time = ' | ' .. wezterm.strftime('%R ')
+    time = (state.debug_mode and ' | ' or '') .. wezterm.strftime('%R ')
   end
 
   window:set_right_status(wezterm.format({
@@ -354,6 +369,10 @@ local colors = {
   cursor_border = '#fb4934',
   selection_fg = background,
   selection_bg = '#fb4934',
+  quick_select_label_bg = { Color = '#60b5de' },
+  quick_select_label_fg = { Color = '#ffffff' },
+  quick_select_match_bg = { Color = '#c07d9e' },
+  quick_select_match_fg = { Color = '#ffffff' },
   tab_bar = {
     background = background,
     inactive_tab_edge = 'rgba(28, 28, 28, 0.9)',
@@ -373,6 +392,7 @@ local colors = {
 }
 
 local config = {
+  adjust_window_size_when_changing_font_size = false,
   audible_bell = 'Disabled',
   background = {
     {
@@ -390,8 +410,8 @@ local config = {
   color_scheme = 'Classic Dark (base16)',
   colors = colors,
   command_palette_font_size = 16.0,
-  cursor_blink_rate = 500,
   command_palette_bg_color = '#1c1c1c',
+  cursor_blink_rate = 500,
   default_cursor_style = 'BlinkingBar',
   default_cwd = wezterm.home_dir,
   font = wezterm.font(font, { weight = 'Regular', italic = false }),
@@ -424,6 +444,11 @@ local config = {
       mods = 'CMD',
       action = act.OpenLinkAtMouseCursor,
     },
+  },
+  quick_select_patterns = {
+    '[0-9a-f]{7,40}', -- hashes
+    '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}', -- uuids
+    'https?:\\/\\/\\S+',
   },
   quote_dropped_files = 'Posix',
   scrollback_lines = 10000,
