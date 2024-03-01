@@ -72,8 +72,12 @@
 
   # Commit no verify (disable hooks)
   cnv = commit -n -m
+
   # Count the number of files changed in the current branch compared to main
   count = !git diff --name-only main... | wc -l
+
+  # Count number of commits ahead of main
+  ccount = !git rev-list --count main..`git branch --show-current`
 
   dd = !git --no-pager diff
 
