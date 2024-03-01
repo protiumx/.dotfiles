@@ -91,6 +91,7 @@ function M.setup()
       'c',
       'comment',
       'cpp',
+      'cue',
       'go',
       'javascript',
       'json',
