@@ -79,6 +79,7 @@ return packer.startup(function(use)
 
   -- Themes
   use('ellisonleao/gruvbox.nvim')
+  use({ 'nyoom-engineering/oxocarbon.nvim' })
   use({
     'mcchrish/zenbones.nvim',
     requires = 'rktjmp/lush.nvim',
