@@ -401,7 +401,7 @@ local config = {
       },
       width = 'Cover',
       height = 'Cover',
-      hsb = { brightness = 0.15 },
+      hsb = { brightness = 0.3 },
       vertical_align = 'Middle',
       horizontal_align = 'Center',
     },
@@ -414,6 +414,7 @@ local config = {
   cursor_blink_rate = 500,
   default_cursor_style = 'BlinkingBar',
   default_cwd = wezterm.home_dir,
+  default_prog = { 'zsh' },
   font = wezterm.font(font, { weight = 'Regular', italic = false }),
   font_rules = {
     {
