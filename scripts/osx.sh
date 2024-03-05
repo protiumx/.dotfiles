@@ -70,4 +70,9 @@ setup_osx() {
 
 	# Disable startup sound
 	sudo nvram SystemAudioVolume=%01
+
+  # Enable ssh agent on start up
+  info "Enabling ssh agent on start up with launchctl"
+  cp "$HOME/.dotfiles/macos/com.openssh.ssh-agent.plist" "$HOME/Library/LaunchAgents/"
+  launchctl load -w "$HOME/Library/LaunchAgents/com.openssh.ssh-agent.plist"
 }
