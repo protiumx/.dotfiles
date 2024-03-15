@@ -92,19 +92,19 @@ function M.setup()
       p(os.date, BUILD_DATE),
     }),
 
-    postfix({
-      trig = '.toiso',
-      name = 'epoch to ISO',
-      match_pattern = '(%d)+$',
-      docTrig = '0',
-    }, {
-      f(function(_, parent)
-        if #parent.snippet.env.POSTFIX_MATCH < 9 then
-          return os.date(ISO_FORMAT)
-        end
-        return os.date(ISO_FORMAT, tonumber(parent.snippet.env.POSTFIX_MATCH))
-      end, {}),
-    }),
+    --   postfix({
+    --     trig = '.toiso',
+    --     name = 'epoch to ISO',
+    --     match_pattern = '(%d)+$',
+    --     docTrig = '0',
+    --   }, {
+    --     f(function(_, parent)
+    --       if #parent.snippet.env.POSTFIX_MATCH < 9 then
+    --         return os.date(ISO_FORMAT)
+    --       end
+    --       return os.date(ISO_FORMAT, tonumber(parent.snippet.env.POSTFIX_MATCH))
+    --     end, {}),
+    --   }),
   }, { key = 'all' })
 
   vim.keymap.set({ 'i', 's' }, '<M-n>', function()
