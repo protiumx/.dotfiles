@@ -30,7 +30,7 @@ local colors = {
 colors.accent = colors.red
 
 -- Overrides for all color schemes
-local baseHls = {
+local base_groups = {
   -- Custom for floats and borders
   XMenu = { bg = colors.dark_grey, default = true, fg = colors.foreground },
   XBorder = { bg = colors.dark_grey, fg = colors.dark_grey, default = true },
@@ -46,7 +46,7 @@ local baseHls = {
   TermCursor = { link = 'Cursor' },
   ColorColumn = { bg = '#1a1717' },
   CursorLine = { bg = 'none' },
-  -- CursorLineNr = { fg = colors.orange, bg = 'none' },
+  CursorLineNr = { fg = colors.orange, bg = 'none' },
   LineNr = { bg = 'none', fg = colors.dark_violet },
   EndOfBuffer = { fg = colors.background },
   ErrorMsg = { fg = colors.red, bg = 'none', bold = true },
@@ -58,7 +58,7 @@ local baseHls = {
   Pmenu = { link = 'XMenu' },
   SignColumn = { bg = 'none' },
   StatusLine = { bg = colors.background, fg = colors.foreground },
-  -- Todo                        = { fg = colors.orange, bold = true },
+  -- Todo = { fg = colors.orange, bold = true },
   VertSplit = { fg = colors.grey },
   Visual = { bg = colors.violet, fg = colors.background },
   -- Gitsigns
@@ -162,48 +162,56 @@ local baseHls = {
   -- DevIconDefault          = { fg = colors.dark_orange, bg = 'none' },
 }
 
-local diagnosticsHls = {
-  DiagnosticVirtualTextError = vim.tbl_extend(
-    'force',
-    vim.api.nvim_get_hl_by_name('DiagnosticVirtualTextError', true) or {},
-    { bg = 'none' }
-  ),
-  DiagnosticVirtualTextWarn = vim.tbl_extend(
-    'force',
-    vim.api.nvim_get_hl_by_name('DiagnosticVirtualTextWarn', true) or {},
-    { bg = 'none' }
-  ),
-  DiagnosticVirtualTextInfo = vim.tbl_extend(
-    'force',
-    vim.api.nvim_get_hl_by_name('DiagnosticVirtualTextInfo', true) or {},
-    { bg = 'none' }
-  ),
-  DiagnosticVirtualTextHint = vim.tbl_extend(
-    'force',
-    vim.api.nvim_get_hl_by_name('DiagnosticVirtualTextHint', true) or {},
-    { bg = 'none' }
-  ),
-  DiagnosticSignError = vim.tbl_extend(
-    'force',
-    vim.api.nvim_get_hl_by_name('DiagnosticSignError', true) or {},
-    { bg = 'none' }
-  ),
-  DiagnosticSignWarn = vim.tbl_extend(
-    'force',
-    vim.api.nvim_get_hl_by_name('DiagnosticSignWarn', true) or {},
-    { bg = 'none' }
-  ),
-  DiagnosticSignInfo = vim.tbl_extend(
-    'force',
-    vim.api.nvim_get_hl_by_name('DiagnosticSignInfo', true) or {},
-    { bg = 'none' }
-  ),
-  DiagnosticSignHint = vim.tbl_extend(
-    'force',
-    vim.api.nvim_get_hl_by_name('DiagnosticSignHint', true) or {},
-    { bg = 'none' }
-  ),
-}
+local function overrides()
+  return {
+    Title = vim.tbl_extend(
+      'force',
+      vim.api.nvim_get_hl_by_name('Title', true) or {},
+      { bg = colors.background }
+    ),
+
+    DiagnosticVirtualTextError = vim.tbl_extend(
+      'force',
+      vim.api.nvim_get_hl_by_name('DiagnosticVirtualTextError', true) or {},
+      { bg = 'none' }
+    ),
+    DiagnosticVirtualTextWarn = vim.tbl_extend(
+      'force',
+      vim.api.nvim_get_hl_by_name('DiagnosticVirtualTextWarn', true) or {},
+      { bg = 'none' }
+    ),
+    DiagnosticVirtualTextInfo = vim.tbl_extend(
+      'force',
+      vim.api.nvim_get_hl_by_name('DiagnosticVirtualTextInfo', true) or {},
+      { bg = 'none' }
+    ),
+    DiagnosticVirtualTextHint = vim.tbl_extend(
+      'force',
+      vim.api.nvim_get_hl_by_name('DiagnosticVirtualTextHint', true) or {},
+      { bg = 'none' }
+    ),
+    DiagnosticSignError = vim.tbl_extend(
+      'force',
+      vim.api.nvim_get_hl_by_name('DiagnosticSignError', true) or {},
+      { bg = 'none' }
+    ),
+    DiagnosticSignWarn = vim.tbl_extend(
+      'force',
+      vim.api.nvim_get_hl_by_name('DiagnosticSignWarn', true) or {},
+      { bg = 'none' }
+    ),
+    DiagnosticSignInfo = vim.tbl_extend(
+      'force',
+      vim.api.nvim_get_hl_by_name('DiagnosticSignInfo', true) or {},
+      { bg = 'none' }
+    ),
+    DiagnosticSignHint = vim.tbl_extend(
+      'force',
+      vim.api.nvim_get_hl_by_name('DiagnosticSignHint', true) or {},
+      { bg = 'none' }
+    ),
+  }
+end
 
 local function load(gs)
   for group, opts in pairs(gs) do
@@ -212,8 +220,8 @@ local function load(gs)
 end
 
 function colors.load()
-  load(baseHls)
-  load(diagnosticsHls)
+  load(base_groups)
+  load(overrides())
 
   vim.g.terminal_color_0 = colors.background
 end
