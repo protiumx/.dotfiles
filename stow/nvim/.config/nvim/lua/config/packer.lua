@@ -65,7 +65,7 @@ return packer.startup(function(use)
   -- Telescope
   use({
     'nvim-telescope/telescope.nvim',
-    branch = '0.1.x',
+    tag = '0.1.x',
     config = function()
       require('config.telescope').setup()
     end,
@@ -480,6 +480,7 @@ return packer.startup(function(use)
   -- Debugging
   use({
     'mfussenegger/nvim-dap',
+    cmd = 'DapContinue',
     ft = {
       'go',
     },
