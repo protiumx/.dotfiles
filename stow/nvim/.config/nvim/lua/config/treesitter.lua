@@ -43,12 +43,12 @@ local function setup_text_objects()
       swap = {
         enable = true,
         swap_next = {
-          ['<leader>na'] = '@parameter.inner',
-          ['<leader>nm'] = '@function.outer',
+          ['<leader>pn'] = '@parameter.inner',
+          ['<leader>mn'] = '@function.outer',
         },
         swap_previous = {
-          ['<leader>pa'] = '@parameter.inner',
-          ['<leader>pm'] = '@function.outer',
+          ['<leader>pp'] = '@parameter.inner',
+          ['<leader>mp'] = '@function.outer',
         },
       },
       move = {
