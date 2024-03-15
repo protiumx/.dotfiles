@@ -84,10 +84,19 @@ local keys = {
 
   { key = 'z', mods = key_mod_panes, action = act.TogglePaneZoomState },
   { key = 'x', mods = 'SHIFT|' .. key_mod_panes, action = act.ActivateCopyMode },
+  {
+    key = 'L',
+    mods = 'CTRL|SHIFT',
+    action = act.QuickSelectArgs({
+      patterns = {
+        'https?://\\S+',
+      },
+    }),
+  },
 
   {
-    key = '1',
-    mods = key_mod_panes,
+    key = 'p',
+    mods = 'SHIFT|' .. key_mod_panes,
     action = wezterm.action_callback(function(_win, pane)
       pane:move_to_new_tab()
     end),
@@ -167,15 +176,15 @@ local keys = {
   {
     key = 's',
     mods = key_mod_panes,
-    action = act.PaneSelect({
-      mode = 'SwapWithActive',
-    }),
+    action = act.PaneSelect,
   },
 
   {
     key = 'S',
     mods = 'SHIFT|' .. key_mod_panes,
-    action = act.PaneSelect,
+    action = act.PaneSelect({
+      mode = 'SwapWithActive',
+    }),
   },
 
   -- Tabs
@@ -188,6 +197,8 @@ local keys = {
   { key = 'T', mods = 'SHIFT|' .. key_mod_panes, action = act.ShowTabNavigator },
   { key = 'H', mods = 'SHIFT|' .. key_mod_panes, action = act.ActivateTabRelative(-1) },
   { key = 'L', mods = 'SHIFT|' .. key_mod_panes, action = act.ActivateTabRelative(1) },
+  { key = 'H', mods = 'SHIFT|CTRL|' .. key_mod_panes, action = act.MoveTabRelative(-1) },
+  { key = 'L', mods = 'SHIFT|CTRL|' .. key_mod_panes, action = act.MoveTabRelative(1) },
 
   {
     key = 'o',
@@ -198,13 +209,13 @@ local keys = {
   {
     key = '0',
     mods = key_mod_panes,
-    action = act.ResetFontAndWindowSize,
+    action = act.ResetFontSize,
   },
 
   -- Utils
   {
-    key = 'P',
-    mods = 'SHIFT|' .. key_mod_panes,
+    key = 'p',
+    mods = key_mod_panes,
     action = act.SplitPane({
       direction = 'Right',
       size = { Percent = 35 },
@@ -395,16 +406,16 @@ local config = {
   adjust_window_size_when_changing_font_size = false,
   audible_bell = 'Disabled',
   background = {
-    {
-      source = {
-        File = '/Users/bmayo/.dotfiles/background/goya.jpg',
-      },
-      width = 'Cover',
-      height = 'Cover',
-      hsb = { brightness = 0.3 },
-      vertical_align = 'Middle',
-      horizontal_align = 'Center',
-    },
+    -- {
+    --   source = {
+    --     File = '/Users/bmayo/.dotfiles/background/goya.jpg',
+    --   },
+    --   width = 'Cover',
+    --   height = 'Cover',
+    --   hsb = { brightness = 0.3 },
+    --   vertical_align = 'Middle',
+    --   horizontal_align = 'Center',
+    -- },
   },
   canonicalize_pasted_newlines = 'None',
   color_scheme = 'Classic Dark (base16)',
@@ -464,7 +475,7 @@ local config = {
   underline_position = -4,
   use_fancy_tab_bar = true,
   -- window_background_opacity = 1,
-  -- window_background_opacity = 0.6,
+  window_background_opacity = 0.6,
   -- macos_window_background_blur = 10,
   window_decorations = 'RESIZE',
   window_frame = {
