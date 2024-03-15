@@ -131,6 +131,10 @@
 
   wt = worktree
 
+  wtls = worktree list
+
+  wtrm = worktree remove
+
 [init]
   templatedir = ~/.config/git/templates
   defaultBranch = main
