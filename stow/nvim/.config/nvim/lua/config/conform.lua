@@ -13,6 +13,7 @@ function M.setup()
       ocaml = { 'ocamlformat' },
       javascript = { 'prettier' },
       json = { 'prettier' },
+      html = { 'prettier' },
       markdown = { 'marksman' },
       go = { 'gofumpt', 'goimports' }, -- runs both
     },
