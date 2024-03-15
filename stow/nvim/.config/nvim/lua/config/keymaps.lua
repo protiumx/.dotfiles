@@ -63,6 +63,9 @@ vim.keymap.set('n', '<Leader>h', '<C-w>h', { silent = true })
 vim.keymap.set('n', '<Leader>j', '<C-w>j', { silent = true })
 vim.keymap.set('n', '<Leader>k', '<C-w>k', { silent = true })
 vim.keymap.set('n', '<Leader>l', '<C-w>l', { silent = true })
+vim.keymap.set('n', '<Leader>V', '<C-w>|', { silent = true })
+vim.keymap.set('n', '<Leader>H', '<C-w>-', { silent = true })
+vim.keymap.set('n', '<Leader>:', '<C-w>=', { silent = true })
 vim.keymap.set('n', '<C-w>S', '<cmd>bp | vs #<CR>', { desc = 'Open previous buffer in vsplit' })
 
 -- Buffer utils
