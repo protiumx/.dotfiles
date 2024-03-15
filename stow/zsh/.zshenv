@@ -204,6 +204,10 @@ drm-all() {
   docker rm $(docker ps -aq)
 }
 
+slog() {
+  stern --since 1m deployments/$1
+}
+
 # Aliases
 alias cat="bat -p --paging=never --theme='TwoDark'"
 alias dc="docker compose"
@@ -270,4 +274,5 @@ alias gci="gcommit ci"
 alias gdo="gcommit docs"
 alias gmi="gcommit misc"
 
-alias rgv="rg --no-heading --vimgrep"
+alias rgvim="rg --no-heading --vimgrep"
+alias yeet="rm -rf"
