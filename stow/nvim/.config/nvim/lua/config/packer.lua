@@ -362,6 +362,17 @@ return packer.startup(function(use)
     requires = 'nvim-lua/plenary.nvim',
   })
 
+  use({
+    'NeogitOrg/neogit',
+    requires = {
+      'nvim-lua/plenary.nvim',
+      'sindrets/diffview.nvim',
+    },
+    config = function()
+      require('config.neogit').setup()
+    end,
+  })
+
   -- Snippets
   use({
     'L3MON4D3/LuaSnip',
