@@ -148,7 +148,8 @@ _fzf_compgen_dir() {
 	fd --type d --hidden --follow --exclude ".git/" . "$1"
 }
 
-[ -f ~/.fzf.zsh ] && source $HOME/.fzf.zsh
+# [ -f ~/.fzf.zsh ] && source $HOME/.fzf.zsh
+eval "$(fzf --zsh)"
 
 # K8s completions
 [[ -x "$(command -v kubectl)" ]] && source <(kubectl completion zsh)
