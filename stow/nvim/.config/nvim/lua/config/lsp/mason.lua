@@ -1,24 +1,7 @@
 local M = {}
 
--- https://github.com/neovim/nvim-lspconfig/issues/115#issuecomment-902680058
-local function organize_go_imports(timeoutms)
-  local params = vim.lsp.util.make_range_params()
-  params.context = { only = { 'source.organizeImports' } }
-  local result = vim.lsp.buf_request_sync(0, 'textDocument/codeAction', params, timeoutms)
-  for _, res in pairs(result or {}) do
-    for _, r in pairs(res.result or {}) do
-      if r.edit then
-        vim.lsp.util.apply_workspace_edit(r.edit, 'UTF-8')
-      else
-        vim.lsp.buf.execute_command(r.command)
-      end
-    end
-  end
-end
-
 local on_lsp_attach = function(client, bufnr)
   require('config.lsp.keymaps').setup(bufnr)
-  -- require('config.lsp.format').setup(bufnr)
   if client.name == 'yamlls' then
     client.server_capabilities.documentFormattingProvider = true
   end

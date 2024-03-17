@@ -4,7 +4,7 @@ function M.setup()
   ---@diagnostic disable-next-line: redundant-parameter
   require('go').setup({
     comment_placeholder = '',
-    gocoverage_sign = '┃',
+    dap_debug = false,
     -- duplicate from ./init.lua
     diagnostic = {
       virtual_text = true,
@@ -14,13 +14,17 @@ function M.setup()
       update_in_insert = true,
     },
     floaterm = {
-      posititon = 'right', -- one of {`top`, `bottom`, `left`, `right`, `center`, `auto`}
-      width = 0.5, -- width of float window if not auto
+      posititon = 'right',
+      width = 0.5,
     },
+    gofmt = 'gofumpt',
+    gocoverage_sign = '┃',
     icons = false,
+    lsp_cfg = false,
     lsp_document_formatting = false,
     lsp_inlay_hints = {
       enable = false,
+      title_colors = 'nord',
     },
     lsp_keymaps = false,
     luasnip = true,
