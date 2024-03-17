@@ -11,8 +11,13 @@ function M.setup(bufnr)
 
   nmap('gd', vim.lsp.buf.definition, 'Go to definition')
   nmap('<C-l>dv', ':vsplit | lua vim.lsp.buf.definition()<CR>', 'Go to definition vertical split')
-  nmap('gy', vim.lsp.buf.type_definition, 'Show type definition')
-  nmap('gi', vim.lsp.buf.implementation, 'Go to implementation')
+  nmap('gt', vim.lsp.buf.type_definition, 'Show type definition')
+  nmap('gy', vim.lsp.buf.implementation, 'Go to implementation')
+  nmap(
+    '<C-l>dv',
+    ':vsplit | lua vim.lsp.buf.implementation()<CR>',
+    'Go to implementation vertical split'
+  )
   nmap('gR', vim.lsp.buf.references, 'Go to references')
   -- nmap('gd', '<cmd>lua vim.lsp.buf.definition()<CR>zz', 'Go to definition')
   nmap('[d', vim.diagnostic.goto_prev, 'Go to prev diagnostic')
@@ -27,8 +32,6 @@ function M.setup(bufnr)
   nmap('<C-l>k', vim.lsp.buf.signature_help, 'Show signature help')
   nmap('<C-l>h', vim.lsp.buf.document_highlight, 'Highlight node')
   nmap('<C-l>c', vim.lsp.buf.clear_references, 'Clear highlights')
-  nmap('<C-l>q', vim.lsp.buf.setqflist, 'Set quickfix list with diagnostics')
-  nmap('<C-l>f', vim.lsp.buf.format, 'Format')
 end
 
 return M
