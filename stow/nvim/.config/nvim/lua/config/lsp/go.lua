@@ -28,9 +28,9 @@ function M.setup()
     },
     lsp_keymaps = false,
     luasnip = true,
-    max_line_len = 100,
-    test_runner = 'go',
     run_in_floaterm = true,
+    test_runner = 'go',
+    trouble = true,
   })
 
   vim.keymap.set('n', '<Leader>tp', '<cmd>GoTestPkg<CR>')
