@@ -477,6 +477,13 @@ return packer.startup(function(use)
     end,
   })
 
+  use({
+    'folke/trouble.nvim',
+    config = function()
+      require('config.lsp.trouble').setup()
+    end,
+  })
+
   -- Debugging
   use({
     'mfussenegger/nvim-dap',
