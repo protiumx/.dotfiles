@@ -123,7 +123,7 @@ function M.setup()
         hidden = false,
       },
       untracked = {
-        folded = false,
+        folded = true,
         hidden = false,
       },
       unstaged = {
