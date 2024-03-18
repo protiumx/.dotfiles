@@ -5,7 +5,7 @@ function M.setup()
 
   neogit.setup({
     -- Hides the hints at the top of the status buffer
-    disable_hint = false,
+    disable_hint = true,
     -- Disables changing the buffer highlights based on where the cursor is.
     disable_context_highlighting = false,
     -- Disables signs for sections/items/hunks
@@ -50,7 +50,7 @@ function M.setup()
     highlight = {
       italic = false,
       bold = true,
-      underline = true,
+      underline = false,
     },
     -- Set to false if you want to be responsible for creating _ALL_ keymappings
     use_default_keymaps = true,
@@ -63,7 +63,7 @@ function M.setup()
     -- Sorting keys: https://git-scm.com/docs/git-for-each-ref#_options
     sort_branches = '-committerdate',
     -- Change the default way of opening neogit
-    kind = 'vsplit',
+    kind = 'tab',
     -- Disable line numbers and relative line numbers
     disable_line_numbers = false,
     -- The time after which an output console is shown for slow running commands
@@ -106,9 +106,9 @@ function M.setup()
     },
     signs = {
       -- { CLOSED, OPENED }
-      hunk = { '', '' },
-      item = { '', '' },
-      section = { '', '' },
+      hunk = { '.', '' },
+      item = { '', '' },
+      section = { '', '' },
     },
     -- Each Integration is auto-detected through plugin presence, however, it can be disabled by setting to `false`
     integrations = {
@@ -243,6 +243,8 @@ function M.setup()
       },
     },
   })
+
+  vim.keymap.set('n', '<M-d>', '<cmd>Neogit<CR>', { desc = 'Open Neogit' })
 end
 
 return M
