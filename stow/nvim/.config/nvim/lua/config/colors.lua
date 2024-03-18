@@ -79,6 +79,13 @@ local base_groups = {
   MasonHeader = { link = 'XMenu' },
   MasonHeading = { link = 'XBorder' },
   MasonNormal = { link = 'XMenu' },
+  -- Neogit
+  NeogitHunkHeaderHighlight = { bg = 'none' },
+  -- NeogitDiffContextHighlight = { link = '' },
+  NeogitDiffAddHighlight = { link = 'DiffAdd' },
+  NeogitDiffDeleteHighlight = { link = 'DiffDelete' },
+  NeogitDiffHeaderHighlight = { link = 'DiffAdd' },
+  NeogitFold = { fg = colors.dark_yellow },
   -- Telescope
   TelescopeBorder = { link = 'XBorder' },
   TelescopeNormal = { bg = colors.background, fg = colors.foreground },
