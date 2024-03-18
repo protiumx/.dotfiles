@@ -118,8 +118,8 @@ local function keymaps()
     builtin.spell_suggest(telescope_themes.get_cursor(themes.base))
   end, '[S]pell [S]uggestions')
 
-  map('n', '<C-g>b', builtin.git_branches, '[G]it [B]ranches')
-  map('n', '<C-g>h', builtin.git_bcommits, '[G]it [H]istory of buffer')
+  map('n', '<C-g>bb', builtin.git_branches, '[G]it [B]ranches')
+  map('n', '<C-g>H', builtin.git_bcommits, '[G]it [H]istory of buffer')
   map('n', '<C-g>c', builtin.git_commits, '[G]it [C]ommits')
   map('n', '<C-g>S', function()
     builtin.git_status(dropdown)
@@ -174,6 +174,8 @@ function M.setup()
     end,
   })
   local trouble = require('trouble.providers.telescope')
+
+  local fb_actions = require('telescope').extensions.file_browser.actions
 
   telescope.setup({
     defaults = {
@@ -263,6 +265,12 @@ function M.setup()
         grouped = true,
         hidden = true,
         git_status = false,
+        mappings = {
+          ['i'] = {
+            ['<M-R>'] = fb_actions.remove,
+            ['<M-d>'] = false,
+          },
+        },
       },
     },
   })
