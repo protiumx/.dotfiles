@@ -118,6 +118,14 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = {
+    'NeogitStatus',
+    'NeogitPopup',
+  },
+  command = [[ setlocal nospell ]],
+})
+
 autocmd('FileType', {
   pattern = 'man',
   command = [[nnoremap <buffer><silent> q :quit<CR>]],
