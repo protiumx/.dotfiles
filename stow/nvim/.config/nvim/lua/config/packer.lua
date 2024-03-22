@@ -493,9 +493,6 @@ return packer.startup(function(use)
   use({
     'mfussenegger/nvim-dap',
     cmd = 'DapContinue',
-    ft = {
-      'go',
-    },
     module = { 'dap' },
     wants = {
       'nvim-dap-virtual-text',
@@ -503,6 +500,7 @@ return packer.startup(function(use)
     },
     requires = {
       'theHamsta/nvim-dap-virtual-text',
+      'nvim-neotest/nvim-nio',
       'rcarriga/nvim-dap-ui',
     },
     config = function()

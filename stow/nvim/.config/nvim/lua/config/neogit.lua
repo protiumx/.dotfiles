@@ -74,7 +74,7 @@ function M.setup()
       recent_commit_count = 10,
     },
     commit_editor = {
-      kind = 'split_above',
+      kind = 'split',
     },
     commit_select_view = {
       kind = 'split',

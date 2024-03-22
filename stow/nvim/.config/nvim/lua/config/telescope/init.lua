@@ -218,7 +218,7 @@ function M.setup()
           ['<M-q>s'] = telescope_actions.send_selected_to_qflist + telescope_actions.open_qflist,
           ['<M-q>a'] = 'add_selected_to_qflist',
           ['<M-Q>'] = telescope_actions.send_to_qflist + telescope_actions.open_qflist,
-          ['<c-t>'] = trouble.open_with_trouble,
+          ['<C-t>'] = trouble.open_with_trouble,
         },
         n = {
           ['q'] = 'close',
