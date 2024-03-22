@@ -9,6 +9,9 @@
 [tag]
   gpgSign = true
 
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+
 [include]
   path = ~/work/.gitconfig
 
