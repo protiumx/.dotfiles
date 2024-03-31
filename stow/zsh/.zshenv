@@ -106,6 +106,11 @@ jsondiff() {
   delta <(jq --sort-keys . $1) <(jq --sort-keys . $2)
 }
 
+# Trigger pin entry for key $1
+gpg-pin() {
+  echo "sign" | gpg --sign --default-key $GPG_DEFAULT_KEY &> /dev/null
+}
+
 # Fuzzy find kubernetes resource and apply an action
 kf() {
   local r=$(kubectl get $1 | sed 1d | awk '{print $1}' | fzf --height 40% -q ${2:-""})
