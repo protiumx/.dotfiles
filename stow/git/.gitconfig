@@ -77,10 +77,10 @@
   cnv = commit -n -m
 
   # Count the number of files changed in the current branch compared to main
-  count = !git diff --name-only main... | wc -l
+  count-files = !git diff --name-only main... | wc -l
 
   # Count number of commits ahead of main
-  ccount = !git rev-list --count main..`git branch --show-current`
+  count-commits = !git rev-list --count main..`git branch --show-current`
 
   dd = !git --no-pager diff
 
@@ -111,7 +111,7 @@
   s = status -sb
 
   # Stash the working directory, the index and the untracked files
-  stall = stash save --include-untracked
+  stash-all = stash save --include-untracked
 
   # Pull rebase remote main
   sync = !git pull origin main --rebase
