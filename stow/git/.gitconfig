@@ -70,6 +70,8 @@
   # checkout or create new branch
   ck = "!f() { git checkout $1 2>/dev/null || git checkout -b $1; }; f"
 
+  co = checkout
+
   # Remove untracked and ignored files interactively
   cleanup = clean -xfdi
 
@@ -85,7 +87,7 @@
   dd = !git --no-pager diff
 
   # Clean up all current changes
-  discard = checkout -- .
+  discard = "!f() { git checkout main -- ${1:-.}; }; f"
 
   # Filter the commit logs messages with the provided string
   filter = "!f() { git logs --grep=$1; }; f"
