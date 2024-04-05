@@ -213,6 +213,10 @@ slog() {
   stern --since 1m deployments/$1
 }
 
+rand() {
+  openssl rand -base64 "${1:-10}"
+}
+
 # Aliases
 alias cat="bat -p --paging=never --theme='TwoDark'"
 alias dc="docker compose"
