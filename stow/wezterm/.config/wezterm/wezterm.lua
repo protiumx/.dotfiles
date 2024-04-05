@@ -82,8 +82,16 @@ local keys = {
     action = act.CloseCurrentPane({ confirm = true }),
   },
 
-  { key = 'z', mods = key_mod_panes, action = act.TogglePaneZoomState },
-  { key = 'x', mods = 'SHIFT|' .. key_mod_panes, action = act.ActivateCopyMode },
+  {
+    key = 'z',
+    mods = key_mod_panes,
+    action = act.TogglePaneZoomState,
+  },
+  {
+    key = 'x',
+    mods = 'SHIFT|' .. key_mod_panes,
+    action = act.ActivateCopyMode,
+  },
   {
     key = 'L',
     mods = 'CTRL|SHIFT',
@@ -296,9 +304,9 @@ local process_icons = {
 
 local function get_current_working_dir(tab)
   local current_dir = tab.active_pane and tab.active_pane.current_working_dir or { file_path = '' }
-  local HOME_DIR = string.format('file://%s', os.getenv('HOME'))
+  local HOME_DIR = os.getenv('HOME')
 
-  return current_dir == HOME_DIR and '.'
+  return current_dir.file_path == HOME_DIR and '~'
     or string.gsub(current_dir.file_path, '(.*[/\\])(.*)', '%2')
 end
 
@@ -327,11 +335,10 @@ wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_wid
   end
 
   local cwd = wezterm.format({
-    { Attribute = { Intensity = 'Bold' } },
     { Text = get_current_working_dir(tab) },
   })
 
-  local title = string.format(' %s ~ %s  ', get_process(tab), cwd)
+  local title = string.format(' %s (%s)  ', get_process(tab), cwd)
 
   if has_unseen_output then
     return {
@@ -471,7 +478,7 @@ local config = {
   },
   show_new_tab_button_in_tab_bar = false,
   switch_to_last_active_tab_when_closing_tab = true,
-  tab_max_width = 60,
+  tab_max_width = 80,
   underline_position = -4,
   use_fancy_tab_bar = true,
   -- window_background_opacity = 1,
