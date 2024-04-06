@@ -1,7 +1,23 @@
+[core]
+  pager = delta
+  # avoid problems when changing a case of a filename
+  ignorecase = false
+  excludesfile = ~/.config/git/ignore
+
+[init]
+  templatedir = ~/.config/git/templates
+  defaultBranch = main
+
+[gpg]
+  program = gpg
+
 [user]
   name = Brian Mayo
   email = ioprotium@gmail.com
   signingKey = 1B2B3771
+
+[include]
+  path = ~/work/.gitconfig
 
 [commit]
   gpgsign = true
@@ -9,21 +25,13 @@
 [tag]
   gpgSign = true
 
-[url "git@github.com:"]
-	insteadOf = https://github.com/
-
-[include]
-  path = ~/work/.gitconfig
-
-[core]
-  pager = delta
-  # avoid problems when changing a case of a filename
-  ignorecase = false
-  excludesfile = ~/.config/git/ignore
+[log]
+  date = iso
 
 [status]
     # Show untracked files, directories and files in untracked directorie
   showUntrackedFiles = all
+  submoduleSummary = true
 
 [interactive]
   diffFilter = delta --color-only
@@ -37,17 +45,31 @@
 
 [rebase]
   # Stash and pop uncommitted changes on rebase
-  autoStash = true
+  autostash = true
+  autosquash = true
+  updateRefs = true
 
 # Maintain a 1-1 mapping to upstream refs and tags
 [fetch]
   prune = true
-  pruneTags = true
+  prunetags = true
+  fsckobjects = true
+
+[transfer]
+  fsckobjects = true
+
+[receive]
+  fsckobjects = true
+
+[branch]
+  sort = -committerdate
 
 [diff]
   colorMoved = default
+  algorithm = histogram
 
 [help]
+  # Run corrected command after 1 second
   autocorrect = 1
 
 [delta]
@@ -139,13 +161,6 @@
   wtls = worktree list
 
   wtrm = worktree remove
-
-[init]
-  templatedir = ~/.config/git/templates
-  defaultBranch = main
-
-[gpg]
-  program = gpg
 
 [color "branch"]
   current = yellow reverse
