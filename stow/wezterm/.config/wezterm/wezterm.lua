@@ -6,9 +6,12 @@ local is_windows = wezterm.target_triple == 'x86_64-pc-windows-msvc'
 local font = 'MonoLisa'
 local key_mod_panes = is_windows and 'ALT' or 'CMD'
 
+-- Global state
 local state = {
   debug_mode = false,
 }
+
+local key_table_leader = { key = 'Backspace', mods = key_mod_panes }
 
 local keys = {
   {
@@ -41,12 +44,6 @@ local keys = {
   { key = 'PageDown', mods = 'SHIFT', action = act.ScrollByPage(1) },
 
   {
-    key = 'p',
-    mods = key_mod_panes,
-    action = act.ShowLauncherArgs({ flags = 'FUZZY|TABS|WORKSPACES' }),
-  },
-
-  {
     key = '.',
     mods = 'CMD',
     action = wezterm.action.ActivateCommandPalette,
@@ -65,6 +62,14 @@ local keys = {
   },
 
   -- Panes
+  {
+    key = 'p',
+    mods = 'LEADER',
+    action = act.ActivateKeyTable({
+      name = 'pane',
+      timeout_milliseconds = 1500,
+    }),
+  },
   {
     key = 'd',
     mods = key_mod_panes,
@@ -86,28 +91,6 @@ local keys = {
     key = 'z',
     mods = key_mod_panes,
     action = act.TogglePaneZoomState,
-  },
-  {
-    key = 'x',
-    mods = 'SHIFT|' .. key_mod_panes,
-    action = act.ActivateCopyMode,
-  },
-  {
-    key = 'L',
-    mods = 'CTRL|SHIFT',
-    action = act.QuickSelectArgs({
-      patterns = {
-        'https?://\\S+',
-      },
-    }),
-  },
-
-  {
-    key = 'p',
-    mods = 'SHIFT|' .. key_mod_panes,
-    action = wezterm.action_callback(function(_win, pane)
-      pane:move_to_new_tab()
-    end),
   },
 
   {
@@ -171,7 +154,7 @@ local keys = {
   -- Rotate
   {
     key = 'r',
-    mods = 'CMD',
+    mods = key_mod_panes,
     action = act.RotatePanes('CounterClockwise'),
   },
 
@@ -181,12 +164,14 @@ local keys = {
     action = act.RotatePanes('Clockwise'),
   },
 
+  -- Select and focus
   {
     key = 's',
     mods = key_mod_panes,
     action = act.PaneSelect,
   },
 
+  -- Select and swap
   {
     key = 'S',
     mods = 'SHIFT|' .. key_mod_panes,
@@ -199,7 +184,7 @@ local keys = {
   {
     key = 't',
     mods = 'CMD',
-    action = act.SpawnTab('DefaultDomain'),
+    action = act.SpawnCommandInNewTab({ cwd = wezterm.home_dir }),
   },
 
   { key = 'T', mods = 'SHIFT|' .. key_mod_panes, action = act.ShowTabNavigator },
@@ -214,19 +199,27 @@ local keys = {
     action = act.ActivateLastTab,
   },
 
+  -- Utils
+
   {
     key = '0',
     mods = key_mod_panes,
     action = act.ResetFontSize,
   },
 
-  -- Utils
   {
-    key = 'p',
-    mods = key_mod_panes,
-    action = act.SplitPane({
-      direction = 'Right',
-      size = { Percent = 35 },
+    key = 'x',
+    mods = 'SHIFT|' .. key_mod_panes,
+    action = act.ActivateCopyMode,
+  },
+
+  {
+    key = 'L',
+    mods = 'CTRL|SHIFT',
+    action = act.QuickSelectArgs({
+      patterns = {
+        'https?://\\S+',
+      },
     }),
   },
 
@@ -271,6 +264,34 @@ local keys = {
   { key = 'i', mods = 'CTRL', action = act.SendKey({ key = 'i', mods = 'CTRL' }) },
 }
 
+local key_tables = {
+  pane = {
+    {
+      key = 't',
+      action = wezterm.action_callback(function(_win, pane)
+        pane:move_to_new_tab()
+      end),
+    },
+
+    -- vertical slim panel
+    {
+      key = 'v',
+      action = act.SplitPane({
+        direction = 'Right',
+        size = { Percent = 35 },
+      }),
+    },
+
+    {
+      key = 'h',
+      action = act.SplitPane({
+        direction = 'Down',
+        size = { Percent = 35 },
+      }),
+    },
+  },
+}
+
 local process_icons = {
   ['docker'] = wezterm.nerdfonts.linux_docker,
   ['docker-compose'] = wezterm.nerdfonts.linux_docker,
@@ -312,7 +333,7 @@ end
 
 local function get_process(tab)
   if not tab.active_pane or tab.active_pane.foreground_process_name == '' then
-    return '[?]'
+    return nil
   end
 
   local process_name = string.gsub(tab.active_pane.foreground_process_name, '(.*[/\\])(.*)', '%2')
@@ -338,7 +359,8 @@ wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_wid
     { Text = get_current_working_dir(tab) },
   })
 
-  local title = string.format(' %s (%s)  ', get_process(tab), cwd)
+  local process = get_process(tab)
+  local title = process and string.format(' %s (%s)  ', process, cwd) or ' [?] '
 
   if has_unseen_output then
     return {
@@ -354,29 +376,33 @@ end)
 
 local background = '#0a0a00'
 wezterm.on('update-right-status', function(window, pane)
-  local status = ''
-  local max_args = 3
+  local process = ''
 
   if state.debug_mode then
     local info = pane:get_foreground_process_info()
     if info then
-      status = info.name
+      process = info.name
       for i = 2, #info.argv do
-        status = status .. ' ' .. info.argv[i]
+        process = info.argv[i]
       end
     end
   end
 
-  local time = ''
+  local status = (#process > 0 and ' | ' or '')
+  local name = window:active_key_table()
+  if name then
+    status = string.format('󰌌  {%s}', name)
+  end
+
   if window:get_dimensions().is_full_screen then
-    time = (state.debug_mode and ' | ' or '') .. wezterm.strftime('%R ')
+    status = status .. wezterm.strftime(' %R ')
   end
 
   window:set_right_status(wezterm.format({
     { Foreground = { Color = '#7eb282' } },
-    { Text = status },
+    { Text = process },
     { Foreground = { Color = '#808080' } },
-    { Text = time },
+    { Text = status },
   }))
 end)
 
@@ -450,6 +476,8 @@ local config = {
     brightness = 0.6,
   },
   keys = keys,
+  key_tables = key_tables,
+  leader = key_table_leader,
   max_fps = 120,
   mouse_bindings = {
     {
