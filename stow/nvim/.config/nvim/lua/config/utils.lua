@@ -117,4 +117,9 @@ function M.uuid()
   return id
 end
 
+function M.uid()
+  local uuid = M.uuid()
+  return string.gsub(uuid, '-', '')
+end
+
 return M

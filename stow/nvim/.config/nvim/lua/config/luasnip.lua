@@ -8,13 +8,13 @@ local BUILD_DATE = '%Y%m%d%H%M'
 function M.setup()
   local ls = require('luasnip')
   local fmt = require('luasnip.extras.fmt').fmt
-  local postfix = require('luasnip.extras.postfix').postfix
+  -- local postfix = require('luasnip.extras.postfix').postfix
   local types = require('luasnip.util.types')
 
   local snippet = ls.snippet
 
   -- local d = ls.dynamic_node
-  local f = ls.function_node
+  -- local f = ls.function_node
   local i = ls.insert_node
   -- local sn = ls.snippet_node
   -- local t = ls.text_node
@@ -66,6 +66,13 @@ function M.setup()
       name = 'UUIDv4',
     }, {
       p(utils.uuid),
+    }),
+
+    snippet({
+      trig = 'uid',
+      name = 'UID',
+    }, {
+      p(utils.uid),
     }),
 
     snippet({
