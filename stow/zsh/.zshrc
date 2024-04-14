@@ -23,7 +23,8 @@ export HOMEBREW_NO_INSECURE_REDIRECT=1
 
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/rg"
 
-export MANPAGER='less -s'
+# export MANPAGER='less -s'
+export MANPAGER='nvim +Man!'
 # Enable highlighting in Less, useful for manpages
 export LESS_TERMCAP_mb=$'\e[1;31m'     # begin bold
 export LESS_TERMCAP_md=$'\e[1;94m'     # begin blink
