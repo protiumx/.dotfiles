@@ -29,7 +29,7 @@
   date = iso
 
 [status]
-    # Show untracked files, directories and files in untracked directorie
+    # Show untracked files, directories and files in untracked directories
   showUntrackedFiles = all
   submoduleSummary = true
 
