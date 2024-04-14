@@ -97,7 +97,7 @@ local base_groups = {
   TelescopePromptBorder = { link = 'XBorder' },
   TelescopePromptNormal = { link = 'XMenu', fg = colors.foreground },
   TelescopePromptPrefix = { link = 'XMenu', fg = colors.foreground },
-  -- TelescopePromptTitle = { fg = colors.background, bg = colors.light_orange },
+  TelescopePromptTitle = { fg = colors.background, bg = colors.light_orange },
   TelescopeResultsBorder = { link = 'XBorder' },
   TelescopeResultsNormal = { link = 'XMenu' },
   -- TelescopeResultsTitle = { fg = colors.background, bg = colors.light_orange },
