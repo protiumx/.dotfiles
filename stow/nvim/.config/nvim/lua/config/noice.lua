@@ -47,7 +47,7 @@ function M.setup()
 
       popup = {
         border = {
-          style = 'shadow',
+          style = 'solid',
         },
         win_options = {
           linebreak = true,
@@ -92,7 +92,7 @@ function M.setup()
     cmdline = {
       format = {
         cmdline = { pattern = '^:', icon = ':', lang = '' },
-        search_down = { kind = 'search', pattern = '^/', icon = '󰿟', lang = 'regex' },
+        search_down = { kind = 'search', pattern = '^/', icon = '/', lang = 'regex' },
         search_up = { kind = 'search', pattern = '^%?', icon = '?', lang = 'regex' },
         filter = false,
         lua = false,
@@ -123,7 +123,7 @@ function M.setup()
         enabled = true,
         opts = {
           position = {
-            row = 2,
+            row = 2, -- show below the current line
           },
         },
       },

@@ -22,7 +22,7 @@ local nui_popup_base = {
       left = 1,
       right = 1,
     },
-    style = 'none',
+    style = 'solid',
   },
   buf_options = {
     modifiable = true,
