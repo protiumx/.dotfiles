@@ -164,6 +164,13 @@ function M.setup()
     group = 'startup',
     pattern = '*',
     callback = function()
+      -- Do not open for man pages
+      for _, param in ipairs(vim.v.argv) do
+        if string.find(param, '+Man') then
+          return
+        end
+      end
+
       -- Open file browser if argument is a folder
       local arg = vim.api.nvim_eval('argv(0)')
       if arg and (vim.fn.isdirectory(arg) ~= 0 or arg == '') then
