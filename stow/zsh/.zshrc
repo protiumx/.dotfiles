@@ -108,11 +108,7 @@ alias ll="eza --group-directories-first -l --color always --icons -a -s type"
 
 # Golang
 export GOPATH="$HOME/go"
-# export GOROOT="$HOME/go/current"
-
 [ -d "$GOPATH/bin" ] && PATH="$GOPATH/bin:$PATH"
-[ -d "/usr/local/go/bin" ] && PATH="/usr/local/go/bin:$PATH"
-
 # Rust
 [ -f $HOME/.cargo/env ] && source $HOME/.cargo/env
 
@@ -157,6 +153,7 @@ eval "$(fzf --zsh)"
 
 [[ ! -r $HOME/.opam/opam-init/init.zsh ]] || source $HOME/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
 
+PATH="$(brew --prefix)/opt/python@3.11/libexec/bin:$PATH"
 export PATH
 
 # Source all profile files
