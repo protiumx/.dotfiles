@@ -134,6 +134,9 @@
   # Short status
   s = status -sb
 
+  # Show numstat between main and HEAD
+  stat = diff --shortstat main HEAD
+
   # Stash the working directory, the index and the untracked files
   stash-all = stash save --include-untracked
 
