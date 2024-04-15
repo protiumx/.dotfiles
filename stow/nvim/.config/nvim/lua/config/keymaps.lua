@@ -76,7 +76,7 @@ vim.keymap.set('n', '<Leader>`', '<C-^>', { silent = true })
 vim.keymap.set(
   'n',
   '--',
-  '<cmd>e # | bd #<CR>',
+  '<cmd>e # | bwipeout #<CR>',
   { silent = true, desc = 'Delete buffer and go to previous' }
 )
 vim.keymap.set('n', '<Leader>bb', '<cmd>bd<CR>', { silent = true })
@@ -94,15 +94,15 @@ vim.keymap.set({ 't', 'n' }, '<M-\\>', '<cmd>tabp<CR>', { silent = true })
 -- Terminal utils
 vim.keymap.set(
   { 'i', 'n', 'v' },
-  '<F12>',
-  '<cmd>$tabnew term://zsh<CR>',
-  { silent = true, desc = 'Open terminal in new tab in last position' }
-)
-vim.keymap.set(
-  { 'i', 'n', 'v' },
   '<F10>',
   '<cmd>vs term://zsh<CR>',
   { silent = true, desc = 'Open terminal in vertical split' }
+)
+vim.keymap.set(
+  { 'i', 'n', 'v' },
+  '<F12>',
+  '<cmd>$tabnew term://zsh<CR>',
+  { silent = true, desc = 'Open terminal in new tab in last position' }
 )
 vim.keymap.set('t', '<C-q>', '<cmd>bd!<CR>', { silent = true, desc = 'Close terminal buffer' })
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { silent = true, desc = 'Term normal mode' })
