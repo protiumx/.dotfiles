@@ -98,6 +98,8 @@ function M.setup()
       })
     end,
   })
+
+  -- require('lspconfig').gopls.setup({ cmd = { 'gopls', '-logfile' } })
 end
 
 return M

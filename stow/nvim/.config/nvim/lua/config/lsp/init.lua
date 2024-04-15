@@ -8,7 +8,7 @@ function M.setup()
   vim.fn.sign_define('DiagnosticSignInfo', { text = icons.info, texthl = 'DiagnosticSignInfo' })
   vim.fn.sign_define('DiagnosticSignHint', { text = icons.hint, texthl = 'DiagnosticSignHint' })
 
-  vim.lsp.set_log_level('off')
+  vim.lsp.set_log_level('error')
 
   require('config.lsp.mason').setup()
   require('config.lsp.saga').setup()
