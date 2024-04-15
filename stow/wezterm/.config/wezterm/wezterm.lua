@@ -360,7 +360,7 @@ wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_wid
   })
 
   local process = get_process(tab)
-  local title = process and string.format(' %s (%s)  ', process, cwd) or ' [?] '
+  local title = process and string.format(' %s (%s) ', process, cwd) or ' [?] '
 
   if has_unseen_output then
     return {
