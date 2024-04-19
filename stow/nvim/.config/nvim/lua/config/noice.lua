@@ -81,7 +81,7 @@ function M.setup()
         },
         position = { row = 2, col = 0 },
         win_options = {
-          wrap = true,
+          wrap = false,
           winblend = 0,
           linebreak = true,
           winhighlight = win_highlights,
