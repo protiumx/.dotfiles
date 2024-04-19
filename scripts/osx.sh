@@ -74,5 +74,6 @@ setup_osx() {
   # Enable ssh agent on start up
   info "Enabling ssh agent on start up with launchctl"
   cp "$HOME/.dotfiles/macos/com.openssh.ssh-agent.plist" "$HOME/Library/LaunchAgents/"
-  launchctl load -w "$HOME/Library/LaunchAgents/com.openssh.ssh-agent.plist"
+  launchctl load "$HOME/Library/LaunchAgents/com.openssh.ssh-agent.plist"
+  launchctl enable "$HOME/Library/LaunchAgents/com.openssh.ssh-agent.plist"
 }
