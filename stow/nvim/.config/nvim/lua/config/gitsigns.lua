@@ -49,12 +49,21 @@ end
 
 function M.setup()
   require('gitsigns').setup({
-    on_attach = on_attach,
+    attach_to_untracked = true,
     current_line_blame_opts = {
       virt_text = true,
       virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
       delay = 1000,
       ignore_whitespace = false,
+    },
+    on_attach = on_attach,
+    preview_config = {
+      -- Options passed to nvim_open_win
+      border = 'solid',
+      style = 'minimal',
+      relative = 'cursor',
+      row = 0,
+      col = 1,
     },
     signs = {
       untracked = {
