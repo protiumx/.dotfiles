@@ -228,8 +228,8 @@ alias tree="eza --tree --level=5 --icons --group-directories-first --color auto"
 alias yw="yarn workspace"
 
 # Kubernetes
-alias kx="kubectx"
 alias k="kubectl"
+alias kx="kubectx"
 alias k9="k9s -c pod --readonly"
 
 alias kfp="kf pods"
@@ -282,6 +282,9 @@ alias gst="gcommit style"
 alias gci="gcommit ci"
 alias gdo="gcommit docs"
 alias gmi="gcommit misc"
+alias ck="git ck"
+alias pull="git pull"
+alias push="git push"
 
-alias rgvim="rg --no-heading --vimgrep"
+alias rgv="rg --no-heading --vimgrep"
 alias yeet="rm -rf"
