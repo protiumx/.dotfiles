@@ -39,7 +39,7 @@ function M.setup()
   end
 
   -- Pickers
-  map({ 'n', 'i' }, '<M-r>', run_file, 'Select golang fiel to run')
+  map({ 'n', 'i' }, '<M-r>', run_file, 'Select golang file to run')
   map({ 'n', 'i' }, '<M-R>', function()
     dap.run({
       type = vim.bo.filetype,
@@ -99,10 +99,12 @@ function M.setup()
   map({ 'n', 'i' }, '<M-d>U', function()
     dapui.toggle()
   end, 'Toggle UI')
+
   map({ 'n', 'i', 'v' }, '<M-d>e', function()
     dapui.eval()
   end, 'Evaluate')
-  map({ 'n', 'i' }, '<M-d>e', function()
+
+  map({ 'n', 'i' }, '<M-d>ue', function()
     dapui.set_breakpoint()
   end, 'Set breakpoint')
 end
