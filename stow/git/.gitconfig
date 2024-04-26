@@ -114,6 +114,8 @@
   # Filter the commit logs messages with the provided string
   filter = "!f() { git logs --grep=$1; }; f"
 
+  get = clone --depth 1
+
   last = log -1 HEAD --stat
 
   lg = !git log --pretty=format:\"%C(magenta)%h%Creset -%C(red)%d%Creset %s %C(dim green)(%cr) [%an]\" --abbrev-commit
