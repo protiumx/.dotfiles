@@ -9,11 +9,16 @@ setopt +o nomatch
 : "$LC_ALL:=\"en_US.UTF-8\""
 export LANG LANGUAGE LC_CTYPE LC_ALL
 
+export DOCKER_SCAN_SUGGEST=false
+export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=true
+
 export TERM="screen-256color"
 export GPG_TTY=$(tty)
 export EDITOR="nvim"
 export HISTSIZE=10000
-export SAVEHIST=10000
+export HISTFILESIZE=$HISTSIZE
+export HISTIGNORE="ls:ls *:cd:cd -:pwd;exit:date:* --help"
+export SAVEHIST=$HISTSIZE
 
 export LD_LIBRARY_PATH="$HOME/.config/nvim/lua/config/nvim"
 export DYLD_LIBRARY_PATH="$HOME/.config/nvim/lua/config/nvim"

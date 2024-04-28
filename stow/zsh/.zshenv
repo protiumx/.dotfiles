@@ -11,13 +11,45 @@ jwt-decode() {
   jq -R 'split(".") |.[0:2] | map(@base64d) | map(fromjson)' <<< $1
 }
 
-cheat() {
-  curl -s "cheat.sh/$1";
+# Print commits with URLs to github
+ghhist() {
+  local remote="$(git remote -v | awk '/^origin.*\(push\)$/ {print $2}')"
+  [[ "$remote" ]] || return
+  local user_repo="$(echo "$remote" | perl -pe 's/.*://;s/\.git$//')"
+  git log $* --name-status --color | awk "$(cat <<AWK
+    /^.*commit [0-9a-f]{40}/ {sha=substr(\$2,1,7)}
+    /^[MA]\t/ {printf "%s\thttps://github.com/$user_repo/blob/%s/%s\n", \$1, sha, \$2; next}
+    /.*/ {print \$0}
+AWK
+  )" | less -F
+}
+
+# Test if HTTP compression (RFC 2616 + SDCH) is enabled for a given URL.
+httpcompression() {
+	encoding="$(curl -LIs -H 'User-Agent: Mozilla/5 Gecko' -H 'Accept-Encoding: gzip,deflate,compress,sdch' "$1" | grep '^Content-Encoding:')" && echo "$1 is encoded using ${encoding#* }" || echo "$1 is not using any encoding"
+}
+
+# get gzipped size
+gzp() {
+	echo "orig size    (bytes): "
+	cat "$1" | wc -c
+	echo "gzipped size (bytes): "
+	gzip -c "$1" | wc -c
 }
 
 # Move files fuzzy find destination
 fzmv() {
   mv "$@" $(fd -t d -H | fzf)
+}
+
+# Create a new directory and enter it
+md() {
+	mkdir -p "$@" && cd "$@"
+}
+
+server() {
+	local port="${1:-8000}"
+  python3 -m http.server $port
 }
 
 # Show package.json scripts with fzf and run selected
@@ -218,10 +250,14 @@ rand() {
 }
 
 # Aliases
+alias ..2="cd ../.."
+alias ..3="cd ../../.."
+
 alias cat="bat -p --paging=never --theme='TwoDark'"
 alias dc="docker compose"
 alias dot="cd ~/.dotfiles && nvim"
 alias e="nvim"
+alias fs="stat -f \"%z bytes\""
 alias icat="wezterm imgcat"
 alias dud="dust -b -H -r -X '.git'"
 alias tree="eza --tree --level=5 --icons --group-directories-first --color auto"
@@ -260,8 +296,6 @@ alias ksd="kubectl scale deployment"
 # Create 5 random passwords
 alias mkpwd="xkcdpass --count=5 --acrostic=\"chaos\" -C \"first\" -R --min=5 --max=6 -D \"#@^&~_-;\""
 alias isodate='date -u +"%Y-%m-%dT%H:%M:%SZ"'
-# Serve files in current dir with python http server
-alias serv="python3 -m http.server"
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
 alias localip="ifconfig | grep 'inet ' | grep -v 127.0.0.1 | cut -d\ -f2"
@@ -282,9 +316,11 @@ alias gst="gcommit style"
 alias gci="gcommit ci"
 alias gdo="gcommit docs"
 alias gmi="gcommit misc"
-alias ck="git ck"
+
+alias cm="git commit"
 alias pull="git pull"
 alias push="git push"
+alias st="git st"
 
 alias rgv="rg --no-heading --vimgrep"
 alias yeet="rm -rf"
