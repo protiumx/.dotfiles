@@ -223,7 +223,7 @@ alias dc="docker compose"
 alias dot="cd ~/.dotfiles && nvim"
 alias e="nvim"
 alias icat="wezterm imgcat"
-alias lt="dust -b -H -r -X '.git'"
+alias dud="dust -b -H -r -X '.git'"
 alias tree="eza --tree --level=5 --icons --group-directories-first --color auto"
 alias yw="yarn workspace"
 
@@ -243,9 +243,7 @@ alias kdd="kubectl describe deployment"
 alias kdp="kubectl describe pods"
 alias kds="kubectl describe svc"
 
-alias kgctx="kubectl config get-contexts"
-alias kgcj="kubectl get cronjob"
-alias kgconf="kubectl get configmap"
+alias kctxs="kubectl config get-contexts"
 
 alias kgd="kubectl get deployements"
 alias kge="kubectl get events"
@@ -253,7 +251,7 @@ alias kgi="kubectl get ingress"
 alias kgp="kubectl get pods"
 alias kgs="kubectl get svc"
 # List pods images
-alias kgpv="kgp -o jsonpath='{.items[*].spec.containers[*].image}' | tr -s '[[:space:]]' '\n' | sort | cut -d'/' -f3 | column -t -s':' | uniq -c | fzf --height 40%"
+alias kgpv="kubectl get pods -o jsonpath='{.items[*].spec.containers[*].image}' | tr -s '[[:space:]]' '\n' | sort | cut -d'/' -f3 | column -t -s':' | uniq -c | fzf --height 40%"
 
 alias kpf="kubectl port-forward"
 alias krrd="kubectl rollout restart deployment"
@@ -266,11 +264,13 @@ alias isodate='date -u +"%Y-%m-%dT%H:%M:%SZ"'
 alias serv="python3 -m http.server"
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
-alias localip="ifconfig | grep 'inet ' | grep -v 127.0.0.1 | cut -d\  -f2"
-# Lock the screen
+alias localip="ifconfig | grep 'inet ' | grep -v 127.0.0.1 | cut -d\ -f2"
+
+# Lock the screen macos
 alias afk="open /System/Library/CoreServices/ScreenSaverEngine.app"
 
 # Conventional Commits
+alias g="git"
 alias gcm="git commit -m"
 alias gnv="git commit --no-verify -m"
 alias gre="gcommit refactor"
