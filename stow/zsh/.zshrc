@@ -70,6 +70,10 @@ ZSH_THEME=""
 # Fix slow bracketed-paste
 DISABLE_MAGIC_FUNCTIONS="true"
 
+set completion-ignore-case on
+# Do not autocomplete hidden files unless the pattern explicitly begins with a dot
+set match-hidden-files off
+
 setopt HIST_FIND_NO_DUPS
 setopt HIST_IGNORE_ALL_DUPS
 setopt appendhistory # Immediately append history instead of overwriting
