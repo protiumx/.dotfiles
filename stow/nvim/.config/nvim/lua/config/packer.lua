@@ -274,13 +274,13 @@ return packer.startup(function(use)
     end,
   })
 
-  use({
-    'numToStr/Comment.nvim',
-    event = 'BufRead',
-    config = function()
-      require('config.comment').setup()
-    end,
-  })
+  -- use({
+  --   'numToStr/Comment.nvim',
+  --   event = 'BufRead',
+  --   config = function()
+  --     require('config.comment').setup()
+  --   end,
+  -- })
 
   use({
     'nvim-tree/nvim-web-devicons',

@@ -2,9 +2,6 @@ local M = {}
 
 local on_lsp_attach = function(client, bufnr)
   require('config.lsp.keymaps').setup(bufnr)
-  if client.name == 'yamlls' then
-    client.server_capabilities.documentFormattingProvider = true
-  end
 
   local colors = require('config.colors')
   vim.api.nvim_create_augroup('lsp_diagnostic_hold', { clear = true })

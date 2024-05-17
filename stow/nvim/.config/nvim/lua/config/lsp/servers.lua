@@ -25,6 +25,9 @@ local servers = {
         command = 'clippy',
         extraArgs = { '--no-deps' },
       },
+      inlay_hints = {
+        auto = false,
+      },
       procMacro = {
         enable = true,
         ignored = {
@@ -80,6 +83,15 @@ local servers = {
       upgrade_depdendency = true,
       vendor = true,
     },
+    hints = {
+      assignVariableTypes = true,
+      compositeLiteralFields = true,
+      compositeLiteralTypes = true,
+      constantValues = true,
+      functionTypeParameters = true,
+      parameterNames = true,
+      rangeVariableTypes = true,
+    },
     experimentalPostfixCompletions = true,
     gofumpt = true,
     linksInHover = false,
@@ -99,6 +111,9 @@ local servers = {
           indent_style = 'space',
           indent_size = '2',
         },
+      },
+      hint = {
+        enable = true,
       },
       runtime = {
         version = 'LuaJIT',

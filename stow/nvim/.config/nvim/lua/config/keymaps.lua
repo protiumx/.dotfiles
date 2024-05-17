@@ -193,3 +193,10 @@ vim.keymap.set('n', '<Leader>vo', ':vsp | e <C-R>=expand("%:h") . "/"<CR>')
 -- Select all text in current buffer
 vim.keymap.set('n', '<M-a>', 'ggVG', { silent = true })
 vim.keymap.set('i', '<M-a>', '<Esc>ggVG', { silent = true })
+
+vim.keymap.set('n', '<C-_>', 'gcc', { remap = true })
+vim.keymap.set('n', '<C-/>', 'gcc', { remap = true })
+vim.keymap.set('v', '<C-_>', 'gcc', { remap = true })
+vim.keymap.set('v', '<C-/>', 'gcc', { remap = true })
+vim.keymap.set('i', '<C-/>', '<C-o>gcc', { remap = true })
+vim.keymap.set('i', '<C-_>', '<C-o>gcc', { remap = true })
