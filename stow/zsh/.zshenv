@@ -1,7 +1,5 @@
 #!/usr/bin/env zsh
 
-# Functions
-
 reload() {
   source ~/.zshrc
   source ~/.zshenv
@@ -32,7 +30,7 @@ httpcompression() {
 # get gzipped size
 gzp() {
 	echo "orig size    (bytes): "
-	cat "$1" | wc -c
+	wc -c "$1"
 	echo "gzipped size (bytes): "
 	gzip -c "$1" | wc -c
 }
@@ -324,3 +322,4 @@ alias st="git st"
 
 alias rgv="rg --no-heading --vimgrep"
 alias yeet="rm -rf"
+

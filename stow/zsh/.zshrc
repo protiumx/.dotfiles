@@ -1,36 +1,25 @@
 #!/usr/bin/env zsh
 
-# Disable error when using glob patterns that don't have matches
-setopt +o nomatch
-
 : "$LANG:=\"en_US.UTF-8\""
 : "$LANGUAGE:=\"en\""
 : "$LC_CTYPE:=\"en_US.UTF-8\""
 : "$LC_ALL:=\"en_US.UTF-8\""
-export LANG LANGUAGE LC_CTYPE LC_ALL
 
+# export GPG_TTY=$(tty)
 export DOCKER_SCAN_SUGGEST=false
-export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=true
-
-export TERM="screen-256color"
-export GPG_TTY=$(tty)
 export EDITOR="nvim"
-export HISTSIZE=10000
-export HISTFILESIZE=$HISTSIZE
-export HISTIGNORE="ls:ls *:cd:cd -:pwd;exit:date:* --help"
-export SAVEHIST=$HISTSIZE
-
-export LD_LIBRARY_PATH="$HOME/.config/nvim/lua/config/nvim"
-export DYLD_LIBRARY_PATH="$HOME/.config/nvim/lua/config/nvim"
-
+export GPG_TTY=$(tty)
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_INSECURE_REDIRECT=1
-
-export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/rg"
-
-# export MANPAGER='less -s'
+export LANG LANGUAGE LC_CTYPE LC_ALL
 export MANPAGER='nvim +Man!'
-# Enable highlighting in Less, useful for manpages
+export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/rg"
+export TERM="screen-256color"
+
+export DYLD_LIBRARY_PATH="$HOME/.config/nvim/lua/config/nvim"
+export LD_LIBRARY_PATH="$HOME/.config/nvim/lua/config/nvim"
+
+# Less highlighting
 export LESS_TERMCAP_mb=$'\e[1;31m'     # begin bold
 export LESS_TERMCAP_md=$'\e[1;94m'     # begin blink
 export LESS_TERMCAP_so=$'\e[01;44;37m' # begin reverse video
@@ -47,26 +36,32 @@ else
 	eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-BREW_PREFIX="$(brew --prefix)"
+# ZSH Config
+# Plugins
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+source "${ZINIT_HOME}/zinit.zsh"
 
-################# Oh MyZsh ####################
+zinit ice depth=1; zinit light zsh-users/zsh-syntax-highlighting
+zinit ice depth=1; zinit light zsh-users/zsh-autosuggestions
+zinit ice depth=1; zinit light Aloxaf/fzf-tab
 
-export ZSH="$HOME/.oh-my-zsh"
+# K8s completions
+[[ -x "$(command -v kubectl)" ]] && source <(kubectl completion zsh)
+
+autoload -Uz compinit && compinit
+
+zinit cdreplay -q
+
+bindkey "^p" history-search-backward
+bindkey "^n" history-search-forward
 
 # Use hyphen-insensitive completion: _ and - will be interchangeable.
 HYPHEN_INSENSITIVE="true"
-
-# Disable command auto-correction.
 ENABLE_CORRECTION="false"
-
-# Disable auto-setting terminal title.
 DISABLE_AUTO_TITLE="true"
-
-# Change the command execution time stamp shown in the history command output
-HIST_STAMPS="dd.mm.yyyy"
-
-ZSH_THEME=""
-
+HIST_STAMPS="dd.mm.yy"
 # Fix slow bracketed-paste
 DISABLE_MAGIC_FUNCTIONS="true"
 
@@ -74,36 +69,39 @@ set completion-ignore-case on
 # Do not autocomplete hidden files unless the pattern explicitly begins with a dot
 set match-hidden-files off
 
-setopt HIST_FIND_NO_DUPS
-setopt HIST_IGNORE_ALL_DUPS
-setopt appendhistory # Immediately append history instead of overwriting
-setopt nobeep
+HISTSIZE=10000
+HISTFILESIZE=$HISTSIZE
+HISTFILE=$HOME/.zsh_history
+SAVEHIST=$HISTSIZE
+HISTIGNORE="ls:ls *:cd:cd -:pwd;exit:date:* --help"
+HISTDUP=erase
 
-plugins=(
-	docker # auto-completion for docker
-	fzf-tab
-)
+setopt appendhistory # Immediately append history instead of overwriting
+setopt sharehistory # Share hist with all sessions
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt hist_ignore_dups
+setopt hist_save_no_dups
+setopt hist_find_no_dups
+setopt nobeep
+# Disable error when using glob patterns that don't have matches
+setopt +o nomatch
 
 # Enable option-stacking for docker (i.e docker run -it <TAB>)
 zstyle ':completion:*:*:docker:*' option-stacking yes
 zstyle ':completion:*:*:docker-*:*' option-stacking yes
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' menu no
 
-source $ZSH/oh-my-zsh.sh
-
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
-export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE='100' # limit suggestion to 100 chars
-
-source $BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-
-# Fix issue autocomplete after paste
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE='100' # limit suggestion to 100 chars
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(bracketed-paste)
-
-source $BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 ################# Config ####################
 
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
+eval "$(fzf --zsh)"
 
 # changes ctrl-u to delete everything to the left of the cursor, rather than the whole line
 bindkey "^U" backward-kill-line
@@ -115,9 +113,14 @@ bindkey '^[[3;3~' kill-word
 alias ls="eza --group-directories-first -G  --color auto --icons -a -s type"
 alias ll="eza --group-directories-first -l --color always --icons -a -s type"
 
+# Add aliases to completion
+compdef g='git'
+compdef k='kubectl'
+
 # Golang
 export GOPATH="$HOME/go"
 [ -d "$GOPATH/bin" ] && PATH="$GOPATH/bin:$PATH"
+
 # Rust
 [ -f $HOME/.cargo/env ] && source $HOME/.cargo/env
 
@@ -154,11 +157,6 @@ _fzf_compgen_dir() {
 	fd --type d --hidden --follow --exclude ".git/" . "$1"
 }
 
-# [ -f ~/.fzf.zsh ] && source $HOME/.fzf.zsh
-eval "$(fzf --zsh)"
-
-# K8s completions
-[[ -x "$(command -v kubectl)" ]] && source <(kubectl completion zsh)
 
 [[ ! -r $HOME/.opam/opam-init/init.zsh ]] || source $HOME/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
 
@@ -235,6 +233,5 @@ zsh-ctrl-o () {
 zle -N zsh-ctrl-o
 bindkey -r '^o'
 bindkey '^o' zsh-ctrl-o
-
 
 echo "( .-.)"
