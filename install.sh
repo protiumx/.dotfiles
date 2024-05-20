@@ -12,7 +12,6 @@ set -o pipefail
 . scripts/osx.sh
 . scripts/fonts.sh
 . scripts/packages.sh
-. scripts/oh-my-zsh.sh
 
 cleanup() {
 	err "Last command failed"
