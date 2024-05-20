@@ -13,6 +13,7 @@ export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_INSECURE_REDIRECT=1
 export LANG LANGUAGE LC_CTYPE LC_ALL
 export MANPAGER='nvim +Man!'
+export PICO_SDK_PATH="$HOME/dev/pico-sdk"
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/rg"
 export TERM="screen-256color"
 
@@ -27,8 +28,6 @@ export LESS_TERMCAP_us=$'\e[01;37m'    # begin underline
 export LESS_TERMCAP_me=$'\e[0m'        # reset bold/blink
 export LESS_TERMCAP_se=$'\e[0m'        # reset reverse video
 export LESS_TERMCAP_ue=$'\e[0m'        # reset underline
-
-export PICO_SDK_PATH="$HOME/dev/pico-sdk"
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
@@ -48,7 +47,8 @@ zinit ice depth=1; zinit light zsh-users/zsh-autosuggestions
 zinit ice depth=1; zinit light Aloxaf/fzf-tab
 
 # K8s completions
-[[ -x "$(command -v kubectl)" ]] && source <(kubectl completion zsh)
+[[ -x "$(command -v kubectl)" ]] && (source <(kubectl completion zsh) && compdef k='kubectl')
+[[ ! -r $HOME/.opam/opam-init/init.zsh ]] || source $HOME/.opam/opam-init/init.zsh > /dev/null 2> /dev/null
 
 autoload -Uz compinit && compinit
 
@@ -57,35 +57,31 @@ zinit cdreplay -q
 bindkey "^p" history-search-backward
 bindkey "^n" history-search-forward
 
-# Use hyphen-insensitive completion: _ and - will be interchangeable.
-HYPHEN_INSENSITIVE="true"
+HYPHEN_INSENSITIVE="true" # use hyphen-insensitive completion: _ and - will be interchangeable.
 ENABLE_CORRECTION="false"
 DISABLE_AUTO_TITLE="true"
 HIST_STAMPS="dd.mm.yy"
-# Fix slow bracketed-paste
-DISABLE_MAGIC_FUNCTIONS="true"
+DISABLE_MAGIC_FUNCTIONS="true" # fix slow bracketed-paste
 
 set completion-ignore-case on
-# Do not autocomplete hidden files unless the pattern explicitly begins with a dot
-set match-hidden-files off
+set match-hidden-files off # do not autocomplete hidden files unless the pattern explicitly begins with a dot
 
 HISTSIZE=10000
 HISTFILESIZE=$HISTSIZE
 HISTFILE=$HOME/.zsh_history
 SAVEHIST=$HISTSIZE
-HISTIGNORE="ls:ls *:cd:cd -:pwd;exit:date:* --help"
+HISTIGNORE="ls:ls *:cd:cd -:pwd;exit:date:* --help:* -h:* help:* -v:* --version:* version"
 HISTDUP=erase
 
-setopt appendhistory # Immediately append history instead of overwriting
-setopt sharehistory # Share hist with all sessions
+setopt appendhistory # immediately append history instead of overwriting
+setopt sharehistory # share history across sessions
 setopt hist_ignore_space
 setopt hist_ignore_all_dups
 setopt hist_ignore_dups
 setopt hist_save_no_dups
 setopt hist_find_no_dups
 setopt nobeep
-# Disable error when using glob patterns that don't have matches
-setopt +o nomatch
+setopt +o nomatch # disable error when using glob patterns that don't have matches
 
 # Enable option-stacking for docker (i.e docker run -it <TAB>)
 zstyle ':completion:*:*:docker:*' option-stacking yes
@@ -97,25 +93,17 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE='100' # limit suggestion to 100 chars
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(bracketed-paste)
 
-################# Config ####################
-
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 eval "$(fzf --zsh)"
 
-# changes ctrl-u to delete everything to the left of the cursor, rather than the whole line
-bindkey "^U" backward-kill-line
-# alt-del delete word forwards
-bindkey '^[[3;3~' kill-word
+bindkey "^U" backward-kill-line # ctrl-u deletes everything to the left of the cursor
+bindkey '^[[3;3~' kill-word # alt-del delete word forwards
 
 # zsh syntax highlighting clears and restores aliases after .zshenv is loaded
 # this keeps ls and ll aliased correctly
 alias ls="eza --group-directories-first -G  --color auto --icons -a -s type"
 alias ll="eza --group-directories-first -l --color always --icons -a -s type"
-
-# Add aliases to completion
-compdef g='git'
-compdef k='kubectl'
 
 # Golang
 export GOPATH="$HOME/go"
@@ -156,9 +144,6 @@ _fzf_compgen_path() {
 _fzf_compgen_dir() {
 	fd --type d --hidden --follow --exclude ".git/" . "$1"
 }
-
-
-[[ ! -r $HOME/.opam/opam-init/init.zsh ]] || source $HOME/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
 
 PATH="$(brew --prefix)/opt/python@3.11/libexec/bin:$PATH"
 export PATH
@@ -233,5 +218,8 @@ zsh-ctrl-o () {
 zle -N zsh-ctrl-o
 bindkey -r '^o'
 bindkey '^o' zsh-ctrl-o
+
+# Add aliases to completion
+compdef g='git'
 
 echo "( .-.)"

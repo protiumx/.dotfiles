@@ -253,13 +253,12 @@ alias ..3="cd ../../.."
 
 alias cat="bat -p --paging=never --theme='TwoDark'"
 alias dc="docker compose"
-alias dot="cd ~/.dotfiles && nvim"
+alias dot="cd ~/.dotfiles && nvim ."
 alias e="nvim"
 alias fs="stat -f \"%z bytes\""
 alias icat="wezterm imgcat"
-alias dud="dust -b -H -r -X '.git'"
+alias duu="dust -b -H -r -X '.git'"
 alias tree="eza --tree --level=5 --icons --group-directories-first --color auto"
-alias yw="yarn workspace"
 
 # Kubernetes
 alias k="kubectl"
@@ -314,7 +313,6 @@ alias gst="gcommit style"
 alias gci="gcommit ci"
 alias gdo="gcommit docs"
 alias gmi="gcommit misc"
-
 alias cm="git commit"
 alias pull="git pull"
 alias push="git push"
@@ -322,4 +320,3 @@ alias st="git st"
 
 alias rgv="rg --no-heading --vimgrep"
 alias yeet="rm -rf"
-
