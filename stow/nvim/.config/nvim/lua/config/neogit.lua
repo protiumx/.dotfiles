@@ -231,7 +231,7 @@ function M.setup()
         ['u'] = 'Unstage',
         ['U'] = 'UnstageStaged',
         ['$'] = 'CommandHistory',
-        ['#'] = 'Console',
+        -- ['#'] = 'Console',
         ['Y'] = 'YankSelected',
         ['<c-r>'] = 'RefreshBuffer',
         ['<enter>'] = 'GoToFile',
