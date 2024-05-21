@@ -25,3 +25,6 @@ runtime
 dereference
 dereferenced
 deadletter
+namespace
+proto
+middleware
