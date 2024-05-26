@@ -58,10 +58,9 @@ function M.setup()
   })
 
   local servers = require('config.lsp.servers')
-
   local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
+  capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
   capabilities.textDocument.completion.completionItem = {
     documentationFormat = { 'markdown', 'plaintext' },
     snippetSupport = true,
@@ -79,7 +78,7 @@ function M.setup()
       },
     },
   }
-  -- Ensure the servers above are installed
+
   local mason_lspconfig = require('mason-lspconfig')
 
   mason_lspconfig.setup({
@@ -96,7 +95,7 @@ function M.setup()
     end,
   })
 
-  -- require('lspconfig').gopls.setup({ cmd = { 'gopls', '-logfile' } })
+  require('lspconfig').gleam.setup({})
 end
 
 return M

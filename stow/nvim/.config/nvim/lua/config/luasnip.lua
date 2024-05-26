@@ -44,6 +44,7 @@ function M.setup()
       'docker',
       'eelixir',
       'elixir',
+      'gleam',
       'go',
       'html',
       'javascript',

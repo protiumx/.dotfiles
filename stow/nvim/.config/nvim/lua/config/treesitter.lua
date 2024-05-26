@@ -93,6 +93,7 @@ function M.setup()
       'comment',
       'cpp',
       'cue',
+      'gleam',
       'go',
       'gomod',
       'gosum',
