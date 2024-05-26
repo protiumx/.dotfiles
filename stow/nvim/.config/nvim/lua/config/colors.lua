@@ -172,50 +172,50 @@ local base_groups = {
 
 local function overrides()
   return {
-    Title = vim.tbl_extend(
-      'force',
-      vim.api.nvim_get_hl_by_name('Title', true) or {},
-      { bg = colors.background }
-    ),
+    -- Title = vim.tbl_extend(
+    --   'force',
+    --   vim.api.nvim_get_hl_by_name('Title', true) or {},
+    --   { bg = colors.background }
+    -- ),
 
     DiagnosticVirtualTextError = vim.tbl_extend(
       'force',
-      vim.api.nvim_get_hl_by_name('DiagnosticVirtualTextError', true) or {},
+      vim.api.nvim_get_hl(0, { name = 'DiagnosticVirtualTextError' }) or {},
       { bg = 'none' }
     ),
     DiagnosticVirtualTextWarn = vim.tbl_extend(
       'force',
-      vim.api.nvim_get_hl_by_name('DiagnosticVirtualTextWarn', true) or {},
+      vim.api.nvim_get_hl(0, { name = 'DiagnosticVirtualTextWarn' }) or {},
       { bg = 'none' }
     ),
     DiagnosticVirtualTextInfo = vim.tbl_extend(
       'force',
-      vim.api.nvim_get_hl_by_name('DiagnosticVirtualTextInfo', true) or {},
+      vim.api.nvim_get_hl(0, { name = 'DiagnosticVirtualTextInfo' }) or {},
       { bg = 'none' }
     ),
     DiagnosticVirtualTextHint = vim.tbl_extend(
       'force',
-      vim.api.nvim_get_hl_by_name('DiagnosticVirtualTextHint', true) or {},
+      vim.api.nvim_get_hl(0, { name = 'DiagnosticVirtualTextHint' }) or {},
       { bg = 'none' }
     ),
     DiagnosticSignError = vim.tbl_extend(
       'force',
-      vim.api.nvim_get_hl_by_name('DiagnosticSignError', true) or {},
+      vim.api.nvim_get_hl(0, { name = 'DiagnosticSignError' }) or {},
       { bg = 'none' }
     ),
     DiagnosticSignWarn = vim.tbl_extend(
       'force',
-      vim.api.nvim_get_hl_by_name('DiagnosticSignWarn', true) or {},
+      vim.api.nvim_get_hl(0, { name = 'DiagnosticSignWarn' }) or {},
       { bg = 'none' }
     ),
     DiagnosticSignInfo = vim.tbl_extend(
       'force',
-      vim.api.nvim_get_hl_by_name('DiagnosticSignInfo', true) or {},
+      vim.api.nvim_get_hl(0, { name = 'DiagnosticSignInfo' }) or {},
       { bg = 'none' }
     ),
     DiagnosticSignHint = vim.tbl_extend(
       'force',
-      vim.api.nvim_get_hl_by_name('DiagnosticSignHint', true) or {},
+      vim.api.nvim_get_hl(0, { name = 'DiagnosticSignHint' }) or {},
       { bg = 'none' }
     ),
   }
