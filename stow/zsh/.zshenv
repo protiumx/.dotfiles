@@ -248,8 +248,6 @@ rand() {
 }
 
 # Aliases
-alias ..2="cd ../.."
-alias ..3="cd ../../.."
 
 alias cat="bat -p --paging=never --theme='TwoDark'"
 alias dc="docker compose"

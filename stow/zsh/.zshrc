@@ -35,36 +35,35 @@ else
 	eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-# ZSH Config
-# Plugins
+# zsh-init
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
 [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 source "${ZINIT_HOME}/zinit.zsh"
 
+# plugins
 zinit ice depth=1; zinit light zsh-users/zsh-syntax-highlighting
 zinit ice depth=1; zinit light zsh-users/zsh-autosuggestions
 zinit ice depth=1; zinit light Aloxaf/fzf-tab
 
-# K8s completions
+# completions
+autoload -Uz compinit && compinit
+
 [[ -x "$(command -v kubectl)" ]] && (source <(kubectl completion zsh) && compdef k='kubectl')
 [[ ! -r $HOME/.opam/opam-init/init.zsh ]] || source $HOME/.opam/opam-init/init.zsh > /dev/null 2> /dev/null
 
-autoload -Uz compinit && compinit
-
 zinit cdreplay -q
 
-bindkey "^p" history-search-backward
-bindkey "^n" history-search-forward
-
-HYPHEN_INSENSITIVE="true" # use hyphen-insensitive completion: _ and - will be interchangeable.
-ENABLE_CORRECTION="false"
-DISABLE_AUTO_TITLE="true"
-HIST_STAMPS="dd.mm.yy"
-DISABLE_MAGIC_FUNCTIONS="true" # fix slow bracketed-paste
-
+# bindkey "^p" history-search-backward
+# bindkey "^n" history-search-forward
+#
 set completion-ignore-case on
 set match-hidden-files off # do not autocomplete hidden files unless the pattern explicitly begins with a dot
+
+# options
+setopt multios              # enable redirect to multiple streams: echo >file1 >file2
+setopt long_list_jobs       # show long list format job notifications
+setopt interactivecomments  # recognize comments
 
 HISTSIZE=10000
 HISTFILESIZE=$HISTSIZE
@@ -73,9 +72,13 @@ SAVEHIST=$HISTSIZE
 HISTIGNORE="ls:ls *:cd:cd -:pwd;exit:date:* --help:* -h:* help:* -v:* --version:* version"
 HISTDUP=erase
 
-setopt appendhistory # immediately append history instead of overwriting
-setopt sharehistory # share history across sessions
-setopt hist_ignore_space
+setopt auto_menu         # show completion menu on successive tab press
+setopt complete_in_word
+setopt always_to_end
+setopt appendhistory     # immediately append history instead of overwriting
+setopt sharehistory      # share history across sessions
+setopt hist_ignore_space # ignore commands that start with space
+setopt hist_verify       # show command with history expansion to user before running it
 setopt hist_ignore_all_dups
 setopt hist_ignore_dups
 setopt hist_save_no_dups
@@ -83,26 +86,91 @@ setopt hist_find_no_dups
 setopt nobeep
 setopt +o nomatch # disable error when using glob patterns that don't have matches
 
+# autoload -U history-search-end
+# zle -N history-beginning-search-backward-end history-search-end
+# zle -N history-beginning-search-forward-end history-search-end
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+
+bindkey "^[[A" up-line-or-beginning-search
+bindkey "^[[B" down-line-or-beginning-search
+
+# fix up/down
+if [[ -n "${terminfo[kcuu1]}" ]]; then
+ bindkey "${terminfo[kcuu1]}" up-line-or-beginning-search
+fi
+
+if [[ -n "${terminfo[kcud1]}" ]]; then
+  bindkey "${terminfo[kcud1]}" down-line-or-beginning-search
+fi
+
+# [Ctrl-RightArrow] - move forward one word
+bindkey '^[[1;5C' forward-word
+# [Ctrl-LeftArrow] - move backward one word
+bindkey '^[[1;5D' backward-word
+
 # Enable option-stacking for docker (i.e docker run -it <TAB>)
 zstyle ':completion:*:*:docker:*' option-stacking yes
 zstyle ':completion:*:*:docker-*:*' option-stacking yes
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-zstyle ':completion:*' menu no
+# zstyle ':completion:*' menu no
+zstyle ':completion:*:*:*:*:*' menu select
+# Hyphen sensitive
+zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]-_}={[:upper:][:lower:]_-}' 'r:|=*' 'l:|=* r:|=*'
+# Complete . and .. special directories
+zstyle ':completion:*' special-dirs true
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
+zstyle ':completion:*:*:*:*:processes' command "ps -u $USERNAME -o pid,user,comm -w -w"
+
+autoload -U +X bashcompinit && bashcompinit
+
+# directories
+setopt auto_cd
+setopt auto_pushd
+setopt pushd_ignore_dups
+setopt pushdminus
+
+alias -- -='cd -'
+
+function d () {
+  if [[ -n $1 ]]; then
+    dirs "$@"
+  else
+    dirs -v | head -n 10
+  fi
+}
+compdef _dirs d
+
+# List directory contents
+alias lsa='ls -lah'
+alias l='ls -lah'
+alias ll='ls -lh'
+alias la='ls -lAh'
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE='100' # limit suggestion to 100 chars
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(bracketed-paste)
+# ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(history-beginning-search-backward history-beginning-search-forward)
 
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 eval "$(fzf --zsh)"
 
-bindkey "^U" backward-kill-line # ctrl-u deletes everything to the left of the cursor
-bindkey '^[[3;3~' kill-word # alt-del delete word forwards
+bindkey "^U" backward-kill-line # [Ctrl-u] deletes everything to the left of the cursor
+bindkey '^[[3;3~' kill-word     # [Alt-del] delete word forwards
+bindkey -s '\el' 'ls\n'         # [Esc-l] - run command: ls
+
+# Edit the current command line in $EDITOR
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '\C-x\C-e' edit-command-line
+bindkey "^[m" copy-prev-shell-word # [M-m] useful for renaming files to add suffix
 
 # zsh syntax highlighting clears and restores aliases after .zshenv is loaded
 # this keeps ls and ll aliased correctly
-alias ls="eza --group-directories-first -G  --color auto --icons -a -s type"
+alias ls="eza --group-directories-first -G --color auto --icons -a -s type"
 alias ll="eza --group-directories-first -l --color always --icons -a -s type"
 
 # Golang
