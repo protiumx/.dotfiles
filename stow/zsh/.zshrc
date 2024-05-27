@@ -50,7 +50,6 @@ zinit ice depth=1; zinit light Aloxaf/fzf-tab
 autoload -Uz compinit && compinit
 
 [[ -x "$(command -v kubectl)" ]] && (source <(kubectl completion zsh) && compdef k='kubectl')
-[[ ! -r $HOME/.opam/opam-init/init.zsh ]] || source $HOME/.opam/opam-init/init.zsh > /dev/null 2> /dev/null
 
 zinit cdreplay -q
 
@@ -179,6 +178,9 @@ export GOPATH="$HOME/go"
 
 # Rust
 [ -f $HOME/.cargo/env ] && source $HOME/.cargo/env
+
+# Ocaml
+[[ ! -r $HOME/.opam/opam-init/init.zsh ]] || source $HOME/.opam/opam-init/init.zsh > /dev/null 2> /dev/null
 
 # FZF
 
