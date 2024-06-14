@@ -11,7 +11,7 @@ local state = {
   debug_mode = false,
 }
 
-local key_table_leader = { key = 'Backspace', mods = key_mod_panes }
+local key_table_leader = { key = '/', mods = key_mod_panes }
 
 local keys = {
   {
@@ -33,7 +33,7 @@ local keys = {
   },
 
   {
-    key = '>',
+    key = '?',
     mods = 'CMD|SHIFT',
     action = wezterm.action_callback(function()
       state.debug_mode = not state.debug_mode
@@ -208,7 +208,7 @@ local keys = {
   },
 
   {
-    key = 'x',
+    key = 'v',
     mods = 'SHIFT|' .. key_mod_panes,
     action = act.ActivateCopyMode,
   },
@@ -391,7 +391,7 @@ wezterm.on('update-right-status', function(window, pane)
   local status = (#process > 0 and ' | ' or '')
   local name = window:active_key_table()
   if name then
-    status = string.format('󰌌  {%s}', name)
+    status = string.format('󰌌  { %s }', name)
   end
 
   if window:get_dimensions().is_full_screen then
