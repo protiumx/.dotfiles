@@ -36,7 +36,6 @@ function M.setup()
     fold_open = '', -- icon used for open folds
     group = true, -- group results by file
     height = 10, -- height of the trouble list when position is top or bottom
-    icons = true, -- use devicons for filenames
     include_declaration = { 'lsp_references', 'lsp_implementations', 'lsp_definitions' }, -- for the given modes, include the declaration of the current symbol in the results
     indent_lines = true, -- add an indent guide below the fold icons
     mode = 'workspace_diagnostics', -- "workspace_diagnostics", "document_diagnostics", "quickfix", "lsp_references", "loclist"
