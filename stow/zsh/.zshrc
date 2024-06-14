@@ -53,11 +53,9 @@ autoload -Uz compinit && compinit
 
 zinit cdreplay -q
 
-# bindkey "^p" history-search-backward
-# bindkey "^n" history-search-forward
-#
 set completion-ignore-case on
 set match-hidden-files off # do not autocomplete hidden files unless the pattern explicitly begins with a dot
+unset zle_bracketed_paste
 
 # options
 setopt multios              # enable redirect to multiple streams: echo >file1 >file2
@@ -70,6 +68,7 @@ HISTFILE=$HOME/.zsh_history
 SAVEHIST=$HISTSIZE
 HISTIGNORE="ls:ls *:cd:cd -:pwd;exit:date:* --help:* -h:* help:* -v:* --version:* version"
 HISTDUP=erase
+WORDCHARS="*?[]~=&;!#$%^(){}<>" # allows to stop deletion on ./-_
 
 setopt auto_menu         # show completion menu on successive tab press
 setopt complete_in_word
@@ -93,6 +92,7 @@ autoload -U down-line-or-beginning-search
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 
+bindkey -e
 bindkey "^[[A" up-line-or-beginning-search
 bindkey "^[[B" down-line-or-beginning-search
 
@@ -104,11 +104,6 @@ fi
 if [[ -n "${terminfo[kcud1]}" ]]; then
   bindkey "${terminfo[kcud1]}" down-line-or-beginning-search
 fi
-
-# [Ctrl-RightArrow] - move forward one word
-bindkey '^[[1;5C' forward-word
-# [Ctrl-LeftArrow] - move backward one word
-bindkey '^[[1;5D' backward-word
 
 # Enable option-stacking for docker (i.e docker run -it <TAB>)
 zstyle ':completion:*:*:docker:*' option-stacking yes
@@ -173,6 +168,7 @@ alias ls="eza --group-directories-first -G --color auto --icons -a -s type"
 alias ll="eza --group-directories-first -l --color always --icons -a -s type"
 
 # Golang
+export GOTOOLCHAIN="local"
 export GOPATH="$HOME/go"
 [ -d "$GOPATH/bin" ] && PATH="$GOPATH/bin:$PATH"
 
