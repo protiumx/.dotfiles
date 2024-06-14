@@ -70,7 +70,7 @@
 
 [help]
   # Run corrected command after 1 second
-  autocorrect = 1
+  autocorrect = 20
 
 [delta]
   navigate = true  # use n and N to move between diff sections
