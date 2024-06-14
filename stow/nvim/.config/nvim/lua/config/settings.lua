@@ -8,6 +8,7 @@ vim.g.omni_sql_no_default_maps = 1
 vim.cmd([[
   syntax sync minlines=3000
   filetype plugin indent on
+  set iskeyword-=_
   set fillchars=diff:\ ,
   set pumheight=20
   set undolevels=100
