@@ -22,6 +22,7 @@ function M.setup()
     icons = false,
     lsp_cfg = false,
     lsp_document_formatting = false,
+    lsp_codelens = false,
     lsp_inlay_hints = {
       enable = false,
       title_colors = 'nord',
