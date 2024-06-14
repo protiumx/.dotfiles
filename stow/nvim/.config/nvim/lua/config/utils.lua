@@ -1,4 +1,4 @@
-local nvim = require('config.nvim')
+-- local nvim = require('config.nvim')
 local state = require('config.state')
 
 local M = {}
@@ -34,11 +34,7 @@ end
 
 ---Open the file under cursor in existing window if available, else open a new vsplit
 function M.open_file_under_cursor()
-  local file = nvim.file_under_cursor()
-  if file == nil then
-    return
-  end
-
+  local file = vim.fn.expand('<cfile>')
   local parts = vim.split(file, ':')
   local pos_cmd = string.format('call cursor(%s, %s)', parts[2], #parts == 3 and parts[3] or '0')
 
