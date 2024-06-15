@@ -1,6 +1,6 @@
 local M = {}
 
-function M.setup()
+function M.config()
   require('trouble').setup({
     action_keys = { -- key mappings for actions in the trouble list
       -- map to {} to remove a mapping, for example:

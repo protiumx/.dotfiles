@@ -68,7 +68,7 @@ local function lsp_symbol()
   return require('lspsaga.symbol.winbar'):get_bar() or ''
 end
 
-function M.setup()
+function M.config()
   local icons = require('config.icons').lsp
 
   local file_section = {

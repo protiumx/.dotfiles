@@ -1,6 +1,6 @@
 local M = {}
 
-function M.setup()
+function M.config()
   local function map(mode, l, r, desc)
     local opts = { silent = true, desc = desc }
     vim.keymap.set(mode, l, r, opts)

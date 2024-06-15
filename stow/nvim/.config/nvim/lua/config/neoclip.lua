@@ -1,6 +1,6 @@
 local M = {}
 
-function M.setup()
+function M.config()
   local function is_whitespace(line)
     return vim.fn.match(line, [[^\s*$]]) ~= -1
   end

@@ -81,7 +81,7 @@ local sources = {
   },
 }
 
-function M.setup()
+function M.config()
   local cmp = require('cmp')
   local compare = require('cmp.config.compare')
   local types = require('cmp.types')

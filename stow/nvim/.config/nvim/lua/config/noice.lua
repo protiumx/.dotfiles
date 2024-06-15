@@ -2,7 +2,7 @@ local ui = require('config.ui')
 
 local M = {}
 
-function M.setup()
+function M.config()
   local win_highlights = {
     NormalFloat = 'NormalFloat',
     FloatBorder = 'FloatBorder',

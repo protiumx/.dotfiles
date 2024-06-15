@@ -125,7 +125,7 @@ local function configure_debuggers()
   }
 end
 
-function M.setup()
+function M.config()
   configure_symbols()
   configure_ui()
   configure_debuggers()

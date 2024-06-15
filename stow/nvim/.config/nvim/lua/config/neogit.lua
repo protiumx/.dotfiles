@@ -1,6 +1,6 @@
 local M = {}
 
-function M.setup()
+function M.config()
   local neogit = require('neogit')
 
   neogit.setup({

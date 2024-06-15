@@ -1,6 +1,6 @@
 local M = {}
 
-function M.setup()
+function M.config()
   ---@diagnostic disable-next-line: redundant-parameter
   require('go').setup({
     comment_placeholder = '',

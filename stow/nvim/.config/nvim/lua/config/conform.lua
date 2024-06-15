@@ -1,6 +1,6 @@
 local M = {}
 
-function M.setup()
+function M.config()
   local conform = require('conform')
   conform.setup({
     format_on_save = {

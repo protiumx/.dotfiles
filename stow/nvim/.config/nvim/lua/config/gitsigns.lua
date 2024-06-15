@@ -47,7 +47,7 @@ local function on_attach(bufnr)
   map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', '[Git] Hunk Text Object')
 end
 
-function M.setup()
+function M.config()
   require('gitsigns').setup({
     attach_to_untracked = true,
     current_line_blame_opts = {

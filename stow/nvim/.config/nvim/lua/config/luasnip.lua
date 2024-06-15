@@ -5,7 +5,7 @@ local M = {}
 local ISO_FORMAT = '%Y-%m-%dT%H:%M:%S'
 local BUILD_DATE = '%Y%m%d%H%M'
 
-function M.setup()
+function M.config()
   local ls = require('luasnip')
   local fmt = require('luasnip.extras.fmt').fmt
   -- local postfix = require('luasnip.extras.postfix').postfix

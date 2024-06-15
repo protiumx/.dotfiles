@@ -158,7 +158,7 @@ end
 
 local M = {}
 
-function M.setup()
+function M.config()
   vim.api.nvim_create_augroup('startup', { clear = true })
   vim.api.nvim_create_autocmd('VimEnter', {
     group = 'startup',
@@ -180,7 +180,6 @@ function M.setup()
       end
     end,
   })
-  local trouble = require('trouble.providers.telescope')
 
   local fb_actions = require('telescope').extensions.file_browser.actions
 
@@ -225,7 +224,9 @@ function M.setup()
           ['<M-q>s'] = telescope_actions.send_selected_to_qflist + telescope_actions.open_qflist,
           ['<M-q>a'] = 'add_selected_to_qflist',
           ['<M-Q>'] = telescope_actions.send_to_qflist + telescope_actions.open_qflist,
-          ['<C-t>'] = require('trouble.sources.telescope').open,
+          ['<C-t>'] = function()
+            require('trouble.sources.telescope').open()
+          end,
         },
         n = {
           ['q'] = 'close',
