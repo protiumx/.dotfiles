@@ -212,6 +212,7 @@ _fzf_compgen_dir() {
 }
 
 PATH="$(brew --prefix)/opt/python@3.11/libexec/bin:$PATH"
+PATH="$HOME/.dotfiles/bin:$PATH"
 export PATH
 
 # Source all profile files
