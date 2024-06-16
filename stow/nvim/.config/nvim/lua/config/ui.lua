@@ -1,6 +1,3 @@
-local Popup = require('nui.popup')
-local event = require('nui.utils.autocmd').event
-
 -- Global for all plugins and internal views
 local M = {
   winblend = 12,
@@ -36,6 +33,9 @@ local nui_popup_base = {
 
 ---@param opts table|nil
 function M.popup(opts)
+  local Popup = require('nui.popup')
+  local event = require('nui.utils.autocmd').event
+
   local popup = Popup(vim.tbl_extend('force', nui_popup_base, opts or {}))
 
   popup:map('n', 'q', function()

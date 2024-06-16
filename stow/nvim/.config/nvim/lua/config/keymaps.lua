@@ -1,7 +1,7 @@
+local utils = require('config.utils')
+
 local macos = jit.os == 'OSX'
 local system_clip_reg = macos and '*' or '+'
-
-local utils = require('config.utils')
 
 vim.g.mapleader = ' '
 vim.keymap.set('i', '<C-c>', '<Esc>', { silent = true })
@@ -27,18 +27,6 @@ vim.keymap.set('n', 'G', 'Gzz', { silent = true })
 
 vim.keymap.set({ 'n', 'v' }, 'H', '^', { silent = true })
 vim.keymap.set({ 'n', 'v' }, 'L', '$', { silent = true })
-vim.keymap.set(
-  'n',
-  '<Leader>gF',
-  utils.open_file_under_cursor,
-  { silent = true, desc = 'Opens the file under cursor and sets position' }
-)
-vim.keymap.set(
-  'n',
-  '<Leader>ge',
-  utils.open_file_from_error,
-  { silent = true, desc = 'Opens the file from errorformat and sets position' }
-)
 -- Move lines up/down preserving format
 vim.keymap.set('n', '<M-j>', ':m .+1<CR>==', { silent = true })
 vim.keymap.set('n', '<M-k>', ':m .-2<CR>==', { silent = true })
@@ -180,6 +168,20 @@ vim.keymap.set('n', '<Leader>L', function()
   vim.fn.setreg(system_clip_reg, path)
   print('Copied: ' .. path)
 end, { desc = 'Copy current path with line and column to reg ' .. system_clip_reg })
+
+vim.keymap.set(
+  'n',
+  '<Leader>gF',
+  utils.open_file_under_cursor,
+  { silent = true, desc = 'Opens the file under cursor and sets position' }
+)
+
+vim.keymap.set(
+  'n',
+  '<Leader>ge',
+  utils.open_file_from_error,
+  { silent = true, desc = 'Opens the file from errorformat and sets position' }
+)
 
 vim.keymap.set('n', '<Leader>s', '<cmd>w<CR>', { desc = 'Quick save' })
 vim.keymap.set('n', '<Leader>G', 'g<C-g>', { desc = 'File stats' })

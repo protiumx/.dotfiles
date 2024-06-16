@@ -102,7 +102,7 @@ local base_groups = {
   TelescopeResultsNormal = { link = 'XMenu' },
   -- TelescopeResultsTitle = { fg = colors.background, bg = colors.light_orange },
   -- TelescopeSelectionCaret = { fg = colors.red, bg = 'none' },
-  -- TelescopeSelection = { fg = colors.orange, bg = 'none' },
+  TelescopeSelection = { fg = colors.orange, bg = 'none' },
   -- vim-sandwich
   OperatorSandwichBuns = { fg = colors.background, bg = colors.green },
   OperatorSandwichChange = { fg = colors.background, bg = colors.yellow },
@@ -170,6 +170,10 @@ local base_groups = {
   -- DevIconDefault          = { fg = colors.dark_orange, bg = 'none' },
 }
 
+local function extend_highlight(hl, config)
+  return vim.tbl_extend('force', vim.api.nvim_get_hl(0, { name = hl }) or {}, config)
+end
+
 local function overrides()
   return {
     -- Title = vim.tbl_extend(
@@ -178,46 +182,14 @@ local function overrides()
     --   { bg = colors.background }
     -- ),
 
-    DiagnosticVirtualTextError = vim.tbl_extend(
-      'force',
-      vim.api.nvim_get_hl(0, { name = 'DiagnosticVirtualTextError' }) or {},
-      { bg = 'none' }
-    ),
-    DiagnosticVirtualTextWarn = vim.tbl_extend(
-      'force',
-      vim.api.nvim_get_hl(0, { name = 'DiagnosticVirtualTextWarn' }) or {},
-      { bg = 'none' }
-    ),
-    DiagnosticVirtualTextInfo = vim.tbl_extend(
-      'force',
-      vim.api.nvim_get_hl(0, { name = 'DiagnosticVirtualTextInfo' }) or {},
-      { bg = 'none' }
-    ),
-    DiagnosticVirtualTextHint = vim.tbl_extend(
-      'force',
-      vim.api.nvim_get_hl(0, { name = 'DiagnosticVirtualTextHint' }) or {},
-      { bg = 'none' }
-    ),
-    DiagnosticSignError = vim.tbl_extend(
-      'force',
-      vim.api.nvim_get_hl(0, { name = 'DiagnosticSignError' }) or {},
-      { bg = 'none' }
-    ),
-    DiagnosticSignWarn = vim.tbl_extend(
-      'force',
-      vim.api.nvim_get_hl(0, { name = 'DiagnosticSignWarn' }) or {},
-      { bg = 'none' }
-    ),
-    DiagnosticSignInfo = vim.tbl_extend(
-      'force',
-      vim.api.nvim_get_hl(0, { name = 'DiagnosticSignInfo' }) or {},
-      { bg = 'none' }
-    ),
-    DiagnosticSignHint = vim.tbl_extend(
-      'force',
-      vim.api.nvim_get_hl(0, { name = 'DiagnosticSignHint' }) or {},
-      { bg = 'none' }
-    ),
+    DiagnosticVirtualTextError = extend_highlight('DiagnosticVirtualTextError', { bg = 'none' }),
+    DiagnosticVirtualTextWarn = extend_highlight('DiagnosticVirtualTextWarn', { bg = 'none' }),
+    DiagnosticVirtualTextInfo = extend_highlight('DiagnosticVirtualTextInfo', { bg = 'none' }),
+    DiagnosticVirtualTextHint = extend_highlight('DiagnosticVirtualTextHint', { bg = 'none' }),
+    DiagnosticSignError = extend_highlight('DiagnosticSignError', { bg = 'none' }),
+    DiagnosticSignWarn = extend_highlight('DiagnosticSignWarn', { bg = 'none' }),
+    DiagnosticSignInfo = extend_highlight('DiagnosticSignInfo', { bg = 'none' }),
+    DiagnosticSignHint = extend_highlight('DiagnosticSignHint', { bg = 'none' }),
   }
 end
 

@@ -1,5 +1,3 @@
-local Path = require('plenary.path')
-
 GlobalState = GlobalState or {}
 GlobalState.marked_buffers = GlobalState.marked_buffers or {}
 GlobalState.marked_files = GlobalState.marked_files or {}
@@ -30,6 +28,8 @@ function state.get(key)
 end
 
 function state.toggle_buffer_mark(bufnr)
+  local Path = require('plenary.path')
+
   if GlobalState.marked_buffers[bufnr] then
     GlobalState.marked_buffers[bufnr] = nil
   else
