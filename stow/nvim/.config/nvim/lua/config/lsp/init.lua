@@ -54,7 +54,7 @@ local M = {
   on_lsp_attach = on_lsp_attach,
 }
 
-function M.config()
+function M.setup()
   local icons = require('config.icons').lsp
 
   vim.lsp.set_log_level('error')
