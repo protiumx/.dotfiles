@@ -1,3 +1,4 @@
+auth
 api
 init
 apis
@@ -44,3 +45,19 @@ postgres
 http
 https
 localhost
+params
+fql
+gql
+graphql
+sql
+workspace
+metadata
+uuids
+sdm
+sdmf
+cid
+expr
+ubuntu
+url
+unmarshal
+func
