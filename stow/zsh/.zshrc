@@ -211,7 +211,7 @@ _fzf_compgen_dir() {
 	fd --type d --hidden --follow --exclude ".git/" . "$1"
 }
 
-PATH="$(brew --prefix)/opt/python@3.11/libexec/bin:$PATH"
+PATH="$(brew --prefix)/opt/python@3.12/libexec/bin:$PATH"
 PATH="$HOME/.dotfiles/bin:$PATH"
 export PATH
 
