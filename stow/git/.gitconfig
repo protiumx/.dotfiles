@@ -109,7 +109,7 @@
   dd = !git --no-pager diff
 
   # Clean up all current changes
-  discard = "!f() { git checkout main -- ${1:-.}; }; f"
+  discard = "!f() { git restore ${1:-.}; }; f"
 
   # Filter the commit logs messages with the provided string
   filter = "!f() { git logs --grep=$1; }; f"
