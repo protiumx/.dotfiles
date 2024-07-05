@@ -220,6 +220,7 @@ return function()
           ['<M-Up>'] = 'cycle_history_prev',
           ['<M-a>'] = 'toggle_all', -- select/deselect all entries
           ['<M-i>'] = 'insert_symbol_i',
+          ['<M-q>'] = false,
           ['<M-q>s'] = telescope_actions.send_selected_to_qflist + telescope_actions.open_qflist,
           ['<M-q>a'] = 'add_selected_to_qflist',
           ['<M-Q>'] = telescope_actions.send_to_qflist + telescope_actions.open_qflist,

@@ -110,7 +110,7 @@ return {
         },
         position = { row = 2, col = 0 },
         win_options = {
-          wrap = false,
+          wrap = true,
           winblend = 0,
           linebreak = true,
           winhighlight = win_highlights,

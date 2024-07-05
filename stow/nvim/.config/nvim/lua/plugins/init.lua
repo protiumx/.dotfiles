@@ -87,7 +87,7 @@ return {
 
   {
     'norcalli/nvim-colorizer.lua',
-    cmd = { 'ColorizerToggle', 'ColorizerAttachToBuffer' },
+    cmd = { 'ColorizerToggle' },
     opts = {
       user_default_options = {
         RGB = false,
