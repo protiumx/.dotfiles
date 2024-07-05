@@ -51,6 +51,11 @@ return {
   cond = function()
     return vim.fn.isdirectory(vim.fn.getcwd() .. '/.git/')
   end,
+  init = function()
+    vim.api.nvim_set_hl(0, 'GitSignsUntracked', { link = 'GitSignsAdd' })
+    vim.api.nvim_set_hl(0, 'GitSignsUntrackedNr', { link = 'GitSignsAddNr' })
+    vim.api.nvim_set_hl(0, 'GitSignsUntrackedLn', { link = 'GitSignsAddLn' })
+  end,
   opts = {
     attach_to_untracked = true,
     current_line_blame_opts = {
@@ -70,10 +75,7 @@ return {
     },
     signs = {
       untracked = {
-        hl = 'GitSignsAdd',
         text = '┃',
-        numhl = 'GitSignsAddNr',
-        linehl = 'GitSignsAddLn',
       },
     },
   },
