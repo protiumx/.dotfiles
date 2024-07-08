@@ -15,6 +15,12 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local lazy_config = {
+  change_detection = {
+    enabled = false,
+  },
+  git = {
+    log = { '-10' },
+  },
   ui = {
     -- a number <1 is a percentage., >1 is a fixed size
     size = { width = 0.8, height = 0.8 },
