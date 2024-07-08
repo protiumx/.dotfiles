@@ -167,6 +167,12 @@ return function()
 
     preselect = cmp.PreselectMode.Item,
 
+    view = {
+      entries = {
+        follow_cursor = true,
+      }
+    },
+
     mapping = cmp.mapping.preset.insert({
       ['<CR>'] = cmp.mapping.confirm({
         select = true,
