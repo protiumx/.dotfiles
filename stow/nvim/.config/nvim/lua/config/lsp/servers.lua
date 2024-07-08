@@ -118,7 +118,6 @@ local servers = {
   },
   lua_ls = {
     Lua = {
-      completion = { callSnippet = 'Both' },
       diagnostics = {
         globals = { 'vim', 'jit' },
         neededFileStatus = true,
