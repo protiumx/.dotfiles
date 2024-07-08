@@ -79,7 +79,7 @@ return {
       recent_commit_count = 10,
     },
     commit_editor = {
-      kind = 'split',
+      kind = 'split_above',
     },
     commit_select_view = {
       kind = 'split',
@@ -118,7 +118,6 @@ return {
     -- Each Integration is auto-detected through plugin presence, however, it can be disabled by setting to `false`
     integrations = {
       telescope = nil,
-      diffview = nil,
       fzf_lua = nil,
     },
     sections = {
