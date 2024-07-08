@@ -128,6 +128,7 @@ vim.keymap.set(
 )
 vim.keymap.set({ 'n', 'v' }, '<Leader>D', '"_d', { silent = true, desc = 'Delete to blackwhole' })
 vim.keymap.set({ 'n', 'v' }, '<Leader>C', '"_c', { silent = true, desc = 'Delete to blackwhole' })
+
 -- Delete shortcuts
 vim.keymap.set({ 'n', 'v' }, '<Leader>d_', 'dt_')
 vim.keymap.set({ 'n', 'v' }, '<Leader>d-', 'dt-')
@@ -149,6 +150,9 @@ vim.keymap.set(
   [[:%s/\<<C-r><C-w>\>//g<Left><Left>]],
   { desc = 'Prepare current word sustituion buffer wise' }
 )
+vim.keymap.set('n', '<C-s>', function()
+  vim.o.hlsearch = not vim.o.hlsearch
+end, { desc = 'Toggle hlsearch' })
 -- Join line with cursor at beginning of line using z as mark
 vim.keymap.set('n', 'J', 'mzJ`z', { silent = true })
 vim.keymap.set(
@@ -198,7 +202,7 @@ vim.keymap.set('i', '<M-a>', '<Esc>ggVG', { silent = true })
 
 vim.keymap.set('n', '<C-_>', 'gcc', { remap = true })
 vim.keymap.set('n', '<C-/>', 'gcc', { remap = true })
-vim.keymap.set('v', '<C-_>', 'gcc', { remap = true })
+vim.keymap.set('v', '<C-_>', 'gc', { remap = true })
 vim.keymap.set('v', '<C-/>', 'gcc', { remap = true })
 vim.keymap.set('i', '<C-/>', '<C-o>gcc', { remap = true })
 vim.keymap.set('i', '<C-_>', '<C-o>gcc', { remap = true })
