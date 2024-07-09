@@ -12,6 +12,7 @@ return {
     'json',
     'lua',
     'ocaml',
+    'proto',
     'python',
     'rust',
     'sh',
