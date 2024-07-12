@@ -3,6 +3,7 @@ api
 init
 apis
 uuid
+uuids
 uid
 golang
 lsp
@@ -61,3 +62,6 @@ ubuntu
 url
 unmarshal
 func
+param
+utils
+nullable

@@ -1,5 +1,27 @@
 return function()
   local conform = require('conform')
+  conform.setup({
+    format_on_save = {
+      timeout_ms = 1000,
+      lsp_fallback = true,
+    },
+    formatters = {
+      goimports = {
+        prepend_args = { '-local', 'go.crwd.dev,github.com/CrowdStrike' },
+      },
+    },
+    formatters_by_ft = {
+      go = { 'goimports', 'gofumpt' },
+      html = { 'prettier' },
+      javascript = { 'prettier' },
+      json = { 'prettier' },
+      lua = { 'stylua' },
+      markdown = { 'marksman' },
+      ocaml = { 'ocamlformat' },
+      proto = { 'buf' },
+      python = { 'black' },
+    },
+  })
 
   vim.api.nvim_create_user_command('Format', function(args)
     local range = nil
