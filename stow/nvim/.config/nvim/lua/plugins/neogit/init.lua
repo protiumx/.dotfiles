@@ -6,7 +6,7 @@ return {
   },
   cmd = 'Neogit',
   keys = {
-    { '<M-d>', '<cmd>Neogit<CR>', desc = 'Open Neogit', silent = true },
+    { '<M-n>', '<cmd>Neogit<CR>', desc = 'Open Neogit', silent = true },
   },
   opts = {
     -- Hides the hints at the top of the status buffer
