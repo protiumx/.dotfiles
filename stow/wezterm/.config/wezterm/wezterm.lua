@@ -374,7 +374,7 @@ wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_wid
   }
 end)
 
-local background = '#0a0a00'
+local background = '#161616'
 wezterm.on('update-right-status', function(window, pane)
   local process = ''
 
@@ -505,6 +505,7 @@ local config = {
     PATH = '/opt/homebrew/bin:/home/bmayo/.go/current/bin:' .. os.getenv('PATH'),
   },
   show_new_tab_button_in_tab_bar = false,
+  show_close_tab_button_in_tabs = false,
   switch_to_last_active_tab_when_closing_tab = true,
   tab_max_width = 80,
   underline_position = -4,
