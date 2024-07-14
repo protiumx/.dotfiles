@@ -24,6 +24,26 @@ return {
     lazy = false,
     priority = 1000,
   },
+  -- {
+  --   'cranberry-clockworks/coal.nvim',
+  --   config = function()
+  --       require('coal').setup({
+  --         -- colors = {
+  --         --   anti_flash_white = '#cfcbc9'
+  --         -- }
+  --       })
+  --   end
+  -- },
+  {
+    'zenbones-theme/zenbones.nvim',
+    init = function()
+      vim.g['zenbones_compat'] = 1
+    end,
+    config = function()
+      vim.cmd('colorscheme zenwritten')
+    end,
+    dependencies = { 'rktjmp/lush.nvim' },
+  },
 
   {
     'MunifTanjim/nui.nvim',
