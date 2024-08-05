@@ -34,11 +34,12 @@ local function on_attach(bufnr)
   end, '[Git] Blame line full')
   map('n', '<C-g>tb', gs.toggle_current_line_blame, '[Git] Toggle line blame')
   map('n', '<C-g>td', gs.toggle_deleted, '[Git] Toggle deleted preview')
+  map('n', '<C-g>hp', gs.preview_hunk, '[Git] Preview hunk')
+
   map('n', '<C-g>hr', gs.reset_hunk, '[Git] Reset hunk')
   map('v', '<C-g>hr', function()
     gs.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') })
   end)
-  map('n', '<C-g>hp', gs.preview_hunk, '[Git] Preview hunk')
   map('n', '<C-g>br', gs.reset_buffer)
 
   -- Text object
