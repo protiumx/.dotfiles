@@ -159,7 +159,7 @@ vim.keymap.set(
   'v',
   '<Leader>/',
   '"yy/<C-R>y<CR>',
-  { desc = 'Yunk selected text into "y and put it in search' }
+  { desc = 'Yank selected text into "y and put it in search' }
 )
 vim.keymap.set('n', '<Leader>P', function()
   local path = vim.fn.expand('%:~:.')

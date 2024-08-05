@@ -89,6 +89,7 @@ local servers = {
     filetypes = { 'sh', 'zsh' },
   },
   gopls = {
+    buildFlags = { '-tags=stack' },
     analyses = {
       unusedparams = true,
       unusedvariable = true,
