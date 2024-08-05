@@ -9,6 +9,7 @@ vim.cmd([[
   syntax sync minlines=3000
   filetype plugin indent on
   set iskeyword-=_
+  set iskeyword-==
   set fillchars=diff:\ ,
   set pumheight=20
   set undolevels=100
@@ -74,7 +75,7 @@ vim.opt.spelloptions = 'camel'
 vim.opt.showmode = false
 vim.opt.startofline = false
 
-vim.opt.wildmode = 'full'     -- Shows a menu bar as opposed to an enormous list
+vim.opt.wildmode = 'full' -- Shows a menu bar as opposed to an enormous list
 vim.opt.wildignorecase = true -- Ignore case when completing file names and directories
 vim.opt.wildignore = {
   '*.o',
