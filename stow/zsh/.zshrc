@@ -68,7 +68,7 @@ HISTFILE=$HOME/.zsh_history
 SAVEHIST=$HISTSIZE
 HISTIGNORE="ls:ls *:cd:cd -:pwd;exit:date:* --help:* -h:* help:* -v:* --version:* version"
 HISTDUP=erase
-WORDCHARS="*?[]~=&;!#$%^(){}<>" # allows to stop deletion on ./-_
+WORDCHARS="*?[]~&;!#$%^(){}<>" # allows to stop deletion on ./-_=
 
 setopt auto_menu         # show completion menu on successive tab press
 setopt complete_in_word
