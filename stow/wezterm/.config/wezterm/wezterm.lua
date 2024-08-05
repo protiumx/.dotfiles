@@ -88,6 +88,12 @@ local keys = {
   },
 
   {
+    key = 'W',
+    mods = key_mod_panes .. '|SHIFT',
+    action = wezterm.action.CloseCurrentTab({ confirm = true }),
+  },
+
+  {
     key = 'z',
     mods = key_mod_panes,
     action = act.TogglePaneZoomState,
@@ -511,7 +517,7 @@ local config = {
   underline_position = -4,
   use_fancy_tab_bar = true,
   -- window_background_opacity = 1,
-  window_background_opacity = 0.6,
+  -- window_background_opacity = 0.6,
   -- macos_window_background_blur = 10,
   window_decorations = 'RESIZE',
   window_frame = {
