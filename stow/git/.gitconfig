@@ -123,9 +123,11 @@
   lp = log --pretty=format:'%Cred%h%Creset %C(yellow)%d%Creset %s %Cgreen(%cr)%Creset - %C(magenta)%cn%Creset' --abbrev-commit --date=relative
 
   main = !git checkout main && git pull
+  development = !git checkout development && git pull
+  integration = !git checkout integration && git pull
 
   # Clean up merged branches to a given branch ("main" is default)
-  purge = "!f() { git branch --merged ${1-main} | grep -v " ${1-main}$" | xargs -r git branch -d; }; f"
+  purge = "!f() { git branch --merged ${1-main} | grep -v " ${1:-main}$" | xargs -r git branch -d; }; f"
 
   pwl = push --force-with-lease
 
@@ -145,7 +147,7 @@
   stash-all = stash save --include-untracked
 
   # Pull rebase remote main
-  sync = !git pull origin main --rebase
+  sync = "!f() { git pull origin ${1:-main} --rebase; }; f"
 
   # List tags and sort them by version number
   tags = tag -l --sort=-version:refname
