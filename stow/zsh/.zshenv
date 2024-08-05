@@ -247,6 +247,10 @@ rand() {
   openssl rand -base64 "${1:-10}"
 }
 
+docker-down() {
+  docker stop $(docker ps -a -q)
+}
+
 # Aliases
 
 alias cat="bat -p --paging=never --theme='TwoDark'"
