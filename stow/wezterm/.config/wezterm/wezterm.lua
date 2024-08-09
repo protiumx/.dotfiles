@@ -34,7 +34,7 @@ local keys = {
 
   {
     key = '?',
-    mods = 'CMD|SHIFT',
+    mods = 'CMD|CTRL',
     action = wezterm.action_callback(function()
       state.debug_mode = not state.debug_mode
     end),
