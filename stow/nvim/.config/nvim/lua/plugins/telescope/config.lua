@@ -165,6 +165,10 @@ return function()
     callback = function()
       -- Do not open for man pages
       for _, param in ipairs(vim.v.argv) do
+        if param == '-' then
+          return
+        end
+
         if string.find(param, '+Man') then
           return
         end
