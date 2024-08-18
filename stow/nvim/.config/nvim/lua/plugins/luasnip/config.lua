@@ -6,13 +6,13 @@ local BUILD_DATE = '%Y%m%d%H%M'
 return function()
   local ls = require('luasnip')
   local fmt = require('luasnip.extras.fmt').fmt
-  -- local postfix = require('luasnip.extras.postfix').postfix
+  local postfix = require('luasnip.extras.postfix').postfix
   local types = require('luasnip.util.types')
 
   local snippet = ls.snippet
 
   -- local d = ls.dynamic_node
-  -- local f = ls.function_node
+  local f = ls.function_node
   local i = ls.insert_node
   -- local sn = ls.snippet_node
   -- local t = ls.text_node
@@ -102,20 +102,24 @@ return function()
       p(os.date, BUILD_DATE),
     }),
 
-    --   postfix({
-    --     trig = '.toiso',
-    --     name = 'epoch to ISO',
-    --     match_pattern = '(%d)+$',
-    --     docTrig = '0',
-    --   }, {
-    --     f(function(_, parent)
-    --       if #parent.snippet.env.POSTFIX_MATCH < 9 then
-    --         return os.date(ISO_FORMAT)
-    --       end
-    --       return os.date(ISO_FORMAT, tonumber(parent.snippet.env.POSTFIX_MATCH))
-    --     end, {}),
-    --   }),
-  }, { key = 'all' })
+    postfix({
+      trig = '.toiso',
+      name = 'epoch to ISO',
+      match_pattern = '%d+',
+      docTrig = '0',
+    }, {
+      f(function(_, parent)
+        local ret = ''
+        print(vim.inspect(parent.snippet.env))
+        if #parent.snippet.env.POSTFIX_MATCH < 9 then
+          ret = os.date(ISO_FORMAT)
+        else
+          ret = os.date(ISO_FORMAT, tonumber(parent.snippet.env.POSTFIX_MATCH))
+        end
+        return ret
+      end, {}),
+    }),
+  }, {})
 
   require('config.snippets.go').setup()
 end
