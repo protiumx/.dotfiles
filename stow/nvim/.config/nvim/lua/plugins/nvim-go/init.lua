@@ -1,3 +1,4 @@
+local config = require('config.lsp').config
 return {
   'ray-x/go.nvim',
   ft = { 'go' },
@@ -15,7 +16,7 @@ return {
     dap_debug = false,
     -- duplicate from ./init.lua
     diagnostic = {
-      virtual_text = true,
+      virtual_text = config.virtual_text,
       underline = false,
       severity_sort = true,
       signs = false,
@@ -33,11 +34,11 @@ return {
     lsp_codelens = false,
     lsp_inlay_hints = {
       enable = false,
-      title_colors = 'nord',
     },
     lsp_keymaps = false,
-    luasnip = true,
+    luasnip = false,
     run_in_floaterm = true,
+    textobjects = false,
     test_runner = 'go',
     trouble = true,
   },
