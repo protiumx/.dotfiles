@@ -11,21 +11,32 @@ local t = ls.text_node
 local f = ls.function_node
 local d = ls.dynamic_node
 local c = ls.choice_node
+local postfix = require('luasnip.extras.postfix').postfix
 
 local get_node_text = vim.treesitter.get_node_text
+
+local function in_test_file()
+  local filename = vim.fn.expand('%:p')
+  return vim.endswith(filename, '_test.go')
+end
+
+local snip_test_file = {
+  show_condition = in_test_file,
+  condition = in_test_file,
+}
 
 local function error_choices(info)
   return c(info.index, {
     t(info.err_name),
 
     fmt('fmt.Error("{}: %v", {})', {
-      i(1, info.func_name .. ' failed'),
+      i(1, 'fail'),
       t(info.err_name),
     }),
 
     fmt('errors.Wrap({}, "{}")', {
       t(info.err_name),
-      i(1, info.func_name .. ' failed'),
+      i(1, 'fail'),
     }),
   })
 end
@@ -167,17 +178,38 @@ if <err_r> != nil {
 ]]
 
 local test_tpl = [[
-func Test<name>(t *testint.T) {
-  tests := map[string]struct{
-    <struct>
-  }{}
+func Test<>(t *testing.T) {
+  tests := []struct{
+    name string
+    <>
+  }{
+    <>
+  }
 
-  for name, tt := range tests {
-    t.Run(name, func (t *testing.T) {
+  for _, tt := range tests {
+    t.Run(tt.name, func (t *testing.T) {
+      <>
     })
   }
 }
 ]]
+
+local bench_tpl = [[
+func Benchmark<>(b *testing.B) {
+  for i := 0; i << b.N; i++ {
+    <>(<>)
+  }
+}
+]]
+
+local call_tpl = [[
+<> := <>
+if err != nil {
+  return <>
+}
+]]
+
+local treesitter_postfix = require('luasnip.extras.treesitter_postfix').treesitter_postfix
 
 return {
   setup = function()
@@ -195,22 +227,60 @@ return {
         })
       ),
 
-      -- ls.s(
-      --   {
-      --     name = 'Go Test',
-      --     trig = 'Test(%S+)',
-      --     trigEngine = 'pattern',
-      --     reTrig = true,
-      --     docTrig = 'TestXXX',
-      --   },
-      --   d(1, function(_, parent)
-      --     print(vim.inspect(parent.captures))
-      --     return fmta(test_tpl, {
-      --       name = parent.captures[1],
-      --       struct = i(1),
-      --     })
-      --   end)
-      -- ),
+      ls.s(
+        { trig = 'Test([%w_%d]+)', regTrig = true, docTrig = 'TestXXX' },
+        d(1, function(_, parent)
+          return sn(
+            1,
+            fmta(test_tpl, {
+              t(parent.snippet.captures[1]),
+              i(2),
+              i(3),
+              i(4),
+            })
+          )
+        end),
+        snip_test_file
+      ),
+
+      ls.s(
+        { trig = 'tdt', name = 'Table driven test' },
+        fmta(test_tpl, {
+          i(1),
+          i(2),
+          i(3),
+          i(4),
+        }),
+        snip_test_file
+      ),
+
+      ls.s(
+        { trig = 'bench', name = 'bench test cases ', dscr = 'Create benchmark test' },
+        fmta(bench_tpl, {
+          ls.i(1, 'Fn'),
+          rep(1),
+          ls.i(2, 'args'),
+        }),
+        snip_test_file
+      ),
+
+      postfix({
+        trig = '.call1',
+        name = 'wrap call with if err',
+        match_pattern = '^%w+%(%.*%)+$',
+        docTrig = 'fn()',
+      }, {
+        d(1, function(_, parent)
+          return sn(
+            1,
+            fmta(call_tpl, {
+              t('err'),
+              t(parent.snippet.env.POSTFIX_MATCH),
+              i(1),
+            })
+          )
+        end),
+      }),
     })
   end,
 }
