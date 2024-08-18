@@ -46,6 +46,19 @@ return {
       mode = { 'i', 's' },
       silent = true,
     },
+
+    {
+      '<C-x>',
+      function()
+        require('luasnip').expand({
+          jump_into_func = function(snip)
+            return snip:jump_into(2)
+          end,
+        })
+      end,
+      mode = { 'i' },
+      silent = true,
+    },
   },
   config = function()
     require('plugins.luasnip.config')()
