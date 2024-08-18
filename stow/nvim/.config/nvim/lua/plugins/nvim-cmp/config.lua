@@ -83,7 +83,6 @@ return function()
   local cmp = require('cmp')
   local compare = require('cmp.config.compare')
   local types = require('cmp.types')
-  local luasnip = require('luasnip')
 
   local excluded_ftypes = {
     sagarename = true,
@@ -112,7 +111,7 @@ return function()
 
     snippet = {
       expand = function(args)
-        luasnip.lsp_expand(args.body)
+        require('luasnip').lsp_expand(args.body)
       end,
     },
 
@@ -198,6 +197,7 @@ return function()
         end
       end, { 'i', 's' }),
       ['<C-k>'] = cmp.mapping(function(fallback)
+        local luasnip = require('luasnip')
         if luasnip.expand_or_jumpable() then
           luasnip.expand_or_jumpable()
         else
@@ -206,6 +206,16 @@ return function()
       end, { 'i', 's' }),
     }),
   })
+
+  vim.keymap.set('i', '<C-O>', function()
+    cmp.complete({
+      config = {
+        sources = {
+          { name = 'luasnip' },
+        },
+      },
+    })
+  end)
 
   vim.api.nvim_create_autocmd('FileType', {
     group = vim.api.nvim_create_augroup('cmp-ft', { clear = true }),
