@@ -24,6 +24,7 @@ coroutine
 coroutines
 kubernetes
 wildcard
+wildcards
 runtime
 dereference
 dereferenced
@@ -69,3 +70,4 @@ todo
 redis
 vm
 kafka
+substring
