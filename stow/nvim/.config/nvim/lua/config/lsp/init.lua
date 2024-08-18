@@ -52,6 +52,28 @@ end
 
 local M = {
   on_lsp_attach = on_lsp_attach,
+  config = {
+    virtual_text = {
+      spacing = 1,
+      format = function(_)
+        -- just show the sign
+        return ''
+      end,
+    },
+    float = {
+      focusable = true,
+      source = true,
+      boder = 'single',
+      header = '',
+      prefix = '',
+      max_width = 100,
+      zindex = 40,
+    },
+    underline = false,
+    severity_sort = true,
+    signs = false,
+    update_in_insert = true,
+  },
 }
 
 function M.setup()
@@ -79,28 +101,7 @@ function M.setup()
   -- )
   --
 
-  vim.diagnostic.config({
-    virtual_text = {
-      spacing = 1,
-      format = function(_)
-        -- just show the sign
-        return ''
-      end,
-    },
-    float = {
-      focusable = true,
-      source = true,
-      boder = 'single',
-      header = '',
-      prefix = '',
-      max_width = 100,
-      zindex = 40,
-    },
-    underline = false,
-    severity_sort = true,
-    signs = false,
-    update_in_insert = true,
-  })
+  vim.diagnostic.config(M.config)
 end
 
 return M

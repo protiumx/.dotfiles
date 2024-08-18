@@ -1,7 +1,6 @@
 local servers = {
   bufls = {},
   dockerls = {},
-  -- graphql = {},
   tsserver = {},
   html = {},
   jsonls = {
