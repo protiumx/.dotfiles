@@ -59,7 +59,7 @@ local base_groups = {
   SignColumn = { bg = 'none' },
   StatusLine = { bg = colors.background, fg = colors.foreground },
   TabLineSel = { fg = '#b8bb26', bg = 'none' },
-  -- Todo = { fg = colors.orange, bold = true },
+  Todo = { fg = colors.orange, bold = true },
   VertSplit = { fg = colors.grey },
   -- Visual = { bg = colors.violet, fg = colors.background },
   -- Gitsigns
