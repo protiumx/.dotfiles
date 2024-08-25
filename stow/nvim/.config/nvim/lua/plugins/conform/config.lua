@@ -16,7 +16,6 @@ return function()
       javascript = { 'prettier' },
       json = { 'prettier' },
       lua = { 'stylua' },
-      markdown = { 'marksman' },
       ocaml = { 'ocamlformat' },
       proto = { 'buf' },
       python = { 'black' },
