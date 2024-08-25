@@ -5,11 +5,11 @@ return {
   end,
   dependencies = { 'nvim-lua/plenary.nvim' },
   keys = {
-    { '<M-D>', '<cmd>DiffviewOpen<CR>', desc = 'Open Diffview HEAD', silent = true },
+    { '<M-.>', '<cmd>DiffviewOpen<CR>', desc = 'Diffview HEAD', silent = true },
     {
       '<M-H>',
       '<cmd>DiffviewFileHistory %<CR>',
-      desc = 'Open Diffview history current file',
+      desc = 'Diffview file history',
       silent = true,
     },
   },
