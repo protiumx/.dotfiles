@@ -22,6 +22,12 @@ AWK
   )" | less -F
 }
 
+# NOTE: needs Regexp::Debugger module
+# sudo cpan Regexp::Debugger
+perlrex() {
+  perl -MRegexp::Debugger -E "'$1' =~ /$2/"
+}
+
 # Test if HTTP compression (RFC 2616 + SDCH) is enabled for a given URL.
 httpcompression() {
 	encoding="$(curl -LIs -H 'User-Agent: Mozilla/5 Gecko' -H 'Accept-Encoding: gzip,deflate,compress,sdch' "$1" | grep '^Content-Encoding:')" && echo "$1 is encoded using ${encoding#* }" || echo "$1 is not using any encoding"
