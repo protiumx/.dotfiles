@@ -110,7 +110,6 @@ return function()
     }, {
       f(function(_, parent)
         local ret = ''
-        print(vim.inspect(parent.snippet.env))
         if #parent.snippet.env.POSTFIX_MATCH < 9 then
           ret = os.date(ISO_FORMAT)
         else
