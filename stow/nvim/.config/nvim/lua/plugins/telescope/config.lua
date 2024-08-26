@@ -252,21 +252,19 @@ return function()
 
     pickers = {
       find_files = {
+        -- stylua: ignore
         find_command = {
           'fd',
-          '-t',
-          'f',
+          '-t', 'f',
           '--hidden',
           '--strip-cwd-prefix',
           '-i',
-          '-E',
-          '.git/*',
-          '-E',
-          'target/*',
-          '-E',
-          '**/node_modules',
-          '-E',
-          '.DS_Store',
+          '-E', '.git/*',
+          '-E', 'target/*',
+          '-E', '**/node_modules',
+          '-E', '.DS_Store',
+          '-E', '.bin',
+          '-E', '**/bin',
         },
       },
     },
