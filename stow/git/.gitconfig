@@ -62,7 +62,7 @@
   fsckobjects = true
 
 [branch]
-  sort = -committerdate
+  sort = committerdate
 
 [diff]
   colorMoved = default

@@ -106,7 +106,7 @@ vim.keymap.set('t', '<M-k>', '<cmd>wincmd k<CR>', { silent = true })
 vim.keymap.set('t', '<M-l>', '<cmd>wincmd l<CR>', { silent = true })
 
 -- Git utils
-vim.keymap.set('n', '<M-,>s', function()
+vim.keymap.set('n', '<M-,>', function()
   local cmd = vim.fn.expand('git stage %')
   vim.cmd('!' .. cmd)
   print(cmd)
