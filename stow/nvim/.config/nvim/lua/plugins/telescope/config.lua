@@ -220,14 +220,14 @@ return function()
         i = {
           ['<M-x>'] = 'delete_buffer',
           ['<M-O>'] = actions.select_window,
-          ['<M-Down>'] = 'cycle_history_next',
-          ['<M-Up>'] = 'cycle_history_prev',
+          ['<M-k>'] = 'cycle_history_next',
+          ['<M-j>'] = 'cycle_history_prev',
           ['<M-a>'] = 'toggle_all', -- select/deselect all entries
           ['<M-i>'] = 'insert_symbol_i',
           ['<M-q>'] = false,
           ['<M-q>s'] = telescope_actions.send_selected_to_qflist + telescope_actions.open_qflist,
           ['<M-q>a'] = 'add_selected_to_qflist',
-          ['<M-Q>'] = telescope_actions.send_to_qflist + telescope_actions.open_qflist,
+          ['<M-q>o'] = telescope_actions.send_to_qflist + telescope_actions.open_qflist,
           ['<C-t>'] = function()
             require('trouble.sources.telescope').open()
           end,
