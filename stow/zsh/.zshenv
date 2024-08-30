@@ -87,6 +87,10 @@ urldecode() {
   python3 -c "from urllib.parse import unquote; print(unquote('$1'));"
 }
 
+urlencode() {
+  python3 -c "import urllib.parse; print(urllib.parse.quote_plus('$1'));"
+}
+
 # Run jq using fzf and clipboard as source
 ijq() {
   echo '' | fzf --print-query --preview-window nohidden --no-height --preview "${1-pbpaste} | jq {q}"
