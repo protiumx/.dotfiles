@@ -97,7 +97,7 @@ return function()
           'neotest-summary',
           'noice',
           'packer',
-          'qf',
+          -- 'qf',
           'tsplayground',
         },
       },
@@ -186,8 +186,11 @@ return function()
             return global_state.get('quiet') and '󰊠' or ''
           end,
         },
-        { 'location' },
-        { 'progress', fmt = string.lower },
+        {
+          function()
+            return '%4l:%-3c %3p%%/%L'
+          end,
+        },
       },
     },
     inactive_sections = {
