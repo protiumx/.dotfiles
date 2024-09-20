@@ -72,3 +72,6 @@ vm
 kafka
 substring
 prev
+timestamp
+struct
+structs
