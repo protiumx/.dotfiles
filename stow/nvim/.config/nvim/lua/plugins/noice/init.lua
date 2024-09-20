@@ -174,7 +174,7 @@ return {
     routes = {
       -- route messages larger than 100 chars or 6 lines to popup
       {
-        filter = { event = 'msg_show', min_length = 100, min_height = 6 },
+        filter = { event = 'msg_show', min_length = 20, min_height = 6 },
         view = 'popup',
       },
     },
