@@ -207,7 +207,7 @@ return function()
     }),
   })
 
-  vim.keymap.set('i', '<C-O>', function()
+  vim.keymap.set('i', '<M-:>', function()
     cmp.complete({
       config = {
         sources = {
