@@ -75,6 +75,8 @@ local base_groups = {
   DiffviewStatusUnmerged = { fg = colors.dark_yellow, bg = 'none', bold = true },
   DiffviewStatusUntracked = { fg = colors.green, bg = 'none', bold = true },
   DiffviewStatusRenamed = { fg = colors.violet, bg = 'none', bold = true },
+  -- Lazy
+  LazyBackdrop = { link = 'XMenu' },
   -- Mason
   MasonHeader = { link = 'XMenu' },
   MasonHeading = { link = 'XBorder' },
