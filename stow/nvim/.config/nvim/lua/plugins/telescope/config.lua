@@ -90,20 +90,27 @@ local function keymaps()
     pickers.buffers(dropdown)
   end, 'Find buffers')
 
-  map({ 'v' }, '<M-s>g', function()
-    local search = utils.get_selection_text()
-    builtin.grep_string({ search = search, prompt_title = 'Searh: ' .. string.sub(search, 0, 20) })
-  end, '[S]earch Live [G]rep from visual selection')
-
-  map({ 'i', 'n' }, '<M-s>w', function()
+  map({ 'i', 'n', 'v' }, '<M-s>w', function()
     local cwd = vim.fn.expand('%:p:h')
-    builtin.grep_string({ cwd = cwd, prompt_title = get_buffer_dir(cwd) })
+    local search = nil
+    local title = get_buffer_dir(cwd)
+    if vim.fn.mode() == 'v' then
+      search = utils.get_selection_text()
+      title = 'Searh: ' .. string.sub(search, 0, 20)
+    end
+
+    builtin.grep_string({ search = search, cwd = cwd, prompt_title = title })
   end, '[S]earch [W]ord under cursor in cwd relative to buffer')
 
-  map({ 'i', 'n' }, '<M-s>W', function()
-    builtin.grep_string({
-      prompt_title = utils.get_cwd_name(),
-    })
+  map({ 'i', 'n', 'v' }, '<M-s>W', function()
+    local search = nil
+    local title = utils.get_cwd_name()
+    if vim.fn.mode() == 'v' then
+      search = utils.get_selection_text()
+      title = 'Searh: ' .. string.sub(search, 0, 20)
+    end
+
+    builtin.grep_string({ search = search, prompt_title = title })
   end, '[S]earch [W]ord under cursor in cwd')
 
   map('n', '<M-s>h', builtin.help_tags, '[S]earch [H]elp')
