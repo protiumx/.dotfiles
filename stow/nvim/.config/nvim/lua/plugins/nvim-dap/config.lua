@@ -74,7 +74,7 @@ end
 
 local function configure_debuggers()
   local dap = require('dap')
-  local pickers = require('plugins.telescope.pickers')
+  -- local pickers = require('plugins.telescope.pickers')
 
   dap.adapters.go = {
     type = 'server',
@@ -107,19 +107,19 @@ local function configure_debuggers()
       mode = 'test',
       program = './${relativeFileDirname}',
     },
-    {
-      type = 'go',
-      name = 'Launch File',
-      request = 'launch',
-      cwd = '${workspaceFolder}',
-      program = function()
-        return coroutine.create(function(coro)
-          pickers.find_file_pattern('*.go', function(entry)
-            coroutine.resume(coro, entry)
-          end)
-        end)
-      end,
-    },
+    -- {
+    --   type = 'go',
+    --   name = 'Launch File',
+    --   request = 'launch',
+    --   cwd = '${workspaceFolder}',
+    --   program = function()
+    --     return coroutine.create(function(coro)
+    --       pickers.find_file_pattern('*.go', function(entry)
+    --         coroutine.resume(coro, entry)
+    --       end)
+    --     end)
+    --   end,
+    -- },
   }
 end
 
@@ -127,5 +127,5 @@ return function()
   configure_symbols()
   configure_ui()
   configure_debuggers()
-  require('plugins.dap.keymaps').setup()
+  require('plugins.nvim-dap.keymaps').setup()
 end
