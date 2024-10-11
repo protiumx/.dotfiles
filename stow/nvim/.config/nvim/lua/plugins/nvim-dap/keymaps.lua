@@ -47,7 +47,7 @@ function M.setup()
       name = 'Launching ${file}',
       program = '${file}',
     })
-  end, 'Select golang fiel to run')
+  end, 'Select golang file to run')
 
   map({ 'n', 'i' }, '<M-d>c', function()
     dap.run_to_cursor()

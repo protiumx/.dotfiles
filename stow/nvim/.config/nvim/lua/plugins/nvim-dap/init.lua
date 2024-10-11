@@ -1,6 +1,6 @@
 return {
   'mfussenegger/nvim-dap',
-  cmd = 'DapContinue',
+  event = 'VeryLazy',
   dependencies = {
     'theHamsta/nvim-dap-virtual-text',
     'nvim-neotest/nvim-nio',
