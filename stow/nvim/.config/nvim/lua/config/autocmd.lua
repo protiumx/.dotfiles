@@ -5,11 +5,11 @@ local autocmd = vim.api.nvim_create_autocmd
 autocmd({ 'BufWritePre' }, {
   group = augroup('remove_white_spaces', { clear = true }),
   pattern = '*',
-  callback = function()
-    local _, client = next(vim.lsp.buf_get_clients())
+  callback = function(args)
+    local _, client = next(vim.lsp.get_clients())
     -- Skip if LSP provides formatting
     if
-      vim.lsp.buf_is_attached()
+      vim.lsp.buf_is_attached(args.buf, client.id)
       and client
       and client.server_capabilities.documentFormattingProvider
     then
@@ -156,13 +156,13 @@ autocmd('FileType', {
 -- })
 
 -- Check if we need to reload the file when it changed
-vim.api.nvim_create_autocmd({ 'FocusGained', 'TermClose', 'TermLeave' }, {
+autocmd({ 'FocusGained', 'TermClose', 'TermLeave' }, {
   group = augroup('checktime', { clear = true }),
   command = 'checktime',
 })
 
 -- resize splits if window got resized
-vim.api.nvim_create_autocmd({ 'VimResized' }, {
+autocmd({ 'VimResized' }, {
   group = augroup('resize_splits', { clear = true }),
   callback = function()
     vim.cmd('tabdo wincmd =')
@@ -175,4 +175,20 @@ autocmd('BufWritePost', {
   callback = function(args)
     vim.cmd('mkspell! ' .. args.file)
   end,
+})
+
+local function load_qf_keymaps(args)
+  vim.keymap.set({ 'n', 'v' }, 'dd', function()
+    local items = vim.fn.getqflist()
+    local line = vim.fn.line('.')
+    table.remove(items, line)
+    vim.fn.setqflist(items, 'r')
+    vim.api.nvim_win_set_cursor(0, { line, 0 })
+  end, { buffer = args.buf })
+end
+
+autocmd('BufWinEnter', {
+  group = augroup('qf-maps', { clear = true }),
+  pattern = 'quickfix',
+  callback = load_qf_keymaps,
 })
