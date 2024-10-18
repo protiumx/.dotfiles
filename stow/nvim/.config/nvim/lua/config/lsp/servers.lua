@@ -1,7 +1,7 @@
 local servers = {
   bufls = {},
   dockerls = {},
-  tsserver = {},
+  ts_ls = {},
   html = {},
   jsonls = {
     schemas = require('schemastore').json.schemas(),
@@ -88,7 +88,8 @@ local servers = {
     filetypes = { 'sh', 'zsh' },
   },
   gopls = {
-    buildFlags = { '-tags=stack' },
+    -- buildFlags = { '-tags=stack' },
+    cmd_env = { GOFLAGS = '-tags=stack' },
     analyses = {
       unusedparams = true,
       unusedvariable = true,
