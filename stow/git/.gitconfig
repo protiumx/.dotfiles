@@ -89,7 +89,7 @@
   append = commit --amend --no-edit
 
   # List remote-tracking and local branches
-  branches = branch --all -vv
+  branches = branch --all -v
 
   # checkout or create new branch
   ck = "!f() { git checkout $1 2>/dev/null || git checkout -b $1; }; f"
@@ -116,8 +116,6 @@
   # Filter the commit logs messages with the provided string
   filter = "!f() { git logs --grep=$1; }; f"
 
-  get = clone --depth 1
-
   last = log -1 HEAD --stat
 
   lg = log --pretty=format:\"%C(magenta)%h%Creset -%C(red)%d%Creset %s %C(dim green)(%cr) [%an]\" --abbrev-commit
@@ -125,11 +123,13 @@
   lp = log --pretty=format:'%Cred%h%Creset %C(yellow)%d%Creset %s %Cgreen(%cr)%Creset - %C(magenta)%cn%Creset' --abbrev-commit --date=relative
 
   main = !git checkout main && git pull
+
   development = !git checkout development && git pull
+
   integration = !git checkout integration && git pull
 
   # Clean up merged branches to a given branch ("main" is default)
-  purge = "!f() { git branch --merged ${1-main} | grep -v " ${1:-main}$" | xargs -r git branch -d; }; f"
+  purge = "!f() { git branch -r --merged | grep ${1:-main} | cut -d "/" -f 2 | xargs -r git branch -d; }; f"
 
   pwl = push --force-with-lease
 
