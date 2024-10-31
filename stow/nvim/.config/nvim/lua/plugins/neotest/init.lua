@@ -6,7 +6,6 @@ return {
   },
   cmd = 'Neotest',
   keys = {
-
     {
       '<Leader>tF',
       function()
@@ -14,7 +13,6 @@ return {
       end,
       silent = true,
     },
-
     {
       '<Leader>tf',
       function()
@@ -22,7 +20,6 @@ return {
       end,
       silent = true,
     },
-
     {
       '<Leader>tD',
       function()
@@ -30,7 +27,6 @@ return {
       end,
       silent = true,
     },
-
     {
       '<Leader>tl',
       function()
@@ -38,7 +34,6 @@ return {
       end,
       silent = true,
     },
-
     {
       '<Leader>tx',
       function()
@@ -46,7 +41,6 @@ return {
       end,
       silent = true,
     },
-
     {
       '<Leader>tS',
       function()
@@ -54,7 +48,6 @@ return {
       end,
       silent = true,
     },
-
     {
       '<Leader>to',
       function()
@@ -62,7 +55,6 @@ return {
       end,
       silent = true,
     },
-
     {
       '<Leader>tO',
       function()
@@ -70,7 +62,6 @@ return {
       end,
       silent = true,
     },
-
     {
       '<Leader>tn',
       function()
@@ -78,7 +69,6 @@ return {
       end,
       silent = true,
     },
-
     {
       '<Leader>tN',
       function()
@@ -86,7 +76,6 @@ return {
       end,
       silent = true,
     },
-
     {
       '<Leader>tw',
       function()
@@ -94,7 +83,6 @@ return {
       end,
       silent = true,
     },
-
     {
       ']t',
       function()
@@ -102,7 +90,6 @@ return {
       end,
       silent = true,
     },
-
     {
       '[t',
       function()
