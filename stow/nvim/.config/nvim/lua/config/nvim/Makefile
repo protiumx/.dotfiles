@@ -2,11 +2,11 @@ CC = gcc
 CFLAGS:=
 LIBNAME:=
 UNAME_S := $(shell uname -s)
+
 ifeq ($(UNAME_S),Linux)
 	CFLAGS=-shared -fPIC
 	LIBNAME=libnvim.so
-endif
-ifeq ($(UNAME_S),Darwin)
+else ifeq ($(UNAME_S),Darwin)
 	CFLAGS=-shared -fPIC -Wl,-undefined -Wl,dynamic_lookup
 	LIBNAME=libnvim.dylib
 endif

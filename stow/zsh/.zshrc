@@ -17,8 +17,8 @@ export PICO_SDK_PATH="$HOME/dev/pico-sdk"
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/rg"
 export TERM="screen-256color"
 
-export DYLD_LIBRARY_PATH="$DYLD_LIBRARY_PATH:$HOME/.config/nvim/lua/config/nvim"
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$HOME/.config/nvim/lua/config/nvim"
+# export DYLD_LIBRARY_PATH="$DYLD_LIBRARY_PATH:$HOME/.config/nvim/lua/config/nvim"
+# export LD_LIBRARY_PATH="$LD_LIBRARY_PATH$HOME/.config/nvim/lua/config/nvim"
 
 # Less highlighting
 export LESS_TERMCAP_mb=$'\e[1;31m'     # begin bold
