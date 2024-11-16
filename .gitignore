@@ -1,5 +1,6 @@
 .DS_STORE
 stow/nvim/.config/nvim/.netrwhist
-stow/nvim/.config/nvim/plugin/packer_compiled.lua
+stow/nvim/.config/nvim/lazy-lock.json
 *.so
 *.dylib
+
