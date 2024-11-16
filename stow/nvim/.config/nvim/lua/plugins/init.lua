@@ -85,27 +85,6 @@ return {
   },
 
   {
-    'ahmedkhalf/project.nvim',
-    config = function() end,
-    opts = {
-      manual_mode = true,
-      detection_methods = { 'pattern' },
-      show_hidden = true,
-      silent_chdir = false,
-      update_focused_file = {
-        enable = false,
-      },
-      patterns = {
-        'go.mod',
-        'Cargo.toml',
-        'package.json',
-        '.git',
-        '!.git/worktrees',
-      },
-    },
-  },
-
-  {
     'sindrets/winshift.nvim',
     cmd = 'WinShift',
     keys = {

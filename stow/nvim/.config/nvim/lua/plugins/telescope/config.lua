@@ -294,7 +294,6 @@ return function()
 
   telescope.load_extension('fzf')
   telescope.load_extension('file_browser')
-  telescope.load_extension('projects')
   telescope.load_extension('neoclip')
   telescope.load_extension('live_grep_args')
 
