@@ -99,7 +99,7 @@ vim.keymap.set(
 )
 vim.keymap.set('t', '<C-q>', '<cmd>bd!<CR>', { silent = true, desc = 'Close terminal buffer' })
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { silent = true, desc = 'Term normal mode' })
-vim.keymap.set('t', '<Leader>`', '<cmd>tabn<CR>', { silent = true }) -- avoid switching buffers
+-- vim.keymap.set('t', '<Leader>`', '<cmd>tabn<CR>', { silent = true }) -- avoid switching buffers
 vim.keymap.set('t', '<M-h>', '<cmd>wincmd h<CR>', { silent = true })
 vim.keymap.set('t', '<M-j>', '<cmd>wincmd j<CR>', { silent = true })
 vim.keymap.set('t', '<M-k>', '<cmd>wincmd k<CR>', { silent = true })

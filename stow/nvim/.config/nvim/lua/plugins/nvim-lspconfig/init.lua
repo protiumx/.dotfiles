@@ -6,6 +6,7 @@ return {
     'c',
     'cpp',
     'dockerfile',
+    'elixir',
     'html',
     'go',
     'javascript',

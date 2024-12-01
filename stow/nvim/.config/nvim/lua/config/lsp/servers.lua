@@ -1,5 +1,6 @@
 local servers = {
   bufls = {},
+  elixirls = {},
   dockerls = {},
   ts_ls = {},
   html = {},
