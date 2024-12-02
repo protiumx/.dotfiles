@@ -1,6 +1,7 @@
 return {
   'j-hui/fidget.nvim',
   event = 'VeryLazy',
+  enabled = jit.os ~= 'OSX',
   config = function()
     require('fidget').setup({
       progress = {

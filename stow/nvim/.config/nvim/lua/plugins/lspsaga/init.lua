@@ -1,4 +1,5 @@
 return {
+  enabled = jit.os ~= 'OSX',
   'glepnir/lspsaga.nvim',
   keys = {
     { 'gh', '<cmd>Lspsaga finder imp+def+ref<CR>', silent = true },
