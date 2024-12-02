@@ -15,7 +15,7 @@ return {
       javascript = { 'prettier' },
       json = { 'prettier' },
       html = { 'prettier' },
-      markdown = { 'marksman' },
+      markdown = { 'prettier' },
       go = { 'gofumpt', 'goimports' }, -- runs both
     },
   },
