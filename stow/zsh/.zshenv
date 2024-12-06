@@ -123,6 +123,16 @@ glog() {
     - %an%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n %C(white)%s%C(reset)"
 }
 
+alpha_build() {
+  current_branch=$(git branch --show-current | sed 's/\//-/')
+  timestring=$(date +"%d-%H%M")
+  tag_name="v0.0.0-pre.$USER-$current_branch-$timestring"
+
+  git tag $tag_name
+  git push origin $tag_name
+  echo -e "\nTag: $tag_name"
+}
+
 # Print git remote
 gremote() {
   git config --get remote.origin.url | sed -E 's/(ssh:\/\/)?git@/https:\/\//' | sed 's/com:/com\//' | sed 's/\.git$//' | head -n1
