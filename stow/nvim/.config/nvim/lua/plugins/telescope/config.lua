@@ -68,11 +68,11 @@ local function keymaps()
   end, 'Browse files relative to buffer')
 
   map({ 'i', 'n' }, '<M-F>', function()
-    extensions.file_browser.file_browser({
+    extensions.file_browser.file_browser(themes.get_ivy({
       path = '%:p:h',
       grouped = true,
       hidden = true,
-    })
+    }))
   end, 'Browse files relative to buffer with preview')
 
   map({ 'i', 'n' }, '<M-g>', function()
@@ -117,9 +117,7 @@ local function keymaps()
   map('n', '<M-s>k', builtin.keymaps, '[S]earch [K]eymaps')
 
   map({ 'i', 'n' }, '<M-/>', function()
-    builtin.current_buffer_fuzzy_find({
-      theme = 'dropdown',
-    })
+    builtin.current_buffer_fuzzy_find(themes.get_ivy())
   end, 'Fuzzy search in buffer')
 
   map({ 'i', 'n' }, '<M-s>s', function()
@@ -198,11 +196,7 @@ return function()
       dynamic_preview_title = true,
       winblend = ui.winblend,
       show_line = false,
-      borderchars = {
-        prompt = { ' ' },
-        results = { ' ' },
-        preview = { ' ' },
-      },
+      borderchars = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
       prompt_prefix = '󰿟 ',
       prompt_title = '',
       results_title = '',
@@ -258,7 +252,12 @@ return function()
     },
 
     pickers = {
+      live_grep = {
+        theme = 'ivy',
+        borderchars = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
+      },
       find_files = {
+        theme = 'ivy',
         -- stylua: ignore
         find_command = {
           'fd',

@@ -23,5 +23,11 @@ M.get_dropdown = function(opts)
   })
   return vim.tbl_extend('force', dropdown, opts)
 end
+---
+---@param opts table | nil
+M.get_ivy = function(opts)
+  opts = vim.tbl_extend('force', M.base, opts or {})
+  return themes.get_ivy(opts)
+end
 
 return M
