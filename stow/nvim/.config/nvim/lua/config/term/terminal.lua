@@ -12,6 +12,7 @@ local cmd = api.nvim_command
 local Term = {}
 
 ---Term:new creates a new terminal instance
+---@return Term
 function Term:new()
   return setmetatable({
     win = nil,
@@ -83,9 +84,8 @@ function Term:create_buf()
   end
 
   local buf = api.nvim_create_buf(false, true)
-
   -- this ensures filetype is set to Fterm on first run
-  api.nvim_buf_set_option(buf, 'filetype', self.config.ft)
+  api.nvim_set_option_value('filetype', self.config.ft, { buf = buf })
 
   return buf
 end
@@ -97,17 +97,20 @@ function Term:create_win(buf)
   local cfg = self.config
   local dim = utils.get_dimension(cfg.dimensions)
   local win = api.nvim_open_win(buf, true, {
-    border = cfg.border,
-    relative = 'editor',
-    style = 'minimal',
-    width = dim.width,
+    -- border = cfg.border,
+    -- relative = 'editor',
+    -- style = 'minimal',
+    win = -1,
+    split = 'below',
+    vertical = true,
+    -- width = dim.width,
     height = dim.height,
-    col = dim.col,
-    row = dim.row,
+    -- col = dim.col,
+    -- row = dim.row,
   })
 
-  api.nvim_win_set_option(win, 'winhl', ('Normal:%s'):format(cfg.hl))
-  api.nvim_win_set_option(win, 'winblend', cfg.blend)
+  -- api.nvim_set_option_value('winhl', ('Normal:%s'):format(cfg.hl), { win = win })
+  -- api.nvim_set_option_value('winblend', cfg.blend, { win = win })
 
   return win
 end
@@ -145,7 +148,7 @@ function Term:open_term()
   })
 
   -- This prevents the filetype being changed to `term` instead of `FTerm` when closing the floating window
-  api.nvim_buf_set_option(self.buf, 'filetype', self.config.ft)
+  api.nvim_set_option_value('filetype', self.config.ft, { buf = self.buf })
 
   return self:prompt()
 end
@@ -155,7 +158,8 @@ end
 function Term:open()
   -- Move to existing window if the window already exists
   if utils.is_win_valid(self.win) then
-    return api.nvim_set_current_win(self.win)
+    api.nvim_set_current_win(self.win)
+    return self
   end
 
   self:remember_cursor()
@@ -181,7 +185,7 @@ function Term:close(force)
     return self
   end
 
-  api.nvim_win_close(self.win, {})
+  api.nvim_win_close(self.win, true)
 
   self.win = nil
 

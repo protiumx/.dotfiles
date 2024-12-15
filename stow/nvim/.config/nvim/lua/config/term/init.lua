@@ -70,8 +70,8 @@ function M.setup()
     border = 'none',
     blend = 20,
     dimensions = {
-      height = 0.4,
-      width = 0.3,
+      height = 0.25,
+      width = 1.0,
     },
   }
 

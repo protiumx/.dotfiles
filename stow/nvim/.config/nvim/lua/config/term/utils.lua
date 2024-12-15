@@ -39,8 +39,8 @@ M.defaults = {
   dimensions = {
     height = 0.8,
     width = 0.8,
-    x = 0.5,
-    y = 0.5,
+    x = 0,
+    y = 1,
   },
 }
 
@@ -57,7 +57,7 @@ function M.get_dimension(opts)
 
   -- calculate our floating window size
   local width = math.ceil(cl * opts.width)
-  local height = math.ceil(ln * opts.height - 4)
+  local height = math.ceil(ln * opts.height)
 
   if width < min_width then
     width = min_width
@@ -69,7 +69,7 @@ function M.get_dimension(opts)
 
   -- and its starting position
   local col = math.ceil((cl - width) * opts.x)
-  local row = math.ceil((ln - height) * opts.y - 1)
+  local row = math.ceil((ln - height) * opts.y)
 
   return {
     width = width,
