@@ -16,14 +16,6 @@
 \x auto
 \pset linestyle unicode
 
-create or replace function table_size(name text) 
-returns table ("size" text) 
-security definer 
-language sql as 
-$$
-  SELECT pg_size_pretty(pg_total_relation_size(name));
-$$;
-
 \unset QUIET
 
 -- Include a local file
