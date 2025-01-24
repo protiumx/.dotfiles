@@ -128,6 +128,8 @@
 
   integration = !git checkout integration && git pull
 
+  production = !git checkout production && git pull
+
   # Clean up merged branches to a given branch ("main" is default)
   purge = "!f() { git branch -r --merged | grep ${1:-main} | cut -d "/" -f 2 | xargs -r git branch -d; }; f"
 

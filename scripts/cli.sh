@@ -18,6 +18,8 @@ install_go_tools() {
 	declare -A tools=(
 		[delve]="github.com/go-delve/delve/cmd/dlv@latest"
 		[shfmt]="mvdan.cc/sh/v3/cmd/shfmt@latest"
+    [moq]="github.com/matryer/moq@latest"
+    [gofumpt]="mvdan.cc/gofumpt@latest"
 	)
 
 	for tool in "!${tools[@]}"; do
