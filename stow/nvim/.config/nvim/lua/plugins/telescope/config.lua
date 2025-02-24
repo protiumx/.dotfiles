@@ -137,7 +137,7 @@ local function keymaps()
     builtin.lsp_document_symbols(dropdown)
   end, '[L]SP [S]ymbols')
 
-  map({ 'i', 'n' }, '<M-s>r', builtin.resume, 'Resume last search')
+  map({ 'i', 'n' }, '<M-\'>', builtin.resume, 'Resume last search')
   map('n', '<M-s>p', builtin.pickers, '[S]earch [P]revious pickers')
 
   -- Projects

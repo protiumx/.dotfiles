@@ -16,7 +16,7 @@ return {
   dependencies = { 'nvim-telescope/telescope.nvim' },
   event = 'VeryLazy',
   opts = {
-    history = 100,
+    history = 50,
     enable_persistent_history = false,
     length_limit = 1000,
     preview = true,
@@ -35,6 +35,10 @@ return {
     on_replay = {
       set_reg = true,
       move_to_front = true,
+    },
+     on_select = {
+	    move_to_front = true,
+	    close_telescope = true,
     },
     keys = {
       telescope = {
