@@ -31,7 +31,7 @@ return {
       -- add pattern to search register
       register = false,
       -- clear highlight after jump
-      nohlsearch = false,
+      nohlsearch = true,
       -- automatically jump when there is only one match
       autojump = true,
     },
@@ -61,7 +61,7 @@ return {
           search = { multi_window = true },
         })
       end,
-      desc = 'Flash Treesitter',
+      desc = 'Flash multi-window',
     },
   },
 }

@@ -2,7 +2,6 @@ return {
   require('plugins.conform'),
   require('plugins.diffview'),
   require('plugins.gitsigns'),
-  -- require('plugins.hop'),
   require('plugins.flash'),
   require('plugins.lualine'),
   require('plugins.neoclip'),
