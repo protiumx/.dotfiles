@@ -26,6 +26,7 @@
 
 [tag]
   gpgSign = true
+  sort = version:refname
 
 [log]
   date = iso
@@ -42,6 +43,10 @@
   # Keep local commits on top of the tree
   rebase = true
 
+[push]
+  default = simple
+  autoSetupRemote = true
+
 [merge]
   conflictstyle = zdiff3
 
@@ -55,6 +60,7 @@
 [fetch]
   prune = true
   prunetags = true
+  all = true
   fsckobjects = true
 
 [transfer]
@@ -67,7 +73,7 @@
   sort = committerdate
 
 [diff]
-  colorMoved = default
+  colorMoved = plain
   algorithm = histogram
 
 [help]
@@ -76,8 +82,9 @@
 
 [delta]
   navigate = true  # use n and N to move between diff sections
-  light = false
+  dark = true
   side-by-side = true
+  hyperlinks = true
 
 [alias]
   # List all the git aliases
@@ -183,3 +190,4 @@
 # reuse recorded resolution
 [rerere]
 	enabled = true
+  autoupdate = true
