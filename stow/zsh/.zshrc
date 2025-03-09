@@ -150,7 +150,7 @@ ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(bracketed-paste)
 
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
-eval "$(fzf --zsh)"
+source <(fzf --zsh)
 
 bindkey "^U" backward-kill-line # [Ctrl-u] deletes everything to the left of the cursor
 bindkey '^[[3;3~' kill-word     # [Alt-del] delete word forwards
