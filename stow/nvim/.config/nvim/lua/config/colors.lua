@@ -78,6 +78,7 @@ local base_groups = {
   -- Lazy
   LazyBackdrop = { link = 'XMenu' },
   -- Mason
+  MasonBackdrop = { bg = colors.background },
   MasonHeader = { link = 'XMenu' },
   MasonHeading = { link = 'XBorder' },
   MasonNormal = { link = 'XMenu' },
