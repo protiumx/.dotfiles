@@ -11,6 +11,8 @@ return function()
       },
     },
     formatters_by_ft = {
+      bash = { 'shfmt' },
+      sh = { 'shfmt' },
       go = { 'goimports', 'gofumpt' },
       html = { 'prettier' },
       javascript = { 'prettier' },

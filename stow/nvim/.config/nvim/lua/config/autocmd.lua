@@ -9,8 +9,8 @@ autocmd({ 'BufWritePre' }, {
     local _, client = next(vim.lsp.get_clients())
     -- Skip if LSP provides formatting
     if
-      vim.lsp.buf_is_attached(args.buf, client.id)
-      and client
+      client
+      and vim.lsp.buf_is_attached(args.buf, client.id)
       and client.server_capabilities.documentFormattingProvider
     then
       return
