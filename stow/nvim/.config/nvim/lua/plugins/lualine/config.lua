@@ -132,7 +132,7 @@ return function()
         {
           lsp_symbol,
           cond = function()
-            return next(vim.lsp.buf_get_clients(0)) ~= nil
+            return #vim.lsp.get_clients() > 0
           end,
         },
       },
