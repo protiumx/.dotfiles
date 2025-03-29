@@ -10,11 +10,9 @@ set -o pipefail
 . scripts/cli.sh
 . scripts/config.sh
 . scripts/osx.sh
-. scripts/fonts.sh
 . scripts/packages.sh
 
 cleanup() {
-  err "Last command failed"
   info "Finishing..."
 }
 
@@ -23,7 +21,7 @@ wait_input() {
 }
 
 main() {
-  info "Installing ..."
+  info "Dotfiles setup"
 
   info "################################################################################"
   info "Homebrew Packages"
@@ -32,13 +30,6 @@ main() {
   install_packages
 
   success "Finished installing Homebrew packages"
-
-  info "################################################################################"
-  info "Homebrew Fonts"
-  info "################################################################################"
-  wait_input
-  install_fonts
-  success "Finished installing fonts"
 
   info "################################################################################"
   info "Oh-my-zsh"
@@ -57,10 +48,10 @@ main() {
   success "Finished installing macOS apps"
 
   info "################################################################################"
-  info "PiP modules"
+  info "PiP tools"
   info "################################################################################"
   wait_input
-  install_python_packages
+  install_python_tools
   success "Finished installing python packages"
 
   info "################################################################################"
@@ -89,11 +80,6 @@ main() {
   success "Finished stowing dotfiles"
 
   info "################################################################################"
-  info "Crating development folders"
-  info "################################################################################"
-  mkdir -p ~/Development/protiumx
-
-  info "################################################################################"
   info "SSH Key"
   info "################################################################################"
   setup_github_ssh
@@ -101,7 +87,7 @@ main() {
 
   if ! hash rustc &>/dev/null; then
     info "################################################################################"
-    info "Rust Setup"
+    info "Rustup Setup"
     info "################################################################################"
     wait_input
     rustup-init

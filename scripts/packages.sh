@@ -19,7 +19,7 @@ packages=(
   gettext
   git-delta # https://github.com/dandavison/delta
   gpg
-  go
+  go       # golang
   graphviz # https://graphviz.org/
   grpcurl  # https://github.com/fullstorydev/grpcurl
   imagemagick
@@ -30,9 +30,7 @@ packages=(
   lazydocker # https://github.com/jesseduffield/lazydocker
   lf         # https://github.com/gokcehan/lf
   libpq
-  lynx # https://lynx.invisible-island.net/
-  mas  # https://github.com/mas-cli/mas
-  minikube
+  mas # https://github.com/mas-cli/mas
   neovim
   node
   nmap
@@ -43,10 +41,9 @@ packages=(
   protobuf
   ripgrep # https://github.com/BurntSushi/ripgre
   rustup
-  # sd         # https://github.com/chmln/sd
+  sd # https://github.com/chmln/sd
   shellcheck
   stow
-  stylua # https://github.com/JohnnyMorganz/StyLua
   telnet
   xo/xo/usql # https://github.com/xo/usql
   # websocat   # https://github.com/vi/websocat

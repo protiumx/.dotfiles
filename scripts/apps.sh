@@ -1,33 +1,26 @@
-apps=(
-	arduino
-	clipy # Clipboard manager https://github.com/Clipy/Clipy
-	deepl
-	discord
-	docker
-	firefox
-	google-chrome
-	rectangle # Window util
-	slack
-	spotify
-	visual-studio-code
-	vlc
-	wez/wezterm/wezterm # Terminal https://wezfurlong.org/wezterm
-)
-
-mas_apps=(
-	"937984704"  # Amphetamine
-	"1444383602" # Good Notes 5
-	"768053424"  # Gappling (svg viewer)
-)
-
 install_macos_apps() {
-	info "Installing macOS apps..."
-	install_brew_casks "${apps[@]}"
+  local apps=(
+    arduino
+    clipy # https://github.com/Clipy/Clipy
+    firefox
+    google-chrome
+    spotify
+    vlc
+    wez/wezterm/wezterm # https://wezfurlong.org/wezterm
+  )
+
+  info "Installing macOS apps..."
+  install_brew_casks "${apps[@]}"
 }
 
 install_masApps() {
-	info "Installing App Store apps..."
-	for app in "${mas_apps[@]}"; do
-		mas install "$app"
-	done
+  local apps=(
+    "1444383602" # Good Notes 5
+    "768053424"  # Gappling: svg viewer https://apps.apple.com/us/app/gapplin/id768053424
+  )
+
+  info "Installing App Store apps..."
+  for app in "${apps[@]}"; do
+    mas install "$app"
+  done
 }
