@@ -39,7 +39,7 @@ Main plugins:
 - [Cmp](https://github.com/hrsh7th/nvim-cmp)
 - Theme: [gruvbox](https://github.com/ellisonleao/gruvbox.nvim)
 
-Plugins are managed with [lazy.nvim](https://github.com/folke/lazy.nvim)
+Plugins are managed with [lazy.nvim](https://github.com/folke/lazy.nvim).
 Check all [plugins](./stow/nvim/.config/nvim/lua/plugins).
 
 ### CLI
