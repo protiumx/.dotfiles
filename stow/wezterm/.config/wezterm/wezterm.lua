@@ -1,6 +1,8 @@
 ---@diagnostic disable: unused-local
+
 local wezterm = require('wezterm')
 local act = wezterm.action
+
 -- https://wezfurlong.org/wezterm/config/lua/wezterm/target_triple.html
 local is_windows = wezterm.target_triple == 'x86_64-pc-windows-msvc'
 local font = 'MonoLisa'
@@ -10,6 +12,26 @@ local key_mod_panes = is_windows and 'ALT' or 'CMD'
 local state = {
   debug_mode = false,
 }
+
+---Activate or create pane
+---@param opts table
+---@return table
+local function pane_activate_create(opts)
+  return {
+    key = opts.key,
+    mods = opts.mods,
+    action = wezterm.action_callback(function(_, pane)
+      local pane_at_direction = pane:tab():get_pane_direction(opts.direction)
+
+      if pane_at_direction then
+        pane_at_direction:activate()
+        return
+      end
+
+      pane:split({ direction = opts.direction, domain = 'CurrentPaneDomain' })
+    end),
+  }
+end
 
 local key_table_leader = { key = '/', mods = key_mod_panes }
 
@@ -108,29 +130,26 @@ local keys = {
   },
 
   -- Activation
-  {
+  pane_activate_create({
     key = 'h',
     mods = key_mod_panes,
-    action = act.ActivatePaneDirection('Left'),
-  },
+  }),
 
-  {
+  pane_activate_create({
     key = 'l',
     mods = key_mod_panes,
-    action = act.ActivatePaneDirection('Right'),
-  },
+  }),
 
-  {
+  pane_activate_create({
     key = 'k',
     mods = key_mod_panes,
-    action = act.ActivatePaneDirection('Up'),
-  },
+  }),
 
-  {
+  pane_activate_create({
     key = 'j',
     mods = key_mod_panes,
     action = act.ActivatePaneDirection('Down'),
-  },
+  }),
 
   -- Size
   {
@@ -194,16 +213,18 @@ local keys = {
   },
 
   { key = 'T', mods = 'SHIFT|' .. key_mod_panes, action = act.ShowTabNavigator },
+  -- Activate Tabs
   { key = 'H', mods = 'SHIFT|' .. key_mod_panes, action = act.ActivateTabRelative(-1) },
   { key = 'L', mods = 'SHIFT|' .. key_mod_panes, action = act.ActivateTabRelative(1) },
-  { key = 'H', mods = 'SHIFT|CTRL|' .. key_mod_panes, action = act.MoveTabRelative(-1) },
-  { key = 'L', mods = 'SHIFT|CTRL|' .. key_mod_panes, action = act.MoveTabRelative(1) },
-
   {
     key = 'o',
     mods = key_mod_panes,
     action = act.ActivateLastTab,
   },
+
+  -- Swap Tabs
+  { key = 'H', mods = 'SHIFT|CTRL|' .. key_mod_panes, action = act.MoveTabRelative(-1) },
+  { key = 'L', mods = 'SHIFT|CTRL|' .. key_mod_panes, action = act.MoveTabRelative(1) },
 
   -- Utils
 
@@ -226,6 +247,19 @@ local keys = {
       patterns = {
         'https?://\\S+',
       },
+    }),
+  },
+  {
+    key = 'L',
+    mods = 'CMD|SHIFT',
+    action = act.QuickSelectArgs({
+      patterns = {
+        'https?://\\S+',
+      },
+      action = wezterm.action_callback(function(window, pane)
+        local url = window:get_selection_text_for_pane(pane)
+        wezterm.open_with(url)
+      end),
     }),
   },
 
