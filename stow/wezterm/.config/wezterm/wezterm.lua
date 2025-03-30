@@ -497,7 +497,7 @@ local config = {
   command_palette_font_size = 16.0,
   command_palette_bg_color = '#1c1c1c',
   cursor_blink_rate = 500,
-  default_cursor_style = 'BlinkingBar',
+  default_cursor_style = 'BlinkingUnderline',
   default_cwd = wezterm.home_dir,
   default_prog = { 'zsh' },
   font = wezterm.font(font, { weight = 'Regular', italic = false }),
