@@ -11,6 +11,8 @@ local function on_lsp_attach(client, bufnr)
         bufnr = bufnr,
         focus = false,
         border = 'single',
+        scope = 'line',
+        severity = { vim.diagnostic.severity.ERROR, vim.diagnostic.severity.WARN },
       })
     end,
   })
