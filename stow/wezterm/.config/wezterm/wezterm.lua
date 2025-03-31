@@ -263,7 +263,7 @@ local keys = {
     }),
   },
   {
-    key = 'L',
+    key = 'O',
     mods = 'CMD|SHIFT',
     action = act.QuickSelectArgs({
       patterns = {
