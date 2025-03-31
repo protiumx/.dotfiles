@@ -38,8 +38,6 @@ vim.keymap.set('i', '<M-j>', '<Esc>:m .+1<CR>==gi', { silent = true })
 vim.keymap.set('i', '<M-k>', '<Esc>:m .-2<CR>==gi', { silent = true })
 
 -- Quickfix navigation
-vim.keymap.set('n', ']q', '<cmd>cn<CR>0zz')
-vim.keymap.set('n', '[q', '<cmd>cp<CR>0zz')
 vim.keymap.set('n', '<Leader>qo', '<cmd>copen<CR>')
 vim.keymap.set('n', '<Leader>qq', '<cmd>cclose<CR>')
 vim.keymap.set('n', '<Leader>Q', '<cmd>call setqflist([])<CR>', { desc = 'Clean quickfix' })
