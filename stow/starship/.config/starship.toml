@@ -43,7 +43,7 @@ threshold = 30
 format = "[$symbol ${ram}]($style)"
 
 [git_branch]
-symbol = " "
+symbol = " "
 format = "[$symbol$branch(:$remote_branch)]($style) "
 style = "purple"
 
@@ -59,7 +59,7 @@ stashed = "^${count} "
 staged = "+${count} "
 deleted = "x${count} "
 renamed = "»${count} "
-style = "grey"
+style = "#a7b2b4"
 
 [status]
 disabled = false
@@ -88,8 +88,14 @@ format = "[$symbol($version(-$name) )]($style)"
 symbol = " "
 
 [docker_context]
-format = "[$symbol$context ]($style)"
+disabled = true
+format = "[$symbol ]($style)"
 symbol = " "
+
+[kubernetes]
+disabled = false
+symbol = "󱃾 "
+format = '[$symbol$context( \($namespace\))]($style) '
 
 [elixir]
 disabled = true
