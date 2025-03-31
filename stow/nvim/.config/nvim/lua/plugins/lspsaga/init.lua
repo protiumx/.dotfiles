@@ -6,7 +6,6 @@ return {
     { '<M-l>i', '<cmd>Lspsaga finder imp<CR>', silent = true },
     { '<M-l>r', '<cmd>Lspsaga finder ref<CR>', silent = true },
     { '<Leader>ca', '<cmd>Lspsaga code_action<CR>', mode = { 'n', 'v' }, silent = true },
-    { 'gr', '<cmd>Lspsaga rename<CR>', silent = true },
     { 'gD', '<cmd>Lspsaga peek_definition<CR>', silent = true },
     { 'gT', '<cmd>Lspsaga peek_type_definition<CR>', silent = true },
     { '<C-g>d', '<cmd>Lspsaga show_buf_diagnostics<CR>', silent = true },
