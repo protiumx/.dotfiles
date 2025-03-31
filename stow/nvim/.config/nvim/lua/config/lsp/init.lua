@@ -58,7 +58,7 @@ local M = {
     virtual_text = {
       spacing = 1,
       format = function(_)
-        -- just show the sign
+        -- Just show the sign, no text
         return ''
       end,
     },
