@@ -13,6 +13,13 @@ local state = {
   debug_mode = false,
 }
 
+local pane_direction_map = {
+  Down = 'Bottom',
+  Left = 'Left',
+  Right = 'Right',
+  Up = 'Top',
+}
+
 ---Activate or create pane
 ---@param opts table
 ---@return table
@@ -28,7 +35,10 @@ local function pane_activate_create(opts)
         return
       end
 
-      pane:split({ direction = opts.direction, domain = 'CurrentPaneDomain' })
+      pane:split({
+        direction = pane_direction_map[opts.direction],
+        domain = 'CurrentPaneDomain',
+      })
     end),
   }
 end
@@ -133,22 +143,25 @@ local keys = {
   pane_activate_create({
     key = 'h',
     mods = key_mod_panes,
+    direction = 'Left',
   }),
 
   pane_activate_create({
     key = 'l',
     mods = key_mod_panes,
+    direction = 'Right',
   }),
 
   pane_activate_create({
     key = 'k',
     mods = key_mod_panes,
+    direction = 'Up',
   }),
 
   pane_activate_create({
     key = 'j',
     mods = key_mod_panes,
-    action = act.ActivatePaneDirection('Down'),
+    direction = 'Down',
   }),
 
   -- Size
@@ -365,11 +378,15 @@ local process_icons = {
 }
 
 local function get_current_working_dir(tab)
-  local current_dir = tab.active_pane and tab.active_pane.current_working_dir or { file_path = '' }
+  local url = tab.active_pane and tab.active_pane.current_working_dir or { file_path = '' }
+  local path = url.file_path
+  if path:sub(-1) == '/' then
+    path = path:sub(1, #path - 1)
+  end
+
   local HOME_DIR = os.getenv('HOME')
 
-  return current_dir.file_path == HOME_DIR and '~'
-    or string.gsub(current_dir.file_path, '(.*[/\\])(.*)', '%2')
+  return path == HOME_DIR and '~' or string.gsub(path, '(.*[/\\])(.*)', '%2')
 end
 
 local function get_process(tab)
