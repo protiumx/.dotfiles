@@ -1,10 +1,7 @@
-# config
---column
 --smart-case
---line-number
 --hidden
---follow
 --no-heading
+--column
 --max-columns=150
 --max-columns-preview
 --colors=line:none
@@ -12,9 +9,12 @@
 --colors=match:fg:205
 --engine=auto
 
-# add custom types
+# custom types
 --type-add
 web:*.{html,css,js,jsx,ts,tsx,scss,sass,html.heex}*
+
+--type-add
+gt:*_test.go*
 
 # ignores, etc
 --glob=!.git/*
@@ -26,4 +26,3 @@ web:*.{html,css,js,jsx,ts,tsx,scss,sass,html.heex}*
 --glob=!_build
 --glob=!*.cache
 --glob=!.Trash
---glob=!.licenses
