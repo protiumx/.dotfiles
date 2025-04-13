@@ -28,7 +28,6 @@ packages=(
   kubernetes-cli
   hyperfine  # https://github.com/sharkdp/hyperfine
   lazydocker # https://github.com/jesseduffield/lazydocker
-  lf         # https://github.com/gokcehan/lf
   libpq
   mas # https://github.com/mas-cli/mas
   neovim
@@ -47,6 +46,7 @@ packages=(
   telnet
   xo/xo/usql # https://github.com/xo/usql
   # websocat   # https://github.com/vi/websocat
+  yazi # https://github.com/sxyazi/yazi
   wget
   zsh
   zinit  # https://github.com/zdharma-continuum/zinit
