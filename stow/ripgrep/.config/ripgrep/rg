@@ -16,7 +16,7 @@ web:*.{html,css,js,jsx,ts,tsx,scss,sass,html.heex}*
 --type-add
 gt:*_test.go*
 
-# ignores, etc
+# ignores
 --glob=!.git/*
 --glob=!.elixir_ls
 --glob=!node_modules

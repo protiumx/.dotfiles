@@ -84,7 +84,7 @@
   navigate = true  # use n and N to move between diff sections
   dark = true
   side-by-side = true
-  hyperlinks = true
+  hyperlinks = false
 
 [alias]
   # List all the git aliases
