@@ -27,7 +27,6 @@ stow_dotfiles() {
   local folders=(
     ".config/fd"
     ".config/git"
-    ".config/kitty"
     ".config/lf"
     ".config/nvim"
     ".config/ripgrep"
