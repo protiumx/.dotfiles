@@ -137,12 +137,6 @@ function d () {
 }
 compdef _dirs d
 
-# List directory contents
-alias lsa='ls -lah'
-alias l='ls -lah'
-alias ll='ls -lh'
-alias la='ls -lAh'
-
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE='100' # limit suggestion to 100 chars
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(bracketed-paste)
@@ -164,8 +158,9 @@ bindkey "^[m" copy-prev-shell-word # [M-m] useful for renaming files to add suff
 
 # zsh syntax highlighting clears and restores aliases after .zshenv is loaded
 # this keeps ls and ll aliased correctly
-alias ls="eza --group-directories-first -G --color auto --icons -a -s type"
-alias ll="eza --group-directories-first -l --color always --icons -a -s type"
+alias ls="eza --group-directories-first -G --color auto --hyperlink --icons -a -s type"
+alias ll="eza --group-directories-first -l --color always --hyperlink --icons -a -s type"
+alias lsa='ls -lah'
 
 # Golang
 export GOTOOLCHAIN="local"
