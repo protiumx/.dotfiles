@@ -10,9 +10,9 @@ jwt-decode() {
 }
 
 # Print commits with URLs to github
-ghhist() {
+gh-logs() {
   local remote="$(git remote -v | awk '/^origin.*\(push\)$/ {print $2}')"
-  [[ "$remote" ]] || return
+  [[ "$remote" ]] || return;
   local user_repo="$(echo "$remote" | perl -pe 's/.*://;s/\.git$//')"
   git log $* --name-status --color | awk "$(cat <<AWK
     /^.*commit [0-9a-f]{40}/ {sha=substr(\$2,1,7)}

@@ -12,7 +12,6 @@ export GPG_TTY=$(tty)
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_INSECURE_REDIRECT=1
 export LANG LANGUAGE LC_CTYPE LC_ALL
-export MANPAGER='nvim +Man!'
 export PICO_SDK_PATH="$HOME/dev/pico-sdk"
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/rg"
 export TERM="screen-256color"
@@ -29,6 +28,7 @@ export LESS_TERMCAP_me=$'\e[0m'        # reset bold/blink
 export LESS_TERMCAP_se=$'\e[0m'        # reset reverse video
 export LESS_TERMCAP_ue=$'\e[0m'        # reset underline
 
+# Load brew env
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 else
@@ -66,7 +66,7 @@ HISTSIZE=10000
 HISTFILESIZE=$HISTSIZE
 HISTFILE=$HOME/.zsh_history
 SAVEHIST=$HISTSIZE
-HISTIGNORE="ls:ls *:cd:cd -:pwd;exit:date:* --help:* -h:* help:* -v:* --version:* version"
+HISTORY_IGNORE="(ls*|cd*|pwd|exit|date|* --help|* -h|* help|* -v|* --version|* version|e .|nvim .)"
 HISTDUP=erase
 WORDCHARS="*?[]~&;!#$%^(){}<>" # allows to stop deletion on ./-_=
 
@@ -227,6 +227,14 @@ fi
 # fi
 
 ################# ZSH widgets ####################
+
+zshaddhistory() {
+  emulate -L zsh
+  ## uncomment if HISTORY_IGNORE
+  ## should use EXTENDED_GLOB syntax
+  setopt extendedglob
+  [[ $1 != ${~HISTORY_IGNORE} ]]
+}
 
 # search changed files in git repo
 fzf-git-files-widget() {
