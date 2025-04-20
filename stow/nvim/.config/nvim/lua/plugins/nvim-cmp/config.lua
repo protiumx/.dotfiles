@@ -130,7 +130,6 @@ return function()
     sources = {
       sources.lsp,
       sources.snippets,
-      sources.lua,
       sources.buffer,
       sources.path,
     },
