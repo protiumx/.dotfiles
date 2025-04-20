@@ -10,16 +10,13 @@ function M.setup(bufnr)
   end
 
   nmap('gd', vim.lsp.buf.definition, 'Go to definition')
-  nmap('<C-l>dv', ':vsplit | lua vim.lsp.buf.definition()<CR>', 'Go to definition vertical split')
+  nmap('<C-l>d', ':vsplit | lua vim.lsp.buf.definition()<CR>', 'Go to definition vertical split')
   nmap('gt', vim.lsp.buf.type_definition, 'Show type definition')
-  nmap('gy', vim.lsp.buf.implementation, 'Go to implementation')
   nmap(
-    '<C-l>dv',
+    '<C-l>i',
     ':vsplit | lua vim.lsp.buf.implementation()<CR>',
     'Go to implementation vertical split'
   )
-  nmap('gR', vim.lsp.buf.references, 'Go to references')
-  nmap('gd', '<cmd>lua vim.lsp.buf.definition()<CR>zz', 'Go to definition')
   nmap('[e', function()
     vim.diagnostic.jump({ count = -1, float = true, severity = vim.diagnostic.severity.ERROR })
   end, 'Go to prev error')
@@ -42,7 +39,6 @@ function M.setup(bufnr)
   if jit.os == 'OSX' then
     nmap('gh', '<cmd>Telescope lsp_references<CR>', 'Show signature help')
     nmap('<Leader>ca', vim.lsp.buf.code_action, 'Code Action')
-    nmap('gr', vim.lsp.buf.rename, 'Rename')
     nmap('gT', vim.lsp.buf.type_definition, 'Type definition')
   end
 end
