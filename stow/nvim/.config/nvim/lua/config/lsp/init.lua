@@ -1,10 +1,31 @@
 local colors = require('config.colors')
 local icons = require('config.icons').lsp
+local util = require('config.lsp.util')
+
+local servers = {
+  'bashls',
+  'clangd',
+  'dockerls',
+  'gopls',
+  'luals',
+  'pyright',
+  'rust_analyzer',
+  'yamlls',
+}
+
+if jit.os ~= 'OSX' then
+  table.insert(servers, 'elixirls')
+  table.insert(servers, 'ocamllsp')
+end
 
 local function on_lsp_attach(args, bufnr)
   require('config.lsp.keymaps').setup(bufnr)
+  local gopls = require('config.lsp.gopls')
 
   local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+  if client.name == 'gopls' then
+    gopls.setup(bufnr)
+  end
 
   -- diagnostic open float on cursor hold:
   vim.api.nvim_create_augroup('lsp_diagnostic_hold', { clear = true })
@@ -84,25 +105,64 @@ local function load_config()
     root_markers = { '.git' },
   })
 
-  local servers = {
-    'bashls',
-    'clangd',
-    'dockerls',
-    'gopls',
-    'luals',
-    'pyright',
-    'rust_analyzer',
-    'yamlls',
-  }
-
-  if jit.os ~= 'OSX' then
-    table.insert(servers, 'elixirls')
-    table.insert(servers, 'ocamllsp')
-  end
-
   for _, server in ipairs(servers) do
     vim.lsp.enable(server)
   end
+end
+
+-- Adapted from lspconfig
+local function setup_cmds()
+  vim.api.nvim_create_user_command('LspRestart', function(info)
+    local detach_clients = {}
+    local clients = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })
+    for _, client in ipairs(clients) do
+      vim.notify('restarting client: ' .. client.name)
+      client:stop()
+      if vim.tbl_count(client.attached_buffers) > 0 then
+        detach_clients[client.name] = { client, vim.lsp.get_buffers_by_client_id(client.id) }
+      end
+    end
+
+    local timer = assert(vim.uv.new_timer())
+    timer:start(
+      500,
+      100,
+      vim.schedule_wrap(function()
+        for client_name, tuple in pairs(detach_clients) do
+          local client, attached_buffers = unpack(tuple)
+          if client.is_stopped() then
+            for _, _ in pairs(attached_buffers) do
+              vim.lsp.start(vim.lsp.config[client_name])
+            end
+            detach_clients[client_name] = nil
+          end
+        end
+
+        if next(detach_clients) == nil and not timer:is_closing() then
+          timer:close()
+        end
+      end)
+    )
+  end, {
+    desc = 'Manually restart the given language client(s)',
+  })
+
+  vim.api.nvim_create_user_command('LspStop', function(info)
+    local clients = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })
+
+    for _, client in ipairs(clients) do
+      vim.notify('restarting client: ' .. client.name)
+      client:stop(true)
+    end
+  end, {
+    desc = 'Manually stops the given language client(s)',
+  })
+
+  vim.api.nvim_create_user_command('LspLog', function()
+    vim.cmd(string.format('tabnew %s', vim.lsp.get_log_path()))
+  end, {
+    desc = 'Opens the Nvim LSP client log.',
+  })
 end
 
 function M.setup()
@@ -124,6 +184,7 @@ function M.setup()
   --
 
   load_config()
+  setup_cmds()
   -- Setup diagnostic icons
   vim.fn.sign_define('DiagnosticSignError', { text = icons.error, texthl = 'DiagnosticSignError' })
   vim.fn.sign_define('DiagnosticSignWarn', { text = icons.warn, texthl = 'DiagnosticSignWarn' })
