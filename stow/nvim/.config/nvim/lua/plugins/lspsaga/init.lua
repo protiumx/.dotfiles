@@ -8,8 +8,6 @@ return {
     { '<Leader>ca', '<cmd>Lspsaga code_action<CR>', mode = { 'n', 'v' }, silent = true },
     { 'gD', '<cmd>Lspsaga peek_definition<CR>', silent = true },
     { 'gT', '<cmd>Lspsaga peek_type_definition<CR>', silent = true },
-    { '<C-g>d', '<cmd>Lspsaga show_buf_diagnostics<CR>', silent = true },
-    { '<M-l>o', '<cmd>Lspsaga outline<CR>', silent = true },
   },
   opts = {
     preview = {
