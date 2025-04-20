@@ -1,7 +1,12 @@
-local function on_lsp_attach(client, bufnr)
+local colors = require('config.colors')
+local icons = require('config.icons').lsp
+
+local function on_lsp_attach(args, bufnr)
   require('config.lsp.keymaps').setup(bufnr)
 
-  local colors = require('config.colors')
+  local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+
+  -- diagnostic open float on cursor hold:
   vim.api.nvim_create_augroup('lsp_diagnostic_hold', { clear = true })
   vim.api.nvim_create_autocmd('CursorHold', {
     group = 'lsp_diagnostic_hold',
@@ -17,7 +22,8 @@ local function on_lsp_attach(client, bufnr)
     end,
   })
 
-  if client.server_capabilities.documentHighlightProvider then
+  -- document references highlight
+  if client:supports_method('textDocument/documentHighlight', args.buf) then
     vim.api.nvim_set_hl(0, 'LspReferenceRead', { fg = colors.accent })
     vim.api.nvim_set_hl(0, 'LspReferenceText', { fg = colors.accent })
     vim.api.nvim_set_hl(0, 'LspReferenceWrite', { fg = colors.accent })
@@ -53,7 +59,7 @@ local function on_lsp_attach(client, bufnr)
 end
 
 local M = {
-  on_lsp_attach = on_lsp_attach,
+  -- diagnostics config
   config = {
     virtual_text = {
       spacing = 1,
@@ -78,15 +84,64 @@ local M = {
   },
 }
 
-function M.setup()
-  local icons = require('config.icons').lsp
+local function setup_lsp()
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
+  -- Better completion config
+  capabilities.textDocument.completion.completionItem = {
+    documentationFormat = { 'markdown', 'plaintext' },
+    snippetSupport = true,
+    preselectSupport = true,
+    insertReplaceSupport = true,
+    labelDetailsSupport = true,
+    deprecatedSupport = true,
+    commitCharactersSupport = true,
+    tagSupport = { valueSet = { 1 } },
+    resolveSupport = {
+      properties = {
+        'documentation',
+        'detail',
+        'additionalTextEdits',
+      },
+    },
+  }
+
+  vim.lsp.config('*', {
+    capabilities = capabilities,
+    root_markers = { '.git' },
+  })
+
+  local servers = {
+    'bashls',
+    'clangd',
+    'dockerls',
+    'gopls',
+    'luals',
+    'pyrigth',
+    'rust_analyzer',
+    'yamlls',
+  }
+
+  if jit.os ~= 'OSX' then
+    table.insert(servers, 'elixirls')
+    table.insert(servers, 'ocamllsp')
+  end
+
+  for _, server in ipairs(servers) do
+    vim.lsp.enable(server)
+  end
+end
+
+local function setup_icons()
   vim.lsp.set_log_level('error')
   vim.fn.sign_define('DiagnosticSignError', { text = icons.error, texthl = 'DiagnosticSignError' })
   vim.fn.sign_define('DiagnosticSignWarn', { text = icons.warn, texthl = 'DiagnosticSignWarn' })
   vim.fn.sign_define('DiagnosticSignInfo', { text = icons.info, texthl = 'DiagnosticSignInfo' })
   vim.fn.sign_define('DiagnosticSignHint', { text = icons.hint, texthl = 'DiagnosticSignHint' })
+end
 
+function M.setup()
   -- NOTE: noice.nvim sets these 2 handlers
   -- vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
   --   vim.lsp.handlers.hover,
@@ -103,7 +158,12 @@ function M.setup()
   -- )
   --
 
+  setup_lsp()
+  setup_icons()
   vim.diagnostic.config(M.config)
+  vim.api.nvim_create_autocmd('LspAttach', {
+    callback = on_lsp_attach,
+  })
 end
 
 return M
