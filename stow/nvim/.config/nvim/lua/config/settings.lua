@@ -47,8 +47,8 @@ vim.o.laststatus = 3
 -- vim.opt.foldmethod = "expr"
 -- vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 
-vim.opt.undodir = os.getenv('HOME') .. '/.vim/undodir'
 vim.opt.undofile = true
+vim.opt.undodir = os.getenv('HOME') .. '/.nvim/undodir'
 
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
@@ -79,72 +79,34 @@ vim.opt.wildmode = 'full' -- Shows a menu bar as opposed to an enormous list
 vim.opt.wildignorecase = true -- Ignore case when completing file names and directories
 vim.opt.wildignore = {
   '*.o',
-  '*.obj',
-  '*~',
-  '*.exe',
-  '*.a',
-  '*.pdb',
   '*.lib',
   '*.so',
-  '*.pyc',
-  '*.pyo',
-  '*.bin',
-  '*.dex',
-  '*.log',
-  '*.pyc',
   '*.sqlite',
   '*.sqlite3',
-  '*.min.js',
-  '*.min.css',
   '*.tags',
   '*.zip',
-  '*.7z',
-  '*.rar',
   '*.gz',
   '*.tar',
   '*.gzip',
-  '*.bz2',
   '*.tgz',
-  '*.xz',
   '*.png',
   '*.jpg',
   '*.gif',
-  '*.bmp',
-  '*.tga',
-  '*.pcx',
-  '*.ppm',
   '*.img',
   '*.iso',
   '*.pdf',
   '*.dmg',
-  '*.app',
-  '*.ipa',
-  '*.apk',
-  '*.mobi',
-  '*.epub',
   '*.mp4',
-  '*.avi',
-  '*.flv',
   '*.mov',
-  '*.mkv',
-  '*.swf',
-  '*.swc',
   '*.ppt',
   '*.pptx',
   '*.doc',
   '*.docx',
-  '*.xlt',
   '*.xls',
   '*.xlsx',
-  '*.odt',
-  '*.wps',
   '*/.git/*',
   '*.DS_Store',
   '*/node_modules/*',
-  '*/build/*',
-  '*/logs/*',
-  '*/dist/*',
-  '*/tmp/*',
 }
 
 if vim.fn.has('wsl') == 1 then
