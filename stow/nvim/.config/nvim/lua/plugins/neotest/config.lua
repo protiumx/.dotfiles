@@ -49,7 +49,7 @@ return function()
     },
     output_panel = {
       enabled = true,
-      open = 'vertical topleft split',
+      open = 'vertical split',
     },
     icons = {
       child_indent = '│',

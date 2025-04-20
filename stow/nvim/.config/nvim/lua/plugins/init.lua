@@ -11,7 +11,6 @@ return {
   require('plugins.noice'),
   require('plugins.nvim-cmp'),
   require('plugins.nvim-dap'),
-  require('plugins.nvim-go'),
   require('plugins.telescope'),
   require('plugins.text-case'),
   require('plugins.treesitter'),
