@@ -1,3 +1,4 @@
+-- https://github.com/elixir-lsp/elixir-ls
 return {
   filetypes = { 'elixir', 'eelixir', 'heex', 'surface' },
   root_dir = function(bufnr, on_dir)

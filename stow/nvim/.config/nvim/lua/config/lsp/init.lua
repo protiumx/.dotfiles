@@ -27,34 +27,6 @@ local function on_lsp_attach(args, bufnr)
     vim.api.nvim_set_hl(0, 'LspReferenceRead', { fg = colors.accent })
     vim.api.nvim_set_hl(0, 'LspReferenceText', { fg = colors.accent })
     vim.api.nvim_set_hl(0, 'LspReferenceWrite', { fg = colors.accent })
-
-    -- TODO: create command to enable doc Highlight
-    -- vim.api.nvim_create_augroup('lsp_document_highlight', { clear = true })
-    -- Highlight references only in normal mode
-    -- local timer = nil
-    -- vim.api.nvim_create_autocmd('CursorHold', {
-    --   group = 'lsp_document_highlight',
-    --   buffer = bufnr,
-    --   callback = function()
-    --     timer = vim.defer_fn(function()
-    --       vim.lsp.buf.document_highlight()
-    --       timer = nil
-    --     end, 1000)
-    --   end
-    -- })
-
-    -- vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
-    --   group = 'lsp_document_highlight',
-    --   buffer = bufnr,
-    --   callback = function()
-    --     if timer ~= nil then
-    --       timer:stop()
-    --       timer = nil
-    --     else
-    --       vim.lsp.buf.clear_references()
-    --     end
-    --   end
-    -- })
   end
 end
 
@@ -84,7 +56,7 @@ local M = {
   },
 }
 
-local function setup_lsp()
+local function load_config()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
@@ -118,7 +90,7 @@ local function setup_lsp()
     'dockerls',
     'gopls',
     'luals',
-    'pyrigth',
+    'pyright',
     'rust_analyzer',
     'yamlls',
   }
@@ -133,15 +105,8 @@ local function setup_lsp()
   end
 end
 
-local function setup_icons()
-  vim.lsp.set_log_level('error')
-  vim.fn.sign_define('DiagnosticSignError', { text = icons.error, texthl = 'DiagnosticSignError' })
-  vim.fn.sign_define('DiagnosticSignWarn', { text = icons.warn, texthl = 'DiagnosticSignWarn' })
-  vim.fn.sign_define('DiagnosticSignInfo', { text = icons.info, texthl = 'DiagnosticSignInfo' })
-  vim.fn.sign_define('DiagnosticSignHint', { text = icons.hint, texthl = 'DiagnosticSignHint' })
-end
-
 function M.setup()
+  vim.lsp.set_log_level('WARN')
   -- NOTE: noice.nvim sets these 2 handlers
   -- vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
   --   vim.lsp.handlers.hover,
@@ -158,9 +123,15 @@ function M.setup()
   -- )
   --
 
-  setup_lsp()
-  setup_icons()
+  load_config()
+  -- Setup diagnostic icons
+  vim.fn.sign_define('DiagnosticSignError', { text = icons.error, texthl = 'DiagnosticSignError' })
+  vim.fn.sign_define('DiagnosticSignWarn', { text = icons.warn, texthl = 'DiagnosticSignWarn' })
+  vim.fn.sign_define('DiagnosticSignInfo', { text = icons.info, texthl = 'DiagnosticSignInfo' })
+  vim.fn.sign_define('DiagnosticSignHint', { text = icons.hint, texthl = 'DiagnosticSignHint' })
+
   vim.diagnostic.config(M.config)
+
   vim.api.nvim_create_autocmd('LspAttach', {
     callback = on_lsp_attach,
   })

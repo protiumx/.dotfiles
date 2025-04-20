@@ -1,7 +1,7 @@
 local colors = require('config.colors')
 local global_state = require('config.state')
 
-local modes = {
+local mode_text_map = {
   ['__'] = '--',
   ['c'] = 'C',
   ['i'] = 'I',
@@ -22,7 +22,7 @@ local modes = {
   [''] = 'V-B',
 }
 
-local mode_colors = {
+local mode_colors_map = {
   n = colors.blue,
   i = colors.yellow,
   v = colors.magenta,
@@ -115,11 +115,11 @@ return function()
         {
           'mode',
           fmt = function()
-            return modes[vim.fn.mode()] .. ' |'
+            return mode_text_map[vim.fn.mode()] .. ' |'
           end,
           color = function()
             local val = {
-              fg = mode_colors[vim.fn.mode()],
+              fg = mode_colors_map[vim.fn.mode()],
               bg = 'none',
               gui = 'bold',
             }
@@ -147,10 +147,11 @@ return function()
             return s
           end,
         },
+        -- Show icon if there are unsaved buffers
         {
           function()
             for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-              if vim.api.nvim_buf_get_option(buf, 'modified') then
+              if vim.api.nvim_get_option_value('modified', { buf = buf }) then
                 return '󱃓'
               end
             end
@@ -186,6 +187,7 @@ return function()
             return global_state.get('quiet') and '󰊠' or ''
           end,
         },
+        -- Position
         {
           function()
             return '%4l:%-3c %3p%%/%L'
