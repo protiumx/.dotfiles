@@ -1,6 +1,30 @@
 -- From https://github.com/TheRealLorenz/nvim-lspconfig/blob/master/lua/lspconfig/util.lua
 local M = {}
 
+function M.validate_bufnr(bufnr)
+  vim.validate('bufnr', bufnr, 'number')
+  return bufnr == 0 and vim.api.nvim_get_current_buf() or bufnr
+end
+
+function M.search_ancestors(startpath, func)
+  vim.validate('func', func, 'function')
+  if func(startpath) then
+    return startpath
+  end
+  local guard = 100
+  for path in vim.fs.parents(startpath) do
+    -- Prevent infinite recursion if our algorithm breaks
+    guard = guard - 1
+    if guard == 0 then
+      return
+    end
+
+    if func(path) then
+      return path
+    end
+  end
+end
+
 function M.bufname_valid(bufname)
   if
     bufname:match('^/')
@@ -18,7 +42,7 @@ local function escape_wildcards(path)
 end
 
 function M.root_pattern(...)
-  local patterns = M.tbl_flatten({ ... })
+  local patterns = vim.iter({ ... }):flatten(math.huge):totable()
   return function(startpath)
     startpath = M.strip_archive_subpath(startpath)
     for _, pattern in ipairs(patterns) do
@@ -37,52 +61,6 @@ function M.root_pattern(...)
       end
     end
   end
-end
-
-function M.insert_package_json(config_files, field, fname)
-  local path = vim.fn.fnamemodify(fname, ':h')
-  local root_with_package =
-    vim.fs.dirname(vim.fs.find('package.json', { path = path, upward = true })[1])
-
-  if root_with_package then
-    -- only add package.json if it contains field parameter
-    local path_sep = iswin and '\\' or '/'
-    for line in io.lines(root_with_package .. path_sep .. 'package.json') do
-      if line:find(field) then
-        config_files[#config_files + 1] = 'package.json'
-        break
-      end
-    end
-  end
-  return config_files
-end
-
-function M.get_config_by_ft(filetype)
-  local configs = require('lspconfig.configs')
-  local matching_configs = {}
-  for _, config in pairs(configs) do
-    local filetypes = config.filetypes or {}
-    for _, ft in pairs(filetypes) do
-      if ft == filetype then
-        table.insert(matching_configs, config)
-      end
-    end
-  end
-  return matching_configs
-end
-
---- Note: In Nvim 0.11+ this currently has no public interface, the healthcheck uses the private
---- `vim.lsp._enabled_configs`:
---- https://github.com/neovim/neovim/blob/28e819018520a2300eaeeec6794ffcd614b25dd2/runtime/lua/vim/lsp/health.lua#L186
-function M.get_managed_clients()
-  local configs = require('lspconfig.configs')
-  local clients = {}
-  for _, config in pairs(configs) do
-    if config.manager then
-      vim.list_extend(clients, config.manager:clients())
-    end
-  end
-  return clients
 end
 
 -- For zipfile: or tarfile: virtual paths, returns the path to the archive.
