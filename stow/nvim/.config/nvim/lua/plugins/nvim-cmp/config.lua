@@ -39,11 +39,6 @@ local sources = {
     end,
   },
 
-  lua = {
-    name = 'nvim_lua',
-    priority = 100,
-  },
-
   snippets = {
     name = 'luasnip',
     priority = 80,
@@ -97,7 +92,7 @@ return function()
         return false
       end
 
-      local ftype = vim.api.nvim_buf_get_option(0, 'filetype')
+      local ftype = vim.api.nvim_get_option_value('filetype', { buf = 0 })
       return not excluded_ftypes[ftype]
     end,
 
