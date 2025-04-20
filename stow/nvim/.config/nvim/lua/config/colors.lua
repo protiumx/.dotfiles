@@ -179,12 +179,7 @@ end
 
 local function overrides()
   return {
-    -- Title = vim.tbl_extend(
-    --   'force',
-    --   vim.api.nvim_get_hl_by_name('Title', true) or {},
-    --   { bg = colors.background }
-    -- ),
-
+    -- Title = extend_highlight('Title', { bg = colors.background }),
     DiagnosticVirtualTextError = extend_highlight('DiagnosticVirtualTextError', { bg = 'none' }),
     DiagnosticVirtualTextWarn = extend_highlight('DiagnosticVirtualTextWarn', { bg = 'none' }),
     DiagnosticVirtualTextInfo = extend_highlight('DiagnosticVirtualTextInfo', { bg = 'none' }),

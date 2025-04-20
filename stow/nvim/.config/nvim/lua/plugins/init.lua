@@ -18,27 +18,37 @@ return {
   require('plugins.treesj'),
   require('plugins.trouble'),
   require('plugins.vim-sandwich'),
+  require('plugins.fidget'),
+  require('plugins.lspsaga'),
 
   {
     'ellisonleao/gruvbox.nvim',
+    enabled = false,
+    config = function()
+      local colors = require('config.colors')
+      require('gruvbox').setup({
+        undercurl = true,
+        underline = true,
+        bold = true,
+        contrast = '',
+        palette_overrides = {
+          dark0 = colors.background,
+          dark1 = colors.background,
+        },
+        dim_inactive = false,
+        transparent_mode = true,
+      })
+
+      vim.cmd('colorscheme gruvbox')
+    end,
     lazy = false,
     priority = 1000,
   },
-  -- {
-  --   'cranberry-clockworks/coal.nvim',
-  --   config = function()
-  --       require('coal').setup({
-  --         -- colors = {
-  --         --   anti_flash_white = '#cfcbc9'
-  --         -- }
-  --       })
-  --   end
-  -- },
   {
     'zenbones-theme/zenbones.nvim',
-    init = function()
-      vim.g['zenbones_compat'] = 1
-    end,
+    -- init = function()
+    --   vim.g['zenwritten_compat'] = 1
+    -- end,
     config = function()
       vim.cmd('colorscheme zenwritten')
     end,
@@ -59,6 +69,7 @@ return {
 
   {
     'mbbill/undotree',
+    enabled = false,
     event = 'VeryLazy',
     config = function()
       vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
