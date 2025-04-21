@@ -37,20 +37,12 @@ return {
         dim_inactive = false,
         transparent_mode = true,
       })
-
-      vim.cmd('colorscheme gruvbox')
     end,
     lazy = false,
     priority = 1000,
   },
   {
     'zenbones-theme/zenbones.nvim',
-    -- init = function()
-    --   vim.g['zenwritten_compat'] = 1
-    -- end,
-    config = function()
-      vim.cmd('colorscheme zenwritten')
-    end,
     dependencies = { 'rktjmp/lush.nvim' },
   },
 
