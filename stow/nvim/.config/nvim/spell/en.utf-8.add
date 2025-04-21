@@ -78,3 +78,5 @@ structs
 namespaces
 keymap
 keymaps
+cmd
+colorscheme
