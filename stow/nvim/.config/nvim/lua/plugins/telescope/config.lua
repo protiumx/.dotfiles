@@ -124,21 +124,20 @@ local function keymaps()
     builtin.spell_suggest(telescope_themes.get_cursor(themes.base))
   end, '[S]pell [S]uggestions')
 
-  map('n', '<C-g>bb', builtin.git_branches, '[G]it [B]ranches')
-  map('n', '<C-g>H', builtin.git_bcommits, '[G]it [H]istory of buffer')
-  map('n', '<C-g>c', builtin.git_commits, '[G]it [C]ommits')
-  map('n', '<C-g>S', function()
+  map('n', '<M-s>gb', builtin.git_branches, '[G]it [B]ranches')
+  map('n', '<M-s>gbc', builtin.git_bcommits, '[G]it [H]istory of buffer')
+  map('n', '<M-s>gc', builtin.git_commits, '[G]it [C]ommits')
+  map('n', '<M-s>gs', function()
     builtin.git_status(dropdown)
   end, '[G]it [S]tatus')
 
-  map('n', '<M-l>d', builtin.diagnostics, '[L]SP [D]iagnostics')
-  map('n', '<M-l>c', builtin.diagnostics, '[L]SP Incoming [C]alls')
-  map({ 'i', 'n' }, '<M-l>s', function()
+  map('n', '<M-s>ld', builtin.diagnostics, '[L]SP [D]iagnostics')
+  map('n', '<M-s>lc', builtin.diagnostics, '[L]SP Incoming [C]alls')
+  map({ 'i', 'n' }, '<M-s>ls', function()
     builtin.lsp_document_symbols(dropdown)
   end, '[L]SP [S]ymbols')
 
-  map({ 'i', 'n' }, '<M-\'>', builtin.resume, 'Resume last search')
-  map('n', '<M-s>p', builtin.pickers, '[S]earch [P]revious pickers')
+  map({ 'i', 'n' }, "<M-'>", builtin.resume, 'Resume last search')
 
   -- Projects
   map('n', '<M-s>P', function()
@@ -154,6 +153,7 @@ local function keymaps()
     telescope.extensions.macroscope.default(themes.get_dropdown({ previewer = true }))
   end, '[S]earch [M]acros')
 
+  -- Fzf live
   map(
     { 'i', 'n' },
     '<M-s>f',
@@ -163,22 +163,11 @@ local function keymaps()
 end
 
 return function()
-  vim.api.nvim_create_augroup('startup', { clear = true })
+  local group = vim.api.nvim_create_augroup('startup', { clear = true })
   vim.api.nvim_create_autocmd('VimEnter', {
-    group = 'startup',
+    group = group,
     pattern = '*',
     callback = function()
-      -- Do not open for man pages
-      for _, param in ipairs(vim.v.argv) do
-        if param == '-' then
-          return
-        end
-
-        if string.find(param, '+Man') then
-          return
-        end
-      end
-
       -- Open file browser if argument is a folder
       local arg = vim.api.nvim_eval('argv(0)')
       if arg and (vim.fn.isdirectory(arg) ~= 0 or arg == '') then
@@ -224,14 +213,10 @@ return function()
           ['<M-k>'] = 'cycle_history_next',
           ['<M-j>'] = 'cycle_history_prev',
           ['<M-a>'] = 'toggle_all', -- select/deselect all entries
-          ['<M-i>'] = 'insert_symbol_i',
-          ['<M-q>'] = false,
+          ['<M-q>'] = false, -- remove keymap
           ['<M-q>s'] = telescope_actions.send_selected_to_qflist + telescope_actions.open_qflist,
           ['<M-q>a'] = 'add_selected_to_qflist',
           ['<M-q>o'] = telescope_actions.send_to_qflist + telescope_actions.open_qflist,
-          ['<C-t>'] = function()
-            require('trouble.sources.telescope').open()
-          end,
         },
         n = {
           ['q'] = 'close',
@@ -239,7 +224,7 @@ return function()
         },
       },
       preview = {
-        filesize_limit = 5, -- MB
+        filesize_limit = 1, -- MB
       },
       vimgrep_arguments = {
         'rg',
