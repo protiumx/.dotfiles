@@ -8,10 +8,8 @@ local fmt = require('luasnip.extras.fmt').fmt
 local sn = ls.snippet_node
 local i = ls.insert_node
 local t = ls.text_node
-local f = ls.function_node
 local d = ls.dynamic_node
 local c = ls.choice_node
-local postfix = require('luasnip.extras.postfix').postfix
 
 local get_node_text = vim.treesitter.get_node_text
 
@@ -174,8 +172,7 @@ local efi_tpl = [[
 if <err_r> != nil {
   return <ret>
 }
-<finish>
-]]
+<finish>]]
 
 local test_tpl = [[
 func Test<>(t *testing.T) {
@@ -191,8 +188,7 @@ func Test<>(t *testing.T) {
       <>
     })
   }
-}
-]]
+}]]
 
 local bench_tpl = [[
 func Benchmark<>(b *testing.B) {
@@ -208,8 +204,6 @@ if err != nil {
   return <>
 }
 ]]
-
-local treesitter_postfix = require('luasnip.extras.treesitter_postfix').treesitter_postfix
 
 return {
   setup = function()
@@ -228,18 +222,13 @@ return {
       ),
 
       ls.s(
-        { trig = 'Test([%w_%d]+)', regTrig = true, docTrig = 'TestXXX' },
-        d(1, function(_, parent)
-          return sn(
-            1,
-            fmta(test_tpl, {
-              t(parent.snippet.captures[1]),
-              i(2),
-              i(3),
-              i(4),
-            })
-          )
-        end),
+        'tft',
+        fmta(test_tpl, {
+          i(1),
+          i(2),
+          i(3),
+          i(4),
+        }),
         snip_test_file
       ),
 
@@ -263,24 +252,6 @@ return {
         }),
         snip_test_file
       ),
-
-      postfix({
-        trig = '.call1',
-        name = 'wrap call with if err',
-        match_pattern = '^%w+%(%.*%)+$',
-        docTrig = 'fn()',
-      }, {
-        d(1, function(_, parent)
-          return sn(
-            1,
-            fmta(call_tpl, {
-              t('err'),
-              t(parent.snippet.env.POSTFIX_MATCH),
-              i(1),
-            })
-          )
-        end),
-      }),
     })
   end,
 }
