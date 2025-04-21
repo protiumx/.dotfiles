@@ -22,6 +22,10 @@ local function on_lsp_attach(args, bufnr)
   local gopls = require('config.lsp.gopls')
 
   local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+  -- Disable semantic tokens
+  client.server_capabilities.semanticTokensProvider = nil
+
+  -- Load client specific config
   if client.name == 'gopls' then
     gopls.setup(bufnr)
   end
