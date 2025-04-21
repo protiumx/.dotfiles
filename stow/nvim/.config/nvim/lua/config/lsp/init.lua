@@ -1,8 +1,7 @@
 local colors = require('config.colors')
 local icons = require('config.icons').lsp
-local util = require('config.lsp.util')
 
-local servers = {
+local clients = {
   'bashls',
   'clangd',
   'dockerls',
@@ -14,8 +13,8 @@ local servers = {
 }
 
 if jit.os ~= 'OSX' then
-  table.insert(servers, 'elixirls')
-  table.insert(servers, 'ocamllsp')
+  table.insert(clients, 'elixirls')
+  table.insert(clients, 'ocamllsp')
 end
 
 local function on_lsp_attach(args, bufnr)
@@ -77,7 +76,7 @@ local M = {
   },
 }
 
-local function load_config()
+local function setup_clients()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
@@ -105,7 +104,7 @@ local function load_config()
     root_markers = { '.git' },
   })
 
-  for _, server in ipairs(servers) do
+  for _, server in ipairs(clients) do
     vim.lsp.enable(server)
   end
 end
@@ -183,7 +182,7 @@ function M.setup()
   -- )
   --
 
-  load_config()
+  setup_clients()
   setup_cmds()
   -- Setup diagnostic icons
   vim.fn.sign_define('DiagnosticSignError', { text = icons.error, texthl = 'DiagnosticSignError' })
