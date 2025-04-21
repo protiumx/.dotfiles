@@ -38,7 +38,6 @@ return function()
     include = {
       'c',
       'cpp',
-      'css',
       'docker',
       'eelixir',
       'elixir',
@@ -47,7 +46,6 @@ return function()
       'html',
       'javascript',
       'jsdoc',
-      'license',
       'lua',
       'markdown',
       'make',
