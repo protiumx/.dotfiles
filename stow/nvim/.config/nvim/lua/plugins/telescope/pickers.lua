@@ -1,4 +1,5 @@
 local Path = require('plenary.path')
+
 local strings = require('plenary.strings')
 
 local telescope_actions = require('telescope.actions')
@@ -18,6 +19,9 @@ local themes = require('plugins.telescope.themes')
 local utils = require('config.utils')
 local state = require('config.state')
 
+-- Used to sort buffers that have common marks
+local common_marks = { 'A', 'S', 'D', 'F' }
+
 local M = {}
 
 local function entry_from_buffer(opts)
@@ -28,9 +32,9 @@ local function entry_from_buffer(opts)
   local displayer = entry_display.create({
     separator = ' ',
     items = {
-      { width = 1 },
-      { width = opts.bufnr_width, right_justify = true },
-      { width = 4 },
+      { width = 1 }, -- pin
+      { width = opts.bufnr_width },
+      { width = 1 }, -- mark
       { width = icon_width },
       { remaining = true },
     },
@@ -39,17 +43,18 @@ local function entry_from_buffer(opts)
   local cwd = vim.fn.expand(opts.cwd or vim.loop.cwd())
 
   local make_display = function(entry)
-    -- marked + bufnr_width + modes + icon + 4 spaces + : + lnum
-    opts.__prefix = 1 + opts.bufnr_width + 4 + icon_width + 4 + 1 + #tostring(entry.lnum)
+    -- marked + bufnr_width + mark + icon
+    -- E.g. "󰤱.100.A.<icon>.some/path", dots are spaces
+    opts.__prefix = 1 + opts.bufnr_width + 1 + icon_width + 3
     local display_bufname = telescope_utils.transform_path(opts, entry.filename)
     local display_icon, hl_group = telescope_utils.get_devicons(entry.filename, false)
 
     return displayer({
       entry.marked and '󰤱' or ' ',
       { entry.bufnr, 'TelescopeResultsNumber' },
-      { entry.indicator, 'TelescopeResultsComment' },
+      { entry.indicator, 'TelescopeMatching' },
       { display_icon, hl_group },
-      display_bufname .. ':' .. entry.lnum,
+      display_bufname,
     })
   end
 
@@ -58,30 +63,12 @@ local function entry_from_buffer(opts)
     -- if bufname is inside the cwd, trim that part of the string
     bufname = Path:new(bufname):normalize(cwd)
 
-    local hidden = entry.info.hidden == 1 and 'h' or 'a'
-    local readonly = vim.api.nvim_buf_get_option(entry.bufnr, 'readonly') and '=' or ' '
-    local changed = entry.info.changed == 1 and '+' or ' '
-    local indicator = entry.flag .. hidden .. readonly .. changed
-    local lnum = 1
-
-    -- account for potentially stale lnum as getbufinfo might not be updated or from resuming buffers picker
-    if entry.info.lnum ~= 0 then
-      -- but make sure the buffer is loaded, otherwise line_count is 0
-      if vim.api.nvim_buf_is_loaded(entry.bufnr) then
-        local line_count = vim.api.nvim_buf_line_count(entry.bufnr)
-        lnum = math.max(math.min(entry.info.lnum, line_count), 1)
-      else
-        lnum = entry.info.lnum
-      end
-    end
-
     -- NOTE: This caches the state of the of the results
     return make_entry.set_default_entry_mt({
       bufnr = entry.bufnr,
       display = make_display,
       filename = bufname,
-      indicator = indicator,
-      lnum = lnum,
+      indicator = entry.mark or ' ',
       marked = state.get_buffer(entry.bufnr),
       ordinal = entry.bufnr .. ' : ' .. bufname,
       value = bufname,
@@ -92,8 +79,10 @@ end
 -- based on telescope builtin https://github.com/nvim-telescope/telescope.nvim/blob/master/lua/telescope/builtin/__internal.lua#L885
 -- place marked buffers always at the top of the results
 function M.buffers(opts)
-  opts.bufnr_width = 3 -- account for up to 3 digits buf numbers
+  -- Max text width for "999"
+  opts.bufnr_width = 3
 
+  -- Filter out unloaded buffers and buffers for the cwd
   local bufnrs = vim.tbl_filter(function(b)
     if 1 ~= vim.fn.buflisted(b) or not vim.api.nvim_buf_is_loaded(b) then
       return false
@@ -103,7 +92,12 @@ function M.buffers(opts)
       return false
     end
 
-    if opts.cwd and not string.find(vim.api.nvim_buf_get_name(b), opts.cwd, 1, true) then
+    local bufname = vim.api.nvim_buf_get_name(b)
+    if opts.cwd and not string.find(bufname, opts.cwd, 1, true) then
+      return false
+    end
+
+    if bufname == '.' or bufname == vim.loop.cwd() then
       return false
     end
 
@@ -111,33 +105,48 @@ function M.buffers(opts)
   end, vim.api.nvim_list_bufs())
 
   if not next(bufnrs) then
+    vim.notify('No listed buffers')
     return
   end
 
-  table.sort(bufnrs, function(a, b)
-    if state.get_buffer(a) and state.get_buffer(b) then
-      return vim.fn.getbufinfo(a)[1].lastused > vim.fn.getbufinfo(b)[1].lastused
+  local buffers = {}
+  for _, bufnr in ipairs(bufnrs) do
+    local mark = nil
+    for _, m in ipairs(common_marks) do
+      local row = vim.api.nvim_buf_get_mark(bufnr, m)[1]
+      if row > 0 then
+        mark = m
+        break
+      end
     end
 
-    if state.get_buffer(a) then
+    table.insert(buffers, {
+      bufnr = bufnr,
+      info = vim.fn.getbufinfo(bufnr)[1],
+      mark = mark,
+    })
+  end
+
+  table.sort(buffers, function(a, b)
+    -- When both buffers are marked fallback to lastused timestamp
+    if state.get_buffer(a.bufnr) and state.get_buffer(b.bufnr) then
+      return a.info.lastused > b.info.lastused
+    end
+
+    if a.mark ~= nil and b.mark ~= nil then
+      return a.mark > b.mark
+    end
+
+    if state.get_buffer(a.bufnr) or a.mark ~= nil then
       return true
     end
 
-    if state.get_buffer(b) then
+    if state.get_buffer(b.bufnr) or b.mark ~= nil then
       return false
     end
 
-    return vim.fn.getbufinfo(a)[1].lastused > vim.fn.getbufinfo(b)[1].lastused
+    return a.info.lastused > b.info.lastused
   end)
-
-  local buffers = {}
-  for _, bufnr in ipairs(bufnrs) do
-    table.insert(buffers, {
-      bufnr = bufnr,
-      flag = vim.fn.bufnr('') and '%' or (bufnr == vim.fn.bufnr('#') and '#' or ' '),
-      info = vim.fn.getbufinfo(bufnr)[1],
-    })
-  end
 
   pickers
     .new(opts, {
@@ -206,11 +215,7 @@ end
 
 ---Find files on prompt change with fd
 function M.find_files_live(opts)
-  if opts.cwd then
-    opts.cwd = vim.fn.expand(opts.cwd)
-  else
-    opts.cwd = vim.loop.cwd()
-  end
+  opts.cwd = opts.cwd and vim.fn.expand(opts.cwd) or vim.loop.cwd()
 
   local cmd_generator = function(prompt)
     if #prompt < 3 then
@@ -219,7 +224,6 @@ function M.find_files_live(opts)
 
     local args = utils.tbl_clone(fd_search_files_cmd)
     table.insert(args, prompt)
-
     return args
   end
 
