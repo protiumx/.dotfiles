@@ -1,5 +1,3 @@
--- from https://github.com/tjdevries/config_manager/blob/master/xdg_config/nvim/lua/tj/snips/ft/go.lua
-
 local ls = require('luasnip')
 local rep = require('luasnip.extras').rep
 local fmta = require('luasnip.extras.fmt').fmta
