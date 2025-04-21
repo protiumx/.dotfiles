@@ -66,13 +66,14 @@ vim.keymap.set('n', '<C-w>B', '<cmd>vs #<CR>', { desc = 'Open previous buffer in
 vim.keymap.set('n', '<Tab>', '<cmd>bn<CR>', { silent = true })
 vim.keymap.set('n', '<S-Tab>', '<cmd>bp<CR>', { silent = true })
 vim.keymap.set('n', '<Leader>`', '<C-^>', { silent = true })
-vim.keymap.set(
-  'n',
-  '--',
-  '<cmd>e # | bwipeout #<CR>',
-  -- FIXME: this loses the bp reference
-  { silent = true, desc = 'Delete buffer and go to previous' }
-)
+vim.keymap.set('n', '--', function()
+  utils.delete_buffer(0, { wipe = true })
+end, { silent = true, desc = 'Wipe buffer and go to previous' })
+
+vim.keymap.set('n', '<Leader>bd', function()
+  utils.delete_buffer(0, { wipe = false })
+end, { silent = true, desc = 'Delete buffer and go to previous' })
+
 vim.keymap.set(
   'n',
   '<M-X>',

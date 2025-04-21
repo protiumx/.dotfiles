@@ -8,6 +8,69 @@ function M.get_cwd_name()
   return vim.fn.fnamemodify(vim.loop.cwd(), ':t')
 end
 
+function M.delete_buffer(buf, opts)
+  buf = buf == 0 and vim.api.nvim_get_current_buf() or buf
+
+  -- Filter out unlisted or dir buffers
+  local listed = vim.tbl_filter(function(b)
+    return vim.fn.buflisted(b) == 1
+      and vim.fn.bufname(b) ~= '.'
+      and vim.fn.bufname(b) ~= vim.loop.cwd()
+  end, vim.api.nvim_list_bufs())
+
+  -- If we only have 2 buffers, just close the current one
+  if #listed <= 2 then
+    pcall(vim.cmd, (opts.wipe and 'bwipeout! ' or 'bdelete! ') .. buf)
+    return
+  end
+
+  vim.api.nvim_buf_call(buf, function()
+    if vim.bo.modified then
+      local ok, choice = pcall(
+        vim.fn.confirm,
+        ('Save changes to %q?'):format(vim.fn.bufname()),
+        '&Yes\n&No\n&Cancel'
+      )
+      if not ok or choice == 0 or choice == 3 then -- 0 for <Esc>/<C-c> and 3 for Cancel
+        return
+      end
+      if choice == 1 then -- Yes
+        vim.cmd.write()
+      end
+    end
+
+    for _, win in ipairs(vim.fn.win_findbuf(buf)) do
+      vim.api.nvim_win_call(win, function()
+        if not vim.api.nvim_win_is_valid(win) or vim.api.nvim_win_get_buf(win) ~= buf then
+          return
+        end
+
+        -- Try using alternate buffer
+        local alt = vim.fn.bufnr('#')
+        local alt_win = vim.fn.win_findbuf(alt)
+        if alt ~= buf and #alt_win == 0 and vim.fn.buflisted(alt) == 1 then
+          vim.api.nvim_win_set_buf(win, alt)
+          return
+        end
+
+        -- Try using previous buffer
+        -- local has_previous = pcall(vim.cmd, 'bprevious')
+        -- if has_previous and buf ~= vim.api.nvim_win_get_buf(win) then
+        --   return
+        -- end
+
+        -- Create new listed buffer to avoid changing layout
+        -- local new_buf = vim.api.nvim_create_buf(true, false)
+        -- vim.api.nvim_win_set_buf(win, new_buf)
+      end)
+    end
+
+    if vim.api.nvim_buf_is_valid(buf) then
+      pcall(vim.cmd, (opts.wipe and 'bwipeout! ' or 'bdelete! ') .. buf)
+    end
+  end)
+end
+
 ---@param original table
 ---@return table
 function M.tbl_clone(original)
