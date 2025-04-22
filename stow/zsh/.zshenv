@@ -124,13 +124,15 @@ glog() {
 }
 
 alpha_build() {
-  current_branch=$(git branch --show-current | sed 's/\//-/')
-  timestring=$(date +"%d-%H%M")
-  tag_name="v0.0.0-pre.$USER-$current_branch-$timestring"
+  local current_branch=$(git branch --show-current | sed 's/\//-/')
+  local timestring=$(date +"%d-%H%M")
+  local tag_name="v0.0.0-pre.$USER-$current_branch-$timestring"
+  if [[ $current_branch =~ "$USER" ]]; then
+    tag_name="v0.0.0-pre.$current_branch-$timestring"
+  fi
 
-  git tag $tag_name
-  git push origin $tag_name
-  echo -e "\nTag: $tag_name"
+  git tag $tag_name || echo "Failed to create tag $tag_name"
+  (git push origin $tag_name && echo -e "\nTag: $tag_name") || echo "Failed to push tag $tag_name"
 }
 
 # Print git remote
