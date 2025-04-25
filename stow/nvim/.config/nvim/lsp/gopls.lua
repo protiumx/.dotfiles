@@ -62,7 +62,7 @@ return {
     },
     experimentalPostfixCompletions = true,
     gofumpt = true,
-    linksInHover = false,
+    linksInHover = true,
     staticcheck = true,
     usePlaceholders = true,
   },
