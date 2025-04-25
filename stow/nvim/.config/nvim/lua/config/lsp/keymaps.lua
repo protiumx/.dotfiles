@@ -2,10 +2,6 @@ local M = {}
 
 function M.setup(bufnr)
   local nmap = function(keys, cmd, desc)
-    if cmd == nil then
-      return
-    end
-
     vim.keymap.set('n', keys, cmd, { buffer = bufnr, desc = '[LSP] ' .. desc })
   end
 

@@ -6,7 +6,7 @@ reload() {
 }
 
 jwt-decode() {
-  jq -R 'split(".") |.[0:2] | map(@base64d) | map(fromjson)' <<< $1
+  jq -R 'split(".") | .[0:2] | map(@base64d) | map(fromjson)' <<< $1
 }
 
 # Print commits with URLs to github
@@ -46,7 +46,7 @@ fzmv() {
   mv "$@" $(fd -t d -H | fzf)
 }
 
-# Create a new directory and enter it
+# Create a new directory and cd it
 md() {
 	mkdir -p "$@" && cd "$@"
 }
@@ -62,11 +62,6 @@ pkgrun() {
   if [[ -n $scripts ]]; then
     yarn run "$name"
   fi
-}
-
-# Jump to folder (zoxide) and open nvim.
-zv() {
- z "$1" && nvim .
 }
 
 # Retrieve process real memory
@@ -92,8 +87,18 @@ urlencode() {
 }
 
 # Run jq using fzf and clipboard as source
+# $1 - Either a json string or a file path
 ijq() {
-  echo '' | fzf --print-query --preview-window nohidden --no-height --preview "${1-pbpaste} | jq {q}"
+  if [[ -n "$1" ]]; then
+    if [[ -f "$1" ]]; then
+      pbcopy < $1
+    else
+      pbcopy <<< "$1"
+    fi
+  fi
+
+  # Piping an empty value blocks fzf from using default sources
+  echo '' | fzf --print-query --preview-window nohidden --no-height -q "." --preview "pbpaste | jq {q}"
 }
 
 # Go to repository root folder
@@ -123,6 +128,7 @@ glog() {
     - %an%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n %C(white)%s%C(reset)"
 }
 
+# Creates and push a git tag with a template v0.0.0-pre.$USER-<branch>-D-HHmm
 alpha_build() {
   local current_branch=$(git branch --show-current | sed 's/\//-/')
   local timestring=$(date +"%d-%H%M")
@@ -158,7 +164,7 @@ jsondiff() {
   delta <(jq --sort-keys . $1) <(jq --sort-keys . $2)
 }
 
-# Trigger pin entry for key $1
+# Trigger pin entry for key $GPG_DEFAULT_KEY
 gpg-pin() {
   echo "sign" | gpg --sign --default-key $GPG_DEFAULT_KEY &> /dev/null
 }
@@ -216,7 +222,7 @@ kube-serv-config() {
   fi
 }
 
-# View the envionment variables of a provided pod
+# View the environment variables of a provided pod
 kube-pod-env() {
   if [ -z "$1" ]; then
     echo "No pod supplied. \nUsage: $funcstack[1] <pod_name>"
@@ -315,8 +321,6 @@ alias kpf="kubectl port-forward"
 alias krrd="kubectl rollout restart deployment"
 alias ksd="kubectl scale deployment"
 
-# Create 5 random passwords
-alias mkpwd="xkcdpass --count=5 --acrostic=\"chaos\" -C \"first\" -R --min=5 --max=6 -D \"#@^&~_-;\""
 alias isodate='date -u +"%Y-%m-%dT%H:%M:%SZ"'
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
