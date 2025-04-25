@@ -13,34 +13,47 @@ local state = {
   debug_mode = false,
 }
 
-local pane_direction_map = {
-  Down = 'Bottom',
-  Left = 'Left',
-  Right = 'Right',
-  Up = 'Top',
-}
-
----Activate or create pane
----@param opts table
----@return table
-local function pane_activate_create(opts)
-  return {
-    key = opts.key,
-    mods = opts.mods,
-    action = wezterm.action_callback(function(_, pane)
-      local pane_at_direction = pane:tab():get_pane_direction(opts.direction)
-
-      if pane_at_direction then
-        pane_at_direction:activate()
-        return
-      end
-
-      pane:split({
-        direction = pane_direction_map[opts.direction],
-        domain = 'CurrentPaneDomain',
-      })
-    end),
+local function pane_keys(mods)
+  local key_mappings = {
+    j = 'Down',
+    h = 'Left',
+    l = 'Right',
+    k = 'Up',
   }
+
+  local keys = {}
+  for k, dir in pairs(key_mappings) do
+    table.insert(keys, {
+      key = k,
+      mods = mods,
+      action = act.ActivatePaneDirection(dir),
+    })
+
+    table.insert(keys, {
+      key = k,
+      mods = mods .. '|CTRL',
+      action = act.SplitPane({
+        direction = dir,
+      }),
+    })
+
+    table.insert(keys, {
+      key = k,
+      mods = mods .. '|CTRL|SHIFT',
+      action = act.SplitPane({
+        direction = dir,
+        top_level = true,
+      }),
+    })
+
+    table.insert(keys, {
+      key = k,
+      mods = mods .. '|ALT',
+      action = act.AdjustPaneSize({ dir, 1 }),
+    })
+  end
+
+  return keys
 end
 
 local key_table_leader = { key = '/', mods = key_mod_panes }
@@ -99,18 +112,8 @@ local keys = {
     mods = 'LEADER',
     action = act.ActivateKeyTable({
       name = 'pane',
-      timeout_milliseconds = 1500,
+      timeout_milliseconds = 2000,
     }),
-  },
-  {
-    key = 'd',
-    mods = key_mod_panes,
-    action = act.SplitHorizontal({ domain = 'CurrentPaneDomain' }),
-  },
-  {
-    key = 'D',
-    mods = 'SHIFT|' .. key_mod_panes,
-    action = act.SplitVertical({ domain = 'CurrentPaneDomain' }),
   },
 
   {
@@ -137,56 +140,6 @@ local keys = {
     action = wezterm.action_callback(function(_win, pane)
       pane:move_to_new_window()
     end),
-  },
-
-  -- Activation
-  pane_activate_create({
-    key = 'h',
-    mods = key_mod_panes,
-    direction = 'Left',
-  }),
-
-  pane_activate_create({
-    key = 'l',
-    mods = key_mod_panes,
-    direction = 'Right',
-  }),
-
-  pane_activate_create({
-    key = 'k',
-    mods = key_mod_panes,
-    direction = 'Up',
-  }),
-
-  pane_activate_create({
-    key = 'j',
-    mods = key_mod_panes,
-    direction = 'Down',
-  }),
-
-  -- Size
-  {
-    key = 'H',
-    mods = 'SHIFT|' .. key_mod_panes,
-    action = act.AdjustPaneSize({ 'Left', 1 }),
-  },
-
-  {
-    key = 'J',
-    mods = 'SHIFT|' .. key_mod_panes,
-    action = act.AdjustPaneSize({ 'Down', 1 }),
-  },
-
-  {
-    key = 'K',
-    mods = 'SHIFT|' .. key_mod_panes,
-    action = act.AdjustPaneSize({ 'Up', 1 }),
-  },
-
-  {
-    key = 'L',
-    mods = 'SHIFT|' .. key_mod_panes,
-    action = act.AdjustPaneSize({ 'Right', 1 }),
   },
 
   -- Rotate
@@ -317,6 +270,10 @@ local keys = {
   { key = 'i', mods = 'CTRL', action = act.SendKey({ key = 'i', mods = 'CTRL' }) },
 }
 
+for _, v in ipairs(pane_keys(key_mod_panes)) do
+  table.insert(keys, v)
+end
+
 local key_tables = {
   pane = {
     {
@@ -432,7 +389,6 @@ wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_wid
   }
 end)
 
-local background = '#161616'
 wezterm.on('update-right-status', function(window, pane)
   local process = ''
 
@@ -463,6 +419,8 @@ wezterm.on('update-right-status', function(window, pane)
     { Text = status },
   }))
 end)
+
+local background = '#161616'
 
 local colors = {
   background = background,
