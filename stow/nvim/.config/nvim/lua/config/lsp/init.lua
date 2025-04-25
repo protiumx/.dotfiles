@@ -3,6 +3,7 @@ local icons = require('config.icons').lsp
 
 local clients = {
   'bashls',
+  'buf_ls',
   'clangd',
   'dockerls',
   'gopls',
