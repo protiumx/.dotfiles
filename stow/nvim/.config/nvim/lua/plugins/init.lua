@@ -29,7 +29,7 @@ return {
         undercurl = true,
         underline = true,
         bold = true,
-        contrast = '',
+        contrast = 'soft',
         palette_overrides = {
           dark0 = colors.background,
           dark1 = colors.background,
@@ -37,13 +37,19 @@ return {
         dim_inactive = false,
         transparent_mode = true,
       })
+      vim.cmd('colorscheme gruvbox')
     end,
     lazy = false,
     priority = 1000,
   },
   {
+    lazy = false,
+    priority = 1000,
     'zenbones-theme/zenbones.nvim',
     dependencies = { 'rktjmp/lush.nvim' },
+    config = function()
+      vim.cmd('colorscheme zenwritten')
+    end,
   },
 
   {
