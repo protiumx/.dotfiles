@@ -23,9 +23,12 @@ AWK
 }
 
 # NOTE: needs Regexp::Debugger module
-# sudo cpan Regexp::Debugger
+# Linux: sudo cpan Regexp::Debugger
+# Macos: sudo perl -MCPAN -e 'install Regexp::Debugger'
+# $1 - The input
+# $2 - The regex expression
 perlrex() {
-  perl -MRegexp::Debugger -E "'$1' =~ /$2/"
+  perl -MRegexp::Debugger -E "q{$1} =~ m{$2}"
 }
 
 # Test if HTTP compression (RFC 2616 + SDCH) is enabled for a given URL.
