@@ -85,8 +85,8 @@ local keys = {
     end),
   },
 
-  { key = 'PageUp', mods = 'SHIFT', action = act.ScrollByPage(-1) },
-  { key = 'PageDown', mods = 'SHIFT', action = act.ScrollByPage(1) },
+  { key = 'PageUp', action = act.ScrollByPage(-1) },
+  { key = 'PageDown', action = act.ScrollByPage(1) },
 
   {
     key = '.',
