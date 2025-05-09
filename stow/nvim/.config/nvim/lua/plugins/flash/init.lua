@@ -2,6 +2,7 @@ return {
   'folke/flash.nvim',
   opts = {
     search = {
+      enabled = false,
       multi_window = false,
       forward = true,
       wrap = true,
