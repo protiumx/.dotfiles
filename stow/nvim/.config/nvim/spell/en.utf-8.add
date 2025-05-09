@@ -80,3 +80,5 @@ keymap
 keymaps
 cmd
 colorscheme
+boolean
+unicode
