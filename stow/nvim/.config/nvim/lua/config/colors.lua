@@ -135,7 +135,7 @@ local base_groups = {
   TerminalBorder = { link = 'XBorder' },
   TerminalNormal = { link = 'XMenu' },
   SagaShadow = { fg = colors.background, bg = colors.background },
-  SpellBad = { undercurl = true },
+  SpellBad = { undercurl = true, sp = colors.red },
   TitleIcon = { fg = colors.foreground, bg = colors.light_orange },
   TitleString = { fg = colors.background, bg = colors.light_orange },
   -- LSP
