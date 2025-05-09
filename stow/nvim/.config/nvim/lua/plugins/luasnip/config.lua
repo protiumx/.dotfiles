@@ -19,7 +19,7 @@ return function()
 
   local extras = require('luasnip.extras')
   local rep = extras.rep
-  local p = extras.partial
+  local partial = extras.partial
 
   ls.config.set_config({
     delete_check_events = 'InsertLeave',
@@ -66,14 +66,14 @@ return function()
       trig = 'uuid',
       name = 'UUIDv4',
     }, {
-      p(utils.uuid),
+      partial(utils.uuid),
     }),
 
     snippet({
       trig = 'uid',
       name = 'UID',
     }, {
-      p(utils.uid),
+      partial(utils.uid),
     }),
 
     snippet({
@@ -81,7 +81,7 @@ return function()
       name = 'ISO',
       dscr = 'Now as ISO Date',
     }, {
-      p(os.date, ISO_FORMAT),
+      partial(os.date, ISO_FORMAT),
     }),
 
     snippet({
@@ -89,7 +89,7 @@ return function()
       name = 'Epoch',
       dscr = 'Now as unix epoch',
     }, {
-      p(os.date, '%s'),
+      partial(os.date, '%s'),
     }),
 
     snippet({
@@ -97,7 +97,7 @@ return function()
       name = 'Build date',
       dscr = 'Now as a build date time stamp',
     }, {
-      p(os.date, BUILD_DATE),
+      partial(os.date, BUILD_DATE),
     }),
 
     postfix({
@@ -107,6 +107,7 @@ return function()
       docTrig = '0',
     }, {
       f(function(_, parent)
+        ---@type string|osdate
         local ret = ''
         if #parent.snippet.env.POSTFIX_MATCH < 9 then
           ret = os.date(ISO_FORMAT)
@@ -116,6 +117,11 @@ return function()
         return ret
       end, {}),
     }),
+
+    ls.s('time', partial(vim.fn.strftime, '%H:%M:%S')),
+    ls.s('date', partial(vim.fn.strftime, '%Y-%m-%d')),
+    ls.s('timestamp', partial(vim.fn.strftime, '%Y-%m-%d %H:%M:%S')),
+    ls.s('rfc3339', partial(vim.fn.strftime, '%Y-%m-%dT%H:%M:%SZ')),
   }, {})
 
   require('config.snippets.go').setup()
