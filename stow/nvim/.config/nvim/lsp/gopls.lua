@@ -12,6 +12,21 @@ local function get_root(fname)
   return vim.fs.root(fname, { 'go.work', 'go.mod', '.git' })
 end
 
+local range_format = 'textDocument/rangeFormatting'
+local formatting = 'textDocument/formatting'
+
+local get_current_gomod = function()
+  local file = io.open('go.mod', 'r')
+  if file == nil then
+    return nil
+  end
+
+  local first_line = file:read()
+  local mod_name = first_line:gsub('module ', '')
+  file:close()
+  return mod_name
+end
+
 -- https://github.com/golang/tools/tree/master/gopls
 return {
   cmd = { 'gopls' },
@@ -37,6 +52,20 @@ return {
       end
     end)
   end,
+  handlers = {
+    [range_format] = function(...)
+      vim.lsp.handlers[range_format](...)
+      if vim.fn.getbufinfo('%')[1].changed == 1 then
+        vim.cmd('noautocmd write')
+      end
+    end,
+    [formatting] = function(...)
+      vim.lsp.handlers[formatting](...)
+      if vim.fn.getbufinfo('%')[1].changed == 1 then
+        vim.cmd('noautocmd write')
+      end
+    end,
+  },
   settings = {
     analyses = {
       unusedparams = true,
@@ -47,6 +76,7 @@ return {
       generate = true,
       gc_details = true,
       regenerate_cgo = true,
+      test = true,
       tidy = true,
       upgrade_depdendency = true,
       vendor = true,
@@ -64,6 +94,14 @@ return {
     gofumpt = true,
     linksInHover = true,
     staticcheck = true,
+    completeUnimported = true,
     usePlaceholders = true,
+    diagnosticsDelay = '1s',
+    -- diagnosticsTrigger = 'Edit', -- update diagnostics on update instead of on write
+    symbolMatcher = 'FastFuzzy',
+    semanticTokens = false,
+    vulncheck = 'Imports',
+    buildFlags = { '-tags', 'stack' },
+    ['local'] = get_current_gomod(),
   },
 }
