@@ -250,6 +250,47 @@ return {
         }),
         snip_test_file
       ),
+
+      ls.s(
+        { trig = 'noerr', name = 'Require No Error', dscr = 'Add a require.NoError call' },
+        ls.c(1, {
+          ls.sn(nil, fmt('require.NoError(t, {})', { ls.i(1, 'err') })),
+          ls.sn(nil, fmt('require.NoError(t, {}, "{}")', { ls.i(1, 'err'), ls.i(2) })),
+          ls.sn(
+            nil,
+            fmt('require.NoErrorf(t, {}, "{}", {})', { ls.i(1, 'err'), ls.i(2), ls.i(3) })
+          ),
+        }),
+        snip_test_file
+      ),
+
+      -- errors.Wrap
+      ls.s(
+        { trig = 'erw', dscr = 'errors.Wrap' },
+        fmt([[errors.Wrap({}, "{}")]], {
+          ls.i(1, 'err'),
+          ls.i(2, 'failed to'),
+        })
+      ),
+
+      -- errors.Wrapf
+      ls.s(
+        { trig = 'erwf', dscr = 'errors.Wrapf' },
+        fmt([[errors.Wrapf({}, "{}", {})]], {
+          ls.i(1, 'err'),
+          ls.i(2, 'failed %v'),
+          ls.i(3, 'args'),
+        })
+      ),
+
+      -- Nolint
+      ls.s(
+        { trig = 'nolt', dscr = 'ignore linter' },
+        fmt([[//nolint:{} // {}]], {
+          ls.i(1, 'staticcheck'),
+          ls.i(2, 'Explain why'),
+        })
+      ),
     })
   end,
 }
