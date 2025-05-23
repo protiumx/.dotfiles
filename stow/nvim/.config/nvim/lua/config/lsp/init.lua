@@ -8,6 +8,7 @@ local clients = {
   'dockerls',
   'gopls',
   'luals',
+  'marksman',
   'pyright',
   'rust_analyzer',
   'yamlls',
