@@ -10,9 +10,7 @@ lsp
 lua
 luajit
 neovim
-autoload
 config
-datalink
 detections
 dev
 github
@@ -32,7 +30,6 @@ deadletter
 namespace
 proto
 middleware
-init
 buf
 grpc
 rpc
@@ -54,11 +51,7 @@ graphql
 sql
 workspace
 metadata
-uuids
-sdm
-sdmf
 cid
-expr
 ubuntu
 url
 unmarshal
@@ -70,7 +63,6 @@ todo
 redis
 vm
 kafka
-substring
 prev
 timestamp
 struct
@@ -82,3 +74,5 @@ cmd
 colorscheme
 boolean
 unicode
+tx
+fn
