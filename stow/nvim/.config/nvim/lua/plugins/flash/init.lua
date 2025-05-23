@@ -63,5 +63,13 @@ return {
       end,
       desc = 'Flash multi-window',
     },
+    {
+      '<C-s>',
+      mode = { 'n', 'x', 'o' },
+      function()
+        require('flash').jump({ continue = true })
+      end,
+      desc = 'Flash resume',
+    },
   },
 }
