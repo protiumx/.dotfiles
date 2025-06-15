@@ -27,11 +27,11 @@ stow_dotfiles() {
   local folders=(
     ".config/fd"
     ".config/git"
-    ".config/lf"
     ".config/nvim"
     ".config/ripgrep"
     ".config/vim"
     ".config/wezterm"
+    ".config/yazi"
     ".gnupg"
     ".ssh"
   )

@@ -8,6 +8,7 @@ taps=(
 packages=(
   bat    # https://github.com/sharkdp/bat
   bottom # https://github.com/ClementTsang/bottom
+  buf    # https://buf.build/
   cmake
   ctags
   curl
@@ -40,7 +41,8 @@ packages=(
   protobuf
   ripgrep # https://github.com/BurntSushi/ripgre
   rustup
-  sd # https://github.com/chmln/sd
+  ruff # https://github.com/astral-sh/ruff
+  sd   # https://github.com/chmln/sd
   shellcheck
   stow
   telnet

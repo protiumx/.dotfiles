@@ -377,6 +377,7 @@ local process_icons = {
   ['curl'] = wezterm.nerdfonts.mdi_flattr,
   ['gh'] = wezterm.nerdfonts.dev_github_badge,
   ['ruby'] = wezterm.nerdfonts.cod_ruby,
+  ['yazi'] = '',
 }
 
 local function get_current_working_dir(tab)
