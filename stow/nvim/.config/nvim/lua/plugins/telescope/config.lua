@@ -251,6 +251,7 @@ return function()
           '--strip-cwd-prefix',
           '-i',
           '-E', '.git/*',
+          '-E', '.venv/*',
           '-E', 'target/*',
           '-E', '**/node_modules',
           '-E', '.DS_Store',

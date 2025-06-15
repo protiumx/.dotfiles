@@ -26,3 +26,4 @@ gt:*_test.go*
 --glob=!_build
 --glob=!*.cache
 --glob=!.Trash
+--glob=!.venv

@@ -1,6 +1,7 @@
 .yarn
 .git
 .elixir_ls
+.venv
 node_modules
 _build
 .cache
