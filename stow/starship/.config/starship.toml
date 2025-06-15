@@ -12,6 +12,7 @@ $jobs\
 $kubernetes\
 $docker_context\
 $cmd_duration\
+$python\
 $status\
 $line_break\
 $time $character"""
@@ -60,9 +61,9 @@ disabled = false
 format = "[$symbol $status]($style)"
 symbol = ""
 signal_symbol = ""
-sigint_symbol = "𥉉"
-not_found_symbol = ""
-not_executable_symbol = ""
+sigint_symbol = ""
+not_found_symbol = "󱈍"
+not_executable_symbol = ""
 
 [cmd_duration]
 disabled = true
@@ -107,9 +108,13 @@ symbol = " "
 [package]
 symbol = " "
 
+# only show when there is a virtual env
 [python]
-format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+format = '[${symbol}(\($virtualenv\) )]($style)'
 symbol = " "
+detect_files = []
+detect_folders = [".venv"]
+detect_extensions = []
 
 [rust]
 format = "[$symbol($version )]($style)"
