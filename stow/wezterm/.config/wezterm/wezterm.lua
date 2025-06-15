@@ -13,7 +13,7 @@ local state = {
   debug_mode = false,
 }
 
-local function pane_keys(mods)
+local function pane_keys(mod)
   local key_mappings = {
     j = 'Down',
     h = 'Left',
@@ -25,13 +25,13 @@ local function pane_keys(mods)
   for k, dir in pairs(key_mappings) do
     table.insert(keys, {
       key = k,
-      mods = mods,
+      mods = mod,
       action = act.ActivatePaneDirection(dir),
     })
 
     table.insert(keys, {
       key = k,
-      mods = mods .. '|CTRL',
+      mods = mod .. '|CTRL',
       action = act.SplitPane({
         direction = dir,
       }),
@@ -39,7 +39,7 @@ local function pane_keys(mods)
 
     table.insert(keys, {
       key = k,
-      mods = mods .. '|CTRL|SHIFT',
+      mods = mod .. '|CTRL|SHIFT',
       action = act.SplitPane({
         direction = dir,
         top_level = true,
@@ -48,12 +48,44 @@ local function pane_keys(mods)
 
     table.insert(keys, {
       key = k,
-      mods = mods .. '|ALT',
+      mods = mod .. '|ALT',
       action = act.AdjustPaneSize({ dir, 1 }),
     })
   end
 
   return keys
+end
+
+local function open_file(window, pane, uri)
+  -- uri should have format file://[HOSTNAME]/PATH[#linenr]
+  -- Not a file or in alt screen (e.g. nvim, less)
+  if uri:find('^file:') ~= 1 or pane:is_alt_screen_active() then
+    return false
+  end
+
+  local editor = 'nvim'
+  local url = wezterm.url.parse(uri)
+  -- If there is a pane with neovim send keys
+  local panes = window:active_tab():panes()
+  for _, p in ipairs(panes) do
+    if p:get_foreground_process_name() == editor then
+      local vim_cmd = ':e ' .. url.file_path .. (url.fragment and ' | ' .. url.fragment or '')
+      p:send_text(vim_cmd .. '\r')
+      return false
+    end
+  end
+
+  -- Open nvim in the same pane
+  if url.fragment then
+    pane:send_text(wezterm.shell_join_args({
+      editor,
+      '+' .. url.fragment,
+      url.file_path,
+    }) .. '\r')
+  else
+    pane:send_text(wezterm.shell_join_args({ editor, url.file_path }) .. '\r')
+  end
+  return false
 end
 
 local key_table_leader = { key = '/', mods = key_mod_panes }
@@ -225,6 +257,19 @@ local keys = {
       action = wezterm.action_callback(function(window, pane)
         local url = window:get_selection_text_for_pane(pane)
         wezterm.open_with(url)
+      end),
+    }),
+  },
+  {
+    key = 'F',
+    mods = 'CMD|SHIFT',
+    action = act.QuickSelectArgs({
+      patterns = {
+        'file:///\\S+',
+      },
+      action = wezterm.action_callback(function(window, pane)
+        local uri = window:get_selection_text_for_pane(pane)
+        open_file(window, pane, uri)
       end),
     }),
   },
@@ -421,35 +466,7 @@ wezterm.on('update-right-status', function(window, pane)
 end)
 
 wezterm.on('open-uri', function(window, pane, uri)
-  -- uri should have format file://[HOSTNAME]/PATH[#linenr]
-  -- Not a file or in alt screen (e.g. nvim, less)
-  if uri:find('^file:') ~= 1 or pane:is_alt_screen_active() then
-    return false
-  end
-
-  local editor = 'nvim'
-  local url = wezterm.url.parse(uri)
-  -- If there is a pane with neovim send keys
-  local panes = window:active_tab():panes()
-  for _, p in ipairs(panes) do
-    if p:get_foreground_process_name() == editor then
-      local vim_cmd = ':e ' .. url.file_path .. (url.fragment and ' | ' .. url.fragment or '')
-      p:send_text(vim_cmd .. '\r')
-      return false
-    end
-  end
-
-  -- Open nvim in the same pane
-  if url.fragment then
-    pane:send_text(wezterm.shell_join_args({
-      editor,
-      '+' .. url.fragment,
-      url.file_path,
-    }) .. '\r')
-  else
-    pane:send_text(wezterm.shell_join_args({ editor, url.file_path }) .. '\r')
-  end
-  return false
+  return open_file(window, pane, uri)
 end)
 
 local base_bg = '#161616'
@@ -507,14 +524,14 @@ local config = {
   default_cursor_style = 'BlinkingUnderline',
   default_cwd = wezterm.home_dir,
   default_prog = { 'zsh' },
-  font = wezterm.font(font, { weight = 'Regular', italic = false }),
+  font = wezterm.font(font, { weight = is_windows and 'Medium' or 'Regular', italic = false }),
   font_rules = {
     {
       intensity = 'Bold',
       font = wezterm.font(font, { italic = false, weight = 'Bold' }),
     },
   },
-  font_size = is_windows and 14.0 or 20.0,
+  font_size = is_windows and 15.0 or 20.0,
   -- Disable font ligatures
   harfbuzz_features = { 'calt=1', 'clig=0', 'liga=0', 'zero', 'ss01' },
   hide_tab_bar_if_only_one_tab = false,
@@ -563,8 +580,8 @@ local config = {
   -- macos_window_background_blur = 10,
   window_decorations = 'RESIZE',
   window_frame = {
-    font = wezterm.font({ family = font }),
-    font_size = is_windows and 12.0 or 18.0,
+    font = wezterm.font({ family = font, weight = 'Regular' }),
+    font_size = is_windows and 13.0 or 18.0,
     active_titlebar_bg = colors.background,
     inactive_titlebar_bg = colors.background,
   },
