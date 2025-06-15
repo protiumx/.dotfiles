@@ -74,7 +74,7 @@ HISTSIZE=2000 # session size
 HISTFILESIZE=$HISTSIZE
 SAVEHIST=$HISTSIZE # save from session
 HISTFILE=$HOME/.zsh_history
-HISTORY_IGNORE="(z *|..*|mkdir*|cd*|ls|pwd|exit|date|* --help|* -h|* help|* --version|* version|e .|nvim .)"
+HISTORY_IGNORE="(z *|..*|mkdir*|cd*|ls*|* --help|* -h|* help|* --version|* version|* .)"
 HISTDUP=erase
 
 # allows to stop deletion on ./-_=
@@ -175,6 +175,8 @@ export GOPATH="$HOME/go"
 
 # Ocaml
 [[ ! -r $HOME/.opam/opam-init/init.zsh ]] || source $HOME/.opam/opam-init/init.zsh > /dev/null 2> /dev/null
+
+[[ ! -r $HOME/wezterm.sh ]] || source $HOME/wezterm.sh > /dev/null 2> /dev/null
 
 # FZF
 
