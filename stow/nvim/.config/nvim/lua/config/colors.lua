@@ -170,7 +170,8 @@ local base_groups = {
   -- text fg only when using `minimal` notify style
   NotifyINFOIcon = { fg = colors.foreground },
   -- web-dev-icons
-  -- DevIconDefault          = { fg = colors.dark_orange, bg = 'none' },
+  -- DevIconDefault = { fg = colors.dark_orange, bg = 'none' },
+  YaziFloat = { link = 'XMenu' },
 }
 
 local function extend_highlight(hl, config)

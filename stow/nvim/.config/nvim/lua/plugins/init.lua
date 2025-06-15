@@ -19,6 +19,7 @@ return {
   require('plugins.vim-sandwich'),
   require('plugins.fidget'),
   require('plugins.lspsaga'),
+  require('plugins.yazi'),
 
   {
     'ellisonleao/gruvbox.nvim',
