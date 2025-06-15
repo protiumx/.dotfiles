@@ -11,16 +11,6 @@ $git_status\
 $jobs\
 $kubernetes\
 $docker_context\
-$c\
-$cmake\
-$deno\
-$elixir\
-$golang\
-$lua\
-$nodejs\
-$python\
-$rust\
-$zig\
 $cmd_duration\
 $status\
 $line_break\
@@ -29,6 +19,10 @@ $time $character"""
 [character]
 success_symbol = "[|](bold #e46876)"
 error_symbol = "[|](bold #e46876)"
+vimcmd_symbol = '[](bold green)'
+vimcmd_visual_symbol = '[](bold green)'
+vimcmd_replace_one_symbol = '[](bold green)'
+vimcmd_replace_symbol = '[](bold green)'
 
 [time]
 disabled = false
