@@ -420,32 +420,64 @@ wezterm.on('update-right-status', function(window, pane)
   }))
 end)
 
-local background = '#161616'
+wezterm.on('open-uri', function(window, pane, uri)
+  -- uri should have format file://[HOSTNAME]/PATH[#linenr]
+  -- Not a file or in alt screen (e.g. nvim, less)
+  if uri:find('^file:') ~= 1 or pane:is_alt_screen_active() then
+    return false
+  end
+
+  local editor = 'nvim'
+  local url = wezterm.url.parse(uri)
+  -- If there is a pane with neovim send keys
+  local panes = window:active_tab():panes()
+  for _, p in ipairs(panes) do
+    if p:get_foreground_process_name() == editor then
+      local vim_cmd = ':e ' .. url.file_path .. (url.fragment and ' | ' .. url.fragment or '')
+      p:send_text(vim_cmd .. '\r')
+      return false
+    end
+  end
+
+  -- Open nvim in the same pane
+  if url.fragment then
+    pane:send_text(wezterm.shell_join_args({
+      editor,
+      '+' .. url.fragment,
+      url.file_path,
+    }) .. '\r')
+  else
+    pane:send_text(wezterm.shell_join_args({ editor, url.file_path }) .. '\r')
+  end
+  return false
+end)
+
+local base_bg = '#161616'
 
 local colors = {
-  background = background,
+  background = base_bg,
   cursor_bg = '#a9a1e1',
-  cursor_fg = background,
+  cursor_fg = base_bg,
   cursor_border = '#fb4934',
-  selection_fg = background,
+  selection_fg = base_bg,
   selection_bg = '#fb4934',
   quick_select_label_bg = { Color = '#60b5de' },
   quick_select_label_fg = { Color = '#ffffff' },
   quick_select_match_bg = { Color = '#c07d9e' },
   quick_select_match_fg = { Color = '#ffffff' },
   tab_bar = {
-    background = background,
+    background = base_bg,
     inactive_tab_edge = 'rgba(28, 28, 28, 0.9)',
     active_tab = {
-      bg_color = background,
+      bg_color = base_bg,
       fg_color = '#c0c0c0',
     },
     inactive_tab = {
-      bg_color = background,
+      bg_color = base_bg,
       fg_color = '#808080',
     },
     inactive_tab_hover = {
-      bg_color = background,
+      bg_color = base_bg,
       fg_color = '#808080',
     },
   },
