@@ -5,13 +5,14 @@
 : "$LC_CTYPE:=\"en_US.UTF-8\""
 : "$LC_ALL:=\"en_US.UTF-8\""
 
+export LANG LANGUAGE LC_CTYPE LC_ALL
+
 # export GPG_TTY=$(tty)
 export DOCKER_SCAN_SUGGEST=false
 export EDITOR="nvim"
 export GPG_TTY=$(tty)
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_INSECURE_REDIRECT=1
-export LANG LANGUAGE LC_CTYPE LC_ALL
 export PICO_SDK_PATH="$HOME/dev/pico-sdk"
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/rg"
 export TERM="screen-256color"
@@ -41,46 +42,63 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 source "${ZINIT_HOME}/zinit.zsh"
 
+zvm_after_init() {
+  source <(fzf --zsh)
+}
+
 # plugins
+zinit ice depth=1; zinit light jeffreytse/zsh-vi-mode
 zinit ice depth=1; zinit light zsh-users/zsh-syntax-highlighting
 zinit ice depth=1; zinit light zsh-users/zsh-autosuggestions
 zinit ice depth=1; zinit light Aloxaf/fzf-tab
+
+ZVM_NORMAL_MODE_CURSOR=$(zvm_cursor_style $ZVM_CURSOR_BLINKING_BLOCK)
+ZVM_INSERT_MODE_CURSOR=$(zvm_cursor_style $ZVM_CURSOR_BLINKING_UNDERLINE)
+ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+ZVM_VI_HIGHLIGHT_BACKGROUND=#404040
+ZVM_VI_SURROUND_BINDKEY=s-prefix
 
 # completions
 autoload -Uz compinit && compinit
 
 [[ -x "$(command -v kubectl)" ]] && (source <(kubectl completion zsh) && compdef k='kubectl')
 
+# Replay completions
 zinit cdreplay -q
 
 set completion-ignore-case on
 set match-hidden-files off # do not autocomplete hidden files unless the pattern explicitly begins with a dot
 unset zle_bracketed_paste
 
+HISTSIZE=2000 # session size
+HISTFILESIZE=$HISTSIZE
+SAVEHIST=$HISTSIZE # save from session
+HISTFILE=$HOME/.zsh_history
+HISTORY_IGNORE="(z *|..*|mkdir*|cd*|ls|pwd|exit|date|* --help|* -h|* help|* --version|* version|e .|nvim .)"
+HISTDUP=erase
+
+# allows to stop deletion on ./-_=
+WORDCHARS="*?[]~&;!#$%^(){}<>"
+
 # options
 setopt multios              # enable redirect to multiple streams: echo >file1 >file2
 setopt long_list_jobs       # show long list format job notifications
 setopt interactivecomments  # recognize comments
-
-HISTSIZE=10000
-HISTFILESIZE=$HISTSIZE
-HISTFILE=$HOME/.zsh_history
-SAVEHIST=$HISTSIZE
-HISTORY_IGNORE="(ls*|cd*|pwd|exit|date|* --help|* -h|* help|* -v|* --version|* version|e .|nvim .)"
-HISTDUP=erase
-WORDCHARS="*?[]~&;!#$%^(){}<>" # allows to stop deletion on ./-_=
-
+setopt NO_CASE_GLOB
+setopt GLOB_DOTS
+# https://zsh.sourceforge.io/Doc/Release/Options.html
 setopt auto_menu         # show completion menu on successive tab press
 setopt complete_in_word
 setopt always_to_end
-setopt appendhistory     # immediately append history instead of overwriting
-setopt sharehistory      # share history across sessions
-setopt hist_ignore_space # ignore commands that start with space
-setopt hist_verify       # show command with history expansion to user before running it
-setopt hist_ignore_all_dups
-setopt hist_ignore_dups
-setopt hist_save_no_dups
-setopt hist_find_no_dups
+setopt APPEND_HISTORY     # append history instead of overwriting
+setopt SHARE_HISTORY      # share history across sessions
+setopt HIST_IGNORE_SPACE # ignore commands that start with space
+setopt HIST_VERIFY       # do not execute upon expansion
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_IGNORE_DUPS
+setopt HIST_SAVE_NO_DUPS
+setopt HIST_FIND_NO_DUPS
 setopt nobeep
 setopt +o nomatch # disable error when using glob patterns that don't have matches
 
@@ -111,10 +129,12 @@ zstyle ':completion:*:*:docker-*:*' option-stacking yes
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 # zstyle ':completion:*' menu no
 zstyle ':completion:*:*:*:*:*' menu select
+
 # Hyphen sensitive
 zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]-_}={[:upper:][:lower:]_-}' 'r:|=*' 'l:|=* r:|=*'
 # Complete . and .. special directories
 zstyle ':completion:*' special-dirs true
+
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
 zstyle ':completion:*:*:*:*:processes' command "ps -u $USERNAME -o pid,user,comm -w -w"
 
@@ -125,17 +145,6 @@ setopt auto_cd
 setopt auto_pushd
 setopt pushd_ignore_dups
 setopt pushdminus
-
-alias -- -='cd -'
-
-function d () {
-  if [[ -n $1 ]]; then
-    dirs "$@"
-  else
-    dirs -v | head -n 10
-  fi
-}
-compdef _dirs d
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE='100' # limit suggestion to 100 chars
@@ -155,12 +164,6 @@ autoload -U edit-command-line
 zle -N edit-command-line
 bindkey '\C-x\C-e' edit-command-line
 bindkey "^[m" copy-prev-shell-word # [M-m] useful for renaming files to add suffix
-
-# zsh syntax highlighting clears and restores aliases after .zshenv is loaded
-# this keeps ls and ll aliased correctly
-alias ls="eza --group-directories-first -G --color auto --hyperlink --icons -a -s type"
-alias ll="eza --group-directories-first -l --color always --hyperlink --icons -a -s type"
-alias lsa='ls -lah'
 
 # Golang
 export GOTOOLCHAIN="local"
@@ -219,6 +222,16 @@ done
 if [[ "$OSTYPE" =~ ^linux ]]; then
 	eval $(ssh-agent) >/dev/null
 fi
+
+# From https://github.com/ohmyzsh/ohmyzsh/blob/master/lib/directories.zsh
+function d() {
+  if [[ -n $1 ]]; then
+    dirs "$@"
+  else
+    dirs -v | head -n 10
+  fi
+}
+compdef _dirs d
 
 # Add ssh keys to apple keychain
 # Commented out in favor of macos/com.openssh.ssh-agent.plist
