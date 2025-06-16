@@ -1,5 +1,9 @@
 #!/usr/bin/env zsh
 
+# Sources:
+# https://zsh.sourceforge.io/Doc/Release/Zsh-Line-Editor.html
+# https://zsh.sourceforge.io/Doc/Release/Options.html
+
 export DOCKER_SCAN_SUGGEST=false
 export EDITOR="nvim"
 export HOMEBREW_NO_ANALYTICS=1
@@ -36,7 +40,7 @@ source "${ZINIT_HOME}/zinit.zsh"
 zvm_after_init() {
   source <(fzf --zsh)
 
-  bindkey -e
+  # bindkey -e # selects emacs
   bindkey "^[[A" up-line-or-beginning-search
   bindkey "^[[B" down-line-or-beginning-search
 
@@ -60,6 +64,8 @@ zvm_after_init() {
   bindkey -r '^o'
   bindkey '^o' zsh-ctrl-o
   bindkey '^f' y
+
+  zvm_bindkey vicmd '^e' zvm_vi_edit_command_line
 }
 
 # plugins
@@ -104,7 +110,6 @@ setopt long_list_jobs       # show long list format job notifications
 setopt interactivecomments  # recognize comments
 setopt NO_CASE_GLOB
 setopt GLOB_DOTS
-# https://zsh.sourceforge.io/Doc/Release/Options.html
 setopt auto_menu         # show completion menu on successive tab press
 setopt complete_in_word
 setopt always_to_end
