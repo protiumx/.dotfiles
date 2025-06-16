@@ -1,16 +1,17 @@
 #!/usr/bin/env zsh
 
+: "$LANG:=\"en_US.UTF-8\""
+: "$LANGUAGE:=\"en\""
+: "$LC_CTYPE:=\"en_US.UTF-8\""
+: "$LC_ALL:=\"en_US.UTF-8\""
+
+export LANG LANGUAGE LC_CTYPE LC_ALL
+
+export GPG_TTY=$(tty)
+
 reload() {
   source ~/.zshrc
   source ~/.zshenv
-}
-
-function y() {
-  local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-  yazi "$@" --cwd-file="$tmp"
-  IFS= read -r -d '' cwd <"$tmp"
-  [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
-  rm -f -- "$tmp"
 }
 
 jwt-decode() {
