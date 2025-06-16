@@ -1,7 +1,7 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 add_newline = false
-command_timeout = 1000
+command_timeout = 1200
 
 format = """
 $directory\
@@ -55,6 +55,7 @@ staged = "+${count} "
 deleted = "x${count} "
 renamed = "»${count} "
 style = "#a7b2b4"
+use_git_executable = true
 
 [status]
 disabled = false
