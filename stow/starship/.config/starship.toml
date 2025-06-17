@@ -92,6 +92,7 @@ symbol = " "
 disabled = false
 symbol = "󱃾 "
 format = '[$symbol$context( \($namespace\))]($style) '
+detect_env_vars = ["STARSHIP_KUBE"]
 
 [elixir]
 disabled = true
