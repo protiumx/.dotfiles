@@ -14,6 +14,10 @@ reload() {
   source ~/.zshenv
 }
 
+function starship-kube() {
+  export STARSHIP_KUBE=true
+}
+
 jwt-decode() {
   jq -R 'split(".") | .[0:2] | map(@base64d) | map(fromjson)' <<<$1
 }

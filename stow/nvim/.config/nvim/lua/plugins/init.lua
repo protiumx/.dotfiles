@@ -1,8 +1,11 @@
 return {
   require('plugins.conform'),
   require('plugins.diffview'),
-  require('plugins.gitsigns'),
+  require('plugins.fidget'),
   require('plugins.flash'),
+  require('plugins.gitsigns'),
+  -- require('plugins.go-nvim'),
+  require('plugins.lspsaga'),
   require('plugins.lualine'),
   require('plugins.neoclip'),
   require('plugins.neogit'),
@@ -17,10 +20,7 @@ return {
   require('plugins.treesj'),
   require('plugins.trouble'),
   require('plugins.vim-sandwich'),
-  require('plugins.fidget'),
-  require('plugins.lspsaga'),
   require('plugins.yazi'),
-
   {
     'ellisonleao/gruvbox.nvim',
     enabled = false,
