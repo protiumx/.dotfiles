@@ -37,48 +37,36 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 source "${ZINIT_HOME}/zinit.zsh"
 
-zvm_after_init() {
-  source <(fzf --zsh)
-
-  # bindkey -e # selects emacs
-  bindkey "^[[A" up-line-or-beginning-search
-  bindkey "^[[B" down-line-or-beginning-search
-
-  # fix up/down
-  if [[ -n "${terminfo[kcuu1]}" ]]; then
-   bindkey "${terminfo[kcuu1]}" up-line-or-beginning-search
-  fi
-
-  if [[ -n "${terminfo[kcud1]}" ]]; then
-    bindkey "${terminfo[kcud1]}" down-line-or-beginning-search
-  fi
-
-  bindkey '\C-x\C-e' edit-command-line
-  bindkey "^[m" copy-prev-shell-word # [M-m] useful for renaming files to add suffix
-  bindkey "^u" backward-kill-line # [Ctrl-u] deletes everything to the left of the cursor
-  bindkey '^[[3;3~' kill-word     # [Alt-del] delete word forwards
-  bindkey -s '\el' 'ls\n'         # [Esc-l] - run command: ls
-  bindkey -r '\eg'
-  bindkey '\eg' fzf-git-files-widget
-  bindkey '^z' zsh-ctrl-z
-  bindkey -r '^o'
-  bindkey '^o' zsh-ctrl-o
-  bindkey '^f' y
-
-  zvm_bindkey vicmd '^e' zvm_vi_edit_command_line
-}
-
 # plugins
-zinit ice depth=1; zinit light jeffreytse/zsh-vi-mode
 zinit ice depth=1; zinit light zsh-users/zsh-syntax-highlighting
 zinit ice depth=1; zinit light zsh-users/zsh-autosuggestions
 zinit ice depth=1; zinit light Aloxaf/fzf-tab
 
-ZVM_NORMAL_MODE_CURSOR=$(zvm_cursor_style $ZVM_CURSOR_BLINKING_BLOCK)
-ZVM_INSERT_MODE_CURSOR=$(zvm_cursor_style $ZVM_CURSOR_BLINKING_UNDERLINE)
-ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
-ZVM_VI_HIGHLIGHT_BACKGROUND=#404040
-ZVM_VI_SURROUND_BINDKEY=s-prefix
+# bind keys
+# bindkey -e # selects emacs
+bindkey "^[[A" up-line-or-beginning-search
+bindkey "^[[B" down-line-or-beginning-search
+
+# fix up/down
+if [[ -n "${terminfo[kcuu1]}" ]]; then
+ bindkey "${terminfo[kcuu1]}" up-line-or-beginning-search
+fi
+
+if [[ -n "${terminfo[kcud1]}" ]]; then
+  bindkey "${terminfo[kcud1]}" down-line-or-beginning-search
+fi
+
+bindkey '^e' edit-command-line
+bindkey "^[m" copy-prev-shell-word # [M-m] useful for renaming files to add suffix
+bindkey "^u" backward-kill-line # [Ctrl-u] deletes everything to the left of the cursor
+bindkey '^[[3;3~' kill-word     # [Alt-del] delete word forwards
+bindkey -s '\el' 'ls\n'         # [Esc-l] - run command: ls
+bindkey -r '\eg'
+bindkey '\eg' fzf-git-files-widget
+bindkey '^z' zsh-ctrl-z
+bindkey -r '^o'
+bindkey '^o' zsh-ctrl-o
+bindkey '^f' y
 
 # completions
 autoload -Uz compinit && compinit
