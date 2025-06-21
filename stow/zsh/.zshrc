@@ -43,7 +43,7 @@ zinit ice depth=1; zinit light zsh-users/zsh-autosuggestions
 zinit ice depth=1; zinit light Aloxaf/fzf-tab
 
 # bind keys
-# bindkey -e # selects emacs
+bindkey -e # set emacs keymaps so that I can use <M-Left> and <M-Right> without triggering vimode
 bindkey "^[[A" up-line-or-beginning-search
 bindkey "^[[B" down-line-or-beginning-search
 
