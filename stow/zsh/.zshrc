@@ -1,19 +1,21 @@
 #!/usr/bin/env zsh
 
-# Sources:
+# Docs:
 # https://zsh.sourceforge.io/Doc/Release/Zsh-Line-Editor.html
 # https://zsh.sourceforge.io/Doc/Release/Options.html
 
 export DOCKER_SCAN_SUGGEST=false
-export EDITOR="nvim"
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_INSECURE_REDIRECT=1
-export PICO_SDK_PATH="$HOME/dev/pico-sdk"
-export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/rg"
+
+export EDITOR="nvim"
 export TERM="screen-256color"
 
+export PICO_SDK_PATH="$HOME/dev/pico-sdk"
+export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/rg"
+
 # export DYLD_LIBRARY_PATH="$DYLD_LIBRARY_PATH:$HOME/.config/nvim/lua/config/nvim"
-# export LD_LIBRARY_PATH="$LD_LIBRARY_PATH$HOME/.config/nvim/lua/config/nvim"
+# export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$HOME/.config/nvim/lua/config/nvim"
 
 # Less highlighting
 export LESS_TERMCAP_mb=$'\e[1;31m'     # begin bold
@@ -129,16 +131,17 @@ zle -N down-line-or-beginning-search
 zstyle ':completion:*:*:docker:*' option-stacking yes
 zstyle ':completion:*:*:docker-*:*' option-stacking yes
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-# zstyle ':completion:*' menu no
+zstyle ':completion:*' menu no
 zstyle ':completion:*:*:*:*:*' menu select
-
 # Hyphen sensitive
 zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]-_}={[:upper:][:lower:]_-}' 'r:|=*' 'l:|=* r:|=*'
 # Complete . and .. special directories
 zstyle ':completion:*' special-dirs true
-
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
 zstyle ':completion:*:*:*:*:processes' command "ps -u $USERNAME -o pid,user,comm -w -w"
+
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+zstyle ':fzf-tab:*' use-fzf-default-opts yes
 
 autoload -U +X bashcompinit && bashcompinit
 
@@ -171,23 +174,31 @@ export GOPATH="$HOME/go"
 # FZF
 
 # Excluded dirs are set in ../fd/ignore
+
+if [[ "$OSTYPE" =~ ^linux ]]; then
+  clip="xclip -selection c -i"
+else
+  clip="pbcopy"
+fi
+
 export FZF_DEFAULT_COMMAND="fd -d 1 --hidden --no-ignore-vcs --follow --color=never --strip-cwd-prefix"
 export FZF_DEFAULT_OPTS="
   --height 40%
   --layout=reverse
   --prompt '  '
   --pointer ' '
-  --marker '~ '
+  --marker '┃ '
   --multi
   --bind 'ctrl-p:toggle-preview'
   --bind 'ctrl-e:become(nvim {})'
+  --bind 'ctrl-y:execute-silent(echo -n {2..} | $clip)+abort'
   --preview='bat {}'
   --preview-window 'hidden,border-left'
   --no-info
-  --scrollbar=▏▕
-  --color 'gutter:-1,hl+:#82aaff,hl:#82aaff,bg+:-1,pointer:#82aaff'"
-export FZF_COMPLETION_OPTS=$FZF_DEFAULT_OPTS
+  --scrollbar='▏▕'
+  --color 'gutter:-1,hl+:#82aaff,hl:#82aaff,bg+:-1,pointer:#bbbbbb'"
 
+export FZF_COMPLETION_OPTS=$FZF_DEFAULT_OPTS
 # zoxide fzf opts
 export _ZO_FZF_OPTS=$FZF_DEFAULT_OPTS
 
