@@ -181,6 +181,24 @@ gpg-pin() {
   echo "sign" | gpg --sign --default-key $GPG_DEFAULT_KEY &>/dev/null
 }
 
+fzf-nvim-files() {
+  local oldfiles=($(nvim -u NONE --headless +'lua io.write(table.concat(vim.v.oldfiles, "\n") .. "\n")' +qa))
+  local valid_files=()
+  for file in "${oldfiles[@]}"; do
+    if [[ -f "$file" ]]; then
+      valid_files+=("$file")
+    fi
+  done
+  local files=($(printf "%s\n" "${valid_files[@]}" |
+    grep -v '\[.*' |
+    fzf --multi \
+      --preview 'bat -n --color=always --line-range=:500 {} 2>/dev/null || echo "Error previewing file"' \
+      --height=70% \
+      --layout=default))
+
+  [[ ${#files[@]} -gt 0 ]] && nvim "${files[@]}"
+}
+
 # Fuzzy find kubernetes resource and apply an action
 kf() {
   local r=$(kubectl get $1 | sed 1d | awk '{print $1}' | fzf --height 40% -q ${2:-""})
