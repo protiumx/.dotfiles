@@ -58,7 +58,7 @@ if [[ -n "${terminfo[kcud1]}" ]]; then
   bindkey "${terminfo[kcud1]}" down-line-or-beginning-search
 fi
 
-bindkey '^e' edit-command-line
+bindkey '^x' edit-command-line
 bindkey "^[m" copy-prev-shell-word # [M-m] useful for renaming files to add suffix
 bindkey "^u" backward-kill-line # [Ctrl-u] deletes everything to the left of the cursor
 bindkey '^[[3;3~' kill-word     # [Alt-del] delete word forwards
@@ -144,6 +144,17 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 zstyle ':fzf-tab:*' use-fzf-default-opts yes
 
 autoload -U +X bashcompinit && bashcompinit
+
+typeset -A ZSH_HIGHLIGHT_STYLES
+ZSH_HIGHLIGHT_STYLES[precommand]='fg=250,bold'
+ZSH_HIGHLIGHT_STYLES[command]='fg=250,bold'
+ZSH_HIGHLIGHT_STYLES[function]='fg=250,bold'
+ZSH_HIGHLIGHT_STYLES[builtin]='fg=250,bold'
+ZSH_HIGHLIGHT_STYLES[alias]='fg=250,bold'
+ZSH_HIGHLIGHT_STYLES[commandseparator]='fg=250,bold'
+ZSH_HIGHLIGHT_STYLES[redirection]='fg=250,bold'
+ZSH_HIGHLIGHT_STYLES[arg0]='fg=247'
+ZSH_HIGHLIGHT_STYLES[default]='fg=247'
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE='100' # limit suggestion to 100 chars
