@@ -380,6 +380,12 @@ local process_icons = {
   ['yazi'] = '',
 }
 
+local theme = {
+  bg = '#161616',
+  fg1 = '#bbbbbb',
+  fg2 = '#9e9e9e',
+}
+
 local function get_current_working_dir(tab)
   local url = tab.active_pane and tab.active_pane.current_working_dir or { file_path = '' }
   local path = url.file_path
@@ -425,7 +431,8 @@ wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_wid
 
   if has_unseen_output then
     return {
-      { Foreground = { Color = '#28719c' } },
+      { Foreground = { Color = theme.fg1 } },
+      { Attribute = { Intensity = 'Bold' } },
       { Text = title },
     }
   end
@@ -459,9 +466,9 @@ wezterm.on('update-right-status', function(window, pane)
   end
 
   window:set_right_status(wezterm.format({
-    { Foreground = { Color = '#7eb282' } },
+    { Foreground = { Color = theme.fg2 } },
     { Text = process },
-    { Foreground = { Color = '#808080' } },
+    { Foreground = { Color = theme.fg2 } },
     { Text = status },
   }))
 end)
@@ -470,33 +477,31 @@ wezterm.on('open-uri', function(window, pane, uri)
   return open_file(window, pane, uri)
 end)
 
-local base_bg = '#161616'
-
 local colors = {
-  background = base_bg,
-  cursor_bg = '#a9a1e1',
-  cursor_fg = base_bg,
-  cursor_border = '#fb4934',
-  selection_fg = base_bg,
+  background = theme.bg,
+  cursor_bg = theme.fg2,
+  cursor_fg = theme.bg,
+  cursor_border = theme.fg2,
+  selection_fg = theme.bg,
   selection_bg = '#fb4934',
   quick_select_label_bg = { Color = '#60b5de' },
   quick_select_label_fg = { Color = '#ffffff' },
   quick_select_match_bg = { Color = '#c07d9e' },
   quick_select_match_fg = { Color = '#ffffff' },
   tab_bar = {
-    background = base_bg,
+    background = theme.bg,
     inactive_tab_edge = 'rgba(28, 28, 28, 0.9)',
     active_tab = {
-      bg_color = base_bg,
-      fg_color = '#c0c0c0',
+      bg_color = theme.bg,
+      fg_color = theme.fg1,
     },
     inactive_tab = {
-      bg_color = base_bg,
-      fg_color = '#808080',
+      bg_color = theme.bg,
+      fg_color = theme.fg2,
     },
     inactive_tab_hover = {
-      bg_color = base_bg,
-      fg_color = '#808080',
+      bg_color = theme.bg,
+      fg_color = theme.fg2,
     },
   },
 }

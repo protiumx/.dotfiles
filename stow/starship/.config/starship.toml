@@ -18,12 +18,12 @@ $line_break\
 $time $character"""
 
 [character]
-success_symbol = "[|](bold #e46876)"
-error_symbol = "[|](bold #e46876)"
-vimcmd_symbol = '[](bold green)'
-vimcmd_visual_symbol = '[](bold green)'
-vimcmd_replace_one_symbol = '[](bold green)'
-vimcmd_replace_symbol = '[](bold green)'
+success_symbol = "[|](bold #9e9e9e)"
+error_symbol = "[|](bold #9e9e9e)"
+vimcmd_symbol = '[](bold #9e9e9e)'
+vimcmd_visual_symbol = '[](#9e9e9e)'
+vimcmd_replace_one_symbol = '[](#9e9e9e)'
+vimcmd_replace_symbol = '[](#9e9e9e)'
 
 [time]
 disabled = false
@@ -77,7 +77,7 @@ truncate_to_repo = false
 truncation_length = 1
 style = "blue"
 read_only = " "
-format = '[$path]($style)[$read_only]($read_only_style) '
+format = '[$path](bold #bbbbbb)[$read_only]($read_only_style) '
 
 [c]
 format = "[$symbol($version(-$name) )]($style)"
