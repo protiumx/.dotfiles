@@ -4,6 +4,7 @@ add_newline = false
 command_timeout = 1200
 
 format = """
+$time \
 $directory\
 $git_branch\
 $git_state\
@@ -15,7 +16,7 @@ $cmd_duration\
 $python\
 $status\
 $line_break\
-$time $character"""
+$character"""
 
 [character]
 success_symbol = "[](bold #9e9e9e)"
