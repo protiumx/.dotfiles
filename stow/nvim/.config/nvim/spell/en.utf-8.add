@@ -30,7 +30,6 @@ deadletter
 namespace
 proto
 middleware
-buf
 grpc
 rpc
 protobuf
@@ -54,8 +53,8 @@ metadata
 cid
 ubuntu
 url
+uri
 unmarshal
-func
 param
 utils
 nullable
@@ -74,8 +73,6 @@ cmd
 colorscheme
 boolean
 unicode
-tx
-fn
 unary
 submodule
 submodules
