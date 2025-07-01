@@ -34,7 +34,7 @@ local function entry_from_buffer(opts)
     items = {
       { width = 1 }, -- pin
       { width = opts.bufnr_width },
-      { width = 1 }, -- mark
+      { width = 2 }, -- mark
       { width = icon_width },
       { remaining = true },
     },
@@ -46,6 +46,7 @@ local function entry_from_buffer(opts)
     -- marked + bufnr_width + mark + icon
     -- E.g. "󰤱.100.A.<icon>.some/path", dots are spaces
     opts.__prefix = 1 + opts.bufnr_width + 1 + icon_width + 3
+
     local display_bufname = telescope_utils.transform_path(opts, entry.filename)
     local display_icon, hl_group = telescope_utils.get_devicons(entry.filename, false)
 
@@ -63,12 +64,15 @@ local function entry_from_buffer(opts)
     -- if bufname is inside the cwd, trim that part of the string
     bufname = Path:new(bufname):normalize(cwd)
 
+    local changed = entry.info.changed == 1 and '+' or ' '
+    local indicator = (entry.mark or ' ') .. changed
+
     -- NOTE: This caches the state of the of the results
     return make_entry.set_default_entry_mt({
       bufnr = entry.bufnr,
       display = make_display,
       filename = bufname,
-      indicator = entry.mark or ' ',
+      indicator = indicator,
       marked = state.get_buffer(entry.bufnr),
       ordinal = entry.bufnr .. ' : ' .. bufname,
       value = bufname,
