@@ -60,6 +60,9 @@ local M = {
   -- diagnostics config
   config = {
     virtual_text = {
+      prefix = function(diagnostic)
+        return ''
+      end,
       spacing = 1,
       format = function(_)
         -- Just show the sign, no text
