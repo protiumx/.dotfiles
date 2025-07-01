@@ -1,11 +1,15 @@
 ---@diagnostic disable: unused-local
 
+-- Sources:
+-- https://wezterm.org/config/lua/config/index.html
+-- https://wezterm.org/config/lua/keyassignment/index.html
+
 local wezterm = require('wezterm')
 local act = wezterm.action
 
 -- https://wezfurlong.org/wezterm/config/lua/wezterm/target_triple.html
 local is_windows = wezterm.target_triple == 'x86_64-pc-windows-msvc'
-local font = 'MonoLisa'
+local font = 'Berkeley Mono'
 local key_mod_panes = is_windows and 'ALT' or 'CMD'
 
 -- Global state
@@ -57,38 +61,59 @@ local function pane_keys(mod)
 end
 
 local function open_file(window, pane, uri)
-  -- uri should have format file://[HOSTNAME]/PATH[#linenr]
+  wezterm.log_info('enter with uir', uri)
   -- Not a file or in alt screen (e.g. nvim, less)
-  if uri:find('^file:') ~= 1 or pane:is_alt_screen_active() then
+  if pane:is_alt_screen_active() then
     return false
   end
 
+  local path = ''
+  local row = ''
+  local path_row_pattern = '(%S+):(%d+)'
+
+  -- check for pattern file://[HOSTNAME]/PATH[#linenr]
+  if uri:find('^file:') == 1 then
+    local url = wezterm.url.parse(uri)
+    path = url.file_path
+    if url.fragment then
+      row = url.fragment
+    end
+  elseif uri:find(path_row_pattern) ~= -1 then
+    path, row = string.match(uri, path_row_pattern)
+  else
+    return false
+  end
+
+  wezterm.log_info('......', uri, path, row)
   local editor = 'nvim'
-  local url = wezterm.url.parse(uri)
+  local cursor = ''
+  if row and row ~= '' then
+    cursor = '+' .. row
+  end
+
+  local args = cursor ~= '' and { editor, cursor, path } or { editor, path }
+  local cmd = wezterm.shell_join_args(args)
+
   -- If there is a pane with neovim send keys
   local panes = window:active_tab():panes()
   for _, p in ipairs(panes) do
-    if p:get_foreground_process_name() == editor then
-      local vim_cmd = ':e ' .. url.file_path .. (url.fragment and ' | ' .. url.fragment or '')
-      p:send_text(vim_cmd .. '\r')
-      return false
+    local editor_ps = p:get_foreground_process_name():find(editor)
+    if editor_ps then
+      row = row ~= '' and ('|' .. row) or ''
+      p:send_text(':')
+      wezterm.sleep_ms(50)
+      p:send_text('e ' .. path .. row .. '\r')
+      p:activate()
+      return true
     end
   end
 
-  -- Open nvim in the same pane
-  if url.fragment then
-    pane:send_text(wezterm.shell_join_args({
-      editor,
-      '+' .. url.fragment,
-      url.file_path,
-    }) .. '\r')
-  else
-    pane:send_text(wezterm.shell_join_args({ editor, url.file_path }) .. '\r')
-  end
-  return false
+  -- Open nvim in a new pane to the right
+  pane:split({ args = args, direction = 'Right', top_level = true })
+  return true
 end
 
-local key_table_leader = { key = '/', mods = key_mod_panes }
+local key_table_leader = { key = '/', mods = key_mod_panes, timeout_milliseconds = 1000 }
 
 local keys = {
   {
@@ -96,6 +121,7 @@ local keys = {
     mods = 'CMD',
     action = act.PromptInputLine({
       description = 'Launch',
+      prompt = ' ',
       action = wezterm.action_callback(function(window, pane, line)
         if line then
           window:perform_action(
@@ -116,9 +142,19 @@ local keys = {
       state.debug_mode = not state.debug_mode
     end),
   },
+  {
+    key = 'a',
+    mods = 'LEADER|CTRL',
+    action = wezterm.action.SendString('lololo'),
+  },
 
-  { key = 'PageUp', action = act.ScrollByPage(-1) },
-  { key = 'PageDown', action = act.ScrollByPage(1) },
+  -- Scrolling
+  { key = 'PageUp', action = act.ScrollByPage(-0.3) },
+  { key = 'PageDown', action = act.ScrollByPage(0.3) },
+  { key = 'UpArrow', mods = 'ALT', action = act.ScrollByLine(-1) },
+  { key = 'DownArrow', mods = 'ALT', action = act.ScrollByLine(1) },
+  { key = 'UpArrow', mods = 'SHIFT|ALT', action = act.ScrollToTop },
+  { key = 'DownArrow', mods = 'SHIFT|ALT', action = act.ScrollToBottom },
 
   {
     key = '.',
@@ -178,12 +214,6 @@ local keys = {
   {
     key = 'r',
     mods = key_mod_panes,
-    action = act.RotatePanes('CounterClockwise'),
-  },
-
-  {
-    key = 'R',
-    mods = 'SHIFT|CMD',
     action = act.RotatePanes('Clockwise'),
   },
 
@@ -221,11 +251,26 @@ local keys = {
   },
 
   -- Swap Tabs
-  { key = 'H', mods = 'SHIFT|CTRL|' .. key_mod_panes, action = act.MoveTabRelative(-1) },
-  { key = 'L', mods = 'SHIFT|CTRL|' .. key_mod_panes, action = act.MoveTabRelative(1) },
+  { key = '{', mods = 'SHIFT|CTRL', action = act.MoveTabRelative(-1) },
+  { key = '}', mods = 'SHIFT|CTRL', action = act.MoveTabRelative(1) },
 
   -- Utils
 
+  {
+    key = 'R',
+    mods = 'SHIFT|CMD',
+    action = act.ReloadConfiguration,
+  },
+
+  {
+    key = 'n',
+    mods = 'SHIFT|' .. key_mod_panes,
+    action = wezterm.action.ShowLauncherArgs({
+      title = 'Launch',
+      fuzzy_help_text = 'Search: ',
+      flags = 'FUZZY|TABS|LAUNCH_MENU_ITEMS',
+    }),
+  },
   {
     key = '0',
     mods = key_mod_panes,
@@ -248,6 +293,12 @@ local keys = {
     }),
   },
   {
+    key = '?',
+    mods = 'CMD',
+    action = act.QuickSelect,
+  },
+  -- Quick select links and open them
+  {
     key = 'O',
     mods = 'CMD|SHIFT',
     action = act.QuickSelectArgs({
@@ -260,12 +311,14 @@ local keys = {
       end),
     }),
   },
+  -- Quick select files
   {
     key = 'F',
     mods = 'CMD|SHIFT',
     action = act.QuickSelectArgs({
       patterns = {
         'file:///\\S+',
+        '[\\w\\d/.-_]+:\\d{1,4}',
       },
       action = wezterm.action_callback(function(window, pane)
         local uri = window:get_selection_text_for_pane(pane)
@@ -378,12 +431,15 @@ local process_icons = {
   ['gh'] = wezterm.nerdfonts.dev_github_badge,
   ['ruby'] = wezterm.nerdfonts.cod_ruby,
   ['yazi'] = '',
+  ['wezterm'] = wezterm.nerdfonts.cod_tools,
 }
 
 local theme = {
   bg = '#161616',
   fg1 = '#bbbbbb',
   fg2 = '#9e9e9e',
+  fg3 = '#777777',
+  unseen = '#C53030',
 }
 
 local function get_current_working_dir(tab)
@@ -398,9 +454,13 @@ local function get_current_working_dir(tab)
   return path == HOME_DIR and '~' or string.gsub(path, '(.*[/\\])(.*)', '%2')
 end
 
-local function get_process(tab)
-  if not tab.active_pane or tab.active_pane.foreground_process_name == '' then
+local function get_tab_process(tab)
+  if not tab.active_pane then
     return nil
+  end
+
+  if tab.active_pane.foreground_process_name == '' then
+    return process_icons['wezterm'] .. ' ' .. tab.active_pane.title
   end
 
   local process_name = string.gsub(tab.active_pane.foreground_process_name, '(.*[/\\])(.*)', '%2')
@@ -422,24 +482,35 @@ wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_wid
     end
   end
 
-  local cwd = wezterm.format({
-    { Text = get_current_working_dir(tab) },
-  })
-
-  local process = get_process(tab)
-  local title = process and string.format(' %s (%s) ', process, cwd) or ' [?] '
-
-  if has_unseen_output then
-    return {
-      { Foreground = { Color = theme.fg1 } },
-      { Attribute = { Intensity = 'Bold' } },
-      { Text = title },
-    }
+  local cwd = get_current_working_dir(tab)
+  local process = get_tab_process(tab)
+  local title = '[?]'
+  if process then
+    if cwd ~= '' then
+      title = string.format(' %s (%s) ', process, cwd)
+    else
+      title = string.format(' %s ', process)
+    end
   end
 
-  return {
+  local w = wezterm.column_width(title)
+  local min_width = 10
+  if w < min_width then
+    title = wezterm.pad_right(title, min_width)
+  end
+
+  local format = wezterm.format({
     { Text = title },
-  }
+  })
+
+  if has_unseen_output then
+    format = wezterm.format({
+      { Foreground = { Color = theme.unseen } },
+      { Text = title },
+    })
+  end
+
+  return format
 end)
 
 wezterm.on('update-right-status', function(window, pane)
@@ -497,7 +568,7 @@ local colors = {
     },
     inactive_tab = {
       bg_color = theme.bg,
-      fg_color = theme.fg2,
+      fg_color = theme.fg3,
     },
     inactive_tab_hover = {
       bg_color = theme.bg,
@@ -522,22 +593,24 @@ local config = {
     -- },
   },
   canonicalize_pasted_newlines = 'None',
+  check_for_updates = true,
   color_scheme = 'Classic Dark (base16)',
   colors = colors,
-  command_palette_font_size = 16.0,
+  command_palette_font_size = 18.0,
   command_palette_bg_color = '#1c1c1c',
   cursor_blink_rate = 500,
   default_cursor_style = 'BlinkingUnderline',
   default_cwd = wezterm.home_dir,
   default_prog = { 'zsh' },
-  font = wezterm.font(font, { weight = is_windows and 'Medium' or 'Regular', italic = false }),
+  font = wezterm.font(font, { weight = 'Regular', italic = false }),
   font_rules = {
+    -- Disable italics in bold
     {
       intensity = 'Bold',
       font = wezterm.font(font, { italic = false, weight = 'Bold' }),
     },
   },
-  font_size = is_windows and 15.0 or 20.0,
+  font_size = is_windows and 16.0 or 21.0,
   -- Disable font ligatures
   harfbuzz_features = { 'calt=1', 'clig=0', 'liga=0', 'zero', 'ss01' },
   hide_tab_bar_if_only_one_tab = false,
@@ -548,6 +621,12 @@ local config = {
   },
   keys = keys,
   key_tables = key_tables,
+  launch_menu = {
+    {
+      label = 'Run go package tests',
+      args = { 'go', 'test', './...' },
+    },
+  },
   leader = key_table_leader,
   max_fps = 120,
   mouse_bindings = {
@@ -566,7 +645,7 @@ local config = {
   quick_select_patterns = {
     '[0-9a-f]{7,40}', -- hashes
     '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}', -- uuids
-    'https?:\\/\\/\\S+',
+    '(https?|file):\\/\\/\\S+',
   },
   quote_dropped_files = 'Posix',
   scrollback_lines = 10000,
@@ -579,15 +658,15 @@ local config = {
   show_close_tab_button_in_tabs = false,
   switch_to_last_active_tab_when_closing_tab = true,
   tab_max_width = 80,
-  underline_position = -4,
+  -- underline_position = -4,
   use_fancy_tab_bar = true,
-  -- window_background_opacity = 1,
-  -- window_background_opacity = 0.6,
+  use_resize_increments = true,
+  window_background_opacity = 0.7,
   -- macos_window_background_blur = 10,
   window_decorations = 'RESIZE',
   window_frame = {
-    font = wezterm.font({ family = font, weight = 'Regular' }),
-    font_size = is_windows and 13.0 or 18.0,
+    font = wezterm.font({ family = font, weight = 'Bold' }),
+    font_size = is_windows and 15.0 or 18.0,
     active_titlebar_bg = colors.background,
     inactive_titlebar_bg = colors.background,
   },
