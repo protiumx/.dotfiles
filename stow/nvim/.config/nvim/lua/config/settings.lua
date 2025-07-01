@@ -1,3 +1,5 @@
+local colors = require('config.colors')
+
 vim.g.netrw_banner = 0
 vim.g.netrw_browse_split = 0
 vim.g.loaded_netrw = 1
@@ -149,3 +151,9 @@ local builtins = {
 for _, plugin in ipairs(builtins) do
   vim.g['loaded_' .. plugin] = 1
 end
+
+vim.api.nvim_create_user_command('ToggleTransparency', function()
+  colors.toggle_transparent()
+end, {
+  desc = 'Re-enable autoformat-on-save',
+})

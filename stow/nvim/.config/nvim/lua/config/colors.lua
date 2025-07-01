@@ -29,6 +29,25 @@ local colors = {
 
 colors.accent = colors.red
 
+local function load(gs)
+  for group, opts in pairs(gs) do
+    vim.api.nvim_set_hl(0, group, opts)
+  end
+end
+
+function colors.toggle_transparent()
+  local normal = vim.api.nvim_get_hl(0, { name = 'Normal' })
+  local bg = 'none'
+  if not normal.bg then
+    bg = colors.background
+  end
+
+  load({
+    Normal = { fg = colors.foreground, bg = bg },
+    NormalNC = { fg = colors.foreground, bg = bg },
+  })
+end
+
 -- Overrides for all color schemes
 local base_groups = {
   -- Custom for floats and borders
@@ -40,8 +59,11 @@ local base_groups = {
   -- Base groups
   Normal = { bg = colors.background, fg = colors.foreground },
   -- NormalNC = { bg = colors.background, fg = colors.foreground },
+
+  -- Transparent
   -- Normal = { fg = colors.foreground, bg = 'none' },
   -- NormalNC = { fg = colors.foreground, bg = 'none' },
+
   -- Cursor = { fg = colors.background, bg = colors.violet },
   TermCursor = { link = 'Cursor' },
   -- ColorColumn = { bg = '#1a1717' },
@@ -190,12 +212,6 @@ local function overrides()
     DiagnosticSignInfo = extend_highlight('DiagnosticSignInfo', { bg = 'none' }),
     DiagnosticSignHint = extend_highlight('DiagnosticSignHint', { bg = 'none' }),
   }
-end
-
-local function load(gs)
-  for group, opts in pairs(gs) do
-    vim.api.nvim_set_hl(0, group, opts)
-  end
 end
 
 function colors.load()
