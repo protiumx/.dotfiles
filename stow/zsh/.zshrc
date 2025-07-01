@@ -155,6 +155,8 @@ ZSH_HIGHLIGHT_STYLES[commandseparator]='fg=250,bold'
 ZSH_HIGHLIGHT_STYLES[redirection]='fg=250,bold'
 ZSH_HIGHLIGHT_STYLES[arg0]='fg=247'
 ZSH_HIGHLIGHT_STYLES[default]='fg=247'
+ZSH_HIGHLIGHT_STYLES[path]=none
+ZSH_HIGHLIGHT_STYLES[path_prefix]=none
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE='100' # limit suggestion to 100 chars
@@ -308,4 +310,4 @@ function y() {
 
 zle -N y
 
-echo "( .-.)"
+echo "( .-.)\n"
