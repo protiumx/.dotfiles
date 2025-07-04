@@ -19,12 +19,13 @@ stow_dotfiles() {
     ".gitconfig"
     ".jq"
     ".profile*"
+    ".psqlrc"
     ".vimrc"
     ".zshrc"
     ".zshenv"
     ".zprofile"
   )
-  local folders=(
+  local directories=(
     ".config/fd"
     ".config/git"
     ".config/nvim"
@@ -35,22 +36,32 @@ stow_dotfiles() {
     ".gnupg"
     ".ssh"
   )
+
   info "Removing existing config files"
   for f in "${files[@]}"; do
     rm -f "$HOME/$f" || true
   done
 
-  # Create the folders to avoid symlinking folders
-  for d in "${folders[@]}"; do
+  info "Removing existing config directories"
+  for d in "${directories[@]}"; do
     rm -rf "${HOME:?}/$d" || true
+    # Create the folders to avoid symlinking folders
     mkdir -p "$HOME/$d"
   done
 
   # shellcheck disable=SC2155
-  local to_stow="$(find stow -maxdepth 1 -type d -mindepth 1 | awk -F "/" '{print $NF}' ORS=' ')"
+  local to_stow="$(find stow -maxdepth 1 -type d -mindepth 1 -not -path "library" | awk -F "/" '{print $NF}' ORS=' ')"
   info "Stowing: $to_stow"
-  stow -d stow --verbose 1 --target "$HOME" "$to_stow"
 
-  # set permissions
-  chmod a+x ~/.git-templates/hooks/pre-commit
+  read -p "Are you sure? " -n 1 -r
+  if [[ ! $REPLY =~ ^[Yy]$ ]]
+  then
+    stow -d stow --verbose 1 --target "$HOME" "$to_stow"
+    # set permissions
+    chmod a+x ~/.git-templates/hooks/pre-commit
+
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+      stow -d stow --verbose 1 --target "$HOME/Library/Application Support/" library
+    fi
+  fi
 }

@@ -4,10 +4,12 @@ layouts:
   - two-pane
   - tall
   # - 3column-middle
+  - four-corners
+  - center-focus
   # - tall-right
   # - wide
   # - middle-wide
-  # - 3column-left
+  - 3column-left
   # - 3column-right
   # - 4column-left
   # - 4column-right
@@ -16,21 +18,18 @@ layouts:
   # - floating
   # - widescreen-tall
   # - widescreen-tall-right
-  - bsp
+  # - bsp
 
 # First mod (default option + shift).
 mod1:
   - option
-  # - shift
   - control
-  # - command
 
 # Second mod (default option + shift + control).
 mod2:
   - option
   - shift
   - control
-  # - command
 
 # Commands:
 # special key values
@@ -74,23 +73,6 @@ increase-main:
 decrease-main:
   mod: mod1
   key: "."
-
-# General purpose command for custom layouts. Functionality is layout-dependent.
-# command1:
-#   mod: <NONE>
-#   key: <NONE>
-# General purpose command for custom layouts. Functionality is layout-dependent.
-# command2:
-#   mod: <NONE>
-#   key: <NONE>
-# General purpose command for custom layouts. Functionality is layout-dependent.
-# command3:
-#   mod: <NONE>
-#   key: <NONE>
-# General purpose command for custom layouts. Functionality is layout-dependent.
-# command4:
-#   mod: <NONE>
-#   key: <NONE>
 
 # Focus the next window in the list going counter-clockwise.
 focus-ccw:
@@ -159,22 +141,26 @@ swap-main:
 
 # Select tall layout
 select-tall-layout:
-  mod: mod1
-  key: a
+  mod: mod2
+  key: q
 
 select-two-pane-layout:
   mod: mod2
-  key: d
+  key: w
+
+select-four-corners-layout:
+  mod: mod2
+  key: r
 
 # Select fullscreen layout
 select-fullscreen-layout:
-  mod: mod1
-  key: d
+  mod: mod2
+  key: e
 
 # Select column layout
-select-column-layout:
-  mod: mod1
-  key: f
+# select-column-layout:
+#   mod: mod1
+#   key: f
 
 # Move the currently focused window to the space to the left.
 throw-space-left:
@@ -189,7 +175,7 @@ throw-space-right:
 # Toggle the floating state of the currently focused window; i.e., if it was floating make it tiled and if it was tiled make it floating.
 toggle-float:
   mod: mod1
-  key: t
+  key: f
 
 # Display the layout HUD with the current layout on each screen.
 display-current-layout:
@@ -305,4 +291,4 @@ screen-padding-bottom: 10
 restore-layouts-on-launch: true
 
 # true to display some optional debug information in the layout HUD (default false).
-debug-layout-info: false
+debug-layout-info: true
