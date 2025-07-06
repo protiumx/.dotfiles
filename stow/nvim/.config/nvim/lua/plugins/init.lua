@@ -25,7 +25,6 @@ return {
   require('plugins.noice'),
   require('plugins.nvim-cmp'),
   require('plugins.telescope'),
-  require('plugins.text-case'),
   require('plugins.treesitter'),
   require('plugins.treesj'),
   require('plugins.vim-sandwich'),
@@ -80,15 +79,6 @@ return {
         TRACE = '',
         WARN = '',
       },
-    },
-  },
-
-  {
-    'sindrets/winshift.nvim',
-    cmd = 'WinShift',
-    keys = {
-      { '<C-w>m', '<Cmd>WinShift<CR>' },
-      { "<C-w>'", '<Cmd>WinShift swap<CR>' },
     },
   },
 
