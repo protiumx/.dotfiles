@@ -6,7 +6,7 @@
 : "$LC_ALL:=\"en_US.UTF-8\""
 
 export LANG LANGUAGE LC_CTYPE LC_ALL
-
+export GPG_DEFAULT_KEY=1B2B3771
 export GPG_TTY=$(tty)
 
 reload() {
