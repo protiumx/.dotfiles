@@ -141,4 +141,8 @@ function M.uid()
   return string.gsub(uuid, '-', '')
 end
 
+function M.is_git_commit()
+  return (vim.env.GIT_AUTHOR_EMAIL or '') ~= ''
+end
+
 return M

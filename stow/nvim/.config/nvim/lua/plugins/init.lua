@@ -1,3 +1,19 @@
+local utils = require('config.utils')
+
+local zenbones = {
+  lazy = false,
+  priority = 1000,
+  'zenbones-theme/zenbones.nvim',
+  dependencies = { 'rktjmp/lush.nvim' },
+  config = function()
+    vim.cmd('colorscheme zenwritten')
+  end,
+}
+
+if utils.is_git_commit() then
+  return { zenbones }
+end
+
 return {
   require('plugins.conform'),
   require('plugins.diffview'),
@@ -15,6 +31,7 @@ return {
   require('plugins.treesj'),
   require('plugins.vim-sandwich'),
   require('plugins.yazi'),
+  zenbones,
   {
     'ellisonleao/gruvbox.nvim',
     enabled = false,
@@ -37,16 +54,6 @@ return {
     lazy = false,
     priority = 1000,
   },
-  {
-    lazy = false,
-    priority = 1000,
-    'zenbones-theme/zenbones.nvim',
-    dependencies = { 'rktjmp/lush.nvim' },
-    config = function()
-      vim.cmd('colorscheme zenwritten')
-    end,
-  },
-
   {
     'MunifTanjim/nui.nvim',
     lazy = false,

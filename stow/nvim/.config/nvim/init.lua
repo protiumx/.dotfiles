@@ -1,4 +1,5 @@
 require('config.keymaps')
+require('config.settings')
 
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -18,6 +19,7 @@ local lazy_config = {
   change_detection = {
     enabled = false,
   },
+  spec = require('plugins'),
   git = {
     log = { '-10' },
   },
@@ -89,5 +91,5 @@ local lazy_config = {
   },
 }
 
-require('lazy').setup('plugins', lazy_config)
+require('lazy').setup(lazy_config)
 require('config').setup()
