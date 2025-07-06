@@ -22,8 +22,7 @@ local mode_text_map = {
 }
 
 local base_theme = {
-  a = {},
-  b = { bg = 'none', fg = colors.foreground, bold = true },
+  a = { bg = 'none', fg = colors.foreground, gui = 'bold' },
   x = { bg = 'none', fg = colors.purple },
   y = { bg = 'none', fg = colors.light_grey },
   z = { bg = 'none', fg = colors.light_grey },
@@ -42,7 +41,7 @@ local theme = {
 return function()
   local file_section = {
     'filename',
-    path = 1,
+    path = 1, -- relative path
     disabled_buftypes = { 'terminal', 'qf', 'prompt' },
     symbols = {
       modified = '[+]',
@@ -85,14 +84,6 @@ return function()
           'mode',
           fmt = function()
             return mode_text_map[vim.fn.mode()] .. ' |'
-          end,
-          color = function()
-            local val = {
-              fg = colors.foreground,
-              bg = 'none',
-              gui = 'bold',
-            }
-            return val
           end,
         },
       },
