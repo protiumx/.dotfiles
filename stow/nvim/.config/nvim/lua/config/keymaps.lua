@@ -37,15 +37,42 @@ vim.keymap.set('v', '<M-k>', ":m '<-2<CR>gv=gv", { silent = true })
 vim.keymap.set('i', '<M-j>', '<Esc>:m .+1<CR>==gi', { silent = true })
 vim.keymap.set('i', '<M-k>', '<Esc>:m .-2<CR>==gi', { silent = true })
 
--- Quickfix navigation
+-- Quickfix
 vim.keymap.set('n', '<Leader>qo', '<cmd>copen<CR>')
-vim.keymap.set('n', '<Leader>Q', '<cmd>cclose<CR>')
+vim.keymap.set('n', '<Leader>qq', '<cmd>cclose<CR>')
 vim.keymap.set(
   'n',
-  '<Leader>qq',
+  '<Leader>Q',
   '<cmd>call setqflist([]) | cclose<CR>',
   { desc = 'Clean quickfix' }
 )
+--
+vim.keymap.set({ 'n', 'v' }, '<Leader>qd', function()
+  local items = vim.fn.getqflist()
+  if vim.bo.buftype ~= 'quickfix' or #items == 0 then
+    return
+  end
+
+  local pos = utils.get_lines_indexes()
+  local new_items = {}
+  for i, item in ipairs(items) do
+    if i < pos[1] or i > pos[2] then
+      new_items[#new_items + 1] = item
+    end
+  end
+
+  vim.fn.setqflist(new_items, 'r')
+  if #new_items == 0 then
+    return
+  end
+
+  local new_idx = math.min(pos[1], #new_items)
+  vim.api.nvim_win_set_cursor(0, { new_idx, 0 })
+
+  if vim.fn.mode() ~= 'n' then
+    vim.api.nvim_input('<esc>')
+  end
+end, { desc = 'Delete qf entries' })
 
 -- Window utils
 vim.keymap.set('n', '<Leader><Up>', '<cmd>resize -2<CR>', { silent = true })
@@ -58,30 +85,22 @@ vim.keymap.set('n', '<Leader>k', '<C-w>k', { silent = true })
 vim.keymap.set('n', '<Leader>l', '<C-w>l', { silent = true })
 vim.keymap.set('n', '<Leader>V', '<C-w>|', { silent = true })
 vim.keymap.set('n', '<Leader>H', '<C-w>-', { silent = true })
-vim.keymap.set('n', '<Leader>:', '<C-w>=', { silent = true })
-vim.keymap.set(
-  'n',
-  '<Leader>wp',
-  '<cmd>bp | vs #<CR>',
-  { desc = 'Focus previous buffer in vsplit' }
-)
-
+vim.keymap.set('n', '<Leader>0', '<C-w>=', { silent = true })
 -- Buffer utils
-vim.keymap.set('n', '<C-w>B', '<cmd>vs #<CR>', { desc = 'Open previous buffer in new vsplit' })
+vim.keymap.set('n', '<Leader>bp', '<cmd>vs #<CR>', { desc = 'Open previous buffer in new vsplit' })
 vim.keymap.set('n', '<Tab>', '<cmd>bn<CR>', { silent = true })
 vim.keymap.set('n', '<S-Tab>', '<cmd>bp<CR>', { silent = true })
 vim.keymap.set('n', '<Leader>`', '<C-^>', { silent = true })
 vim.keymap.set('n', '--', function()
   utils.delete_buffer(0, { wipe = true })
 end, { silent = true, desc = 'Wipe buffer and go to previous' })
-
 vim.keymap.set('n', '<Leader>bd', function()
   utils.delete_buffer(0, { wipe = false })
 end, { silent = true, desc = 'Delete buffer and go to previous' })
 
 vim.keymap.set(
   'n',
-  '<M-X>',
+  '<Leader>bx',
   '<cmd>%bd | e #<CR>',
   { silent = true, desc = 'Close all but current buffer' }
 )
@@ -99,7 +118,7 @@ vim.keymap.set(
   { 'i', 'n', 'v' },
   '<F12>',
   '<cmd>$tabnew term://zsh<CR>',
-  { silent = true, desc = 'Open terminal in new tab in last position' }
+  { silent = true, desc = 'Open terminal in new tab at last position' }
 )
 vim.keymap.set('t', '<C-q>', '<cmd>bd!<CR>', { silent = true, desc = 'Close terminal buffer' })
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { silent = true, desc = 'Term normal mode' })
@@ -115,8 +134,6 @@ vim.keymap.set('n', '<M-,>', function()
   vim.cmd('!' .. cmd)
   print(cmd)
 end, { desc = '[Git] stage current file', silent = true })
-vim.keymap.set('n', '<C-g><Up>', '<cmd>!git push<CR>', { desc = '[Git] push' })
-vim.keymap.set('n', '<C-g><Down>', '<cmd>!git pull<CR>', { desc = '[Git] pull' })
 vim.keymap.set('n', '<C-g>r', function()
   local cmd = vim.fn.expand('git checkout origin/main %')
   vim.cmd('!' .. cmd)
@@ -124,7 +141,7 @@ vim.keymap.set('n', '<C-g>r', function()
 end, { desc = '[Git] checkout current file', silent = true })
 
 -- No OPs
-vim.keymap.set('n', '&', '<nop>')
+vim.keymap.set('n', '&', '<nop>', { silent = true })
 vim.keymap.set('n', 'Q', '<nop>', { silent = true })
 
 -- Registers utils
@@ -146,32 +163,20 @@ vim.keymap.set(
   ']p',
   { silent = true, desc = 'Paste and go to begining of selection' }
 )
-vim.keymap.set({ 'n' }, 'P', ']P', { silent = true })
 vim.keymap.set({ 'v' }, 'y', 'y`]', { silent = true, desc = 'Yank and go to end of selection' })
--- Normal p
-vim.keymap.set({ 'n', 'v' }, '<C-p>', 'p', { silent = true })
-vim.keymap.set('n', '<Leader>gp', '`[v`]', { silent = true, desc = 'Select what was pasted' })
-vim.keymap.set('n', '<Leader>vv', 'gv', { silent = true, desc = 'activate previous visual block' })
+vim.keymap.set({ 'n' }, 'P', ']P', { silent = true })
+vim.keymap.set({ 'n', 'v' }, '<C-p>', 'p', { silent = true, desc = 'Default p command' })
+vim.keymap.set('n', '<Leader>vp', '`[v`]', { silent = true, desc = 'Select what was pasted' })
 vim.keymap.set(
   'n',
   '<Leader>wr',
   [[:%s/\<<C-r><C-w>\>//g<Left><Left>]],
   { desc = 'Prepare current word sustituion buffer wise' }
 )
-vim.keymap.set('n', '<C-s>', function()
-  vim.o.hlsearch = not vim.o.hlsearch
-end, { desc = 'Toggle hlsearch' })
-
 vim.keymap.set('n', 'J', 'mzJ`z', { silent = true, desc = 'Join line keeping cursor postion' })
 vim.keymap.set(
   'v',
-  '<Leader>/',
-  '"yy/<C-R>y<CR>',
-  { desc = 'Yank selected text into "y and put it in search' }
-)
-vim.keymap.set(
-  'v',
-  '<Leader>/',
+  '<Leader>:',
   [[:s/\%V]],
   { silent = true, desc = 'Search replace only in visual selection' }
 )
@@ -182,28 +187,14 @@ vim.keymap.set('n', '<Leader>P', function()
 end, { desc = 'Copy current path to reg ' .. system_clip_reg })
 
 vim.keymap.set('n', '<Leader>L', function()
-  local path = vim.fn.expand('%:h') .. '/' .. vim.fn.expand('%:t') .. ':' .. vim.fn.line('.')
+  local path = vim.fn.expand('%:~:.') .. ':' .. vim.fn.line('.')
   vim.fn.setreg(system_clip_reg, path)
   print('Copied: ' .. path)
 end, { desc = 'Copy current path with line and column to reg ' .. system_clip_reg })
 
-vim.keymap.set(
-  'n',
-  '<Leader>gF',
-  utils.open_file_under_cursor,
-  { silent = true, desc = 'Opens the file under cursor and sets position' }
-)
-
-vim.keymap.set(
-  'n',
-  '<Leader>ge',
-  utils.open_file_from_error,
-  { silent = true, desc = 'Opens the file from errorformat and sets position' }
-)
-
 vim.keymap.set('n', '<Leader>s', '<cmd>w<CR>', { desc = 'Quick save' })
 vim.keymap.set('n', '<Leader>G', 'g<C-g>', { desc = 'File stats' })
-vim.keymap.set('n', '<Leader>S', '<cmd>mks! .session.vim<CR>')
+vim.keymap.set('n', '<Leader>S', '<cmd>mks! .session.vim<CR>', { desc = 'Create session' })
 vim.keymap.set('i', '<M-o>', '<C-o>o', { silent = true, desc = 'New line below' })
 vim.keymap.set('i', '<M-O>', '<C-o>O', { silent = true, desc = 'New line above' })
 vim.keymap.set(
@@ -221,11 +212,3 @@ vim.keymap.set(
 -- Select all text in current buffer
 vim.keymap.set('n', '<M-a>', 'ggVG', { silent = true, desc = 'Select all' })
 vim.keymap.set('i', '<M-a>', '<Esc>ggVG', { silent = true, desc = 'Select all' })
-
--- Comment utils - uses LSP
-vim.keymap.set('n', '<C-_>', 'gcc', { remap = true })
-vim.keymap.set('n', '<C-/>', 'gcc', { remap = true })
-vim.keymap.set('v', '<C-_>', 'gc', { remap = true })
-vim.keymap.set('v', '<C-/>', 'gc', { remap = true })
-vim.keymap.set('i', '<C-/>', '<C-o>gcc', { remap = true })
-vim.keymap.set('i', '<C-_>', '<C-o>gcc', { remap = true })

@@ -32,11 +32,17 @@ function M.setup(bufnr)
     vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}))
   end, 'Toggle inlay hints')
 
-  if jit.os == 'OSX' then
-    nmap('gh', '<cmd>Telescope lsp_references<CR>', 'Show signature help')
-    nmap('<Leader>ca', vim.lsp.buf.code_action, 'Code Action')
-    nmap('gT', vim.lsp.buf.type_definition, 'Type definition')
-  end
+  nmap('gh', '<cmd>Telescope lsp_references<CR>', 'Show signature help')
+  nmap('<Leader>ca', vim.lsp.buf.code_action, 'Code Action')
+  nmap('gT', vim.lsp.buf.type_definition, 'Type definition')
+
+  -- Comment utils - uses LSP
+  vim.keymap.set('n', '<C-_>', 'gcc', { remap = true })
+  vim.keymap.set('n', '<C-/>', 'gcc', { remap = true })
+  vim.keymap.set('v', '<C-_>', 'gc', { remap = true })
+  vim.keymap.set('v', '<C-/>', 'gc', { remap = true })
+  vim.keymap.set('i', '<C-/>', '<C-o>gcc', { remap = true })
+  vim.keymap.set('i', '<C-_>', '<C-o>gcc', { remap = true })
 end
 
 return M

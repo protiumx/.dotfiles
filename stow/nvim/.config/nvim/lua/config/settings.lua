@@ -2,10 +2,12 @@ local colors = require('config.colors')
 
 vim.g.netrw_banner = 0
 vim.g.netrw_browse_split = 0
+
+-- Disable netrw
 vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
 vim.g.netrw_liststyle = 3
-vim.g.omni_sql_no_default_maps = 1
+
+vim.g.omni_sql_no_default_maps = 1 -- Disable completion on sql files
 
 vim.cmd([[
   syntax sync minlines=3000
@@ -26,19 +28,20 @@ vim.opt.cmdwinheight = 12
 vim.opt.hidden = true
 vim.opt.backup = false
 vim.opt.writebackup = false
-vim.opt.updatetime = 200
+vim.opt.updatetime = 300
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.sessionoptions:append({ 'curdir', 'winsize' })
 vim.opt.shortmess:append({ c = true, F = true, s = true })
 vim.opt.wrap = false
+
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.opt.autoindent = true
-vim.opt.ignorecase = true
 vim.opt.smartindent = true
+
 vim.opt.listchars = { eol = '', tab = '  ' }
 vim.opt.list = true
 -- menuone: popup even when there's only one match
@@ -46,20 +49,19 @@ vim.opt.list = true
 -- noselect: Do not select, force user to select one from the menu
 vim.o.completeopt = 'menu,menuone,noselect'
 vim.o.laststatus = 3
--- vim.opt.foldmethod = "expr"
--- vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 
 vim.opt.undofile = true
 vim.opt.undodir = os.getenv('HOME') .. '/.nvim/undodir'
 
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 
 vim.opt.termguicolors = true
 
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = 'yes'
-vim.opt.cursorline = true
 vim.opt.colorcolumn = '100'
 
 vim.opt.isfname:append('@-@')
@@ -67,7 +69,6 @@ vim.opt.mouse = 'a'
 vim.opt.encoding = 'UTF-8'
 vim.opt.splitbelow = true
 vim.opt.splitright = true
-vim.opt.smartcase = true
 
 vim.opt.spell = true
 vim.opt.spelllang = 'en_us'
@@ -85,30 +86,8 @@ vim.opt.wildignore = {
   '*.so',
   '*.sqlite',
   '*.sqlite3',
-  '*.tags',
-  '*.zip',
-  '*.gz',
-  '*.tar',
-  '*.gzip',
-  '*.tgz',
-  '*.png',
-  '*.jpg',
-  '*.gif',
-  '*.img',
-  '*.iso',
-  '*.pdf',
-  '*.dmg',
-  '*.mp4',
-  '*.mov',
-  '*.ppt',
-  '*.pptx',
-  '*.doc',
-  '*.docx',
-  '*.xls',
-  '*.xlsx',
   '*/.git/*',
   '*.DS_Store',
-  '*/node_modules/*',
 }
 
 if vim.fn.has('wsl') == 1 then
@@ -129,6 +108,10 @@ end
 vim.filetype.add({
   pattern = {
     ['[jt]sconfig.*.json'] = 'jsonc',
+    ['Dockerfile*'] = 'dockerfile',
+  },
+  extension = {
+    heex = 'html',
   },
 })
 
@@ -155,5 +138,5 @@ end
 vim.api.nvim_create_user_command('ToggleTransparency', function()
   colors.toggle_transparent()
 end, {
-  desc = 'Re-enable autoformat-on-save',
+  desc = 'Toggle transparency',
 })

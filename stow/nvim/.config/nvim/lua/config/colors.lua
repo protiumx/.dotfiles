@@ -54,8 +54,8 @@ local base_groups = {
   XMenu = { bg = colors.dark_grey, default = true, fg = colors.foreground },
   XBorder = { bg = colors.dark_grey, fg = colors.dark_grey, default = true },
   OnYank = { bg = colors.foreground, fg = colors.background, bold = true },
-
   DevOutputBufferTitle = { fg = colors.background, bg = colors.light_orange, bold = true },
+
   -- Base groups
   Normal = { bg = colors.background, fg = colors.foreground },
   -- NormalNC = { bg = colors.background, fg = colors.foreground },
@@ -99,11 +99,6 @@ local base_groups = {
   DiffviewStatusRenamed = { fg = colors.violet, bg = 'none', bold = true },
   -- Lazy
   LazyBackdrop = { link = 'XMenu' },
-  -- Mason
-  MasonBackdrop = { bg = colors.background },
-  MasonHeader = { link = 'XMenu' },
-  MasonHeading = { link = 'XBorder' },
-  MasonNormal = { link = 'XMenu' },
   -- Neogit
   NeogitHunkHeaderHighlight = { bg = 'none' },
   -- NeogitDiffContextHighlight = { link = '' },
@@ -131,46 +126,11 @@ local base_groups = {
   -- vim-sandwich
   OperatorSandwichBuns = { fg = colors.background, bg = colors.green },
   OperatorSandwichChange = { fg = colors.background, bg = colors.yellow },
-  -- lspsaga.nvim
-  ActionPreviewBorder = { link = 'XBorder' },
-  ActionPreviewNormal = { link = 'XMenu' },
-  ActionPreviewTitle = { link = 'XMenu' },
-  CallHierarchyBorder = { link = 'XBorder' },
-  CallHierarchyNormal = { link = 'XMenu' },
-  DefinitionBorder = { link = 'XBorder' },
-  DefinitionNormal = { link = 'XMenu' },
-  DiagnosticBorder = { link = 'XBorder' },
-  DiagnosticNormal = { link = 'XMenu' },
-  DiagnosticShowNormal = { link = 'XMenu' },
-  DiagnosticShowBorder = { link = 'XBorder' },
-  FinderBorder = { link = 'XBorder' },
-  FinderNormal = { link = 'XMenu' },
-  HoverBorder = { link = 'XBorder' },
-  HoverNormal = { link = 'XMenu' },
-  OutlinePreviewBorder = { link = 'XBorder' },
-  OutlinePreviewNormal = { link = 'XMenu' },
-  RenameBorder = { link = 'XBorder' },
-  RenameNormal = { link = 'XMenu' },
-  SagaBorder = { link = 'XBorder' },
-  SagaNormal = { link = 'XMenu' },
-  SagaSep = { fg = colors.foreground, bg = 'none' },
-  TerminalBorder = { link = 'XBorder' },
-  TerminalNormal = { link = 'XMenu' },
-  SagaShadow = { fg = colors.background, bg = colors.background },
+  --
   SpellBad = { undercurl = true, sp = colors.red },
-  TitleIcon = { fg = colors.foreground, bg = colors.light_orange },
-  TitleString = { fg = colors.background, bg = colors.light_orange },
   -- LSP
   LspReferenceText = { bg = colors.red, fg = colors.foreground },
   LspSignatureActiveParameter = { link = 'Search' },
-  -- Neotree
-  NeoTreeCursorLine = { link = 'Visual' },
-  NeoTreeFloatBorder = { link = 'XBorder' },
-  NeoTreeFloatTitle = { fg = colors.background, bg = colors.light_orange },
-  NeoTreeTitleBar = { fg = colors.background, bg = colors.light_orange },
-  -- NeoTreeNormal               = { bg = colors.background },
-  NeoTreeNormal = { bg = 'none' },
-  NeoTreeNormalNC = { bg = 'none' },
   -- Noice.nvim
   NoiceCmdlineIcon = { fg = colors.red },
   NoiceCmdlineIconInput = { fg = colors.red },

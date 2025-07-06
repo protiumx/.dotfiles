@@ -1,3 +1,4 @@
+local utils = require('config.utils')
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 
@@ -44,38 +45,11 @@ autocmd('QuickFixCmdPost', {
   command = 'lwindow',
 })
 
-autocmd('CmdwinEnter', {
-  group = augroup('cmdwin', { clear = true }),
-  pattern = '*',
-  callback = function()
-    vim.keymap.set('n', 'q', '<cmd>close<CR>', { silent = true })
-  end,
-})
-
-autocmd({ 'BufNewFile', 'BufRead' }, {
-  pattern = '*.heex',
-  command = [[setlocal ft=html syntax=html]],
-})
-
-autocmd({ 'BufNewFile', 'BufRead' }, {
-  desc = 'Set file type for Dockerfile*',
-  pattern = 'Dockerfile*',
-  command = [[set ft=dockerfile]],
-})
-
 autocmd('TermOpen', {
   group = augroup('term_open_insert', { clear = true }),
   pattern = { 'FTerm', 'term://*' },
   command = [[
     setlocal nonumber norelativenumber nospell signcolumn=no noruler scrolloff=0
-    startinsert
-  ]],
-})
-
-autocmd({ 'BufWinEnter', 'WinEnter' }, {
-  group = augroup('term_insert', { clear = true }),
-  pattern = { 'FTerm' },
-  command = [[
     startinsert
   ]],
 })
@@ -87,43 +61,30 @@ autocmd('FileType', {
   ]],
 })
 
--- close some filetypes with <q>
+-- Close some filetypes with <q>
 vim.api.nvim_create_autocmd('FileType', {
   group = augroup('close_with_q', { clear = true }),
   pattern = {
-    'PlenaryTestPopup',
     'help',
     'lspinfo',
     'man',
     'notify',
     'qf',
     'git',
-    'spectre_panel',
     'startuptime',
     'tsplayground',
     'checkhealth',
     'neotest-output',
     'neotest-summary',
     'neotest-output-panel',
-    'guihua',
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
     vim.keymap.set('n', 'q', '<cmd>close<CR>', { buffer = event.buf, silent = true })
-    vim.keymap.set('n', '``', '<nop>', { buffer = event.buf, silent = true })
-
     vim.cmd([[
       setlocal colorcolumn=0
     ]])
   end,
-})
-
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = {
-    'NeogitStatus',
-    'NeogitPopup',
-  },
-  command = [[ setlocal nospell ]],
 })
 
 autocmd('FileType', {
@@ -155,13 +116,13 @@ autocmd('FileType', {
 --   end,
 -- })
 
--- Check if we need to reload the file when it changed
-autocmd({ 'FocusGained', 'TermClose', 'TermLeave' }, {
+-- Check if any buffer changed when after leaving the terminal
+autocmd({ 'TermClose', 'TermLeave' }, {
   group = augroup('checktime', { clear = true }),
   command = 'checktime',
 })
 
--- resize splits if window got resized
+-- Resize splits if nvim window got resized
 autocmd({ 'VimResized' }, {
   group = augroup('resize_splits', { clear = true }),
   callback = function()
@@ -175,20 +136,4 @@ autocmd('BufWritePost', {
   callback = function(args)
     vim.cmd('mkspell! ' .. args.file)
   end,
-})
-
-local function load_qf_keymaps(args)
-  vim.keymap.set({ 'n', 'v' }, 'dd', function()
-    local items = vim.fn.getqflist()
-    local line = vim.fn.line('.')
-    table.remove(items, line)
-    vim.fn.setqflist(items, 'r')
-    vim.api.nvim_win_set_cursor(0, { line, 0 })
-  end, { buffer = args.buf })
-end
-
-autocmd('BufWinEnter', {
-  group = augroup('qf-maps', { clear = true }),
-  pattern = 'quickfix',
-  callback = load_qf_keymaps,
 })

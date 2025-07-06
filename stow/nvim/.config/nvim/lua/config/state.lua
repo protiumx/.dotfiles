@@ -1,7 +1,6 @@
 GlobalState = GlobalState or {}
 GlobalState.marked_buffers = GlobalState.marked_buffers or {}
 GlobalState.marked_files = GlobalState.marked_files or {}
-GlobalState.quiet = GlobalState.quiet or false
 
 local state = {
   _global = GlobalState,

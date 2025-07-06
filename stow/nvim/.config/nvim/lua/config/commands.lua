@@ -77,15 +77,9 @@ local git_command = {
   },
 }
 
-local quiet_command = {
-  handler = utils.toggle_quiet,
-  options = {},
-}
-
 ---@type table<string, XCommand>
 local commands = {
   git = git_command,
-  quiet = quiet_command,
   watch = watch_command,
 }
 
