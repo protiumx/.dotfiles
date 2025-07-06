@@ -229,11 +229,18 @@ return function()
     },
 
     pickers = {
+      buffers = {
+        disable_devicons = true,
+      },
+
       live_grep = {
+        disable_devicons = true,
         theme = 'ivy',
         borderchars = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
       },
+
       find_files = {
+        disable_devicons = true,
         theme = 'ivy',
         -- stylua: ignore
         find_command = {
@@ -256,6 +263,7 @@ return function()
     extensions = {
       file_browser = {
         respect_gitignore = false,
+        disable_devicons = true,
         grouped = true,
         hidden = true,
         git_status = false,

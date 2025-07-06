@@ -25,17 +25,12 @@ local common_marks = { 'A', 'S', 'D', 'F' }
 local M = {}
 
 local function entry_from_buffer(opts)
-  local icon_width = 0
-  local icon, _ = telescope_utils.get_devicons('fname', false)
-  icon_width = strings.strdisplaywidth(icon)
-
   local displayer = entry_display.create({
     separator = ' ',
     items = {
       { width = 1 }, -- pin
       { width = opts.bufnr_width },
-      { width = 2 }, -- mark
-      { width = icon_width },
+      { width = 2 }, -- mark + space
       { remaining = true },
     },
   })
@@ -43,18 +38,16 @@ local function entry_from_buffer(opts)
   local cwd = vim.fn.expand(opts.cwd or vim.loop.cwd())
 
   local make_display = function(entry)
-    -- marked + bufnr_width + mark + icon
-    -- E.g. "󰤱.100.A.<icon>.some/path", dots are spaces
-    opts.__prefix = 1 + opts.bufnr_width + 1 + icon_width + 3
+    -- marked + bufnr_width + mark + path
+    -- E.g. "󰤱.100.A.some/path", dots are spaces
+    opts.__prefix = 1 + opts.bufnr_width + 2
 
     local display_bufname = telescope_utils.transform_path(opts, entry.filename)
-    local display_icon, hl_group = telescope_utils.get_devicons(entry.filename, false)
 
     return displayer({
       entry.marked and '󰤱' or ' ',
       { entry.bufnr, 'TelescopeResultsNumber' },
       { entry.indicator, 'TelescopeMatching' },
-      { display_icon, hl_group },
       display_bufname,
     })
   end
