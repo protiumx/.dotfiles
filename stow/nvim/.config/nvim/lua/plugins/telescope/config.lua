@@ -267,11 +267,9 @@ return function()
         grouped = true,
         hidden = true,
         git_status = false,
-        mappings = {
-          ['i'] = {
-            ['<M-R>'] = fb_actions.remove,
-            ['<M-d>'] = false,
-          },
+        display_stat = {
+          date = true,
+          size = true,
         },
       },
     },
