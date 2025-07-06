@@ -3,9 +3,7 @@ return {
   event = 'InsertEnter',
   dependencies = {
     'hrsh7th/cmp-buffer',
-    'hrsh7th/cmp-path',
     'hrsh7th/cmp-nvim-lsp',
-    'f3fora/cmp-spell',
     'saadparwaiz1/cmp_luasnip',
     require('plugins.luasnip'),
   },

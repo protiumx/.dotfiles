@@ -1,24 +1,18 @@
 return {
   require('plugins.conform'),
   require('plugins.diffview'),
-  require('plugins.fidget'),
   require('plugins.flash'),
   require('plugins.gitsigns'),
-  -- require('plugins.go-nvim'),
-  require('plugins.lspsaga'),
   require('plugins.lualine'),
   require('plugins.neoclip'),
   require('plugins.neogit'),
   require('plugins.neotest'),
-  require('plugins.neotree'),
   require('plugins.noice'),
   require('plugins.nvim-cmp'),
-  require('plugins.nvim-dap'),
   require('plugins.telescope'),
   require('plugins.text-case'),
   require('plugins.treesitter'),
   require('plugins.treesj'),
-  require('plugins.trouble'),
   require('plugins.vim-sandwich'),
   require('plugins.yazi'),
   {
@@ -63,15 +57,6 @@ return {
     'nvim-treesitter/nvim-treesitter-textobjects',
     event = 'VeryLazy',
     dependencies = { 'nvim-treesitter' },
-  },
-
-  {
-    'mbbill/undotree',
-    enabled = false,
-    event = 'VeryLazy',
-    config = function()
-      vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
-    end,
   },
 
   {
@@ -133,6 +118,51 @@ return {
     event = 'VeryLazy',
     opts = {
       color_icons = true,
+    },
+  },
+  {
+    's1n7ax/nvim-window-picker',
+    name = 'window-picker',
+    event = 'VeryLazy',
+    version = '2.*',
+    config = function()
+      local picker = require('window-picker')
+      picker.setup({
+        autoselect_one = true,
+        include_current = false,
+        filter_rules = {
+          -- filter using buffer options
+          bo = {
+            -- if the file type is one of following, the window will be ignored
+            filetype = { 'neo-tree', 'neo-tree-popup', 'notify' },
+          },
+        },
+        highlights = {
+          statusline = {
+            focused = {
+              bg = '#e35e4f',
+              bold = true,
+            },
+            unfocused = {
+              bg = '#e35e4f',
+              bold = true,
+            },
+          },
+        },
+      })
+    end,
+
+    keys = {
+      {
+        '<C-w>S>',
+        mode = 'n',
+        function()
+          local picked_window_id = require('window-picker').pick_window()
+            or vim.api.nvim_get_current_win()
+          vim.api.nvim_set_current_win(picked_window_id)
+        end,
+        desc = 'Pick a window',
+      },
     },
   },
 }

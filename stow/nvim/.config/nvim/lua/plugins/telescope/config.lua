@@ -152,14 +152,6 @@ local function keymaps()
   map({ 'n', 'i' }, '<M-s>m', function()
     telescope.extensions.macroscope.default(themes.get_dropdown({ previewer = true }))
   end, '[S]earch [M]acros')
-
-  -- Fzf live
-  map(
-    { 'i', 'n' },
-    '<M-s>f',
-    telescope.extensions.live_grep_args.live_grep_args,
-    'Ripgrep with args'
-  )
 end
 
 return function()
@@ -280,7 +272,6 @@ return function()
   telescope.load_extension('fzf')
   telescope.load_extension('file_browser')
   telescope.load_extension('neoclip')
-  telescope.load_extension('live_grep_args')
 
   keymaps()
 

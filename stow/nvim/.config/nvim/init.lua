@@ -81,7 +81,7 @@ local lazy_config = {
   -- so :help works even for plugins that don't have vim docs.
   -- when the readme opens with :help it will be correctly displayed as markdown
   readme = {
-    enabled = true,
+    enabled = false,
     root = vim.fn.stdpath('state') .. '/lazy/readme',
     files = { 'README.md', 'lua/**/README.md' },
     -- only generate markdown helptags for plugins that dont have docs

@@ -53,6 +53,7 @@ local base_theme = {
   y = { bg = 'none', fg = colors.light_grey },
   z = { bg = 'none', fg = colors.light_grey },
 }
+
 local theme = {
   normal = base_theme,
   insert = base_theme,
@@ -63,17 +64,13 @@ local theme = {
   },
 }
 
-local function lsp_symbol()
-  return require('lspsaga.symbol.winbar'):get_bar() or ''
-end
-
 return function()
-  local icons = require('config.icons').lsp
+  local lsp_icons = require('config.icons').lsp
 
   local file_section = {
     'filename',
     path = 1,
-    disabled_buftypes = { 'terminal' },
+    disabled_buftypes = { 'terminal', 'qf' },
     symbols = {
       modified = '[+]',
       readonly = '',
@@ -128,14 +125,7 @@ return function()
         },
       },
       lualine_b = { file_section },
-      lualine_c = {
-        {
-          lsp_symbol,
-          cond = function()
-            return #vim.lsp.get_clients() > 0
-          end,
-        },
-      },
+      lualine_c = {},
       lualine_x = {
         {
           'branch',
@@ -164,10 +154,10 @@ return function()
           'diagnostics',
           sources = { 'nvim_lsp' },
           symbols = {
-            error = icons.error .. ' ',
-            warn = icons.warn .. ' ',
-            info = icons.info .. ' ',
-            hint = icons.hint .. ' ',
+            error = lsp_icons.error .. ' ',
+            warn = lsp_icons.warn .. ' ',
+            info = lsp_icons.info .. ' ',
+            hint = lsp_icons.hint .. ' ',
           },
         },
       },

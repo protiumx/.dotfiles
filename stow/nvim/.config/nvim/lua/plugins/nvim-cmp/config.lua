@@ -60,18 +60,6 @@ local sources = {
     },
     priority = 60,
   },
-
-  path = {
-    name = 'path',
-    keyword_length = 3,
-    group_index = 2,
-    priority = 40,
-  },
-
-  spell = {
-    name = 'spell',
-    priority = 10,
-  },
 }
 
 return function()
@@ -131,7 +119,6 @@ return function()
       sources.lsp,
       sources.snippets,
       sources.buffer,
-      sources.path,
     },
 
     formatting = {
@@ -170,10 +157,12 @@ return function()
       ['<CR>'] = cmp.mapping.confirm({
         select = true,
       }),
+
       ['<C-e>'] = cmp.mapping.close(),
       ['<C-Space>'] = cmp.mapping.complete(),
       ['<C-d>'] = cmp.mapping.scroll_docs(4),
       ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+
       ['<Tab>'] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
@@ -183,6 +172,7 @@ return function()
           fallback()
         end
       end, { 'i', 's' }),
+
       ['<S-Tab>'] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_prev_item()
@@ -190,6 +180,7 @@ return function()
           fallback()
         end
       end, { 'i', 's' }),
+
       ['<C-k>'] = cmp.mapping(function(fallback)
         local luasnip = require('luasnip')
         if luasnip.expand_or_jumpable() then
@@ -201,6 +192,7 @@ return function()
     }),
   })
 
+  -- Trigger luasnip completion
   vim.keymap.set('i', '<M-:>', function()
     cmp.complete({
       config = {
@@ -217,9 +209,7 @@ return function()
     callback = function()
       require('cmp').setup.buffer({
         sources = {
-          sources.spell,
           sources.snippets,
-          sources.path,
           sources.buffer,
         },
       })
