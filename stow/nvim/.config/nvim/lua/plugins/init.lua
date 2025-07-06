@@ -21,7 +21,6 @@ return {
   require('plugins.gitsigns'),
   require('plugins.lualine'),
   require('plugins.neoclip'),
-  require('plugins.neogit'),
   require('plugins.neotest'),
   require('plugins.noice'),
   require('plugins.nvim-cmp'),
