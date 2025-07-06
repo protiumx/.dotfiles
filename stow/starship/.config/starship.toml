@@ -29,7 +29,7 @@ vimcmd_replace_symbol = '[](#9e9e9e)'
 [time]
 disabled = false
 format = '[ $time ]($style)'
-style = "bg:#333333 fg:#bbbbbb"
+style = "bg:#bbbbbb fg:#161616"
 time_format = "%H:%M"
 
 [memory_usage]
