@@ -1,5 +1,4 @@
 local colors = require('config.colors')
-local global_state = require('config.state')
 
 local mode_text_map = {
   ['__'] = '--',
@@ -22,33 +21,9 @@ local mode_text_map = {
   [''] = 'V-B',
 }
 
-local mode_colors_map = {
-  n = colors.blue,
-  i = colors.yellow,
-  v = colors.magenta,
-  [''] = colors.lightblue,
-  [''] = colors.white,
-  V = colors.lightblue,
-  c = colors.orange,
-  no = colors.magenta,
-  s = colors.orange,
-  S = colors.orange,
-  -- [""] = colors.orange,
-  ic = colors.yellow,
-  R = colors.purple,
-  Rv = colors.purple,
-  cv = colors.orange,
-  ce = colors.orange,
-  r = colors.cyan,
-  rm = colors.cyan,
-  ['r?'] = colors.cyan,
-  ['!'] = colors.cyan,
-  t = colors.cyan,
-}
-
 local base_theme = {
   a = {},
-  b = { bg = 'none', fg = colors.blue },
+  b = { bg = 'none', fg = colors.foreground, bold = true },
   x = { bg = 'none', fg = colors.purple },
   y = { bg = 'none', fg = colors.light_grey },
   z = { bg = 'none', fg = colors.light_grey },
@@ -65,22 +40,20 @@ local theme = {
 }
 
 return function()
-  local lsp_icons = require('config.icons').lsp
-
   local file_section = {
     'filename',
     path = 1,
-    disabled_buftypes = { 'terminal', 'qf' },
+    disabled_buftypes = { 'terminal', 'qf', 'prompt' },
     symbols = {
       modified = '[+]',
-      readonly = '',
-      newfile = '',
+      readonly = '[-]',
+      newfile = '[^]',
     },
   }
 
   require('lualine').setup({
     options = {
-      icons_enabled = true,
+      icons_enabled = false,
       theme = theme,
       component_separators = '',
       section_separators = '',
@@ -94,7 +67,6 @@ return function()
           'neotest-summary',
           'noice',
           'packer',
-          -- 'qf',
           'tsplayground',
         },
       },
@@ -116,7 +88,7 @@ return function()
           end,
           color = function()
             local val = {
-              fg = mode_colors_map[vim.fn.mode()],
+              fg = colors.foreground,
               bg = 'none',
               gui = 'bold',
             }
@@ -134,7 +106,7 @@ return function()
               return s:sub(1, 30) .. '..'
             end
 
-            return s
+            return '(' .. s .. ')'
           end,
         },
         -- Show icon if there are unsaved buffers
@@ -149,18 +121,7 @@ return function()
           end,
         },
       },
-      lualine_y = {
-        {
-          'diagnostics',
-          sources = { 'nvim_lsp' },
-          symbols = {
-            error = lsp_icons.error .. ' ',
-            warn = lsp_icons.warn .. ' ',
-            info = lsp_icons.info .. ' ',
-            hint = lsp_icons.hint .. ' ',
-          },
-        },
-      },
+      lualine_y = {},
       lualine_z = {
         {
           require('noice').api.status.search.get,
@@ -171,11 +132,6 @@ return function()
           require('noice').api.status.mode.get,
           cond = require('noice').api.status.mode.has,
           color = { fg = '#ff9e64' },
-        },
-        {
-          function()
-            return global_state.get('quiet') and '󰊠' or ''
-          end,
         },
         -- Position
         {
