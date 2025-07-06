@@ -1,35 +1,5 @@
 local cmp_types = require('cmp.types')
 
-local state = require('config.state')
-
-local kind_icons = {
-  Class = '  ',
-  Color = '  ',
-  Constant = '  ',
-  Constructor = '  ',
-  Enum = '  ',
-  EnumMember = '  ',
-  Event = '  ',
-  Field = '  ',
-  File = '  ',
-  Folder = '  ',
-  Function = '  ',
-  Interface = '  ',
-  Keyword = '  ',
-  Method = '  ',
-  Module = '  ',
-  Operator = '  ',
-  Property = '  ',
-  Reference = '  ',
-  Snippet = '  ',
-  Struct = '  ',
-  Text = '  ',
-  TypeParameter = '  ',
-  Unit = '  ',
-  Value = '  ',
-  Variable = '  ',
-}
-
 local sources = {
   lsp = {
     name = 'nvim_lsp',
@@ -47,6 +17,7 @@ local sources = {
   buffer = {
     name = 'buffer',
     group_index = 2,
+    priority = 60,
     keyword_length = 3,
     option = {
       -- Only buffers in the current tab
@@ -58,7 +29,6 @@ local sources = {
         return vim.tbl_keys(bufs)
       end,
     },
-    priority = 60,
   },
 }
 
@@ -66,22 +36,28 @@ return function()
   local cmp = require('cmp')
   local compare = require('cmp.config.compare')
   local types = require('cmp.types')
+  local lsp_icons = require('config.icons').lsp
 
-  local excluded_ftypes = {
-    sagarename = true,
-    TelescopePrompt = true,
-    ['dap-repl'] = true,
-    dapui_watches = true,
+  local excluded_buftypes = {
+    prompt = true,
   }
+
+  local enabled = true
+  vim.api.nvim_create_user_command('ToggleCmp', function()
+    enabled = not enabled
+  end, {})
 
   cmp.setup({
     enabled = function()
-      if state.get('quiet') then
+      if not enabled then
         return false
       end
 
-      local ftype = vim.api.nvim_get_option_value('filetype', { buf = 0 })
-      return not excluded_ftypes[ftype]
+      local btype = vim.api.nvim_get_option_value('buftype', { buf = 0 })
+      local disabled = excluded_buftypes[btype]
+        or vim.fn.reg_recording() ~= ''
+        or vim.fn.reg_executing() ~= ''
+      return not disabled
     end,
 
     confirmation = {
@@ -124,7 +100,7 @@ return function()
     formatting = {
       fields = { 'abbr', 'kind' },
       format = function(_, item)
-        item.kind = kind_icons[item.kind]
+        item.kind = lsp_icons.kind_icons[item.kind]
         item.abbr = string.sub(item.abbr, 1, 50)
         item.menu = ''
         return item
@@ -202,17 +178,4 @@ return function()
       },
     })
   end)
-
-  vim.api.nvim_create_autocmd('FileType', {
-    group = vim.api.nvim_create_augroup('cmp-ft', { clear = true }),
-    pattern = { 'markdown' },
-    callback = function()
-      require('cmp').setup.buffer({
-        sources = {
-          sources.snippets,
-          sources.buffer,
-        },
-      })
-    end,
-  })
 end
