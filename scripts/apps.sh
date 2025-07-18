@@ -6,7 +6,6 @@ install_macos_apps() {
     google-chrome
     spotify
     vlc
-    wez/wezterm/wezterm # https://wezfurlong.org/wezterm
   )
 
   info "Installing macOS apps..."
