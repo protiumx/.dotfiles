@@ -24,11 +24,11 @@ return {
   require('plugins.neotest'),
   require('plugins.noice'),
   require('plugins.nvim-cmp'),
+  require('plugins.nvim-lint'),
   require('plugins.telescope'),
   require('plugins.treesitter'),
   require('plugins.treesj'),
   require('plugins.vim-sandwich'),
-  require('plugins.yazi'),
   zenbones,
   {
     'ellisonleao/gruvbox.nvim',
@@ -114,51 +114,6 @@ return {
     event = 'VeryLazy',
     opts = {
       color_icons = true,
-    },
-  },
-  {
-    's1n7ax/nvim-window-picker',
-    name = 'window-picker',
-    event = 'VeryLazy',
-    version = '2.*',
-    config = function()
-      local picker = require('window-picker')
-      picker.setup({
-        autoselect_one = true,
-        include_current = false,
-        filter_rules = {
-          -- filter using buffer options
-          bo = {
-            -- if the file type is one of following, the window will be ignored
-            filetype = { 'neo-tree', 'neo-tree-popup', 'notify' },
-          },
-        },
-        highlights = {
-          statusline = {
-            focused = {
-              bg = '#e35e4f',
-              bold = true,
-            },
-            unfocused = {
-              bg = '#e35e4f',
-              bold = true,
-            },
-          },
-        },
-      })
-    end,
-
-    keys = {
-      {
-        '<C-w>S>',
-        mode = 'n',
-        function()
-          local picked_window_id = require('window-picker').pick_window()
-            or vim.api.nvim_get_current_win()
-          vim.api.nvim_set_current_win(picked_window_id)
-        end,
-        desc = 'Pick a window',
-      },
     },
   },
 }
