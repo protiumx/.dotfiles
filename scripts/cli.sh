@@ -46,7 +46,8 @@ install_rust_tools() {
 
   for p in "${cargo_packages[@]}"; do
     info "Installing <cargo $p>"
-    cargo install "$p"
+    expand=($p)
+    cargo install "${expand[@]}"
   done
 
   local rustup_components=(
