@@ -14,6 +14,7 @@ vim.cmd([[
   filetype plugin indent on
   set iskeyword-=_
   set iskeyword-==
+  set iskeyword+=+
   set fillchars=diff:\ ,
   set pumheight=20
   set undolevels=100
