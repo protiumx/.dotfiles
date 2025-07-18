@@ -17,7 +17,7 @@ cleanup() {
 }
 
 wait_input() {
-  read -p -r "Press enter to continue: "
+  read -p "Press any key to continue "
 }
 
 main() {
@@ -28,24 +28,22 @@ main() {
   info "################################################################################"
   wait_input
   install_packages
-
   success "Finished installing Homebrew packages"
-
-  info "################################################################################"
-  info "Oh-my-zsh"
-  info "################################################################################"
-  wait_input
-  install_oh_my_zsh
-  success "Finished installing Oh-my-zsh"
 
   info "################################################################################"
   info "MacOS Apps"
   info "################################################################################"
   wait_input
   install_macos_apps
-
-  install_masApps
   success "Finished installing macOS apps"
+
+  if ! hash rustc &>/dev/null; then
+    info "################################################################################"
+    info "Rustup Setup"
+    info "################################################################################"
+    wait_input
+    rustup-init
+  fi
 
   info "################################################################################"
   info "PiP tools"
@@ -84,14 +82,6 @@ main() {
   info "################################################################################"
   setup_github_ssh
   success "Finished setting up SSH Key"
-
-  if ! hash rustc &>/dev/null; then
-    info "################################################################################"
-    info "Rustup Setup"
-    info "################################################################################"
-    wait_input
-    rustup-init
-  fi
 
   success "Done"
 
