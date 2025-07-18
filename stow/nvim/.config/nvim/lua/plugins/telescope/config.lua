@@ -1,4 +1,3 @@
-local actions = require('plugins.telescope.actions')
 local pickers = require('plugins.telescope.pickers')
 local themes = require('plugins.telescope.themes')
 
@@ -201,7 +200,6 @@ return function()
       mappings = {
         i = {
           ['<M-x>'] = 'delete_buffer',
-          ['<M-O>'] = actions.select_window,
           ['<M-k>'] = 'cycle_history_next',
           ['<M-j>'] = 'cycle_history_prev',
           ['<M-a>'] = 'toggle_all', -- select/deselect all entries
@@ -246,6 +244,7 @@ return function()
         find_command = {
           'fd',
           '-t', 'f',
+          '--no-ignore',
           '--hidden',
           '--strip-cwd-prefix',
           '-i',
@@ -267,6 +266,7 @@ return function()
         grouped = true,
         hidden = true,
         git_status = false,
+        no_ignore = true,
         display_stat = {
           date = true,
           size = true,
