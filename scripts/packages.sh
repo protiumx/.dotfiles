@@ -1,7 +1,8 @@
 packages=(
-  bat    # https://github.com/sharkdp/bat
-  bottom # https://github.com/ClementTsang/bottom
-  buf    # https://buf.build/
+  bat                  # https://github.com/sharkdp/bat
+  bash-language-server # https://github.com/bash-lsp/bash-language-server
+  bottom               # https://github.com/ClementTsang/bottom
+  buf                  # https://buf.build/
   cmake
   curl
   dust      # https://github.com/bootandy/dust
