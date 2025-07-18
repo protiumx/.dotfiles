@@ -5,7 +5,6 @@ local clients = {
   'bashls',
   'buf_ls',
   'clangd',
-  'dockerls',
   'gopls',
   'luals',
   'marksman',
