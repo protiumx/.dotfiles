@@ -1,54 +1,38 @@
-taps=(
-  homebrew/cask
-  homebrew/cask-fonts
-  homebrew/core
-  wez/wezterm
-)
-
 packages=(
   bat    # https://github.com/sharkdp/bat
   bottom # https://github.com/ClementTsang/bottom
   buf    # https://buf.build/
   cmake
-  ctags
   curl
-  dasel # https://github.com/TomWright/dasel
-  dust  # https://github.com/bootandy/dust
-  eza   # https://github.com/eza-community/eza
-  fzf   # https://github.com/junegunn/fzf
-  fd    # https://github.com/sharkdp/fd
-  gettext
+  dust      # https://github.com/bootandy/dust
+  eza       # https://github.com/eza-community/eza
+  fzf       # https://github.com/junegunn/fzf
+  fd        # https://github.com/sharkdp/fd
   git-delta # https://github.com/dandavison/delta
   gpg
   go       # golang
   graphviz # https://graphviz.org/
-  grpcurl  # https://github.com/fullstorydev/grpcurl
   imagemagick
   jq
-  k9s # https://github.com/derailed/k9s
   kubernetes-cli
-  hyperfine  # https://github.com/sharkdp/hyperfine
-  lazydocker # https://github.com/jesseduffield/lazydocker
-  libpq
-  mas # https://github.com/mas-cli/mas
+  hyperfine # https://github.com/sharkdp/hyperfine
+  libpq     # psql
   neovim
   node
   nmap
-  openssl
   pinentry-mac
-  postgresql
-  python3
+  python
   protobuf
   ripgrep # https://github.com/BurntSushi/ripgre
   rustup
   ruff # https://github.com/astral-sh/ruff
   sd   # https://github.com/chmln/sd
   shellcheck
+  starship
   stow
   telnet
   xo/xo/usql # https://github.com/xo/usql
-  # websocat   # https://github.com/vi/websocat
-  yazi # https://github.com/sxyazi/yazi
+  yazi       # https://github.com/sxyazi/yazi
   wget
   zsh
   zinit  # https://github.com/zdharma-continuum/zinit
@@ -56,9 +40,6 @@ packages=(
 )
 
 install_packages() {
-  info "Configuring taps"
-  apply_brew_taps "${taps[@]}"
-
   info "Installing packages..."
   install_brew_formulas "${packages[@]}"
 
