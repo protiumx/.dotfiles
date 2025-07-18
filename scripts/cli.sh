@@ -18,6 +18,8 @@ install_go_tools() {
     "github.com/go-delve/delve/cmd/dlv@latest"
     "mvdan.cc/sh/v3/cmd/shfmt@latest"
     "mvdan.cc/gofumpt@latest"
+    "golang.org/x/tools/gopls@latest"
+    "golang.org/x/tools/cmd/goimports@latest"
   )
 
   for p in "${packages[@]}"; do
