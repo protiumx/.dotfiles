@@ -26,6 +26,7 @@ stow_dotfiles() {
     ".zprofile"
   )
   local directories=(
+    ".config/amethyst"
     ".config/fd"
     ".config/git"
     ".config/nvim"
@@ -54,8 +55,7 @@ stow_dotfiles() {
   info "Stowing: $to_stow"
 
   read -p "Are you sure? " -n 1 -r
-  if [[ ! $REPLY =~ ^[Yy]$ ]]
-  then
+  if [[ ! $REPLY =~ ^[Yy]$ ]]; then
     stow -d stow --verbose 1 --target "$HOME" "$to_stow"
     # set permissions
     chmod a+x ~/.git-templates/hooks/pre-commit
