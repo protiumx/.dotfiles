@@ -18,6 +18,7 @@ packages=(
   kubernetes-cli
   hyperfine # https://github.com/sharkdp/hyperfine
   libpq     # psql
+  lua-language-server
   neovim
   node
   nmap
