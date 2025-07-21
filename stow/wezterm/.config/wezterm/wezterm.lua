@@ -62,6 +62,10 @@ end
 
 local function open_file(window, pane, uri)
   wezterm.log_info('enter with uir', uri)
+  if uri:find('^https?:') == 1 then
+    return false
+  end
+
   -- Not a file or in alt screen (e.g. nvim, less)
   if pane:is_alt_screen_active() then
     return false
@@ -670,6 +674,7 @@ local config = {
     active_titlebar_bg = colors.background,
     inactive_titlebar_bg = colors.background,
   },
+  exit_behavior = 'Hold',
 }
 
 if is_windows then
