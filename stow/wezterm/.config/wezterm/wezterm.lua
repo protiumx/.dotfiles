@@ -73,7 +73,7 @@ local function open_file(window, pane, uri)
 
   local path = ''
   local row = ''
-  local path_row_pattern = '(%S+):(%d+)'
+  local path_row_pattern = '([^%s:]+):(%d+)'
 
   -- check for pattern file://[HOSTNAME]/PATH[#linenr]
   if uri:find('^file:') == 1 then
@@ -113,7 +113,12 @@ local function open_file(window, pane, uri)
   end
 
   -- Open nvim in a new pane to the right
-  pane:split({ args = args, direction = 'Right', top_level = true })
+  pane:split({
+    args = args,
+    direction = 'Right',
+    top_level = true,
+    size = 0.5,
+  })
   return true
 end
 
@@ -322,7 +327,7 @@ local keys = {
     action = act.QuickSelectArgs({
       patterns = {
         'file:///\\S+',
-        '[\\w\\d/.-_]+:\\d{1,4}',
+        '[^\\s:]{3,}:\\d{1,4}',
       },
       action = wezterm.action_callback(function(window, pane)
         local uri = window:get_selection_text_for_pane(pane)
@@ -443,7 +448,7 @@ local theme = {
   fg1 = '#bbbbbb',
   fg2 = '#9e9e9e',
   fg3 = '#777777',
-  unseen = '#C53030',
+  red = '#C53030',
 }
 
 local function get_current_working_dir(tab)
@@ -509,7 +514,7 @@ wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_wid
 
   if has_unseen_output then
     format = wezterm.format({
-      { Foreground = { Color = theme.unseen } },
+      { Foreground = { Color = theme.red } },
       { Text = title },
     })
   end
@@ -558,11 +563,11 @@ local colors = {
   cursor_fg = theme.bg,
   cursor_border = theme.fg2,
   selection_fg = theme.bg,
-  selection_bg = '#fb4934',
-  quick_select_label_bg = { Color = '#60b5de' },
-  quick_select_label_fg = { Color = '#ffffff' },
-  quick_select_match_bg = { Color = '#c07d9e' },
-  quick_select_match_fg = { Color = '#ffffff' },
+  selection_bg = theme.fg1,
+  quick_select_label_bg = { Color = theme.red },
+  quick_select_label_fg = { Color = theme.fg1 },
+  quick_select_match_bg = { Color = theme.fg1 },
+  quick_select_match_fg = { Color = theme.bg },
   tab_bar = {
     background = theme.bg,
     inactive_tab_edge = 'rgba(28, 28, 28, 0.9)',
@@ -658,6 +663,7 @@ local config = {
     EDITOR = 'nvim',
     PATH = '/opt/homebrew/bin:/home/bmayo/.go/current/bin:' .. os.getenv('PATH'),
   },
+  -- native_macos_fullscreen_mode = true,
   show_new_tab_button_in_tab_bar = false,
   show_close_tab_button_in_tabs = false,
   switch_to_last_active_tab_when_closing_tab = true,
@@ -665,7 +671,7 @@ local config = {
   -- underline_position = -4,
   use_fancy_tab_bar = true,
   use_resize_increments = true,
-  window_background_opacity = 0.7,
+  -- window_background_opacity = 0.7,
   -- macos_window_background_blur = 10,
   window_decorations = 'RESIZE',
   window_frame = {
@@ -674,7 +680,6 @@ local config = {
     active_titlebar_bg = colors.background,
     inactive_titlebar_bg = colors.background,
   },
-  exit_behavior = 'Hold',
 }
 
 if is_windows then

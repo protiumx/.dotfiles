@@ -135,9 +135,9 @@ swap-main:
 #   mod: mod1
 #   key: u
 # Move the currently focused window to the n-th space; e.g., throw-space-3 will move the window to the 3rd space.
-# throw-space-<screen-number>:
-#   mod: mod1
-#   key: i
+throw-space-2:
+  mod: mod1
+  key: '2'
 
 # Select tall layout
 select-tall-layout:
@@ -215,7 +215,7 @@ smart-window-margins: false
 # window-margins: true
 # window-margin-size: 5
 # The size of the margins between windows (in px, default 0).
-window-margin-size: 10
+window-margin-size: 8
 
 # The max number of windows that may be visible on a screen at one time before
 # additional windows are minimized. A value of 0 disables the feature.
