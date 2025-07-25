@@ -43,8 +43,8 @@ return function()
     keymaps = {
       view = {
         { 'n', '<C-o>', actions.goto_file_tab, { desc = 'Open the file in a new tabpage' } },
-        { 'n', '<Leader>P', actions.focus_files, { desc = 'Bring focus to the file panel' } },
-        { 'n', '<Leader>p', actions.toggle_files, { desc = 'Toggle the file panel.' } },
+        { 'n', '<Leader>p', actions.focus_files, { desc = 'Bring focus to the file panel' } },
+        { 'n', '<Leader>P', actions.toggle_files, { desc = 'Toggle the file panel.' } },
       },
       file_panel = {
         { 'n', '<C-o>', actions.goto_file_tab, { desc = 'Open the file in a new tabpage' } },
