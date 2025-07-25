@@ -155,7 +155,7 @@ select-four-corners-layout:
 # Select fullscreen layout
 select-fullscreen-layout:
   mod: mod2
-  key: e
+  key: F
 
 # Select column layout
 # select-column-layout:
