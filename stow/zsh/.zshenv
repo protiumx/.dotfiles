@@ -370,6 +370,6 @@ alias yeet="rm -rf"
 
 alias -g ...='../..'
 alias rd=rmdir
-alias ls="eza --group-directories-first -G --color auto --hyperlink --icons -a -s type"
-alias ll="eza --group-directories-first -l --color always --hyperlink --icons -a -s type"
+alias ls="eza --group-directories-first -G --color never --hyperlink --icons -a -s type"
+alias ll="eza --group-directories-first -l --color never --hyperlink --icons -a -s type"
 alias la='ls -lah'
