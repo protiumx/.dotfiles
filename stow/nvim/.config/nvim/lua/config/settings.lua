@@ -43,7 +43,7 @@ vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.smartindent = true
 
-vim.opt.listchars = { eol = '', tab = '  ' }
+vim.opt.listchars = { eol = '¬', tab = '  ' }
 vim.opt.list = true
 -- menuone: popup even when there's only one match
 -- noinsert: Do not insert text until a selection is made
