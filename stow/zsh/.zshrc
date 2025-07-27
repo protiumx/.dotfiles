@@ -48,6 +48,7 @@ zinit ice depth=1; zinit light Aloxaf/fzf-tab
 bindkey -e # set emacs keymaps so that I can use <M-Left> and <M-Right> without triggering vimode
 bindkey "^[[A" up-line-or-beginning-search
 bindkey "^[[B" down-line-or-beginning-search
+bindkey '\e' vi-cmd-mode
 
 # fix up/down
 if [[ -n "${terminfo[kcuu1]}" ]]; then
@@ -58,17 +59,31 @@ if [[ -n "${terminfo[kcud1]}" ]]; then
   bindkey "${terminfo[kcud1]}" down-line-or-beginning-search
 fi
 
-bindkey '^x' edit-command-line
-bindkey "^[m" copy-prev-shell-word # [M-m] useful for renaming files to add suffix
-bindkey "^u" backward-kill-line # [Ctrl-u] deletes everything to the left of the cursor
-bindkey '^[[3;3~' kill-word     # [Alt-del] delete word forwards
-bindkey -s '\el' 'ls\n'         # [Esc-l] - run command: ls
-bindkey -r '\eg'
-bindkey '\eg' fzf-git-files-widget
-bindkey '^z' zsh-ctrl-z
+bindkey -r '\eg' # remove
 bindkey -r '^o'
-bindkey '^o' zsh-ctrl-o
-bindkey '^f' y
+bindkey '^x' edit-command-line
+bindkey -M vicmd '!' edit-command-line
+bindkey "^[m" copy-prev-shell-word # [M-m] useful for renaming files to add suffix
+bindkey "^u" backward-kill-line    # [Ctrl-u] deletes everything to the left of the cursor
+bindkey '^[[3;3~' kill-word        # [M-del] delete word forwards
+bindkey -s '^[l' 'ls\n'            # [M-l] - run command: ls
+bindkey '\eg' fzf-git-files-widget
+bindkey '^z' _zsh-ctrl-z
+bindkey '^o' _zsh-nvim
+bindkey '^f' y # open yazi
+
+# setup surrounding vi operators
+autoload -Uz select-bracketed select-quoted
+zle -N select-quoted
+zle -N select-bracketed
+for km in viopp visual; do
+  for c in {a,i}${(s..)^:-\'\"\`\|,./:;=+@}; do
+    bindkey -M $km -- $c select-quoted
+  done
+  for c in {a,i}${(s..)^:-'()[]{}<>bB'}; do
+    bindkey -M $km -- $c select-bracketed
+  done
+done
 
 # completions
 autoload -Uz compinit && compinit
@@ -146,17 +161,28 @@ zstyle ':fzf-tab:*' use-fzf-default-opts yes
 autoload -U +X bashcompinit && bashcompinit
 
 typeset -A ZSH_HIGHLIGHT_STYLES
-ZSH_HIGHLIGHT_STYLES[precommand]='fg=250,bold'
-ZSH_HIGHLIGHT_STYLES[command]='fg=250,bold'
-ZSH_HIGHLIGHT_STYLES[function]='fg=250,bold'
-ZSH_HIGHLIGHT_STYLES[builtin]='fg=250,bold'
-ZSH_HIGHLIGHT_STYLES[alias]='fg=250,bold'
-ZSH_HIGHLIGHT_STYLES[commandseparator]='fg=250,bold'
-ZSH_HIGHLIGHT_STYLES[redirection]='fg=250,bold'
-ZSH_HIGHLIGHT_STYLES[arg0]='fg=247'
-ZSH_HIGHLIGHT_STYLES[default]='fg=247'
+
+theme_hl='fg=250,bold'
+theme_fg='fg=247'
+theme_error='fg=160,bold'
+
+ZSH_HIGHLIGHT_STYLES[default]=$theme_fg
+ZSH_HIGHLIGHT_STYLES[unknown-token]=$theme_error
+ZSH_HIGHLIGHT_STYLES[command]=$theme_hl
+ZSH_HIGHLIGHT_STYLES[reserved-word]=$theme_hl
+ZSH_HIGHLIGHT_STYLES[precommand]=$theme_hl
+ZSH_HIGHLIGHT_STYLES[function]=$theme_hl
+ZSH_HIGHLIGHT_STYLES[builtin]=$theme_hl
+ZSH_HIGHLIGHT_STYLES[alias]=$theme_hl
+ZSH_HIGHLIGHT_STYLES[commandseparator]=$theme_hl
+ZSH_HIGHLIGHT_STYLES[redirection]=$theme_hl
+ZSH_HIGHLIGHT_STYLES[arg0]=$theme_fg
+ZSH_HIGHLIGHT_STYLES[single-quoted-argument]=$theme_fg
+ZSH_HIGHLIGHT_STYLES[double-quoted-argument]=$theme_fg
+ZSH_HIGHLIGHT_STYLES[autodirectory]=none
 ZSH_HIGHLIGHT_STYLES[path]=none
 ZSH_HIGHLIGHT_STYLES[path_prefix]=none
+ZSH_HIGHLIGHT_STYLES[path_pathseparator]=none
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE='100' # limit suggestion to 100 chars
@@ -281,7 +307,7 @@ fzf-git-files-widget() {
 zle -N fzf-git-files-widget
 
 # go back to fg
-zsh-ctrl-z () {
+_zsh-ctrl-z () {
   if [[ $#BUFFER -eq 0 ]]; then
     BUFFER="fg"
     zle accept-line
@@ -290,16 +316,15 @@ zsh-ctrl-z () {
     zle clear-screen
   fi
 }
-zle -N zsh-ctrl-z
+zle -N _zsh-ctrl-z
 
-# edit current folder
-zsh-ctrl-o () {
-  if [[ $#BUFFER -eq 0 ]]; then
-    BUFFER="nvim ."
-    zle accept-line
-  fi
+# open nvim in cwd
+_zsh-nvim () {
+  zle .kill-whole-line
+  BUFFER="nvim ."
+  zle accept-line
 }
-zle -N zsh-ctrl-o
+zle -N _zsh-nvim
 
 function y() {
   local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
@@ -311,5 +336,20 @@ function y() {
 }
 
 zle -N y
+function zle-keymap-select {
+  if [[ $KEYMAP = vicmd ]]; then
+    echo -ne '\e[2 q'
+  else
+    echo -ne '\e[3 q'
+  fi
+}
+
+zle -N zle-keymap-select
+
+zle-line-init() {
+  echo -ne "\e[3 q"
+}
+
+zle -N zle-line-init
 
 echo "( .-.)\n"
