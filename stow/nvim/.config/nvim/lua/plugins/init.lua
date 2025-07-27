@@ -1,5 +1,3 @@
-local utils = require('config.utils')
-
 local zenbones = {
   lazy = false,
   priority = 1000,
@@ -10,7 +8,7 @@ local zenbones = {
   end,
 }
 
-if utils.is_git_commit() then
+if vim.g.mini then
   return { zenbones }
 end
 

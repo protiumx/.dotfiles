@@ -1,6 +1,9 @@
 require('config.keymaps')
 require('config.settings')
 
+local utils = require('config.utils')
+vim.g.mini = utils.should_minimal_env()
+
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   vim.fn.system({

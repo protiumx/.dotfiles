@@ -1,8 +1,7 @@
 local M = {}
 
 function M.setup()
-  local utils = require('config.utils')
-  if utils.is_git_commit() then
+  if vim.g.mini then
     return
   end
 

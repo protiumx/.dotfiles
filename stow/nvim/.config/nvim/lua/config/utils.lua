@@ -141,8 +141,16 @@ function M.uid()
   return string.gsub(uuid, '-', '')
 end
 
-function M.is_git_commit()
-  return (vim.env.GIT_AUTHOR_EMAIL or '') ~= ''
+-- Checks for
+-- - Writing git commits
+-- - Editing /tmp files
+function M.should_minimal_env()
+  if (vim.env.GIT_AUTHOR_EMAIL or '') ~= '' then
+    return true
+  end
+
+  local file_arg = #vim.v.argv > 0 and vim.v.argv[#vim.v.argv] or ''
+  return vim.startswith(file_arg, '/tmp')
 end
 
 return M
