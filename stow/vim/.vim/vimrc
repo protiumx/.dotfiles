@@ -1,0 +1,37 @@
+let path = $HOME . '/.vim/'
+set nocompatible
+filetype off
+syntax on
+filetype plugin indent on
+let mapleader = " "
+
+set termguicolors
+set modelines=0
+set number
+set visualbell
+set encoding=utf-8
+set wrap
+set textwidth=100
+set formatoptions=tcqrn1
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set expandtab
+set backspace=indent,eol,start
+set hidden
+set ttyfast
+set laststatus=2
+set showmode
+set showcmd
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+set showmatch
+set listchars=tab:\ \ ,eol:¬
+set background=dark
+set t_Co=256
+colorscheme 256_noir
+nnoremap / /\v
+vnoremap / /\v
+map <leader>l :set list!<CR>
