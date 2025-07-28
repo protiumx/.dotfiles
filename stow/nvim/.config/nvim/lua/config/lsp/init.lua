@@ -31,22 +31,6 @@ local function on_lsp_attach(args, bufnr)
     gopls.setup(bufnr)
   end
 
-  -- diagnostic open float on cursor hold:
-  vim.api.nvim_create_augroup('lsp_diagnostic_hold', { clear = true })
-  vim.api.nvim_create_autocmd('CursorHold', {
-    group = 'lsp_diagnostic_hold',
-    buffer = bufnr,
-    callback = function()
-      vim.diagnostic.open_float({
-        bufnr = bufnr,
-        focus = false,
-        border = 'single',
-        scope = 'line',
-        severity = { vim.diagnostic.severity.ERROR, vim.diagnostic.severity.WARN },
-      })
-    end,
-  })
-
   -- document references highlight
   if client:supports_method('textDocument/documentHighlight', args.buf) then
     vim.api.nvim_set_hl(0, 'LspReferenceRead', { fg = colors.accent })
@@ -59,7 +43,7 @@ local M = {
   -- diagnostics config
   config = {
     virtual_text = {
-      prefix = function(diagnostic)
+      prefix = function(_diagnostic)
         return ''
       end,
       spacing = 1,
@@ -119,10 +103,10 @@ end
 
 -- Adapted from lspconfig
 local function setup_cmds()
-  vim.api.nvim_create_user_command('LspRestart', function(info)
+  vim.api.nvim_create_user_command('LspRestart', function(_)
     local detach_clients = {}
-    local clients = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })
-    for _, client in ipairs(clients) do
+    local active_clients = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })
+    for _, client in ipairs(active_clients) do
       vim.notify('restarting client: ' .. client.name)
       client:stop()
       if vim.tbl_count(client.attached_buffers) > 0 then
@@ -154,10 +138,10 @@ local function setup_cmds()
     desc = 'Manually restart the given language client(s)',
   })
 
-  vim.api.nvim_create_user_command('LspStop', function(info)
-    local clients = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })
+  vim.api.nvim_create_user_command('LspStop', function(_)
+    local active_clients = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })
 
-    for _, client in ipairs(clients) do
+    for _, client in ipairs(active_clients) do
       vim.notify('restarting client: ' .. client.name)
       client:stop(true)
     end
