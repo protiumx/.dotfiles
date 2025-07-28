@@ -5,7 +5,7 @@ local utils = require('config.utils')
 vim.g.mini = utils.should_minimal_env()
 
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
   vim.fn.system({
     'git',
     'clone',
@@ -95,4 +95,4 @@ local lazy_config = {
 }
 
 require('lazy').setup(lazy_config)
-require('config').setup()
+require('config.init').setup()
