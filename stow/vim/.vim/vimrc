@@ -31,7 +31,18 @@ set showmatch
 set listchars=tab:\ \ ,eol:¬
 set background=dark
 set t_Co=256
+set pumheight=20
+set undolevels=100
+set grepprg=rg\ --vimgrep\ --smart-case\ --hidden\ --no-heading
+set grepformat=%f:%l:%c:%m
+set completeopt=menu,menuone,noselect
+set noswapfile
+set splitbelow
+set splitright
+set relativenumber
+
 colorscheme 256_noir
+
 nnoremap / /\v
 vnoremap / /\v
 map <leader>l :set list!<CR>

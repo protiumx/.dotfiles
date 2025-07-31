@@ -15,7 +15,7 @@ set background=dark
 let g:colors_name = "256_noir"
 
 hi Normal gui=NONE guifg=#bcbcbc
-hi NonText guifg=#161616
+hi NonText guifg=#303030
 hi Keyword gui=bold cterm=bold guifg=#bbbbbb
 hi Constant gui=NONE guifg=#d0d0d0
 hi String gui=NONE guifg=#8a8a8a
@@ -41,6 +41,7 @@ hi StatusLine gui=bold,reverse guifg=#8a8a8a
 hi StatusLineNC gui=reverse guifg=#303030
 hi Visual gui=reverse guifg=#bcbcbc
 hi TermCursor gui=reverse guifg=NONE guibg=NONE
+hi EndOfBuffer guifg=#161616
 
 highlight! link Boolean Normal
 highlight! link Delimiter Normal
