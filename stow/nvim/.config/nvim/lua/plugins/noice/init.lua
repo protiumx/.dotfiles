@@ -136,7 +136,17 @@ return {
 
     lsp = {
       progress = {
-        enabled = false,
+        enabled = true,
+        throttle = 200, -- update every 200ms
+        lsp_progress = {
+          '({data.progress.percentage}%) ',
+          { '{data.progress.title} ', hl_group = 'NoiceLspProgressTitle' },
+          { '{data.progress.client} ', hl_group = 'NoiceLspProgressClient' },
+        },
+        format_done = {
+          { '{data.progress.title} ', hl_group = 'NoiceLspProgressTitle' },
+          { '{data.progress.client} ', hl_group = 'NoiceLspProgressClient' },
+        },
       },
 
       hover = {
