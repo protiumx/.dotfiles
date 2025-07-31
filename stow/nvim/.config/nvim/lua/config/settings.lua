@@ -65,7 +65,6 @@ vim.opt.scrolloff = 8
 vim.opt.signcolumn = 'yes'
 vim.opt.colorcolumn = '100'
 
-vim.opt.isfname:append('@-@')
 vim.opt.mouse = 'a'
 vim.opt.encoding = 'UTF-8'
 vim.opt.splitbelow = true
