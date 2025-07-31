@@ -144,13 +144,16 @@ end
 -- Checks for
 -- - Writing git commits
 -- - Editing /tmp files
+-- - Env variable `MIN` is present
 function M.should_minimal_env()
-  if (vim.env.GIT_AUTHOR_EMAIL or '') ~= '' then
+  if (vim.env.GIT_AUTHOR_EMAIL or vim.env.CL or '') ~= '' then
     return true
   end
 
-  local file_arg = #vim.v.argv > 0 and vim.v.argv[#vim.v.argv] or ''
-  return vim.startswith(file_arg, '/tmp')
+  -- Check if one argument is a /tmp file
+  return vim.tbl_contains(vim.v.argv, function(arg)
+    return vim.startswith(arg, '/tmp')
+  end, { predicate = true })
 end
 
 return M
