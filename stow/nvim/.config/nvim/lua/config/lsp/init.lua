@@ -10,7 +10,6 @@ local clients = {
   'marksman',
   'pyright',
   'rust_analyzer',
-  'yamlls',
 }
 
 if jit.os ~= 'OSX' then
