@@ -59,8 +59,8 @@ style = "fg:#9e9e9e"
 
 [status]
 disabled = false
-format = "[$symbol $status]($style)"
-symbol = ""
+format = "[$symbol$status]($style)"
+symbol = "\\$!"
 signal_symbol = ""
 sigint_symbol = ""
 not_found_symbol = "󱈍"
