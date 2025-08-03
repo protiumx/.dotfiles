@@ -28,10 +28,13 @@ export LESS_TERMCAP_ue=$'\e[0m'        # reset underline
 
 # Load brew env
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 else
-	eval "$(/opt/homebrew/bin/brew shellenv)"
+  eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
+
+export CPATH="$HOMEBREW_PREFIX/include:$CPATH"
+export LIBRARY_PATH="$HOMEBREW_PREFIX/lib:$LIBRARY_PATH"
 
 # zsh-init
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -40,9 +43,12 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 source "${ZINIT_HOME}/zinit.zsh"
 
 # plugins
-zinit ice depth=1; zinit light zsh-users/zsh-syntax-highlighting
-zinit ice depth=1; zinit light zsh-users/zsh-autosuggestions
-zinit ice depth=1; zinit light Aloxaf/fzf-tab
+zinit ice depth=1
+zinit light zsh-users/zsh-syntax-highlighting
+zinit ice depth=1
+zinit light zsh-users/zsh-autosuggestions
+zinit ice depth=1
+zinit light Aloxaf/fzf-tab
 
 # bind keys
 bindkey -e # set emacs keymaps so that I can use <M-Left> and <M-Right> without triggering vimode
@@ -52,35 +58,37 @@ bindkey '\e' vi-cmd-mode
 
 # fix up/down
 if [[ -n "${terminfo[kcuu1]}" ]]; then
- bindkey "${terminfo[kcuu1]}" up-line-or-beginning-search
+  bindkey "${terminfo[kcuu1]}" up-line-or-beginning-search
 fi
 
 if [[ -n "${terminfo[kcud1]}" ]]; then
   bindkey "${terminfo[kcud1]}" down-line-or-beginning-search
 fi
 
-bindkey -r '\eg' # remove
-bindkey -r '^o'
-bindkey '^x' edit-command-line
-bindkey -M vicmd '!' edit-command-line
-bindkey "^[m" copy-prev-shell-word # [M-m] useful for renaming files to add suffix
-bindkey "^u" backward-kill-line    # [Ctrl-u] deletes everything to the left of the cursor
-bindkey '^[[3;3~' kill-word        # [M-del] delete word forwards
-bindkey -s '^[l' 'ls\n'            # [M-l] - run command: ls
-bindkey '\eg' fzf-git-files-widget
-bindkey '^z' _zsh-ctrl-z
+bindkey -r '\eg'                       # remove
+bindkey -r '^o'                        # remove
+bindkey '^x' edit-command-line         # [Ctrl-x] edit line
+bindkey -M vicmd '!' edit-command-line # [!] edit line when in vimcmd
+bindkey "^[m" copy-prev-shell-word     # [M-m] useful for renaming files to add suffix
+bindkey "^u" backward-kill-line        # [Ctrl-u] deletes everything to the left of the cursor
+bindkey '^[[3;3~' kill-word            # [M-del] delete word forwards
+bindkey -s '^[l' 'ls\n'                # [M-l] - run command: ls
+bindkey '\er' _zle-repeat-last         # [M-r] clear screen and repeat last
+bindkey '^f' y                         # open yazi
+bindkey '^z' _zsh-ctrl-z               # better ctrl-z
+bindkey '\eg' _fzf-git-files-widget
 bindkey '^o' _zsh-nvim
-bindkey '^f' y # open yazi
+bindkey '\ed' _git-diff
 
 # setup surrounding vi operators
 autoload -Uz select-bracketed select-quoted
 zle -N select-quoted
 zle -N select-bracketed
 for km in viopp visual; do
-  for c in {a,i}${(s..)^:-\'\"\`\|,./:;=+@}; do
+  for c in {a,i}{"'","\"","\`","|",",",".","/",":",";","=","+","@"}; do
     bindkey -M $km -- $c select-quoted
   done
-  for c in {a,i}${(s..)^:-'()[]{}<>bB'}; do
+  for c in {a,i}{"(",")","[","]","{","}","<",">","b","B"}; do
     bindkey -M $km -- $c select-bracketed
   done
 done
@@ -110,16 +118,16 @@ HISTDUP=erase
 WORDCHARS="*?[]~&;!#$%^(){}<>"
 
 # options
-setopt multios              # enable redirect to multiple streams: echo >file1 >file2
-setopt long_list_jobs       # show long list format job notifications
-setopt interactivecomments  # recognize comments
+setopt multios             # enable redirect to multiple streams: echo >file1 >file2
+setopt long_list_jobs      # show long list format job notifications
+setopt interactivecomments # recognize comments
 setopt NO_CASE_GLOB
 setopt GLOB_DOTS
-setopt auto_menu         # show completion menu on successive tab press
+setopt auto_menu # show completion menu on successive tab press
 setopt complete_in_word
 setopt always_to_end
-setopt APPEND_HISTORY     # append history instead of overwriting
-setopt SHARE_HISTORY      # share history across sessions
+setopt APPEND_HISTORY    # append history instead of overwriting
+setopt SHARE_HISTORY     # share history across sessions
 setopt HIST_IGNORE_SPACE # ignore commands that start with space
 setopt HIST_VERIFY       # do not execute upon expansion
 setopt HIST_IGNORE_ALL_DUPS
@@ -142,10 +150,11 @@ autoload -U down-line-or-beginning-search
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path "$HOME/.zsh/zcompcache"
 # Enable option-stacking for docker (i.e docker run -it <TAB>)
 zstyle ':completion:*:*:docker:*' option-stacking yes
 zstyle ':completion:*:*:docker-*:*' option-stacking yes
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
 zstyle ':completion:*:*:*:*:*' menu select
 # Hyphen sensitive
@@ -167,9 +176,9 @@ theme_fg='fg=247'
 theme_error='fg=160,bold'
 
 ZSH_HIGHLIGHT_STYLES[default]=$theme_fg
-ZSH_HIGHLIGHT_STYLES[unknown-token]=$theme_error
+ZSH_HIGHLIGHT_STYLES["unknown-token"]=$theme_error
 ZSH_HIGHLIGHT_STYLES[command]=$theme_hl
-ZSH_HIGHLIGHT_STYLES[reserved-word]=$theme_hl
+ZSH_HIGHLIGHT_STYLES["reserved-word"]=$theme_hl
 ZSH_HIGHLIGHT_STYLES[precommand]=$theme_hl
 ZSH_HIGHLIGHT_STYLES[function]=$theme_hl
 ZSH_HIGHLIGHT_STYLES[builtin]=$theme_hl
@@ -177,8 +186,8 @@ ZSH_HIGHLIGHT_STYLES[alias]=$theme_hl
 ZSH_HIGHLIGHT_STYLES[commandseparator]=$theme_hl
 ZSH_HIGHLIGHT_STYLES[redirection]=$theme_hl
 ZSH_HIGHLIGHT_STYLES[arg0]=$theme_fg
-ZSH_HIGHLIGHT_STYLES[single-quoted-argument]=$theme_fg
-ZSH_HIGHLIGHT_STYLES[double-quoted-argument]=$theme_fg
+ZSH_HIGHLIGHT_STYLES["single-quoted-argument"]=$theme_fg
+ZSH_HIGHLIGHT_STYLES["double-quoted-argument"]=$theme_fg
 ZSH_HIGHLIGHT_STYLES[autodirectory]=none
 ZSH_HIGHLIGHT_STYLES[path]=none
 ZSH_HIGHLIGHT_STYLES[path_prefix]=none
@@ -199,16 +208,16 @@ zle -N edit-command-line
 
 # Golang
 export GOTOOLCHAIN="local"
-export GOPATH="$HOME/go"
+export GOPATH=$HOME/.go
 [ -d "$GOPATH/bin" ] && PATH="$GOPATH/bin:$PATH"
 
 # Rust
 [ -f $HOME/.cargo/env ] && source $HOME/.cargo/env
 
 # Ocaml
-[[ ! -r $HOME/.opam/opam-init/init.zsh ]] || source $HOME/.opam/opam-init/init.zsh > /dev/null 2> /dev/null
+[[ ! -r $HOME/.opam/opam-init/init.zsh ]] || source $HOME/.opam/opam-init/init.zsh >/dev/null 2>/dev/null
 
-[[ ! -r $HOME/wezterm.sh ]] || source $HOME/wezterm.sh > /dev/null 2> /dev/null
+[[ ! -r $HOME/wezterm.sh ]] || source $HOME/wezterm.sh >/dev/null 2>/dev/null
 
 # FZF
 
@@ -242,13 +251,13 @@ export FZF_COMPLETION_OPTS=$FZF_DEFAULT_OPTS
 export _ZO_FZF_OPTS=$FZF_DEFAULT_OPTS
 
 _fzf_compgen_path() {
-	fd --hidden --follow --exclude ".git/" . "$1"
+  fd --hidden --follow --exclude ".git/" . "$1"
 }
 
 # Use fd to generate the list for directory completion
 # Needs trigger **
 _fzf_compgen_dir() {
-	fd --type d --hidden --follow --exclude ".git/" . "$1"
+  fd --type d --hidden --follow --exclude ".git/" . "$1"
 }
 
 PATH="$(brew --prefix)/opt/python@3.12/libexec/bin:$PATH"
@@ -259,12 +268,12 @@ export PATH
 
 # Source all profile files
 for file in $HOME/.profile*; do
-	source "$file"
+  source "$file"
 done
 
 # Start ssh agent
 if [[ "$OSTYPE" =~ ^linux ]]; then
-	eval $(ssh-agent) >/dev/null
+  eval $(ssh-agent) >/dev/null
 fi
 
 # From https://github.com/ohmyzsh/ohmyzsh/blob/master/lib/directories.zsh
@@ -280,7 +289,7 @@ compdef _dirs d
 ################# ZSH widgets ####################
 
 # search changed files in git repo
-fzf-git-files-widget() {
+_fzf-git-files-widget() {
   if ! git rev-parse --git-dir >/dev/null 2>&1; then
     return 1
   fi
@@ -304,10 +313,10 @@ fzf-git-files-widget() {
   zle end-of-line
 }
 
-zle -N fzf-git-files-widget
+zle -N _fzf-git-files-widget
 
 # go back to fg
-_zsh-ctrl-z () {
+_zsh-ctrl-z() {
   if [[ $#BUFFER -eq 0 ]]; then
     BUFFER="fg"
     zle accept-line
@@ -319,7 +328,7 @@ _zsh-ctrl-z () {
 zle -N _zsh-ctrl-z
 
 # open nvim in cwd
-_zsh-nvim () {
+_zsh-nvim() {
   zle .kill-whole-line
   BUFFER="nvim ."
   zle accept-line
@@ -334,8 +343,8 @@ function y() {
   rm -f -- "$tmp"
   zle redisplay
 }
-
 zle -N y
+
 function zle-keymap-select {
   if [[ $KEYMAP = vicmd ]]; then
     echo -ne '\e[2 q'
@@ -343,13 +352,25 @@ function zle-keymap-select {
     echo -ne '\e[3 q'
   fi
 }
-
 zle -N zle-keymap-select
 
 zle-line-init() {
   echo -ne "\e[3 q"
 }
-
 zle -N zle-line-init
+
+_zle-repeat-last() {
+  zle clear-screen
+  BUFFER=$history[$((HISTCMD - 1))]
+  zle accept-line
+}
+zle -N _zle-repeat-last
+
+function _git-diff {
+  zle push-input
+  BUFFER="git diff"
+  zle accept-line
+}
+zle -N _git-diff
 
 echo "( .-.)\n"
