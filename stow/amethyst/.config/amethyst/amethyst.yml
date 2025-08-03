@@ -229,12 +229,14 @@ window-minimum-width: 0
 
 # List of bundle identifiers for applications to either be automatically floating or automatically tiled based on floating-is-blacklist (default []).
 floating:
-  - "com.apple.systempreferences"
+  - "*preferences*"
   - "com.apple.Notes"
   - "com.apple.Preview"
   - "com.apple.Finder"
-  - "com.agilebits.onepassword7"
   - "com.apple.FontBook"
+  - "com.agilebits.onepassword7"
+  - "com.riotgames.*"
+  - "com.raycast.*"
 
 # Boolean flag determining behavior of the floating list. true if the applications should be floating and all others tiled. false if the applications should be tiled and all others floating (default true).
 floating-is-blacklist: true
