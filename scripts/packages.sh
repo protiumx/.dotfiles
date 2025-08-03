@@ -30,6 +30,7 @@ packages=(
   ruff # https://github.com/astral-sh/ruff
   sd   # https://github.com/chmln/sd
   shellcheck
+  shfmt # https://github.com/mvdan/sh
   starship
   stow
   telnet
