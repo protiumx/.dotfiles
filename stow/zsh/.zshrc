@@ -55,16 +55,6 @@ bindkey -e # set emacs keymaps so that I can use <M-Left> and <M-Right> without 
 bindkey "^[[A" up-line-or-beginning-search
 bindkey "^[[B" down-line-or-beginning-search
 bindkey '\e' vi-cmd-mode
-
-# fix up/down
-if [[ -n "${terminfo[kcuu1]}" ]]; then
-  bindkey "${terminfo[kcuu1]}" up-line-or-beginning-search
-fi
-
-if [[ -n "${terminfo[kcud1]}" ]]; then
-  bindkey "${terminfo[kcud1]}" down-line-or-beginning-search
-fi
-
 bindkey -r '\eg'                       # remove
 bindkey -r '^o'                        # remove
 bindkey '^x' edit-command-line         # [Ctrl-x] edit line
@@ -79,6 +69,14 @@ bindkey '^z' _zsh-ctrl-z               # better ctrl-z
 bindkey '\eg' _fzf-git-files-widget
 bindkey '^o' _zsh-nvim
 bindkey '\ed' _git-diff
+# fix up/down
+if [[ -n "${terminfo[kcuu1]}" ]]; then
+  bindkey "${terminfo[kcuu1]}" up-line-or-beginning-search
+fi
+
+if [[ -n "${terminfo[kcud1]}" ]]; then
+  bindkey "${terminfo[kcud1]}" down-line-or-beginning-search
+fi
 
 # setup surrounding vi operators
 autoload -Uz select-bracketed select-quoted
@@ -209,7 +207,7 @@ zle -N edit-command-line
 # Golang
 export GOTOOLCHAIN="local"
 export GOPATH=$HOME/.go
-[ -d "$GOPATH/bin" ] && PATH="$GOPATH/bin:$PATH"
+PATH="$GOPATH/bin:$PATH"
 
 # Rust
 [ -f $HOME/.cargo/env ] && source $HOME/.cargo/env
