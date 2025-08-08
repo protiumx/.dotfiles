@@ -310,7 +310,7 @@ rand() {
 
 ################## Aliases ##################
 
-alias cat="bat -p --paging=never --theme='TwoDark'"
+alias cat="bat -p --theme='TwoDark'"
 alias dc="docker compose"
 alias dot="cd ~/.dotfiles && nvim ."
 alias duu="dust -b -H -r -X '.git'"
