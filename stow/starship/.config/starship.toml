@@ -40,7 +40,7 @@ format = "[$symbol ${ram}]($style)"
 
 [git_branch]
 symbol = ""
-format = '[\( [$branch](bold fg:#9e9e9e)(:$remote_branch) \)]($style) '
+format = '[\([$branch](bold fg:#9e9e9e)(:$remote_branch)\)]($style) '
 style = "fg:#9e9e9e"
 
 [git_status]
