@@ -13,6 +13,7 @@ packages=(
   gpg
   go       # golang
   graphviz # https://graphviz.org/
+  hexyl    # https://github.com/sharkdp/hexyl
   imagemagick
   jq
   kubernetes-cli
