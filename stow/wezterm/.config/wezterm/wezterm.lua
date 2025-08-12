@@ -637,7 +637,7 @@ local config = {
     },
   },
   leader = key_table_leader,
-  max_fps = 120,
+  max_fps = 144,
   mouse_bindings = {
     {
       event = { Up = { streak = 1, button = 'Left' } },
