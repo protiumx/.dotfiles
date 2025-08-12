@@ -140,3 +140,16 @@ vim.api.nvim_create_user_command('ToggleTransparency', function()
 end, {
   desc = 'Toggle transparency',
 })
+
+local augroup = vim.api.nvim_create_augroup
+local autocmd = vim.api.nvim_create_autocmd
+autocmd('TextYankPost', {
+  group = augroup('yank_post', { clear = true }),
+  pattern = '*',
+  callback = function()
+    vim.highlight.on_yank({
+      higroup = 'OnYank',
+      timeout = 400,
+    })
+  end,
+})

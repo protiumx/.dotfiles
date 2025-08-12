@@ -20,17 +20,6 @@ autocmd({ 'BufWritePre' }, {
   end,
 })
 
-autocmd('TextYankPost', {
-  group = augroup('yank_post', { clear = true }),
-  pattern = '*',
-  callback = function()
-    vim.highlight.on_yank({
-      higroup = 'OnYank',
-      timeout = 400,
-    })
-  end,
-})
-
 augroup('autoqf', { clear = true })
 autocmd('QuickFixCmdPost', {
   group = 'autoqf',
