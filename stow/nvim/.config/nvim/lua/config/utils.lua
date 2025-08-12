@@ -146,13 +146,13 @@ end
 -- - Editing /tmp files
 -- - Env variable `MIN` is present
 function M.should_minimal_env()
-  if (vim.env.GIT_AUTHOR_EMAIL or vim.env.CL or '') ~= '' then
+  if (vim.env.CL or '') ~= '' then
     return true
   end
 
   -- Check if one argument is a /tmp file
   return vim.tbl_contains(vim.v.argv, function(arg)
-    return vim.startswith(arg, '/tmp')
+    return vim.startswith(arg, '/tmp/') or vim.startswith(arg, '/private/')
   end, { predicate = true })
 end
 
