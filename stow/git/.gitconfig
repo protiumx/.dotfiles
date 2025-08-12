@@ -5,6 +5,7 @@
   excludesfile = ~/.config/git/ignore
   untrackedcache = true
   fsmonitor = true
+  editor = CL=1 nvim
 
 [init]
   templatedir = ~/.config/git/templates
