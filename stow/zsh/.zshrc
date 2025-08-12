@@ -59,7 +59,7 @@ bindkey -r '\eg'                       # remove
 bindkey -r '^o'                        # remove
 bindkey '^x' edit-command-line         # [Ctrl-x] edit line
 bindkey -M vicmd '!' edit-command-line # [!] edit line when in vimcmd
-bindkey "^[m" copy-prev-shell-word     # [M-m] useful for renaming files to add suffix
+bindkey '\ep' copy-prev-shell-word     # [M-m] useful for renaming files to add suffix
 bindkey "^u" backward-kill-line        # [Ctrl-u] deletes everything to the left of the cursor
 bindkey '^[[3;3~' kill-word            # [M-del] delete word forwards
 bindkey -s '^[l' 'ls\n'                # [M-l] - run command: ls
@@ -173,10 +173,16 @@ theme_hl='fg=250,bold'
 theme_fg='fg=247'
 theme_error='fg=160,bold'
 
+# using variables due to shfmt adding spaces around dashes
+unkown_token="unknown-token"
+reserved_word="reserved-word"
+singlequoted="single-quoted-argument"
+doublequoted="double-quoted-argument"
+backtickquoted="back-quoted-argument"
 ZSH_HIGHLIGHT_STYLES[default]=$theme_fg
-ZSH_HIGHLIGHT_STYLES["unknown-token"]=$theme_error
+ZSH_HIGHLIGHT_STYLES[$unkown_token]=$theme_error
 ZSH_HIGHLIGHT_STYLES[command]=$theme_hl
-ZSH_HIGHLIGHT_STYLES["reserved-word"]=$theme_hl
+ZSH_HIGHLIGHT_STYLES[$reserved_word]=$theme_hl
 ZSH_HIGHLIGHT_STYLES[precommand]=$theme_hl
 ZSH_HIGHLIGHT_STYLES[function]=$theme_hl
 ZSH_HIGHLIGHT_STYLES[builtin]=$theme_hl
@@ -184,8 +190,9 @@ ZSH_HIGHLIGHT_STYLES[alias]=$theme_hl
 ZSH_HIGHLIGHT_STYLES[commandseparator]=$theme_hl
 ZSH_HIGHLIGHT_STYLES[redirection]=$theme_hl
 ZSH_HIGHLIGHT_STYLES[arg0]=$theme_fg
-ZSH_HIGHLIGHT_STYLES["single-quoted-argument"]=$theme_fg
-ZSH_HIGHLIGHT_STYLES["double-quoted-argument"]=$theme_fg
+ZSH_HIGHLIGHT_STYLES[$singlequoted]=$theme_fg
+ZSH_HIGHLIGHT_STYLES[$doublequoted]=$theme_fg
+ZSH_HIGHLIGHT_STYLES[$backtickquoted]=$theme_fg
 ZSH_HIGHLIGHT_STYLES[autodirectory]=none
 ZSH_HIGHLIGHT_STYLES[path]=none
 ZSH_HIGHLIGHT_STYLES[path_prefix]=none
