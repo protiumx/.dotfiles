@@ -1,4 +1,3 @@
--- stylua: ignore start
 local utils = require('config.utils')
 
 local macos = jit.os == 'OSX'
@@ -14,6 +13,7 @@ map('n', 'gx', function()
   vim.cmd('!open ' .. file)
 end, { silent = true })
 
+-- stylua: ignore start
 -- General movements
 -- Move down/up centered
 map('n', '<C-d>', '<C-d>zz', { silent = true })
@@ -144,13 +144,11 @@ map('n', '<Leader>P', function()
   vim.fn.setreg(system_clip_reg, path)
   print('Copied: ' .. path)
 end, { desc = 'Copy current path to reg ' .. system_clip_reg })
-
 map('n', '<Leader>L', function()
   local path = vim.fn.expand('%:~:.') .. ':' .. vim.fn.line('.')
   vim.fn.setreg(system_clip_reg, path)
   print('Copied: ' .. path)
 end, { desc = 'Copy current path with line and column to reg ' .. system_clip_reg })
-
 map('n', '<Leader>s', '<cmd>w<CR>', { desc = 'Quick save' })
 map('n', '<Leader>S', '<cmd>mks! .session.vim<CR>', { desc = 'Create session' })
 map('i', '<M-o>', '<C-o>o', { silent = true, desc = 'New line below' })
