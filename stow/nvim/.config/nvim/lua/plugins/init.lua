@@ -28,28 +28,6 @@ return {
   require('plugins.vim-sandwich'),
   zenbones,
   {
-    'ellisonleao/gruvbox.nvim',
-    enabled = false,
-    config = function()
-      local colors = require('config.colors')
-      require('gruvbox').setup({
-        undercurl = true,
-        underline = true,
-        bold = true,
-        contrast = 'soft',
-        palette_overrides = {
-          dark0 = colors.background,
-          dark1 = colors.background,
-        },
-        dim_inactive = false,
-        transparent_mode = true,
-      })
-      vim.cmd('colorscheme gruvbox')
-    end,
-    lazy = false,
-    priority = 1000,
-  },
-  {
     'MunifTanjim/nui.nvim',
     lazy = false,
     priority = 1000,
