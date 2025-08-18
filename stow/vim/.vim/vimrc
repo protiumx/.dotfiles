@@ -7,13 +7,13 @@ let mapleader = " "
 
 set termguicolors
 set modelines=0
-set number
 set visualbell
 set encoding=utf-8
 set wrap
 set textwidth=100
 set formatoptions=tcqrn1
 set tabstop=2
+set smarttab
 set shiftwidth=2
 set softtabstop=2
 set expandtab
@@ -32,17 +32,23 @@ set listchars=tab:\ \ ,eol:¬
 set background=dark
 set t_Co=256
 set pumheight=20
-set undolevels=100
+set undolevels=20
 set grepprg=rg\ --vimgrep\ --smart-case\ --hidden\ --no-heading
 set grepformat=%f:%l:%c:%m
 set completeopt=menu,menuone,noselect
 set noswapfile
 set splitbelow
 set splitright
-set relativenumber
+set iskeyword-==
+set iskeyword+=+
+set fillchars+=vert:\▏
 
-colorscheme 256_noir
+colorscheme amber
 
 nnoremap / /\v
+nnoremap Y yy
+nnoremap L $
+nnoremap H ^
+nnoremap <silent> <Leader>s <cmd>w<CR>
 vnoremap / /\v
 map <leader>l :set list!<CR>
