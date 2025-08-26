@@ -12,6 +12,7 @@ vim.g.omni_sql_no_default_maps = 1 -- Disable completion on sql files
 vim.cmd([[
   syntax sync minlines=3000
   filetype plugin indent on
+  set cursorline
   set iskeyword-=_
   set iskeyword-==
   set iskeyword+=+
