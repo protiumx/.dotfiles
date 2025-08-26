@@ -3,9 +3,9 @@ local zenbones = {
   priority = 1000,
   'zenbones-theme/zenbones.nvim',
   dependencies = { 'rktjmp/lush.nvim' },
-  config = function()
-    vim.cmd('colorscheme zenwritten')
-  end,
+  -- config = function()
+  --   vim.cmd('colorscheme zenwritten')
+  -- end,
 }
 
 if vim.g.mini then
@@ -27,6 +27,14 @@ return {
   require('plugins.treesj'),
   require('plugins.vim-sandwich'),
   zenbones,
+  {
+    'wnkz/monoglow.nvim',
+    lazy = false,
+    priority = 1000,
+    init = function()
+      vim.cmd([[colorscheme monoglow]])
+    end,
+  },
   {
     'MunifTanjim/nui.nvim',
     lazy = false,
