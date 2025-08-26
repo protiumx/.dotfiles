@@ -43,15 +43,6 @@ local function pane_keys(mod)
 
     table.insert(keys, {
       key = k,
-      mods = mod .. '|CTRL|SHIFT',
-      action = act.SplitPane({
-        direction = dir,
-        top_level = true,
-      }),
-    })
-
-    table.insert(keys, {
-      key = k,
       mods = mod .. '|ALT',
       action = act.AdjustPaneSize({ dir, 1 }),
     })
