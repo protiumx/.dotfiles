@@ -55,16 +55,14 @@ return {
     '--all-scopes-completion',
     '--background-index', -- should include a compile_commands.json or .txt
     '--clang-tidy',
-    '--cross-file-rename',
     '--completion-style=detailed',
     '--fallback-style=Microsoft',
-    '--function-arg-placeholders',
+    '--function-arg-placeholders=true',
     '--header-insertion-decorators',
     '--header-insertion=never',
     '--limit-results=10',
     '--pch-storage=memory',
     '--query-driver=/usr/include/*',
-    '--suggest-missing-includes',
   },
   filetypes = { 'c', 'cpp', 'objc', 'objcpp' },
   root_markers = {
