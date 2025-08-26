@@ -3,32 +3,31 @@ syntax reset
 set background=dark
 let g:colors_name = "amber"
 
-hi Normal gui=NONE guifg=#ff8100
+hi Normal gui=NONE guifg=#ff6f00
 hi NonText guifg=#303030
-hi Keyword cterm=NONE guifg=#ff8100
-hi Constant gui=NONE guifg=#ff8100
-hi String gui=NONE guifg=#ff8100
-hi Comment gui=NONE guifg=#656565
-hi Number gui=NONE guifg=#ff8100
-hi Error gui=NONE guifg=#ff8100 guibg=#870000
-hi ErrorMsg gui=NONE guifg=#ff8100 guibg=#af0000
-hi Search gui=NONE guifg=#ff8100 guibg=#303030
-hi IncSearch guifg=#161616 guibg=#ff8100
-hi DiffChange gui=NONE guifg=#d70000 guibg=#ff8100
-hi DiffText gui=bold guifg=#ff8100 guibg=#ff0000
-hi SignColumn gui=NONE guifg=#af0000 guibg=#656565
-hi SpellBad gui=undercurl guifg=#ff8100 guibg=#870000
-hi SpellCap gui=NONE guifg=#ff8100 guibg=#af0000
-hi SpellRare gui=NONE guifg=#af0000
-hi WildMenu gui=NONE guifg=#656565 guibg=#ff8100
-hi Pmenu gui=NONE guifg=#ff8100 guibg=#656565
+hi Keyword cterm=NONE guifg=#ff6f00
+hi Constant gui=NONE guifg=#ff6f00
+hi String gui=NONE guifg=#ff6f00
+hi Comment gui=NONE guifg=#8f6539
+hi Number gui=NONE guifg=#ff6f00
+hi Error gui=NONE guifg=#ff6f00 guibg=#870000
+hi ErrorMsg gui=NONE guifg=#ff6f00 guibg=#870000
+hi Search gui=NONE guifg=#ff6f00 guibg=#303030
+hi IncSearch guifg=#161616 guibg=#ff6f00
+hi DiffChange gui=NONE guifg=#d70000 guibg=#ff6f00
+hi DiffText gui=bold guifg=#ff6f00 guibg=#ff0000
+hi SignColumn gui=NONE guifg=#870000 guibg=#656565
+hi SpellBad gui=undercurl cterm=undercurl guisp=#870000 ctermfg=NONE ctermbg=NONE
+hi SpellCap gui=undercurl cterm=undercurl guisp=#870000 ctermfg=NONE ctermbg=NONE
+hi SpellRare gui=undercurl cterm=undercurl guisp=#870000 ctermfg=NONE ctermbg=NONE
+hi WildMenu gui=NONE guifg=#656565 guibg=#ff6f00
+hi Pmenu gui=NONE guifg=#ff6f00 guibg=#656565
 hi PmenuThumb gui=NONE guifg=#080808 guibg=#656565
-hi SpecialKey gui=NONE guifg=#161616 guibg=#ff8100
-hi MatchParen gui=reverse cterm=reverse guifg=#ff8100 guibg=NONE
+hi MatchParen gui=reverse cterm=reverse guifg=#ff6f00 guibg=NONE
 hi CursorLine gui=NONE guifg=NONE guibg=#121212
-hi StatusLine cterm=inverse guifg=#ff8100 guibg=#161616
+hi StatusLine cterm=inverse guifg=#ff6f00 guibg=#161616
 hi StatusLineNC guifg=#656565 guibg=NONE cterm=bold
-hi Visual guibg=#ff8100 guifg=#161616
+hi Visual guibg=#ff6f00 guifg=#161616
 hi TermCursor gui=reverse guifg=NONE guibg=NONE
 hi EndOfBuffer guifg=#161616
 hi VertSplit guifg=#656565 guibg=NONE cterm=reverse
@@ -84,3 +83,4 @@ highlight! link Cursor StatusLine
 highlight! link Underlined SpellRare
 highlight! link rstEmphasis SpellRare
 highlight! link diffChanged DiffChange
+highlight! link SpecialKey NonText

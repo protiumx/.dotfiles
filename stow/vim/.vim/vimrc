@@ -10,13 +10,13 @@ set modelines=0
 set visualbell
 set encoding=utf-8
 set wrap
+set spell
 set textwidth=100
 set formatoptions=tcqrn1
 set tabstop=2
 set smarttab
 set shiftwidth=2
 set softtabstop=2
-set expandtab
 set backspace=indent,eol,start
 set hidden
 set ttyfast
@@ -28,7 +28,7 @@ set incsearch
 set ignorecase
 set smartcase
 set showmatch
-set listchars=tab:\ \ ,eol:¬
+set listchars=tab:.\ ,eol:¬
 set background=dark
 set t_Co=256
 set pumheight=20
