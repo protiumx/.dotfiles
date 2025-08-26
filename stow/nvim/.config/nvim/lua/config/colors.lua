@@ -110,19 +110,19 @@ local base_groups = {
   TelescopeBorder = { link = 'XBorder' },
   TelescopeNormal = { bg = colors.background, fg = colors.foreground },
   TelescopePreviewBorder = { link = 'XBorder' },
-  TelescopePreviewLine = { fg = colors.background, bg = colors.orange },
+  -- TelescopePreviewLine = { fg = colors.background, bg = colors.orange },
   TelescopePreviewNormal = { link = 'XMenu', fg = colors.foreground },
-  TelescopePreviewTitle = { fg = colors.background, bg = colors.light_orange },
+  TelescopePreviewTitle = { fg = colors.foreground, bg = colors.background },
   -- TelescopePrompt = { fg = colors.purple },
   TelescopePromptBorder = { link = 'XBorder' },
   TelescopePromptNormal = { link = 'XMenu', fg = colors.foreground },
   TelescopePromptPrefix = { link = 'XMenu', fg = colors.foreground },
-  TelescopePromptTitle = { fg = colors.background, bg = colors.light_orange },
+  TelescopePromptTitle = { fg = colors.foreground, bg = colors.background },
   TelescopeResultsBorder = { link = 'XBorder' },
   TelescopeResultsNormal = { link = 'XMenu' },
-  -- TelescopeResultsTitle = { fg = colors.background, bg = colors.light_orange },
-  TelescopeSelectionCaret = { fg = colors.red, bg = colors.grey },
-  TelescopeSelection = { bg = colors.grey },
+  TelescopeResultsTitle = { bg = colors.background, fg = colors.foreground },
+  -- TelescopeSelectionCaret = { fg = colors.red, bg = colors.grey },
+  -- TelescopeSelection = { bg = colors.grey },
   -- vim-sandwich
   OperatorSandwichBuns = { fg = colors.background, bg = colors.green },
   OperatorSandwichChange = { fg = colors.background, bg = colors.yellow },
@@ -154,6 +154,7 @@ local base_groups = {
   -- web-dev-icons
   -- DevIconDefault = { fg = colors.dark_orange, bg = 'none' },
   YaziFloat = { link = 'XMenu' },
+  -- Overrides for lackester
 }
 
 local function extend_highlight(hl, config)
