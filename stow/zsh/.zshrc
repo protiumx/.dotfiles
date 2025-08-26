@@ -269,6 +269,7 @@ PATH="$(brew --prefix)/opt/python@3.12/libexec/bin:$PATH"
 PATH="$HOME/.dotfiles/bin:$PATH"
 PATH="$HOME/.local/bin:$PATH"
 PATH="$PATH:/Applications/WezTerm.app/Contents/MacOS"
+PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 export PATH
 
 # Source all profile files
