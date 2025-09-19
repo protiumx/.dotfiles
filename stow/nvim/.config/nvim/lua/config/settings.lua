@@ -89,6 +89,7 @@ vim.opt.wildignore = {
   '*.sqlite3',
   '*/.git/*',
   '*.DS_Store',
+  '*.class',
 }
 
 if vim.fn.has('wsl') == 1 then

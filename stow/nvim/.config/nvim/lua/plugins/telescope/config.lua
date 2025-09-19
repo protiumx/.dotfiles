@@ -231,6 +231,12 @@ return function()
         disable_devicons = true,
       },
 
+      grep_string = {
+        theme = 'ivy',
+        disable_devicons = true,
+        borderchars = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
+      },
+
       live_grep = {
         disable_devicons = true,
         theme = 'ivy',
@@ -240,6 +246,7 @@ return function()
       find_files = {
         disable_devicons = true,
         theme = 'ivy',
+        borderchars = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
         -- stylua: ignore
         find_command = {
           'fd',
@@ -250,11 +257,9 @@ return function()
           '-i',
           '-E', '.git/*',
           '-E', '.venv/*',
-          '-E', 'target/*',
           '-E', '**/node_modules',
           '-E', '.DS_Store',
-          '-E', '.bin',
-          '-E', '**/bin',
+          '-E', '**/*.class*',
         },
       },
     },

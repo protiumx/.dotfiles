@@ -25,5 +25,6 @@ gt:*_test.go*
 --glob=!.yarn
 --glob=!_build
 --glob=!*.cache
+--glob=!**/*.class
 --glob=!.Trash
 --glob=!.venv
