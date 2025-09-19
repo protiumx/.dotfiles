@@ -142,7 +142,11 @@ function M.buffers(opts)
       return false
     end
 
-    return a.info.lastused > b.info.lastused
+    if a.info.lastused > b.info.lastused then
+      return true
+    end
+
+    return false
   end)
 
   pickers
