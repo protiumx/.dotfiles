@@ -110,7 +110,7 @@ local base_groups = {
   TelescopeBorder = { link = 'XBorder' },
   TelescopeNormal = { bg = colors.dark_grey, fg = colors.foreground },
   TelescopePreviewBorder = { link = 'XBorder' },
-  -- TelescopePreviewLine = { fg = colors.background, bg = colors.orange },
+  TelescopePreviewLine = { fg = colors.background, bg = colors.foreground },
   TelescopePreviewNormal = { link = 'XMenu', fg = colors.foreground },
   TelescopePreviewTitle = { fg = colors.foreground, bg = colors.dark_grey },
   -- TelescopePrompt = { fg = colors.purple },
