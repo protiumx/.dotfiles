@@ -86,7 +86,7 @@ symbol = " "
 
 [docker_context]
 disabled = true
-format = "[$symbol ]($style)"
+format = "[$symbol ](fg:#9e9e9e)"
 symbol = " "
 
 [kubernetes]
@@ -113,7 +113,7 @@ symbol = " "
 
 # only show when there is a virtual env
 [python]
-format = '[${symbol}(\($virtualenv\) )]($style)'
+format = '[${symbol}(\($virtualenv\) )](fg:#9e9e9e)'
 symbol = " "
 detect_files = []
 detect_folders = [".venv"]
