@@ -65,6 +65,7 @@ return function()
     },
 
     completion = {
+      autocomplete = false,
       completeopt = 'menu, menuone',
     },
 
@@ -135,7 +136,7 @@ return function()
       }),
 
       ['<C-e>'] = cmp.mapping.close(),
-      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-Space>'] = cmp.mapping.complete({ reason = cmp.ContextReason.Auto }),
       ['<C-d>'] = cmp.mapping.scroll_docs(4),
       ['<C-u>'] = cmp.mapping.scroll_docs(-4),
 
