@@ -155,6 +155,8 @@ local base_groups = {
   -- DevIconDefault = { fg = colors.dark_orange, bg = 'none' },
   YaziFloat = { link = 'XMenu' },
   -- Overrides for lackester
+  ['@keyword.return'] = { fg = '#1bfd9c', bold = true },
+  ['@keyword.import.go'] = { fg = '#1bfd9c', bold = true },
 }
 
 local function extend_highlight(hl, config)
