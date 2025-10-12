@@ -284,8 +284,8 @@ unpack() {
 }
 
 brewit() {
-  brew update &&
-    brew upgrade &&
+  brew update -q &&
+    brew upgrade -q &&
     brew autoremove &&
     brew cleanup -s &&
     brew doctor
