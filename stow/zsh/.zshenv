@@ -129,9 +129,64 @@ ccommit() {
 
 # Pretty git log
 glog() {
-  git log --graph --abbrev-commit --decorate --all \
-    --format=format:"%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(dim white) \
-    - %an%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n %C(white)%s%C(reset)"
+  local hash='hash=$(echo {} | grep -o "[a-f0-9]\{7\}" | sed -n "1p") && [[ $hash != "" ]]'
+  local preview="$hash && git show --color \$hash"
+  local less="$hash && sh -c \"git show --color \$hash | less -R\""
+  local checkout="$hash && git checkout \$hash"
+  local rebase="$hash && git rebase --interactive \$hash"
+
+  git log --graph --color \
+    --format='%C(white)%h - %C(green)%cs - %C(blue)%s%C(red)%d' |
+    fzf \
+      --ansi \
+      --reverse \
+      --no-sort \
+      --preview="$preview" \
+      --bind="alt-l:execute($less)" \
+      --bind="alt-c:execute($checkout)+abort" \
+      --bind="alt-r:execute($rebase)+abort" \
+      --header="[m-l: less | m-c: checkout | m-r: rebase]"
+}
+
+fgf() {
+  local -r prompt_add="add: "
+  local -r prompt_reset="reset: "
+
+  local -r git_root_dir=$(git rev-parse --show-toplevel)
+  local -r git_unstaged_files="git ls-files --modified --deleted --other --exclude-standard --deduplicate $git_root_dir"
+
+  local git_staged_files='git status --short | grep "^[A-Z]" | awk "{print \$NF}"'
+
+  local -r git_reset="git reset -- {+}"
+  local -r enter_cmd="($git_unstaged_files | grep {} && git add {+}) || $git_reset"
+
+  local -r preview_status="git status --short"
+  local -r preview_diff="git diff --color=always {} | sed \"1,4d\""
+  local -r header="[c-s: switch add/reset | c-n: bat | c-t: status | m-d: diff | c-b: blame | m-c: commit | m-a: append | enter: add/reset]"
+
+  local -r mode_reset="change-prompt($prompt_reset)+reload($git_staged_files)"
+  local -r mode_add="change-prompt($prompt_add)+reload($git_unstaged_files)"
+
+  eval "$git_unstaged_files" | fzf \
+    --multi \
+    --height 100% \
+    --reverse \
+    --no-sort \
+    --prompt="$prompt_add" \
+    --preview="$preview_diff" \
+    --header "$header" \
+    --bind="ctrl-t:change-preview($preview_status)" \
+    --bind="alt-d:change-preview($preview_diff)" \
+    --bind='ctrl-n:change-preview(bat {})' \
+    --bind='ctrl-b:change-preview(git blame --color-by-age {})' \
+    --bind="ctrl-s:transform:[[ \$FZF_PROMPT =~ '$prompt_add' ]] && echo '$mode_reset' || echo '$mode_add'" \
+    --bind="enter:execute($enter_cmd)" \
+    --bind="enter:+reload([[ \$FZF_PROMPT =~ '$prompt_add' ]] && $git_unstaged_files || $git_staged_files)" \
+    --bind="enter:+refresh-preview" \
+    --bind='alt-c:execute(git commit)+abort' \
+    --bind='alt-a:execute(git commit --amend)+abort' \
+    --bind='ctrl-u:preview-half-page-up' \
+    --bind='ctrl-d:preview-half-page-down'
 }
 
 # Print commits with URLs to github

@@ -240,11 +240,10 @@ export FZF_DEFAULT_OPTS="
   --layout=reverse
   --prompt '  '
   --pointer ' '
-  --marker '┃ '
   --multi
   --bind 'ctrl-p:toggle-preview'
   --bind 'ctrl-e:become(nvim {})'
-  --bind 'ctrl-y:execute-silent(echo -n {2..} | $clip)+abort'
+  --bind 'ctrl-y:execute-silent(echo -n {} | $clip)+abort'
   --preview='bat {}'
   --preview-window 'hidden,border-left'
   --no-info
