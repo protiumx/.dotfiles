@@ -30,9 +30,10 @@ function M.setup(bufnr)
   nmap('<C-l>y', function()
     vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}))
   end, 'Toggle inlay hints')
-  nmap('<C-l>o', '<cmd>Telescope lsp_document_symbols', 'Show signature help')
-  nmap('gh', '<cmd>Telescope lsp_references<CR>', 'Show signature help')
-  nmap('gT', vim.lsp.buf.type_definition, 'Type definition')
+  nmap('gh', '<cmd>Telescope lsp_references<CR>', 'References')
+  nmap('gH', '<cmd>Telescope lsp_implementations<CR>', 'Implementations')
+  nmap('gy', '<cmd>Telescope lsp_type_definitions<CR>', 'Type definitions')
+  nmap('gt', vim.lsp.buf.type_definition, 'Type definition')
 
   -- Comment utils - uses LSP
   vim.keymap.set('n', '<C-_>', 'gcc', { remap = true })
