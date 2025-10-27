@@ -51,10 +51,10 @@ function M.delete_buffer(buf, opts)
         end
 
         -- Try using previous buffer
-        -- local has_previous = pcall(vim.cmd, 'bprevious')
-        -- if has_previous and buf ~= vim.api.nvim_win_get_buf(win) then
-        --   return
-        -- end
+        local has_previous = pcall(vim.cmd, 'bprevious')
+        if has_previous and buf ~= vim.api.nvim_win_get_buf(win) then
+          return
+        end
 
         -- Create new listed buffer to avoid changing layout
         -- local new_buf = vim.api.nvim_create_buf(true, false)
