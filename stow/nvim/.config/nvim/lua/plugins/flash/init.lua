@@ -64,7 +64,7 @@ return {
       desc = 'Flash multi-window',
     },
     {
-      '<Leader-s>',
+      '<Leader>S',
       mode = { 'n', 'x', 'o' },
       function()
         require('flash').jump({ continue = true })
