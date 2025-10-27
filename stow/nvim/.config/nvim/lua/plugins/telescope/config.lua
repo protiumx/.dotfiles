@@ -131,7 +131,7 @@ local function keymaps()
   end, '[G]it [S]tatus')
 
   map('n', '<M-s>ld', builtin.diagnostics, '[L]SP [D]iagnostics')
-  map('n', '<M-s>lc', builtin.diagnostics, '[L]SP Incoming [C]alls')
+  map('n', '<M-s>lc', builtin.lsp_incoming_calls, '[L]SP Incoming [C]alls')
   map({ 'i', 'n' }, '<M-s>ls', function()
     builtin.lsp_document_symbols(dropdown)
   end, '[L]SP [S]ymbols')
