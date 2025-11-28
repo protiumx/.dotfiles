@@ -363,6 +363,12 @@ rand() {
   openssl rand -base64 "${1:-10}"
 }
 
+go-why() {
+  local mod=$(grep "^\t" go.mod | cut -d " " -f 1 | sed 's/\t//g' | fzf --height 40%)
+  echo "checking $mod"
+  go mod why -m $mod
+}
+
 ################## Aliases ##################
 
 alias cat="bat -p --theme='TwoDark'"
