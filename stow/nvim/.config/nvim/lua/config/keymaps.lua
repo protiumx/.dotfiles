@@ -43,7 +43,6 @@ map('i', '<M-k>', '<Esc>:m .-2<CR>==gi', { silent = true })
 map('n', '<Leader>qo', '<cmd>copen<CR>')
 map('n', '<Leader>qq', '<cmd>cclose<CR>')
 map( 'n', '<Leader>Q', '<cmd>call setqflist([]) | cclose<CR>', { desc = 'Clean quickfix' })
---
 map({ 'n', 'v' }, '<Leader>qd', function()
   local items = vim.fn.getqflist()
   if vim.bo.buftype ~= 'quickfix' or #items == 0 then
