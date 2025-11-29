@@ -54,7 +54,7 @@ end
 local function open_file(window, pane, uri)
   wezterm.log_info('enter with uir', uri)
   if uri:find('^https?:') == 1 then
-    return false
+    return true
   end
 
   -- Not a file or in alt screen (e.g. nvim, less)
