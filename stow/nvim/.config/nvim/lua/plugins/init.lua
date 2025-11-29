@@ -21,7 +21,6 @@ return {
   require('plugins.neoclip'),
   require('plugins.noice'),
   require('plugins.nvim-cmp'),
-  require('plugins.nvim-lint'),
   require('plugins.telescope'),
   require('plugins.treesitter'),
   require('plugins.treesj'),
