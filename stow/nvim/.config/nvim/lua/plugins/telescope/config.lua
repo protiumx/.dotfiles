@@ -260,6 +260,7 @@ return function()
           '-E', '**/node_modules',
           '-E', '.DS_Store',
           '-E', '**/*.class*',
+          '-E', 'target/*',
         },
       },
     },
