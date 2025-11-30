@@ -9,11 +9,11 @@
 [![shellcheck](https://github.com/protiumx/.dotfiles/actions/workflows/shell.yml/badge.svg)](https://github.com/protiumx/.dotfiles/actions/workflows/shell.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-My dotfiles to set up a dev environment in a **MacOS** machine.
+My dotfiles to set up a dev environment in a **macOS** machine.
 Summary:
 - Installs all the packages and apps I use
 - [stows](https://www.gnu.org/software/stow/) all config files
-- Sets all my preferred MacOS configurations
+- Sets all my preferred macOS configurations
 
 ## Previews
 
@@ -63,7 +63,7 @@ In order to reuse these scripts, here a summary of files you can change/adapt to
 - `scripts/packages.sh`: all the `homebrew` taps and packages to install
 - `scripts/apps.sh`: `homebrew` casks to install
 - `scripts/cli.sh`: CLI apps from different sources
-- `scripts/osx.sh`: **MacOS** settings
+- `scripts/osx.sh`: **macOS** settings
 - `scripts/config.sh`: general settings and dotfiles
 
 ## Testing Stow
