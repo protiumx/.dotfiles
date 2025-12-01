@@ -90,7 +90,8 @@ function M.get_lines_indexes()
     return line, line
   end
 
-  return vim.fn.line("'<"), vim.fn.line("'>")
+  local vline = vim.fn.getpos('v')[2]
+  return math.min(vline, line), math.max(vline, line)
 end
 
 ---Get text from visual selection
