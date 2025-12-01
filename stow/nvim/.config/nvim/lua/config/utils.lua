@@ -1,4 +1,8 @@
-local M = {}
+local macos = jit.os == 'OSX'
+
+local M = {
+  system_clip_reg = macos and '*' or '+',
+}
 
 ---Returns the current cwd folder name
 function M.get_cwd_name()
@@ -83,16 +87,10 @@ end
 function M.get_lines_indexes()
   local line = vim.fn.line('.')
   if string.lower(vim.fn.mode()) ~= 'v' then
-    return { line, line }
+    return line, line
   end
 
-  local vline = vim.fn.getpos('v')[2]
-  if vline > 0 and line > vline then
-    -- vline marks the start
-    return { vline, line }
-  end
-
-  return { line, line }
+  return vim.fn.line("'<"), vim.fn.line("'>")
 end
 
 ---Get text from visual selection
@@ -107,6 +105,18 @@ function M.get_selection_text()
   local text = vim.fn.getreg('a')
   vim.fn.setreg('a', a_orig)
   return text
+end
+
+function M.copy_with_context()
+  local lstart, lend = M.get_lines_indexes()
+  local lines = vim.fn.getline(lstart, lend)
+  local path = vim.fn.expand('%:~:.')
+  local content = table.concat(lines --[[@as table]], '\n')
+
+  local number_format = lstart ~= lend and string.format('%s-%s', lstart, lend) or tostring(lstart)
+  content = string.format('// %s:%s\n%s', path, number_format, content)
+  vim.fn.setreg(M.system_clip_reg, content)
+  vim.notify(string.format('Copied lines [%d-%d]', lstart, lend), vim.log.levels.INFO)
 end
 
 ---@param filename string
