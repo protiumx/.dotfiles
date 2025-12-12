@@ -423,7 +423,7 @@ alias gst="ccommit style"
 alias gci="ccommit ci"
 alias gdo="ccommit docs"
 alias gmi="ccommit misc"
-alias pull="git pull"
+alias pull="git pull --prune"
 alias push="git push"
 
 alias rgv="rg --no-heading --vimgrep"
