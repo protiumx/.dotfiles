@@ -1,9 +1,8 @@
 return {
   'nvim-treesitter/nvim-treesitter',
+  branch = 'main',
   lazy = false,
-  build = function()
-    pcall(require('nvim-treesitter.install').update({ with_sync = true }))
-  end,
+  build = ':TSUpdate',
   config = function()
     require('plugins.treesitter.config')()
   end,

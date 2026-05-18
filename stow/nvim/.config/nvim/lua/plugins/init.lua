@@ -1,15 +1,14 @@
-local zenbones = {
+local monoglow = {
+  'wnkz/monoglow.nvim',
   lazy = false,
   priority = 1000,
-  'zenbones-theme/zenbones.nvim',
-  dependencies = { 'rktjmp/lush.nvim' },
-  -- config = function()
-  --   vim.cmd('colorscheme zenwritten')
-  -- end,
+  init = function()
+    vim.cmd([[colorscheme monoglow]])
+  end,
 }
 
 if vim.g.mini then
-  return { zenbones }
+  return { monoglow }
 end
 
 return {
@@ -23,27 +22,14 @@ return {
   require('plugins.nvim-cmp'),
   require('plugins.telescope'),
   require('plugins.treesitter'),
+  require('plugins.treesitter-textobjects'),
   require('plugins.treesj'),
   require('plugins.vim-sandwich'),
-  zenbones,
-  {
-    'wnkz/monoglow.nvim',
-    lazy = false,
-    priority = 1000,
-    init = function()
-      vim.cmd([[colorscheme monoglow]])
-    end,
-  },
+  monoglow,
   {
     'MunifTanjim/nui.nvim',
     lazy = false,
     priority = 1000,
-  },
-
-  {
-    'nvim-treesitter/nvim-treesitter-textobjects',
-    event = 'VeryLazy',
-    dependencies = { 'nvim-treesitter' },
   },
 
   {
