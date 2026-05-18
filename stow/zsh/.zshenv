@@ -208,16 +208,21 @@ gremote() {
   git config --get remote.origin.url | sed -E 's/(ssh:\/\/)?git@/https:\/\//' | sed 's/com:/com\//' | sed 's/\.git$//' | head -n1
 }
 
-# Creates and push a git tag with a template v0.0.0-pre.$USER-<branch>-D-HHmm
+# Creates and push a git tag with a template v0.0.0-pre.$USER-$1-D-HHmm or v0.0.0-pre.$USER-<branch>-D-HHmm
 alpha-build() {
-  local current_branch=$(git branch --show-current | sed 's/\//-/')
-  local timestring=$(date +"%d-%H%M")
-  local tag_name="v0.0.0-pre.$USER-$current_branch-$timestring"
-  if [[ $current_branch =~ "$USER" ]]; then
-    tag_name="v0.0.0-pre.$current_branch-$timestring"
+  local branch=$1
+  if [ -z "$branch" ]; then
+    branch=$(git branch --show-current | sed 's/\//-/')
   fi
 
-  git tag $tag_name || echo "Failed to create tag $tag_name"
+  local timestring=$(date +"%d-%H%M")
+  local tag_name="v0.0.0-pre.$USER-$branch-$timestring"
+  # Check if the user is already present in the branch name
+  if [[ $branch =~ "$USER" ]]; then
+    tag_name="v0.0.0-pre.$branch-$timestring"
+  fi
+
+  git tag $tag_name || (echo "Failed to create tag $tag_name" && return 1)
   (git push origin $tag_name && echo -e "\nTag: $tag_name") || echo "Failed to push tag $tag_name"
 }
 
@@ -376,7 +381,7 @@ alias dc="docker compose"
 alias dot="cd ~/.dotfiles && nvim ."
 alias duu="dust -b -H -r -X '.git'"
 alias e="nvim"
-alias gmw="go mod why"
+alias gmw="go mod why -m"
 alias icat="wezterm imgcat"
 alias tree="eza --tree --level=5 --icons --group-directories-first --color auto"
 
