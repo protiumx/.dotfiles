@@ -69,6 +69,7 @@ bindkey '^z' _zsh-ctrl-z               # better ctrl-z
 bindkey '\eg' _fzf-git-files-widget
 bindkey '^o' _zsh-nvim
 bindkey '\ed' _git-diff
+
 # fix up/down
 if [[ -n "${terminfo[kcuu1]}" ]]; then
   bindkey "${terminfo[kcuu1]}" up-line-or-beginning-search
@@ -168,6 +169,7 @@ zstyle ':fzf-tab:*' use-fzf-default-opts yes
 autoload -U +X bashcompinit && bashcompinit
 
 typeset -A ZSH_HIGHLIGHT_STYLES
+zle_highlight=('region:bg=168,fg=251')
 
 theme_hl='fg=250,bold'
 theme_fg='fg=247'
