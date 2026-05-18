@@ -3,12 +3,18 @@
 ; sql
 
 ([
+   (interpreted_string_literal_content)
+   (raw_string_literal_content)
+ ] @sql
+ (#match? @sql "(SELECT|select|INSERT|insert|UPDATE|update|DELETE|delete).+(FROM|from|INTO|into|VALUES|values|SET|set).*(WHERE|where|GROUP BY|group by)?"))
+
+([
   (interpreted_string_literal_content)
   (raw_string_literal_content)
  ] @injection.content
- (#contains? @injection.content "-- sql" "--sql"
+ (#contains? @injection.content "WITH" "SELECT"
                   "GROUP BY" "HAVING" "INSERT INTO"
-                  "UPDATE SET" "LEFT JOIN" "group by" "having" "insert into"
+                  "UPDATE SET" "LEFT JOIN" "with" "select" "group by" "having" "insert into"
                   "update set" "left join")
  (#set! injection.language "sql"))
 
