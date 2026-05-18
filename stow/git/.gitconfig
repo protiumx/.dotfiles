@@ -134,7 +134,7 @@
 
   lp = log --pretty=format:'%Cred%h%Creset %C(yellow)%d%Creset %s %Cgreen(%cr)%Creset - %C(magenta)%cn%Creset' --abbrev-commit --date=relative
 
-  main = !git checkout main && git pull
+  main = !git checkout main && git pull --prune
 
   development = !git checkout development && git pull
 
