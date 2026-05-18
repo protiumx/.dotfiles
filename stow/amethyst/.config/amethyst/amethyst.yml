@@ -87,7 +87,7 @@ focus-cw:
 # Focus the main window in the list.
 focus-main:
   mod: mod1
-  key: m
+  key: 1
 
 # Focus the next screen in the list going counter-clockwise.
 focus-screen-ccw:
@@ -155,7 +155,7 @@ select-four-corners-layout:
 # Select fullscreen layout
 select-fullscreen-layout:
   mod: mod2
-  key: F
+  key: f
 
 # Select column layout
 # select-column-layout:
