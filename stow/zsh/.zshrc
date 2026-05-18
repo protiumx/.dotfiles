@@ -18,7 +18,7 @@ export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/rg"
 # export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$HOME/.config/nvim/lua/config/nvim"
 
 # Less highlighting
-export LESS_TERMCAP_mb=$'\e[1;31m'     # begin bold
+export LESS_TERMCAP_mb=$'\e[1;48m'     # begin bold
 export LESS_TERMCAP_md=$'\e[1;94m'     # begin blink
 export LESS_TERMCAP_so=$'\e[01;44;37m' # begin reverse video
 export LESS_TERMCAP_us=$'\e[01;37m'    # begin underline
@@ -250,7 +250,7 @@ export FZF_DEFAULT_OPTS="
   --preview-window 'hidden,border-left'
   --no-info
   --scrollbar='▏▕'
-  --color 'gutter:-1,hl+:#82aaff,hl:#82aaff,bg+:-1,pointer:#bbbbbb'"
+  --color 'gutter:-1,hl+:#1bfd9c,hl:#1bfd9c,bg+:-1,pointer:#bbbbbb'"
 
 export FZF_COMPLETION_OPTS=$FZF_DEFAULT_OPTS
 # zoxide fzf opts
