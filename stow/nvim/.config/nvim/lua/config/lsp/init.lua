@@ -5,6 +5,7 @@ local clients = {
   'bashls',
   'buf_ls',
   'clangd',
+  'harper_ls',
   'gopls',
   'luals',
   'marksman',
@@ -143,7 +144,8 @@ local function setup_cmds()
 
     for _, client in ipairs(active_clients) do
       vim.notify('restarting client: ' .. client.name)
-      client:stop(true)
+      client:stop(false)
+      vim.diagnostic.reset()
     end
   end, {
     desc = 'Manually stops the given language client(s)',
@@ -157,7 +159,7 @@ local function setup_cmds()
 end
 
 function M.setup()
-  vim.lsp.set_log_level('WARN')
+  vim.lsp.log.set_level('WARN')
   -- NOTE: noice.nvim sets these 2 handlers
   -- vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
   --   vim.lsp.handlers.hover,
