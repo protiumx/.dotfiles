@@ -1,7 +1,7 @@
 \set QUIET 1
 
-\set PROMPT1 '%[%033[1m%][%`date "+%H:%M"`]( %m@%/ )%[%033[0m%] | '
-\set PROMPT2 '%R%# '
+\set PROMPT1 '%[%033[1m%][%`date "+%H:%M"`]( %M@%/ )%[%033[0m%] | '
+\set PROMPT2 '%l%R%# '
 \set HISTCONTROL ignoredups
 \set HISTFILE ~/.local/state/psql_history-:DBNAME
 \set HISTSIZE 2000
