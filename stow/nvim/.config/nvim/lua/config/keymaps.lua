@@ -195,6 +195,11 @@ map(
   ':vsp | e <C-R>=expand("%:h") . "/"<CR>',
   { desc = 'Populates cmd with current file and vs' }
 )
+
+map('n', '<Leader>!', function()
+  vim.b.chars = (vim.b.chars == nil and false) or not vim.b.chars
+  vim.opt_local.listchars = { eol = '¬', tab = vim.b.chars and '»·' or '  ' }
+end)
 -- Select all text in current buffer
 map('n', '<M-a>', 'ggVG', { silent = true, desc = 'Select all' })
 map('i', '<M-a>', '<Esc>ggVG', { silent = true, desc = 'Select all' })
