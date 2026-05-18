@@ -36,7 +36,7 @@ return {
     for m, o in pairs(select_keymaps) do
       vim.keymap.set({ 'x', 'o' }, m, function()
         to.select_textobject(o, 'textobjects')
-      end)
+      end, { desc = '[treesitter] select ' .. o })
     end
 
     local swap_next = {
@@ -46,7 +46,7 @@ return {
     for m, o in pairs(swap_next) do
       vim.keymap.set('n', m, function()
         require('nvim-treesitter-textobjects.swap').swap_next(o)
-      end)
+      end, { desc = '[treesitter] swap ' .. o })
     end
 
     local swap_previous = {
@@ -56,7 +56,7 @@ return {
     for m, o in pairs(swap_previous) do
       vim.keymap.set('n', m, function()
         require('nvim-treesitter-textobjects.swap').swap_previous(o)
-      end)
+      end, { desc = '[treesitter] swap ' .. o })
     end
 
     local goto_next_start = {
@@ -68,7 +68,7 @@ return {
     for m, o in pairs(goto_next_start) do
       vim.keymap.set({ 'n', 'x', 'o' }, m, function()
         require('nvim-treesitter-textobjects.move').goto_next_start(o, 'textobjects')
-      end)
+      end, { desc = '[treesitter] goto next start' .. o })
     end
 
     local goto_next_end = {
@@ -80,7 +80,7 @@ return {
     for m, o in pairs(goto_next_end) do
       vim.keymap.set({ 'n', 'x', 'o' }, m, function()
         require('nvim-treesitter-textobjects.move').goto_next_end(o, 'textobjects')
-      end)
+      end, { desc = '[treesitter] goto next end' .. o })
     end
 
     local goto_previous_start = {
@@ -92,7 +92,7 @@ return {
     for m, o in pairs(goto_previous_start) do
       vim.keymap.set({ 'n', 'x', 'o' }, m, function()
         require('nvim-treesitter-textobjects.move').goto_previous_start(o, 'textobjects')
-      end)
+      end, { desc = '[treesitter] goto prev start' .. o })
     end
 
     local goto_previous_end = {
@@ -104,7 +104,7 @@ return {
     for m, o in pairs(goto_previous_end) do
       vim.keymap.set({ 'n', 'x', 'o' }, m, function()
         require('nvim-treesitter-textobjects.move').goto_previous_end(o, 'textobjects')
-      end)
+      end, { desc = '[treesitter] goto prev end' .. o })
     end
   end,
   dependencies = { 'nvim-treesitter' },
