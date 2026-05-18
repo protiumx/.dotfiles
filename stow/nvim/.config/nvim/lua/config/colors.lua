@@ -131,6 +131,7 @@ local base_groups = {
   -- LSP
   LspReferenceText = { bg = colors.red, fg = colors.foreground },
   LspSignatureActiveParameter = { link = 'Search' },
+  LspInlayHint = { fg = colors.light_pink, bold = true },
   -- Noice.nvim
   NoiceCmdlineIcon = { fg = colors.red },
   NoiceCmdlineIconInput = { fg = colors.red },
