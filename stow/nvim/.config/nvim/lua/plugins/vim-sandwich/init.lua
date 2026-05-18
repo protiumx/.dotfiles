@@ -30,9 +30,9 @@ return {
     { 'ia', '<Plug>(textobj-sandwich-auto-i)', mode = 'o', remap = true },
     { 'aa', '<Plug>(textobj-sandwich-auto-a)', mode = 'o', remap = true },
     -- surrounds e.g. cim_ deletes text surrounded by _
-    { 'im', '<Plug>(textobj-sandwich-literal-query-i)', mode = 'x', remap = true },
-    { 'im', '<Plug>(textobj-sandwich-literal-query-i)', mode = 'o', remap = true },
-    { 'am', '<Plug>(textobj-sandwich-literal-query-a)', mode = 'x', remap = true },
-    { 'am', '<Plug>(textobj-sandwich-literal-query-a)', mode = 'o', remap = true },
+    { '<M-s>im', '<Plug>(textobj-sandwich-literal-query-i)', mode = 'x', remap = true },
+    { '<M-s>im', '<Plug>(textobj-sandwich-literal-query-i)', mode = 'o', remap = true },
+    { '<M-s>am', '<Plug>(textobj-sandwich-literal-query-a)', mode = 'x', remap = true },
+    { '<M-s>am', '<Plug>(textobj-sandwich-literal-query-a)', mode = 'o', remap = true },
   },
 }
