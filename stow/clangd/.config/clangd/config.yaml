@@ -1,0 +1,2 @@
+Flags:
+  Append: [ -std=c23 ]
