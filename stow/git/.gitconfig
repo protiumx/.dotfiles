@@ -6,6 +6,7 @@
   untrackedcache = true
   fsmonitor = true
   editor = CL=1 nvim
+	hooksPath = ~/.git-hooks
 
 [init]
   templatedir = ~/.config/git/templates
