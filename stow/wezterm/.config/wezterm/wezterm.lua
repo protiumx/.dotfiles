@@ -408,6 +408,7 @@ local key_tables = {
 }
 
 local process_icons = {
+  ['claude'] = wezterm.nerdfonts.md_robot_angry,
   ['docker'] = wezterm.nerdfonts.linux_docker,
   ['docker-compose'] = wezterm.nerdfonts.linux_docker,
   ['btm'] = '',
@@ -470,6 +471,10 @@ local function get_tab_process(tab)
 
   if tab.active_pane.foreground_process_name == '' then
     return process_icons['wezterm'] .. ' ' .. tab.active_pane.title
+  end
+
+  if string.find(tab.active_pane.foreground_process_name, 'claude') then
+    return process_icons['claude']
   end
 
   local process_name = string.gsub(tab.active_pane.foreground_process_name, '(.*[/\\])(.*)', '%2')
