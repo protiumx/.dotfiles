@@ -52,8 +52,9 @@ local function pane_keys(mod)
 end
 
 local function open_file(window, pane, uri)
-  wezterm.log_info('enter with uir', uri)
+  wezterm.log_info('enter with uri', uri)
   if uri:find('^https?:') == 1 then
+    -- Do not open URLs, let the parent handle it
     return true
   end
 
@@ -64,7 +65,7 @@ local function open_file(window, pane, uri)
 
   local path = ''
   local row = ''
-  local path_row_pattern = '([^%s:]+):(%d+)'
+  local path_row_pattern = '([^%s:]+):(%d+)' -- /tmp/file.txt:line
 
   -- check for pattern file://[HOSTNAME]/PATH[#linenr]
   if uri:find('^file:') == 1 then
@@ -110,10 +111,15 @@ local function open_file(window, pane, uri)
     top_level = true,
     size = 0.5,
   })
+
   return true
 end
 
-local key_table_leader = { key = '/', mods = key_mod_panes, timeout_milliseconds = 1000 }
+local key_table_leader = {
+  key = '/',
+  mods = key_mod_panes,
+  timeout_milliseconds = 1000,
+}
 
 local keys = {
   {
@@ -316,6 +322,7 @@ local keys = {
     key = 'F',
     mods = 'CMD|SHIFT',
     action = act.QuickSelectArgs({
+      skip_action_on_paste = true,
       patterns = {
         'file:///\\S+',
         '[^\\s:]{3,}:\\d{1,4}',
@@ -440,6 +447,8 @@ local theme = {
   fg2 = '#9e9e9e',
   fg3 = '#777777',
   red = '#C53030',
+  green = '#1bfd9c',
+  blue = '#66b2b2',
 }
 
 local function get_current_working_dir(tab)
@@ -505,7 +514,7 @@ wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_wid
 
   if has_unseen_output then
     format = wezterm.format({
-      { Foreground = { Color = theme.red } },
+      { Foreground = { Color = theme.green } },
       { Text = title },
     })
   end
@@ -544,19 +553,37 @@ wezterm.on('update-right-status', function(window, pane)
   }))
 end)
 
-wezterm.on('open-uri', function(window, pane, uri)
-  return open_file(window, pane, uri)
-end)
+wezterm.on('open-uri', open_file)
 
 local colors = {
+  ansi = {
+    theme.bg,
+    theme.red,
+    theme.green,
+    '#f4bf75',
+    theme.blue,
+    '#aa759f',
+    '#75b5aa',
+    '#d0d0d0',
+  },
+  brights = {
+    '#505050',
+    theme.red,
+    theme.green,
+    '#f4bf75',
+    theme.blue,
+    '#aa759f',
+    '#75b5aa',
+    '#f5f5f5',
+  },
   background = theme.bg,
   cursor_bg = theme.fg2,
   cursor_fg = theme.bg,
   cursor_border = theme.fg2,
   selection_fg = theme.bg,
   selection_bg = theme.fg1,
-  quick_select_label_bg = { Color = theme.red },
-  quick_select_label_fg = { Color = theme.fg1 },
+  quick_select_label_bg = { Color = theme.green },
+  quick_select_label_fg = { Color = theme.bg },
   quick_select_match_bg = { Color = theme.fg1 },
   quick_select_match_fg = { Color = theme.bg },
   tab_bar = {
