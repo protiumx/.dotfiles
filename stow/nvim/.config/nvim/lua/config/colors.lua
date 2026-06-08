@@ -11,6 +11,7 @@ local colors = {
   dark_yellow = '#ffaf00',
   dark_violet = '#605060',
   green = '#98c379',
+  neon_green = '#1bfd9c',
   grey = '#202020',
   light_grey = '#727169',
   light_orange = '#ffa066',
@@ -124,8 +125,8 @@ local base_groups = {
   -- TelescopeSelectionCaret = { fg = colors.red, bg = colors.grey },
   -- TelescopeSelection = { bg = colors.grey },
   -- vim-sandwich
-  OperatorSandwichBuns = { fg = colors.background, bg = colors.green },
-  OperatorSandwichChange = { fg = colors.background, bg = colors.yellow },
+  OperatorSandwichBuns = { fg = colors.background, bg = colors.neon_green },
+  OperatorSandwichChange = { fg = colors.background, bg = colors.neon_green },
   --
   SpellBad = { undercurl = true, sp = colors.red },
   -- LSP
@@ -155,9 +156,9 @@ local base_groups = {
   -- web-dev-icons
   -- DevIconDefault = { fg = colors.dark_orange, bg = 'none' },
   YaziFloat = { link = 'XMenu' },
-  -- Overrides for lackester
-  ['@keyword.return'] = { fg = '#1bfd9c', bold = true },
-  ['@keyword.import.go'] = { fg = '#1bfd9c', bold = true },
+  -- Overrides for monoglow
+  ['@keyword.return'] = { fg = colors.neon_green, bold = true },
+  ['@keyword.import.go'] = { fg = colors.neon_green, bold = true },
 }
 
 local function extend_highlight(hl, config)
