@@ -15,12 +15,9 @@ vim.cmd([[
   set cursorline
   set iskeyword-=_
   set iskeyword-==
-  set iskeyword+=+
   set fillchars=diff:\ ,
   set pumheight=20
   set undolevels=100
-  set grepprg=rg\ --vimgrep\ --smart-case\ --hidden\ --no-heading
-  set grepformat=%f:%l:%c:%m
 ]])
 
 vim.opt.shell = 'zsh'
@@ -36,6 +33,8 @@ vim.opt.relativenumber = true
 vim.opt.sessionoptions:append({ 'curdir', 'winsize' })
 vim.opt.shortmess:append({ c = true, F = true, s = true })
 vim.opt.wrap = false
+vim.opt.grepprg = "rg --vimgrep --smart-case --hidden --no-heading -g '!.git'"
+vim.opt.grepformat = '%f:%l:%c:%m'
 
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2

@@ -38,3 +38,5 @@ npm-debug.log
 Icon
 Network Trash Folder
 Temporary Items
+
+**/.claude/settings.local.json
