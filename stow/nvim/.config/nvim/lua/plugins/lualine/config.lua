@@ -23,7 +23,7 @@ local mode_text_map = {
 
 local base_theme = {
   a = { bg = 'none', fg = colors.foreground, gui = 'bold' },
-  x = { bg = 'none', fg = colors.purple },
+  x = { bg = 'none', fg = colors.neon_green },
   y = { bg = 'none', fg = colors.light_grey },
   z = { bg = 'none', fg = colors.light_grey },
 }
@@ -117,7 +117,7 @@ return function()
         {
           require('noice').api.status.search.get,
           cond = require('noice').api.status.search.has,
-          color = { fg = 'ff9e64' },
+          color = { fg = '#ff9e64' },
         },
         {
           require('noice').api.status.mode.get,
