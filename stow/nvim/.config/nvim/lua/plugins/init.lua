@@ -18,6 +18,7 @@ return {
   require('plugins.gitsigns'),
   require('plugins.lualine'),
   require('plugins.neoclip'),
+  require('plugins.neotest'),
   require('plugins.noice'),
   require('plugins.nvim-cmp'),
   require('plugins.telescope'),
