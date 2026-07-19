@@ -368,10 +368,18 @@ rand() {
   openssl rand -base64 "${1:-10}"
 }
 
+ppath() {
+  echo -e "${PATH//:/\\n}" | sort
+}
+
 go-why() {
   local mod=$(grep "^\t" go.mod | cut -d " " -f 1 | sed 's/\t//g' | fzf --height 40%)
   echo "checking $mod"
   go mod why -m $mod
+}
+
+lsusb() {
+  ioreg -p IOUSB -w0 | sed 's/[^o]*o //; s/@.*$//' | grep -v '^Root.*'
 }
 
 ################## Aliases ##################
@@ -409,7 +417,6 @@ alias krrd="kubectl rollout restart deployment"
 alias ksd="kubectl scale deployment"
 
 alias isodate='date -u +"%Y-%m-%dT%H:%M:%SZ"'
-alias ppath='echo -e ${PATH//:/\\n}'
 alias localip="ifconfig | grep 'inet ' | grep -v 127.0.0.1 | cut -d\ -f2"
 
 # Lock the screen macos
