@@ -35,8 +35,7 @@ packages=(
   starship
   stow
   telnet
-  xo/xo/usql # https://github.com/xo/usql
-  yazi       # https://github.com/sxyazi/yazi
+  yazi # https://github.com/sxyazi/yazi
   wget
   zsh
   zinit  # https://github.com/zdharma-continuum/zinit
