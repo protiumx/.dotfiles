@@ -11,6 +11,8 @@ set visualbell
 set encoding=utf-8
 set wrap
 set spell
+set number
+set noshowmatch
 set textwidth=100
 set formatoptions=tcqrn1
 set tabstop=2
