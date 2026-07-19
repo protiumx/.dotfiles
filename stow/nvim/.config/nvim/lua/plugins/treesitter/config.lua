@@ -30,7 +30,9 @@ return function()
     'vim',
     'vimdoc',
     'yaml',
+    'zsh',
   }
+
   ts.install(fts):wait(300000)
 
   vim.api.nvim_create_autocmd('FileType', {
