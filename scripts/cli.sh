@@ -37,7 +37,7 @@ install_rust_tools() {
 
   if ! command -v rust-analyzer &>/dev/null; then
     info "Installing rust-analyzer"
-    brew install rust-analyzer
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
   fi
 
   local cargo_packages=(
@@ -48,7 +48,7 @@ install_rust_tools() {
 
   for p in "${cargo_packages[@]}"; do
     info "Installing <cargo $p>"
-    expand=($p)
+    expand=("$p")
     cargo install "${expand[@]}"
   done
 
