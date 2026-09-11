@@ -439,6 +439,7 @@ alias pull="git pull --prune"
 alias push="git push"
 
 alias rgv="rg --no-heading --vimgrep"
+alias pjq="pbpaste | jq '.'"
 alias yeet="rm -rf"
 
 alias -g ...='../..'
