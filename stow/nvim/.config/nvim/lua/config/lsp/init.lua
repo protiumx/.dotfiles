@@ -10,6 +10,7 @@ local clients = {
   'luals',
   'marksman',
   'pyright',
+  -- 'ty',
   'rust_analyzer',
   'tiltls',
 }
@@ -72,6 +73,12 @@ local M = {
 local function setup_clients()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+
+  if not capabilities.textDocument.semanticTokens then
+    capabilities.textDocument.semanticTokens = {}
+  end
+
+  capabilities.textDocument.semanticTokens.multilineTokenSupport = true
 
   -- Better completion config
   capabilities.textDocument.completion.completionItem = {

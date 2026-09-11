@@ -10,6 +10,22 @@ return {
     'asciidoc',
     'gitcommit',
     'markdown',
+    'text',
+    'tex',
   },
   root_markers = { '.git' },
+  settings = {
+    linters = {
+      SpellCheck = true,
+      SpelledNumbers = false,
+      AnA = true,
+      SentenceCapitalization = true,
+      UnclosedQuotes = true,
+      WrongApostrophe = false,
+      LongSentences = true,
+      RepeatedWords = true,
+      Spaces = true,
+      CorrectNumberSuffix = true,
+    },
+  },
 }
