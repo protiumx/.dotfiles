@@ -124,7 +124,17 @@ map('n', '<M-,>', function()
   vim.cmd('!' .. cmd)
   print(cmd)
 end, { desc = '[Git] stage current file', silent = true })
-map('n', '<C-g>r', function()
+map('n', '<C-g>R', function()
+  local opts = { prompt = 'Enter value for shiftwidth: ', scope = 'buffer' }
+  local proceed = false
+  vim.ui.input(opts, function(input)
+    proceed = input:lower() == 'y'
+  end)
+
+  if not proceed then
+    return
+  end
+
   local cmd = vim.fn.expand('git checkout origin/main %')
   vim.cmd('!' .. cmd)
   print(cmd)
