@@ -261,6 +261,8 @@ return function()
           '-E', '.DS_Store',
           '-E', '**/*.class*',
           '-E', 'target/*',
+          '-E', 'venv*/*',
+          '-E', '.env/*',
         },
       },
     },

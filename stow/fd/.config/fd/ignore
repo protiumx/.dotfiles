@@ -2,9 +2,11 @@
 .git
 .elixir_ls
 .venv
+.env
 node_modules
 _build
 .cache
 .Trash
 .licenses
 target/*
+venv*/*

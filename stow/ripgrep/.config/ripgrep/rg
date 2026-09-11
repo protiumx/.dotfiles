@@ -28,3 +28,5 @@ gt:*_test.go*
 --glob=!**/*.class
 --glob=!.Trash
 --glob=!.venv
+--glob=!.env
+--glob=!venv*/*
