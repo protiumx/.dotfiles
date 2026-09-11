@@ -13,7 +13,6 @@ vim.cmd([[
   syntax sync minlines=3000
   filetype plugin indent on
   set cursorline
-  set iskeyword-=_
   set iskeyword-==
   set fillchars=diff:\ ,
   set pumheight=20
