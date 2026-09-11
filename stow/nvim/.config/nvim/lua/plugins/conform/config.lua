@@ -19,7 +19,7 @@ return function()
       lua = { 'stylua' },
       ocaml = { 'ocamlformat' },
       proto = { 'buf' },
-      python = { 'black' },
+      python = { 'ruff_format' },
       sh = { 'shfmt' },
       zsh = { 'shfmt' },
     },
