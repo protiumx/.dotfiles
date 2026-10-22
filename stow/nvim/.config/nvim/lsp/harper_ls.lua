@@ -13,7 +13,7 @@ return {
     'text',
     'tex',
   },
-  root_markers = { '.git' },
+  root_markers = { '.git', '.harper-dictionary.txt' },
   settings = {
     linters = {
       SpellCheck = true,

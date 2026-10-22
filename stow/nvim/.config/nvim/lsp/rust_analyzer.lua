@@ -1,44 +1,99 @@
--- https://github.com/rust-lang/rust-analyzer
-
-local util = require('config.lsp.util')
+---@brief
+---
+--- https://github.com/rust-lang/rust-analyzer
+---
+--- rust-analyzer (aka rls 2.0), a language server for Rust
+---
+---
+--- See [docs](https://rust-analyzer.github.io/book/configuration.html) for extra settings. The settings can be used like this:
+--- ```lua
+--- vim.lsp.config('rust_analyzer', {
+---   settings = {
+---     ['rust-analyzer'] = {
+---       diagnostics = {
+---         enable = false;
+---       }
+---     }
+---   }
+--- })
+--- ```
+---
+--- Note: do not set `init_options` for this LS config, it will be automatically populated by the contents of settings["rust-analyzer"] per
+--- https://github.com/rust-lang/rust-analyzer/blob/eb5da56d839ae0a9e9f50774fa3eb78eb0964550/docs/dev/lsp-extensions.md?plain=1#L26.
 
 local function reload_workspace(bufnr)
-  bufnr = util.validate_bufnr('bufnr')
-  local clients = vim.lsp.get_clients({ bufnr = bufnr, name = 'rust_analyzer' })
+  local clients = vim.lsp.get_clients { bufnr = bufnr, name = 'rust_analyzer' }
   for _, client in ipairs(clients) do
-    vim.notify('Reloading Cargo Workspace')
-    client.request('rust-analyzer/reloadWorkspace', nil, function(err)
+    vim.notify 'Reloading Cargo Workspace'
+    ---@diagnostic disable-next-line:param-type-mismatch
+    client:request('rust-analyzer/reloadWorkspace', nil, function(err)
       if err then
         error(tostring(err))
       end
-      vim.notify('Cargo workspace reloaded')
+      vim.notify 'Cargo workspace reloaded'
     end, 0)
   end
 end
 
+---@param command string
+---@return boolean
+local function executable_exists(command)
+  local exists = vim.fn.executable(command) == 1
+
+  if not exists then
+    vim.notify_once(('[rust_analyzer] %s not found.'):format(command), vim.log.levels.WARN)
+  end
+
+  return exists
+end
+
+local function user_sysroot_src()
+  return vim.tbl_get(vim.lsp.config['rust_analyzer'], 'settings', 'rust-analyzer', 'cargo', 'sysrootSrc')
+end
+
+local function default_sysroot_src()
+  local sysroot = vim.tbl_get(vim.lsp.config['rust_analyzer'], 'settings', 'rust-analyzer', 'cargo', 'sysroot')
+  if not sysroot then
+    local result = vim
+        .system({ 'cargo', '-Z', 'unstable-options', 'rustc', '--print', 'sysroot' }, { text = true })
+        :wait()
+
+    if result.code == 0 and result.stdout then
+      sysroot = vim.trim(result.stdout)
+    end
+  end
+
+  return sysroot and vim.fs.joinpath(sysroot, 'lib/rustlib/src/rust/library') or nil
+end
+
 local function is_library(fname)
   local user_home = vim.fs.normalize(vim.env.HOME)
-  local cargo_home = os.getenv('CARGO_HOME') or user_home .. '/.cargo'
+  local cargo_home = os.getenv 'CARGO_HOME' or user_home .. '/.cargo'
   local registry = cargo_home .. '/registry/src'
   local git_registry = cargo_home .. '/git/checkouts'
 
-  local rustup_home = os.getenv('RUSTUP_HOME') or user_home .. '/.rustup'
+  local rustup_home = os.getenv 'RUSTUP_HOME' or user_home .. '/.rustup'
   local toolchains = rustup_home .. '/toolchains'
 
-  for _, item in ipairs({ toolchains, registry, git_registry }) do
-    if vim.fs.relpath(item, fname) then
-      local clients = vim.lsp.get_clients({ name = 'rust_analyzer' })
+  local sysroot_src = user_sysroot_src() or default_sysroot_src()
+
+  for _, item in ipairs { toolchains, registry, git_registry, sysroot_src } do
+    if item and vim.fs.relpath(item, fname) then
+      local clients = vim.lsp.get_clients { name = 'rust_analyzer' }
       return #clients > 0 and clients[#clients].config.root_dir or nil
     end
   end
 end
 
+---@type vim.lsp.Config
 return {
   cmd = { 'rust-analyzer' },
-
   filetypes = { 'rust' },
-
   root_dir = function(bufnr, on_dir)
+    if not executable_exists('cargo') then
+      return
+    end
+
     local fname = vim.api.nvim_buf_get_name(bufnr)
     local reused_dir = is_library(fname)
     if reused_dir then
@@ -46,13 +101,13 @@ return {
       return
     end
 
-    local cargo_crate_dir = util.root_pattern('Cargo.toml')(fname)
+    local cargo_crate_dir = vim.fs.root(fname, { 'Cargo.toml' })
     local cargo_workspace_root
 
     if cargo_crate_dir == nil then
       on_dir(
-        util.root_pattern('rust-project.json')(fname)
-          or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
+        vim.fs.root(fname, { 'rust-project.json' })
+        or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
       )
       return
     end
@@ -78,17 +133,12 @@ return {
 
         on_dir(cargo_workspace_root or cargo_crate_dir)
       else
-        vim.notify(
-          ('[rust_analyzer] cmd failed with code %d: %s\n%s'):format(
-            output.code,
-            cmd,
-            output.stderr
-          )
-        )
+        vim.schedule(function()
+          vim.notify(('[rust_analyzer] cmd failed with code %d: %s\n%s'):format(output.code, cmd, output.stderr))
+        end)
       end
     end)
   end,
-
   capabilities = {
     experimental = {
       serverStatusNotification = true,
@@ -101,13 +151,28 @@ return {
       },
     },
   },
-
+  settings = {
+    ['rust-analyzer'] = {
+      lens = {
+        debug = { enable = true },
+        enable = true,
+        implementations = { enable = true },
+        references = {
+          adt = { enable = true },
+          enumVariant = { enable = true },
+          method = { enable = true },
+          trait = { enable = true },
+        },
+        run = { enable = true },
+        updateTest = { enable = true },
+      },
+    },
+  },
   before_init = function(init_params, config)
     -- See https://github.com/rust-lang/rust-analyzer/blob/eb5da56d839ae0a9e9f50774fa3eb78eb0964550/docs/dev/lsp-extensions.md?plain=1#L26
     if config.settings and config.settings['rust-analyzer'] then
       init_params.initializationOptions = config.settings['rust-analyzer']
     end
-
     ---@param command table{ title: string, command: string, arguments: any[] }
     vim.lsp.commands['rust-analyzer.runSingle'] = function(command)
       local r = command.arguments[1]
@@ -127,52 +192,9 @@ return {
       end
     end
   end,
-
-  on_attach = function()
-    vim.api.nvim_buf_create_user_command(0, 'CargoReload', function()
-      reload_workspace(0)
+  on_attach = function(_, bufnr)
+    vim.api.nvim_buf_create_user_command(bufnr, 'LspCargoReload', function()
+      reload_workspace(bufnr)
     end, { desc = 'Reload current cargo workspace' })
   end,
-
-  settings = {
-    ['rust-analyzer'] = {
-      assist = {
-        importEnforceGranularity = true,
-        importPrefix = 'create',
-      },
-      cargo = {
-        allFeatures = true,
-        loadOutDirsFromCheck = true,
-        runBuildScripts = true,
-      },
-      -- Add clippy lints for Rust.
-      checkOnSave = {
-        allFeatures = true,
-        command = 'clippy',
-        extraArgs = { '--no-deps' },
-      },
-      inlay_hints = {},
-      lens = {
-        debug = { enable = true },
-        enable = true,
-        implementations = { enable = true },
-        references = {
-          adt = { enable = true },
-          enumVariant = { enable = true },
-          method = { enable = true },
-          trait = { enable = true },
-        },
-        run = { enable = true },
-        updateTest = { enable = true },
-      },
-      procMacro = {
-        enable = true,
-        ignored = {
-          ['async-trait'] = { 'async_trait' },
-          ['napi-derive'] = { 'napi' },
-          ['async-recursion'] = { 'async_recursion' },
-        },
-      },
-    },
-  },
 }

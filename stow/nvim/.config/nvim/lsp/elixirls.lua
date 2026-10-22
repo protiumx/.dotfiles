@@ -1,5 +1,8 @@
 -- https://github.com/elixir-lsp/elixir-ls
+
+---@type vim.lsp.Config
 return {
+  cmd = { 'elixir-ls' },
   filetypes = { 'elixir', 'eelixir', 'heex', 'surface' },
   root_dir = function(bufnr, on_dir)
     local fname = vim.api.nvim_buf_get_name(bufnr)

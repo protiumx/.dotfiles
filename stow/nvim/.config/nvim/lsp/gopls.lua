@@ -28,6 +28,8 @@ local get_current_gomod = function()
 end
 
 -- https://github.com/golang/tools/tree/master/gopls
+
+---@type vim.lsp.Config
 return {
   cmd = { 'gopls' },
   filetypes = { 'go', 'gomod', 'gowork' },
@@ -52,6 +54,10 @@ return {
       end
     end)
   end,
+
+  -- NOTE: it is important to add handler to formatting handlers
+  -- the async formatter will call these handlers when gopls respond
+  -- without these handlers, the file will not be saved
   handlers = {
     [range_format] = function(...)
       vim.lsp.handlers[range_format](...)
